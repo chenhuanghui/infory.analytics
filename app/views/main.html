@@ -364,12 +364,8 @@
     </div>
   </div>
 </div>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="bower_components/theme/bootstrap/bootstrap.min.js"></script>
-<script src="bower_components/theme/theme.js"></script>
-<script type="text/javascript">
-  $(function () {
+<script>
+    $(document).ready(function(){
     var $navDots = $("#hero nav a")
     var $next = $(".slide-nav.next");
     var $prev = $(".slide-nav.prev");
@@ -415,16 +411,16 @@
       if (actualIndex < 0) {
         actualIndex = $slides.length - 1;
       }
-
+    
       updateSlides(actualIndex);
     });
 
     function updateSlides(index) {
-        // update nav dots
+         //update nav dots
         $navDots.removeClass("active");
         $navDots.eq(index).addClass("active");
 
-        // update slides
+         //update slides
         var $activeSlide = $("#hero .slide.active");
         var $nextSlide = $slides.eq(index);
 
@@ -445,14 +441,14 @@
         swiping = true;
 
         actualIndex++;
+        console.log($slides);
         if (actualIndex >= $slides.length) {
           actualIndex = 0;
         }
-
         updateSlides(actualIndex);
       }, 5000);
 
-      // demo player
+       //demo player
       var $videoModal = $(".video-modal");
       $("#demo-player").click(function () {
         $videoModal.toggleClass("active");
@@ -462,11 +458,11 @@
       $videoModal.click(function () {
         $videoModal.removeClass("active");
         setTimeout(function () {
-          $videoModal.find(".wrap").html('<iframe src="http://player.vimeo.com/video/22439234" width="620" height="350" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+          $videoModal.find(".wrap").html('<iframe src="http:player.vimeo.com/video/22439234" width="620" height="350" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
         }, 1000);
       })
       $videoModal.find(".wrap").click(function (e) {
         e.stopPropagation();
       });
-    });
+    })
 </script>
