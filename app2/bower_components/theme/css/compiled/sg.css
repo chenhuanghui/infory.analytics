@@ -1,0 +1,20 @@
+.navigation{
+    padding: 10px 50px;
+}
+
+.navigation .brand{
+    color: #29323a;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.navigation .current-tab{
+    color: #32a0ee;
+    font-size: 14px;
+}
+
+#user-chart, #promotion-chart{
+    height: 250px;
+    margin-top: 65px;
+}
