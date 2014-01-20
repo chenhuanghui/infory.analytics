@@ -1,0 +1,231 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-controller="brandCreateCtrl">
+    <!-- sidebar -->
+    <div id="sidebar-nav">
+        <ul id="dashboard-menu">
+            <li class="active">
+                <a href="/#">
+                    <i class="icon-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>            
+            <li>
+                <a href="/#/inbox">
+                    <i class="icon-signal"></i>
+                    <span>Inbox</span>
+                </a>
+            </li>
+            <li>
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-group"></i>
+                    <span>Nhãn hiệu</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu active">
+                    <li><a href="/#/brand/new" class="active">Tạo nhãn hiệu mới</a></li>
+                    <li><a href="javascript:void(0)">Dịch vụ giao hàng</a></li>
+                    <li><a href="javascript:void(0)">Quản lý nhãn hiệu</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-edit"></i>
+                    <span>Nhân viên</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="javascript:void(0)">Tạo nhân viên mới</a></li>
+                    <li><a href="javascript:void(0)">Quản lý nhân viên</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)">
+                    <i class="icon-picture"></i>
+                    <span>Quảng cáo</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)">
+                    <i class="icon-calendar-empty"></i>
+                    <span>Khuyến mãi</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)">
+                    <i class="icon-cog"></i>
+                    <span>Khách hàng</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar -->
+    
+    
+    <!-- main container -->
+    <div class="content">
+        <div id="pad-wrapper">
+            <div class="row">
+                <div class="col-md-9 with-sidebar">
+                    <div id="brand-fuelux-wizard" class="wizard row">
+                        <ul class="wizard-steps">
+                            <li data-target="#brand-step1" class="active">
+                                <span class="step">1</span>
+                                <span class="title">General <br> information</span>
+                            </li>
+                            <li data-target="#brand-step2">
+                                <span class="step">2</span>
+                                <span class="title">Address <br> information</span>
+                            </li>
+                            <li data-target="#brand-step3">
+                                <span class="step">3</span>
+                                <span class="title">User <br> settings</span>
+                            </li>
+                        </ul>                            
+                    </div>
+                    <div class="step-content form-page">
+                        <div class="step-pane active" id="brand-step1">
+                            <div class="row form-wrapper">
+                                <div class="col-md-9">
+                                    <form>
+                                        <div class="field-box">
+                                            <span class="title">Nhập tên thương hiệu</span>
+                                            <input class="form-control inline-block" type="text" /> <div class="btn-glow"><i class="icon-wrench"></i> Tìm kiếm</div>
+                                        </div>
+                                        <div class="field-box">
+                                            * Thông tin thương hiệu <input type="file" />
+                                        </div>
+                                        <div class="field-box">
+                                            <div class="alert alert-info" style="width: 91%;">
+                                                <i class="icon-exclamation-sign"></i>
+                                                Xác thực quyền sở hữu bằng cách upload giấy phép kinh doanh
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-pane" id="brand-step2">
+                            <div class="row form-wrapper">
+                                <div class="col-md-9">
+                                    <form id="brand-form">
+                                        <div class="col-md-4 avatar-box">
+                                            <div class="personal-image">
+                                                <img src="img/personal-info.png" class="avatar img-circle" alt="avatar" />
+                                                <p>Upload a different photo...</p>
+                                                
+                                                <input type="file" />
+                                            </div>
+                                        </div>
+                                        <div class="field-box">
+                                            <span class="title">Mô tả</span>
+                                            <textarea class="form-control inline-block" rows="4"></textarea>
+                                        </div>
+                                        <div class="field-box">
+                                            <span class="title">Loại hình kinh doanh</span>
+                                            <div class="ui-select">
+                                                <select>
+                                                    <option selected="">Dropdown</option>
+                                                    <option>Custom selects</option>
+                                                    <option>Pure css styles</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="field-box">
+                                            <span class="title">Website</span>
+                                            <div class="predefined">
+                                                <span class="value">http://</span>
+                                                <input class="form-control inline-input" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="field-box">
+                                            <span class="title">Fanpage</span>
+                                            <div class="predefined">
+                                                <span class="value">http://</span>
+                                                <input class="form-control inline-input" type="text">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-pane" id="brand-step3">
+                            <div class="row form-wrapper">
+                                <div class="col-md-8">
+                                    <div class="alert alert-success">
+                                        <i class="icon-ok-sign"></i> bạn vừa tạo thành nhãn hiệu "xxx". <br /> 
+                                        <span style="margin-left: 43px;">hãy tạo cửa hàng mới cho nhãn hiệu của bạn</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="brand-wizard-actions wizard-actions">
+                            <button type="button" disabled class="btn-glow primary btn-prev"> 
+                                <i class="icon-chevron-left"></i> Prev
+                            </button>
+                            <button type="button" class="btn-glow primary btn-next">
+                                Next <i class="icon-chevron-right"></i>
+                            </button>
+                            <button type="button" class="btn-glow success btn-finish btn-create-brand" data-last="Finish">
+                                Tạo thương hiệu
+                            </button>
+                            <button type="button" class="btn-glow success btn-finish btn-create-shop">
+                                Tạo cửa hàng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- scripts -->
+<script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="vendor/theme/scripts/fuelux.wizard.js"></script>
+<script>
+//winzard create brand
+$(function () {
+    var $wizard = $('#brand-fuelux-wizard'),
+        $btnPrev = $('.brand-wizard-actions .btn-prev'),
+        $btnNext = $('.brand-wizard-actions .btn-next'),
+        $btnCreate = $('.brand-wizard-actions .btn-create-brand'),
+        $btnFinish = $(".brand-wizard-actions .btn-create-shop");
+
+    $wizard.wizard().on('finished', function(e) {
+        // wizard complete code
+    }).on("changed", function(e) {
+        var step = $wizard.wizard("selectedItem");
+        // reset states
+        $btnNext.removeAttr("disabled");
+        $btnPrev.removeAttr("disabled");
+        $btnNext.show();
+        $btnFinish.hide();
+        $btnCreate.hide();
+
+        if (step.step === 1) {
+            $btnPrev.attr("disabled", "disabled");
+        } else if (step.step === 2) {
+            $btnNext.hide();
+            $btnCreate.show();
+        } else if (step.step === 3) {
+            $btnNext.hide();
+            $btnFinish.show();
+        }
+    });
+
+    $btnPrev.on('click', function() {
+        $wizard.wizard('previous');
+    });
+    $btnNext.on('click', function() {
+        $wizard.wizard('next');
+    });
+    $btnCreate.on('click', function(){
+        $wizard.wizard('next');
+    })
+});
+</script>

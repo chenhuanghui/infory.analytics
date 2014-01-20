@@ -6,6 +6,8 @@ angular.module('dashboardSmgApp', [
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
+  'brand',
+  'inbox'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -13,9 +15,6 @@ angular.module('dashboardSmgApp', [
         templateUrl: 'modules/home/home.html',
         controller: 'MainCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
-      });
   });
 
 angular.module('dashboardSmgApp')

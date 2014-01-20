@@ -22,3 +22,51 @@
 .inline-block{
     display: inline-block;
 }
+
+#brand-fuelux-wizard .wizard-steps li{
+    min-width: 30%;
+    max-width: 30%;
+}
+
+#brand-form .avatar-box{
+    float: none;
+    margin: 0 auto;
+}
+
+#brand-form .ui-select{
+    width: 400px;
+}
+
+form .title{
+    display: block;
+}
+
+.step-content .step-pane {
+  min-height: inherit;
+}
+
+#brand-list li ul{
+    display: none;
+}
+
+#brand-list .open ul{
+    display: block;
+}
+
+#brand-list a.dropdown-toggle{
+    display: block;
+    text-decoration: none;
+}
+
+#brand-list a.dropdown-toggle .name{
+    font-size: 20px;
+}
+
+#brand-list .btn-glow{
+    margin-left: 60px;
+}
+
+#brand-list>li{
+    padding-bottom: 10px;
+    border-bottom: #ccc 1px solid;
+}
