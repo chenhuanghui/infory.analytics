@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('dashboardSmgApp', [
+  'home',
+  'shop',
   'ngCookies',
   'ngResource',
   'ngSanitize',
@@ -13,9 +15,6 @@ angular.module('dashboardSmgApp', [
         templateUrl: 'modules/home/home.html',
         controller: 'MainCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
-      });
   });
 
 angular.module('dashboardSmgApp')
