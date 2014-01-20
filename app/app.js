@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('dashboardSmgApp', [
+  'home',
+  'shop',
   'ngCookies',
   'ngResource',
   'ngSanitize',

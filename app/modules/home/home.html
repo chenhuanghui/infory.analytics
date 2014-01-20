@@ -67,115 +67,117 @@
     
     <!-- main container -->
     <div class="content">
-        <div id="home" class="divTab">
-            <!-- settings changer -->
-            <div class="skins-nav">
-                <a href="#" class="skin first_nav selected">
-                    <span class="icon"></span><span class="text">Default skin</span>
-                </a>
-                <a href="#" class="skin second_nav" data-file="css/compiled/skins/dark.css">
-                    <span class="icon"></span><span class="text">Dark skin</span>
-                </a>
-            </div>
-        
-            <!-- upper main stats -->
-            <div id="main-stats">
-                <div class="row stats-row">
-                    <div class="col-md-3 col-sm-3 stat">
-                        <div class="data">
-                            <span class="number">2457</span>
-                            lượt xem
-                        </div>
-                        <span class="date">Hôm nay</span>
+        <!-- settings changer -->
+        <div class="skins-nav">
+            <a href="#" class="skin first_nav selected">
+                <span class="icon"></span><span class="text">Default skin</span>
+            </a>
+            <a href="#" class="skin second_nav" data-file="css/compiled/skins/dark.css">
+                <span class="icon"></span><span class="text">Dark skin</span>
+            </a>
+        </div>
+
+        <!-- upper main stats -->
+        <div id="main-stats">
+            <div class="row stats-row">
+                <div class="col-md-3 col-sm-3 stat">
+                    <div class="data">
+                        <span class="number">2457</span>
+                        lượt xem
                     </div>
-                    <div class="col-md-3 col-sm-3 stat">
-                        <div class="data">
-                            <span class="number">3240</span>
-                            Người dùng
-                        </div>
-                        <span class="date">February 2013</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 stat">
-                        <div class="data">
-                            <span class="number">322</span>
-                            Lượt đặt hàng
-                        </div>
-                        <span class="date">This week</span>
-                    </div>
-                    <div class="col-md-3 col-sm-3 stat last">
-                        <div class="data">
-                            <span class="number">$2,340</span>
-                            doanh thu
-                        </div>
-                        <span class="date">trong 30 ngày</span>
-                    </div>
+                    <span class="date">Hôm nay</span>
                 </div>
-            </div>
-            <!-- end upper main stats -->
-        
-            <div id="pad-wrapper">
-                <!-- statistics chart built with jQuery Flot -->
-                <div class="row chart">
-                    <div class="col-md-12">
-                        <h4 class="clearfix pull-left">
-                            Thống kê người dùng                         
-                        </h4>
-                        <div class="btn-group pull-right">
-                            <button class="glow left">DAY</button>
-                            <button class="glow middle active">MONTH</button>
-                            <button class="glow right">YEAR</button>
-                        </div>
+                <div class="col-md-3 col-sm-3 stat">
+                    <div class="data">
+                        <span class="number">3240</span>
+                        Người dùng
                     </div>
-                    <div class="col-md-12">
-                        <div id="user-chart"></div>
-                    </div>
+                    <span class="date">February 2013</span>
                 </div>
-                <!-- end statistics chart -->
-                
-                <!-- kinh doanh nhãn hiệu -->
-                <div class="row section">
-                    <div class="col-md-12">
-                        <h4 class="title">Thống kê kinh doanh nhãn hiệu</h4>
+                <div class="col-md-3 col-sm-3 stat">
+                    <div class="data">
+                        <span class="number">322</span>
+                        Lượt đặt hàng
                     </div>
-                    <div class="col-md-12">
-                        <h5>Biểu đồ tăng trưởng các nhãn hiệu</h5>
-                        <br />
-                        <div id="brand-growth-chart" style="height: 250px;"></div>
-                    </div>
+                    <span class="date">This week</span>
                 </div>
-                
-                <!-- kinh doanh quảng cáo -->
-                <div class="row section">
-                    <div class="col-md-12">
-                        <h4 class="title">Thống kê kinh doanh quảng cáo</h4>
+                <div class="col-md-3 col-sm-3 stat last">
+                    <div class="data">
+                        <span class="number">$2,340</span>
+                        doanh thu
                     </div>
-                    <div class="col-md-12">
-                        <h5>Quarterly Apple iOS device unit sales</h5>
-                        <br />
-                        <div id="brand-advertising-chart" style="height: 250px;"></div>
-                    </div>
+                    <span class="date">trong 30 ngày</span>
                 </div>
-                
-                <!-- statistics chart built with jQuery Flot -->
-                <div class="row section chart">
-                    <div class="col-md-12">
-                        <h4 class="clearfix pull-left">
-                            Thống kê khuyến mãi                         
-                        </h4>
-                        <div class="btn-group pull-right">
-                            <button class="glow left">DAY</button>
-                            <button class="glow middle active">MONTH</button>
-                            <button class="glow right">YEAR</button>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div id="promotion-chart"></div>
-                    </div>
-                </div>
-                <!-- end statistics chart -->
             </div>
         </div>
+        <!-- end upper main stats -->
+
+        <div id="pad-wrapper">
+
+            <!-- statistics chart built with jQuery Flot -->
+            <div class="row chart">
+                <div class="col-md-12">
+                    <h4 class="clearfix pull-left">
+                        Thống kê người dùng                         
+                    </h4>
+                    <div class="btn-group pull-right">
+                        <button class="glow left">DAY</button>
+                        <button class="glow middle active">MONTH</button>
+                        <button class="glow right">YEAR</button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div id="user-chart"></div>
+                </div>
+            </div>
+            <!-- end statistics chart -->
+            
+            <!-- kinh doanh nhãn hiệu -->
+            <div class="row section">
+                <div class="col-md-12">
+                    <h4 class="title">Thống kê kinh doanh nhãn hiệu</h4>
+                </div>
+                <div class="col-md-12">
+                    <h5>Biểu đồ tăng trưởng các nhãn hiệu</h5>
+                    <br />
+                    <div id="brand-growth-chart" style="height: 250px;"></div>
+                </div>
+            </div>
+            
+            <!-- kinh doanh quảng cáo -->
+            <div class="row section">
+                <div class="col-md-12">
+                    <h4 class="title">Thống kê kinh doanh quảng cáo</h4>
+                </div>
+                <div class="col-md-12">
+                    <h5>Quarterly Apple iOS device unit sales</h5>
+                    <br />
+                    <div id="brand-advertising-chart" style="height: 250px;"></div>
+                </div>
+            </div>
+            
+            <!-- statistics chart built with jQuery Flot -->
+            <div class="row section chart">
+                <div class="col-md-12">
+                    <h4 class="clearfix pull-left">
+                        Thống kê khuyến mãi                         
+                    </h4>
+                    <div class="btn-group pull-right">
+                        <button class="glow left">DAY</button>
+                        <button class="glow middle active">MONTH</button>
+                        <button class="glow right">YEAR</button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div id="promotion-chart"></div>
+                </div>
+            </div>
+            <!-- end statistics chart -->
+            
+        </div>
     </div>
+</div>
+<!-- end main container -->
 </div>
 <!-- scripts -->
 <script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
@@ -188,210 +190,199 @@
 <!-- morrisjs -->
 <script src="vendor/theme/scripts/morris.min.js"></script>
 <script src="vendor/theme/scripts/fuelux.wizard.js"></script>
-<script src="modules/home/home.js"></script>
 <script>
-//show tab
-//function showTab(menu, tab){
-//    $('#dashboard-menu li').removeClass('active');
-//    $('#dashboard-menu li .pointer').addClass('hide');
-//    $('.divTab').addClass('hide');
-//    $(menu).addClass('active');
-//    $(menu+' .pointer').removeClass('hide');
-//    $(tab).removeClass('hide');
-//}
+    //show tooltip
+    function showTooltip(x, y, contents) {
+        $('<div id="tooltip">' + contents + '</div>').css( {
+            position: 'absolute',
+            display: 'none',
+            top: y - 30,
+            left: x - 50,
+            color: "#fff",
+            padding: '2px 5px',
+            'border-radius': '6px',
+            'background-color': '#000',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    }
 
-//show tooltip
-function showTooltip(x, y, contents) {
-    $('<div id="tooltip">' + contents + '</div>').css( {
-        position: 'absolute',
-        display: 'none',
-        top: y - 30,
-        left: x - 50,
-        color: "#fff",
-        padding: '2px 5px',
-        'border-radius': '6px',
-        'background-color': '#000',
-        opacity: 0.80
-    }).appendTo("body").fadeIn(200);
-}
+    //  user Chart
+    var visits = [[1, 50], [2, 40], [3, 45], [4, 23],[5, 55],[6, 65],[7, 61],[8, 70],[9, 65],[10, 75],[11, 57],[12, 59]];
+    var visitors = [[1, 25], [2, 50], [3, 23], [4, 48],[5, 38],[6, 40],[7, 47],[8, 55],[9, 43],[10,50],[11,47],[12, 39]];
 
-//  user Chart
-var visits = [[1, 50], [2, 40], [3, 45], [4, 23],[5, 55],[6, 65],[7, 61],[8, 70],[9, 65],[10, 75],[11, 57],[12, 59]];
-var visitors = [[1, 25], [2, 50], [3, 23], [4, 48],[5, 38],[6, 40],[7, 47],[8, 55],[9, 43],[10,50],[11,47],[12, 39]];
-
-var plot = $.plot($("#user-chart"),
-    [ { data: visits, label: "Signups"},
-     { data: visitors, label: "Visits" }], {
-        series: {
-            lines: { show: true,
-                    lineWidth: 1,
-                    fill: true, 
-                    fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
-                 },
-            points: { show: true, 
-                     lineWidth: 2,
-                     radius: 3
-                 },
-            shadowSize: 0,
-            stack: true
-        },
-        grid: { hoverable: true, 
-               clickable: true, 
-               tickColor: "#f9f9f9",
-               borderWidth: 0
+    var plot = $.plot($("#user-chart"),
+        [ { data: visits, label: "Signups"},
+         { data: visitors, label: "Visits" }], {
+            series: {
+                lines: { show: true,
+                        lineWidth: 1,
+                        fill: true, 
+                        fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
+                     },
+                points: { show: true, 
+                         lineWidth: 2,
+                         radius: 3
+                     },
+                shadowSize: 0,
+                stack: true
             },
-        legend: {
-                // show: false
-                labelBoxBorderColor: "#fff"
-            },  
-        colors: ["#a7b5c5", "#30a0eb"],
-        xaxis: {
-            ticks: [[1, "JAN"], [2, "FEB"], [3, "MAR"], [4,"APR"], [5,"MAY"], [6,"JUN"], 
-                   [7,"JUL"], [8,"AUG"], [9,"SEP"], [10,"OCT"], [11,"NOV"], [12,"DEC"]],
-            font: {
-                size: 12,
-                family: "Open Sans, Arial",
-                variant: "small-caps",
-                color: "#9da3a9"
-            }
-        },
-        yaxis: {
-            ticks:3, 
-            tickDecimals: 0,
-            font: {size:12, color: "#9da3a9"}
-        }
-     });
-     
-var previousPoint = null;
-$("#user-chart").bind("plothover", function (event, pos, item) {
-    if (item) {
-        if (previousPoint != item.dataIndex) {
-            previousPoint = item.dataIndex;
-
-            $("#tooltip").remove();
-            var x = item.datapoint[0].toFixed(0),
-                y = item.datapoint[1].toFixed(0);
-
-            var month = item.series.xaxis.ticks[item.dataIndex].label;
-
-            showTooltip(item.pageX, item.pageY,
-                        item.series.label + " of " + month + ": " + y);
-        }
-    }
-    else {
-        $("#tooltip").remove();
-        previousPoint = null;
-    }
-});
-
-// Biểu đồ tăng trưởng nhãn hiệu
-Morris.Area({
-    element: 'brand-growth-chart',
-    data: [
-        {period: '2010 Q1', iphone: 2666, ipad: null, itouch: 2647},
-        {period: '2010 Q2', iphone: 2778, ipad: 2294, itouch: 2441},
-        {period: '2010 Q3', iphone: 4912, ipad: 1969, itouch: 2501},
-        {period: '2010 Q4', iphone: 3767, ipad: 3597, itouch: 5689},
-        {period: '2011 Q1', iphone: 6810, ipad: 1914, itouch: 2293},
-        {period: '2011 Q2', iphone: 5670, ipad: 4293, itouch: 1881},
-        {period: '2011 Q3', iphone: 4820, ipad: 3795, itouch: 1588},
-        {period: '2011 Q4', iphone: 15073, ipad: 5967, itouch: 5175},
-        {period: '2012 Q1', iphone: 10687, ipad: 4460, itouch: 2028},
-        {period: '2012 Q2', iphone: 8432, ipad: 5713, itouch: 1791}
-    ],
-    xkey: 'period',
-    ykeys: ['iphone', 'ipad', 'itouch'],
-    labels: ['iPhone', 'iPad', 'iPod Touch'],
-    lineWidth: 2,
-    hideHover: 'auto',
-    lineColors: ["#81d5d9", "#a6e182", "#67bdf8"]
-});
-
-// Biểu đồ kinh doanh quảng cáo nhãn hiệu
-Morris.Area({
-    element: 'brand-advertising-chart',
-    data: [
-        {period: '2010 Q1', iphone: 2666, ipad: null, itouch: 2647},
-        {period: '2010 Q2', iphone: 2778, ipad: 2294, itouch: 2441},
-        {period: '2010 Q3', iphone: 4912, ipad: 1969, itouch: 2501},
-        {period: '2010 Q4', iphone: 3767, ipad: 3597, itouch: 5689},
-        {period: '2011 Q1', iphone: 6810, ipad: 1914, itouch: 2293},
-        {period: '2011 Q2', iphone: 5670, ipad: 4293, itouch: 1881},
-        {period: '2011 Q3', iphone: 4820, ipad: 3795, itouch: 1588},
-        {period: '2011 Q4', iphone: 15073, ipad: 5967, itouch: 5175},
-        {period: '2012 Q1', iphone: 10687, ipad: 4460, itouch: 2028},
-        {period: '2012 Q2', iphone: 8432, ipad: 5713, itouch: 1791}
-    ],
-    xkey: 'period',
-    ykeys: ['iphone', 'ipad', 'itouch'],
-    labels: ['iPhone', 'iPad', 'iPod Touch'],
-    lineWidth: 2,
-    hideHover: 'auto',
-    lineColors: ["#81d5d9", "#a6e182", "#67bdf8"]
-});
-
-//biểu đồ khuyến mãi
-var plot = $.plot($("#promotion-chart"),
-    [ { data: visits, label: "Signups"},
-     { data: visitors, label: "Visits" }], {
-        series: {
-            lines: { show: true,
-                    lineWidth: 1,
-                    fill: true, 
-                    fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
-                 },
-            points: { show: true, 
-                     lineWidth: 2,
-                     radius: 3
-                 },
-            shadowSize: 0,
-            stack: true
-        },
-        grid: { hoverable: true, 
-               clickable: true, 
-               tickColor: "#f9f9f9",
-               borderWidth: 0
+            grid: { hoverable: true, 
+                   clickable: true, 
+                   tickColor: "#f9f9f9",
+                   borderWidth: 0
+                },
+            legend: {
+                    // show: false
+                    labelBoxBorderColor: "#fff"
+                },  
+            colors: ["#a7b5c5", "#30a0eb"],
+            xaxis: {
+                ticks: [[1, "JAN"], [2, "FEB"], [3, "MAR"], [4,"APR"], [5,"MAY"], [6,"JUN"], 
+                       [7,"JUL"], [8,"AUG"], [9,"SEP"], [10,"OCT"], [11,"NOV"], [12,"DEC"]],
+                font: {
+                    size: 12,
+                    family: "Open Sans, Arial",
+                    variant: "small-caps",
+                    color: "#9da3a9"
+                }
             },
-        legend: {
-                // show: false
-                labelBoxBorderColor: "#fff"
-            },  
-        colors: ["#a7b5c5", "#30a0eb"],
-        xaxis: {
-            ticks: [[1, "JAN"], [2, "FEB"], [3, "MAR"], [4,"APR"], [5,"MAY"], [6,"JUN"], 
-                   [7,"JUL"], [8,"AUG"], [9,"SEP"], [10,"OCT"], [11,"NOV"], [12,"DEC"]],
-            font: {
-                size: 12,
-                family: "Open Sans, Arial",
-                variant: "small-caps",
-                color: "#9da3a9"
+            yaxis: {
+                ticks:3, 
+                tickDecimals: 0,
+                font: {size:12, color: "#9da3a9"}
             }
-        },
-        yaxis: {
-            ticks:3, 
-            tickDecimals: 0,
-            font: {size:12, color: "#9da3a9"}
+         });
+         
+    var previousPoint = null;
+    $("#user-chart").bind("plothover", function (event, pos, item) {
+        if (item) {
+            if (previousPoint != item.dataIndex) {
+                previousPoint = item.dataIndex;
+
+                $("#tooltip").remove();
+                var x = item.datapoint[0].toFixed(0),
+                    y = item.datapoint[1].toFixed(0);
+
+                var month = item.series.xaxis.ticks[item.dataIndex].label;
+
+                showTooltip(item.pageX, item.pageY,
+                            item.series.label + " of " + month + ": " + y);
+            }
         }
-     });
-
-$("#promotion-chart").bind("plothover", function (event, pos, item) {
-    if (item) {
-        if (previousPoint != item.dataIndex) {
-            previousPoint = item.dataIndex;
-
+        else {
             $("#tooltip").remove();
-            var x = item.datapoint[0].toFixed(0),
-                y = item.datapoint[1].toFixed(0);
-
-            var month = item.series.xaxis.ticks[item.dataIndex].label;
-
-            showTooltip(item.pageX, item.pageY,
-                        item.series.label + " of " + month + ": " + y);
+            previousPoint = null;
         }
-    }
-    else {
-        $("#tooltip").remove();
-        previousPoint = null;
-    }
-});     
+    });
+
+    // Biểu đồ tăng trưởng nhãn hiệu
+    Morris.Area({
+        element: 'brand-growth-chart',
+        data: [
+            {period: '2010 Q1', iphone: 2666, ipad: null, itouch: 2647},
+            {period: '2010 Q2', iphone: 2778, ipad: 2294, itouch: 2441},
+            {period: '2010 Q3', iphone: 4912, ipad: 1969, itouch: 2501},
+            {period: '2010 Q4', iphone: 3767, ipad: 3597, itouch: 5689},
+            {period: '2011 Q1', iphone: 6810, ipad: 1914, itouch: 2293},
+            {period: '2011 Q2', iphone: 5670, ipad: 4293, itouch: 1881},
+            {period: '2011 Q3', iphone: 4820, ipad: 3795, itouch: 1588},
+            {period: '2011 Q4', iphone: 15073, ipad: 5967, itouch: 5175},
+            {period: '2012 Q1', iphone: 10687, ipad: 4460, itouch: 2028},
+            {period: '2012 Q2', iphone: 8432, ipad: 5713, itouch: 1791}
+        ],
+        xkey: 'period',
+        ykeys: ['iphone', 'ipad', 'itouch'],
+        labels: ['iPhone', 'iPad', 'iPod Touch'],
+        lineWidth: 2,
+        hideHover: 'auto',
+        lineColors: ["#81d5d9", "#a6e182", "#67bdf8"]
+    });
+
+    // Biểu đồ kinh doanh quảng cáo nhãn hiệu
+    Morris.Area({
+        element: 'brand-advertising-chart',
+        data: [
+            {period: '2010 Q1', iphone: 2666, ipad: null, itouch: 2647},
+            {period: '2010 Q2', iphone: 2778, ipad: 2294, itouch: 2441},
+            {period: '2010 Q3', iphone: 4912, ipad: 1969, itouch: 2501},
+            {period: '2010 Q4', iphone: 3767, ipad: 3597, itouch: 5689},
+            {period: '2011 Q1', iphone: 6810, ipad: 1914, itouch: 2293},
+            {period: '2011 Q2', iphone: 5670, ipad: 4293, itouch: 1881},
+            {period: '2011 Q3', iphone: 4820, ipad: 3795, itouch: 1588},
+            {period: '2011 Q4', iphone: 15073, ipad: 5967, itouch: 5175},
+            {period: '2012 Q1', iphone: 10687, ipad: 4460, itouch: 2028},
+            {period: '2012 Q2', iphone: 8432, ipad: 5713, itouch: 1791}
+        ],
+        xkey: 'period',
+        ykeys: ['iphone', 'ipad', 'itouch'],
+        labels: ['iPhone', 'iPad', 'iPod Touch'],
+        lineWidth: 2,
+        hideHover: 'auto',
+        lineColors: ["#81d5d9", "#a6e182", "#67bdf8"]
+    });
+
+    //biểu đồ khuyến mãi
+    var plot = $.plot($("#promotion-chart"),
+        [ { data: visits, label: "Signups"},
+         { data: visitors, label: "Visits" }], {
+            series: {
+                lines: { show: true,
+                        lineWidth: 1,
+                        fill: true, 
+                        fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
+                     },
+                points: { show: true, 
+                         lineWidth: 2,
+                         radius: 3
+                     },
+                shadowSize: 0,
+                stack: true
+            },
+            grid: { hoverable: true, 
+                   clickable: true, 
+                   tickColor: "#f9f9f9",
+                   borderWidth: 0
+                },
+            legend: {
+                    // show: false
+                    labelBoxBorderColor: "#fff"
+                },  
+            colors: ["#a7b5c5", "#30a0eb"],
+            xaxis: {
+                ticks: [[1, "JAN"], [2, "FEB"], [3, "MAR"], [4,"APR"], [5,"MAY"], [6,"JUN"], 
+                       [7,"JUL"], [8,"AUG"], [9,"SEP"], [10,"OCT"], [11,"NOV"], [12,"DEC"]],
+                font: {
+                    size: 12,
+                    family: "Open Sans, Arial",
+                    variant: "small-caps",
+                    color: "#9da3a9"
+                }
+            },
+            yaxis: {
+                ticks:3, 
+                tickDecimals: 0,
+                font: {size:12, color: "#9da3a9"}
+            }
+         });
+
+    $("#promotion-chart").bind("plothover", function (event, pos, item) {
+        if (item) {
+            if (previousPoint != item.dataIndex) {
+                previousPoint = item.dataIndex;
+
+                $("#tooltip").remove();
+                var x = item.datapoint[0].toFixed(0),
+                    y = item.datapoint[1].toFixed(0);
+
+                var month = item.series.xaxis.ticks[item.dataIndex].label;
+
+                showTooltip(item.pageX, item.pageY,
+                            item.series.label + " of " + month + ": " + y);
+            }
+        }
+        else {
+            $("#tooltip").remove();
+            previousPoint = null;
+        }
+    });
 </script>
