@@ -1,215 +1,149 @@
 <div ng-include="'partials/_header.html'"></div>
-<div ng-controller="brandCreateCtrl">
-    <!-- sidebar -->
-    <div id="sidebar-nav">
-        <ul id="dashboard-menu">
-            <li>
-                <a href="/#">
-                    <i class="icon-home"></i>
-                    <span>Home</span>
-                </a>
-            </li>            
-            <li class="active">
-                <div class="pointer">
-                    <div class="arrow"></div>
-                    <div class="arrow_border"></div>
-                </div>
-                <a href="/#/inbox">
-                    <i class="icon-signal"></i>
-                    <span>Inbox</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="#">
-                    <i class="icon-group"></i>
-                    <span>Nhãn hiệu</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="/#/brand/new">Tạo nhãn hiệu mới</a></li>
-                    <li><a href="javascript:void(0)">Dịch vụ giao hàng</a></li>
-                    <li><a href="javascript:void(0)">Quản lý nhãn hiệu</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="#">
-                    <i class="icon-edit"></i>
-                    <span>Nhân viên</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="javascript:void(0)">Tạo nhân viên mới</a></li>
-                    <li><a href="javascript:void(0)">Quản lý nhân viên</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="icon-picture"></i>
-                    <span>Quảng cáo</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="icon-calendar-empty"></i>
-                    <span>Khuyến mãi</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="icon-cog"></i>
-                    <span>Khách hàng</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- end sidebar -->
-    
-    
-    <!-- main container -->
-    <div class="content">
-        <div id="pad-wrapper">
-            <!-- inbox table-->
-            <!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
-            <div class="table-wrapper products-table">
-                <div class="row head">
-                    <div class="col-md-12">
-                        <h4>Thông báo</h4>
-                    </div>
-                </div>
-
-                <div class="row filter-block">
-                    <div class="pull-right">
-                        <div class="ui-select">
-                            <select>
-                              <option>Filter users</option>
-                              <option>Signed last 30 days</option>
-                              <option>Active users</option>
-                            </select>
-                        </div>
-                        <input type="text" class="search">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="col-md-3">
-                                    <input type="checkbox">
-                                    Thông báo từ
-                                </th>
-                                <th class="col-md-3">
-                                    <span class="line"></span>Nội dung
-                                </th>
-                                <th class="col-md-3">
-                                    <span class="line"></span>Hoạt động
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- row -->
-                            <tr class="first">
-                                <td>
-                                    <input type="checkbox">
-                                    <div class="img">
-                                        <img src="img/table-img.png" alt="pic" />
-                                    </div>
-                                    <a href="#" class="name">Generate Lorem </a>
-                                </td>
-                                <td class="description">
-                                    if you are going to use a passage of Lorem Ipsum.
-                                </td>
-                                <td>
-                                    <span class="label label-success">Active</span>
-                                    <ul class="actions">
-                                        <li><a href="#">Edit</a></li>
-                                        <li class="last"><a href="#">Delete</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <!-- row -->
-                            <tr>
-                                <td>
-                                    <input type="checkbox">
-                                    <div class="img">
-                                        <img src="img/table-img.png" alt="pic" />
-                                    </div>
-                                    <a href="#" class="name">Internet tend</a>
-                                </td>
-                                <td class="description">
-                                    There are many variations of passages.
-                                </td>
-                                <td>
-                                    <ul class="actions">
-                                        <li><a href="#">Edit</a></li>
-                                        <li class="last"><a href="#">Delete</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <!-- row -->
-                            <tr>
-                                <td>
-                                    <input type="checkbox">
-                                    <div class="img">
-                                        <img src="img/table-img.png" alt="pic" />
-                                    </div>
-                                    <a href="#" class="name">Generate Lorem </a>
-                                </td>
-                                <td class="description">
-                                    if you are going to use a passage of Lorem Ipsum.
-                                </td>
-                                <td>
-                                    <ul class="actions">
-                                        <li><a href="#">Edit</a></li>
-                                        <li class="last"><a href="#">Delete</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <!-- row -->
-                            <tr>
-                                <td>
-                                    <input type="checkbox">
-                                    <div class="img">
-                                        <img src="img/table-img.png" alt="pic" />
-                                    </div>
-                                    <a href="#" class="name">Internet tend</a>
-                                </td>
-                                <td class="description">
-                                    There are many variations of passages.
-                                </td>
-                                <td>
-                                    <span class="label label-info">Standby</span>
-                                    <ul class="actions">
-                                        <li><a href="#">Edit</a></li>
-                                        <li class="last"><a href="#">Delete</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox">
-                                    <div class="img">
-                                        <img src="img/table-img.png" alt="pic" />
-                                    </div>
-                                    <a href="#" class="name">Generate Lorem </a>
-                                </td>
-                                <td class="description">
-                                    if you are going to use a passage of Lorem Ipsum.
-                                </td>
-                                <td>
-                                    <span class="label label-success">Active</span>
-                                    <ul class="actions">
-                                        <li><a href="#">Edit</a></li>
-                                        <li class="last"><a href="#">Delete</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div class="content">
+    <div id="pad-wrapper">
+        <!-- inbox table-->
+        <!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
+        <div class="table-wrapper products-table">
+            <div class="row head">
+                <div class="col-md-12">
+                    <h4>Thông báo</h4>
                 </div>
             </div>
-            <!-- end products table -->
+
+            <div class="row filter-block">
+                <div class="pull-right">
+                    <div class="ui-select">
+                        <select>
+                          <option>Filter users</option>
+                          <option>Signed last 30 days</option>
+                          <option>Active users</option>
+                        </select>
+                    </div>
+                    <input type="text" class="search">
+                </div>
+            </div>
+
+            <div class="row">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-md-3">
+                                <input type="checkbox">
+                                Thông báo từ
+                            </th>
+                            <th class="col-md-3">
+                                <span class="line"></span>Nội dung
+                            </th>
+                            <th class="col-md-3">
+                                <span class="line"></span>Hoạt động
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- row -->
+                        <tr class="first">
+                            <td>
+                                <input type="checkbox">
+                                <div class="img">
+                                    <img src="img/table-img.png" alt="pic" />
+                                </div>
+                                <a href="#" class="name">Generate Lorem </a>
+                            </td>
+                            <td class="description">
+                                if you are going to use a passage of Lorem Ipsum.
+                            </td>
+                            <td>
+                                <span class="label label-success">Active</span>
+                                <ul class="actions">
+                                    <li><a href="#">Edit</a></li>
+                                    <li class="last"><a href="#">Delete</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <!-- row -->
+                        <tr>
+                            <td>
+                                <input type="checkbox">
+                                <div class="img">
+                                    <img src="img/table-img.png" alt="pic" />
+                                </div>
+                                <a href="#" class="name">Internet tend</a>
+                            </td>
+                            <td class="description">
+                                There are many variations of passages.
+                            </td>
+                            <td>
+                                <ul class="actions">
+                                    <li><a href="#">Edit</a></li>
+                                    <li class="last"><a href="#">Delete</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <!-- row -->
+                        <tr>
+                            <td>
+                                <input type="checkbox">
+                                <div class="img">
+                                    <img src="img/table-img.png" alt="pic" />
+                                </div>
+                                <a href="#" class="name">Generate Lorem </a>
+                            </td>
+                            <td class="description">
+                                if you are going to use a passage of Lorem Ipsum.
+                            </td>
+                            <td>
+                                <ul class="actions">
+                                    <li><a href="#">Edit</a></li>
+                                    <li class="last"><a href="#">Delete</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <!-- row -->
+                        <tr>
+                            <td>
+                                <input type="checkbox">
+                                <div class="img">
+                                    <img src="img/table-img.png" alt="pic" />
+                                </div>
+                                <a href="#" class="name">Internet tend</a>
+                            </td>
+                            <td class="description">
+                                There are many variations of passages.
+                            </td>
+                            <td>
+                                <span class="label label-info">Standby</span>
+                                <ul class="actions">
+                                    <li><a href="#">Edit</a></li>
+                                    <li class="last"><a href="#">Delete</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox">
+                                <div class="img">
+                                    <img src="img/table-img.png" alt="pic" />
+                                </div>
+                                <a href="#" class="name">Generate Lorem </a>
+                            </td>
+                            <td class="description">
+                                if you are going to use a passage of Lorem Ipsum.
+                            </td>
+                            <td>
+                                <span class="label label-success">Active</span>
+                                <ul class="actions">
+                                    <li><a href="#">Edit</a></li>
+                                    <li class="last"><a href="#">Delete</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <!-- end products table -->
     </div>
 </div>
 <!-- scripts -->

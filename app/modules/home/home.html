@@ -1,184 +1,117 @@
 <div ng-include="'partials/_header.html'"></div>
-<div ng-controller="HomeCtrl">
-    <!-- sidebar -->
-    <div id="sidebar-nav">
-        <ul id="dashboard-menu">
-            <li class="active">
-                <div class="pointer">
-                    <div class="arrow"></div>
-                    <div class="arrow_border"></div>
-                </div>
-                <a href="/">
-                    <i class="icon-home"></i>
-                    <span>Home</span>
-                </a>
-            </li>            
-            <li>
-                <a href="/#/inbox">
-                    <i class="icon-signal"></i>
-                    <span>Inbox</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="#">
-                    <i class="icon-group"></i>
-                    <span>Nhãn hiệu</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="/#/brand/new">Tạo nhãn hiệu mới</a></li>
-                    <li><a href="javascript:void(0)">Dịch vụ giao hàng</a></li>
-                    <li><a href="javascript:void(0)">Quản lý nhãn hiệu</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="#">
-                    <i class="icon-edit"></i>
-                    <span>Nhân viên</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="javascript:void(0)">Tạo nhân viên mới</a></li>
-                    <li><a href="javascript:void(0)">Quản lý nhân viên</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="icon-picture"></i>
-                    <span>Quảng cáo</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="icon-calendar-empty"></i>
-                    <span>Khuyến mãi</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="icon-cog"></i>
-                    <span>Khách hàng</span>
-                </a>
-            </li>
-        </ul>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div class="content">
+    <!-- settings changer -->
+    <div class="skins-nav">
+        <a href="#" class="skin first_nav selected">
+            <span class="icon"></span><span class="text">Default skin</span>
+        </a>
+        <a href="#" class="skin second_nav" data-file="css/compiled/skins/dark.css">
+            <span class="icon"></span><span class="text">Dark skin</span>
+        </a>
     </div>
-    <!-- end sidebar -->
-    
-    
-    <!-- main container -->
-    <div class="content">
-        <!-- settings changer -->
-        <div class="skins-nav">
-            <a href="#" class="skin first_nav selected">
-                <span class="icon"></span><span class="text">Default skin</span>
-            </a>
-            <a href="#" class="skin second_nav" data-file="css/compiled/skins/dark.css">
-                <span class="icon"></span><span class="text">Dark skin</span>
-            </a>
-        </div>
 
-        <!-- upper main stats -->
-        <div id="main-stats">
-            <div class="row stats-row">
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <span class="number">2457</span>
-                        lượt xem
-                    </div>
-                    <span class="date">Hôm nay</span>
+    <!-- upper main stats -->
+    <div id="main-stats">
+        <div class="row stats-row">
+            <div class="col-md-3 col-sm-3 stat">
+                <div class="data">
+                    <span class="number">2457</span>
+                    lượt xem
                 </div>
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <span class="number">3240</span>
-                        Người dùng
-                    </div>
-                    <span class="date">February 2013</span>
+                <span class="date">Hôm nay</span>
+            </div>
+            <div class="col-md-3 col-sm-3 stat">
+                <div class="data">
+                    <span class="number">3240</span>
+                    Người dùng
                 </div>
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <span class="number">322</span>
-                        Lượt đặt hàng
-                    </div>
-                    <span class="date">This week</span>
+                <span class="date">February 2013</span>
+            </div>
+            <div class="col-md-3 col-sm-3 stat">
+                <div class="data">
+                    <span class="number">322</span>
+                    Lượt đặt hàng
                 </div>
-                <div class="col-md-3 col-sm-3 stat last">
-                    <div class="data">
-                        <span class="number">$2,340</span>
-                        doanh thu
-                    </div>
-                    <span class="date">trong 30 ngày</span>
+                <span class="date">This week</span>
+            </div>
+            <div class="col-md-3 col-sm-3 stat last">
+                <div class="data">
+                    <span class="number">$2,340</span>
+                    doanh thu
                 </div>
+                <span class="date">trong 30 ngày</span>
             </div>
         </div>
-        <!-- end upper main stats -->
+    </div>
+    <!-- end upper main stats -->
 
-        <div id="pad-wrapper">
+    <div id="pad-wrapper">
 
-            <!-- statistics chart built with jQuery Flot -->
-            <div class="row chart">
-                <div class="col-md-12">
-                    <h4 class="clearfix pull-left">
-                        Thống kê người dùng                         
-                    </h4>
-                    <div class="btn-group pull-right">
-                        <button class="glow left">DAY</button>
-                        <button class="glow middle active">MONTH</button>
-                        <button class="glow right">YEAR</button>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div id="user-chart"></div>
+        <!-- statistics chart built with jQuery Flot -->
+        <div class="row chart">
+            <div class="col-md-12">
+                <h4 class="clearfix pull-left">
+                    Thống kê người dùng                         
+                </h4>
+                <div class="btn-group pull-right">
+                    <button class="glow left">DAY</button>
+                    <button class="glow middle active">MONTH</button>
+                    <button class="glow right">YEAR</button>
                 </div>
             </div>
-            <!-- end statistics chart -->
-            
-            <!-- kinh doanh nhãn hiệu -->
-            <div class="row section">
-                <div class="col-md-12">
-                    <h4 class="title">Thống kê kinh doanh nhãn hiệu</h4>
-                </div>
-                <div class="col-md-12">
-                    <h5>Biểu đồ tăng trưởng các nhãn hiệu</h5>
-                    <br />
-                    <div id="brand-growth-chart" style="height: 250px;"></div>
-                </div>
+            <div class="col-md-12">
+                <div id="user-chart"></div>
             </div>
-            
-            <!-- kinh doanh quảng cáo -->
-            <div class="row section">
-                <div class="col-md-12">
-                    <h4 class="title">Thống kê kinh doanh quảng cáo</h4>
-                </div>
-                <div class="col-md-12">
-                    <h5>Quarterly Apple iOS device unit sales</h5>
-                    <br />
-                    <div id="brand-advertising-chart" style="height: 250px;"></div>
-                </div>
-            </div>
-            
-            <!-- statistics chart built with jQuery Flot -->
-            <div class="row section chart">
-                <div class="col-md-12">
-                    <h4 class="clearfix pull-left">
-                        Thống kê khuyến mãi                         
-                    </h4>
-                    <div class="btn-group pull-right">
-                        <button class="glow left">DAY</button>
-                        <button class="glow middle active">MONTH</button>
-                        <button class="glow right">YEAR</button>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div id="promotion-chart"></div>
-                </div>
-            </div>
-            <!-- end statistics chart -->
-            
         </div>
+        <!-- end statistics chart -->
+        
+        <!-- kinh doanh nhãn hiệu -->
+        <div class="row section">
+            <div class="col-md-12">
+                <h4 class="title">Thống kê kinh doanh nhãn hiệu</h4>
+            </div>
+            <div class="col-md-12">
+                <h5>Biểu đồ tăng trưởng các nhãn hiệu</h5>
+                <br />
+                <div id="brand-growth-chart" style="height: 250px;"></div>
+            </div>
+        </div>
+        
+        <!-- kinh doanh quảng cáo -->
+        <div class="row section">
+            <div class="col-md-12">
+                <h4 class="title">Thống kê kinh doanh quảng cáo</h4>
+            </div>
+            <div class="col-md-12">
+                <h5>Quarterly Apple iOS device unit sales</h5>
+                <br />
+                <div id="brand-advertising-chart" style="height: 250px;"></div>
+            </div>
+        </div>
+        
+        <!-- statistics chart built with jQuery Flot -->
+        <div class="row section chart">
+            <div class="col-md-12">
+                <h4 class="clearfix pull-left">
+                    Thống kê khuyến mãi                         
+                </h4>
+                <div class="btn-group pull-right">
+                    <button class="glow left">DAY</button>
+                    <button class="glow middle active">MONTH</button>
+                    <button class="glow right">YEAR</button>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div id="promotion-chart"></div>
+            </div>
+        </div>
+        <!-- end statistics chart -->
+        
     </div>
 </div>
 <!-- end main container -->
-</div>
 <!-- scripts -->
 <script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
 <!-- knob -->

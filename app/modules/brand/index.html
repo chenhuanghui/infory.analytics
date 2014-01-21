@@ -1,159 +1,93 @@
 <div ng-include="'partials/_header.html'"></div>
-<div ng-controller="brandCreateCtrl">
-    <!-- sidebar -->
-    <div id="sidebar-nav">
-        <ul id="dashboard-menu">
-            <li>
-                <a href="/#">
-                    <i class="icon-home"></i>
-                    <span>Home</span>
-                </a>
-            </li>            
-            <li>
-                <a href="/#/inbox">
-                    <i class="icon-signal"></i>
-                    <span>Inbox</span>
-                </a>
-            </li>
-            <li class="active">
-                <div class="pointer">
-                    <div class="arrow"></div>
-                    <div class="arrow_border"></div>
-                </div>
-                <a class="dropdown-toggle" href="#">
-                    <i class="icon-group"></i>
-                    <span>Nhãn hiệu</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu active">
-                    <li><a href="/#/brand/new">Tạo nhãn hiệu mới</a></li>
-                    <li><a href="javascript:void(0)">Dịch vụ giao hàng</a></li>
-                    <li><a href="javascript:void(0)" class="active">Quản lý nhãn hiệu</a></li>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div class="content">
+    <div id="pad-wrapper">
+        <div class="row">
+            <div class="col-md-9">
+                <ul id="brand-list">
+                    <li>
+                        <a class="dropdown-toggle">
+                            <img src="img/contact-img.png" alt="contact" class="img-circle avatar hidden-phone"/>
+                            <span class="name">nhãn hiệu smartguide</span>
+                            <br />
+                            <div class="btn-glow success" onclick="alert('xx')"><i class="icon-plus"></i> Thêm cửa hàng</div>
+                            <div class="btn-glow primary"><i class="icon-bar-chart"></i> Xem thống kế</div>
+                        </a>
+                        <ul class="submenu">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-2 sortable">
+                                            Tên cửa hàng
+                                        </th>
+                                        <th class="col-md-2 sortable">
+                                            <span class="line"></span>Thao tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- row -->
+                                    <tr class="first">
+                                        <td>
+                                            <img src="img/contact-img.png" alt="contact" class="img-circle avatar hidden-phone" />
+                                            <div class="info">
+                                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
+                                                <br />
+                                                <span class="subtext">Graphic Design</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="btn-glow"><i class="icon-edit"></i></div><div class="btn-glow"><i class="icon-info-sign"></i></div> 
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle">
+                            <img src="img/contact-img.png" alt="contact" class="img-circle avatar hidden-phone"/>
+                            <span class="name">nhãn hiệu smartguide</span>
+                            <br />
+                            <div class="btn-glow success" onclick="alert('xx')"><i class="icon-plus"></i> Thêm cửa hàng</div>
+                            <div class="btn-glow primary"><i class="icon-bar-chart"></i> Xem thống kế</div>
+                        </a>
+                        <ul class="submenu">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-2 sortable">
+                                            Tên cửa hàng
+                                        </th>
+                                        <th class="col-md-2 sortable">
+                                            <span class="line"></span>Thao tác
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- row -->
+                                    <tr class="first">
+                                        <td>
+                                            <img src="img/contact-img.png" alt="contact" class="img-circle avatar hidden-phone" />
+                                            <div class="info">
+                                                <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
+                                                <br />
+                                                <span class="subtext">Graphic Design</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="btn-glow"><i class="icon-edit"></i></div><div class="btn-glow"><i class="icon-info-sign"></i></div> 
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ul>
+                    </li>
                 </ul>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="#">
-                    <i class="icon-edit"></i>
-                    <span>Nhân viên</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="javascript:void(0)">Tạo nhân viên mới</a></li>
-                    <li><a href="javascript:void(0)">Quản lý nhân viên</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="icon-picture"></i>
-                    <span>Quảng cáo</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="icon-calendar-empty"></i>
-                    <span>Khuyến mãi</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)">
-                    <i class="icon-cog"></i>
-                    <span>Khách hàng</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- end sidebar -->
-    
-    
-    <!-- main container -->
-    <div class="content">
-        <div id="pad-wrapper">
-            <div class="row">
-                <div class="col-md-9">
-                    <ul id="brand-list">
-                        <li>
-                            <a class="dropdown-toggle">
-                                <img src="img/contact-img.png" alt="contact" class="img-circle avatar hidden-phone"/>
-                                <span class="name">nhãn hiệu smartguide</span>
-                                <br />
-                                <div class="btn-glow success" onclick="alert('xx')"><i class="icon-plus"></i> Thêm cửa hàng</div>
-                                <div class="btn-glow primary"><i class="icon-bar-chart"></i> Xem thống kế</div>
-                            </a>
-                            <ul class="submenu">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2 sortable">
-                                                Tên cửa hàng
-                                            </th>
-                                            <th class="col-md-2 sortable">
-                                                <span class="line"></span>Thao tác
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- row -->
-                                        <tr class="first">
-                                            <td>
-                                                <img src="img/contact-img.png" alt="contact" class="img-circle avatar hidden-phone" />
-                                                <div class="info">
-                                                    <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                                    <br />
-                                                    <span class="subtext">Graphic Design</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="btn-glow"><i class="icon-edit"></i></div><div class="btn-glow"><i class="icon-info-sign"></i></div> 
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="dropdown-toggle">
-                                <img src="img/contact-img.png" alt="contact" class="img-circle avatar hidden-phone"/>
-                                <span class="name">nhãn hiệu smartguide</span>
-                                <br />
-                                <div class="btn-glow success" onclick="alert('xx')"><i class="icon-plus"></i> Thêm cửa hàng</div>
-                                <div class="btn-glow primary"><i class="icon-bar-chart"></i> Xem thống kế</div>
-                            </a>
-                            <ul class="submenu">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-2 sortable">
-                                                Tên cửa hàng
-                                            </th>
-                                            <th class="col-md-2 sortable">
-                                                <span class="line"></span>Thao tác
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- row -->
-                                        <tr class="first">
-                                            <td>
-                                                <img src="img/contact-img.png" alt="contact" class="img-circle avatar hidden-phone" />
-                                                <div class="info">
-                                                    <a href="user-profile.html" class="name">Alejandra Galvan Castillo</a>
-                                                    <br />
-                                                    <span class="subtext">Graphic Design</span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="btn-glow"><i class="icon-edit"></i></div><div class="btn-glow"><i class="icon-info-sign"></i></div> 
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
             </div>
-        </div>    
-    </div>
+        </div>
+    </div>    
 </div>
 <!-- scripts -->
 <script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
