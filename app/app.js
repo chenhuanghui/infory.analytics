@@ -6,8 +6,10 @@ angular.module('dashboardSmgApp', [
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
+  'home',
   'brand',
-  'inbox'
+  'inbox',
+  'shop'
 ])
   .config(function ($routeProvider) {
     $routeProvider
