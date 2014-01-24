@@ -19,7 +19,8 @@ angular.module('dashboardSmgApp', [
       })
   })
 
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $rootScope) {
+    $rootScope._username = "HAHAHAH";
   });
 
 
