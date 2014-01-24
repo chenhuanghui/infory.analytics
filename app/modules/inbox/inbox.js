@@ -3,7 +3,7 @@ angular.module('inbox',[
 	])
 	
 	.controller('inboxCtrl', ['$scope', function ($scope) {
-		$scope.msg = "brand view";
+		$scope.activeTab = "inbox";
 	}])
 
 	.config(function($routeProvider){
