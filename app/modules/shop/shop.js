@@ -1,6 +1,4 @@
-angular.module('shop',[
-		'ngRoute'
-	])
+angular.module('shop')
 	
 	.controller('CreateShopCtrl', ['$scope', function ($scope) {
 		$scope.searchCompleted = false;

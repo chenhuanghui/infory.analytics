@@ -8,8 +8,8 @@ angular.module('dashboardSmgApp', [
   'ui.bootstrap',
   'home',
   'brand',
-  'inbox',
-  'shop'
+  'shop',
+  'account'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -17,13 +17,26 @@ angular.module('dashboardSmgApp', [
         templateUrl: 'modules/home/home.html',
         controller: 'MainCtrl'
       })
+  })
+
+  .controller('MainCtrl', function ($scope) {
   });
 
-angular.module('dashboardSmgApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+
+// Define modules
+
+angular.module('account',[
+  'ngRoute'
+]);  
+
+angular.module('brand',[
+  'ngRoute'
+]);  
+
+angular.module('shop',[
+  'ngRoute'
+]);  
+
+angular.module('home',[
+  'ngRoute'
+]);  

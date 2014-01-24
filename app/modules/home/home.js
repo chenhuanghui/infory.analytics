@@ -1,6 +1,4 @@
-angular.module('home',[
-		'ngRoute'
-	])
+angular.module('home')
 	
 	.controller('homeCtrl', ['$scope', function ($scope) {
 		$scope.activeTab = 'home';

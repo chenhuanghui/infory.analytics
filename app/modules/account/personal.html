@@ -1,0 +1,71 @@
+<div ng-include="'partials/_header.html'"></div>
+
+
+<div class="content wide-content">
+    <div class="settings-wrapper" id="pad-wrapper">
+        <div class="row">
+            <!-- avatar column -->
+            <div class="col-md-3 col-md-offset-1 avatar-box">
+                <div class="personal-image">
+                    <img src="img/personal-info.png" class="avatar img-circle" alt="avatar" />
+                    <p>Upload a different photo...</p>
+                    
+                    <input type="file" />
+                </div>
+            </div>
+
+            <!-- edit form column -->
+            <div class="col-md-7 personal-info">
+                <div class="alert alert-info">
+                    <i class="icon-lightbulb"></i>
+                    Trang hiển thị thông tin cá nhân của bạn Trang hiển thị thông tin cá nhân của bạn
+
+                </div>
+                <h5 class="personal-title">Thông tin cá nhân</h5>
+
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Họ và tên:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="Alejandra" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Email:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="alejandra@design.com" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Mật khẩu:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="password" value="blablablabla" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Xác nhận mật khẩu:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="password" value="blablablabla" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Số điện thoại:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="" value="09090909090" />
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <input type="button" class="btn-glow primary" value="Save Changes">
+                        <span>OR</span>
+                        <input type="reset" value="Cancel" class="reset" ng-click="cancel()">
+                    </div>
+                </form>
+            </div>
+        </div>            
+    </div>
+</div>

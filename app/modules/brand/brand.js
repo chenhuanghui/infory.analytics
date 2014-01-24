@@ -1,7 +1,5 @@
-angular.module('brand',[
-		'ngRoute'
-	])
-	
+angular.module('brand')
+
 	.controller('BrandCtrl', ['$scope', function ($scope) {
 		$scope.msg = "brand view";
 	}])

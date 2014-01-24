@@ -1,6 +1,4 @@
-angular.module('inbox',[
-		'ngRoute'
-	])
+angular.module('account')
 	
 	.controller('inboxCtrl', ['$scope', function ($scope) {
 		$scope.activeTab = "inbox";
@@ -9,7 +7,7 @@ angular.module('inbox',[
 	.config(function($routeProvider){
 		$routeProvider
 			.when('/inbox', {
-				templateUrl: 'modules/inbox/index.html',
+				templateUrl: 'modules/account/inbox.html',
 				controller: 'inboxCtrl'
 			})
 	});
