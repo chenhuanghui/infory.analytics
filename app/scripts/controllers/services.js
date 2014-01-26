@@ -43,7 +43,7 @@
                                 data: user,
                                 contentType: 'application/x-www-form-urlencoded',
                                 success: function(data) {
-                                    changeUser(data);
+                                    changeUser(JSON.parse(data));
                                     success();
                                 },
                                 error: function(data) {
