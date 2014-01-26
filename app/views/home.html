@@ -1,0 +1,28 @@
+<h1>Hello</h1>
+<p>This view is visible to logged in users.</p>
+
+<div ng-controller="NavCtrl">
+	<li access-level="accessLevels.anon" active-nav>
+		<a href="/login">Login</a>
+	</li>
+
+	<li access-level="accessLevels.anon" active-nav>
+		<a href="/register">Register</a>
+	</li>
+
+	<li access-level="accessLevels.user" active-nav>
+		<a href="/home">Home</a>
+	</li>
+
+	<li access-level="accessLevels.user" active-nav>
+		<a href="/private">Private</a>
+	</li>
+
+	<li access-level="accessLevels.admin" active-nav>
+		<a href="/admin">Admin</a>
+	</li>
+
+	<li access-level="accessLevels.user" active-nav>
+		<a href="/login">Logout</a>
+	</li>
+</div>
