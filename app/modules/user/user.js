@@ -2,6 +2,7 @@ angular.module('user')
 	
 	.controller('userCtrl', ['$scope', function ($scope) {
 		$scope.activeTab = "user";
+		$scope.cssLink = "user-profile.css";
 	}])
 
 	.config(function($routeProvider){
