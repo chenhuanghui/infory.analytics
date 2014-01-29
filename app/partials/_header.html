@@ -1,5 +1,5 @@
 <!-- navbar -->
-<header class="navbar navbar-inverse" role="banner">
+<header ng-controller="HeaderCtrl" class="navbar navbar-inverse" role="banner">
     <div class="navbar-header">
         <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
             <span class="sr-only">Toggle navigation</span>
@@ -114,11 +114,10 @@
         </li>
         
         <li class="settings hidden-xs hidden-sm">
-            <a href="#signin" role="button">
+            <a ng-click="logout()" role="button">
                 <i class="icon-share-alt"></i>
             </a>
         </li>
     </ul>
 </header>
 <!-- end navbar -->
-<script src="vendor/theme/scripts/theme.js"></script>
