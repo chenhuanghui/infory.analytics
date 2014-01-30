@@ -78,10 +78,8 @@
                                     </div>
                                     <div class="field-box">
                                         <label>Loại ưu đãi:</label>
-                                        <select id="plan">
-                                            <option value="66">Giảm giá trực tiếp (Voucher)</option>
-                                            <option value="67">Tích luỹ điểm</option>
-                                            <option value="68">Quay số may mắn</option>
+                                        <select ng-model="promotionList" 
+                                                ng-options="promotion as promotion.label for promotion in promotions">
                                         </select>
                                     </div>
 
@@ -94,7 +92,6 @@
                                         <label>Kết thúc:</label>
                                         <input type="text" value="03/29/2013" class="form-control input-datepicker">
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -102,7 +99,12 @@
                     <div class="step-pane" id="step3">
                         <div class="row form-wrapper">
                             <div class="col-md-8">
-                                <div ng-include="'modules/promotion/_voucher.html'"></div>
+                                <div ng-if="promotionList.value == 1">
+                                    <div ng-include="'modules/promotion/_voucher.html'"></div>    
+                                </div>
+                                <div ng-if="promotionList.value != 1">
+                                    <div ng-include="'modules/promotion/_collection.html'"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -186,6 +188,9 @@
         $btnNext.on('click', function() {
             $wizard.wizard('next');
         });
+
+
+        $("input:checkbox, input:radio").uniform();
 
         // datepicker plugin
         $('.input-datepicker').datepicker().on('changeDate', function (ev) {
