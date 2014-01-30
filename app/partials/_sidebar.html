@@ -57,6 +57,24 @@
                 <li id="menu-shop-list"><a href="javascript:void(0)">Danh sách cửa hàng</a></li>
             </ul>
         </li>
+
+        <li id="menu-promotion" ng-class="{active: activeTab == 'promotion'}">
+            <div class="pointer" ng-class="{hide:activeTab != 'promotion'}">
+                <div class="arrow"></div>
+                <div class="arrow_border"></div>
+            </div>
+            <a class="dropdown-toggle" href="#">
+                <i class="icon-home"></i>
+                <span>Ưu đãi</span>
+                <i class="icon-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+                <li id="menu-promotion-list"><a href="#promotion">Danh sách ưu đãi</a></li>
+                <li id="menu-promotion-create"><a href="/#/promotion/new">Tạo ưu đãi mới</a></li>
+                
+            </ul>
+        </li>
+
         <li id="menu-customer" ng-class="{active: activeTab == 'customer'}">
             <div class="pointer" ng-class="{hide:activeTab != 'customer'}">
                 <div class="arrow"></div>

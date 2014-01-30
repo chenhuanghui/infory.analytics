@@ -1,18 +1,7 @@
 <div ng-include="'partials/_header.html'"></div>
 <div ng-include="'partials/_sidebar.html'"></div>
 <!-- main container -->
-<div class="content">
-    
-    <!-- settings changer -->
-    <div class="skins-nav">
-        <a href="#" class="skin first_nav selected">
-            <span class="icon"></span><span class="text">Default</span>
-        </a>
-        <a href="#" class="skin second_nav" data-file="css/compiled/skins/dark.css">
-            <span class="icon"></span><span class="text">Dark skin</span>
-        </a>
-    </div>
-    
+<div class="content">    
     <div id="pad-wrapper">
         <div class="row">
             <div class="col-md-12 col-xs-12">
@@ -78,8 +67,9 @@
                                     </div>
                                     <div class="field-box">
                                         <label>Loại ưu đãi:</label>
-                                        <select ng-model="promotionList" 
-                                                ng-options="promotion as promotion.label for promotion in promotions">
+                                        <select ng-init="promotionTypeList = promotionTypes[0]"
+                                                ng-model="promotionTypeList" 
+                                                ng-options="promotion as promotion.label for promotion in promotionTypes">
                                         </select>
                                     </div>
 
@@ -99,10 +89,10 @@
                     <div class="step-pane" id="step3">
                         <div class="row form-wrapper">
                             <div class="col-md-8">
-                                <div ng-if="promotionList.value == 1">
+                                <div ng-if="promotionTypeList.value == 1">
                                     <div ng-include="'modules/promotion/_voucher.html'"></div>    
                                 </div>
-                                <div ng-if="promotionList.value != 1">
+                                <div ng-if="promotionTypeList.value != 1">
                                     <div ng-include="'modules/promotion/_collection.html'"></div>
                                 </div>
                             </div>
@@ -113,26 +103,10 @@
                             <div class="col-md-8">
                                 <form>
                                     <div class="field-box">
-                                        <label>Subscription Plan:</label>
-                                        <select id="plan">
-                                            <option value="66">Basic - $2.99/month (USD)</option>
-                                            <option value="67">Pro - $9.99/month (USD)</option>
-                                            <option value="68">Premium - $49.99/month (USD)</option>
-                                        </select>
-                                    </div>
-                                    <div class="field-box">
-                                        <label>Credit Card Number:</label>
-                                        <input class="form-control" type="text" />
-                                    </div>
-                                    <div class="field-box">
-                                        <label>Expiration:</label>
-                                        <input class="form-control" style="width:60px;display:inline" placeholder="MM" type="text" /> 
-                                        &nbsp; / &nbsp;
-                                        <input class="form-control" style="width:85px;display:inline" placeholder="YYYY" type="text" />
-                                    </div>
-                                    <div class="field-box">
-                                        <label>Card CVC Number:</label>
-                                        <input class="form-control" type="text" />
+                                        <label>Thời gian :</label>
+                                        <label class="checkbox-inline">
+                                            <div class="checker" id="uniform-inlineCheckbox1"><span><input type="checkbox" id="inlineCheckbox1" value="option1"></span></div> Cả ngày
+                                        </label>
                                     </div>
                                 </form>
                             </div>
