@@ -20,19 +20,19 @@
                     <ul class="wizard-steps">
                         <li data-target="#step1" class="active">
                             <span class="step">1</span>
-                            <span class="title">General <br> information</span>
+                            <span class="title">Thông tin <br> cơ bản</span>
                         </li>
                         <li data-target="#step2">
                             <span class="step">2</span>
-                            <span class="title">Address <br> information</span>
+                            <span class="title">Nội dung<br>ưu đãi</span>
                         </li>
                         <li data-target="#step3">
                             <span class="step">3</span>
-                            <span class="title">User <br> settings</span>
+                            <span class="title">Thời gian<br>tổ chức</span>
                         </li>
                         <li data-target="#step4">
                             <span class="step">4</span>
-                            <span class="title">Payment <br> info</span>
+                            <span class="title">Thông tin<br>khác</span>
                         </li>
                     </ul>                            
                 </div>
@@ -42,10 +42,18 @@
                             <div class="col-md-8">
                                 <form>
                                     <div class="field-box">
-                                        <label>Name:</label>
+                                        <label>Tên chương trình:</label>
                                         <input class="form-control" type="text" />
                                     </div>
-                                    <div class="field-box error">
+                                    <div class="field-box">
+                                        <label>Loại ưu đãi:</label>
+                                        <select id="plan">
+                                            <option value="66">Giảm giá trực tiếp (Voucher)</option>
+                                            <option value="67">Tích luỹ điểm</option>
+                                            <option value="68">Quay số may mắn</option>
+                                        </select>
+                                    </div>
+                                    <!-- <div class="field-box error">
                                         <label>Company:</label>
                                         <input class="form-control" type="text" />
                                         <span class="alert-msg"><i class="icon-remove-sign"></i> Please enter your company</span>
@@ -58,7 +66,7 @@
                                         <label>Username:</label>
                                         <input class="form-control" type="text" />
                                         <span class="alert-msg"><i class="icon-ok-sign"></i> Username available</span>
-                                    </div>
+                                    </div> -->
                                 </form>
                             </div>
                         </div>
