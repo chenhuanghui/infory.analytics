@@ -32,11 +32,12 @@
                                 <form>
                                     <div class="field-box">
                                         <label>Nhãn hiệu:</label>
-                                        <select id="plan">
-                                            <option value="66">Brand 1</option>
-                                            <option value="67">Brand 2</option>
-                                            <option value="68">Brand 3</option>
-                                        </select>
+                                        <div class="col-md-8">
+                                            <label class="radio" ng-repeat="brand in brands">
+                                                <div class="radio" id="uniform-optionsRadios1"><span ng-class='{checked:$first}'><input type="radio" name="optionsRadios" id="optionsRadios1" value="{{brand.id}}" checked=""></span></div>
+                                                {{brand.name}}
+                                            </label>
+                                        </div>                                
                                     </div>
                                     
                                     <!-- <div class="field-box error">

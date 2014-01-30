@@ -2,6 +2,20 @@ angular.module('promotion')
 	
 	.controller('promotionCtrl', ['$scope', function ($scope) {
 		$scope.activeTab = "user";
+		$scope.brands = [
+			{
+				id: 100,
+				name: "Trung Nguyen"
+			},
+			{
+				id: 101,
+				name: "GJC"
+			},
+			{
+				id: 100,
+				name: "Passio"
+			}
+		];
 		$scope.promotionTypes= [{
 		    value: '1',
 		    label: 'Giảm giá trực tiếp (voucher)'
