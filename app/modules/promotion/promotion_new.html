@@ -42,17 +42,14 @@
                             <div class="col-md-8">
                                 <form>
                                     <div class="field-box">
-                                        <label>Tên chương trình:</label>
-                                        <input class="form-control" type="text" />
-                                    </div>
-                                    <div class="field-box">
-                                        <label>Loại ưu đãi:</label>
+                                        <label>Nhãn hiệu:</label>
                                         <select id="plan">
-                                            <option value="66">Giảm giá trực tiếp (Voucher)</option>
-                                            <option value="67">Tích luỹ điểm</option>
-                                            <option value="68">Quay số may mắn</option>
+                                            <option value="66">Brand 1</option>
+                                            <option value="67">Brand 2</option>
+                                            <option value="68">Brand 3</option>
                                         </select>
                                     </div>
+                                    
                                     <!-- <div class="field-box error">
                                         <label>Company:</label>
                                         <input class="form-control" type="text" />
@@ -76,21 +73,28 @@
                             <div class="col-md-8">
                                 <form>
                                     <div class="field-box">
-                                        <label>Address:</label>
+                                        <label>Tên chương trình:</label>
                                         <input class="form-control" type="text" />
                                     </div>
                                     <div class="field-box">
-                                        <label>City:</label>
-                                        <input class="form-control" type="text" />
+                                        <label>Loại ưu đãi:</label>
+                                        <select id="plan">
+                                            <option value="66">Giảm giá trực tiếp (Voucher)</option>
+                                            <option value="67">Tích luỹ điểm</option>
+                                            <option value="68">Quay số may mắn</option>
+                                        </select>
                                     </div>
+
                                     <div class="field-box">
-                                        <label>Postal/ZIP code:</label>
-                                        <input class="form-control" type="text" />
+                                        <label>Bắt đầu:</label>
+                                        <input type="text" value="03/29/2013" class="form-control input-datepicker">
                                     </div>
+
                                     <div class="field-box">
-                                        <label>Country:</label>
-                                        <input class="form-control" type="text" />
+                                        <label>Kết thúc:</label>
+                                        <input type="text" value="03/29/2013" class="form-control input-datepicker">
                                     </div>
+
                                 </form>
                             </div>
                         </div>
@@ -98,36 +102,7 @@
                     <div class="step-pane" id="step3">
                         <div class="row form-wrapper">
                             <div class="col-md-8">
-                                <form>
-                                    <div class="field-box">
-                                        <label>Username:</label>
-                                        <input class="form-control" type="text" />
-                                    </div>
-                                    <div class="field-box">
-                                        <label>Photo:</label>
-                                        <input type="file" />
-                                    </div>
-                                    <div class="field-box">
-                                        <label>App name:</label>
-                                        <input class="form-control" type="text" />
-                                    </div>
-                                    <div class="field-box">
-                                        <label>Time zone:</label>
-                                        <select>
-                                            <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                            <option value="Alaska">(GMT-09:00) Alaska</option>
-                                            <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                            <option value="Arizona">(GMT-07:00) Arizona</option>
-                                            <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                            <option value="Central Time (US &amp; Canada)">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                            <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                            <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option><option value="" disabled="disabled">-------------</option>
-                                            <option value="American Samoa">(GMT-11:00) American Samoa</option>
-                                            <option value="International Date Line West">(GMT-11:00) International Date Line West</option>
-                                            <option value="Midway Island">(GMT-11:00) Midway Island</option>
-                                        </select>
-                                    </div>
-                                </form>
+                                <div ng-include="'modules/promotion/_voucher.html'"></div>
                             </div>
                         </div>
                     </div>
@@ -164,13 +139,13 @@
                 </div>
                 <div class="wizard-actions">
                     <button type="button" disabled class="btn-glow primary btn-prev"> 
-                        <i class="icon-chevron-left"></i> Prev
+                        <i class="icon-chevron-left"></i> Quay lại
                     </button>
                     <button type="button" class="btn-glow primary btn-next" data-last="Finish">
-                        Next <i class="icon-chevron-right"></i>
+                        Tiếp theo <i class="icon-chevron-right"></i>
                     </button>
                     <button type="button" class="btn-glow success btn-finish">
-                        Setup your account!
+                        Hoàn thành
                     </button>
                 </div>
             </div>
@@ -211,7 +186,16 @@
         $btnNext.on('click', function() {
             $wizard.wizard('next');
         });
+
+        // datepicker plugin
+        $('.input-datepicker').datepicker().on('changeDate', function (ev) {
+            $(this).datepicker('hide');
+        });
     });
+
 </script>
 <style scoped>@import url('vendor/theme/styles/compiled/form-wizard.css')</style>
- 
+<style scoped>@import url('vendor/theme/styles/lib/morris.css')</style>
+<style scoped>@import url('vendor/theme/styles/lib/uniform.default.css')</style>
+<style scoped>@import url('vendor/theme/styles/lib/select2.css')</style>
+<style scoped>@import url('vendor/theme/styles/lib/bootstrap.datepicker.css')</style>
