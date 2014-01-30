@@ -10,7 +10,8 @@ angular.module('dashboardSmgApp', [
   'brand',
   'shop',
   'account',
-  'user'
+  'user',
+  'promotion'
 ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -44,5 +45,9 @@ angular.module('home',[
 ]);  
 
 angular.module('user',[
+  'ngRoute'
+]);  
+
+angular.module('promotion',[
   'ngRoute'
 ]);  

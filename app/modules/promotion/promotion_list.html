@@ -1,0 +1,86 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+	<!-- main container -->
+    <div class="content">
+        
+        <div id="pad-wrapper" class="users-list">
+            <div class="row header">
+                <h3>Ưu đãi</h3>
+                <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
+                    <input type="text" class="col-md-5 search" placeholder="Nhập tên ưu đãi">
+                    
+                    <!-- custom popup filter -->
+                    <!-- styles are located in css/elements.css -->
+                    <!-- script that enables this dropdown is located in js/theme.js -->
+
+                    <a href="#promotion/new" class="btn-flat success pull-right">
+                        <span>&#43;</span>
+                        THÊM ƯU ĐÃI
+                    </a>
+                </div>
+            </div>
+
+            <!-- Users table -->
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-md-4 sortable">
+                                    Tên
+                                </th>
+                                <th class="col-md-2 sortable">
+                                    <span class="line"></span>Ngày tạo
+                                </th>
+                                <th class="col-md-2 sortable">
+                                    <span class="line"></span>Lượt sử dụng
+                                </th>
+                                <th class="col-md-2 sortable">
+                                    <span class="line"></span>Lượt xem
+                                </th>
+                                <th class="col-md-2sortable align-right">
+                                    <span class="line"></span>Trạng thái
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+	                        <!-- row -->
+	                        <tr ng-class='{first:$first}' ng-repeat="promotion in promotionList">
+	                            <td >
+	                                <img src="{{promotion.logo}}" alt="contact" class="img-circle avatar hidden-phone" />
+	                                <a href="user-profile.html" class="name">{{promotion.name}}</a>
+	                                <span class="subtext">{{promotion.type}}</span>
+	                            </td>
+	                            <td>
+	                                {{promotion.created}}
+	                            </td>
+	                            <td>
+	                                {{promotion.viewed}}
+	                            </td>
+	                            <td>
+	                                {{promotion.used}}
+	                            </td>
+	                            <td class="align-right">
+	                                {{promotion.status}}
+	                            </td>
+	                        </tr>
+                        </tbody>
+                    </table>
+                </div>                
+            </div>
+            <ul class="pagination pull-right">
+                <li><a href="#">&#8249;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&#8250;</a></li>
+            </ul>
+            <!-- end users table -->
+        </div>
+    </div>
+    <!-- end main container -->
+</html>
+
+<style scoped>@import url('vendor/theme/styles/compiled/user-list.css')</style>
