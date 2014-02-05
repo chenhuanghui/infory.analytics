@@ -64,25 +64,6 @@
                                 success(res);
 
                             }).error(error);
-                            // $.ajax({
-                            //     url: 'http://smartguide.dev/loginapi',
-                            //     type: 'POST',
-                            //     data: user,
-                            //     contentType: 'application/x-www-form-urlencoded',
-                            //     success: function(data) {
-
-                            //         user = JSON.parse(data);
-
-                            //         $cookieStore.put('user', user.username);
-                            //         $cookieStore.put('role', user.role.title);
-
-                            //         changeUser(user);
-                            //         success(user);
-                            //     },
-                            //     error: function(data) {
-                            //         error(data);
-                            //     }
-                            // });
                         },
 
                         logout: function(success, error) {
