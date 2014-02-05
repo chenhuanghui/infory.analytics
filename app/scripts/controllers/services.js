@@ -5,11 +5,29 @@
 
                     // Lấy danh sách accessLevels và userRoles ở file js/routingConfig.
                     var accessLevels = routingConfig.accessLevels,
-                        userRoles = routingConfig.userRoles,
-                        currentUser = $cookieStore.get('user') || {
-                            username: '',
-                            role: userRoles.public
-                        };
+                        userRoles = routingConfig.userRoles;
+
+                    var currentUser = {
+                        username: '',
+                        role: userRoles.public
+                    };
+
+                    if ($cookieStore.get('user')) {
+                        var role = userRoles.public;
+
+                        switch ($cookieStore.get('role')) {
+                            case 'user':
+                                role = userRoles.user;
+                                break;
+                            case 'admin':
+                                role = userRoles.admin;
+                                break;
+                        }
+                        currentUser = {
+                            username: $cookieStore.get('user'),
+                            role: role
+                        }
+                    }
 
                     $cookieStore.remove('user');
 
@@ -37,19 +55,34 @@
                         },
                         login: function(user, success, error) {
 
-                            $.ajax({
-                                url: 'http://smartguide.dev/loginapi',
-                                type: 'POST',
-                                data: user,
-                                contentType: 'application/x-www-form-urlencoded',
-                                success: function(data) {
-                                    changeUser(JSON.parse(data));
-                                    success();
-                                },
-                                error: function(data) {
-                                    error(data);
-                                }
-                            });
+                            $http.post('http://smartguide.dev/loginapi', user).success(function(res) {
+
+                                $cookieStore.put('user', res.username);
+                                $cookieStore.put('role', res.role.title);
+
+                                changeUser(res);
+                                success(res);
+
+                            }).error(error);
+                            // $.ajax({
+                            //     url: 'http://smartguide.dev/loginapi',
+                            //     type: 'POST',
+                            //     data: user,
+                            //     contentType: 'application/x-www-form-urlencoded',
+                            //     success: function(data) {
+
+                            //         user = JSON.parse(data);
+
+                            //         $cookieStore.put('user', user.username);
+                            //         $cookieStore.put('role', user.role.title);
+
+                            //         changeUser(user);
+                            //         success(user);
+                            //     },
+                            //     error: function(data) {
+                            //         error(data);
+                            //     }
+                            // });
                         },
 
                         logout: function(success, error) {
