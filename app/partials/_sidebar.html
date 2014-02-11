@@ -1,9 +1,6 @@
 <!-- sidebar -->
 <div id="sidebar-nav">
     <ul id="dashboard-menu">
-        <!-- personal account -->
-        <div style="margin-left:-10px;margin-top:-40px;"><strong>TÀI KHOẢN</strong></div>
-
         <li id="menu-home" ng-class="{active: activeTab == 'home'}">
             <div class="pointer" ng-class="{hide:activeTab != 'home'}">
                 <div class="arrow"></div>
@@ -11,72 +8,43 @@
             </div>
             <a href="/">
                 <i class="icon-home"></i>
-                <span>Home</span>
-            </a>
-        </li>            
-        <li id="menu-inbox" ng-class="{active: activeTab == 'inbox'}">
-            <div class="pointer" ng-class="{hide:activeTab != 'inbox'}">
-                <div class="arrow"></div>
-                <div class="arrow_border"></div>
-            </div>
-            <a href="/#/inbox">
-                <i class="icon-envelope"></i>
-                <span>Inbox</span>
+                <span>Hoạt động</span>
             </a>
         </li>
-
-        <!-- customer business -->
-        <div style="margin-left:-10px;margin-top:30px;"><strong>DOANH NGHIỆP</strong></div>
         <li id="menu-brand" ng-class="{active: activeTab == 'brand'}">
             <div class="pointer" ng-class="{hide:activeTab != 'brand'}">
                 <div class="arrow"></div>
                 <div class="arrow_border"></div>
             </div>
             <a class="dropdown-toggle" href="#">
-                <i class="icon-tags"></i>
+                <i class="icon-certificate"></i>
                 <span>Nhãn hiệu</span>
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li id="menu-brand-create"><a href="/#/brand/new">Tạo nhãn hiệu mới</a></li>
-                <li id="menu-brand-list"><a href="/#/brand">Danh sách nhãn hiệu</a></li>
+                <li id="menu-brand-info"><a href="/#/brand/info"><i class="icon-info-sign sub-icon"></i>Thông tin</a></li>
+                <li id="menu-brand-promotion"><a href="/#/brand/promotion"><i class="icon-tag sub-icon"></i>Khuyến mãi</a></li>
+                <li id="menu-brand-comment"><a href="/#/brand/comment"><i class="icon-comment sub-icon"></i>Bình luận</a></li>
             </ul>
         </li>
-        <li id="menu-shop" ng-class="{active: activeTab == 'shop'}">
-            <div class="pointer" ng-class="{hide:activeTab != 'shop'}">
+        <li id="menu-analytic" ng-class="{active: activeTab == 'analytic'}">
+            <div class="pointer" ng-class="{hide:activeTab != 'analytic'}">
                 <div class="arrow"></div>
                 <div class="arrow_border"></div>
             </div>
             <a class="dropdown-toggle" href="#">
-                <i class="icon-home"></i>
-                <span>Cửa hàng</span>
+                <i class="icon-signal"></i>
+                <span>Thống kê</span>
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li id="menu-shop-create"><a href="/#/shop/new">Tạo cửa hàng mới</a></li>
-                <li id="menu-shop-list"><a href="javascript:void(0)">Danh sách cửa hàng</a></li>
+                <li><a href="/#/analytic/rate"><i class="icon-filter sub-icon"></i>Đánh giá</a></li>
+                <li><a href="/#/analytic/growth"><i class="icon-external-link sub-icon"></i>Tăng trưởng</a></li>
+                <li><a href="/#/analytic/chart"><i class="icon-bar-chart sub-icon"></i>Biểu đồ</a></li>
             </ul>
         </li>
-
-        <li id="menu-promotion" ng-class="{active: activeTab == 'promotion'}">
-            <div class="pointer" ng-class="{hide:activeTab != 'promotion'}">
-                <div class="arrow"></div>
-                <div class="arrow_border"></div>
-            </div>
-            <a class="dropdown-toggle" href="#">
-                <i class="icon-home"></i>
-                <span>Ưu đãi</span>
-                <i class="icon-chevron-down"></i>
-            </a>
-            <ul class="submenu">
-                <li id="menu-promotion-list"><a href="#promotion">Danh sách ưu đãi</a></li>
-                <li id="menu-promotion-create"><a href="/#/promotion/new">Tạo ưu đãi mới</a></li>
-                
-            </ul>
-        </li>
-
-        <li id="menu-customer" ng-class="{active: activeTab == 'customer'}">
-            <div class="pointer" ng-class="{hide:activeTab != 'customer'}">
+        <li id="menu-client" ng-class="{active: activeTab == 'client'}">
+            <div class="pointer" ng-class="{hide:activeTab != 'client'}">
                 <div class="arrow"></div>
                 <div class="arrow_border"></div>
             </div>
@@ -86,69 +54,27 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li id="menu-customer-personal-info"><a href="/#/shop/new">Thông tin</a></li>
-                <li id="menu-customer-transaction-info"><a href="/#">Lịch sử giao dịch</a></li>
-                <li id="menu-customer-statistic"><a href="/#">Thống kê</a></li>
+                <li><a href="/#/client/list"><i class="icon-reorder sub-icon"></i>Danh sách</a></li>
+                <li><a href="/#/client/notice"><i class="icon-bullhorn sub-icon"></i>Thông báo</a></li>
+                <li><a href="/#/client/survey"><i class="icon-tasks sub-icon"></i>Khảo sát</a></li>
             </ul>
         </li>
-        <li id="menu-employee" ng-class="{active: activeTab == 'employee'}">
-            <div class="pointer" ng-class="{hide:activeTab != 'employee'}">
+        <li id="menu-shop" ng-class="{active: activeTab == 'shop'}">
+            <div class="pointer" ng-class="{hide:activeTab != 'shop'}">
                 <div class="arrow"></div>
                 <div class="arrow_border"></div>
             </div>
             <a class="dropdown-toggle" href="#">
-                <i class="icon-user-md"></i>
-                <span>Nhân viên</span>
+                <i class="icon-shopping-cart"></i>
+                <span>Cửa hàng</span>
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="#user">Danh sách nhân viên</a></li>
-                <li><a href="#user/new">Tạo nhân viên mới</a></li>
+                <li><a href="/#/shop/info"><i class="icon-info-sign sub-icon"></i>Thông tin</a></li>
+                <li><a href="/#/shop/product"><i class="icon-gift sub-icon"></i>Sản phẩm</a></li>
+                <li><a href="/#/shop/order"><i class="icon-credit-card sub-icon"></i>Đặt hàng</a></li>
             </ul>
-        </li>
-
-        <!-- SmartGuide services -->
-        <div style="margin-left:-10px;margin-top:30px;"><strong>DỊCH VỤ</strong></div>
-        <li id="menu-delivery" ng-class="{active: activeTab == 'delivery'}">
-            <div class="pointer" ng-class="{hide:activeTab != 'delivery'}">
-                <div class="arrow"></div>
-                <div class="arrow_border"></div>
-            </div>
-            <a href="javascript:void(0)">
-                <i class="icon-truck"></i>
-                <span>Giao hàng</span>
-            </a>
-        </li>
-        <li id="menu-advertisement" ng-class="{active: activeTab == 'advertisement'}">
-            <div class="pointer" ng-class="{hide:activeTab != 'advertisement'}">
-                <div class="arrow"></div>
-                <div class="arrow_border"></div>
-            </div>
-            <a href="javascript:void(0)">
-                <i class="icon-picture"></i>
-                <span>Quảng cáo</span>
-            </a>
-        </li>
-        <li id="menu-promotion" ng-class="{active: activeTab == 'promotion'}">
-            <div class="pointer" ng-class="{hide:activeTab != 'promotion'}">
-                <div class="arrow"></div>
-                <div class="arrow_border"></div>
-            </div>
-            <a href="javascript:void(0)">
-                <i class="icon-gift"></i>
-                <span>Khuyến mãi</span>
-            </a>
-        </li>
-        <li id="menu-customer-service" ng-class="{active: activeTab == 'customer-service'}">
-            <div class="pointer" ng-class="{hide:activeTab != 'customer-service'}">
-                <div class="arrow"></div>
-                <div class="arrow_border"></div>
-            </div>
-            <a href="javascript:void(0)">
-                <i class="icon-thumbs-up"></i>
-                <span>Chăm sóc khách hàng</span>
-            </a>
-        </li>
+        </li>             
     </ul>
 </div>
 <!-- end sidebar -->
