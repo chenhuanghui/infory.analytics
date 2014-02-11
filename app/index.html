@@ -17,6 +17,7 @@
     
     
     <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
     <link rel="stylesheet" type="text/css" href="vendor/theme/styles/compiled/layout.css" />
     <link rel="stylesheet" type="text/css" href="vendor/theme/styles/compiled/elements.css" />
     <link rel="stylesheet" type="text/css" href="vendor/theme/styles/compiled/icons.css" />
@@ -44,7 +45,9 @@
 
 <body ng-app="dashboardSmgApp">
 
-  <div ng-view></div>
+  <div id="wrapper">
+      <div id="width_wrapper" ng-view></div>
+  </div>
 
   <!-- build:js vendor -->
 	<script src="vendor/jquery/jquery.js"></script>
