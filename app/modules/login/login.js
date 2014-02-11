@@ -3,12 +3,11 @@
 angular.module('dashboardSmgApp')
     .controller('LoginCtrl', ['$rootScope', '$scope', '$location', '$window', 'Auth',
         function($rootScope, $scope, $location, $window, Auth) {
-
-            $scope.rememberme = true;
             $scope.login = function() {
                 Auth.login({
                         username: $scope.username,
-                        role: $scope.role
+                        role: $scope.role,
+                        rememberme: $scope.rememberme
                     },
                     function(res) {
                         $location.path('/');

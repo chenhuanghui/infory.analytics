@@ -29,8 +29,8 @@ angular.module('dashboardSmgApp')
             }
         }
 
-        // Uncomment for testing
-        // $cookieStore.remove('user');
+        // UNCOMMENT FOR TESTING REASON
+        //$cookieStore.remove('user');
 
         function changeUser(user) {
             _.extend(currentUser, user);
@@ -58,8 +58,12 @@ angular.module('dashboardSmgApp')
 
                 $http.post('http://smartguide.dev/loginapi', user).success(function(res) {
 
-                    $cookieStore.put('user', res.username);
-                    $cookieStore.put('role', res.role.title);
+                    if (res.rememberme) {
+                        $cookieStore.put('user', res.username);
+                        $cookieStore.put('role', res.role.title);
+                    } else {
+                        $cookieStore.remove('user');
+                    }
 
                     changeUser(res);
                     success(res);
