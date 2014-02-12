@@ -144,12 +144,44 @@ body {
 #brand_info {
 
 }
-#brand_info .top_info {
-
+#brand_info .info{
+  position: relative;
+  top: -55px;
+  left: 35px;
 }
-#brand_info .top_info img.logo{
+
+#brand_info img.cover{
+  padding: 0px !important;
+}
+
+#brand_info .info img.logo{
   width: 97px;
   height: 97px;
+
+}
+#brand_info .info h4 {
+  position: absolute;
+  top: 22px;
+  left: 120px;
+  color: white;
 }
 
+#brand_info .info h6 {
+  position: absolute;
+  top: 50px;
+  left: 120px;
+}
 
+#brand_info .info_detail {
+  position: absolute;
+  left: 44px;
+  top: 100px;
+  width: 480px;
+}
+
+.clearfix {
+  *zoom: 1;
+  display: table;
+  content: "";
+  clear: both;
+}
