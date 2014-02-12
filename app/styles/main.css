@@ -141,6 +141,10 @@ body {
   margin-top: 0px;
 }
 
+.brand_overview {
+  border-right: 1px solid #dae3e9;
+  padding-right: 0px !important;
+}
 #brand_info {
 
 }
@@ -173,9 +177,7 @@ body {
 }
 
 #brand_info .info_detail {
-  position: absolute;
-  left: 44px;
-  top: 100px;
+  margin-left: 44px;
   width: 480px;
 }
 
@@ -184,4 +186,27 @@ body {
   display: table;
   content: "";
   clear: both;
+}
+
+#shop_list {
+  list-style: none;
+}
+#shop_list li {
+  float: left;
+  width: 528px;
+  padding: 10px;
+}
+#shop_list li:hover {
+  cursor: pointer;
+  background-color: rgb(245,250,253);
+}
+
+
+#shop_list img {
+  float: left;  
+}
+#shop_list p {
+  float: left;  
+  margin-top: 10px;
+  margin-left: 5px;
 }
