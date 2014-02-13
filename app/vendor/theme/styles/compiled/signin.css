@@ -9,11 +9,14 @@
 }
 
 .login-wrapper {
-  position: absolute;
-  top: 90px;
-  left: 0;
-  right: 0;
+  /*position: absolute;
+  top: 90px;*/
+  /*left: 0;
+  right: 0;*/
+  padding-top: 90px;
+  background-color: #3f516b;
   text-align: center;
+  min-height: 650px;
 }
 .login-wrapper .logo {
   margin-bottom: 45px;

@@ -2,6 +2,13 @@ angular.module('brand')
 
 	.controller('BrandCtrl', ['$scope', function ($scope) {
 		$scope.msg = "brand view";
+		test();
+		function test() {
+			var request = Smg.api('/google', function(data, textStatus, jqXHR){
+				console.log(data);
+			});
+		}
+
 	}])
     .controller('brandCreateCtrl', ['$scope', function ($scope) {
 		$scope.msg = "brand view";
