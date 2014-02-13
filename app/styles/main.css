@@ -89,11 +89,11 @@ body {
   background-image: linear-gradient(top,#5b6f8c 1.6%,#7187a8 59%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5b6f8c',endColorstr='#7187a8',GradientType=0);
-  padding: 24px 24px;
+  /*padding: 24px 24px;*/
 }
 
 #width_wrapper {
-  width: 1150px;
+  /*width: 1150px;*/
   margin: 0 auto;
   height: 100%;
   min-height: 650px;
