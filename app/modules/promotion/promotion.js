@@ -3,7 +3,6 @@ angular.module('promotion')
 	.controller('promotionCtrl', ['$scope', function ($scope) {
 		$scope.activeTab = "user";
 		$scope.brands = getBrands();
-		
 		$scope.promotionTypes= [{
 		    value: '1',
 		    label: 'Giảm giá trực tiếp (voucher)'
