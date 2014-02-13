@@ -1,5 +1,5 @@
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: Tahoma,Arial,sans-serif;
   background-color: #f7f7f7;
   position: relative;
   margin: 0px;
@@ -222,7 +222,8 @@ input.search {
   width: 180px;
   float: left;
   margin: 0em;
-  padding-top: 5.8em; }
+  /*padding-top: 5.8em; */
+}
   #sidebar-nav #dashboard-menu {
     list-style: none;
     padding-right: 15px;
