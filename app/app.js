@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dashboardSmgApp', [
+var app = angular.module('Smg', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
@@ -11,29 +11,36 @@ angular.module('dashboardSmgApp', [
   'shop',
   'account',
   'user',
-  'promotion'
-])
-  .config(function ($routeProvider) {
+  'promotion',
+  'smg.services'
+]);
+  app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'modules/home/home.html',
         controller: 'MainCtrl'
       })
+  });
+
+  app.controller('MainCtrl', function ($scope, $rootScope) {
+    $rootScope._username = "HAHAHAH";
   })
 
-  .controller('MainCtrl', function ($scope, $rootScope) {
-    $rootScope._username = "HAHAHAH";
-  });
+  
+
 
 
 // Define modules
+
+angular.module('smg.services', []);
+
 
 angular.module('account',[
   'ngRoute'
 ]);  
 
 angular.module('brand',[
-  'ngRoute'
+  'ngRoute', 'smg.services'
 ]);  
 
 angular.module('shop',[

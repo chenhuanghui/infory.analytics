@@ -1,12 +1,10 @@
 angular.module('brand')
 
-	.controller('BrandCtrl', ['$scope', function ($scope) {
+	.controller('BrandCtrl', ['$scope', 'remoteFactory', function ($scope, remoteFactory) {
 		$scope.msg = "brand view";
 		test();
 		function test() {
-			var request = Smg.api('/google', function(data, textStatus, jqXHR){
-				console.log(data);
-			});
+			console.log(remoteFactory.getInfo());
 		}
 
 	}])
