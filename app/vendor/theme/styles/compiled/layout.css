@@ -353,10 +353,10 @@ input.search {
   min-width: 400px;
   min-height: 620px;
   margin-bottom: 100px;
-  padding-bottom: 50px;
+  /*padding-bottom: 50px;*/
   overflow: hidden;
   position: relative;
-  background: #fff;
+  background: #e1e1e1;
   margin-left: 177px;
   border-left: 1px solid #dae3e9;
   border-bottom: 1px solid #dae3e9;
