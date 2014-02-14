@@ -4,10 +4,16 @@
 * Description
 */
 angular.module('smg.services', [])
-	.factory('remoteFactory', [function ($http) {
+	.factory('remoteFactory', [function () {
 		return {
-			getInfo: function() {
-				return "aaa";
-			}
+			getInfo: function(callback) {
+				$.ajax({
+		                url: 'http://d2.smartguide.dev',
+		                type: 'GET',
+		                success: function(data, textStatus, jqXHR) {
+		                    return data;
+		                }
+		            });
+				}
 		};
 	}]);

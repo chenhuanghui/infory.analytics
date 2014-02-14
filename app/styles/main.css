@@ -108,7 +108,20 @@ body {
   -moz-border-radius: 4px 4px 0 0;
   border-radius: 4px 4px 0 0;
 }
-
+ 
+.block {
+  border-left: 1px solid #dae3e9;
+  border-bottom: 1px solid #dae3e9;
+  box-shadow: -3px 3px 3px -2px #f1f1f3;
+  border-radius: 0px 0px 0px 5px;
+  -webkit-transition: margin-left .3s ease;
+  -moz-transition: margin-left .3s ease;
+  -o-transition: margin-left .3s ease;
+  -ms-transition: margin-left .3s ease;
+  transition: margin-left .3s ease;
+  background-color: #fff;
+  padding-bottom: 50px;
+}
 .shadow {
   box-shadow: 0px 2px 2px #e9edef;
   -webkit-box-shadow: 0px 2px 2px #e9edef;
@@ -212,8 +225,8 @@ body {
   padding: 10px;
 }
 
-#shop_list li.highlight {
-  background-color: #f5fafc;
+.highlight {
+  background-color: #f3f3f3;
 }
 
 #shop_list li:hover {
@@ -251,3 +264,76 @@ body {
   width: 200px;
   display: inline-block;
 }
+
+#promotion_wrapper {
+
+}
+
+#promotion_wrapper .promotion_notice {
+  background-color: #f5fafc;
+  border-bottom: 1px solid #dae3e9;
+  padding: 15px 10px;
+  margin-bottom: 20px;
+}
+
+#promotion_wrapper .promotion_notice .title, #promotion_wrapper .promotion_notice .sub {
+  color: #5aabf0;
+  font-weight: bold;
+  margin: 10px 25px;
+}
+
+#promotion_wrapper .promotion_notice .sub {
+  color: #797f92;
+  font-weight: normal;
+}
+#promotion_wrapper .promotion_notice .add_event {
+  margin-top: 50px; 
+}
+
+#promotion_wrapper .promotion_list {
+  margin: 10px;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+#promotion_wrapper .promotion_list table{
+  
+  border: 1px solid #b5c1c7;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-collapse: separate;
+  border-spacing: 1px;
+  /*border: solid #ccc 1px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 1px #ccc;
+  -moz-box-shadow: 0 1px 1px #ccc;
+  box-shadow: 0 1px 1px #ccc;*/
+}
+#promotion_wrapper .promotion_list table thead{
+  background-color: #f5fafc;
+  color: #797f92;
+}
+#promotion_wrapper .promotion_list table thead th{
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 12px;
+
+}
+.table td{
+  text-align: center !important;
+}
+
+#promotion_wrapper .promotion_list table a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
+
+
+

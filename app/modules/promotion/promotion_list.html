@@ -2,83 +2,82 @@
 <div ng-include="'partials/_sidebar.html'"></div>
 	<!-- main container -->
     <div class="content">
-        
-        <div id="pad-wrapper" class="users-list">
-            <div class="row header">
-                <h3>Ưu đãi</h3>
-                <div class="col-md-10 col-sm-12 col-xs-12 pull-right">
-                    <input type="text" class="col-md-5 search" placeholder="Nhập tên ưu đãi">
-                    
-                    <!-- custom popup filter -->
-                    <!-- styles are located in css/elements.css -->
-                    <!-- script that enables this dropdown is located in js/theme.js -->
-
-                    <a href="#promotion/new" class="btn-flat success pull-right">
-                        <span>&#43;</span>
-                        THÊM ƯU ĐÃI
-                    </a>
+        <div id="promotion_wrapper">
+            <div class="promotion_notice shadow">
+                <div class='col-md-9'>
+                    <span class="btn-flat gray back">Trở lại</span>                
+                    <p class="title">Bắt đầu tạo sự kiện / chương trình khuyến mãi của bạn ngay!</p>
+                    <p class="sub">Ac diam! Enim eu enim egestas, vel ac, ut? Vel sit urna tempor lectus integer. Ac rhoncus nec porttitor. Aliquet. Vut ultrices pid scelerisque! Porttitor augue et sed? </p>
                 </div>
+                <div class="col-md-3"><a class="btn-flat success icon-plus add_event">Tạo sự kiện mới</a></div>
+                <div class="clearfix"></div>
+            </div>
+            
+            <div class="promotion_list">
+                <table class="table table-hover shadow" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <th class="col-md-2">
+                                Loại
+                            </th>
+                            <th class="col-md-4">
+                                <span class="line"></span>Tên
+                            </th>
+                            <th class="col-md-3">
+                                <span class="line"></span>Thời gian
+                            </th>
+                            <th class="col-md-2">
+                                <span class="line"></span>Trạng thái
+                            </th>
+                            <th class="col-md-1">
+                                <span class="line"></span>Thao tác
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- row -->
+                        <tr class="first">
+                            <td>
+                                Đăng tin khuyến mãi
+                            </td>
+                            <td>
+                                <a href="">Sự kiện tháng 3</a>
+                            </td>
+                            <td>
+                                1/3/2014 đến 1/4/2014
+                            </td>
+                            <td>
+                                <span class="btn-flat inverse">Hết hạn</span>
+                            </td>
+                            <td> 
+                                <span class="icon-edit">Sửa</span>
+                            </td>
+                        </tr>
+                        <tr class="highlight">
+                            <td>
+                                Đăng tin khuyến mãi
+                            </td>
+                            <td>
+                                <a href="">Sự kiện tháng 3</a>
+                            </td>
+                            <td>
+                                1/3/2014 đến 1/4/2014
+                            </td>
+                            <td>
+                                <span class="btn-flat success">Đang chạy</span>
+                            </td>
+                            <td> 
+                                <span class="icon-edit">Sửa</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <!-- Users table -->
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="col-md-4 sortable">
-                                    Tên
-                                </th>
-                                <th class="col-md-2 sortable">
-                                    <span class="line"></span>Ngày tạo
-                                </th>
-                                <th class="col-md-2 sortable">
-                                    <span class="line"></span>Lượt sử dụng
-                                </th>
-                                <th class="col-md-2 sortable">
-                                    <span class="line"></span>Lượt xem
-                                </th>
-                                <th class="col-md-2sortable align-right">
-                                    <span class="line"></span>Trạng thái
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-	                        <!-- row -->
-	                        <tr ng-class='{first:$first}' ng-repeat="promotion in promotionList">
-	                            <td >
-	                                <img src="{{promotion.logo}}" alt="contact" class="img-circle avatar hidden-phone" />
-	                                <a href="user-profile.html" class="name">{{promotion.name}}</a>
-	                                <span class="subtext">{{promotion.type}}</span>
-	                            </td>
-	                            <td>
-	                                {{promotion.created}}
-	                            </td>
-	                            <td>
-	                                {{promotion.viewed}}
-	                            </td>
-	                            <td>
-	                                {{promotion.used}}
-	                            </td>
-	                            <td class="align-right">
-	                                {{promotion.status}}
-	                            </td>
-	                        </tr>
-                        </tbody>
-                    </table>
-                </div>                
-            </div>
-            <ul class="pagination pull-right">
-                <li><a href="#">&#8249;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&#8250;</a></li>
-            </ul>
-            <!-- end users table -->
         </div>
+        
+            
+        
     </div>
     <!-- end main container -->
 </html>

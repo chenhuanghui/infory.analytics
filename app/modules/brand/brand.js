@@ -4,7 +4,7 @@ angular.module('brand')
 		$scope.msg = "brand view";
 		test();
 		function test() {
-			console.log(remoteFactory.getInfo());
+			console.dir(remoteFactory.getInfo());
 		}
 
 	}])
