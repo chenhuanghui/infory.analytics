@@ -26,8 +26,8 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
                 access: access.user
             })
             .when('/login', {
-                templateUrl: 'modules/login/login.html',
-                controller: 'LoginCtrl',
+                templateUrl: 'modules/account/signin.html',
+                controller: 'signInCtrl',
                 access: access.anon
             })
             .otherwise({
