@@ -333,7 +333,18 @@ body {
   text-decoration: underline;
 }
 
+.user_name {
+  color: #2D78B8; 
+  text-decoration: underline;
+  font-size:14px;
+  padding: 5px 0px;
+}
 
-
+.right {
+  float: right;
+}
+.left {
+  float: left;
+}
 
 
