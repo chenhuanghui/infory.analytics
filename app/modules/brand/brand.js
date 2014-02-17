@@ -8,18 +8,27 @@ angular.module('brand')
 		}
 
 	}])
-    .controller('brandCreateCtrl', ['$scope', function ($scope) {
-		$scope.msg = "brand view";
-	}])
+    
 
 	.config(function($routeProvider){
 		$routeProvider
 			.when('/brand', {
-				templateUrl: 'modules/brand/index.html',
+				templateUrl: 'modules/brand/brand/brand.html',
 				controller: 'BrandCtrl'
 			})
-            .when('/brand/new', {
-                templateUrl: 'modules/brand/brand_new.html',
-                controller: 'brandCreateCtrl'
-            })
+            
+            .when('/brand/promotion', {
+				templateUrl: 'modules/brand/promotion/promotion_list.html',
+				controller: 'BrandCtrl'
+			})
+
+            .when('/brand/comment', {
+				templateUrl: 'modules/brand/comment/comment.html',
+				controller: 'BrandCtrl'
+			})
+
+			.when('/brand/new', {
+			    templateUrl: 'modules/brand/brand_new.html',
+			    controller: 'BrandCtrl'
+			})
 	});
