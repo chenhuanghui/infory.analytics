@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dashboardSmgApp')
+angular.module('Smg')
     .directive('accessLevel', ['Auth',
         function(Auth) {
             return {
@@ -35,7 +35,7 @@ angular.module('dashboardSmgApp')
         }
     ]);
 
-angular.module('dashboardSmgApp').directive('activeNav', ['$location',
+angular.module('Smg').directive('activeNav', ['$location',
     function($location) {
         return {
             restrict: 'A',

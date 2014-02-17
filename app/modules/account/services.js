@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dashboardSmgApp')
+angular.module('Smg')
     .factory('Auth', function($http, $cookieStore, $document) {
 
         function deleteCookie(name) {
@@ -58,6 +58,7 @@ angular.module('dashboardSmgApp')
             }
 
             currentUser = {
+                name: getCookie('name'),
                 username: getCookie('user'),
                 role: role,
                 access_token: getCookie('access_token')
@@ -89,6 +90,7 @@ angular.module('dashboardSmgApp')
 
                     if (res.status) {
                         var user = {
+                            name: res.data.name,
                             username: res.data.username,
                             role: res.data.role,
                             access_token: res.data.access_token
@@ -105,18 +107,21 @@ angular.module('dashboardSmgApp')
 
 
                         //FOR TESTING REASON    
-                        user = user_test;
+                        //user = user_test;
 
+                        deleteCookie('name');
                         deleteCookie('user');
                         deleteCookie('access_token');
                         deleteCookie('role');
 
                         if (rememberme) {
                             var expires = 7;
+                            setCookie('name', user.name, expires);
                             setCookie('user', user.username, expires);
                             setCookie('access_token', user.access_token, expires);
                             setCookie('role', user.role.title, expires);
                         } else {
+                            setCookie('name', user.name, expires);
                             $cookieStore.put('user', user.username);
                             $cookieStore.put('access_token', user.access_token);
                             $cookieStore.put('role', user.role.title);
