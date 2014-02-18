@@ -6,14 +6,14 @@
     <div class="box">
         <div class="content-wrap">
             <h6>Đăng nhập</h6>
-            <input class="form-control" type="text" placeholder="Địa chỉ email">
-            <input class="form-control" type="password" placeholder="Mật khẩu">
+            <input class="form-control" type="text" placeholder="Địa chỉ email" ng-model="username" required>
+            <input class="form-control" type="password" placeholder="Mật khẩu" ng-model="password" required>
             <a href="#" class="forgot">Quên mật khẩu?</a>
             <div class="remember">
-                <input id="remember-me" type="checkbox">
+                <input id="remember-me" type="checkbox" ng-model="rememberme">
                 <label for="remember-me">Ghi nhớ</label>
             </div>
-            <a class="btn-glow primary login" href="index.html">Đăng nhập</a>
+            <a class="btn-glow primary login" href="index.html" ng-click="login()">Đăng nhập</a>
         </div>
     </div>
 
@@ -22,4 +22,5 @@
         <a href="#signup">Đăng ký ngay</a>
     </div>
 </div>
+
 <style scoped>@import url('vendor/theme/styles/compiled/signin.css')</style>    

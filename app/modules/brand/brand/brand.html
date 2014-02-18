@@ -4,7 +4,7 @@
 <div class="content">
     <div id="brand_wrap">
         <div class="row">
-            <div class="col-md-7 brand_overview">
+            <div class="col-md-7 brand_overview block">
                 <div id="brand_info" class="shadow">
                     <img src="http://farm9.staticflickr.com/8446/8005177885_6d00a46190_z.jpg" class="cover col-md-12">
                     <div class="info">
@@ -65,7 +65,7 @@
                         <div class="clearfix"></div>
                     </ul>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 block">
 
                 <ul class="nav nav-tabs">
                   <li ng-class="{active: main.active.tab == 'info'} ">
@@ -83,15 +83,15 @@
                 <div class="tab-content">
                     <div ng-switch = "main.active.tab">
                         <div ng-switch-when='info'>
-                            <div ng-include='"modules/brand/tabs/_info.html"'> </div>  
+                            <div ng-include='"modules/brand/brand/tabs/_info.html"'> </div>  
                         </div>
 
                         <div ng-switch-when='product'>
-                            <div ng-include='"modules/brand/tabs/_product.html"'> </div>  
+                            <div ng-include='"modules/brand/brand/tabs/_product.html"'> </div>  
                         </div>
 
                         <div ng-switch-when='gallery'>
-                            <div ng-include='"modules/brand/tabs/_gallery.html"'> </div>  
+                            <div ng-include='"modules/brand/brand/tabs/_gallery.html"'> </div>  
                         </div>
 
                     </div>
