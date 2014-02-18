@@ -12,7 +12,8 @@ var app = angular.module('Smg', [
   'account',
   'user',
   'promotion',
-  'smg.services'
+  'smg.services',
+  'engagement'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',
@@ -148,3 +149,8 @@ angular.module('promotion', [
 angular.module('login', [
     'ngRoute'
 ]);
+
+
+angular.module('engagement',[
+  'ngRoute'
+]);  
