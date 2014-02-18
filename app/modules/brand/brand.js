@@ -16,7 +16,13 @@ angular.module('brand')
 				templateUrl: 'modules/brand/brand/brand.html',
 				controller: 'BrandCtrl'
 			})
-            
+			.when('/brand/new', {
+                templateUrl: 'modules/brand/brand_new.html',
+                controller: 'brandCreateCtrl'
+            })
+            .when('/brand/promotion-new', {
+                templateUrl: 'modules/brand/promotion_new.html'
+            })
             .when('/brand/promotion', {
 				templateUrl: 'modules/brand/promotion/promotion_list.html',
 				controller: 'BrandCtrl'
