@@ -121,7 +121,7 @@ body {
   transition: margin-left .3s ease;
   background-color: #fff;
   padding-bottom: 50px;
-  margin: 0px 15px;
+  margin: 0px 15px 20px;
 }
 .block_header {
   background-color: #f5fafc;
@@ -129,6 +129,9 @@ body {
   padding: 9px 20px;
 }
 
+.block_header select{
+  margin: 0px 10px;
+}
 
 .block_content {
   padding: 10px 20px;
