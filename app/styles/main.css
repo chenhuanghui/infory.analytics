@@ -121,6 +121,7 @@ body {
   transition: margin-left .3s ease;
   background-color: #fff;
   padding-bottom: 50px;
+  margin: 0px 15px;
 }
 .block_header {
   background-color: #f5fafc;
@@ -374,7 +375,7 @@ body {
 }
 
 .query_builder .query_record {
-
+  height: 64px;
 }
 .query_builder .query_record select {
   margin: 0px 12px;
@@ -449,7 +450,17 @@ body {
   position: relative;
 }
 
+.notify {
+  color: #555;
+  font-weight: 500;
+  margin-left: 27px;
+  font-weight: bold;
+}
 
+.notify span {
+  color: #09ADFA;
+  text-decoration: underline;
+}
 
 
 
