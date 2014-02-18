@@ -8,7 +8,7 @@ angular.module('engagement')
 
 	.config(function($routeProvider){
 		$routeProvider
-			.when('/engagement', {
+			.when('/segmentation', {
 				templateUrl: 'modules/engagement/segmentation/segmentation.html',
 				controller: 'SegmentationCtrl'
 			})
