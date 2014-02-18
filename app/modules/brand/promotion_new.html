@@ -1,0 +1,240 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div class="content">
+    <div id="promotion-fuelux-wizard" class="wizard">
+        <ul class="wizard-steps">
+            <li data-target="#promotion-step1" class="active">
+                <span class="z-step">Loại sự kiện</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step2">
+                <span class="z-step">Thông tin</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step3">
+                <span class="z-step">Nội dung</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step4">
+                <span class="z-step">Hoàn thành</span>
+            </li>
+        </ul>                            
+    </div>
+    <div id="promotion-step-content" class="step-content form-page">
+        <div class="step-pane active" id="promotion-step1">
+            <div class="step-description">
+                <div class="step-title">
+                    <span class="step-name">Bước 1:</span> chọn loại khuyến mãi hoặc sự kiện cho chiến dịch của bạn.
+                </div>
+                Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+            </div>
+            <div class="form-wrapper">
+                <div class="col-md-8">
+                    <div class="step-wapper">
+                        <form>
+                            <div class="field-box">
+                            <span class="title">CHỌN HÌNH THỨC SỰ KIỆN</span>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected>Dropdown</option>
+                                        <option>Custom selects</option>
+                                        <option>Pure css styles</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-pane" id="promotion-step2">
+            <div class="step-description">
+                <div class="step-title">
+                    <span class="step-name">Bước 2:</span> Thông tin chiến dịch
+                </div>
+                Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
+            </div>
+            <div class="form-wrapper">
+                <div class="col-md-8">
+                    <div class="step-wapper">
+                        <form id="promotion-form">
+                            <div class="field-box">
+                                <span class="title">TÊN CHIẾN DỊCH</span>
+                                <input class="form-control inline-block" type="text"/>
+                            </div>
+                            <div class="field-box">
+                                <span class="title">THỜI GIAN</span>
+                                <input class="form-control inline-block" type="text"/> 
+                            </div>
+                            <div class="field-box">
+                                <span class="title">MÔ TẢ</span>
+                                <textarea class="form-control" rows="4"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-pane" id="promotion-step3">
+            <div class="step-description">
+                <div class="step-title">
+                    <span class="step-name">Bước 3:</span> chọn loại khuyến mãi hoặc sự kiện cho chiến dịch của bạn.
+                </div>
+                Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+            </div>
+            <div class="form-wrapper">
+                <div class="col-md-8">
+                    <div class="step-wapper">
+                        <form id="promotion-form">
+                            <div class="field-box">
+                                <span class="title">Phần thưởng</span>
+                                <input placeholder="Điều kiện" class="form-control inline-block small-input" type="text"/><input placeholder="Phần thưởng" class="form-control inline-block small-input" type="text"/>
+                            </div>
+                            <div class="field-box">
+                                <span class="title">LOẠI THẺ</span>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected>Dropdown</option>
+                                        <option>Custom selects</option>
+                                        <option>Pure css styles</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            <div class="field-box">
+                                <span class="title">SỐ LƯỢNG</span>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected>Dropdown</option>
+                                        <option>Custom selects</option>
+                                        <option>Pure css styles</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            <div class="field-box">
+                                <span class="title">THỜI GIAN ÁP DỤNG</span>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected>Dropdown</option>
+                                        <option>Custom selects</option>
+                                        <option>Pure css styles</option>
+                                    </select>
+                                </div> 
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-pane" id="promotion-step4">
+            <div class="step-description">
+                <div class="step-title">
+                    <span class="step-name">Hoàn thành:</span> chọn loại khuyến mãi hoặc sự kiện cho chiến dịch của bạn.
+                </div>
+                Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+            </div>
+            <div class="form-wrapper">
+                <div class="col-md-8">
+                    <div class="step-wapper">
+                        <div class="step-success">
+                            Bạn đã tạo xong một chiến dịch
+                            <form>
+                                <div class="field-box">
+                                    <span class="title">CHỌN TRẠNG THÁI CHIẾN DỊCH</span>
+                                    <label class="radio">
+                                        <div class="radio" id="uniform-optionsRadios1"><span class="checked"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""/></span></div>
+                                        Chạy chương trình
+                                    </label>
+                                    <label class="radio">
+                                        <div class="radio" id="uniform-optionsRadios2"><span class="checked"><input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked=""/></span></div>
+                                        Chờ kích hoạt
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- display step info -->
+        <div class="col-md-4" style="height: 0;">
+            <div class="step-view-content">
+                XEM TRƯỚC
+                <tabset>
+                    <tab>
+                      <tab-heading>
+                        <i class="glyphicon glyphicon-bell"></i>
+                      </tab-heading>
+                      <table class="table attribute-table">
+                        <thead>
+                            <tr><th>Thuộc tính</th><th>Nội dung</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Loại</td><td></td></tr>
+                            <tr><td>Chương trình</td><td></td></tr>
+                            <tr><td>Thời gian</td><td></td></tr>
+                            <tr><td>Mô tả</td><td></td></tr>
+                        </tbody>
+                      </table>
+                    </tab>
+                    <tab>
+                      <tab-heading>
+                        <i class="icon-table"></i>
+                      </tab-heading>
+                      <img src="http://wowcamera.net/image/cache/data/phone/iphone-5-16gb-white-360x360.jpg" />
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 with-sidebar">
+        <div class="col-md-11">
+            <div class="promotion-wizard-actions wizard-actions">
+                <button type="button" disabled class="btn-glow primary btn-prev"> 
+                    <i class="icon-chevron-left"></i> Prev
+                </button>
+                <button type="button" class="btn-glow primary btn-next" data-last="Finish">
+                    Next <i class="icon-chevron-right"></i>
+                </button>
+                <button type="button" class="btn-glow success btn-finish">
+                    Trở lại trang quản lý
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- scripts -->
+<script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="vendor/theme/scripts/fuelux.wizard.js"></script>
+<script>
+//winzard create promotion
+$(function () {
+    var $wizard = $('#promotion-fuelux-wizard'),
+        $btnPrev = $('.promotion-wizard-actions .btn-prev'),
+        $btnNext = $('.promotion-wizard-actions .btn-next'),
+        $btnFinish = $(".promotion-wizard-actions .btn-finish");
+
+    $wizard.wizard().on('finished', function(e) {
+        // wizard complete code
+    }).on("changed", function(e) {
+        var step = $wizard.wizard("selectedItem");
+        // reset states
+        $btnNext.removeAttr("disabled");
+        $btnPrev.removeAttr("disabled");
+        $btnNext.show();
+        $btnFinish.hide();
+
+        if (step.step === 1) {
+            $btnPrev.attr("disabled", "disabled");
+        } else if (step.step === 4) {
+            $btnNext.hide();
+            $btnFinish.show();
+        }
+    });
+
+    $btnPrev.on('click', function() {
+        $wizard.wizard('previous');
+    });
+    $btnNext.on('click', function() {
+        $wizard.wizard('next');
+    });
+});
+</script>

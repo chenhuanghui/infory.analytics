@@ -24,4 +24,8 @@ angular.module('brand')
                 templateUrl: 'modules/brand/brand_new.html',
                 controller: 'brandCreateCtrl'
             })
+            .when('/brand/promotion-new', {
+                templateUrl: 'modules/brand/promotion_new.html',
+                controller: 'brandCreateCtrl'
+            })
 	});
