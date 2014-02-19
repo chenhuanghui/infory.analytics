@@ -1,7 +1,8 @@
 angular.module('engagement')
 
-	.controller('SegmentationCtrl', ['$scope',function ($scope) {
-			
+	.controller('SegmentationCtrl', ['$scope', 'remoteFactory', function ($scope, remoteFactory) {
+			$scope.metas = remoteFactory.meta_property_types; 								
+			$scope.events = remoteFactory.meta_events;
 	}])
     
 
