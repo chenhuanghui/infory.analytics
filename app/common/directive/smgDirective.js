@@ -20,9 +20,8 @@ angular.module('smgDirectives')
 
     })
     .directive('subfilter', function ($compile) {
-        var qc = 2,
-            _prop = "property"+qc,
-            _meta = "meta"+qc;
+        var qc = 2, _meta, _prop;
+            
         return {
             restrict: 'A',
             templateUrl: 'common/template/subfilter.html',
@@ -36,7 +35,9 @@ angular.module('smgDirectives')
                 scope.addCondition = function() {
                     $actionGroup = element.find(".action_group");
                     $queryGroup = element.find(".query_builder");
-                    
+                    _prop = "property"+qc,
+                    _meta = "meta"+qc;
+
                     var action = $compile('<select class="action clearfix row_'+ qc+'"> '
                                     + '<option>Và</option>'
                                     + '<option>Hoặc</option>'
