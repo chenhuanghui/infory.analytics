@@ -4,7 +4,6 @@ angular.module('account')
             $scope.user = Auth.user;
             $scope.userRoles = Auth.userRoles;
             $scope.accessLevels = Auth.accessLevels;
-            $scope.message = "Hello";
             $scope.hideMessage = true;
 
             $scope.logout = function() {

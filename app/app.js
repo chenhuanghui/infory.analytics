@@ -1,19 +1,19 @@
 'use strict';
 
 var app = angular.module('Smg', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngRoute',
-  'ui.bootstrap',
-  'home',
-  'brand',
-  'shop',
-  'account',
-  'user',
-  'promotion',
-  'smg.services',
-  'engagement'
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'ngRoute',
+    'ui.bootstrap',
+    'home',
+    'brand',
+    'shop',
+    'account',
+    'user',
+    'promotion',
+    'smg.services',
+    'engagement'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',
@@ -101,9 +101,11 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
     }
 ]);
 
-app.controller('MainCtrl', ['$scope', '$rootScope', 'Auth', function($scope, $rootScope, Auth) {
-    $rootScope._username = Auth.user.name;
-}]);
+app.controller('MainCtrl', ['$scope', '$rootScope', 'Auth',
+    function($scope, $rootScope, Auth) {
+        $rootScope._username = Auth.user.name;
+    }
+]);
 
 app.run(['$rootScope', '$location', '$http', 'Auth',
     function($rootScope, $location, $http, Auth) {
@@ -122,12 +124,12 @@ app.run(['$rootScope', '$location', '$http', 'Auth',
 angular.module('smg.services', []);
 
 
-angular.module('account',[
-  'ngRoute'
-]);  
+angular.module('account', [
+    'ngRoute'
+]);
 
-angular.module('brand',[
-  'ngRoute', 'smg.services'
+angular.module('brand', [
+    'ngRoute', 'smg.services'
 ]);
 
 angular.module('shop', [
@@ -151,6 +153,6 @@ angular.module('login', [
 ]);
 
 
-angular.module('engagement',[
-  'ngRoute'
-]);  
+angular.module('engagement', [
+    'ngRoute'
+]);
