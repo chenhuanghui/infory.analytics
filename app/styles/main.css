@@ -135,7 +135,7 @@ body {
 }
 
 .block_content {
-  padding: 10px 20px;
+  padding: 10px 20px 50px;
 }
 .block_footer {
   background-color: rgb(243, 243, 243);
@@ -398,11 +398,11 @@ body {
   cursor: pointer;
 }
 .query_builder .query_record .qr_1, .query_builder .query_record .qr_3 {
-  width: 172px;
+  min-width: 172px;
 }
 
 .query_builder .query_record .qr_2 {
-  width: 100px;
+  min-width: 100px;
 }
 
 
@@ -412,6 +412,7 @@ body {
 .sf_wrapper {
   padding: 19px 24px;
   display: block;
+  overflow: hidden;
 }
 
 .sf_wrapper .labels {
@@ -420,6 +421,7 @@ body {
 }
 .sf_wrapper .labels .action{
   position: relative;
+  margin-bottom: 40px;
 }
 .sf_wrapper .labels .grey_vert {
   top: 0;
@@ -472,8 +474,18 @@ body {
   text-decoration: underline;
 }
 
-
-
 .block_footer span {
   margin: 5px 20px;
+}
+
+.add_condition {
+  position: relative;
+  left: 31px;
+  top: 10px;
+  background: #fff;
+  padding: 0px 0px 16px;
+  cursor: pointer;
+}
+.add_condition i {
+  font-size: 25px;
 }
