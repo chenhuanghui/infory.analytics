@@ -2,10 +2,15 @@ angular.module('brand')
 
 	.controller('BrandCtrl', ['$scope', 'remoteFactory', function ($scope, remoteFactory) {
 		$scope.msg = "brand view";
-		test();
-		function test() {
-			console.dir(remoteFactory.getInfo());
-		}
+		// test();
+		// function test() {
+			
+		// 	var request = remoteFactory.api('/getMetaEvent', 'GET', {}, function(data){
+		// 		console.log(data);
+		// 	}, function(error){
+		// 		console.log(error);
+		// 	});
+		// }
 
 	}])
     
