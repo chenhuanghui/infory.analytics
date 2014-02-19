@@ -57,3 +57,4 @@ angular.module('Smg').directive('activeNav', ['$location',
 
     }
 ]);
+

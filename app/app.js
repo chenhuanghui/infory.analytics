@@ -13,7 +13,8 @@ var app = angular.module('Smg', [
   'user',
   'promotion',
   'smg.services',
-  'engagement'
+  'engagement',
+  'smgDirectives'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',
@@ -121,6 +122,7 @@ app.run(['$rootScope', '$location', '$http', 'Auth',
 
 angular.module('smg.services', []);
 
+angular.module('smgDirectives',[]);  
 
 angular.module('account',[
   'ngRoute'
