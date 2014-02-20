@@ -15,6 +15,14 @@ angular.module('user')
 				templateUrl: 'modules/user/new_user.html',
 				controller: 'userCtrl'
 			})
+            .when('/user/manager', {
+				templateUrl: 'modules/user/user_manager.html',
+				controller: 'userCtrl'
+			})
+            .when('/user/notify-new', {
+				templateUrl: 'modules/user/user_notify_new.html',
+				controller: 'userCtrl'
+			})
 			.when('/user/:id', {
 				templateUrl: 'modules/user/user_profile.html',
 				controller: 'userCtrl'

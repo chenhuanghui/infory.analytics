@@ -283,3 +283,235 @@ body{
     text-decoration: none;
 }
 
+/** user info **/
+#user-info-content{
+    background-color: #fff;    
+}
+
+#user-info {
+    padding: 0;
+    border-right: 1px solid #dae3e9;
+    min-height: 630px;
+    /* box-shadow: 1px 1px 1px #888888; */
+    box-shadow: 1px 1px 1px #f1f1f3;
+}
+
+#user-info .top-block{
+    padding: 10px 20px 0;
+    background-color: #eff4f7;
+    float: left;
+    border-bottom: 1px solid #aab8c1;
+    width: 100%;
+}
+
+#user-info .top-block #report-chose{
+    border-bottom: 1px solid #aab8c1;
+    text-align: right;
+    margin: 0 -20px;
+    padding: 0 10px 10px;
+}
+
+#user-info .top-block #infomation{
+    margin: 0 -20px;
+    float: left;
+}
+
+#user-info .top-block #infomation .logo{
+    float: left;
+    padding: 20px 15px 20px 20px;
+}
+
+#user-info .top-block #infomation .logo .avatar{
+    border: 3px solid #c3cddb;
+}
+
+#user-info .top-block #infomation .detail{
+    float: left;
+    padding: 20px;
+}
+
+#user-info .top-block #infomation .detail .name{
+    font-size: 20px;
+}
+
+#user-info .top-block #infomation .detail p{
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#user-info .top-block #infomation .detail i{
+    font-size: 20px;
+    margin-right: 5px
+}
+
+#activity{
+    float: left;
+    width: 100%;
+    background-color: #fff;
+}
+
+#activity .time{
+    width: 25%;
+    border-right: 1px solid #dedee0;
+}
+
+#activity .action{
+    width: 74%;
+}
+
+#activity .time, #activity .action{
+    display: inline-block;
+    text-align: center;
+    padding: 10px 0;
+    color: #787e94;
+    font-weight: bold;
+}
+
+#activity .header{
+    margin-bottom: 0;
+}
+
+#activity ul{
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+#activity ul.time-line li span.date{
+    display: block;
+    background-color: #f3f3f3;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 18px;
+    color: #abaeb3;
+    
+    
+}
+
+#activity ul.time-line{
+    margin-top: 1px;
+}
+#activity ul.time-line > li{
+    border-bottom: 1px solid #dedee0;
+}
+
+#activity ul.time-line > li ul li {
+    border-top: 1px solid #dedee0;
+}
+
+#activity ul.time-line > li ul li span.action{
+    text-align: left;
+    padding-left: 30px
+}
+
+#user-property{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 2px solid #dae3e9;
+    background-color: #fff;
+    padding:0;
+    margin: 10px;
+    min-height: 400px
+}
+
+#user-property .nav{
+    background-color: #eff4f7;
+    margin-top: 0;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+}
+
+#user-property .nav li.active{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#user-property .nav li.active > a{
+    background-image: -webkit-gradient(
+	linear,
+	left top,
+	left bottom,
+	color-stop(0.24, #FFFFFF),
+	color-stop(0.5, #EFF4F7),
+	color-stop(1, #FFFFFF)
+    );
+    background-image: -o-linear-gradient(bottom, #FFFFFF 24%, #EFF4F7 50%, #FFFFFF 100%);
+    background-image: -moz-linear-gradient(bottom, #FFFFFF 24%, #EFF4F7 50%, #FFFFFF 100%);
+    background-image: -webkit-linear-gradient(bottom, #FFFFFF 24%, #EFF4F7 50%, #FFFFFF 100%);
+    background-image: -ms-linear-gradient(bottom, #FFFFFF 24%, #EFF4F7 50%, #FFFFFF 100%);
+    background-image: linear-gradient(to bottom, #FFFFFF 24%, #EFF4F7 50%, #FFFFFF 100%);     
+}
+
+#user-property .tab-content ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#user-property .tab-content ul li{
+    border-bottom: 1px solid #d7e4ec;
+}
+#user-property .tab-content ul li span{
+    padding: 10px;
+    display: inline-block;
+}
+
+#user-property .tab-content ul li span.property{
+    width: 30%;
+    font-weight: bold;
+    color: #787e94;
+    
+}
+/** user info **/
+/** user manager **/
+.no-padding{
+	padding: 0;	
+}
+
+.z-table{
+    width: 100%;
+}
+
+.z-table thead tr {
+	background-color: #f3f3f3;
+	
+}
+
+.z-table thead tr, .z-table tbody tr{
+	border-bottom: 1px solid #dae3ea;
+}
+
+.z-table tbody tr:last-child{
+	border-bottom: none;
+}
+
+.z-table thead tr th, .z-table tbody tr td, .report-to, .report-to select, .z-table thead tr th select{
+	color: #787e94;
+}
+
+.z-table thead tr th, .z-table tbody tr td{
+	border-right: 1px solid #dedede;
+	text-align:center;
+	padding: 5px 0;
+	
+}
+
+.z-table thead tr th:last-child, .z-table tbody tr td:last-child{
+	border-right: none;
+}
+
+.z-table tbody tr td.name{
+    color: #3389d1;
+}
+/** user manager **/
+/** user create notify **/
+#notify-new, #promotion-new{
+    background-color: #fff;
+}
+/** user create notify **/
