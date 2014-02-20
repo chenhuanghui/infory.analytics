@@ -1,8 +1,8 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', 'remoteFactory', 'dataFactory',
+.controller('BrandCtrl', ['$scope', '$http', 'remoteFactory',
 
-    function($scope, $http, remoteFactory, dataFactory) {
+    function($scope, $http, remoteFactory) {
         $scope.msg = "brand view";
         $scope.brand = null;
         $scope.brands = null;

@@ -249,7 +249,7 @@ angular.module('smg.services')
                     name: "user_career",
                     name_display: "user career",
                     type: "group",
-                    availables_values: "careers"
+                    available_values: "careers"
                 }, {
                     name: "user_total_charge",
                     name_display: "user total charge",
@@ -310,7 +310,7 @@ angular.module('smg.services')
                     name: "user_career",
                     name_display: "user career",
                     type: "group",
-                    availables_values: "careers"
+                    available_values: "careers"
                 }, {
                     name: "user_total_charge",
                     name_display: "user total charge",
@@ -371,7 +371,7 @@ angular.module('smg.services')
                     name: "user_career",
                     name_display: "user career",
                     type: "group",
-                    availables_values: "careers"
+                    available_values: "careers"
                 }, {
                     name: "user_total_charge",
                     name_display: "user total charge",
@@ -436,7 +436,7 @@ angular.module('smg.services')
                     name: "user_career",
                     name_display: "user career",
                     type: "group",
-                    availables_values: "careers"
+                    available_values: "careers"
                 }, {
                     name: "user_total_charge",
                     name_display: "user total charge",
