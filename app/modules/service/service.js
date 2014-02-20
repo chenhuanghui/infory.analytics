@@ -5,14 +5,21 @@
  */
 angular.module('smg.services')
     .factory('dataFactory', function() {
-        var getBrandFunction = null;
+        var getUsersFunction = null;
+        var getBrandIdFunction = null;
 
         return {
-            setGetBrandFunction: function(func) {
-                getBrandFunction = func;
+            setGetUsersFunction: function(func) {
+                getUsersFunction = func;
             },
-            getBrand: function(new_brand) {
-                return getBrandFunction();
+            getUsers: function() {
+                return getUsersFunction();
+            },
+            setGetBrandIdFunction: function(func) {
+                getBrandIdFunction = func;
+            },
+            getBrandId: function() {
+                return getBrandIdFunction();
             }
         }
     })

@@ -5,9 +5,9 @@ angular.module('user')
     function($scope, $routeParams, remoteFactory, dataFactory) {
         $scope.activeTab = "user";
         $scope.cssLink = "user-profile.css";
-        $id = $routeParams.id;
+    $scope.brandId = dataFactory.getBrandId();
 
-        $scope.user = dataFactory.getBrand().users[0];
+        $id = $routeParams.id;
     }
 ])
 

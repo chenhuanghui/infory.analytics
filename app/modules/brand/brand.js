@@ -15,13 +15,17 @@ angular.module('brand')
             display: 'Thời gian'
         }];
 
-        var fields = '["name", "logo", "cover", "type_business", "website", "fanpage", "description", "shops", "users"]';
+        var fields = '["name", "logo", "cover", "type_business", "website", "fanpage", "description", "shops", "id"]';
         remoteFactory.getBrandList(fields, function(data) {
             $scope.brand = data[0];
             $scope.shop = $scope.brand.shops[0];
 
-            dataFactory.setGetBrandFunction(function() {
-                return $scope.brand;
+            dataFactory.setGetUsersFunction(function() {
+                return $scope.brand.users;
+            });
+
+            dataFactory.setGetBrandIdFunction(function() {
+                return $scope.brand.id;
             });
 
         }, function(error) {});
