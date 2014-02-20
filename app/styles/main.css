@@ -488,4 +488,6 @@ body {
 }
 .add_condition i {
   font-size: 25px;
+  position: relative;
+  top: 5px;
 }

@@ -1,0 +1,27 @@
+<div class="query_record">
+    <select class="qr_1" ng-model="property" ng-options="property as property.name_display for property in event.properties" ng-init="property=event.properties[0]"></select>
+
+    <select class="qr_2" ng-model="meta" ng-options="meta as meta for meta in metas[property.type].operators_display" ng-init="meta=metas[property.type].operators_display[0]"></select>
+
+
+    <div ng-switch="metas[property.type].key">
+    	<div ng-switch-when="group">
+    		aaaa
+    	</div>
+    	<div ng-switch-when="number">
+    		aaaa
+    	</div>
+    	<div ng-switch-when="time">
+    		aaaa
+    	</div>
+    	<div ng-switch-when="text">
+    		aaaa
+    	</div>
+    </div>
+
+    <select class="qr_3">
+        <option>Nam</option>
+        <option>Nữ</option>
+    </select>
+    <span class="icon-remove right remove" ng-click="removeCondition($event)"></span>
+</div>

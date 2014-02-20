@@ -20,7 +20,7 @@ angular.module('smgDirectives')
 
     })
     .directive('subfilter', function ($compile) {
-        var qc = 2, _meta, _prop;
+        var qc = 1, _meta, _prop;
             
         return {
             restrict: 'A',
@@ -37,32 +37,39 @@ angular.module('smgDirectives')
                     $queryGroup = element.find(".query_builder");
                     _prop = "property"+qc,
                     _meta = "meta"+qc;
-
+                    scope.qc = qc;
                     var action = $compile('<select class="action clearfix row_'+ qc+'"> '
                                     + '<option>Và</option>'
                                     + '<option>Hoặc</option>'
                                 + '</select>    ')(scope);
+                    
+                    var query_row = $compile('<div query-record events="events" metas="metas" event="event" class="row_'+qc+'" data=".row_'+qc+'"></div>')(scope);
 
-
-                    var query_row = $compile('<div class="query_record row_'+ qc +'">'
-                                    + '<select class="qr_1" ng-model="'+_prop+'" ng-options="property as property.name_display for property in event.properties" ng-init="property=event.properties[0]"></select>'
-                                    + '<select class="qr_2" ng-model="'+_meta+'" ng-options="meta as meta for meta in metas['+_prop+'.type].operators_display" ng-init="meta=metas[property.type].operators_display[0]"></select>'
-                                    + '<select class="qr_3">'
-                                    +        '<option>Nam</option>'
-                                    +        '<option>Nữ</option>'
-                                    +    '</select>'
-                                    + '<span class="icon-remove right remove" ng-click="removeCondition($event)" data=.row_'+qc+'></span>'
-                                    + '</div>')(scope);
                     $actionGroup.append(action);
                     $queryGroup.append(query_row);
 
                     qc++ ;
                 }
 
-                scope.removeCondition = function($event) {
-                    rowId = $($event.target).attr("data");
-                    element.find(rowId).remove();
-                }
+                
             }
         };
     })
+    .directive('queryRecord', [function () {
+
+        return {
+            restrict: 'A',
+            scope: {
+                metas: "=",
+                events: "=",
+                event: "="
+            },
+            templateUrl: 'common/template/query_record.html',
+            link: function (scope, element, attr) {
+                scope.removeCondition = function($event) {
+                    rowId = $($event.target).parent().parent().attr("data");
+                    element.parents().find(rowId).remove();
+                }
+            }
+        };
+    }])
