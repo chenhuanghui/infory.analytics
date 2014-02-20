@@ -4,6 +4,18 @@
  * Description
  */
 angular.module('smg.services')
+    .factory('dataFactory', function() {
+        var getBrandFunction = null;
+
+        return {
+            setGetBrandFunction: function(func) {
+                getBrandFunction = func;
+            },
+            getBrand: function(new_brand) {
+                return getBrandFunction();
+            }
+        }
+    })
     .factory('remoteFactory', function($http) {
         var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
         return {
