@@ -129,6 +129,8 @@ angular.module('Smg')
 
                         changeUser(user);
                         success(user);
+                    } else {
+                        error(res.message);
                     }
                 }).error(error);
             },
