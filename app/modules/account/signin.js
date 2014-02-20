@@ -1,15 +1,16 @@
 angular.module('account')
-    .controller('signInCtrl', ['$rootScope', '$scope', '$location', '$window', 'Auth',
-        function($rootScope, $scope, $location, $window, Auth) {
+    .controller('signInCtrl', ['$scope', '$location', '$window', 'Auth',
+        function($scope, $location, $window, Auth) {
             $scope.user = Auth.user;
             $scope.userRoles = Auth.userRoles;
             $scope.accessLevels = Auth.accessLevels;
+            $scope.hideMessage = true;
 
             $scope.logout = function() {
                 Auth.logout(function() {
                     $location.path('/login');
                 }, function() {
-                    $rootScope.error = "Failed to logout";
+
                 });
             };
 
@@ -20,10 +21,12 @@ angular.module('account')
                         rememberme: $scope.rememberme
                     },
                     function(res) {
+                        $scope.hideMessage = false;
                         $location.path('/');
                     },
                     function(err) {
-                        $rootScope.error = "Failed to login";
+                        $scope.message = err;
+                        $scope.hideMessage = false;
                     });
             };
 

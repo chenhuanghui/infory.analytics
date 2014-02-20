@@ -5,15 +5,20 @@
 
     <div class="box">
         <div class="content-wrap">
-            <h6>Đăng nhập</h6>
-            <input class="form-control" type="text" placeholder="Địa chỉ email" ng-model="username" required>
-            <input class="form-control" type="password" placeholder="Mật khẩu" ng-model="password" required>
-            <a href="#" class="forgot">Quên mật khẩu?</a>
-            <div class="remember">
-                <input id="remember-me" type="checkbox" ng-model="rememberme">
-                <label for="remember-me">Ghi nhớ</label>
-            </div>
-            <a class="btn-glow primary login" href="index.html" ng-click="login()">Đăng nhập</a>
+            <form name="loginForm">
+                <h6>Đăng nhập</h6>
+                <input class="form-control" type="text" placeholder="Địa chỉ email" ng-model="username" name="email" required ng-minlength=6>
+                <input class="form-control" type="password" placeholder="Mật khẩu" ng-model="password" name="password" required g-minlength=6>
+                <a href="#" class="forgot">Quên mật khẩu?</a>
+                <div class="remember">
+                    <input id="remember-me" type="checkbox" ng-model="rememberme">
+                    <label for="remember-me">Ghi nhớ</label>
+                </div>
+                <div class="forget">
+                    <a ng-hide="hideMessage">{{message}}</a>
+                </div>
+                <button type="submit" class="btn-glow primary login" ng-click="login()" ng-disabled="loginForm.$invalid">Đăng nhập</button>
+            </form>
         </div>
     </div>
 
