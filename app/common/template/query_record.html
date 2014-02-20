@@ -4,24 +4,28 @@
     <select class="qr_2" ng-model="meta" ng-options="meta as meta for meta in metas[property.type].operators_display" ng-init="meta=metas[property.type].operators_display[0]"></select>
 
 
-    <div ng-switch="metas[property.type].key">
-    	<div ng-switch-when="group">
-    		aaaa
+    <div ng-switch on="metas[property.type].operators_ui_controller[metas[property.type].operators_display.indexOf(meta)]">
+    	<div ng-switch-when="number input">
+    		number input
     	</div>
-    	<div ng-switch-when="number">
-    		aaaa
+    	<div ng-switch-when="two number input">
+    		two number input
     	</div>
-    	<div ng-switch-when="time">
-    		aaaa
+    	<div ng-switch-when="dropdown">
+    		dropdown
     	</div>
     	<div ng-switch-when="text">
-    		aaaa
+    		text input
     	</div>
+        <div ng-switch-when="time dropdown">
+            time dropdown
+        </div>
+        <div ng-switch-when="date picker">
+            date picker
+        </div>
+        <div ng-switch-when="two date picker">
+            two date picker
+        </div>
     </div>
-
-    <select class="qr_3">
-        <option>Nam</option>
-        <option>Nữ</option>
-    </select>
     <span class="icon-remove right remove" ng-click="removeCondition($event)"></span>
 </div>

@@ -19,15 +19,6 @@ angular.module('brand')
         remoteFactory.getBrandList(fields, function(data) {
             $scope.brand = data[0];
             $scope.shop = $scope.brand.shops[0];
-
-            dataFactory.setGetUsersFunction(function() {
-                return $scope.brand.users;
-            });
-
-            dataFactory.setGetBrandIdFunction(function() {
-                return $scope.brand.id;
-            });
-
         }, function(error) {});
 
 

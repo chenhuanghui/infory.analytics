@@ -4,25 +4,6 @@
  * Description
  */
 angular.module('smg.services')
-    .factory('dataFactory', function() {
-        var getUsersFunction = null;
-        var getBrandIdFunction = null;
-
-        return {
-            setGetUsersFunction: function(func) {
-                getUsersFunction = func;
-            },
-            getUsers: function() {
-                return getUsersFunction();
-            },
-            setGetBrandIdFunction: function(func) {
-                getBrandIdFunction = func;
-            },
-            getBrandId: function() {
-                return getBrandIdFunction();
-            }
-        }
-    })
     .factory('remoteFactory', function($http) {
         var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
         return {
@@ -74,239 +55,6 @@ angular.module('smg.services')
                 return request;
             },
 
-            meta_events: [{
-                name: "view",
-                name_display: "xem thông tin cửa hàng",
-                properties: [{
-                    name: "shop",
-                    name_display: "cửa hàng",
-                    type: "group"
-                }, {
-                    name: "time",
-                    name_display: "thời gian",
-                    type: "time"
-                }, {
-                    name: "platform",
-                    name_display: "nền tảng",
-                    type: "group"
-                }, {
-                    name: "shop_promotion_status",
-                    name_display: "trạng thái khuyến mãi của cửa hàng",
-                    type: "group"
-                }, {
-                    name: "user_city",
-                    name_display: "tỉnh/thành phố của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_age",
-                    name_display: "tuổi khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_gender",
-                    name_display: "giới tính của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_career",
-                    name_display: "nghề nghiệp của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_total_charge",
-                    name_display: "tổng chi của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_view_count",
-                    name_display: "số lần truy cập của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_checkin_count",
-                    name_display: "số lần checkin của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_checkout_count",
-                    name_display: "số lần checkout của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_comment_count",
-                    name_display: "số lần bình luận của khách hàng",
-                    type: "number"
-                }]
-            }, {
-                name: "checkin",
-                name_display: "đến cửa hàng",
-                properties: [{
-                    name: "shop",
-                    name_display: "cửa hàng",
-                    type: "group"
-                }, {
-                    name: "time",
-                    name_display: "thời gian",
-                    type: "time"
-                }, {
-                    name: "fiend_count",
-                    name_display: "số bạn đi cùng",
-                    type: "number"
-                }, {
-                    name: "platform",
-                    name_display: "nền tảng",
-                    type: "group"
-                }, {
-                    name: "shop_promotion_status",
-                    name_display: "trạng thái khuyến mãi của cửa hàng",
-                    type: "group"
-                }, {
-                    name: "user_city",
-                    name_display: "tỉnh/thành phố của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_age",
-                    name_display: "tuổi khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_gender",
-                    name_display: "giới tính của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_career",
-                    name_display: "nghề nghiệp của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_total_charge",
-                    name_display: "tổng chi của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_view_count",
-                    name_display: "số lần truy cập của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_checkin_count",
-                    name_display: "số lần checkin của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_checkout_count",
-                    name_display: "số lần checkout của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_comment_count",
-                    name_display: "số lần bình luận của khách hàng",
-                    type: "number"
-                }]
-            }, {
-                name: "checkout",
-                name_display: "thanh toán",
-                properties: [{
-                    name: "shop",
-                    name_display: "cửa hàng",
-                    type: "group"
-                }, {
-                    name: "time",
-                    name_display: "thời gian",
-                    type: "time"
-                }, {
-                    name: "charge",
-                    name_display: "giá trị hóa đơn",
-                    type: "number"
-                }, {
-                    name: "platform",
-                    name_display: "nền tảng",
-                    type: "group"
-                }, {
-                    name: "shop_promotion_status",
-                    name_display: "trạng thái khuyến mãi của cửa hàng",
-                    type: "group"
-                }, {
-                    name: "user_city",
-                    name_display: "tỉnh/thành phố của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_age",
-                    name_display: "tuổi khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_gender",
-                    name_display: "giới tính của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_career",
-                    name_display: "nghề nghiệp của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_total_charge",
-                    name_display: "tổng chi của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_view_count",
-                    name_display: "số lần truy cập của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_checkin_count",
-                    name_display: "số lần checkin của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_checkout_count",
-                    name_display: "số lần checkout của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_comment_count",
-                    name_display: "số lần bình luận của khách hàng",
-                    type: "number"
-                }]
-            }, {
-                name: "comment",
-                name_display: "bình luận về cửa hàng",
-                properties: [{
-                    name: "shop",
-                    name_display: "cửa hàng",
-                    type: "group"
-                }, {
-                    name: "created_time",
-                    name_display: "ngày tạo",
-                    type: "time"
-                }, {
-                    name: "updated_time",
-                    name_display: "lần sửa gần nhất",
-                    type: "time"
-                }, {
-                    name: "platform",
-                    name_display: "nền tảng",
-                    type: "group"
-                }, {
-                    name: "user_city",
-                    name_display: "tỉnh/thành phố của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_age",
-                    name_display: "tuổi khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_gender",
-                    name_display: "giới tính của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_career",
-                    name_display: "nghề nghiệp của khách hàng",
-                    type: "group"
-                }, {
-                    name: "user_total_charge",
-                    name_display: "tổng chi của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_view_count",
-                    name_display: "số lần truy cập của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_checkin_count",
-                    name_display: "số lần checkin của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_checkout_count",
-                    name_display: "số lần checkout của khách hàng",
-                    type: "number"
-                }, {
-                    name: "user_comment_count",
-                    name_display: "số lần bình luận của khách hàng",
-                    type: "number"
-                }]
-            }, ],
             meta_property_types: {
                 number: {
                     operators: [
@@ -324,6 +72,14 @@ angular.module('smg.services')
                         "lớn hơn hoặc bằng",
                         "bé hơn hoặc bằng",
                         "bằng"
+                    ],
+                    operators_ui_controller: [
+                        "number input",
+                        "number input",
+                        "two number input",
+                        "number input",
+                        "number input",
+                        "number input"
                     ]
                 },
                 group: {
@@ -332,6 +88,9 @@ angular.module('smg.services')
                     ],
                     operators_display: [
                         "là"
+                    ],
+                    operators_ui_controller: [
+                        "dropdown"
                     ]
                 },
                 text: {
@@ -340,25 +99,365 @@ angular.module('smg.services')
                     ],
                     operators_display: [
                         "chứa từ"
+                    ],
+                    operators_ui_controller: [
+                        "text input"
                     ]
                 },
                 time: {
                     operators: [
                         "before",
                         "before_date",
-                        "after",
                         "after_date",
                         "between_dates"
                     ],
                     operators_display: [
                         "cách đây",
                         "trước ngày",
-                        "sau hôm nay",
                         "sau ngày",
                         "trong khoảng thời gian"
+                    ],
+                    operators_ui_controller: [
+                        "time dropdown",
+                        "date picker",
+                        "date picker",
+                        "two date picker"
                     ]
                 },
-            }
+            },
 
+            meta_lists: {
+                shops: [
+                    "Cửa hàng 1",
+                    "Cửa hàng 2",
+                    "Cửa hàng 3",
+                    "Cửa hàng 4"
+                ],
+                cities: [
+                    "An Giang",
+                    "Bà Rịa - Vũng Tàu",
+                    "Bắc Giang",
+                    "Bắc Kạn",
+                    "Bạc Liêu",
+                    "Bắc Ninh",
+                    "Bến Tre",
+                    "Bình Định",
+                    "Bình Dương",
+                    "Bình Phước",
+                    "Bình Thuận",
+                    "Cà Mau",
+                    "Cao Bằng",
+                    "Đắk Lắk",
+                    "Đắk Nông",
+                    "Điện Biên",
+                    "Đồng Nai",
+                    "Đồng Tháp",
+                    "Gia Lai",
+                    "Hà Giang",
+                    "Hà Nam",
+                    "Hà Tĩnh",
+                    "Hải Dương",
+                    "Hậu Giang",
+                    "Hòa Bình",
+                    "Hưng Yên",
+                    "Khánh Hòa",
+                    "Kiên Giang",
+                    "Kon Tum",
+                    "Lai Châu",
+                    "Lâm Đồng",
+                    "Lạng Sơn",
+                    "Lào Cai",
+                    "Long An",
+                    "Nam Định",
+                    "Nghệ An",
+                    "Ninh Bình",
+                    "Ninh Thuận",
+                    "Phú Thọ",
+                    "Quảng Bình",
+                    "Quảng Nam",
+                    "Quảng Ngãi",
+                    "Quảng Ninh",
+                    "Quảng Trị",
+                    "Sóc Trăng",
+                    "Sơn La",
+                    "Tây Ninh",
+                    "Thái Bình",
+                    "Thái Nguyên",
+                    "Thanh Hóa",
+                    "Thừa Thiên Huế",
+                    "Tiền Giang",
+                    "Trà Vinh",
+                    "Tuyên Quang",
+                    "Vĩnh Long",
+                    "Vĩnh Phúc",
+                    "Yên Bái",
+                    "Phú Yên",
+                    "Cần Thơ",
+                    "Đà Nẵng",
+                    "Hải Phòng",
+                    "Hà Nội",
+                    "Hồ Chí Minh"
+                ],
+                platforms: [
+                    "iOS",
+                    "Android",
+                    "Web"
+                ],
+                genders: ["Nam", "Nữ"],
+                careers: [
+                    "học sinh",
+                    "sinh viên",
+                    "giáo viên",
+                    "công nhân",
+                    "lập trình viên",
+                    "nhà khoa học"
+                ]
+            },
+
+            meta_events: [{
+                name: "view",
+                name_display: "view",
+                properties: [{
+                    name: "shop",
+                    name_display: "shop",
+                    type: "group",
+                    available_values: "shops"
+                }, {
+                    name: "time",
+                    name_display: "time",
+                    type: "time"
+                }, {
+                    name: "platform",
+                    name_display: "user platform",
+                    type: "group",
+                    available_values: "platforms"
+                }, {
+                    name: "user_city",
+                    name_display: "user city",
+                    type: "group",
+                    available_values: "cities"
+                }, {
+                    name: "user_age",
+                    name_display: "user age",
+                    type: "number"
+                }, {
+                    name: "user_gender",
+                    name_display: "user gender",
+                    type: "group",
+                    available_values: "gender"
+                }, {
+                    name: "user_career",
+                    name_display: "user career",
+                    type: "group",
+                    availables_values: "careers"
+                }, {
+                    name: "user_total_charge",
+                    name_display: "user total charge",
+                    type: "number"
+                }, {
+                    name: "user_view_count",
+                    name_display: "user view count",
+                    type: "number"
+                }, {
+                    name: "user_checkin_count",
+                    name_display: "user checkin count",
+                    type: "number"
+                }, {
+                    name: "user_checkout_count",
+                    name_display: "user checkout count",
+                    type: "number"
+                }, {
+                    name: "user_comment_count",
+                    name_display: "user comment count",
+                    type: "number"
+                }]
+            }, {
+                name: "checkin",
+                name_display: "checkin",
+                properties: [{
+                    name: "shop",
+                    name_display: "shop",
+                    type: "group",
+                    available_values: "shops"
+                }, {
+                    name: "time",
+                    name_display: "time",
+                    type: "time"
+                }, {
+                    name: "platform",
+                    name_display: "user platform",
+                    type: "group",
+                    available_values: "platforms"
+                }, {
+                    name: "friend_count",
+                    name_display: "friend count",
+                    type: "number"
+                }, {
+                    name: "user_city",
+                    name_display: "user city",
+                    type: "group",
+                    available_values: "cities"
+                }, {
+                    name: "user_age",
+                    name_display: "user age",
+                    type: "number"
+                }, {
+                    name: "user_gender",
+                    name_display: "user gender",
+                    type: "group",
+                    available_values: "gender"
+                }, {
+                    name: "user_career",
+                    name_display: "user career",
+                    type: "group",
+                    availables_values: "careers"
+                }, {
+                    name: "user_total_charge",
+                    name_display: "user total charge",
+                    type: "number"
+                }, {
+                    name: "user_view_count",
+                    name_display: "user view count",
+                    type: "number"
+                }, {
+                    name: "user_checkin_count",
+                    name_display: "user checkin count",
+                    type: "number"
+                }, {
+                    name: "user_checkout_count",
+                    name_display: "user checkout count",
+                    type: "number"
+                }, {
+                    name: "user_comment_count",
+                    name_display: "user comment count",
+                    type: "number"
+                }]
+            }, {
+                name: "checkout",
+                name_display: "checkout",
+                properties: [{
+                    name: "shop",
+                    name_display: "shop",
+                    type: "group",
+                    available_values: "shops"
+                }, {
+                    name: "time",
+                    name_display: "time",
+                    type: "time"
+                }, {
+                    name: "platform",
+                    name_display: "user platform",
+                    type: "group",
+                    available_values: "platforms"
+                }, {
+                    name: "charge",
+                    name_display: "user expense",
+                    type: "number"
+                }, {
+                    name: "user_city",
+                    name_display: "user city",
+                    type: "group",
+                    available_values: "cities"
+                }, {
+                    name: "user_age",
+                    name_display: "user age",
+                    type: "number"
+                }, {
+                    name: "user_gender",
+                    name_display: "user gender",
+                    type: "group",
+                    available_values: "gender"
+                }, {
+                    name: "user_career",
+                    name_display: "user career",
+                    type: "group",
+                    availables_values: "careers"
+                }, {
+                    name: "user_total_charge",
+                    name_display: "user total charge",
+                    type: "number"
+                }, {
+                    name: "user_view_count",
+                    name_display: "user view count",
+                    type: "number"
+                }, {
+                    name: "user_checkin_count",
+                    name_display: "user checkin count",
+                    type: "number"
+                }, {
+                    name: "user_checkout_count",
+                    name_display: "user checkout count",
+                    type: "number"
+                }, {
+                    name: "user_comment_count",
+                    name_display: "user comment count",
+                    type: "number"
+                }]
+            }, {
+                name: "comment",
+                name_display: "comment",
+                properties: [{
+                    name: "shop",
+                    name_display: "shop",
+                    type: "group",
+                    available_values: "shops"
+                }, {
+                    name: "created_time",
+                    name_display: "date create",
+                    type: "time"
+                }, {
+                    name: "updated_time",
+                    name_display: "date update",
+                    type: "time"
+                }, {
+                    name: "platform",
+                    name_display: "user platform",
+                    type: "group",
+                    available_values: "platforms"
+                }, {
+                    name: "content",
+                    name_display: "comment content",
+                    type: "text"
+                }, {
+                    name: "user_city",
+                    name_display: "user city",
+                    type: "group",
+                    available_values: "cities"
+                }, {
+                    name: "user_age",
+                    name_display: "user age",
+                    type: "number"
+                }, {
+                    name: "user_gender",
+                    name_display: "user gender",
+                    type: "group",
+                    available_values: "gender"
+                }, {
+                    name: "user_career",
+                    name_display: "user career",
+                    type: "group",
+                    availables_values: "careers"
+                }, {
+                    name: "user_total_charge",
+                    name_display: "user total charge",
+                    type: "number"
+                }, {
+                    name: "user_view_count",
+                    name_display: "user view count",
+                    type: "number"
+                }, {
+                    name: "user_checkin_count",
+                    name_display: "user checkin count",
+                    type: "number"
+                }, {
+                    name: "user_checkout_count",
+                    name_display: "user checkout count",
+                    type: "number"
+                }, {
+                    name: "user_comment_count",
+                    name_display: "user comment count",
+                    type: "number"
+                }]
+            }]
         };
     });

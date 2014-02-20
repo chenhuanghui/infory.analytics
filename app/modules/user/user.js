@@ -5,9 +5,9 @@ angular.module('user')
     function($scope, $routeParams, remoteFactory, dataFactory) {
         $scope.activeTab = "user";
         $scope.cssLink = "user-profile.css";
-    $scope.brandId = dataFactory.getBrandId();
 
-        $id = $routeParams.id;
+        $scope.brandId = $routeParams.brandId;
+        $scope.userId = $routeParams.userId;
     }
 ])
 
@@ -29,7 +29,7 @@ angular.module('user')
             templateUrl: 'modules/user/user_notify_new.html',
             controller: 'userCtrl'
         })
-        .when('/user/:id', {
+        .when('/user/:brandId/:userId', {
             templateUrl: 'modules/user/user_profile.html',
             controller: 'userCtrl'
         })
