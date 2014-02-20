@@ -5,6 +5,7 @@ angular.module('brand')
     function($scope, remoteFactory, $http) {
         $scope.msg = "brand view";
         $scope.brand = null;
+        $scope.brands = null;
 
         $scope.oderComments = [{
             field: 'like_count',
@@ -14,14 +15,11 @@ angular.module('brand')
             display: 'Thời gian'
         }];
 
-        $http.post('http://dev2.smartguide.vn/dashboard/api/v1/brand/list', {
-            fields: '["name", "logo", "cover", "type_business", "website", "fanpage", "description", "shops"]'
-        }).success(function(data) {
+        var fields = '["name", "logo", "cover", "type_business", "website", "fanpage", "description", "shops"]';
+        remoteFactory.getBrandList(fields, function(data) {
             $scope.brand = data[0];
             $scope.shop = $scope.brand.shops[0];
-        }).error(function(data) {
-            console.log(data);
-        });
+        }, function(error) {});
     }
 ])
 
