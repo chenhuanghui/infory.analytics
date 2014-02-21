@@ -20,11 +20,20 @@ angular.module('smgDirectives', ['ui.date'])
                 $scope.subfilters = [];
                 var num = 0;
 
-                this.add = function(scope) {
+                this.addFilter = function(scope) {
                     $scope.subfilters.push(scope);
                 }
 
-                $scope.getAllSubFilter = function() {
+                this.removeFilter = function(id) {
+                    for (var i = $scope.subfilters.length - 1; i >= 0; i--) {
+                        if ($scope.subfilters[i].getValue().id == id) {
+                            $scope.subfilters.splice(i, 1);
+                            return;
+                        }
+                    }
+                }
+
+                $scope.getAllFilter = function() {
                     angular.forEach($scope.subfilters, function(subfilter) {
                         console.log(subfilter.getValue());
                     });
@@ -65,7 +74,7 @@ angular.module('smgDirectives', ['ui.date'])
 
                     var action_nor = $compile('<span class="btn-flat white action action_child clearfix  row_' + qc + '">{{operator}}</span>')(scope);
 
-                    var query_row = $compile('<div query-record events="events" metas="metas" event="event" metadata="metadata" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
+                    var query_row = $compile('<div query-record id="' + qc + '" events="events" metas="metas" event="event" metadata="metadata" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
 
                     if (element.find(".action").length > 0) {
                         $actionGroup.append(action_nor);
@@ -95,7 +104,8 @@ angular.module('smgDirectives', ['ui.date'])
                     metas: "=",
                     events: "=",
                     event: "=",
-                    metadata: "="
+                    metadata: "=",
+                    id: "@"
                 },
                 templateUrl: 'common/template/query_record.html',
                 link: function(scope, element, attr, ctrl) {
@@ -111,14 +121,20 @@ angular.module('smgDirectives', ['ui.date'])
                     scope.removeCondition = function($event) {
                         rowId = $($event.target).parent().parent().attr("data");
                         element.parents().find(rowId).remove();
-                        console.log(scope.property + "--" + scope.meta + "--" + scope.usrvalue);
+
+                        ctrl.removeFilter(scope.id);
                     }
 
                     scope.getValue = function() {
-                        console.log(scope.property);
+                        return {
+                            id: scope.id,
+                            property: scope.property,
+                            meta: scope.meta,
+                            usrvalue: scope.usrvalue
+                        };
                     }
 
-                    ctrl.add(scope);
+                    ctrl.addFilter(scope);
 
                 }
             };
