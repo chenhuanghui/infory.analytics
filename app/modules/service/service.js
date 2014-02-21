@@ -4,6 +4,26 @@
  * Description
  */
 angular.module('smg.services')
+    .factory('dataFactory', ['$http', 'remoteFactory',
+
+        function($http, remoteFactory) {
+            var brand = null;
+            return {
+                getBrand: function(success, error) {
+                    if (brand != null)
+                        success(brand);
+                    else {
+                        var fields = '["name", "logo", "cover", "type_business", "website", "fanpage", "description", "shops", "id", "owner_phone", "owner_address"]';
+                        remoteFactory.getBrandList(fields, function(data) {
+                            brand = data;
+                            success(brand);
+                        }, error);
+                    }
+                }
+            }
+
+        }
+    ])
     .factory('remoteFactory', function($http) {
         var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
         return {

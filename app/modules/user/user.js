@@ -1,6 +1,6 @@
 angular.module('user')
 
-.controller('userCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory',
+.controller('userCtrl', ['$scope', '$routeParams', 'remoteFactory',
 
     function($scope, $routeParams, remoteFactory, dataFactory) {
         $scope.activeTab = "user";

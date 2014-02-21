@@ -10,12 +10,12 @@
                     <div class="info">
                         <img src="{{brand.logo}}" alt="contact" class="img-circle logo hidden-phone"/>
                         <h4>{{brand.name}} - <span>{{brand.type_business}}</span></h4>
-                        <h6> 422 Võ Văn Kiệt, Phường Cô Giang, Quận 1, Tp. Hồ Chí Minh - API thieu</h6>
+                        <h6> {{brand.owner_address}}</h6>
                         <div class="info_detail">
                             <p>{{brand.description}}</p>        
                             <p> <span>Website: </span> <a href="{{brand.website}}"> {{brand.website}}</a></p>
                             <p> <span>Fanpage: </span> <a href="{{brand.fanpage}}">{{brand.fanpage}}</a></p>
-                            <p> <span>Liên hệ: </span> <a href="http://smartguide.vn"> 0838 38 38 38 - API THIEU</a></p>
+                            <p> <span>Liên hệ: </span> <a> {{brand.owner_phone}}</a></p>
                         </div>
                         <div class="alert alert-danger" style="width: 500px">
                             <i class="icon-remove-sign"></i>
@@ -27,8 +27,7 @@
                     <div id="add_shop">
                         <input class="shop_name form-control" type="text" placeholder="Nhập tên cửa hàng">    
                         <a class="btn-flat success icon-plus">Thêm cửa hàng mới</a>
-                    </div>
-                    
+                    </div>        
 
                     <ul id="shop_list" class="shadow">
                         <li ng-repeat="shop in brand.shops">
