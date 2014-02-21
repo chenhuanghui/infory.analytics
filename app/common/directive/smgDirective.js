@@ -84,19 +84,14 @@ angular.module('smgDirectives', ['ui.date'])
                 },
                 templateUrl: 'common/template/query_record.html',
                 link: function(scope, element, attr) {
-                    scope.birthDay = '2013-07-23';
-                    scope.dateOptions = {
-                        minDate: -20,
-                        maxDate: "+1M +10D"
+                    scope.data = {
+                        dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate()
                     };
 
-                    var $input = element.find('input');
-                    if ($input.is(':focus')) {
-                        $input.trigger('blur');
-                    } else {
-                        $input.trigger('focus');
+                    scope.onTimeSet = function(newDate, oldDate) {
+                        console.log(newDate);
+                        console.log(oldDate);
                     }
-
 
                     scope.removeCondition = function($event) {
                         rowId = $($event.target).parent().parent().attr("data");

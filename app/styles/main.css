@@ -866,17 +866,3 @@ body {
   width: 14px;
   height: 14px;
 }
-
-.proxied-field-wrap {
-    position:relative;
-    height:0;
-    width:0;
-    overflow:hidden;
-    margin:0;
-    padding:0;
-    input {
-        position:absolute;
-        top:0;
-        left:0;
-        }
-}

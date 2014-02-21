@@ -25,7 +25,16 @@
             <select class="qr_3" ng-model="metaValue" ng-options="value as value for value in metadata[property.available_values]"></select>
         </span>
         <span ng-switch-when="date picker">
-            <input type="text" ui-date-format="yy-mm-dd" ng-model="birthDay" ui-date="dateOptions"/>
+            <div class="dropdown">
+              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                <div class="input-append"><input type="text" class="input-large" data-ng-model="data.dateDropDownInput">
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSet"/>
+              </ul>
+            </div>
         </span>
         <span ng-switch-when="two date picker">
             two date picker
