@@ -38,7 +38,7 @@
                                 <div>
                                     <img src="{{message.user_avatar}}" alt="contact" class="img-circle avatar hidden-phone left col-md-1"/>
                                     <div class="col-md-11">
-                                        <span class="user_name"><a href="#/user/{{brand.id}}/{{message.user_id}}">{{message.user_name}}</a></span>
+                                        <span class="user_name"><a ng-click = "showUserProfile(brand.id, message.user_id, message.user_name, message.user_avatar)">{{message.user_name}}</a></span>
                                         </br>
                                         <span class="shop_addr">{{message.content}}</span>  
                                     </div>

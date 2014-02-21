@@ -14,54 +14,29 @@
             </div>
             <div id="infomation">
                 <div class="logo">
-                    <img src="img/personal-info.png" alt="contact" class="avatar img-circle"/>
+                    <img src="{{avatar}}" alt="contact" class="avatar img-circle" height="90px" width="90px"/>
                     
                 </div>
                 <div class="detail">
-                    <h1 class="name">{{brandId}}</h1>
-                    <p><i class="icon-phone-sign"></i>+84 966924733</p>
-                    <p><i class="icon-map-marker"></i>2301 East Lamar Blvd. Suite 140.City, Arlington. United States,Zip Code, TX 76006.</p>
-                    <p><i class="icon-time"></i>7 giờ trước</p>
+                    <h1 class="name">{{username}}</h1>
+                    <p><i class="icon-phone-sign"></i>{{userProfile.phone}}</p>
+                    <p><i class="icon-map-marker"></i>{{userProfile.address}}</p>
+                    <p><i class="icon-time"></i>{{userProfile.last_visit}}</p>
                 </div>
             </div>
         </div>
         <div id="activity">
-            <div class="header">
+            <div class="header" >
                 <span class="time">Thời gian</span>
                 <span class="action">Hoạt động</span>
             </div>
-            <ul class="time-line">
+            <ul class="time-line" ng-repeat="activity in activities">
                 <li>
-                    <span class="date">Thứ 4 ngày 19 tháng 2 năm 2014</span>
-                    <ul>
+                    <span class="date">{{activity.time_str}}</span>
+                    <ul ng-repeat="event in activity.infor">
                         <li>
-                            <span class="time">15:10 PM</span>
-                            <span class="action">happy coding</span>
-                        </li>
-                        <li>
-                            <span class="time">15:10 PM</span>
-                            <span class="action">happy coding</span>
-                        </li>
-                        <li>
-                            <span class="time">15:10 PM</span>
-                            <span class="action">happy coding</span>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <span class="date">Thứ 4 ngày 19 tháng 2 năm 2014</span>
-                    <ul>
-                        <li>
-                            <span class="time">15:10 PM</span>
-                            <span class="action">happy coding</span>
-                        </li>
-                        <li>
-                            <span class="time">15:10 PM</span>
-                            <span class="action">happy coding</span>
-                        </li>
-                        <li>
-                            <span class="time">15:10 PM</span>
-                            <span class="action">happy coding</span>
+                            <span class="time">{{event.hour}}</span>
+                            <span class="action">{{event.name}}</span>
                         </li>
                     </ul>
                 </li>
@@ -76,9 +51,9 @@
             <div class="tab-pane active" id="home">
                 <ul>
                     <li>
-                        <span class="property">Email</span><span class="value">R10@gmail.com</span>
+                        <span class="property">Email</span><span class="value">{{userProfile.email}}</span>
                     </li>
-                    <li><span class="property">Tên</span><span class="value">wayne rooney</span></li>
+                    <li><span class="property">Tên</span><span class="value">{{username}}</span></li>
                 </ul>
             </div>
         </div>

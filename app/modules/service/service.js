@@ -7,16 +7,46 @@ angular.module('smg.services')
     .factory('dataFactory', ['$http', 'remoteFactory',
 
         function($http, remoteFactory) {
-            var brand = null;
+            var brands = null;
+            var currentBrand = null;
+            var user_pre = {
+                username: null,
+                avatar: null
+            };
+            var userProfile = null;
+
             return {
-                getBrand: function(success, error) {
-                    if (brand != null)
-                        success(brand);
+                setUsernameAvatar: function(username, avatar) {
+                    user_pre.username = username;
+                    user_pre.avatar = avatar;
+                },
+                getUsernameAvatar: function() {
+                    return user_pre;
+                },
+                setCurrentBrand: function(brand) {
+                    currentBrand = brand;
+                },
+
+                getBrands: function(success, error) {
+                    if (currentBrand != null)
+                        success(brands, currentBrand);
                     else {
                         var fields = '["name", "logo", "cover", "type_business", "website", "fanpage", "description", "shops", "id", "owner_phone", "owner_address"]';
                         remoteFactory.getBrandList(fields, function(data) {
-                            brand = data;
-                            success(brand);
+                            brands = data;
+                            currentBrand = brands[0];
+                            success(brands, brands[0]);
+                        }, error);
+                    }
+                },
+                getUserProfile: function(brandId, userId, success, error) {
+                    if (userProfile != null) {
+                        success(userProfile);
+                    } else {
+                        var fields = '["name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline"]';
+                        remoteFactory.getUserProfile(fields, brandId, userId, function(data) {
+                            userProfile = data;
+                            success(userProfile);
                         }, error);
                     }
                 }
@@ -36,6 +66,13 @@ angular.module('smg.services')
             getBrandList: function(fields, success, error) {
                 $http.post(base_url + 'brand/list', {
                     fields: fields
+                }).success(success).error(error);
+            },
+            getUserProfile: function(fields, brandId, userId, success, error) {
+                $http.post(base_url + 'user/get_profile', {
+                    fields: fields,
+                    brand_id: brandId,
+                    user_id: userId
                 }).success(success).error(error);
             },
             api: function(path, method, data, success, error) {

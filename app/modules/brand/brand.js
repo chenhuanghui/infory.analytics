@@ -1,7 +1,7 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', 'remoteFactory', 'dataFactory',
-    function($scope, $http, remoteFactory, dataFactory) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', 'remoteFactory', 'dataFactory',
+    function($scope, $http, $location, remoteFactory, dataFactory) {
         $scope.msg = "brand view";
         $scope.brand = null;
         $scope.brands = null;
@@ -14,10 +14,24 @@ angular.module('brand')
             display: 'Thời gian'
         }];
 
-        dataFactory.getBrand(function(data) {
-            $scope.brand = data[0];
+        dataFactory.getBrands(function(brands, brand) {
+            $scope.brands = brands;
+            $scope.brand = brand;
             $scope.shop = $scope.brand.shops[0];
-        }, function() {});
+        })
+
+        $scope.setCurrentBrand = function(brand) {
+            $scope.brand = brand;
+            dataFactory.setCurrentBrand(brand);
+        }
+
+        $scope.showUserProfile = function(brandId, userId, username, avatar) {
+            dataFactory.setUsernameAvatar(username, avatar);
+
+            //FOR TESTING REASON
+            userId = 411;
+            $location.path('/user/' + brandId + '/' + userId);
+        }
 
     }
 ])
