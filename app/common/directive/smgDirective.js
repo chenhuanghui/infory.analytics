@@ -1,4 +1,4 @@
-angular.module('smgDirectives')
+angular.module('smgDirectives', ['ui.date'])
     .controller('FilterCtrl', ['$scope', 'remoteFactory',
         function($scope, remoteFactory) {
             // $scope.metas = remoteFactory.meta_property_types;                               
@@ -60,8 +60,6 @@ angular.module('smgDirectives')
                     })
                     qc++;
                 }
-
-
             }
         };
     })
@@ -79,7 +77,21 @@ angular.module('smgDirectives')
                 },
                 templateUrl: 'common/template/query_record.html',
                 link: function(scope, element, attr) {
-                    scope.date = moment("2013-01-22T00:00:00.000").toDate();
+
+                    scope.birthDay = '2013-07-23';
+                    scope.dateOptions = {
+                        minDate: -20,
+                        maxDate: "+1M +10D"
+                    };
+
+                    var $input = element.find('input');
+                    if ($input.is(':focus')) {
+                        $input.trigger('blur');
+                    } else {
+                        $input.trigger('focus');
+                    }
+
+
                     scope.removeCondition = function($event) {
                         rowId = $($event.target).parent().parent().attr("data");
                         element.parents().find(rowId).remove();
