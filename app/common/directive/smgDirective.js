@@ -16,8 +16,19 @@ angular.module('smgDirectives', ['ui.date'])
                 events: "=",
                 metadata: "="
             },
-            link: function(scope, element, attrs) {
+            controller: function($scope) {
+                $scope.subfilters = [];
+                var num = 0;
 
+                this.add = function(scope) {
+                    $scope.subfilters.push(scope);
+                }
+
+                $scope.getAllSubFilter = function() {
+                    angular.forEach($scope.subfilters, function(subfilter) {
+                        console.log(subfilter.getValue());
+                    });
+                }
             }
         };
 
@@ -37,15 +48,17 @@ angular.module('smgDirectives', ['ui.date'])
                 metadata: "="
 
             },
-            link: function(scope, element, attr) {
+            link: function(scope, element, attr, ctrl) {
                 scope.addCondition = function() {
                     $actionGroup = element.find(".action_group");
                     $queryGroup = element.find(".query_builder");
 
                     _prop = "property" + qc,
                     _meta = "meta" + qc;
+
                     scope.qc = qc;
                     scope.operator = _operator;
+
                     var action_op = $compile('<select ng-model="operator" class="action clearfix row_' + qc + '"> ' + '<option>AND</option>' + '<option>OR</option>' + '</select>    ')(scope);
 
                     // $compile('<div class="btn-group pull-right action clearfix row_'+qc+'"><button class="glow left active">AND </button><button class="glow right">OR</button></div>')(scope);
@@ -64,7 +77,8 @@ angular.module('smgDirectives', ['ui.date'])
                     scope.$watch('operator', function(newOperator, oldOperator) {
                         _operator = newOperator;
                         element.find('.action_child').text(newOperator);
-                    })
+                    });
+
                     qc++;
                 }
             }
@@ -75,6 +89,7 @@ angular.module('smgDirectives', ['ui.date'])
         function() {
 
             return {
+                require: '^smgFilter',
                 restrict: 'A',
                 scope: {
                     metas: "=",
@@ -83,7 +98,7 @@ angular.module('smgDirectives', ['ui.date'])
                     metadata: "="
                 },
                 templateUrl: 'common/template/query_record.html',
-                link: function(scope, element, attr) {
+                link: function(scope, element, attr, ctrl) {
                     scope.data = {
                         dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate()
                     };
@@ -98,9 +113,13 @@ angular.module('smgDirectives', ['ui.date'])
                         element.parents().find(rowId).remove();
                         console.log(scope.property + "--" + scope.meta + "--" + scope.usrvalue);
                     }
+
                     scope.getValue = function() {
                         console.log(scope.property);
                     }
+
+                    ctrl.add(scope);
+
                 }
             };
         }
