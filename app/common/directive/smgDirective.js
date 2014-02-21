@@ -110,10 +110,16 @@ angular.module('smgDirectives', ['ui.date'])
                 templateUrl: 'common/template/query_record.html',
                 link: function(scope, element, attr, ctrl) {
                     scope.data = {
-                        dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate()
+                        dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
+                        dateDisplay: "22-01-2013"
                     };
 
                     scope.onTimeSet = function(newDate, oldDate) {
+                        var d = newDate.getDate();
+                        var m = newDate.getMonth() + 1;
+                        var y = newDate.getFullYear();
+
+                        scope.data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
                         console.log(newDate);
                         console.log(oldDate);
                     }
