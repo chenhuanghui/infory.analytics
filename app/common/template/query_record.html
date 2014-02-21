@@ -25,7 +25,7 @@
             <select class="qr_3" ng-model="metaValue" ng-options="value as value for value in metadata[property.available_values]"></select>
         </span>
         <span ng-switch-when="date picker">
-            date picker
+            <datetimepicker data-ng-model="data.date"></datetimepicker>
         </span>
         <span ng-switch-when="two date picker">
             two date picker

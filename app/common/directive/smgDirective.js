@@ -17,7 +17,7 @@ angular.module('smgDirectives')
                 metadata: "="
             },
             link: function(scope, element, attrs) {
-                
+
             }
         };
 
@@ -40,22 +40,22 @@ angular.module('smgDirectives')
                 scope.addCondition = function() {
                     $actionGroup = element.find(".action_group");
                     $queryGroup = element.find(".query_builder");
-                    scope.oprator = 
-                    _prop = "property" + qc,
+                    scope.oprator =
+                        _prop = "property" + qc,
                     _meta = "meta" + qc;
                     scope.qc = qc;
 
                     var action_op = $compile('<select ng-model="operator" ng-init="AND" class="action clearfix row_' + qc + '"> ' + '<option>Và</option>' + '<option>Hoặc</option>' + '</select>    ')(scope);
 
-                    
+
                     var action_nor = $compile('<span>{{_opra}}</span>')(scope);
                     var query_row = $compile('<div query-record events="events" metas="metas" event="event" metadata="metadata" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
 
-                    
-                    $actionGroup.append(action_op);    
+
+                    $actionGroup.append(action_op);
                     $queryGroup.append(query_row);
 
-                    scope.$watch('operator', function(){
+                    scope.$watch('operator', function() {
                         alert('hey, myVar has changed!');
                     })
                     qc++;
@@ -79,7 +79,7 @@ angular.module('smgDirectives')
                 },
                 templateUrl: 'common/template/query_record.html',
                 link: function(scope, element, attr) {
-
+                    scope.date = moment("2013-01-22T00:00:00.000").toDate();
                     scope.removeCondition = function($event) {
                         rowId = $($event.target).parent().parent().attr("data");
                         element.parents().find(rowId).remove();
