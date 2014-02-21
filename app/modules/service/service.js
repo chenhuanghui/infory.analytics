@@ -244,7 +244,7 @@ angular.module('smg.services')
                     name: "user_gender",
                     name_display: "user gender",
                     type: "group",
-                    available_values: "gender"
+                    available_values: "genders"
                 }, {
                     name: "user_career",
                     name_display: "user career",

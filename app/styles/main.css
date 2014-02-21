@@ -399,6 +399,8 @@ body {
 }
 .query_builder .query_record .qr_1, .query_builder .query_record .qr_3 {
   min-width: 172px;
+  width: inherit;
+  display: inline-block;
 }
 
 .query_builder .query_record .qr_2 {

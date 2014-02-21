@@ -13,23 +13,11 @@
 
                 </div>
                 
-
                 <p class="add_condition" ng-click="addCondition()"> <i class="icon-plus-sign"></i> Thêm điều kiện</p> 
 
             </div>
             <div class="query_builder">
-                <div class="query_record row_0">
-                    <select class="qr_1" ng-model="property" ng-options="property as property.name_display for property in event.properties" ng-init="property=event.properties[0]"></select>
-
-                    <select class="qr_2" ng-model="meta" ng-options="meta as meta for meta in metas[property.type].operators_display" ng-init="meta=metas[property.type].operators_display[0]"></select>
-
-                    <select class="qr_3">
-                        <option>Nam</option>
-                        <option>Nữ</option>
-                    </select>
-                    <span class="icon-remove right remove row_0"></span>
-                </div>
-
+                <div query-record events="events" metas="metas" event="event" metadata="metadata" class="row_0" data=".row_"></div>
                
             </div>
         </div>    

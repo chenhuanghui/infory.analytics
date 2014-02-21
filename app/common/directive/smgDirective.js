@@ -13,17 +13,18 @@ angular.module('smgDirectives')
             templateUrl: 'common/template/filter.html',
             scope: {
                 metas: "=",
-                events: "="
+                events: "=",
+                metadata: "="
             },
             link: function(scope, element, attrs) {
-
+                
             }
         };
 
     })
     .directive('subfilter', function($compile) {
         var qc = 1,
-            _meta, _prop;
+            _meta, _prop, _operator;
 
         return {
             restrict: 'A',
@@ -31,23 +32,32 @@ angular.module('smgDirectives')
             scope: {
                 metas: "=",
                 events: "=",
-                event: "="
+                event: "=",
+                metadata: "="
 
             },
             link: function(scope, element, attr) {
                 scope.addCondition = function() {
                     $actionGroup = element.find(".action_group");
                     $queryGroup = element.find(".query_builder");
+                    scope.oprator = 
                     _prop = "property" + qc,
                     _meta = "meta" + qc;
                     scope.qc = qc;
-                    var action = $compile('<select class="action clearfix row_' + qc + '"> ' + '<option>Và</option>' + '<option>Hoặc</option>' + '</select>    ')(scope);
 
-                    var query_row = $compile('<div query-record events="events" metas="metas" event="event" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
+                    var action_op = $compile('<select ng-model="operator" ng-init="AND" class="action clearfix row_' + qc + '"> ' + '<option>Và</option>' + '<option>Hoặc</option>' + '</select>    ')(scope);
 
-                    $actionGroup.append(action);
+                    
+                    var action_nor = $compile('<span>{{_opra}}</span>')(scope);
+                    var query_row = $compile('<div query-record events="events" metas="metas" event="event" metadata="metadata" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
+
+                    
+                    $actionGroup.append(action_op);    
                     $queryGroup.append(query_row);
 
+                    scope.$watch('operator', function(){
+                        alert('hey, myVar has changed!');
+                    })
                     qc++;
                 }
 
@@ -64,7 +74,8 @@ angular.module('smgDirectives')
                 scope: {
                     metas: "=",
                     events: "=",
-                    event: "="
+                    event: "=",
+                    metadata: "="
                 },
                 templateUrl: 'common/template/query_record.html',
                 link: function(scope, element, attr) {
