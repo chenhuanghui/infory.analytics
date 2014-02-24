@@ -466,7 +466,15 @@ body{
     width: 30%;
     font-weight: bold;
     color: #787e94;
-    
+}
+
+.property-box .tab-content ul li div.value{
+	width: 69%;
+	display: inline-block;
+}
+
+.property-box .tab-content ul li div.value input[type="file"]{
+	width: 85px;
 }
 /** user info **/
 /** user manager **/
