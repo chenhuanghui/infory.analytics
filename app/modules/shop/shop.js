@@ -19,12 +19,13 @@ angular.module('shop')
             $scope.shop.brand_logo = brand.logo;
             $scope.shop.brand_website = brand.website;
             $scope.shop.brand_fanpage = brand.fanpage;
-            $scope.shop.phone = brand.owner_phone;
+            $scope.shop.brand_description = brand.description;
             $scope.shop.brand_type_business = brand.type_business;
+            $scope.shop.phone = brand.owner_phone;
 
             $scope.shop.brand_id = brand.id;
         } else {
-            fields = '["name", "id", "phone", "full_address", "cover", "brand_logo", "brand_website", "brand_fanpage", "brand_type_business"]';
+            fields = '["name", "id", "phone", "full_address", "cover", "brand_logo", "brand_website", "brand_fanpage", "brand_type_business", "brand_description"]';
         }
 
         dataFactory.getShop(shopId, fields, function(data) {
