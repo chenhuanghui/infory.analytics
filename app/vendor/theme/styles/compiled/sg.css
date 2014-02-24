@@ -604,4 +604,10 @@ table#notify-list thead tr th{
   margin-left: 44px;
   width: 480px;
 }
+
+#shop_info .btn-return{
+    position: absolute;
+    z-index: 1;
+    margin: 10px;
+}
 /** shop **/
