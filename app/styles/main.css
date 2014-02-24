@@ -182,7 +182,7 @@ body {
 
 .brand_overview {
   border-right: 1px solid #dae3e9;
-  padding-right: 0px !important;
+  padding: 0;
 }
 #brand_info {
   border-bottom: 1px solid #dae3e9;
@@ -231,19 +231,22 @@ body {
 
 #shop_list {
   list-style: none;
-  float: left;
-  padding-left: 0px;
-  margin-left: 52px;
-  border: 1px solid #dae3e9;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
+  padding: 0;
+  margin: 0 auto;
 }
 
 #shop_list li {
   float: left;
-  width: 528px;
-  padding: 10px;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+#shop_list li .name {
+    color: #3389d1;
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 5px 0 0 0;
 }
 
 .highlight {
@@ -257,7 +260,8 @@ body {
 
 
 #shop_list img {
-  float: left;  
+  float: left;
+  margin-right: 10px;  
 }
 #shop_list p {
   float: left;  
@@ -266,7 +270,7 @@ body {
 }
 #shop_list i {
   float: right;
-  margin: 20px 20px 0px 0px;
+  margin: -20px 20px 0px 0px;
   font-size: 20px;
   color: #555;
 }

@@ -38,8 +38,7 @@ angular.module('shop')
 	.config(function($routeProvider){
 		$routeProvider
 			.when('/shop', {
-				templateUrl: 'shop/shop-list.html',
-				controller: 'ShopCtrl'
+				templateUrl: 'modules/shop/shop.html'
 			})
 			.when('/create-shop', {
 				templateUrl: 'modules/shop/shop_create.html',
