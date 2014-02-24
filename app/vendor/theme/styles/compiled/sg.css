@@ -304,7 +304,7 @@ body{
     width: 100%;
 }
 
-#user-info .top-block #report-chose{
+#user-info .top-block .report-by{
     border-bottom: 1px solid #aab8c1;
     text-align: right;
     margin: 0 -20px;
@@ -408,7 +408,7 @@ body{
     padding-left: 30px
 }
 
-#user-property{
+.property-box{
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -419,7 +419,7 @@ body{
     min-height: 400px
 }
 
-#user-property .nav{
+.property-box .nav{
     background-color: #eff4f7;
     margin-top: 0;
     border-radius: 5px 5px 0 0;
@@ -427,12 +427,12 @@ body{
     -moz-border-radius: 5px 5px 0 0;
 }
 
-#user-property .nav li.active{
+.property-box .nav li{
     margin-top: 10px;
     margin-left: 10px;
 }
 
-#user-property .nav li.active > a{
+.property-box .nav li.active > a{
     background-image: -webkit-gradient(
 	linear,
 	left top,
@@ -448,21 +448,21 @@ body{
     background-image: linear-gradient(to bottom, #FFFFFF 24%, #EFF4F7 50%, #FFFFFF 100%);     
 }
 
-#user-property .tab-content ul{
+.property-box .tab-content ul{
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-#user-property .tab-content ul li{
+.property-box .tab-content ul li{
     border-bottom: 1px solid #d7e4ec;
 }
-#user-property .tab-content ul li span{
+.property-box .tab-content ul li span{
     padding: 10px;
     display: inline-block;
 }
 
-#user-property .tab-content ul li span.property{
+.property-box .tab-content ul li span.property{
     width: 30%;
     font-weight: bold;
     color: #787e94;
@@ -483,15 +483,23 @@ body{
 	
 }
 
-.z-table thead tr, .z-table tbody tr{
+.z-table tbody tr.even{
+    
+}
+
+.z-table tbody tr.odd{
+    background-color: #f3f3f3;
+}
+
+.z-table thead tr th, .z-table tbody tr td{
 	border-bottom: 1px solid #dae3ea;
 }
 
-.z-table tbody tr:last-child{
+.z-table tbody tr:last-child td{
 	border-bottom: none;
 }
 
-.z-table thead tr th, .z-table tbody tr td, .report-to, .report-to select, .z-table thead tr th select{
+.z-table thead tr th, .z-table tbody tr td, .report-by, .report-by select, .z-table thead tr th select{
 	color: #787e94;
 }
 
@@ -506,12 +514,94 @@ body{
 	border-right: none;
 }
 
+.z-table tbody tr td .btn-flat{
+    width: 100px;
+    font-weight: bold;
+}
+
 .z-table tbody tr td.name{
     color: #3389d1;
+    font-weight: bold;
 }
 /** user manager **/
 /** user create notify **/
 #notify-new, #promotion-new{
     background-color: #fff;
 }
+
+#notify-step-content .step-description .btn-glow{
+    float: right;
+    margin-top: -20px;
+}
+
+table#notify-list{
+	float: left;
+	margin-top: 10px;
+	border: 1px solid #dae3ea;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-collapse: separate;
+	-webkit-box-shadow: 0px 2px 5px 0px rgba(208,216,219,1);
+	-moz-box-shadow: 0px 2px 5px 0px rgba(208,216,219,1);
+	box-shadow: 0px 2px 5px 0px rgba(208,216,219,1);
+}
+
+table#notify-list thead tr{
+	background-color: #eff4f7;
+}
+
+table#notify-list thead tr th{
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(208,216,219,1);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(208,216,219,1);
+    box-shadow: 0px 2px 5px 0px rgba(208,216,219,1);
+}
 /** user create notify **/
+/** shop **/
+#shop_wrap {
+  padding: 0px 0px;
+  margin-top: 0px;
+}
+
+.shop_overview {
+  border-right: 1px solid #dae3e9;
+  padding: 0;
+}
+#shop_info {
+  border-bottom: 1px solid #dae3e9;
+  background-color: rgb(239,244,247);
+}
+#shop_info .info{
+  position: relative;
+  top: -55px;
+  left: 35px;
+}
+
+#shop_info img.cover{
+  padding: 0px !important;
+  height: 250px;
+}
+
+#shop_info .info img.logo{
+  width: 97px;
+  height: 97px;
+
+}
+#shop_info .info h4 {
+  position: absolute;
+  top: 22px;
+  left: 120px;
+  color: white;
+}
+
+#shop_info .info h6 {
+  position: absolute;
+  top: 50px;
+  left: 120px;
+}
+
+#shop_info .info_detail {
+  margin-left: 44px;
+  width: 480px;
+}
+/** shop **/

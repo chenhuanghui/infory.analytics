@@ -1,6 +1,6 @@
 angular.module('shop')
 
-.controller('CreateShopCtrl', ['$scope',
+.controller('ShopCtrl', ['$scope',
     function($scope) {
         $scope.searchCompleted = false;
         $scope.defaultCategories = [{
@@ -82,7 +82,7 @@ angular.module('shop')
     var access = routingConfig.accessLevels;
     $routeProvider
         .when('/shop', {
-            templateUrl: 'shop/shop-list.html',
+            templateUrl: 'modules/shop/shop.html',
             controller: 'ShopCtrl',
             access: access.user
         })

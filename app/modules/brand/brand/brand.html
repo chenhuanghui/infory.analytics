@@ -29,23 +29,20 @@
                         <a class="btn-flat success icon-plus">Thêm cửa hàng mới</a>
                     </div>        
 
-                    <ul id="shop_list" class="shadow">
+                    <ul id="shop_list">
                         <li ng-repeat="shop in brand.shops">
-                            <img src="{{brand.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="42" width="42"/>
-                            <p>
-                                <span class="shop_name right">{{shop.name}}</span>
-                                </br>
-                                <span class="shop_addr right">{{shop.full_address}}</span>    
-                            </p>
+                            <img src="{{brand.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="45" width="45"/>
+                            <a href="user-profile.html" class="name">{{shop.name}}</a>
+                            <span class="subtext">{{shop.full_address}}</span>
                             <i class="icon-remove-sign"></i>
                         </li>
                         <div class="clearfix"></div>
                     </ul>
             </div>
-            <div class="col-md-4 block">
+            <div class="col-md-4 property-box">
 
                 <ul class="nav nav-tabs">
-                  <li ng-class="{active: main.active.tab == 'info'} ">
+                  <li ng-class="{active: main.active.tab == 'info'}" class="active">
                     <a ng-click='main.active.tab = "info" ' href=""> Thông tin</a>
                   </li>
                   
@@ -59,7 +56,7 @@
                 </ul>
                 <div class="tab-content">
                     <div ng-switch = "main.active.tab">
-                        <div ng-switch-when='info'>
+                        <div ng-switch-default>
                             <div ng-include='"modules/brand/brand/tabs/_info.html"'> </div>  
                         </div>
 

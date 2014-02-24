@@ -1,0 +1,57 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div class="content">
+    <div id="shop_wrap">
+        <div class="row">
+            <div class="col-md-7 shop_overview block">
+                <div id="shop_info" class="shadow">
+                    <img src="http://farm9.staticflickr.com/8446/8005177885_6d00a46190_z.jpg" class="cover col-md-12">
+                    <div class="info">
+                        <img src="http://dev2.smartguide.vn//media/brand/14/3834-2014-01-16-17-04-38.jpeg" alt="contact" class="img-circle logo hidden-phone"/>
+                        <h4>{{shop.name}}trung nguyen cafe - <span>{{shop.type_business}}an uong</span></h4>
+                        <h6> 422 Võ Văn Kiệt, Phường Cô Giang, Quận 1, Tp. Hồ Chí Minh - API thieu</h6>
+                        <div class="info_detail">
+                            <p>{{shop.description}} Trung Nguyên is a Vietnamese business group involved in the production, processing and distribution of coffee. Trung Nguyên is the largest domestic coffee ...</p>        
+                            <p> <span>Website: </span> <a href="{{shop.website}}"> {{shop.website}}http://trungnguyen.com</a></p>
+                            <p> <span>Fanpage: </span> <a href="{{shop.fanpage}}">{{shop.fanpage}}http://facebook.com/trungnguyenCF</a></p>
+                            <p> <span>Liên hệ: </span> <a href="http://smartguide.vn"> 0838 38 38 38 - API THIEU</a></p>
+                        </div>
+                    </div>
+                </div> <!-- shop info-->
+                    <div id="add_shop">
+                        <input class="shop_name form-control" type="text" placeholder="Nhập tên cửa hàng">    
+                        <a class="btn-flat success icon-plus">Thêm cửa hàng mới</a>
+                    </div>
+                    
+
+                    <ul id="shop_list">
+                        <li ng-repeat="shop in shop.shops">
+                            <img src="{{shop.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="42" width="42"/>
+                            <a href="user-profile.html" class="name">{{shop.name}}</a>
+                            <span class="subtext">{{shop.full_address}}</span>
+                            <i class="icon-remove-sign"></i>
+                        </li>
+                        <div class="clearfix"></div>
+                    </ul>
+            </div>
+            <div class="col-md-4 property-box">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a onclick="javascript:void(0)">Thuộc tính</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <ul>
+                            <li>
+                                <span class="property">Email</span><span class="value">R10@gmail.com</span>
+                            </li>
+                            <li><span class="property">Tên</span><span class="value">wayne rooney</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+<!-- scripts -->
+<script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
