@@ -1,0 +1,84 @@
+angular.module('smg.services')
+    .factory('dataFactory', ['$http', 'remoteFactory',
+
+        function($http, remoteFactory) {
+            var brands = null;
+            var currentBrand = null;
+            var tempShop = null;
+            var currentShop = null;
+
+            var user_pre = {
+                username: null,
+                avatar: null
+            };
+
+            var userProfile = null;
+
+            return {
+                setTempShop: function(shop) {
+                    tempShop = shop;
+                },
+                getTempShop: function() {
+                    return tempShop;
+                },
+                getShop: function(id, fields, success, error) {
+                    if (currentShop != null || (currentShop != null && currentShop.id == id))
+                        return currentShop;
+                    else {
+                        remoteFactory.getShop(id, fields, function(data) {
+                            currentShop = data;
+                            success(data);
+                        }, error);
+                    }
+
+                },
+                setUsernameAvatar: function(username, avatar) {
+                    user_pre.username = username;
+                    user_pre.avatar = avatar;
+                },
+                getUsernameAvatar: function() {
+                    return user_pre;
+                },
+                setCurrentBrand: function(brand) {
+                    currentBrand = brand;
+                },
+                getCurrentBrand: function() {
+                    return currentBrand;
+                },
+                getBrands: function(success, error) {
+                    if (brands != null)
+                        success(brands);
+                    else {
+                        var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "id", "owner_phone", "owner_address", "logo"]';
+                        remoteFactory.getBrandList(fields, function(data) {
+                            brands = data;
+                            success(brands);
+                        }, error);
+                    }
+                },
+                getBrand: function(id, success, error) {
+                    if (currentBrand != null) {
+                        success(currentBrand);
+                    } else {
+                        var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "shops", "id", "owner_phone", "owner_address", "logo"]';
+                        remoteFactory.getBrand(fields, id, function(data) {
+                            currentBrand = data;
+                            success(currentBrand);
+                        }, error);
+                    }
+                },
+                getUserProfile: function(brandId, userId, success, error) {
+                    if (userProfile != null) {
+                        success(userProfile);
+                    } else {
+                        var fields = '["dob", "name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline", "city", "gender", "facebook"]';
+                        remoteFactory.getUserProfile(fields, brandId, userId, function(data) {
+                            userProfile = data;
+                            success(userProfile);
+                        }, error);
+                    }
+                }
+            }
+
+        }
+    ])

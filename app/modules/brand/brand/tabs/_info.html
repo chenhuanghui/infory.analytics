@@ -14,8 +14,8 @@
                 <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
             </div>
             <div class="edit" ng-hide="!editName">
-                <input type="text" ng-model="brandName"/>
-                <i style="cursor:pointer" ng-click="changeName(brandName);editName = !editName;" class="icon-ok-sign success"></i>
+                <input type="text" value="{{brandName}}"/>
+                <i style="cursor:pointer" ng-click="changeName();editName = !editName;" class="icon-ok-sign success"></i>
             </div>
         </div>
     </li>

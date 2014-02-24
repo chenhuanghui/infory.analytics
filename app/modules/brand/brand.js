@@ -7,6 +7,7 @@ angular.module('brand')
         $scope.brand = null;
         $scope.brands = null;
         $scope.editName = false;
+        $scope.brandName = '';
         $scope.oderComments = [{
             field: 'like_count',
             display: 'Lượt thích'
@@ -57,12 +58,11 @@ angular.module('brand')
             $location.path('/shop/' + $scope.brand.id + '/' + shop.id);
         }
 
-        $scope.changeName = function(name) {
-            if (name.length <= 0) {
+        $scope.changeName = function() {
+            if ($scope.brandName.length <= 0) {
                 $scope.brandName = $scope.brand.name;
             } else {
-                $scope.brand.name = name;
-                $scope.brandName = name;
+                $scope.brand.name = $scope.brandName;
                 dataFactory.setCurrentBrand($scope.brand);
             }
         }
