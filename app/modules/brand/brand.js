@@ -6,7 +6,7 @@ angular.module('brand')
         var brandId = $routeParams.brandId;
         $scope.brand = null;
         $scope.brands = null;
-
+        $scope.editName = false;
         $scope.oderComments = [{
             field: 'like_count',
             display: 'Lượt thích'
@@ -22,6 +22,7 @@ angular.module('brand')
                     dataFactory.getBrand(brands[0].id, function(data) {
                         $scope.brand = data;
                         $scope.shop = $scope.brand.shops[0];
+                        $scope.brandName = data.name;
                     }, function() {})
                 } else {
                     for (var i = 0; i < brands.length; i++) {
@@ -29,6 +30,7 @@ angular.module('brand')
                             dataFactory.getBrand(brands[i].id, function(data) {
                                 $scope.brand = data;
                                 $scope.shop = $scope.brand.shops[0];
+                                $scope.brandName = data.name;
                             }, function() {})
                             break;
                         }
@@ -53,6 +55,16 @@ angular.module('brand')
         $scope.goToShopInfo = function(shop) {
             dataFactory.setTempShop(shop);
             $location.path('/shop/' + $scope.brand.id + '/' + shop.id);
+        }
+
+        $scope.changeName = function(name) {
+            if (name.length <= 0) {
+                $scope.brandName = $scope.brand.name;
+            } else {
+                $scope.brand.name = name;
+                $scope.brandName = name;
+                dataFactory.setCurrentBrand($scope.brand);
+            }
         }
     }
 ])
