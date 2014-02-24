@@ -28,14 +28,24 @@ angular.module('smg.services')
                 },
 
                 getBrands: function(success, error) {
-                    if (currentBrand != null)
-                        success(brands, currentBrand);
+                    if (brands != null)
+                        success(brands);
                     else {
-                        var fields = '["name", "logo", "cover", "type_business", "website", "fanpage", "description", "shops", "id", "owner_phone", "owner_address"]';
+                        var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "id", "owner_phone", "owner_address", "logo"]';
                         remoteFactory.getBrandList(fields, function(data) {
                             brands = data;
-                            currentBrand = brands[0];
-                            success(brands, brands[0]);
+                            success(brands);
+                        }, error);
+                    }
+                },
+                getBrand: function(id, success, error) {
+                    if (currentBrand != null) {
+                        success(currentBrand);
+                    } else {
+                        var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "shops", "id", "owner_phone", "owner_address", "logo"]';
+                        remoteFactory.getBrand(fields, id, function(data) {
+                            currentBrand = data;
+                            success(currentBrand);
                         }, error);
                     }
                 },
@@ -66,6 +76,12 @@ angular.module('smg.services')
             getBrandList: function(fields, success, error) {
                 $http.post(base_url + 'brand/list', {
                     fields: fields
+                }).success(success).error(error);
+            },
+            getBrand: function(fields, id, success, error) {
+                $http.post(base_url + 'brand/get', {
+                    fields: fields,
+                    id: id,
                 }).success(success).error(error);
             },
             getUserProfile: function(fields, brandId, userId, success, error) {

@@ -14,11 +14,15 @@ angular.module('brand')
             display: 'Thời gian'
         }];
 
-        dataFactory.getBrands(function(brands, brand) {
+        dataFactory.getBrands(function(brands) {
             $scope.brands = brands;
-            $scope.brand = brand;
-            $scope.shop = $scope.brand.shops[0];
-        })
+            if (brands.length != 0) {
+                dataFactory.getBrand(brands[0].id, function(data) {
+                    $scope.brand = data;
+                    $scope.shop = $scope.brand.shops[0];
+                }, function() {})
+            }
+        }, function() {});
 
         $scope.setCurrentBrand = function(brand) {
             $scope.brand = brand;
@@ -38,21 +42,27 @@ angular.module('brand')
 
 
 .config(function($routeProvider) {
+    var access = routingConfig.accessLevels;
+
     $routeProvider
         .when('/brand', {
             templateUrl: 'modules/brand/brand/brand.html',
             controller: 'BrandCtrl',
+            access: access.user
         })
         .when('/brand/new', {
             templateUrl: 'modules/brand/brand_new.html',
-            controller: 'brandCreateCtrl'
+            controller: 'brandCreateCtrl',
+            access: access.user
         })
         .when('/brand/promotion-new', {
-            templateUrl: 'modules/brand/promotion_new.html'
+            templateUrl: 'modules/brand/promotion_new.html',
+            access: access.user
         })
         .when('/brand/promotion', {
             templateUrl: 'modules/brand/promotion/promotion_list.html',
-            controller: 'BrandCtrl'
+            controller: 'BrandCtrl',
+            access: access.user
         })
 
     .when('/brand/comment', {

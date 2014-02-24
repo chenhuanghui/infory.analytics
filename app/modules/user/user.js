@@ -45,15 +45,17 @@ angular.module('user')
                             dayOfWeek = 'Thứ 7';
                             break;
                     };
+
                     var date = time.getDate();
                     var month = time.getMonth() + 1;
                     var year = time.getFullYear();
+                    var minute = time.getMinutes();
                     var hour = time.getHours();
 
                     var time_str = dayOfWeek + ' ' + (date <= 9 ? '0' + date : date) + '-' + (month <= 9 ? '0' + month : month) + '-' + year;
 
                     userProfile.timeline[i].time_str = time_str;
-                    userProfile.timeline[i].hour = hour + ' giờ';
+                    userProfile.timeline[i].hour = (hour <= 9 ? '0' + hour : hour) + ' : ' + (minute <= 9 ? '0' + minute : minute);
                 }
 
                 $scope.activities = _
@@ -80,33 +82,38 @@ angular.module('user')
                     }
                 }
 
-                var test = k;
-
             },
             function() {});
     }
 ])
 
 .config(function($routeProvider) {
+    var access = routingConfig.accessLevels;
+
     $routeProvider
         .when('/user', {
             templateUrl: 'modules/user/user_list.html',
-            controller: 'userCtrl'
+            controller: 'userCtrl',
+            access: access.user
         })
         .when('/user/new', {
             templateUrl: 'modules/user/new_user.html',
-            controller: 'userCtrl'
+            controller: 'userCtrl',
+            access: access.user
         })
         .when('/user/manager', {
             templateUrl: 'modules/user/user_manager.html',
-            controller: 'userCtrl'
+            controller: 'userCtrl',
+            access: access.user
         })
         .when('/user/notify-new', {
             templateUrl: 'modules/user/user_notify_new.html',
-            controller: 'userCtrl'
+            controller: 'userCtrl',
+            access: access.user
         })
         .when('/user/:brandId/:userId', {
             templateUrl: 'modules/user/user_profile.html',
-            controller: 'userCtrl'
+            controller: 'userCtrl',
+            access: access.user
         })
 });
