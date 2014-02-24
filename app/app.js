@@ -13,7 +13,10 @@ var app = angular.module('Smg', [
     'user',
     'promotion',
     'smg.services',
-    'engagement'
+    'engagement',
+    'smgDirectives',
+    'ui.bootstrap.datetimepicker',
+    'ui.date'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',
@@ -123,6 +126,7 @@ app.run(['$rootScope', '$location', '$http', 'Auth',
 
 angular.module('smg.services', []);
 
+angular.module('smgDirectives', ['ui.date']);
 
 angular.module('account', [
     'ngRoute'
@@ -156,3 +160,6 @@ angular.module('login', [
 angular.module('engagement', [
     'ngRoute'
 ]);
+
+angular.module('ui.bootstrap.datetimepicker', []);
+angular.module('ui.date', []);

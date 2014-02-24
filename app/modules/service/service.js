@@ -1,397 +1,536 @@
 /**
-* Remote Module
-*
-* Description
-*/
+ * Remote Module
+ *
+ * Description
+ */
 angular.module('smg.services')
-	.factory('remoteFactory',function ($http) {
-		var base_url = "http://dev2.smartguide.vn";
-		return {
-	        api: function (path, method, data, success, error) {
-	            // if (arguments.length == 1) {
-	            //     method = 'GET';
-	            //     data = {};
-	            //     callback = function(data, textStatus, jqXHR) {
+    .factory('dataFactory', ['$http', 'remoteFactory',
 
-	            //     };
-	            // }
-	            // else if (arguments.length == 2) {
-	            //     if (Object.prototype.toString.call(method) == "[object Function]") {
-	            //         callback = method;
-	            //         method = 'GET';
-	            //         data = {};
-	            //     }
-	            // }
-	            // else if (arguments.length == 3) {
-	            //     if(typeof method === 'string') {
-	            //         callback = data;
-	            //         data = {};
-	            //     }
-	            //     else if (Object.prototype.toString.call(data) == "[object Function]") {
-	            //         callback = data;
-	            //         data = method;
-	            //         method = 'GET';
-	            //     }
-	            // }
+        function($http, remoteFactory) {
+            var brands = null;
+            var currentBrand = null;
+            var user_pre = {
+                username: null,
+                avatar: null
+            };
+            var userProfile = null;
 
-	            var url = base_url + path;
-	            
+            return {
+                setUsernameAvatar: function(username, avatar) {
+                    user_pre.username = username;
+                    user_pre.avatar = avatar;
+                },
+                getUsernameAvatar: function() {
+                    return user_pre;
+                },
+                setCurrentBrand: function(brand) {
+                    currentBrand = brand;
+                },
 
-	            request = $http({
-	            	url: url,
-	            	method: method
-	            }).success(success).error(error);
-	            return request;
-	        },
+                getBrands: function(success, error) {
+                    if (brands != null)
+                        success(brands);
+                    else {
+                        var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "id", "owner_phone", "owner_address", "logo"]';
+                        remoteFactory.getBrandList(fields, function(data) {
+                            brands = data;
+                            success(brands);
+                        }, error);
+                    }
+                },
+                getBrand: function(id, success, error) {
+                    if (currentBrand != null) {
+                        success(currentBrand);
+                    } else {
+                        var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "shops", "id", "owner_phone", "owner_address", "logo"]';
+                        remoteFactory.getBrand(fields, id, function(data) {
+                            currentBrand = data;
+                            success(currentBrand);
+                        }, error);
+                    }
+                },
+                getUserProfile: function(brandId, userId, success, error) {
+                    if (userProfile != null) {
+                        success(userProfile);
+                    } else {
+                        var fields = '["dob", "name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline", "city", "gender", "facebook"]';
+                        remoteFactory.getUserProfile(fields, brandId, userId, function(data) {
+                            userProfile = data;
+                            success(userProfile);
+                        }, error);
+                    }
+                }
+            }
 
-	        meta_events: [
-							{
-								name: "view",
-								name_display: "xem thông tin cửa hàng",
-								properties: [
-									{
-										name: "shop",
-										name_display: "cửa hàng",
-										type: "group"
-									},
-									{
-										name: "time",
-										name_display: "thời gian",
-										type: "time"
-									},
-									{
-										name: "platform",
-										name_display: "nền tảng",
-										type: "group"
-									},
-									{
-										name: "shop_promotion_status",
-										name_display: "trạng thái khuyến mãi của cửa hàng",
-										type: "group"
-									},
-									{
-										name: "user_city",
-										name_display: "tỉnh/thành phố của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_age",
-										name_display: "tuổi khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_gender",
-										name_display: "giới tính của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_career",
-										name_display: "nghề nghiệp của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_total_charge",
-										name_display: "tổng chi của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_view_count",
-										name_display: "số lần truy cập của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_checkin_count",
-										name_display: "số lần checkin của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_checkout_count",
-										name_display: "số lần checkout của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_comment_count",
-										name_display: "số lần bình luận của khách hàng",
-										type: "number"
-									}
-								]
-							},
-							{
-								name: "checkin",
-								name_display: "đến cửa hàng",
-								properties: [
-									{
-										name: "shop",
-										name_display: "cửa hàng",
-										type: "group"
-									},
-									{
-										name: "time",
-										name_display: "thời gian",
-										type: "time"
-									},
-									{
-										name: "fiend_count",
-										name_display: "số bạn đi cùng",
-										type: "number"
-									},
-									{
-										name: "platform",
-										name_display: "nền tảng",
-										type: "group"
-									},
-									{
-										name: "shop_promotion_status",
-										name_display: "trạng thái khuyến mãi của cửa hàng",
-										type: "group"
-									},
-									{
-										name: "user_city",
-										name_display: "tỉnh/thành phố của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_age",
-										name_display: "tuổi khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_gender",
-										name_display: "giới tính của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_career",
-										name_display: "nghề nghiệp của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_total_charge",
-										name_display: "tổng chi của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_view_count",
-										name_display: "số lần truy cập của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_checkin_count",
-										name_display: "số lần checkin của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_checkout_count",
-										name_display: "số lần checkout của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_comment_count",
-										name_display: "số lần bình luận của khách hàng",
-										type: "number"
-									}
-								]
-							},
-							{
-								name: "checkout",
-								name_display: "thanh toán",
-								properties: [
-									{
-										name: "shop",
-										name_display: "cửa hàng",
-										type: "group"
-									},
-									{
-										name: "time",
-										name_display: "thời gian",
-										type: "time"
-									},
-									{
-										name: "charge",
-										name_display: "giá trị hóa đơn",
-										type: "number"
-									},
-									{
-										name: "platform",
-										name_display: "nền tảng",
-										type: "group"
-									},
-									{
-										name: "shop_promotion_status",
-										name_display: "trạng thái khuyến mãi của cửa hàng",
-										type: "group"
-									},
-									{
-										name: "user_city",
-										name_display: "tỉnh/thành phố của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_age",
-										name_display: "tuổi khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_gender",
-										name_display: "giới tính của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_career",
-										name_display: "nghề nghiệp của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_total_charge",
-										name_display: "tổng chi của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_view_count",
-										name_display: "số lần truy cập của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_checkin_count",
-										name_display: "số lần checkin của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_checkout_count",
-										name_display: "số lần checkout của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_comment_count",
-										name_display: "số lần bình luận của khách hàng",
-										type: "number"
-									}
-								]
-							},
-							{
-								name: "comment",
-								name_display: "bình luận về cửa hàng",
-								properties: [
-									{
-										name: "shop",
-										name_display: "cửa hàng",
-										type: "group"
-									},
-									{
-										name: "created_time",
-										name_display: "ngày tạo",
-										type: "time"
-									},
-									{
-										name: "updated_time",
-										name_display: "lần sửa gần nhất",
-										type: "time"
-									},
-									{
-										name: "platform",
-										name_display: "nền tảng",
-										type: "group"
-									},
-									{
-										name: "user_city",
-										name_display: "tỉnh/thành phố của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_age",
-										name_display: "tuổi khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_gender",
-										name_display: "giới tính của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_career",
-										name_display: "nghề nghiệp của khách hàng",
-										type: "group"
-									},
-									{
-										name: "user_total_charge",
-										name_display: "tổng chi của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_view_count",
-										name_display: "số lần truy cập của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_checkin_count",
-										name_display: "số lần checkin của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_checkout_count",
-										name_display: "số lần checkout của khách hàng",
-										type: "number"
-									},
-									{
-										name: "user_comment_count",
-										name_display: "số lần bình luận của khách hàng",
-										type: "number"
-									}
-								]
-							},
-						],
-			meta_property_types : {
-				number: {
-					operators: [
-						"larger_than",
-						"smaller_than",
-						"between",
-						"larger_than_or_equal",
-						"smaller_than_or_equal",
-						"equal"
-					],
-					operators_display: [
-						"lớn hơn",
-						"nhỏ hơn",
-						"trong khoảng",
-						"lớn hơn hoặc bằng",
-						"bé hơn hoặc bằng",
-						"bằng"
-					]
-				},
-				group: {
-					operators: [
-						"belong"
-					],
-					operators_display: [
-						"là"
-					]
-				},
-				text: {
-					operators: [
-						"contain"
-					],
-					operators_display: [
-						"chứa từ"
-					]
-				},
-				time: {
-					operators: [
-						"before",
-						"before_date",
-						"after",
-						"after_date",
-						"between_dates"
-					],
-					operators_display: [
-						"cách đây",
-						"trước ngày",
-						"sau hôm nay",
-						"sau ngày",
-						"trong khoảng thời gian"
-					]
-				},
-			}			
+        }
+    ])
+    .factory('remoteFactory', function($http) {
+        var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
+        return {
+            login: function(user, success, error) {
+                $http.post('http://dev2.smartguide.vn/dashboard/auth', user).success(success).error(error);
+            },
+            logout: function(user, success, error) {
+                $http.post(base_url + 'logout', user).success(success).error(error);
+            },
+            getBrandList: function(fields, success, error) {
+                $http.post(base_url + 'brand/list', {
+                    fields: fields
+                }).success(success).error(error);
+            },
+            getBrand: function(fields, id, success, error) {
+                $http.post(base_url + 'brand/get', {
+                    fields: fields,
+                    id: id,
+                }).success(success).error(error);
+            },
+            getUserProfile: function(fields, brandId, userId, success, error) {
+                $http.post(base_url + 'user/get_profile', {
+                    fields: fields,
+                    brand_id: brandId,
+                    user_id: userId
+                }).success(success).error(error);
+            },
+            api: function(path, method, data, success, error) {
+                // if (arguments.length == 1) {
+                //     method = 'GET';
+                //     data = {};
+                //     callback = function(data, textStatus, jqXHR) {
 
-		};
-	});
+                //     };
+                // }
+                // else if (arguments.length == 2) {
+                //     if (Object.prototype.toString.call(method) == "[object Function]") {
+                //         callback = method;
+                //         method = 'GET';
+                //         data = {};
+                //     }
+                // }
+                // else if (arguments.length == 3) {
+                //     if(typeof method === 'string') {
+                //         callback = data;
+                //         data = {};
+                //     }
+                //     else if (Object.prototype.toString.call(data) == "[object Function]") {
+                //         callback = data;
+                //         data = method;
+                //         method = 'GET';
+                //     }
+                // }
+
+                var url = base_url + path;
+
+
+                request = $http({
+                    url: url,
+                    method: method
+                }).success(success).error(error);
+                return request;
+            },
+
+            meta_property_types: {
+                number: {
+                    operators: [
+                        "larger_than",
+                        "smaller_than",
+                        "between",
+                        "larger_than_or_equal",
+                        "smaller_than_or_equal",
+                        "equal"
+                    ],
+                    operators_display: [
+                        "lớn hơn",
+                        "nhỏ hơn",
+                        "trong khoảng",
+                        "lớn hơn hoặc bằng",
+                        "bé hơn hoặc bằng",
+                        "bằng"
+                    ],
+                    operators_ui_controller: [
+                        "number input",
+                        "number input",
+                        "two number input",
+                        "number input",
+                        "number input",
+                        "number input"
+                    ]
+                },
+                group: {
+                    operators: [
+                        "belong"
+                    ],
+                    operators_display: [
+                        "là"
+                    ],
+                    operators_ui_controller: [
+                        "dropdown"
+                    ]
+                },
+                text: {
+                    operators: [
+                        "contain"
+                    ],
+                    operators_display: [
+                        "chứa từ"
+                    ],
+                    operators_ui_controller: [
+                        "text input"
+                    ]
+                },
+                time: {
+                    operators: [
+                        "before",
+                        "before_date",
+                        "after_date",
+                        "between_dates"
+                    ],
+                    operators_display: [
+                        "cách đây",
+                        "trước ngày",
+                        "sau ngày",
+                        "trong khoảng thời gian"
+                    ],
+                    operators_ui_controller: [
+                        "time dropdown",
+                        "date picker",
+                        "date picker",
+                        "two date picker"
+                    ]
+                },
+            },
+
+            meta_lists: {
+                shops: [
+                    "Cửa hàng 1",
+                    "Cửa hàng 2",
+                    "Cửa hàng 3",
+                    "Cửa hàng 4"
+                ],
+                cities: [
+                    "An Giang",
+                    "Bà Rịa - Vũng Tàu",
+                    "Bắc Giang",
+                    "Bắc Kạn",
+                    "Bạc Liêu",
+                    "Bắc Ninh",
+                    "Bến Tre",
+                    "Bình Định",
+                    "Bình Dương",
+                    "Bình Phước",
+                    "Bình Thuận",
+                    "Cà Mau",
+                    "Cao Bằng",
+                    "Đắk Lắk",
+                    "Đắk Nông",
+                    "Điện Biên",
+                    "Đồng Nai",
+                    "Đồng Tháp",
+                    "Gia Lai",
+                    "Hà Giang",
+                    "Hà Nam",
+                    "Hà Tĩnh",
+                    "Hải Dương",
+                    "Hậu Giang",
+                    "Hòa Bình",
+                    "Hưng Yên",
+                    "Khánh Hòa",
+                    "Kiên Giang",
+                    "Kon Tum",
+                    "Lai Châu",
+                    "Lâm Đồng",
+                    "Lạng Sơn",
+                    "Lào Cai",
+                    "Long An",
+                    "Nam Định",
+                    "Nghệ An",
+                    "Ninh Bình",
+                    "Ninh Thuận",
+                    "Phú Thọ",
+                    "Quảng Bình",
+                    "Quảng Nam",
+                    "Quảng Ngãi",
+                    "Quảng Ninh",
+                    "Quảng Trị",
+                    "Sóc Trăng",
+                    "Sơn La",
+                    "Tây Ninh",
+                    "Thái Bình",
+                    "Thái Nguyên",
+                    "Thanh Hóa",
+                    "Thừa Thiên Huế",
+                    "Tiền Giang",
+                    "Trà Vinh",
+                    "Tuyên Quang",
+                    "Vĩnh Long",
+                    "Vĩnh Phúc",
+                    "Yên Bái",
+                    "Phú Yên",
+                    "Cần Thơ",
+                    "Đà Nẵng",
+                    "Hải Phòng",
+                    "Hà Nội",
+                    "Hồ Chí Minh"
+                ],
+                platforms: [
+                    "iOS",
+                    "Android",
+                    "Web"
+                ],
+                genders: ["Nam", "Nữ"],
+                careers: [
+                    "học sinh",
+                    "sinh viên",
+                    "giáo viên",
+                    "công nhân",
+                    "lập trình viên",
+                    "nhà khoa học"
+                ]
+            },
+
+            meta_events: [{
+                name: "view",
+                name_display: "view",
+                properties: [{
+                    name: "shop",
+                    name_display: "shop",
+                    type: "group",
+                    available_values: "shops"
+                }, {
+                    name: "time",
+                    name_display: "time",
+                    type: "time"
+                }, {
+                    name: "platform",
+                    name_display: "user platform",
+                    type: "group",
+                    available_values: "platforms"
+                }, {
+                    name: "user_city",
+                    name_display: "user city",
+                    type: "group",
+                    available_values: "cities"
+                }, {
+                    name: "user_age",
+                    name_display: "user age",
+                    type: "number"
+                }, {
+                    name: "user_gender",
+                    name_display: "user gender",
+                    type: "group",
+                    available_values: "genders"
+                }, {
+                    name: "user_career",
+                    name_display: "user career",
+                    type: "group",
+                    available_values: "careers"
+                }, {
+                    name: "user_total_charge",
+                    name_display: "user total charge",
+                    type: "number"
+                }, {
+                    name: "user_view_count",
+                    name_display: "user view count",
+                    type: "number"
+                }, {
+                    name: "user_checkin_count",
+                    name_display: "user checkin count",
+                    type: "number"
+                }, {
+                    name: "user_checkout_count",
+                    name_display: "user checkout count",
+                    type: "number"
+                }, {
+                    name: "user_comment_count",
+                    name_display: "user comment count",
+                    type: "number"
+                }]
+            }, {
+                name: "checkin",
+                name_display: "checkin",
+                properties: [{
+                    name: "shop",
+                    name_display: "shop",
+                    type: "group",
+                    available_values: "shops"
+                }, {
+                    name: "time",
+                    name_display: "time",
+                    type: "time"
+                }, {
+                    name: "platform",
+                    name_display: "user platform",
+                    type: "group",
+                    available_values: "platforms"
+                }, {
+                    name: "friend_count",
+                    name_display: "friend count",
+                    type: "number"
+                }, {
+                    name: "user_city",
+                    name_display: "user city",
+                    type: "group",
+                    available_values: "cities"
+                }, {
+                    name: "user_age",
+                    name_display: "user age",
+                    type: "number"
+                }, {
+                    name: "user_gender",
+                    name_display: "user gender",
+                    type: "group",
+                    available_values: "gender"
+                }, {
+                    name: "user_career",
+                    name_display: "user career",
+                    type: "group",
+                    available_values: "careers"
+                }, {
+                    name: "user_total_charge",
+                    name_display: "user total charge",
+                    type: "number"
+                }, {
+                    name: "user_view_count",
+                    name_display: "user view count",
+                    type: "number"
+                }, {
+                    name: "user_checkin_count",
+                    name_display: "user checkin count",
+                    type: "number"
+                }, {
+                    name: "user_checkout_count",
+                    name_display: "user checkout count",
+                    type: "number"
+                }, {
+                    name: "user_comment_count",
+                    name_display: "user comment count",
+                    type: "number"
+                }]
+            }, {
+                name: "checkout",
+                name_display: "checkout",
+                properties: [{
+                    name: "shop",
+                    name_display: "shop",
+                    type: "group",
+                    available_values: "shops"
+                }, {
+                    name: "time",
+                    name_display: "time",
+                    type: "time"
+                }, {
+                    name: "platform",
+                    name_display: "user platform",
+                    type: "group",
+                    available_values: "platforms"
+                }, {
+                    name: "charge",
+                    name_display: "user expense",
+                    type: "number"
+                }, {
+                    name: "user_city",
+                    name_display: "user city",
+                    type: "group",
+                    available_values: "cities"
+                }, {
+                    name: "user_age",
+                    name_display: "user age",
+                    type: "number"
+                }, {
+                    name: "user_gender",
+                    name_display: "user gender",
+                    type: "group",
+                    available_values: "gender"
+                }, {
+                    name: "user_career",
+                    name_display: "user career",
+                    type: "group",
+                    available_values: "careers"
+                }, {
+                    name: "user_total_charge",
+                    name_display: "user total charge",
+                    type: "number"
+                }, {
+                    name: "user_view_count",
+                    name_display: "user view count",
+                    type: "number"
+                }, {
+                    name: "user_checkin_count",
+                    name_display: "user checkin count",
+                    type: "number"
+                }, {
+                    name: "user_checkout_count",
+                    name_display: "user checkout count",
+                    type: "number"
+                }, {
+                    name: "user_comment_count",
+                    name_display: "user comment count",
+                    type: "number"
+                }]
+            }, {
+                name: "comment",
+                name_display: "comment",
+                properties: [{
+                    name: "shop",
+                    name_display: "shop",
+                    type: "group",
+                    available_values: "shops"
+                }, {
+                    name: "created_time",
+                    name_display: "date create",
+                    type: "time"
+                }, {
+                    name: "updated_time",
+                    name_display: "date update",
+                    type: "time"
+                }, {
+                    name: "platform",
+                    name_display: "user platform",
+                    type: "group",
+                    available_values: "platforms"
+                }, {
+                    name: "content",
+                    name_display: "comment content",
+                    type: "text"
+                }, {
+                    name: "user_city",
+                    name_display: "user city",
+                    type: "group",
+                    available_values: "cities"
+                }, {
+                    name: "user_age",
+                    name_display: "user age",
+                    type: "number"
+                }, {
+                    name: "user_gender",
+                    name_display: "user gender",
+                    type: "group",
+                    available_values: "gender"
+                }, {
+                    name: "user_career",
+                    name_display: "user career",
+                    type: "group",
+                    available_values: "careers"
+                }, {
+                    name: "user_total_charge",
+                    name_display: "user total charge",
+                    type: "number"
+                }, {
+                    name: "user_view_count",
+                    name_display: "user view count",
+                    type: "number"
+                }, {
+                    name: "user_checkin_count",
+                    name_display: "user checkin count",
+                    type: "number"
+                }, {
+                    name: "user_checkout_count",
+                    name_display: "user checkout count",
+                    type: "number"
+                }, {
+                    name: "user_comment_count",
+                    name_display: "user comment count",
+                    type: "number"
+                }]
+            }]
+        };
+    });

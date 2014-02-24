@@ -12,7 +12,7 @@
             <img src="img/logo.png" alt="logo" />
         </a>
         -->
-        <ul class="nav navbar-nav pull-left hidden-xs">
+        <ul class="nav navbar-nav pull-left hidden-xs" ng-controller="BrandCtrl">
             <li class="settings hidden-xs hidden-sm">
                 <a href="/" role="button">
                     <i class="icon-home"></i>
@@ -20,15 +20,11 @@
             </li>
             <li class="dropdown z-btn">
                 <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                    brand name
+                    {{brand.name}}
                     <b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#personal">Personal info</a></li>
-                    <li><a href="#">Account settings</a></li>
-                    <li><a href="#">Billing</a></li>
-                    <li><a href="#">Export your data</a></li>
-                    <li><a href="#">Send feedback</a></li>
+                <ul class="dropdown-menu" ng-repeat="b in brands">
+                    <li><a ng-click="setCurrentBrand(b)">{{b.name}}</a></li>
                 </ul>
             </li>
         </ul>
