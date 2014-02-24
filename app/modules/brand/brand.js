@@ -93,7 +93,7 @@ angular.module('brand')
             controller: 'BrandCtrl',
             access: access.user
         })
-        .when('/brand/comment', {
+        .when('/brand/comment/:brandId', {
             templateUrl: 'modules/brand/comment/comment.html',
             controller: 'BrandCtrl',
             access: access.user
