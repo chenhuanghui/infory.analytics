@@ -27,13 +27,8 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
         $routeProvider
             .when('/', {
                 templateUrl: 'modules/home/home.html',
-                controller: 'MainCtrl',
+                controller: 'HomeCtrl',
                 access: access.user
-            })
-            .when('/login', {
-                templateUrl: 'modules/account/signin.html',
-                controller: 'signInCtrl',
-                access: access.anon
             })
             .otherwise({
                 redirectTo: '/404'
@@ -101,12 +96,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
                 return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
             }
         ];
-    }
-]);
-
-app.controller('MainCtrl', ['$scope', '$rootScope', 'Auth',
-    function($scope, $rootScope, Auth) {
-        $rootScope._username = Auth.user.name;
     }
 ]);
 

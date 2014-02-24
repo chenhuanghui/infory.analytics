@@ -32,7 +32,7 @@
                     <ul id="shop_list">
                         <li ng-repeat="shop in brand.shops">
                             <img src="{{brand.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="45" width="45"/>
-                            <a href="user-profile.html" class="name">{{shop.name}}</a>
+                            <a ng-click="goToShopInfo(shop)" style="cursor:pointer" class="name">{{shop.name}}</a>
                             <span class="subtext">{{shop.full_address}}</span>
                             <i class="icon-remove-sign"></i>
                         </li>

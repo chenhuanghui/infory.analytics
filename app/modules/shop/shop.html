@@ -1,22 +1,22 @@
 <div ng-include="'partials/_header.html'"></div>
 <div ng-include="'partials/_sidebar.html'"></div>
 <!-- main container -->
-<div class="content">
+<div class="content" ng-controller="ShopCtrl">
     <div id="shop_wrap">
         <div class="row">
             <div class="col-md-7 shop_overview block">
                 <div id="shop_info" class="shadow">
-                    <a class="btn-glow btn-return"><i class="icon-share-alt"></i> Trở lại nhãn hiệu</a>
-                    <img src="http://farm9.staticflickr.com/8446/8005177885_6d00a46190_z.jpg" class="cover col-md-12">
+                    <a class="btn-glow btn-return" href="/#/brand/infor/{{brandId}}"><i class="icon-share-alt"></i> Trở lại nhãn hiệu</a>
+                    <img src="{{shop.cover}}" class="cover col-md-12">
                     <div class="info">
-                        <img src="http://dev2.smartguide.vn//media/brand/14/3834-2014-01-16-17-04-38.jpeg" alt="contact" class="img-circle logo hidden-phone"/>
-                        <h4>{{shop.name}}trung nguyen cafe - <span>{{shop.type_business}}an uong</span></h4>
-                        <h6> 422 Võ Văn Kiệt, Phường Cô Giang, Quận 1, Tp. Hồ Chí Minh - API thieu</h6>
+                        <img src="{{shop.brand_logo}}" alt="contact" class="img-circle logo hidden-phone"/>
+                        <h4>{{shop.name}}- <span>{{shop.brand_type_business}}</span></h4>
+                        <h6> {{shop.full_address}}</h6>
                         <div class="info_detail">
-                            <p>{{shop.description}} Trung Nguyên is a Vietnamese business group involved in the production, processing and distribution of coffee. Trung Nguyên is the largest domestic coffee ...</p>        
-                            <p> <span>Website: </span> <a href="{{shop.website}}"> {{shop.website}}http://trungnguyen.com</a></p>
-                            <p> <span>Fanpage: </span> <a href="{{shop.fanpage}}">{{shop.fanpage}}http://facebook.com/trungnguyenCF</a></p>
-                            <p> <span>Liên hệ: </span> <a href="http://smartguide.vn"> 0838 38 38 38 - API THIEU</a></p>
+                            <p>{{shop.description}}</p>        
+                            <p> <span>Website: </span> <a href="{{shop.brand_website}}"> {{shop.brand_website}}</a></p>
+                            <p> <span>Fanpage: </span> <a href="{{shop.brand_fanpage}}">{{shop.brand_fanpage}}</a></p>
+                            <p> <span>Liên hệ: </span> <a href="http://smartguide.vn">{{shop.phone}}</a></p>
                         </div>
                     </div>
                 </div> <!-- shop info-->

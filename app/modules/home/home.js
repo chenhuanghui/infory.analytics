@@ -1,19 +1,13 @@
 angular.module('home')
 
-.controller('homeCtrl', ['$scope',
-    function($scope) {
-        $scope.activeTab = 'home';
+.controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth',
+
+    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth) {
+        $scope._username = Auth.user.name;
+
+        dataFactory.getBrands(function(brands) {
+            $scope.brands = brands;
+            $scope.brand = brands[0];
+        }, function() {});
     }
 ])
-
-.config(function($routeProvider) {
-
-    var access = routingConfig.accessLevels;
-
-    $routeProvider
-        .when('/', {
-            templateUrl: 'modules/home/home.html',
-            controller: 'homeCtrl',
-            access: access.user
-        })
-});

@@ -1,5 +1,5 @@
 angular.module('account')
-    .controller('signInCtrl', ['$scope', '$location', '$window', 'Auth',
+    .controller('SignInCtrl', ['$scope', '$location', '$window', 'Auth',
         function($scope, $location, $window, Auth) {
             $scope.user = Auth.user;
             $scope.userRoles = Auth.userRoles;
@@ -34,4 +34,13 @@ angular.module('account')
                 $window.location.href = '/auth/' + provider;
             };
         }
-    ]);
+    ])
+    .config(function($routeProvider) {
+        var access = routingConfig.accessLevels;
+        $routeProvider
+            .when('/login', {
+                templateUrl: 'modules/account/signin.html',
+                controller: 'SignInCtrl',
+                access: access.anon
+            });
+    });

@@ -12,7 +12,7 @@
             <img src="img/logo.png" alt="logo" />
         </a>
         -->
-        <ul class="nav navbar-nav pull-left hidden-xs" ng-controller="BrandCtrl">
+        <ul class="nav navbar-nav pull-left hidden-xs" ng-controller="HomeCtrl">
             <li class="settings hidden-xs hidden-sm">
                 <a href="/" role="button">
                     <i class="icon-home"></i>
@@ -115,7 +115,7 @@
             </div>
         </li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown" ng-controller="HomeCtrl">
                 {{_username}}
                 <b class="caret"></b>
             </a>
@@ -128,7 +128,7 @@
             </ul>
         </li>
         
-        <li ng-controller="signInCtrl" class="settings hidden-xs hidden-sm">
+        <li ng-controller="SignInCtrl" class="settings hidden-xs hidden-sm">
             <a role="button" ng-click="logout()">
                 <i class="icon-share-alt"></i>
             </a>

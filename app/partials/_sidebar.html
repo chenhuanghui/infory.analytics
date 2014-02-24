@@ -1,5 +1,5 @@
 <!-- sidebar -->
-<div id="sidebar-nav">
+<div id="sidebar-nav" ng-controller="HomeCtrl">
     <ul id="dashboard-menu">
         <li class="active open">
             <a href="/">
@@ -11,9 +11,9 @@
             <i class="icon-certificate"></i>
             <span>Nhãn hiệu</span>
             <ul class="submenu">
-                <li><a href="#brand"><i class="icon-info-sign sub-icon"></i>Thông tin</a></li>
+                <li><a href="#/brand/infor/{{brand.id}}"><i class="icon-info-sign sub-icon"></i>Thông tin</a></li>
                 <li><a href="#brand/promotion"><i class="icon-tag sub-icon"></i>Khuyến mãi</a></li>
-                <li><a href="#brand/comment"><i class="icon-comment sub-icon"></i>Bình luận</a></li>
+                <li><a href="#/brand/comment"><i class="icon-comment sub-icon"></i>Bình luận</a></li>
             </ul>
         </li>
         <li class="active open">

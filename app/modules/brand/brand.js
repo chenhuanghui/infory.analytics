@@ -1,8 +1,9 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', 'remoteFactory', 'dataFactory',
-    function($scope, $http, $location, remoteFactory, dataFactory) {
-        $scope.msg = "brand view";
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory',
+    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory) {
+
+        var brandId = $routeParams.brandId;
         $scope.brand = null;
         $scope.brands = null;
 
@@ -17,10 +18,22 @@ angular.module('brand')
         dataFactory.getBrands(function(brands) {
             $scope.brands = brands;
             if (brands.length != 0) {
-                dataFactory.getBrand(brands[0].id, function(data) {
-                    $scope.brand = data;
-                    $scope.shop = $scope.brand.shops[0];
-                }, function() {})
+                if (brandId == null) {
+                    dataFactory.getBrand(brands[0].id, function(data) {
+                        $scope.brand = data;
+                        $scope.shop = $scope.brand.shops[0];
+                    }, function() {})
+                } else {
+                    for (var i = 0; i < brands.length; i++) {
+                        if (brands[i].id == brandId) {
+                            dataFactory.getBrand(brands[i].id, function(data) {
+                                $scope.brand = data;
+                                $scope.shop = $scope.brand.shops[0];
+                            }, function() {})
+                            break;
+                        }
+                    }
+                }
             }
         }, function() {});
 
@@ -37,6 +50,10 @@ angular.module('brand')
             $location.path('/user/' + brandId + '/' + userId);
         }
 
+        $scope.goToShopInfo = function(shop) {
+            dataFactory.setTempShop(shop);
+            $location.path('/shop/' + $scope.brand.id + '/' + shop.id);
+        }
     }
 ])
 
@@ -45,7 +62,7 @@ angular.module('brand')
     var access = routingConfig.accessLevels;
 
     $routeProvider
-        .when('/brand', {
+        .when('/brand/infor/:brandId', {
             templateUrl: 'modules/brand/brand/brand.html',
             controller: 'BrandCtrl',
             access: access.user

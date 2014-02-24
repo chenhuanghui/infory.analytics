@@ -9,13 +9,34 @@ angular.module('smg.services')
         function($http, remoteFactory) {
             var brands = null;
             var currentBrand = null;
+            var tempShop = null;
+            var currentShop = null;
+
             var user_pre = {
                 username: null,
                 avatar: null
             };
+
             var userProfile = null;
 
             return {
+                setTempShop: function(shop) {
+                    tempShop = shop;
+                },
+                getTempShop: function() {
+                    return tempShop;
+                },
+                getShop: function(id, fields, success, error) {
+                    if (currentShop != null || (currentShop != null && currentShop.id == id))
+                        return currentShop;
+                    else {
+                        remoteFactory.getShop(id, fields, function(data) {
+                            currentShop = data;
+                            success(data);
+                        }, error);
+                    }
+
+                },
                 setUsernameAvatar: function(username, avatar) {
                     user_pre.username = username;
                     user_pre.avatar = avatar;
@@ -26,7 +47,9 @@ angular.module('smg.services')
                 setCurrentBrand: function(brand) {
                     currentBrand = brand;
                 },
-
+                getCurrentBrand: function() {
+                    return currentBrand;
+                },
                 getBrands: function(success, error) {
                     if (brands != null)
                         success(brands);
@@ -67,6 +90,12 @@ angular.module('smg.services')
     .factory('remoteFactory', function($http) {
         var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
         return {
+            getShop: function(id, fields, success, error) {
+                $http.post(base_url + 'shop/get', {
+                    fields: fields,
+                    shop_id: id,
+                }).success(success).error(error);
+            },
             login: function(user, success, error) {
                 $http.post('http://dev2.smartguide.vn/dashboard/auth', user).success(success).error(error);
             },
@@ -92,35 +121,7 @@ angular.module('smg.services')
                 }).success(success).error(error);
             },
             api: function(path, method, data, success, error) {
-                // if (arguments.length == 1) {
-                //     method = 'GET';
-                //     data = {};
-                //     callback = function(data, textStatus, jqXHR) {
-
-                //     };
-                // }
-                // else if (arguments.length == 2) {
-                //     if (Object.prototype.toString.call(method) == "[object Function]") {
-                //         callback = method;
-                //         method = 'GET';
-                //         data = {};
-                //     }
-                // }
-                // else if (arguments.length == 3) {
-                //     if(typeof method === 'string') {
-                //         callback = data;
-                //         data = {};
-                //     }
-                //     else if (Object.prototype.toString.call(data) == "[object Function]") {
-                //         callback = data;
-                //         data = method;
-                //         method = 'GET';
-                //     }
-                // }
-
                 var url = base_url + path;
-
-
                 request = $http({
                     url: url,
                     method: method
