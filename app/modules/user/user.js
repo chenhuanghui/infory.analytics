@@ -82,6 +82,23 @@ angular.module('user')
                     }
                 }
 
+                if (userProfile.email == null)
+                    userProfile.email = "Không xác định";
+
+                if (userProfile.gender == 1)
+                    userProfile.gender = 'Nam';
+                else
+                    userProfile.gender = 'Nữ';
+
+                if (userProfile.city == null)
+                    userProfile.city = "Không xác định";
+
+                userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
+                if (userProfile.dob != null)
+                    userProfile.age = new Date().getFullYear() - userProfile.dob.getFullYear();
+                else
+                    userProfile.age = "Không xác định";
+
             },
             function() {});
     }

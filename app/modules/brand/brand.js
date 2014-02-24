@@ -64,14 +64,15 @@ angular.module('brand')
             controller: 'BrandCtrl',
             access: access.user
         })
+        .when('/brand/comment', {
+            templateUrl: 'modules/brand/comment/comment.html',
+            controller: 'BrandCtrl',
+            access: access.user
 
-    .when('/brand/comment', {
-        templateUrl: 'modules/brand/comment/comment.html',
-        controller: 'BrandCtrl'
-    })
-
-    .when('/brand/new', {
-        templateUrl: 'modules/brand/brand_new.html',
-        controller: 'BrandCtrl'
-    })
+        })
+        .when('/brand/new', {
+            templateUrl: 'modules/brand/brand_new.html',
+            controller: 'BrandCtrl',
+            access: access.user
+        })
 });

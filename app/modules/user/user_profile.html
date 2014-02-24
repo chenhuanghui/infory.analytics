@@ -45,15 +45,20 @@
     </div>
     <div id="user-property" class="col-md-4">
         <ul class="nav nav-tabs">
-          <li class="active"><a onclick="javascript:void(0)">Thuộc tính</a></li>
+          <li class="active"><a onclick="javascript:void(0)">Thông tin</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="home">
                 <ul>
+                    <li><span class="property">Tên</span><span class="value">{{username}}</span></li>
+                    <li><span class="property">Tuổi</span><span class="value">{{userProfile.age}}</span></li>
+                    <li><span class="property">Giới tính</span><span class="value">{{userProfile.gender}}</span></li>
+                    <li><span class="property">Thành phố</span><span class="value">{{userProfile.city}}</span></li>
+                    <li><span class="property">Di động</span><span class="value">{{userProfile.phone}}</span></li>
+                    <li><span class="property">Facebook</span><a href="{{userProfile.facebook}}">{{userProfile.facebook}}</span></li>
                     <li>
                         <span class="property">Email</span><span class="value">{{userProfile.email}}</span>
                     </li>
-                    <li><span class="property">Tên</span><span class="value">{{username}}</span></li>
                 </ul>
             </div>
         </div>

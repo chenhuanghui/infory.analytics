@@ -53,7 +53,7 @@ angular.module('smg.services')
                     if (userProfile != null) {
                         success(userProfile);
                     } else {
-                        var fields = '["name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline"]';
+                        var fields = '["dob", "name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline", "city", "gender", "facebook"]';
                         remoteFactory.getUserProfile(fields, brandId, userId, function(data) {
                             userProfile = data;
                             success(userProfile);
