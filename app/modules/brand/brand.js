@@ -1,7 +1,7 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory',
-    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'brandRemote', 'dataFactory',
+    function($scope, $http, $location, $routeParams, brandRemote, dataFactory) {
 
         var brandId = $routeParams.brandId;
         $scope.brand = null;
@@ -62,10 +62,18 @@ angular.module('brand')
             if ($scope.brandName.length <= 0) {
                 $scope.brandName = $scope.brand.name;
             } else {
-                remoteFactory.updateBrandName(brandId, $scope.brandName, function() {
-                    $scope.brand.name = $scope.brandName;
-                    dataFactory.setCurrentBrand($scope.brand);
-                }, function() {});
+                brandRemote.updateBrandName(brandId, $scope.brandName, function(data) {
+                    if (data.error == undefined) {
+                        $scope.brand.name = $scope.brandName;
+                        dataFactory.setCurrentBrand($scope.brand);
+                        editName != editName;
+                    } else {
+                        $scope.brandName = $scope.brand.name;
+                        editName != editName;
+                    }
+                }, function() {
+
+                });
 
             }
         }

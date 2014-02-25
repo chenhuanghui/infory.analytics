@@ -3,10 +3,9 @@ angular.module('smg.services')
         function($http, remoteFactory) {
             var base_url = remoteFactory.getBaseUrl();
             return {
-                //BRAND
                 updateBrandName: function(brandId, name, success, error) {
                     $http.post(base_url + 'brand/update', {
-                        fields: '["name"]',
+                        name: name,
                         brand_id: brandId,
                     }).success(success).error(error);
                 },
