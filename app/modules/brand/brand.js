@@ -62,8 +62,11 @@ angular.module('brand')
             if ($scope.brandName.length <= 0) {
                 $scope.brandName = $scope.brand.name;
             } else {
-                $scope.brand.name = $scope.brandName;
-                dataFactory.setCurrentBrand($scope.brand);
+                remoteFactory.updateBrandName(brandId, $scope.brandName, function() {
+                    $scope.brand.name = $scope.brandName;
+                    dataFactory.setCurrentBrand($scope.brand);
+                }, function() {});
+
             }
         }
     }

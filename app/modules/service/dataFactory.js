@@ -1,7 +1,10 @@
 angular.module('smg.services')
-    .factory('dataFactory', ['$http', 'remoteFactory',
+    .factory('dataFactory', ['$http', 'remoteFactory', 'brandRemote', 'shopRemote', 'userRemote', 'accountRemote',
 
-        function($http, remoteFactory) {
+        function($http, remoteFactory, brandRemote, shopRemote, userRemote, accountRemote) {
+
+            var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
+
             var brands = null;
             var currentBrand = null;
             var tempShop = null;
@@ -25,7 +28,7 @@ angular.module('smg.services')
                     if (currentShop != null || (currentShop != null && currentShop.id == id))
                         return currentShop;
                     else {
-                        remoteFactory.getShop(id, fields, function(data) {
+                        shopRemote.getShop(id, fields, function(data) {
                             currentShop = data;
                             success(data);
                         }, error);
@@ -50,7 +53,7 @@ angular.module('smg.services')
                         success(brands);
                     else {
                         var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "id", "owner_phone", "owner_address", "logo"]';
-                        remoteFactory.getBrandList(fields, function(data) {
+                        brandRemote.getBrandList(fields, function(data) {
                             brands = data;
                             success(brands);
                         }, error);
@@ -61,7 +64,7 @@ angular.module('smg.services')
                         success(currentBrand);
                     } else {
                         var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "shops", "id", "owner_phone", "owner_address", "logo"]';
-                        remoteFactory.getBrand(fields, id, function(data) {
+                        brandRemote.getBrand(fields, id, function(data) {
                             currentBrand = data;
                             success(currentBrand);
                         }, error);
@@ -72,11 +75,14 @@ angular.module('smg.services')
                         success(userProfile);
                     } else {
                         var fields = '["dob", "name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline", "city", "gender", "facebook"]';
-                        remoteFactory.getUserProfile(fields, brandId, userId, function(data) {
+                        userRemote.getUserProfile(fields, brandId, userId, function(data) {
                             userProfile = data;
                             success(userProfile);
                         }, error);
                     }
+                },
+                getBaseUrl: function() {
+                    return base_url;
                 }
             }
 
