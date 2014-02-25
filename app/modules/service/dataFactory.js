@@ -3,8 +3,6 @@ angular.module('smg.services')
 
         function($http, remoteFactory, brandRemote, shopRemote, userRemote, accountRemote) {
 
-            var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
-
             var brands = null;
             var currentBrand = null;
             var tempShop = null;
@@ -80,9 +78,6 @@ angular.module('smg.services')
                             success(userProfile);
                         }, error);
                     }
-                },
-                getBaseUrl: function() {
-                    return base_url;
                 }
             }
 
