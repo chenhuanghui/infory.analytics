@@ -10,7 +10,7 @@
             <li data-target="#notify-step2">
                 <span class="z-step">Đối tượng</span><img class="line-step" src="img/line_step.png" />
             </li>
-            <li data-target="#notify-step3">
+            <li data-target="#notify-step3" id="menu-manager" onclick="showManager('#menu-manager', '#notify-step3')">
                 <span class="z-step">Quản lý tin</span><img class="line-step" src="img/line_step.png" />
             </li>
         </ul>                            
@@ -28,6 +28,15 @@
                     <div class="step-wapper">
                         <form>
                             <div class="field-box">
+                                <span class="title">TÊN CHIẾN DỊCH</span>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected>Khuyến mãi valentin</option>
+                                        <option selected>Khuyến mãi cá t4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field-box">
                                 <span class="title">CHỌN LOẠI HÌNH THÔNG BÁO</span>
                                 <div class="ui-select">
                                     <select>
@@ -35,15 +44,35 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="field-box">
-                                <span class="title">TÊN NGƯỜI GỬI</span>
-                                <input class="form-control inline-block" type="text">
+                            <div class="sms-box">
+                                <div class="field-box">
+                                    <span class="title">TÊN NGƯỜI GỬI</span>
+                                    <input class="form-control inline-block" type="text">
+                                </div>
+                                <div class="field-box">
+                                    <span class="title">NỘI DUNG</span>
+                                    <textarea class="form-control" rows="4"></textarea>
+                                </div>
                             </div>
-                            <div class="field-box">
-                                <span class="title">NỘI DUNG</span>
-                                <textarea class="form-control" rows="4"></textarea>
+                            <div class="email-box">
+                                <div class="subject">
+                                    <div class="field-box">
+                                        <span class="title">TIÊU ĐỀ</span>
+                                        <input class="form-control inline-block" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="sender">
+                                    <div class="field-box">
+                                        <span class="title">EMAIL NGƯỜI GỬI</span>
+                                        <input class="form-control inline-block" type="text"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="field-box">
+                                    <span class="title">Nội dung</span>
+                                    <textarea class="editor"></textarea>
+                                </div>
                             </div>
-                            
                         </form>
                     </div>
                 </div>
@@ -56,26 +85,7 @@
                 </div>
                 Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
             </div>
-            <div class="form-wrapper">
-                <div class="col-md-8">
-                    <div class="step-wapper">
-                        <form id="notify-form">
-                            <div class="field-box">
-                                <span class="title">TÊN CHIẾN DỊCH</span>
-                                <input class="form-control inline-block" type="text"/>
-                            </div>
-                            <div class="field-box">
-                                <span class="title">THỜI GIAN</span>
-                                <input class="form-control inline-block" type="text"/> 
-                            </div>
-                            <div class="field-box">
-                                <span class="title">MÔ TẢ</span>
-                                <textarea class="form-control" rows="4"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <div class="wapper"  smg-filter metas="metas" events="events" metadata="metadata" ng-include="'common/template/userfilter.html'"></div>
         </div>
         <div class="step-pane" id="notify-step3">
             <div class="step-description">
@@ -150,36 +160,6 @@
                 </div>
             </div>
         </div>
-        <div class="step-pane" id="notify-step4">
-            <div class="step-description">
-                <div class="step-title">
-                    <span class="step-name">Hoàn thành:</span> chọn loại khuyến mãi hoặc sự kiện cho chiến dịch của bạn.
-                </div>
-                Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
-            </div>
-            <div class="form-wrapper">
-                <div class="col-md-8">
-                    <div class="step-wapper">
-                        <div class="step-success">
-                            Bạn đã tạo xong một chiến dịch
-                            <form>
-                                <div class="field-box">
-                                    <span class="title">CHỌN TRẠNG THÁI CHIẾN DỊCH</span>
-                                    <label class="radio">
-                                        <div class="radio" id="uniform-optionsRadios1"><span class="checked"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""/></span></div>
-                                        Chạy chương trình
-                                    </label>
-                                    <label class="radio">
-                                        <div class="radio" id="uniform-optionsRadios2"><span class="checked"><input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked=""/></span></div>
-                                        Chờ kích hoạt
-                                    </label>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="col-md-8 with-sidebar">
         <div class="col-md-11">
@@ -197,6 +177,8 @@
 <!-- scripts -->
 <script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
 <script src="vendor/theme/scripts/fuelux.wizard.js"></script>
+<script src="vendor/theme/scripts/tinymce/tinymce.min.js"></script>
+<script src="vendor/theme/scripts/tinymce/themes/modern/theme.min.js"></script>
 <script>
 //winzard create notify
 $(function () {
@@ -228,4 +210,20 @@ $(function () {
         $wizard.wizard('next');
     });
 });
+
+/** show tab **/
+function showManager(menu, tab){
+    $('.wizard-steps li').removeClass('active');
+    $('.step-pane').removeClass('active');
+    $('.wizard-actions').hide();
+    
+    $(menu).addClass('active');
+    $(tab).addClass('active');
+
+}
+
+/** mce editor **/
+tinymce.init({
+    selector: "textarea.editor"
+ });
 </script>

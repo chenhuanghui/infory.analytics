@@ -104,6 +104,23 @@ angular.module('user')
     }
 ])
 
+.controller('UserManagerCtrl', ['$scope', 'remoteFactory',
+    function($scope, remoteFactory) {
+        $scope.metas = remoteFactory.meta_property_types;
+        $scope.events = remoteFactory.meta_events;
+        $scope.metadata = remoteFactory.meta_lists;
+
+    }
+])
+
+.controller('UserNotifyCtrl', ['$scope', 'remoteFactory',
+    function($scope, remoteFactory) {
+        $scope.metas = remoteFactory.meta_property_types;
+        $scope.events = remoteFactory.meta_events;
+        $scope.metadata = remoteFactory.meta_lists;
+    }
+])
+
 .config(function($routeProvider) {
     var access = routingConfig.accessLevels;
 
@@ -120,12 +137,12 @@ angular.module('user')
         })
         .when('/user/manager', {
             templateUrl: 'modules/user/user_manager.html',
-            controller: 'UserCtrl',
+            controller: 'UserManagerCtrl',
             access: access.user
         })
         .when('/user/notify-new', {
             templateUrl: 'modules/user/user_notify_new.html',
-            controller: 'UserCtrl',
+            controller: 'UserNotifyCtrl',
             access: access.user
         })
         .when('/user/:brandId/:userId', {
