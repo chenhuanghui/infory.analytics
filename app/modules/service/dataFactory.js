@@ -4,16 +4,15 @@ angular.module('smg.services')
         function($http, remoteFactory, brandRemote, shopRemote, userRemote, accountRemote) {
 
             var brands = null;
-            var currentBrand = null;
             var tempShop = null;
-            var currentShop = null;
-
             var user_pre = {
                 username: null,
                 avatar: null
             };
 
             var userProfile = null;
+            var currentShop = null;
+            var currentBrand = null;
 
             return {
                 setTempShop: function(shop) {
@@ -23,7 +22,7 @@ angular.module('smg.services')
                     return tempShop;
                 },
                 getShop: function(id, fields, success, error) {
-                    if (currentShop != null || (currentShop != null && currentShop.id == id))
+                    if (currentShop != null && currentShop.id == id)
                         return currentShop;
                     else {
                         shopRemote.getShop(id, fields, function(data) {
@@ -58,7 +57,7 @@ angular.module('smg.services')
                     }
                 },
                 getBrand: function(id, success, error) {
-                    if (currentBrand != null) {
+                    if (currentBrand != null && currentBrand.id == id) {
                         success(currentBrand);
                     } else {
                         var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "shops", "id", "owner_phone", "owner_address", "logo"]';
@@ -78,6 +77,9 @@ angular.module('smg.services')
                             success(userProfile);
                         }, error);
                     }
+                },
+                getBaseUrl: function() {
+                    return base_url;
                 }
             }
 
