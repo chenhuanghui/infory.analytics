@@ -25,7 +25,7 @@ angular.module('smg.services')
                     if (currentShop != null && currentShop.id == id)
                         return currentShop;
                     else {
-                        shopRemote.getShop(id, fields, function(data) {
+                        shopRemote.get(id, fields, function(data) {
                             currentShop = data;
                             success(data);
                         }, error);
@@ -50,7 +50,7 @@ angular.module('smg.services')
                         success(brands);
                     else {
                         var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "id", "owner_phone", "owner_address", "logo"]';
-                        brandRemote.getBrandList(fields, function(data) {
+                        brandRemote.getList(fields, function(data) {
                             brands = data;
                             success(brands);
                         }, error);
@@ -61,7 +61,7 @@ angular.module('smg.services')
                         success(currentBrand);
                     } else {
                         var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "shops", "id", "owner_phone", "owner_address", "logo"]';
-                        brandRemote.getBrand(fields, id, function(data) {
+                        brandRemote.get(fields, id, function(data) {
                             currentBrand = data;
                             success(currentBrand);
                         }, error);
@@ -72,7 +72,7 @@ angular.module('smg.services')
                         success(userProfile);
                     } else {
                         var fields = '["dob", "name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline", "city", "gender", "facebook"]';
-                        userRemote.getUserProfile(fields, brandId, userId, function(data) {
+                        userRemote.get(fields, brandId, userId, function(data) {
                             userProfile = data;
                             success(userProfile);
                         }, error);

@@ -1,20 +1,14 @@
 angular.module('smgDirectives', ['ui.date'])
-    .controller('FilterCtrl', ['$scope', 'remoteFactory',
-        function($scope, remoteFactory) {
-            // $scope.metas = remoteFactory.meta_property_types;                               
-            // $scope.events = remoteFactory.meta_events;
-
-        }
-    ])
     .directive('smgFilter', function($compile) {
 
         return {
             restrict: "A",
-            //templateUrl: 'common/template/filter.html',
+            templateUrl: 'common/template/filter.html',
             scope: {
                 metas: "=",
                 events: "=",
-                metadata: "="
+                metadata: "=",
+                event: "="
             },
             controller: function($scope) {
                 $scope.subfilters = [];
@@ -49,7 +43,7 @@ angular.module('smgDirectives', ['ui.date'])
 
         return {
             restrict: 'A',
-            //templateUrl: 'common/template/subfilter.html',
+            templateUrl: 'common/template/subfilter.html',
             scope: {
                 metas: "=",
                 events: "=",

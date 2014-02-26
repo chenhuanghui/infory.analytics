@@ -9,6 +9,8 @@ angular.module('brand')
 
         $scope.editName = false;
         $scope.brandName = '';
+        $scope.brandCover = '';
+
         $scope.oderComments = [{
             field: 'like_count',
             display: 'Lượt thích'
@@ -25,6 +27,7 @@ angular.module('brand')
                         $scope.brand = data;
                         $scope.shop = $scope.brand.shops[0];
                         $scope.brandName = data.name;
+                        $scope.brandCover = data.cover;
                     }, function() {})
                 } else {
                     for (var i = 0; i < brands.length; i++) {
@@ -33,6 +36,7 @@ angular.module('brand')
                                 $scope.brand = data;
                                 $scope.shop = $scope.brand.shops[0];
                                 $scope.brandName = data.name;
+                                $scope.brandCover = data.cover;
                             }, function() {})
                             break;
                         }
@@ -63,13 +67,13 @@ angular.module('brand')
             if ($scope.brandName.length <= 0) {
                 $scope.brandName = $scope.brand.name;
             } else {
-                brandRemote.updateBrandName(brandId, $scope.brandName, function(data) {
+                brandRemote.updateName(brandId, $scope.brandName, function(data) {
                     if (data.error == undefined) {
-                        $scope.editName = !$scope.editName;
+                        //$scope.editName = !$scope.editName;
                         $scope.brand.name = $scope.brandName;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
-                        $scope.editName = !$scope.editName;
+                        //$scope.editName = !$scope.editName;
                         $scope.brandName = $scope.brand.name;
                     }
                 }, function() {
@@ -77,6 +81,20 @@ angular.module('brand')
                 });
 
             }
+        }
+
+        $scope.changeCover = function() {
+            brandRemote.updateCover(brandId, $scope.brandCover, function(data) {
+                if (data.error == undefined) {
+                    $scope.brand.cover = $scope.brandCover;
+                    dataFactory.setCurrentBrand($scope.brand);
+                } else {
+                    $scope.brandCover = $scope.brand.cover;
+                }
+            }, function() {
+
+            });
+
         }
     }
 ])

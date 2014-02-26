@@ -4,7 +4,7 @@ angular.module('smg.services')
             var base_url = remoteFactory.getBaseUrl();
             return {
                 // SHOP
-                getShop: function(id, fields, success, error) {
+                get: function(id, fields, success, error) {
                     $http.post(base_url + 'shop/get', {
                         fields: fields,
                         shop_id: id,
