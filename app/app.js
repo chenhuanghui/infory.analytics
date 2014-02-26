@@ -19,7 +19,14 @@ var app = angular.module('Smg', [
     'ui.date'
 ]);
 
+// Replacing the symbol here.
+app.config(function($interpolateProvider) {
+      $interpolateProvider.startSymbol('{{');
+      $interpolateProvider.endSymbol('}}');
+});
+
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',
+
     function($routeProvider, $locationProvider, $httpProvider) {
 
         var access = routingConfig.accessLevels;
