@@ -4,8 +4,10 @@
             Lọc danh sách khách hàng theo
         </div>
         <div class="right">
-            <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
-            <span class="btn-glow success">Sign up now</span>
+            <div class="controller">
+                <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
+                <span class="btn-glow success"><i class="icon-bookmark-empty"></i> Lưu</span>
+            </div>
         </div>
     </div>
 
