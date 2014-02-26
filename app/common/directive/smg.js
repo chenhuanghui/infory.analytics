@@ -1,16 +1,9 @@
 angular.module('smgDirectives', ['ui.date'])
-    .controller('FilterCtrl', ['$scope', 'remoteFactory',
-        function($scope, remoteFactory) {
-            // $scope.metas = remoteFactory.meta_property_types;                               
-            // $scope.events = remoteFactory.meta_events;
-
-        }
-    ])
     .directive('smgFilter', function($compile) {
 
         return {
             restrict: "A",
-            //templateUrl: 'common/template/filter.html',
+            templateUrl: 'common/template/filter.html',
             scope: {
                 metas: "=",
                 events: "=",
