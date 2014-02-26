@@ -7,7 +7,8 @@ angular.module('smgDirectives', ['ui.date'])
             scope: {
                 metas: "=",
                 events: "=",
-                metadata: "="
+                metadata: "=",
+                event: "="
             },
             controller: function($scope) {
                 $scope.subfilters = [];
@@ -42,7 +43,7 @@ angular.module('smgDirectives', ['ui.date'])
 
         return {
             restrict: 'A',
-            //templateUrl: 'common/template/subfilter.html',
+            templateUrl: 'common/template/subfilter.html',
             scope: {
                 metas: "=",
                 events: "=",
