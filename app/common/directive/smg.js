@@ -10,7 +10,7 @@ angular.module('smgDirectives', ['ui.date'])
 
         return {
             restrict: "A",
-            templateUrl: 'common/template/filter.html',
+            //templateUrl: 'common/template/filter.html',
             scope: {
                 metas: "=",
                 events: "=",

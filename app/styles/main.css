@@ -418,7 +418,6 @@ body {
 .sf_wrapper {
   padding: 19px 24px;
   display: block;
-  overflow: hidden;
 }
 
 .sf_wrapper .labels {

@@ -1,0 +1,14 @@
+<div class="block" ng-controller="FilterCtrl">
+    <div class="block_header">
+        <div class="left control">
+            Lọc danh sách khách hàng theo
+        </div>
+        <div class="right">
+            <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
+        </div>
+    </div>
+    <div subfilter event="event" events="events" metas="metas" metadata="metadata"></div>
+
+    <div class="block_footer">
+        <span class="btn-flat primary right" ng-click="getAllFilter()">Xem</span>
+    </div><!-- block footer-->

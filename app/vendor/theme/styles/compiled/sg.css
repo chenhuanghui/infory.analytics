@@ -619,3 +619,23 @@ table#notify-list thead tr th{
     margin: 10px;
 }
 /** shop **/
+/** create notify **/
+.email-box .subject{
+	float: left;
+	width: 60%
+}
+
+.email-box .sender{
+	float: right;
+	width: 35%
+}
+.email-box .subject input, .email-box .sender input{
+	width: 100%;
+}
+
+.wapper{
+    float: left;
+    width: 100%;
+    padding: 10px;
+}
+/** create notify **/
