@@ -7,35 +7,8 @@ angular.module('smg.services')
     .factory('remoteFactory', function($http) {
         var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
         return {
-            getShop: function(id, fields, success, error) {
-                $http.post(base_url + 'shop/get', {
-                    fields: fields,
-                    shop_id: id,
-                }).success(success).error(error);
-            },
-            login: function(user, success, error) {
-                $http.post('http://dev2.smartguide.vn/dashboard/auth', user).success(success).error(error);
-            },
-            logout: function(user, success, error) {
-                $http.post(base_url + 'logout', user).success(success).error(error);
-            },
-            getBrandList: function(fields, success, error) {
-                $http.post(base_url + 'brand/list', {
-                    fields: fields
-                }).success(success).error(error);
-            },
-            getBrand: function(fields, id, success, error) {
-                $http.post(base_url + 'brand/get', {
-                    fields: fields,
-                    id: id,
-                }).success(success).error(error);
-            },
-            getUserProfile: function(fields, brandId, userId, success, error) {
-                $http.post(base_url + 'user/get_profile', {
-                    fields: fields,
-                    brand_id: brandId,
-                    user_id: userId
-                }).success(success).error(error);
+            getBaseUrl: function() {
+                return base_url;
             },
             api: function(path, method, data, success, error) {
                 var url = base_url + path;

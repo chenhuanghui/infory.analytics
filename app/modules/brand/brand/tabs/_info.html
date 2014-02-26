@@ -1,4 +1,4 @@
-<ul>
+<ul ng-controller="BrandCtrl">
     <li>
         <span class="property">Ảnh nền</span>
         <div class="value">
@@ -13,9 +13,9 @@
                 <span>{{brandName}}</span>
                 <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
             </div>
-            <div class="edit" ng-hide="!editName">
-                <input type="text" value="{{brandName}}"/>
-                <i style="cursor:pointer" ng-click="changeName();editName = !editName;" class="icon-ok-sign success"></i>
+            <div ng-hide="!editName">
+                <input ng-model="brandName"/>
+                <i style="cursor:pointer" ng-click="changeName();" class="icon-ok-sign success"></i>
             </div>
         </div>
     </li>

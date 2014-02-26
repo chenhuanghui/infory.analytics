@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Smg')
-    .factory('Auth', ['$cookieStore', '$document', 'remoteFactory',
-        function($cookieStore, $document, remoteFactory) {
+    .factory('Auth', ['$cookieStore', '$document', 'accountRemote',
+        function($cookieStore, $document, accountRemote) {
 
             function deleteCookie(name) {
                 $document.context.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -81,7 +81,7 @@ angular.module('Smg')
                 login: function(user, success, error) {
                     var rememberme = user.rememberme;
 
-                    remoteFactory.login(user, function(res) {
+                    accountRemote.login(user, function(res) {
 
                         if (res.status) {
                             var user = {
@@ -123,7 +123,7 @@ angular.module('Smg')
                         dashboard_token: currentUser.access_token
                     };
 
-                    remoteFactory.logout(user, function(res) {
+                    accountRemote.logout(user, function(res) {
                         if (res.status) {
                             deleteCookie('user');
                             deleteCookie('role');
