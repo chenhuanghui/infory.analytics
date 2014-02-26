@@ -143,6 +143,18 @@ body {
   height: 45px;
   display: block;
 }
+
+.block_footer button{
+    margin: 7px 10px;
+}
+
+.block_footer .method{
+    padding: 7px 65px;
+}
+
+.block_footer .method .ui-select{
+    margin-left: 15px;
+}
 .shadow {
   box-shadow: 0px 2px 2px #e9edef;
   -webkit-box-shadow: 0px 2px 2px #e9edef;
