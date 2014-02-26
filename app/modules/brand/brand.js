@@ -6,6 +6,7 @@ angular.module('brand')
         var brandId = $routeParams.brandId;
         $scope.brand = null;
         $scope.brands = null;
+
         $scope.editName = false;
         $scope.brandName = '';
         $scope.oderComments = [{
@@ -64,12 +65,12 @@ angular.module('brand')
             } else {
                 brandRemote.updateBrandName(brandId, $scope.brandName, function(data) {
                     if (data.error == undefined) {
+                        $scope.editName = !$scope.editName;
                         $scope.brand.name = $scope.brandName;
                         dataFactory.setCurrentBrand($scope.brand);
-                        editName != editName;
                     } else {
+                        $scope.editName = !$scope.editName;
                         $scope.brandName = $scope.brand.name;
-                        editName != editName;
                     }
                 }, function() {
 
