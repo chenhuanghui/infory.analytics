@@ -93,7 +93,9 @@ angular.module('user')
                 if (userProfile.city == null)
                     userProfile.city = "Không xác định";
 
-                userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
+                if (userProfile.facebook[0] != 'h')
+                    userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
+
                 if (userProfile.dob != null)
                     userProfile.age = new Date().getFullYear() - userProfile.dob.getFullYear();
                 else
