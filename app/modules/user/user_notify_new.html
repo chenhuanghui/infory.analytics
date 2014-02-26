@@ -10,7 +10,10 @@
             <li data-target="#notify-step2">
                 <span class="z-step">Đối tượng</span><img class="line-step" src="img/line_step.png" />
             </li>
-            <li data-target="#notify-step3" id="menu-manager" onclick="showManager('#menu-manager', '#notify-step3')">
+            <li data-target="#notify-step3">
+                <span class="z-step">Kích hoạt</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#notify-step4" id="menu-manager" onclick="showManager('#menu-manager', '#notify-step4')">
                 <span class="z-step">Quản lý tin</span><img class="line-step" src="img/line_step.png" />
             </li>
         </ul>                            
@@ -85,9 +88,130 @@
                 </div>
                 Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
             </div>
-            <div class="wapper"  smg-filter metas="metas" events="events" metadata="metadata" ng-include="'common/template/userfilter.html'"></div>
+            
+            <div class="wapper">
+                <div class="block">
+                    <div class="block_header">
+                        <div class="left control">
+                            Lọc danh sách khách hàng theo
+                        </div>
+                        <div class="right">
+                            <div class="controller">
+                                <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
+                                <span class="btn-glow success"><i class="icon-bookmark-empty"></i> Lưu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block_content">
+                        <p class="notify"> Danh sách khách hàng nhận thông báo <span>{{event.name_display}}</span> thoả điều kiện</p>
+                        <div smg-filter metas="metas" events="events" metadata="metadata" event="event"></div>
+                    </div>
+                    <div class="block_footer">
+                        <div class="left method">
+                            Phương thức <div class="ui-select">
+                                            <select>
+                                                <option selected="">Gửi 1 lần</option>
+                                                <option>Gửi tự động</option>
+                                            </select>
+                                        </div>
+                        </div>
+                        <button ng-click="getAllFilter()" type="button" class="btn-glow primary right"><i class="icon-ok"></i> Next</button>
+                    </div><!-- block footer-->
+                </div><!-- block -->
+                
+                <div class="block">
+                    <div class="block_header">
+                        <div class="left control">
+                            <span class="highlight">2</span> khách hàng được chọn / <span class="highlight">200</span> khách hàng thoả điều kiện
+                        </div>
+                        <input type="text" class="search right" placeholder="Tìm kiếm..."/>
+                        <div class="fee right">
+                            Chi phí: <span>40</span> T-coin
+                        </div>
+                    </div>
+                    <div class="block_content no-padding">
+                        <table class="z-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" /></th>
+                                    <th class="name">Tên</th>
+                                    <th>Tuổi</th>
+                                    <th>Giới tính</th>
+                                    <th>Vị trí</th>
+                                    <th>Lần sử dụng cuối</th>
+                                    <th>
+                                        <div class="ui-select">
+                                            <select>
+                                                <option>giờ / ngày</option>
+                                                <option>giờ / tuần</option>
+                                            </select>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" /></td>
+                                    <td class="name">wayne rooney</td>
+                                    <td>28</td>
+                                    <td>Nam</td>
+                                    <td>Manchester United</td>
+                                    <td>12:23 PM 2/20/2014</td>
+                                    <td>1 giờ / ngày</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" /></td>
+                                    <td>wayne rooney</td>
+                                    <td>28</td>
+                                    <td>Nam</td>
+                                    <td>Manchester United</td>
+                                    <td>12:23 PM 2/20/2014</td>
+                                    <td>1 giờ / ngày</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--chart here-->
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="step-pane" id="notify-step3">
+            <div class="step-description">
+                <div class="step-title">
+                    <span class="step-name">Bước 3:</span> Chạy chương trình thông báo gửi tới khách hàng
+                </div>
+                Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
+            </div>
+            <div class="col-md-8">
+                <div class="step-wapper">
+                    <div id="coin-box" class="field-box">
+                        <span class="title">NGÂN SÁCH CHO CHIẾN DỊCH</span>
+                        <div class="slider-coin">
+                            <div class="slider slider-sample2"></div>
+                            <span class="coin">50</span> COIN
+                        </div>
+                        <div class="report">
+                            <p><b>Số tin gửi được: <span>15</span> tin</b><i> / 1000</i></p>
+                            <p><b>Số dư hiện tại: <span>15</span> tin</b></p>
+                        </div>
+                    </div>
+                    <div class="field-box">
+                        <span class="title">THỜI ĐIỂM GỬI TIN</span>
+                        <div class="dropdown">
+                          <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data.dateDisplay">
+                                <span class="add-on"><i class="icon-calendar"></i></span>
+                            </div>
+                          </a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'minute' }" data-on-set-time="onTimeSet"/>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="step-pane" id="notify-step4">
             <div class="step-description">
                 <div class="step-title">
                     Quản lý tin gửi cho khách hàng
@@ -197,7 +321,7 @@ $(function () {
 
         if (step.step === 1) {
             $btnPrev.attr("disabled", "disabled");
-        } else if (step.step === 3) {
+        } else if (step.step === 4) {
             $btnNext.hide();
             $btnPrev.hide();
         }
@@ -226,4 +350,12 @@ function showManager(menu, tab){
 tinymce.init({
     selector: "textarea.editor"
  });
+ 
+/** slider **/
+$(".slider-sample2").slider({
+    range: "min",
+    value: 130,
+    min: 1,
+    max: 500
+});
 </script>

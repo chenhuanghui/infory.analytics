@@ -639,4 +639,35 @@ table#notify-list thead tr th{
     padding: 10px;
 }
 
+input.datetime{
+    width: 200px;
+}
+
+#coin-box{
+	padding: 20px 0 30px;
+}
+
+#coin-box .slider-coin{
+	padding-bottom: 10px;
+	color: #48A5F2;
+	font-weight: bold;
+}
+
+#coin-box .slider-coin .slider{
+	width: 50%;
+	display:inline-block;
+}
+
+#coin-box .slider-coin .coin{
+	font-size: 25px;
+}
+
+#coin-box .report{
+	color: #737991;
+}
+
+.field-box span.title{
+    color: #737991;
+    font-weight: bold;
+}
 /** create notify **/

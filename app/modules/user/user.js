@@ -118,7 +118,24 @@ angular.module('user')
         $scope.metas = remoteFactory.meta_property_types;
         $scope.events = remoteFactory.meta_events;
         $scope.metadata = remoteFactory.meta_lists;
+        
+        $scope.data = {
+                        dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
+                        dateDisplay: "22-01-2013"
+                    };
+
+        $scope.onTimeSet = function(newDate, oldDate) {
+            var d = newDate.getDate();
+            var m = newDate.getMonth() + 1;
+            var y = newDate.getFullYear();
+
+            $scope.data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            console.log(newDate);
+            console.log(oldDate);
+        }
     }
+    
+    
 ])
 
 .config(function($routeProvider) {
