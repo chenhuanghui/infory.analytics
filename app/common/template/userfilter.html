@@ -1,4 +1,4 @@
-<div class="block" ng-controller="FilterCtrl">
+<div class="block">
     <div class="block_header">
         <div class="left control">
             Lọc danh sách khách hàng theo
@@ -8,8 +8,10 @@
             <span class="btn-glow success">Sign up now</span>
         </div>
     </div>
-    <div subfilter event="event" events="events" metas="metas" metadata="metadata" ng-include="'common/template/usersubfilter.html'"></div>
 
+    <div class="block_content">
+        <div smg-filter metas="metas" events="events" metadata="metadata" event="event"></div>
+    </div>
     <div class="block_footer">
         <div class="left method">
             Phương thức <div class="ui-select">
@@ -21,3 +23,4 @@
         </div>
         <button ng-click="getAllFilter()" type="button" class="btn-glow primary right"><i class="icon-ok"></i> Next</button>
     </div><!-- block footer-->
+</div>

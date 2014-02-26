@@ -15,6 +15,31 @@
             <div class="block">
                 <div class="block_header">
                     <div class="left control">
+                        Lọc danh sách khách hàng theo
+                    </div>
+                    <div class="right">
+                        <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
+                        <span class="btn-glow success">Sign up now</span>
+                    </div>
+                </div>
+
+                <div smg-filter metas="metas" events="events" metadata="metadata" event="event"></div>
+
+                <div class="block_footer">
+                    <div class="left method">
+                        Phương thức <div class="ui-select">
+                                        <select>
+                                            <option selected="">Gửi 1 lần</option>
+                                            <option>Gửi tự động</option>
+                                        </select>
+                                    </div>
+                    </div>
+                    <button ng-click="getAllFilter()" type="button" class="btn-glow primary right"><i class="icon-ok"></i> Next</button>
+                </div><!-- block footer-->
+            </div>
+            <!-- <div class="block">
+                <div class="block_header">
+                    <div class="left control">
                         Thống kê lượt 
                         <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
                         theo thời gian
@@ -23,13 +48,13 @@
                     <span class="btn-flat success icon-bookmark-empty right">Lưu</span>
 
                 </div>
-
+                <p class="notify"> Chỉ thống kê các lượt <span>{{event.name_display}}</span> thoả điều kiện</p>
                  <div smg-filter metas="metas" events="events" metadata="metadata" event="event"></div>
 
                 <div class="block_footer">
                     <span class="btn-flat primary right" ng-click="getAllFilter()">Xem</span>
-                </div><!-- block footer-->
-            </div>
+                </div>
+            </div> -->
 
            
 
