@@ -19,15 +19,12 @@
                 <div class="clearfix"></div>
             </div>
             
-            <div class="content">
-                <table class="table table-hover shadow" cellspacing="0" cellpadding="0">
+            <div class="content gray-background">
+                <table class="table table-hover shadow comment white-background" cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
                             <th class="col-md-9">
                                 {{shop.name}}
-                            </th>
-                            <th class="col-md-3">
-                                <span class="line"></span> Thao tác
                             </th>
                         </tr>
                     </thead>
@@ -35,20 +32,21 @@
                         <!-- row -->
                         <tr class="first" ng-repeat="message in shop.comments | orderBy:sorter.field">
                             <td style="text-align: left !important;">
-                                <div>
-                                    <img src="{{message.user_avatar}}" alt="contact" class="img-circle avatar hidden-phone left col-md-1"/>
-                                    <div class="col-md-11">
-                                        <span class="user_name"><a ng-click = "showUserProfile(brand.id, message.user_id, message.user_name, message.user_avatar)" style="cursor:pointer">{{message.user_name}}</a></span>
+                                <div class="col-md-1">
+                                    <img src="{{message.user_avatar}}" alt="contact" class="img-circle avatar hidden-phone" style="height:70px; width:70px;"/>
+                                </div>
+                                <div class="col-md-9 comment-content">
+                                        <span class="user_name"><a ng-click = "showUserProfile(brand.id, message.user_id, message.user_name, message.user_avatar)" style="cursor:pointer">{{message.user_name}}</a></span>   -   <span class="bold">1/3/2013</span>
+                                           <span class="boldanditalic">10:30 PM</span>
                                         </br>
                                         <span class="shop_addr">{{message.content}}</span>  
-                                    </div>
                                 </div>
-                                
-                            </td>
-                            <td>
-                               <span class="btn-flat success">Trả lời</span>
-                               <span class="btn-flat gray back">Xoá</span>
-
+                                <div class="clearfix"></div>
+                                <div id="num-of-like">
+                                    <span class="left bold">127</span>&nbsp;<span>lượt thích</span>
+                                    <span class="btn-flat success right" id="reply-button">Trả lời</span>
+                                    <span class="btn-flat gray back right">Xoá</span>
+                                </div>   
                             </td>
                         </tr>
                     </tbody>
