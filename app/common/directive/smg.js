@@ -98,19 +98,34 @@ angular.module('smgDirectives', ['ui.date'])
                 },
                 templateUrl: 'common/template/query_record.html',
                 link: function(scope, element, attr, ctrl) {
-                    scope.data = {
+                    scope.data = [{
                         dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
-                        dateDisplay: "22-01-2013"
-                    };
+                        dateDisplay: "22-01-2013",
+                    }, {
+                        dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
+                        dateDisplay: "22-01-2013",
+                    }];
 
-                    scope.onTimeSet = function(newDate, oldDate) {
+                    scope.paremeters = {
+                        firstInput: '',
+                        secondInput: ''
+                    }
+
+                    scope.onTimeSetOne = function(newDate, oldDate) {
+                        var d = newDate.getDate();
+                        var m = newDate.getMonth() + 1;
+                        var y = newDate.getFullYear();
+                        scope.paremeters.firstInput = '';
+                        scope.data[0].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                    }
+
+                    scope.onTimeSetTwo = function(newDate, oldDate) {
                         var d = newDate.getDate();
                         var m = newDate.getMonth() + 1;
                         var y = newDate.getFullYear();
 
-                        scope.data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
-                        console.log(newDate);
-                        console.log(oldDate);
+                        scope.paremeters.secondInput = '';
+                        scope.data[1].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
                     }
 
                     scope.removeCondition = function($event) {
@@ -121,11 +136,22 @@ angular.module('smgDirectives', ['ui.date'])
                     }
 
                     scope.getValue = function() {
+                        switch (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)]) {
+                            case 'date picker':
+                                scope.paremeters.firstInput = scope.data[0].dateDropDownInput;
+                                scope.paremeters.secondInput = '';
+                                break;
+                            case 'two date picker':
+                                scope.paremeters.firstInput = scope.data[0].dateDropDownInput;
+                                scope.paremeters.secondInput = scope.data[1].dateDropDownInput;
+                                break;
+                        }
+
                         return {
                             id: scope.id,
                             property: scope.property,
                             meta: scope.meta,
-                            usrvalue: scope.usrvalue
+                            paremeters: scope.paremeters
                         };
                     }
 

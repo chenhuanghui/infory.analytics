@@ -7,37 +7,57 @@
 
     <span class="qr_3" ng-switch on="metas[property.type].operators_ui_controller[metas[property.type].operators_display.indexOf(meta)]">
     	<span ng-switch-when="number input">
-    		<input type="text" class="form-control qr_3" >
+    		<input type="number" class="form-control qr_3" data-ng-model="paremeters.firstInput">
     	</span>
     	<span ng-switch-when="two number input">
-    		<input type="text" class="form-control qr_3">
+    		<input type="number" class="form-control qr_3" data-ng-model="paremeters.firstInput">
     		-
-    		<input type="text" class="form-control qr_3">
+    		<input type="number" class="form-control qr_3" data-ng-model="paremeters.secondInput">
     	</span>
     	<span ng-switch-when="dropdown">
 
-    		<select class="qr_3" ng-model="metaValue" ng-options="value as value for value in metadata[property.available_values]"></select>
+    		<select class="qr_3" ng-model="paremeters.firstInput" ng-options="value as value for value in metadata[property.available_values]"></select>
     	</span>
     	<span ng-switch-when="text">
-    		<input type="text" class="form-control qr_3">
+    		<input type="text" class="form-control qr_3" data-ng-model="paremeters.firstInput">
     	</span>
         <span ng-switch-when="time dropdown">
-            <select class="qr_3" ng-model="metaValue" ng-options="value as value for value in metadata[property.available_values]"></select>
+            <select class="qr_3" ng-model="paremeters.firstInput" ng-options="value as value for value in metadata[property.available_values]"></select>
         </span>
         <span ng-switch-when="date picker">
             <div class="dropdown">
-              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data.dateDisplay">
+              <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#" href="#">
+                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay">
                     <span class="add-on"><i class="icon-calendar"></i></span>
                 </div>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSet"/>
+                <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
               </ul>
             </div>
         </span>
         <span ng-switch-when="two date picker">
-            two date picker
+            <div class="dropdown">
+              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay">
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
+              </ul>
+            </div>
+
+            <div class="dropdown">
+              <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay">
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetTwo"/>
+              </ul>
+            </div>
         </span>
     </span>
     <span class="icon-remove right remove" ng-click="removeCondition($event)"></span>
