@@ -707,3 +707,9 @@ table.comment{
 .white-background{
     background-color: white !important;
 }
+
+/** segmentation **/
+.chart{
+    width: 600px !important;
+    height: 300px !important;
+}
