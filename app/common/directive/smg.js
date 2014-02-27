@@ -85,7 +85,6 @@ angular.module('smgDirectives', ['ui.date'])
     .directive('queryRecord', [
 
         function() {
-
             return {
                 require: '^smgFilter',
                 restrict: 'A',
@@ -154,9 +153,7 @@ angular.module('smgDirectives', ['ui.date'])
                             paremeters: scope.paremeters
                         };
                     }
-
                     ctrl.addFilter(scope);
-
                 }
             };
         }
