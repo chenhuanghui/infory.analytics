@@ -124,17 +124,19 @@ angular.module('user')
 
         $scope.data = {
             dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
-            dateDisplay: "22-01-2013"
+            dateDisplay: "22-01-2013 00:00"
         };
 
         $scope.onTimeSet = function(newDate, oldDate) {
             var d = newDate.getDate();
             var m = newDate.getMonth() + 1;
             var y = newDate.getFullYear();
+            var h = newDate.getHours();
+            var min = newDate.getMinutes();
 
-            $scope.data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
-            console.log(newDate);
-            console.log(oldDate);
+
+            $scope.data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y + '   ' +
+                (h <= 9 ? '0' + h : h) + ' : ' + (min <= 9 ? '0' + min : min);
         }
     }
 
