@@ -45,11 +45,7 @@
                         <option>01/01/2011</option>
                     </select>
 
-                    <select class="type_menu right">
-                        <option>Biểu đồ đường</option>
-                        <option>Biểu đồ tròn</option>
-                        <option>Biểu đồ cột</option>
-                    </select>
+                     <select class="type_menu right" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-init="chartType=chartTypes[0]"></select>
 
                     <select class="type_menu pull-right">
                         <option>NGÀY</option>
@@ -61,16 +57,47 @@
                     
 
                 </div>
-                <div class="block_content">
-
-                    <center>
-                        <cjs-doughnut dataset="doughnutData" options="doughnutOptions" segment-stroke-color="#1C1C1C" segment-stroke-width="2" class="chart"></cjs-doughnut>
-                    </center>
-                    <center><cjs-line dataset="lineData" class="chart"></cjs-line></center>
-                    <center><cjs-bar dataset="barData" class="chart"></cjs-bar></center>
-                    <center><cjs-radar dataset="radarData" class="chart"></cjs-radar></center>
-                    <center><cjs-polar dataset="polarData" class="chart"></cjs-polar></center>
-                    <center><cjs-pie dataset="polarData" class="chart"></cjs-pie></center>
+                <div ng-switch on="chartType.id" class="block_content">
+                    <div ng-switch-when="1">
+                        <nvd3-pie-chart
+                            data="exampleData2"
+                            id="exampleId"
+                            width="550"
+                            height="350"
+                            x="xFunction()"
+                            y="yFunction()"
+                            showLabels="true">
+                            <svg></svg>
+                        </nvd3-pie-chart>
+                    </div>
+                   
+                    <div ng-switch-when="0">
+                        <nvd3-line-chart
+                            data="exampleData1"
+                            id="toolTipExample"
+                            width="550"
+                            height="350"
+                            xAxisTickFormat="xAxisTickFormatFunction()"
+                            yAxisTickFormat="yAxisTickFormatFunction()"
+                            showXAxis="true"
+                            showYAxis="true"
+                            interactive="true">
+                                <svg></svg>
+                        </nvd3-line-chart>
+                    </div>
+                    
+                    <div ng-switch-when="2">
+                        <nvd3-discrete-bar-chart
+                            data="exampleData3"
+                            id="exampleId"
+                            showXAxis="true"
+                            showYAxis="true"
+                            xAxisTickFormat="xAxisTickFormatFunction()"
+                            width="550"
+                            height="400">
+                                <svg></svg>
+                        </nvd3-discrete-bar-chart>
+                    </div>
                     
                 </div>
             </div>
