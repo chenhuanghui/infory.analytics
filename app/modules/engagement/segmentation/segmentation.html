@@ -26,7 +26,7 @@
                 </div>
                 <div class="block_content">
                     <p class="notify"> Chỉ thống kê các lượt <span>{{event.name_display}}</span> thoả điều kiện</p>
-                    <div smg-filter metas="metas" events="events" metadata="metadata" event="event"></div>
+                    <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>
                 </div>
                 <div class="block_footer">
                     <span class="btn-flat primary right" ng-click="getAllFilter()">Xem</span>
@@ -37,9 +37,13 @@
 
             <div class="block">
                 <div class="block_header">
-                    <span class="beg_date date">01/01/2011</span>
+                    <select class="beg_date date">
+                        <option>01/01/2011</option>
+                    </select>
                     - 
-                    <span class="end_date date">01/01/2011<span/>
+                    <select class="end_date date">
+                        <option>01/01/2011</option>
+                    </select>
 
                     <select class="type_menu right">
                         <option>Biểu đồ đường</option>
@@ -47,17 +51,27 @@
                         <option>Biểu đồ cột</option>
                     </select>
 
-                    <div class="btn-group pull-right">
-                        <button class="glow left">NGÀY </button>
-                        <button class="glow middle active">TUẦN </button>
-                        <button class="glow right">THÁNG</button>
-                    </div>
+                    <select class="type_menu pull-right">
+                        <option>NGÀY</option>
+                        <option>TUẦN</option>
+                        <option>THÁNG</option>
+                    </select>
+                    
 
                     
 
                 </div>
                 <div class="block_content">
-                    <!--chart here-->
+
+                    <center>
+                        <cjs-doughnut dataset="doughnutData" options="doughnutOptions" segment-stroke-color="#1C1C1C" segment-stroke-width="2" class="chart"></cjs-doughnut>
+                    </center>
+                    <center><cjs-line dataset="lineData" class="chart"></cjs-line></center>
+                    <center><cjs-bar dataset="barData" class="chart"></cjs-bar></center>
+                    <center><cjs-radar dataset="radarData" class="chart"></cjs-radar></center>
+                    <center><cjs-polar dataset="polarData" class="chart"></cjs-polar></center>
+                    <center><cjs-pie dataset="polarData" class="chart"></cjs-pie></center>
+                    
                 </div>
             </div>
         </div> <!-- content_wrapper-->

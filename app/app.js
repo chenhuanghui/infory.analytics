@@ -16,7 +16,8 @@ var app = angular.module('Smg', [
     'engagement',
     'smgDirectives',
     'ui.bootstrap.datetimepicker',
-    'ui.date'
+    'ui.date',
+    'chartjs'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',
