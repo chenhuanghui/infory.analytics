@@ -5,6 +5,7 @@ angular.module('smgDirectives', ['ui.date'])
             restrict: "A",
             templateUrl: 'common/template/filter.html',
             scope: {
+                subfilters: "=",
                 metas: "=",
                 events: "=",
                 metadata: "=",
@@ -25,12 +26,6 @@ angular.module('smgDirectives', ['ui.date'])
                             return;
                         }
                     }
-                }
-
-                $scope.getAllFilter = function() {
-                    angular.forEach($scope.subfilters, function(subfilter) {
-                        console.log(subfilter.getValue());
-                    });
                 }
             }
         };

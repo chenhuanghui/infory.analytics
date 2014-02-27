@@ -120,11 +120,12 @@ angular.module('user')
         $scope.metas = remoteFactory.meta_property_types;
         $scope.events = remoteFactory.meta_events;
         $scope.metadata = remoteFactory.meta_lists;
-        
+        $scope.subfilters = [];
+
         $scope.data = {
-                        dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
-                        dateDisplay: "22-01-2013"
-                    };
+            dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
+            dateDisplay: "22-01-2013"
+        };
 
         $scope.onTimeSet = function(newDate, oldDate) {
             var d = newDate.getDate();
@@ -136,8 +137,8 @@ angular.module('user')
             console.log(oldDate);
         }
     }
-    
-    
+
+
 ])
 
 .config(function($routeProvider) {
@@ -159,7 +160,7 @@ angular.module('user')
             controller: 'UserManagerCtrl',
             access: access.user
         })
-        .when('/user/notify-new', {
+        .when('/user/notify-new/:brandId', {
             templateUrl: 'modules/user/user_notify_new.html',
             controller: 'UserNotifyCtrl',
             access: access.user
