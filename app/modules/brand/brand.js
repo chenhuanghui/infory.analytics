@@ -69,8 +69,8 @@ angular.module('brand')
             } else {
                 brandRemote.updateName(brandId, $scope.brandName, function(data) {
                     if (data.error == undefined) {
-                        //$scope.editName = !$scope.editName;
                         $scope.brand.name = $scope.brandName;
+                        $scope.editName = !$scope.editName;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
                         //$scope.editName = !$scope.editName;
