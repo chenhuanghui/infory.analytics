@@ -99,7 +99,26 @@ angular.module('brand')
     }
 ])
 
+.controller('createPromotionCtrl', ['$scope', 'remoteFactory',
+    function($scope, remoteFactory) {
+        $scope.data = {
+                        dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
+                        dateDisplay: "22-01-2013"
+                    };
 
+        $scope.onTimeSet = function(newDate, oldDate) {
+            var d = newDate.getDate();
+            var m = newDate.getMonth() + 1;
+            var y = newDate.getFullYear();
+
+            $scope.data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            console.log(newDate);
+            console.log(oldDate);
+        }
+    }
+    
+    
+])
 .config(function($routeProvider) {
     var access = routingConfig.accessLevels;
 
@@ -116,6 +135,7 @@ angular.module('brand')
         })
         .when('/brand/promotion-new', {
             templateUrl: 'modules/brand/promotion_new.html',
+            controller: 'createPromotionCtrl',
             access: access.user
         })
         .when('/brand/promotion', {

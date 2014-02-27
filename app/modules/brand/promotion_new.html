@@ -31,6 +31,24 @@
                     <div class="col-md-8">
                         <div class="step-wapper">
                             <div class="field-box">
+                                <div class="flexslider">
+                                  <ul class="slides">
+                                    <li>
+                          	    	    <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
+                          	    		</li>
+                          	    		<li>
+                          	    	    <img src="img/kitchen_adventurer_lemon.jpg" />
+                          	    		</li>
+                          	    		<li>
+                          	    	    <img src="img/kitchen_adventurer_donut.jpg" />
+                          	    		</li>
+                          	    		<li>
+                          	    	    <img src="img/kitchen_adventurer_caramel.jpg" />
+                          	    		</li>
+                                  </ul>
+                                </div>
+                            </div>
+                            <div class="field-box">
                                 <span class="title">CHỌN HÌNH THỨC SỰ KIỆN</span>
                                 <div class="ui-select">
                                     <select>
@@ -60,11 +78,61 @@
                             </div>
                             <div class="field-box">
                                 <span class="title">THỜI GIAN</span>
-                                <input class="form-control inline-block" type="text"/> 
+                                <div class="dropdown inline-block">
+                                  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                    <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data.dateDisplay">
+                                        <span class="add-on hide"><i class="icon-calendar"></i></span>
+                                    </div>
+                                  </a>
+                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'minute' }" data-on-set-time="onTimeSet"/>
+                                  </ul>
+                                </div>
+                                <div class="dropdown inline-block">
+                                  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                    <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data.dateDisplay">
+                                        <span class="add-on hide"><i class="icon-calendar"></i></span>
+                                    </div>
+                                  </a>
+                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'minute' }" data-on-set-time="onTimeSet"/>
+                                  </ul>
+                                </div> 
                             </div>
                             <div class="field-box">
                                 <span class="title">MÔ TẢ</span>
-                                <textarea class="form-control" rows="4"></textarea>
+                                <div class="block">
+                                    <div class="block_header">
+                                        <div class="left control">
+                                            <span class="highlight">2</span> của hàng được chọn
+                                        </div>
+                                        <input type="text" class="search right small-input no-margin" placeholder="Tìm kiếm..."/>
+                                    </div>
+                                    <div class="block_content no-padding">
+                                        <table class="z-table">
+                                            <thead>
+                                                <tr>
+                                                    <th><input type="checkbox" /></th>
+                                                    <th class="name">Tên cửa hàng</th>
+                                                    <th>Địa chỉ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="checkbox" /></td>
+                                                    <td class="name">wayne rooney</td>
+                                                    <td>Manchester United</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><input type="checkbox" /></td>
+                                                    <td class="name">wayne rooney</td>
+                                                    <td>Manchester United</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!--chart here-->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -78,8 +146,91 @@
                     Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
                 </div>
                 <div class="form-wrapper">
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="step-wapper">
+                            <div class="voucher-box">
+                                <div class="z-box">
+                                    <div class="z-box-header">
+                                        <div class="left">
+                                            <span class="circle-box">A</span>
+                                        </div>
+                                        <i class="icon-remove-sign right"></i>
+                                    </div>
+                                    <div class="z-box-content">
+                                        <div class="detail-voucher">
+                                            <div class="field-box">
+                                                <div class="inline-block">
+                                                    <span class="title">MÔ TẢ PHẦN QUÀ</span>
+                                                    <input type="text" class="description form-control"/>
+                                                </div>
+                                                <div class="inline-block">
+                                                    <span class="title">SỐ LƯỢNG</span>
+                                                    <input type="text" class="quality form-control"/>
+                                                </div>
+                                                <div class="inline-block">
+                                                    <label class="checkbox-inline">
+                                                      <input type="checkbox" id="inlineCheckbox1" value="option1"> Không giới hạn
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="field-box">
+                                                <span class="title">ĐIỀU KIỆN</span>
+                                                <div class="condition">
+                                                    <span class="title">Đối tượng</span>
+                                                    <input type="text" class="form-control" />
+                                                    <br />
+                                                    <span class="title">Thời gian</span>
+                                                    <label class="checkbox-inline">
+                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 2
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 3
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 4
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 5
+                                                    </label>
+                                                    <div class="clearfix"></div>
+                                                    <label class="checkbox-inline">
+                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 6
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 7
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Chủ nhật
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                      <input type="checkbox" id="inlineCheckbox1" value="option1"/> Cả tuần
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="add-voucher shadow">
+                                    <i class="icon-plus"></i> THÊM PHẦN QUÀ
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="news-box">
+                                <div class="field-box">
+                                    <span class="title">TÊN TIÊU ĐỀ</span>
+                                    <input class="form-control inline-block" type="text"/>
+                                </div>
+                                <div class="field-box">
+                                    <span class="title">HÌNH ẢNH</span>
+                                    <input type="file" class="form-control inline-block"/>  
+                                </div>
+                                <div class="field-box">
+                                    <span class="title">TÊN TIÊU ĐỀ</span>
+                                    <textarea placeholder="Nhập nội dung" class="form-control" rows="6"></textarea>
+                                </div>
+                            </div>
+                            <!--
                             <div class="field-box">
                                 <span class="title">Phần thưởng</span>
                                 <input placeholder="Điều kiện" class="form-control inline-block small-input" type="text"/><input placeholder="Phần thưởng" class="form-control inline-block small-input" type="text"/>
@@ -114,6 +265,7 @@
                                     </select>
                                 </div> 
                             </div>
+                            -->
                         </div>
                     </div>
                 </div>
@@ -126,21 +278,59 @@
                     Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
                 </div>
                 <div class="form-wrapper">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="step-wapper">
                             <div class="step-success">
-                                Bạn đã tạo xong một chiến dịch
-                                <div class="field-box">
-                                    <span class="title">CHỌN TRẠNG THÁI CHIẾN DỊCH</span>
-                                    <label class="radio">
-                                        <div class="radio" id="uniform-optionsRadios1"><span class="checked"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""/></span></div>
-                                        Chạy chương trình
-                                    </label>
-                                    <label class="radio">
-                                        <div class="radio" id="uniform-optionsRadios2"><span class="checked"><input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked=""/></span></div>
-                                        Chờ kích hoạt
-                                    </label>
-                                </div>
+                                <table class="z-table bordered-table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="ui-select">
+                                                    <select>
+                                                        <option value="all">Tất cả</option>
+                                                        <option value="">Đăng tin khuyến mãi</option>
+                                                        <option value="">Tặng quà</option>
+                                                    </select>
+                                                </div>
+                                            </th>
+                                            <th>Chiến dịch</th>
+                                            <th>Thời gian</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="even">
+                                            <td>Đăng tin khuyến mãi</td>
+                                            <td class="name">Valentine ấm áp</td>
+                                            <td>từ 14/2/2014 đến 14/3/2014</td>
+                                            <td><a class="btn-flat success">Đang chạy</a></td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td>Đăng tin khuyến mãi</td>
+                                            <td class="name">Valentine ấm áp</td>
+                                            <td>từ 14/2/2014 đến 14/3/2014</td>
+                                            <td><a class="btn-flat gray">Chờ</a></td>
+                                        </tr>
+                                        <tr class="even">
+                                            <td>Đăng tin khuyến mãi</td>
+                                            <td class="name">Valentine ấm áp</td>
+                                            <td>từ 14/2/2014 đến 14/3/2014</td>
+                                            <td><a class="btn-flat success">Đang chạy</a></td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td>Đăng tin khuyến mãi</td>
+                                            <td class="name">Valentine ấm áp</td>
+                                            <td>từ 14/2/2014 đến 14/3/2014</td>
+                                            <td><a class="btn-flat inverse">Kết thúc</a></td>
+                                        </tr>
+                                        <tr class="even">
+                                            <td>Đăng tin khuyến mãi</td>
+                                            <td class="name">Valentine ấm áp</td>
+                                            <td>từ 14/2/2014 đến 14/3/2014</td>
+                                            <td><a class="btn-flat success">Đang chạy</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -154,7 +344,7 @@
                     <tabset>
                         <tab>
                           <tab-heading>
-                            <i class="glyphicon glyphicon-bell"></i>
+                            <i class="icon-reorder"></i>
                           </tab-heading>
                           <table class="table attribute-table">
                             <thead>
@@ -170,7 +360,7 @@
                         </tab>
                         <tab>
                           <tab-heading>
-                            <i class="icon-table"></i>
+                            <i class="icon-mobile-phone"></i>
                           </tab-heading>
                           <img src="http://wowcamera.net/image/cache/data/phone/iphone-5-16gb-white-360x360.jpg" />
                         </tab>
@@ -196,8 +386,10 @@
     </div>
 </div>
 <!-- scripts -->
+<style scoped>@import url('vendor/theme/styles/lib/flexslider.css')</style>
 <script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
 <script src="vendor/theme/scripts/fuelux.wizard.js"></script>
+<script src="vendor/theme/scripts/jquery.flexslider.js"></script>
 <script>
 //winzard create promotion
 $(function () {
@@ -230,5 +422,12 @@ $(function () {
     $btnNext.on('click', function() {
         $wizard.wizard('next');
     });
+});
+/** slide image **/
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: false,
+  });
 });
 </script>

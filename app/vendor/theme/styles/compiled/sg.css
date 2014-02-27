@@ -197,6 +197,10 @@ div.navbar-header ul li i.icon-home{
     border: none;
 }
 
+.step-view-content .icon-reorder, .step-view-content .icon-mobile-phone{
+    font-size: 15px;
+}
+
 .attribute-table{
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -216,10 +220,6 @@ div.navbar-header ul li i.icon-home{
 
 #sidebar-nav #dashboard-menu ul.submenu {
     display: block;
-}
-
-body{
-    /*padding: 30px;*/
 }
 
 #wrapper{
@@ -283,6 +283,87 @@ body{
     text-decoration: none;
 }
 
+.form-wrapper input.date{
+    width: 150px;
+    margin-right: 20px;
+}
+
+.news-box input[type="file"]{
+	width: 400px;
+}
+
+.z-box{
+	border: 1px solid #DAE3E9;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+
+.z-box-header{
+	background-color: #F5FAFC;
+	min-height: 45px;
+	padding: 10px;
+	border-bottom: 1px solid #DAE3E9;
+	border-radius: 4px 4px 0 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+}
+
+.z-box-content{
+	padding: 10px 20px 20px;
+}
+
+.circle-box{
+	background-color: #4f5e71;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 28px;
+	font-size: 17px;
+	color: #fff;
+    display: block;
+}
+
+.z-box-header .icon-remove-sign{
+	font-size: 15px;
+	color: #95A8B7;
+	cursor: pointer;
+}
+
+.detail-voucher input.description{
+	width: 250px;
+}
+
+.detail-voucher input.quality{
+	width: 100px;
+}
+
+.detail-voucher div.inline-block{
+	margin-right: 10px;
+}
+
+.detail-voucher .condition{
+	padding-left: 25px;
+}
+
+.detail-voucher .condition .checkbox-inline{
+	width: 100px;
+}
+
+.add-voucher{
+	background-color: #F5FAFC;
+	text-align: center;
+	color: #b3b7c2;
+	font-weight: bold;
+	padding: 10px;
+	margin-top: 15px;
+	border: 1px solid #DAE3E9;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+/** create promotion **/
 /** user info **/
 #user-info-content{
     background-color: #fff;    
@@ -486,6 +567,10 @@ body{
     width: 100%;
 }
 
+.z-table .ui-select{
+    width: auto;
+}
+
 .z-table thead tr {
 	background-color: #f3f3f3;
 	
@@ -542,7 +627,7 @@ body{
     margin-top: -20px;
 }
 
-table#notify-list{
+table.bordered-table{
 	float: left;
 	margin-top: 10px;
 	border: 1px solid #dae3ea;
@@ -555,11 +640,11 @@ table#notify-list{
 	box-shadow: 0px 2px 5px 0px rgba(208,216,219,1);
 }
 
-table#notify-list thead tr{
+table.bordered-table thead tr{
 	background-color: #eff4f7;
 }
 
-table#notify-list thead tr th{
+table.bordered-table thead tr th{
     -webkit-box-shadow: 0px 2px 5px 0px rgba(208,216,219,1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(208,216,219,1);
     box-shadow: 0px 2px 5px 0px rgba(208,216,219,1);
@@ -669,5 +754,13 @@ input.datetime{
 .field-box span.title{
     color: #737991;
     font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.no-margin{
+    margin: 0 !important;
+}
+.wizard-actions{
+    margin-bottom: 10px;
 }
 /** create notify **/
