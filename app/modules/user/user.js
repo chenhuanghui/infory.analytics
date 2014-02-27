@@ -121,6 +121,14 @@ angular.module('user')
         $scope.events = remoteFactory.meta_events;
         $scope.metadata = remoteFactory.meta_lists;
         $scope.subfilters = [];
+        $scope.notifyTypes = [{
+            id: 1,
+            name: 'Gửi qua SMS'
+
+        }, {
+            id: 2,
+            name: 'Gửi qua email'
+        }];
 
         $scope.data = {
             dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
@@ -133,7 +141,6 @@ angular.module('user')
             var y = newDate.getFullYear();
             var h = newDate.getHours();
             var min = newDate.getMinutes();
-
 
             $scope.data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y + '   ' +
                 (h <= 9 ? '0' + h : h) + ' : ' + (min <= 9 ? '0' + min : min);

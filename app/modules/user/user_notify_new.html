@@ -42,38 +42,42 @@
                             <div class="field-box">
                                 <span class="title">CHỌN LOẠI HÌNH THÔNG BÁO</span>
                                 <div class="ui-select">
-                                    <select>
-                                        <option selected>Gửi qua SMS</option>
-                                    </select>
+                                    <select ng-model="notifyType" ng-options="s=nt.name for nt in notifyTypes" ng-init="notifyType=notifyTypes[0]"></select>
                                 </div>
                             </div>
-                            <div class="sms-box">
-                                <div class="field-box">
-                                    <span class="title">TÊN NGƯỜI GỬI</span>
-                                    <input class="form-control inline-block" type="text">
-                                </div>
-                                <div class="field-box">
-                                    <span class="title">NỘI DUNG</span>
-                                    <textarea class="form-control" rows="4"></textarea>
-                                </div>
-                            </div>
-                            <div class="email-box">
-                                <div class="subject">
-                                    <div class="field-box">
-                                        <span class="title">TIÊU ĐỀ</span>
-                                        <input class="form-control inline-block" type="text"/>
+                            <div ng-switch on="notifyType.id">
+                                <div ng-switch-when="1">
+                                    <div class="sms-box">
+                                        <div class="field-box">
+                                            <span class="title">TÊN NGƯỜI GỬI</span>
+                                            <input class="form-control inline-block" type="text">
+                                        </div>
+                                        <div class="field-box">
+                                            <span class="title">NỘI DUNG</span>
+                                            <textarea class="form-control" rows="4"></textarea>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="sender">
-                                    <div class="field-box">
-                                        <span class="title">EMAIL NGƯỜI GỬI</span>
-                                        <input class="form-control inline-block" type="text"/>
+                                <div ng-switch-when="2">
+                                    <div class="email-box">
+                                        <div class="subject">
+                                            <div class="field-box">
+                                                <span class="title">TIÊU ĐỀ</span>
+                                                <input class="form-control inline-block" type="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="sender">
+                                            <div class="field-box">
+                                                <span class="title">EMAIL NGƯỜI GỬI</span>
+                                                <input class="form-control inline-block" type="text"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="field-box">
+                                            <span class="title">Nội dung</span>
+                                            <textarea class="editor"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <div class="field-box">
-                                    <span class="title">Nội dung</span>
-                                    <textarea class="editor"></textarea>
                                 </div>
                             </div>
                         </form>
