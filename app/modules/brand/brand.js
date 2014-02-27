@@ -28,6 +28,7 @@ angular.module('brand')
                         $scope.shop = $scope.brand.shops[0];
                         $scope.brandName = data.name;
                         $scope.brandCover = data.cover;
+                        refactorDateTimeMessage($scope.brand);
                     }, function() {})
                 } else {
                     for (var i = 0; i < brands.length; i++) {
@@ -37,6 +38,7 @@ angular.module('brand')
                                 $scope.shop = $scope.brand.shops[0];
                                 $scope.brandName = data.name;
                                 $scope.brandCover = data.cover;
+                                refactorDateTimeMessage($scope.brand);
                             }, function() {})
                             break;
                         }
@@ -44,6 +46,22 @@ angular.module('brand')
                 }
             }
         }, function() {});
+
+        function refactorDateTimeMessage(brand) {
+            for (var i = 0; i < brand.shops.length; i++) {
+                for (var j = 0; j < brand.shops[i].comments.length; j++) {
+                    var newDate = new Date(brand.shops[i].comments[j].updated_time);
+                    var d = newDate.getDate();
+                    var m = newDate.getMonth() + 1;
+                    var y = newDate.getFullYear();
+                    var h = newDate.getHours();
+                    var min = newDate.getMinutes();
+
+                    brand.shops[i].comments[j].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                    brand.shops[i].comments[j].timeDisplay = (h <= 9 ? '0' + h : h) + ' : ' + (min <= 9 ? '0' + min : min);
+                }
+            }
+        }
 
         $scope.setCurrentBrand = function(brand) {
             $scope.brand = brand;
@@ -73,7 +91,7 @@ angular.module('brand')
                         $scope.editName = !$scope.editName;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
-                        //$scope.editName = !$scope.editName;
+                        $scope.editName = !$scope.editName;
                         $scope.brandName = $scope.brand.name;
                     }
                 }, function() {
@@ -102,9 +120,9 @@ angular.module('brand')
 .controller('createPromotionCtrl', ['$scope', 'remoteFactory',
     function($scope, remoteFactory) {
         $scope.data = {
-                        dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
-                        dateDisplay: "22-01-2013"
-                    };
+            dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
+            dateDisplay: "22-01-2013"
+        };
 
         $scope.onTimeSet = function(newDate, oldDate) {
             var d = newDate.getDate();
@@ -116,42 +134,42 @@ angular.module('brand')
             console.log(oldDate);
         }
     }
-    
-    
+
+
 ])
-.config(function($routeProvider) {
-    var access = routingConfig.accessLevels;
+    .config(function($routeProvider) {
+        var access = routingConfig.accessLevels;
 
-    $routeProvider
-        .when('/brand/infor/:brandId', {
-            templateUrl: 'modules/brand/brand/brand.html',
-            controller: 'BrandCtrl',
-            access: access.user
-        })
-        .when('/brand/new', {
-            templateUrl: 'modules/brand/brand_new.html',
-            controller: 'brandCreateCtrl',
-            access: access.user
-        })
-        .when('/brand/promotion-new', {
-            templateUrl: 'modules/brand/promotion_new.html',
-            controller: 'createPromotionCtrl',
-            access: access.user
-        })
-        .when('/brand/promotion', {
-            templateUrl: 'modules/brand/promotion/promotion_list.html',
-            controller: 'BrandCtrl',
-            access: access.user
-        })
-        .when('/brand/comment/:brandId', {
-            templateUrl: 'modules/brand/comment/comment.html',
-            controller: 'BrandCtrl',
-            access: access.user
+        $routeProvider
+            .when('/brand/infor/:brandId', {
+                templateUrl: 'modules/brand/brand/brand.html',
+                controller: 'BrandCtrl',
+                access: access.user
+            })
+            .when('/brand/new', {
+                templateUrl: 'modules/brand/brand_new.html',
+                controller: 'brandCreateCtrl',
+                access: access.user
+            })
+            .when('/brand/promotion-new', {
+                templateUrl: 'modules/brand/promotion_new.html',
+                controller: 'createPromotionCtrl',
+                access: access.user
+            })
+            .when('/brand/promotion', {
+                templateUrl: 'modules/brand/promotion/promotion_list.html',
+                controller: 'BrandCtrl',
+                access: access.user
+            })
+            .when('/brand/comment/:brandId', {
+                templateUrl: 'modules/brand/comment/comment.html',
+                controller: 'BrandCtrl',
+                access: access.user
 
-        })
-        .when('/brand/new', {
-            templateUrl: 'modules/brand/brand_new.html',
-            controller: 'BrandCtrl',
-            access: access.user
-        })
-});
+            })
+            .when('/brand/new', {
+                templateUrl: 'modules/brand/brand_new.html',
+                controller: 'BrandCtrl',
+                access: access.user
+            })
+    });
