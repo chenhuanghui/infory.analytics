@@ -1,20 +1,61 @@
 <ul ng-controller="BrandCtrl">
     <li>
-        <span class="property">Ảnh nền</span>
-        <div class="value">
+        <div class="property col-md-4">Ảnh nền</div>
+        <div class="value col-md-8">
             <img src="{{brandCover}}" width="45" height="45" />
-            <input id="coverEdit" type="file" onchange="angular.element(this).scope().changeCover()" />
+            <input id="coverInput" type="file" ng-file-select="changeCover($files)" />
         </div>
     </li>
+
+    <div editor id = "brand.id" data="brand" title="Tên nhãn hiệu" type="brandName" success="changeName(newVal)"></div>
     <li>
-        <span class="property">Tên nhãn hiệu</span>
-        <div class="value">
+        <div class="property col-md-4">Mô tả</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="editDescription">
+                <span>{{brandDescription}}</span>
+                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
+            </div>
+            <div class="edit" ng-hide="!editDescription">
+                <input ng-model="brandDescription" class="form-control inline-block"/>
+                <i ng-click="changeDescription()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            </div>
+        </div>    
+    </li>
+    <li>
+        <div class="property col-md-4">Website</div>
+        <div class="value col-md-8">
             <div class="overview" ng-hide="editName">
                 <span>{{brandName}}</span>
                 <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
             </div>
             <div class="edit" ng-hide="!editName">
-                <input ng-model="brandName"/>
+                <input ng-model="brandName" class="form-control inline-block"/>
+                <i ng-click="changeName()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="property col-md-4">Fanpage</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="editName">
+                <span>{{brandName}}</span>
+                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
+            </div>
+            <div class="edit" ng-hide="!editName">
+                <input ng-model="brandName" class="form-control inline-block"/>
+                <i ng-click="changeName()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="property col-md-4">Liên hệ</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="editName">
+                <span>{{brandName}}</span>
+                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
+            </div>
+            <div class="edit" ng-hide="!editName">
+                <input ng-model="brandName" class="form-control inline-block"/>
                 <i ng-click="changeName()" class="icon-ok-sign success" style="cursor:pointer" ></i>
             </div>
         </div>
