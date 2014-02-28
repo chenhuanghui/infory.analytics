@@ -23,6 +23,9 @@ angular.module('engagement')
         }
 
         $scope.lineChart = {
+            chart: {
+                type: 'line'
+            },
             title: {
                 text: 'Monthly Average Temperature',
                 x: -20 //center
@@ -71,6 +74,9 @@ angular.module('engagement')
         };
 
         $scope.columnChart = {
+            chart: {
+                type: 'column'
+            },
             title: {
                 text: 'Monthly Average Rainfall'
             },
