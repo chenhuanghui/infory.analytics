@@ -830,3 +830,45 @@ table.comment{
     width: 600px !important;
     height: 300px !important;
 }
+
+.home-title{
+    margin-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    font-family: Tahoma;
+    font-size: 28px;
+    color: #e1e1e1;
+    font-style: italic;
+    margin-bottom: 20px;
+    margin: 15px;
+    background-color: white !important;
+}
+
+.home-title-2{
+    margin-left: 15px;
+    padding-top: 30px;
+    font-family: Tahoma;
+    font-size: 28px;
+    color: #e1e1e1;
+    font-style: italic;
+    margin-bottom: 20px;
+    margin: 15px;
+    background-color: white !important;
+}
+
+.content-home{
+    height: auto !important;
+}
+
+.home-watch-chart{
+    width: 140px;
+    text-align: center;
+    margin-top: 11px;
+    margin-left: 0px !important;
+}
+
+.home-select-property-chart{
+    width: 250px !important;
+    height: 32px !important;
+    border-radius: 1px !important;
+}
