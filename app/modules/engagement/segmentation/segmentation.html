@@ -55,46 +55,24 @@
                 </div>
                 <div ng-switch on="chartType.id" class="block_content">
                     <div ng-switch-when="1">
-                        <nvd3-pie-chart
-                            data="exampleData2"
-                            id="exampleId"
-                            width="850"
-                            height="550"
-                            x="xFunction()"
-                            y="yFunction()"
-                            showLabels="true"
-                            tooltips="true">
-                            <svg></svg>
-                        </nvd3-pie-chart>
+                        <div>
+                            <chart value='pieChart' type='pie' height="400">
+                            </chart>
+                        </div>
                     </div>
                    
                     <div ng-switch-when="0">
-                        <nvd3-line-chart
-                            data="exampleData1"
-                            id="toolTipExample"
-                            width="850"
-                            height="550"
-                            showXAxis="true"
-                            showYAxis="true"
-                            interactive="true"
-                            tooltips="true">
-                                <svg></svg>
-                        </nvd3-line-chart>
+                        <div>
+                            <chart value='lineChart' type='line' height="400">
+                            </chart>
+                        </div>
                     </div>
                     
                     <div ng-switch-when="2">
-                        <nvd3-discrete-bar-chart
-                            data="exampleData3"
-                            id="exampleId"
-                            showXAxis="true"
-                            showYAxis="true"
-                            xAxisTickFormat="xAxisTickFormatFunction()"
-                            width="850"
-                            height="550"
-                            interactive="true"
-                            tooltips="true">
-                                <svg></svg>
-                        </nvd3-discrete-bar-chart>
+                        <div>
+                            <chart value='columnChart' type='column' height="400">
+                            </chart>
+                        </div>
                     </div>
                     
                 </div>
