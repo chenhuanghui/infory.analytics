@@ -17,7 +17,7 @@ var app = angular.module('Smg', [
     'smgDirectives',
     'ui.bootstrap.datetimepicker',
     'ui.date',
-    'chartjs'
+    'nvd3ChartDirectives'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',
