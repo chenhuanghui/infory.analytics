@@ -210,6 +210,15 @@ angular.module('brand')
                     commentRemote.get({
                         comment_id: data.comment_id
                     }, function(data) {
+                        var newDate = new Date(data.updated_time);
+                        var d = newDate.getDate();
+                        var m = newDate.getMonth() + 1;
+                        var y = newDate.getFullYear();
+                        var h = newDate.getHours();
+                        var min = newDate.getMinutes();
+
+                        data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                        data.timeDisplay = (h <= 9 ? '0' + h : h) + ' : ' + (min <= 9 ? '0' + min : min);
                         $scope.shop.comments.unshift(data);
                         $scope.commentInput = '';
                     });
