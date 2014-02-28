@@ -5,8 +5,8 @@
  */
 angular.module('smg.services')
     .factory('remoteFactory', function($http) {
-        //var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
-        var base_url = "http://smartguide.dev/dashboard/api/v1/";
+        var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
+        //var base_url = "http://smartguide.dev/dashboard/api/v1/";
         return {
             getBaseUrl: function() {
                 return base_url;

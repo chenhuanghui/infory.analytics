@@ -3,11 +3,11 @@ angular.module('smg.services')
         function($http, remoteFactory) {
             var base_url = remoteFactory.getBaseUrl();
             return {
-                login: function(user, success, error) {
-                    $http.post('http://dev2.smartguide.vn/dashboard/auth', user).success(success).error(error);
+                login: function(fields, success, error) {
+                    $http.post('http://dev2.smartguide.vn/dashboard/auth', fields).success(success).error(error);
                 },
-                logout: function(user, success, error) {
-                    $http.post(base_url + 'logout', user).success(success).error(error);
+                logout: function(fields, success, error) {
+                    $http.post(base_url + 'logout', fields).success(success).error(error);
                 }
             }
         }

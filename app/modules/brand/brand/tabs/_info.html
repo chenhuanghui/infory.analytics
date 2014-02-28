@@ -7,7 +7,20 @@
         </div>
     </li>
 
-    <div editor id = "brand.id" data="brand" title="Tên nhãn hiệu" type="brandName" success="changeName(newVal)"></div>
+    <li>
+        <div class="property col-md-4">Tên nhãn hiệu</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="bundle.editName">
+                <span>{{bundle.brandName}}</span>
+                <a ng-click="bundle.editName = true" style="cursor:pointer" >sửa</a>
+            </div>
+            <div class="edit" ng-hide="!bundle.editName">
+                <input ng-model="bundle.brandName" class="form-control inline-block"/>
+                <i ng-click="changeName()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            </div>
+        </div>
+    </li>
+
     <li>
         <div class="property col-md-4">Mô tả</div>
         <div class="value col-md-8">

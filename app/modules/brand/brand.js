@@ -8,8 +8,10 @@ angular.module('brand')
         $scope.brands = null;
 
         $scope.editName = false;
-        $scope.brandName = '';
-        $scope.brandCover = '';
+        $scope.bundle = {
+            brandName: '',
+            editName: false
+        };
 
         $scope.oderComments = [{
             field: 'like_count',
@@ -26,8 +28,8 @@ angular.module('brand')
                     dataFactory.getBrand(brands[0].id, function(data) {
                         $scope.brand = data;
                         $scope.shop = $scope.brand.shops[0];
-                        $scope.brandName = data.name;
-                        $scope.brandCover = data.cover;
+                        $scope.bundle.brandName = data.name;
+                        $scope.bundle.brandCover = data.cover;
                         refactorDateTimeMessage($scope.brand);
                     }, function() {})
                 } else {
@@ -36,8 +38,8 @@ angular.module('brand')
                             dataFactory.getBrand(brands[i].id, function(data) {
                                 $scope.brand = data;
                                 $scope.shop = $scope.brand.shops[0];
-                                $scope.brandName = data.name;
-                                $scope.brandCover = data.cover;
+                                $scope.bundle.brandName = data.name;
+                                $scope.bundle.brandCover = data.cover;
                                 refactorDateTimeMessage($scope.brand);
                             }, function() {})
                             break;
@@ -82,22 +84,24 @@ angular.module('brand')
         }
 
         $scope.changeName = function() {
-            if ($scope.brandName.length <= 0) {
-                $scope.brandName = $scope.brand.name;
+            if ($scope.bundle.brandName.length <= 0) {
+                $scope.bundle.brandName = $scope.brand.name;
             } else {
-                brandRemote.updateName(brandId, $scope.brandName, function(data) {
+                brandRemote.update({
+                    name: $scope.bundle.brandName,
+                    brand_id: brandId,
+                }, function(data) {
                     if (data.error == undefined) {
-                        $scope.brand.name = $scope.brandName;
-                        $scope.editName = !$scope.editName;
+                        $scope.brand.name = $scope.bundle.brandName;
+                        $scope.bundle.editName = !$scope.bundle.editName;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
-                        $scope.editName = !$scope.editName;
-                        $scope.brandName = $scope.brand.name;
+                        $scope.bundle.editName = !$scope.bundle.editName;
+                        $scope.bundle.brandName = $scope.brand.name;
                     }
                 }, function() {
 
                 });
-
             }
         }
 

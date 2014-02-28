@@ -3,12 +3,8 @@ angular.module('smg.services')
         function($http, remoteFactory) {
             var base_url = remoteFactory.getBaseUrl();
             return {
-                get: function(fields, brandId, userId, success, error) {
-                    $http.post(base_url + 'user/get_profile', {
-                        fields: fields,
-                        brand_id: brandId,
-                        user_id: userId
-                    }).success(success).error(error);
+                get: function(fields, success, error) {
+                    $http.post(base_url + 'user/get_profile', fields).success(success).error(error);
                 }
             }
         }
