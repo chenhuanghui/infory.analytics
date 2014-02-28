@@ -102,18 +102,29 @@ angular.module('brand')
         }
 
         $scope.changeCover = function() {
-            brandRemote.updateCover(brandId, $scope.brandCover, function(data) {
-                if (data.error == undefined) {
-                    $scope.brand.cover = $scope.brandCover;
-                    dataFactory.setCurrentBrand($scope.brand);
-                } else {
-                    $scope.brandCover = $scope.brand.cover;
-                }
-            }, function() {
-
+            var file = $files[0];
+            $.ajaxFileUpload({
+                url: url,
+                data: {
+                    brand_id: brandId
+                },
+                secureuri: false,
+                fileElementId: id,
+                dataType: 'json',
+                success: function(data, status) {}
             });
+            //var file = $('#coverEdit')[0].files[0];
+            // brandRemote.updateCover(brandId, file, function(data) {
+            //     if (data.error == undefined) {
+            //         $scope.brand.cover = $scope.brandCover;
+            //         dataFactory.setCurrentBrand($scope.brand);
+            //     } else {
+            //         $scope.brandCover = $scope.brand.cover;
+            //     }
+            // }, function() {
 
-        }
+            // });
+        };
     }
 ])
 

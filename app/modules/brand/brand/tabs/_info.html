@@ -3,8 +3,7 @@
         <span class="property">Ảnh nền</span>
         <div class="value">
             <img src="{{brandCover}}" width="45" height="45" />
-            <!-- <input type="file" ng-model="brandCover"/>
-            <i style="cursor:pointer" ng-click="changeCover();" class="icon-ok-sign success">{{brandCover}}</i> -->
+            <input id="coverEdit" type="file" onchange="angular.element(this).scope().changeCover()" />
         </div>
     </li>
     <li>
@@ -14,7 +13,7 @@
                 <span>{{brandName}}</span>
                 <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
             </div>
-            <div ng-hide="!editName">
+            <div class="edit" ng-hide="!editName">
                 <input ng-model="brandName"/>
                 <i ng-click="changeName()" class="icon-ok-sign success" style="cursor:pointer" ></i>
             </div>
