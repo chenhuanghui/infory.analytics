@@ -31,8 +31,9 @@ angular.module('shop')
         dataFactory.getShop(shopId, fields, function(data) {
             if (data.full_address != null)
                 $scope.shop = data;
-            else
+            else {
                 $scope.shop.phone = data.phone;
+            }
         }, function() {});
     }
 ])

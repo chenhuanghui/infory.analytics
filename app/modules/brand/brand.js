@@ -1,12 +1,12 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'brandRemote', 'dataFactory',
-    function($scope, $http, $location, $routeParams, brandRemote, dataFactory) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'brandRemote', 'commentRemote', 'dataFactory',
+    function($scope, $http, $location, $routeParams, brandRemote, commentRemote, dataFactory) {
 
         var brandId = $routeParams.brandId;
         $scope.brand = null;
         $scope.brands = null;
-
+        $scope.commentInput = '';
         $scope.editName = false;
         $scope.bundle = {
             brandName: '',
@@ -185,6 +185,37 @@ angular.module('brand')
                 });
             }
         }
+
+        $scope.delComment = function(id) {
+            commentRemote.delete({
+                comment_id: id
+            }, function(data) {
+                if (data.error == undefined) {
+                    for (var i = $scope.shop.comments.length - 1; i >= 0; i--) {
+                        if ($scope.shop.comments[i].id == id) {
+                            $scope.shop.comments.splice(i, 1);
+                            return;
+                        }
+                    }
+                }
+            }, function() {})
+        };
+
+        $scope.addComment = function() {
+            commentRemote.create({
+                shop_id: $scope.shop.id,
+                content: $scope.commentInput
+            }, function(data) {
+                if (data.error == undefined) {
+                    commentRemote.get({
+                        comment_id: data.comment_id
+                    }, function(data) {
+                        $scope.shop.comments.unshift(data);
+                        $scope.commentInput = '';
+                    });
+                }
+            });
+        };
 
         $scope.changeCover = function() {
             var file = $files[0];

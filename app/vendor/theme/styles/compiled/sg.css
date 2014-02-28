@@ -948,3 +948,8 @@ table.comment{
     font-family: Tahoma;
     font-size: 13px;
 }
+
+.first-comment{
+    height: 50px !important;
+    width: 665px;
+}

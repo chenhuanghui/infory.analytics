@@ -35,6 +35,9 @@ angular.module('smg.services')
                     }
 
                 },
+                setCurrentShop: function(shop) {
+                    currentShop = shop;
+                },
                 setUsernameAvatar: function(username, avatar) {
                     user_pre.username = username;
                     user_pre.avatar = avatar;
