@@ -1,22 +1,74 @@
 <ul ng-controller="BrandCtrl">
     <li>
-        <span class="property">Ảnh nền</span>
-        <div class="value">
+        <div class="property col-md-4">Ảnh nền</div>
+        <div class="value col-md-8">
             <img src="{{brandCover}}" width="45" height="45" />
             <!-- <input type="file" ng-model="brandCover"/>
             <i style="cursor:pointer" ng-click="changeCover();" class="icon-ok-sign success">{{brandCover}}</i> -->
         </div>
     </li>
     <li>
-        <span class="property">Tên nhãn hiệu</span>
-        <div class="value">
+        <div class="property col-md-4">Tên nhãn hiệu</div>
+        <div class="value col-md-8">
             <div class="overview" ng-hide="editName">
                 <span>{{brandName}}</span>
                 <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
             </div>
-            <div ng-hide="!editName">
-                <input ng-model="brandName"/>
-                <i style="cursor:pointer" ng-click="changeName();" class="icon-ok-sign success"></i>
+            <div class="edit" ng-hide="!editName">
+                <input ng-model="brandName" class="form-control inline-block"/>
+                <i style="cursor:pointer" ng-click="changeName()" class="icon-ok-sign success"></i>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="property col-md-4">Mô tả</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="editName">
+                <span>Gloria Jean's Coffees là thương hiệu cà phê nổi tiếng trên thế giới, đang được đông đảo giới trẻ Việt Nam yêu thích và ủng hộ. Đến với Gloria Jean's Coffees, bạn không chỉ trải nghiệm được hương vị tuyệt vời của từng món thức uống mà còn cảm nhận được sự gần gũi, thân thiết như vừa trở về nhà. Đó chính là nét tinh túy đặc trưng mà không đâu có được của Gloria Jean’s Coffees.</span>
+                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
+            </div>
+            <div class="edit" ng-hide="!editName">
+                <textarea class="form-control inline-block">Gloria Jean's Coffees là thương hiệu cà phê nổi tiếng trên thế giới, đang được đông đảo giới trẻ Việt Nam yêu thích và ủng hộ. Đến với Gloria Jean's Coffees, bạn không chỉ trải nghiệm được hương vị tuyệt vời của từng món thức uống mà còn cảm nhận được sự gần gũi, thân thiết như vừa trở về nhà. Đó chính là nét tinh túy đặc trưng mà không đâu có được của Gloria Jean’s Coffees.</textarea>
+                <i style="cursor:pointer" ng-click="changeName()" class="icon-ok-sign success"></i>
+            </div>
+        </div>    
+    </li>
+    <li>
+        <div class="property col-md-4">Website</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="editName">
+                <span>{{brandName}}</span>
+                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
+            </div>
+            <div class="edit" ng-hide="!editName">
+                <input ng-model="brandName" class="form-control inline-block"/>
+                <i style="cursor:pointer" ng-click="changeName()" class="icon-ok-sign success"></i>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="property col-md-4">Fanpage</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="editName">
+                <span>{{brandName}}</span>
+                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
+            </div>
+            <div class="edit" ng-hide="!editName">
+                <input ng-model="brandName" class="form-control inline-block"/>
+                <i style="cursor:pointer" ng-click="changeName()" class="icon-ok-sign success"></i>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="property col-md-4">Liên hệ</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="editName">
+                <span>{{brandName}}</span>
+                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
+            </div>
+            <div class="edit" ng-hide="!editName">
+                <input ng-model="brandName" class="form-control inline-block"/>
+                <i style="cursor:pointer" ng-click="changeName()" class="icon-ok-sign success"></i>
             </div>
         </div>
     </li>
