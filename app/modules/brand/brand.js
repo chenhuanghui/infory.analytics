@@ -10,7 +10,14 @@ angular.module('brand')
         $scope.editName = false;
         $scope.bundle = {
             brandName: '',
-            editName: false
+            brandDescription: '',
+            brandWebsite: '',
+            brandFanpage: '',
+            brandContact: '',
+            editName: false,
+            editDescription: false,
+            editWebsite: false,
+            editFanpage: false
         };
 
         $scope.oderComments = [{
@@ -21,6 +28,16 @@ angular.module('brand')
             display: 'Thời gian'
         }];
 
+        function saveBundle(data) {
+            $scope.bundle.brandLogo = data.logo;
+            $scope.bundle.brandName = data.name;
+            $scope.bundle.brandCover = data.cover;
+            $scope.bundle.brandDescription = data.description;
+            $scope.bundle.brandWebsite = data.website;
+            $scope.bundle.brandFanpage = data.fanpage;
+            $scope.bundle.brandContact = data.owner_phone;
+        }
+
         dataFactory.getBrands(function(brands) {
             $scope.brands = brands;
             if (brands.length != 0) {
@@ -28,8 +45,7 @@ angular.module('brand')
                     dataFactory.getBrand(brands[0].id, function(data) {
                         $scope.brand = data;
                         $scope.shop = $scope.brand.shops[0];
-                        $scope.bundle.brandName = data.name;
-                        $scope.bundle.brandCover = data.cover;
+                        saveBundle($scope.brand);
                         refactorDateTimeMessage($scope.brand);
                     }, function() {})
                 } else {
@@ -38,8 +54,7 @@ angular.module('brand')
                             dataFactory.getBrand(brands[i].id, function(data) {
                                 $scope.brand = data;
                                 $scope.shop = $scope.brand.shops[0];
-                                $scope.bundle.brandName = data.name;
-                                $scope.bundle.brandCover = data.cover;
+                                saveBundle($scope.brand);
                                 refactorDateTimeMessage($scope.brand);
                             }, function() {})
                             break;
@@ -98,6 +113,72 @@ angular.module('brand')
                     } else {
                         $scope.bundle.editName = !$scope.bundle.editName;
                         $scope.bundle.brandName = $scope.brand.name;
+                    }
+                }, function() {
+
+                });
+            }
+        }
+
+        $scope.changeDescription = function() {
+            if ($scope.bundle.brandDescription.length <= 0) {
+                $scope.bundle.brandDescription = $scope.brand.description;
+            } else {
+                brandRemote.update({
+                    description: $scope.bundle.brandDescription,
+                    brand_id: brandId,
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.brand.description = $scope.bundle.brandDescription;
+                        $scope.bundle.editDescription = !$scope.bundle.editDescription;
+                        dataFactory.setCurrentBrand($scope.brand);
+                    } else {
+                        $scope.bundle.editDescription = !$scope.bundle.editDescription;
+                        $scope.bundle.brandDescription = $scope.brand.description;
+                    }
+                }, function() {
+
+                });
+            }
+        }
+
+        $scope.changeWebsite = function() {
+            if ($scope.bundle.brandWebsite.length <= 0) {
+                $scope.bundle.brandWebsite = $scope.brand.website;
+            } else {
+                brandRemote.update({
+                    website: $scope.bundle.brandWebsite,
+                    brand_id: brandId,
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.brand.website = $scope.bundle.brandWebsite;
+                        $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
+                        dataFactory.setCurrentBrand($scope.brand);
+                    } else {
+                        $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
+                        $scope.bundle.brandWebsite = $scope.brand.website;
+                    }
+                }, function() {
+
+                });
+            }
+        }
+
+        $scope.changeFanpage = function() {
+            if ($scope.bundle.brandFanpage.length <= 0) {
+                $scope.bundle.brandFanpage = $scope.brand.fanpage;
+            } else {
+                brandRemote.update({
+                    fanpage: $scope.bundle.brandFanpage,
+                    brand_id: brandId,
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.brand.fanpage = $scope.bundle.brandFanpage;
+                        $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
+                        dataFactory.setCurrentBrand($scope.brand);
+                    } else {
+                        $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
+                        $scope.bundle.brandFanpage = $scope.brand.fanpage;
                     }
                 }, function() {
 

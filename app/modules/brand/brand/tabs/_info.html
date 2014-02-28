@@ -1,9 +1,16 @@
 <ul ng-controller="BrandCtrl">
     <li>
+        <div class="property col-md-4">Logo</div>
+        <div class="value col-md-8">
+            <img src="{{bundle.brandLogo}}" width="45" height="45" />
+            <input id="logoInput" type="file" ng-file-select="changeCover($files)" />
+        </div>
+    </li>
+    <li>
         <div class="property col-md-4">Ảnh nền</div>
         <div class="value col-md-8">
-            <img src="{{brandCover}}" width="45" height="45" />
-            <input id="coverInput" type="file" ng-file-select="changeCover($files)" />
+            <img src="{{bundle.brandCover}}" width="45" height="45" />
+            <input id="logoInput" type="file" ng-file-select="changeCover($files)" />
         </div>
     </li>
 
@@ -24,52 +31,41 @@
     <li>
         <div class="property col-md-4">Mô tả</div>
         <div class="value col-md-8">
-            <div class="overview" ng-hide="editDescription">
-                <span>{{brandDescription}}</span>
-                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
+            <div class="overview" ng-hide="bundle.editDescription">
+                <span>{{bundle.brandDescription}}</span>
+                <a ng-click="bundle.editDescription = true" style="cursor:pointer" >sửa</a>
             </div>
-            <div class="edit" ng-hide="!editDescription">
-                <input ng-model="brandDescription" class="form-control inline-block"/>
+            <div class="edit" ng-hide="!bundle.editDescription">
+                <input ng-model="bundle.brandDescription" class="form-control inline-block"/>
                 <i ng-click="changeDescription()" class="icon-ok-sign success" style="cursor:pointer" ></i>
             </div>
-        </div>    
+        </div>
     </li>
+
     <li>
         <div class="property col-md-4">Website</div>
         <div class="value col-md-8">
-            <div class="overview" ng-hide="editName">
-                <span>{{brandName}}</span>
-                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
+            <div class="overview" ng-hide="bundle.editWebsite">
+                <span>{{bundle.brandWebsite}}</span>
+                <a ng-click="bundle.editWebsite = true" style="cursor:pointer" >sửa</a>
             </div>
-            <div class="edit" ng-hide="!editName">
-                <input ng-model="brandName" class="form-control inline-block"/>
-                <i ng-click="changeName()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            <div class="edit" ng-hide="!bundle.editWebsite">
+                <input ng-model="bundle.brandWebsite" class="form-control inline-block"/>
+                <i ng-click="changeWebsite()" class="icon-ok-sign success" style="cursor:pointer" ></i>
             </div>
         </div>
     </li>
+
     <li>
         <div class="property col-md-4">Fanpage</div>
         <div class="value col-md-8">
-            <div class="overview" ng-hide="editName">
-                <span>{{brandName}}</span>
-                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
+            <div class="overview" ng-hide="bundle.editFanpage">
+                <span>{{bundle.brandFanpage}}</span>
+                <a ng-click="bundle.editFanpage = true" style="cursor:pointer" >sửa</a>
             </div>
-            <div class="edit" ng-hide="!editName">
-                <input ng-model="brandName" class="form-control inline-block"/>
-                <i ng-click="changeName()" class="icon-ok-sign success" style="cursor:pointer" ></i>
-            </div>
-        </div>
-    </li>
-    <li>
-        <div class="property col-md-4">Liên hệ</div>
-        <div class="value col-md-8">
-            <div class="overview" ng-hide="editName">
-                <span>{{brandName}}</span>
-                <a style="cursor:pointer" ng-click="editName = !editName;">sửa</a>
-            </div>
-            <div class="edit" ng-hide="!editName">
-                <input ng-model="brandName" class="form-control inline-block"/>
-                <i ng-click="changeName()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            <div class="edit" ng-hide="!bundle.editFanpage">
+                <input ng-model="bundle.brandFanpage" class="form-control inline-block"/>
+                <i ng-click="changeFanpage()" class="icon-ok-sign success" style="cursor:pointer" ></i>
             </div>
         </div>
     </li>
