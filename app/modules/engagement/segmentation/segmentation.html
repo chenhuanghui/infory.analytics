@@ -36,21 +36,32 @@
 
             <div class="block home-block">
                 <div class="block_header">
-                    <select class="beg_date date">
-                        <option>01/01/2011</option>
-                    </select>
-                    - 
-                    <select class="end_date date">
-                        <option>01/01/2011</option>
-                    </select>
+                    <span>
+                        <div class="dropdown left" >
+                          <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                            </div>
+                          </a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
+                          </ul>
+                        </div>
+
+                        <div class="dropdown left" style="margin-left:10px;">
+                          <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                            </div>
+                          </a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'day' }" data-on-set-time="onTimeSetTwo"/>
+                          </ul>
+                        </div>
+                    </span>
 
                      <select class="type_menu right" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-init="chartType=chartTypes[0]"></select>
 
-                    <select class="type_menu pull-right">
-                        <option>NGÀY</option>
-                        <option>TUẦN</option>
-                        <option>THÁNG</option>
-                    </select>
+                     <select class="type_menu pull-right" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-init="time_unit=time_units[0]" ng-change="updateChart()"></select>
+
                 </div>
                 <div ng-switch on="chartType.id" class="block_content">
                     <div ng-switch-when="1">
