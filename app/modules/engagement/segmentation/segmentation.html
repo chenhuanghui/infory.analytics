@@ -6,7 +6,6 @@
             <div class="notice shadow">
                 <div class='col-md-12'>
                     <p class="title">Hệ thống bình luận tại mỗi cửa hàng</p>
-                    <p class="sub">Ac diam! Enim eu enim egestas, vel ac, ut? Vel sit urna tempor lectus integer. Ac rhoncus nec porttitor. Aliquet. Vut ultrices pid scelerisque! Porttitor augue et sed? </p>
                 </div>
                 
                 <div class="clearfix"></div>
@@ -29,7 +28,7 @@
                     <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>
                 </div>
                 <div class="block_footer">
-                    <span class="btn-flat primary right" ng-click="getAllFilter()">Xem</span>
+                    <span class="btn-flat primary right" ng-click="getResult()">Xem</span>
                 </div>
             </div>
 
@@ -56,21 +55,21 @@
                 <div ng-switch on="chartType.id" class="block_content">
                     <div ng-switch-when="1">
                         <div>
-                            <chart value='pieChart' height="400">
+                            <chart value='chartData[1]' height="400">
                             </chart>
                         </div>
                     </div>
                    
                     <div ng-switch-when="0">
                         <div>
-                            <chart value='lineChart' height="400">
+                            <chart value='chartData[0]' height="400">
                             </chart>
                         </div>
                     </div>
                     
                     <div ng-switch-when="2">
                         <div>
-                            <chart value='columnChart' height="400">
+                            <chart value='chartData[2]' height="400">
                             </chart>
                         </div>
                     </div>
