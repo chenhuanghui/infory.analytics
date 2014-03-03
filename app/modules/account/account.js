@@ -1,6 +1,9 @@
 angular.module('account')
-    .controller('accountCtrl', ['$scope',
-        function($scope) {
+    .controller('AccountCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth',
+        function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth) {
+
+            $scope._username = Auth.user.name;
+
             $scope.activeTab = "inbox";
             $scope.activeTab = "personal";
 
