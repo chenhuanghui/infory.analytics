@@ -287,13 +287,8 @@ angular.module('brand')
                 controller: 'brandCreateCtrl',
                 access: access.user
             })
-            .when('/brand/promotion-new', {
+            .when('/brand/promotion/:brandId', {
                 templateUrl: 'modules/brand/promotion_new.html',
-                controller: 'createPromotionCtrl',
-                access: access.user
-            })
-            .when('/brand/promotion', {
-                templateUrl: 'modules/brand/promotion/promotion_list.html',
                 controller: 'BrandCtrl',
                 access: access.user
             })

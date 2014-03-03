@@ -97,7 +97,7 @@ angular.module('user')
                     userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
 
                 if (userProfile.dob != null)
-                    userProfile.age = new Date().getFullYear() - userProfile.dob.getFullYear();
+                    userProfile.age = new Date().getFullYear() - new Date(userProfile.dob).getFullYear();
                 else
                     userProfile.age = "Không xác định";
 
@@ -106,12 +106,41 @@ angular.module('user')
     }
 ])
 
-.controller('UserManagerCtrl', ['$scope', 'remoteFactory',
-    function($scope, remoteFactory) {
+.controller('UserManagerCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory',
+    function($scope, $routeParams, dataFactory, remoteFactory) {
+        var brandId = $routeParams.brandId;
+
         $scope.metas = remoteFactory.meta_property_types;
         $scope.events = remoteFactory.meta_events;
         $scope.metadata = remoteFactory.meta_lists;
 
+        $scope.subfilters = null;
+
+        dataFactory.getUsersOfBrand(brandId, function(data) {
+            $scope.userList = data.users;
+
+            for (var i = 0; i < $scope.userList.length; i++) {
+
+                var user = $scope.userList[i];
+                if (user.email == null)
+                    user.email = "Không xác định";
+
+                if (user.gender == 1)
+                    user.gender = 'Nam';
+                else
+                    user.gender = 'Nữ';
+
+                if (user.city == null)
+                    user.city = "Không xác định";
+
+                if (user.dob != null)
+                    user.age = new Date().getFullYear() - new Date(user.dob).getFullYear();
+                else
+                    user.age = "Không xác định";
+            }
+
+            dataFactory.setUsersOfBrand(brandId, $scope.userList);
+        }, function() {})
     }
 ])
 
@@ -164,7 +193,7 @@ angular.module('user')
             controller: 'UserCtrl',
             access: access.user
         })
-        .when('/user/manager', {
+        .when('/user/manager/:brandId', {
             templateUrl: 'modules/user/user_manager.html',
             controller: 'UserManagerCtrl',
             access: access.user

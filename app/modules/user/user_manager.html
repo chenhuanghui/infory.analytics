@@ -25,7 +25,7 @@
                 </div>
                 <div class="block_content">
                     <p class="notify"> Chỉ thống kê các lượt <span>{{event.name_display}}</span> thoả điều kiện</p>
-                    <div smg-filter metas="metas" events="events" metadata="metadata" event="event"></div>
+                    <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>
                 </div>
                 <div class="block_footer">
                     <span class="btn-flat primary right" ng-click="getAllFilter()">Xem</span>
@@ -51,7 +51,7 @@
                             <tr>
                                 <th><input type="checkbox" /></th>
                                 <th class="name">Tên</th>
-                                <th>Tuổi</th>
+                                <th>Năm sinh</th>
                                 <th>Giới tính</th>
                                 <th>Vị trí</th>
                                 <th>Lần sử dụng cuối</th>
@@ -65,24 +65,15 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody ng-repeat="user in userList">
                             <tr>
                                 <td><input type="checkbox" /></td>
-                                <td class="name">wayne rooney</td>
-                                <td>28</td>
-                                <td>Nam</td>
-                                <td>Manchester United</td>
-                                <td>12:23 PM 2/20/2014</td>
-                                <td>1 giờ / ngày</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>wayne rooney</td>
-                                <td>28</td>
-                                <td>Nam</td>
-                                <td>Manchester United</td>
-                                <td>12:23 PM 2/20/2014</td>
-                                <td>1 giờ / ngày</td>
+                                <td class="name">{{user.name}}</td>
+                                <td>{{user.age}}</td>
+                                <td>{{user.gender}}</td>
+                                <td>{{user.city}}</td>
+                                <td>{{user.last_visit}}</td>
+                                <td>Api thieu</td>
                             </tr>
                         </tbody>
                     </table>
