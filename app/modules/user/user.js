@@ -85,7 +85,7 @@ angular.module('user')
                 if (userProfile.email == null)
                     userProfile.email = "Không xác định";
 
-                if (userProfile.gender == 1)
+                if (userProfile.gender == 'male')
                     userProfile.gender = 'Nam';
                 else
                     userProfile.gender = 'Nữ';
@@ -119,11 +119,7 @@ angular.module('user')
         $scope.userList = dataFactory.getCurrentResultUserFilter();
 
         $scope.getResult = function() {
-            var operator = "AND";
-            if ($scope.subfilters.length > 1)
-                operator = $scope.subfilters[1].getValue().operator;
-
-            var query = filterHelper.buildQuery($scope.metas, $scope.events, $scope.metadata, $scope.event, $scope.subfilters, operator);
+            var query = filterHelper.buildQuery($scope.metas, $scope.events, $scope.metadata, $scope.event, $scope.subfilters);
 
             var fields = {
                 filter: JSON.stringify(query),
@@ -143,7 +139,7 @@ angular.module('user')
                         if (user.email == null)
                             user.email = "Không xác định";
 
-                        if (user.gender == 1)
+                        if (user.gender == 'male')
                             user.gender = 'Nam';
                         else
                             user.gender = 'Nữ';
@@ -152,9 +148,9 @@ angular.module('user')
                             user.city = "Không xác định";
 
                         if (user.dob != null)
-                            user.age = new Date().getFullYear() - new Date(user.dob).getFullYear();
+                            user.dob = new Date(user.dob).getFullYear();
                         else
-                            user.age = "Không xác định";
+                            user.dob = "Không xác định";
                     }
 
                     dataFactory.setCurrentResultUserFilter($scope.userList);

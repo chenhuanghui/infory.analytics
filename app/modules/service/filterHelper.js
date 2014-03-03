@@ -5,6 +5,9 @@ angular.module('Smg')
         function() {
             return {
                 buildQuery: function(metas, events, metadata, event, subfilters, type) {
+                    var type = "AND";
+                    if (subfilters.length > 1)
+                        type = subfilters[1].getValue().operator;
 
                     var query = null;
                     var elements = null;
@@ -28,6 +31,13 @@ angular.module('Smg')
                             continue;
                         switch (pre_query.meta) {
                             case 'là':
+
+                                if (pre_query.paremeters.firstInput == 'Nam')
+                                    pre_query.paremeters.firstInput = 'male';
+
+                                if (pre_query.paremeters.firstInput == 'Nữ')
+                                    pre_query.paremeters.firstInput = 'female';
+
                                 elements.push({
                                     belong: {
                                         property: pre_query.property.name,
