@@ -1028,3 +1028,126 @@ table.comment{
 	left: 13px;
     color: #97AAC8;
 }
+
+/** home **/
+.home-title{
+    margin-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    font-family: Tahoma;
+    font-size: 28px;
+    color: #e1e1e1;
+    font-style: italic;
+    margin-bottom: 20px;
+    margin: 15px;
+    background-color: white !important;
+}
+
+.home-title-2{
+    margin-left: 15px;
+    padding-top: 30px;
+    font-family: Tahoma;
+    font-size: 28px;
+    color: #e1e1e1;
+    font-style: italic;
+    margin-bottom: 20px;
+    margin: 15px;
+    background-color: white !important;
+}
+
+.content-home{
+    height: auto !important;
+}
+
+.home-watch-chart{
+    width: 140px;
+    text-align: center;
+    margin-top: 11px;
+    margin-left: 0px !important;
+}
+
+.home-select-property-chart{
+    width: 250px !important;
+    height: 32px !important;
+    border-radius: 1px !important;
+}
+
+/** personal setting**/
+.personal-normal-title{
+    margin-top: 0px !important;
+    margin-left: 50px !important;
+    padding: 0px !important;
+
+    font-size: 15px !important;
+    font-style: normal !important;
+    font-weight: 150 !important;
+
+}
+
+.setting-title{
+    padding: 0px !important;
+    margin: 0 0 20px 50px !important;
+}
+
+.budget-remain{
+    background-color: #e1e1e1;
+    color: red;
+    padding: 0px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    height: 55px;
+    width: 280px;
+    margin-right: 0px;
+    margin-left: 50px;
+    margin-top: 13px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.t-coin{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.t-coin-title{
+    margin-right: 5px;
+    margin-left: 10px;
+    margin-top: 28px;
+    font-size: 13px;
+    font-weight: normal;
+    color: #696d73;
+    font-style: italic;
+}
+
+.buy-t-coin{
+    background-color: white;
+    background-image: url('/vendor/theme/img/button_pay.png');
+    background-size: cover;
+    border: 0px;
+    color: red;
+    padding: 0px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    height: 60px;
+    width: 210px;
+    margin-right: 0px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.price-form{
+    color: #696d73;
+    margin-right: 125px;
+    margin-bottom: 20px;
+    font-family: Tahoma;
+    font-size: 13px;
+}
+
+.first-comment{
+    height: 50px !important;
+    width: 665px;
+}

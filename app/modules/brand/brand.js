@@ -1,15 +1,24 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'brandRemote', 'dataFactory',
-    function($scope, $http, $location, $routeParams, brandRemote, dataFactory) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'brandRemote', 'commentRemote', 'dataFactory',
+    function($scope, $http, $location, $routeParams, brandRemote, commentRemote, dataFactory) {
 
         var brandId = $routeParams.brandId;
         $scope.brand = null;
         $scope.brands = null;
-
+        $scope.commentInput = '';
         $scope.editName = false;
-        $scope.brandName = '';
-        $scope.brandCover = '';
+        $scope.bundle = {
+            brandName: '',
+            brandDescription: '',
+            brandWebsite: '',
+            brandFanpage: '',
+            brandContact: '',
+            editName: false,
+            editDescription: false,
+            editWebsite: false,
+            editFanpage: false
+        };
 
         $scope.oderComments = [{
             field: 'like_count',
@@ -19,6 +28,16 @@ angular.module('brand')
             display: 'Thời gian'
         }];
 
+        function saveBundle(data) {
+            $scope.bundle.brandLogo = data.logo;
+            $scope.bundle.brandName = data.name;
+            $scope.bundle.brandCover = data.cover;
+            $scope.bundle.brandDescription = data.description;
+            $scope.bundle.brandWebsite = data.website;
+            $scope.bundle.brandFanpage = data.fanpage;
+            $scope.bundle.brandContact = data.owner_phone;
+        }
+
         dataFactory.getBrands(function(brands) {
             $scope.brands = brands;
             if (brands.length != 0) {
@@ -26,8 +45,7 @@ angular.module('brand')
                     dataFactory.getBrand(brands[0].id, function(data) {
                         $scope.brand = data;
                         $scope.shop = $scope.brand.shops[0];
-                        $scope.brandName = data.name;
-                        $scope.brandCover = data.cover;
+                        saveBundle($scope.brand);
                         refactorDateTimeMessage($scope.brand);
                     }, function() {})
                 } else {
@@ -36,8 +54,7 @@ angular.module('brand')
                             dataFactory.getBrand(brands[i].id, function(data) {
                                 $scope.brand = data;
                                 $scope.shop = $scope.brand.shops[0];
-                                $scope.brandName = data.name;
-                                $scope.brandCover = data.cover;
+                                saveBundle($scope.brand);
                                 refactorDateTimeMessage($scope.brand);
                             }, function() {})
                             break;
@@ -82,38 +99,157 @@ angular.module('brand')
         }
 
         $scope.changeName = function() {
-            if ($scope.brandName.length <= 0) {
-                $scope.brandName = $scope.brand.name;
+            if ($scope.bundle.brandName.length <= 0) {
+                $scope.bundle.brandName = $scope.brand.name;
             } else {
-                brandRemote.updateName(brandId, $scope.brandName, function(data) {
+                brandRemote.update({
+                    name: $scope.bundle.brandName,
+                    brand_id: brandId,
+                }, function(data) {
                     if (data.error == undefined) {
-                        $scope.brand.name = $scope.brandName;
-                        $scope.editName = !$scope.editName;
+                        $scope.brand.name = $scope.bundle.brandName;
+                        $scope.bundle.editName = !$scope.bundle.editName;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
-                        $scope.editName = !$scope.editName;
-                        $scope.brandName = $scope.brand.name;
+                        $scope.bundle.editName = !$scope.bundle.editName;
+                        $scope.bundle.brandName = $scope.brand.name;
                     }
                 }, function() {
 
                 });
-
             }
         }
 
-        $scope.changeCover = function() {
-            brandRemote.updateCover(brandId, $scope.brandCover, function(data) {
-                if (data.error == undefined) {
-                    $scope.brand.cover = $scope.brandCover;
-                    dataFactory.setCurrentBrand($scope.brand);
-                } else {
-                    $scope.brandCover = $scope.brand.cover;
-                }
-            }, function() {
+        $scope.changeDescription = function() {
+            if ($scope.bundle.brandDescription.length <= 0) {
+                $scope.bundle.brandDescription = $scope.brand.description;
+            } else {
+                brandRemote.update({
+                    description: $scope.bundle.brandDescription,
+                    brand_id: brandId,
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.brand.description = $scope.bundle.brandDescription;
+                        $scope.bundle.editDescription = !$scope.bundle.editDescription;
+                        dataFactory.setCurrentBrand($scope.brand);
+                    } else {
+                        $scope.bundle.editDescription = !$scope.bundle.editDescription;
+                        $scope.bundle.brandDescription = $scope.brand.description;
+                    }
+                }, function() {
 
-            });
-
+                });
+            }
         }
+
+        $scope.changeWebsite = function() {
+            if ($scope.bundle.brandWebsite.length <= 0) {
+                $scope.bundle.brandWebsite = $scope.brand.website;
+            } else {
+                brandRemote.update({
+                    website: $scope.bundle.brandWebsite,
+                    brand_id: brandId,
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.brand.website = $scope.bundle.brandWebsite;
+                        $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
+                        dataFactory.setCurrentBrand($scope.brand);
+                    } else {
+                        $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
+                        $scope.bundle.brandWebsite = $scope.brand.website;
+                    }
+                }, function() {
+
+                });
+            }
+        }
+
+        $scope.changeFanpage = function() {
+            if ($scope.bundle.brandFanpage.length <= 0) {
+                $scope.bundle.brandFanpage = $scope.brand.fanpage;
+            } else {
+                brandRemote.update({
+                    fanpage: $scope.bundle.brandFanpage,
+                    brand_id: brandId,
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.brand.fanpage = $scope.bundle.brandFanpage;
+                        $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
+                        dataFactory.setCurrentBrand($scope.brand);
+                    } else {
+                        $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
+                        $scope.bundle.brandFanpage = $scope.brand.fanpage;
+                    }
+                }, function() {
+
+                });
+            }
+        }
+
+        $scope.delComment = function(id) {
+            commentRemote.delete({
+                comment_id: id
+            }, function(data) {
+                if (data.error == undefined) {
+                    for (var i = $scope.shop.comments.length - 1; i >= 0; i--) {
+                        if ($scope.shop.comments[i].id == id) {
+                            $scope.shop.comments.splice(i, 1);
+                            return;
+                        }
+                    }
+                }
+            }, function() {})
+        };
+
+        $scope.addComment = function() {
+            commentRemote.create({
+                shop_id: $scope.shop.id,
+                content: $scope.commentInput
+            }, function(data) {
+                if (data.error == undefined) {
+                    commentRemote.get({
+                        comment_id: data.comment_id
+                    }, function(data) {
+                        var newDate = new Date(data.updated_time);
+                        var d = newDate.getDate();
+                        var m = newDate.getMonth() + 1;
+                        var y = newDate.getFullYear();
+                        var h = newDate.getHours();
+                        var min = newDate.getMinutes();
+
+                        data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                        data.timeDisplay = (h <= 9 ? '0' + h : h) + ' : ' + (min <= 9 ? '0' + min : min);
+                        $scope.shop.comments.unshift(data);
+                        $scope.commentInput = '';
+                    });
+                }
+            });
+        };
+
+        $scope.changeCover = function() {
+            var file = $files[0];
+            $.ajaxFileUpload({
+                url: url,
+                data: {
+                    brand_id: brandId
+                },
+                secureuri: false,
+                fileElementId: id,
+                dataType: 'json',
+                success: function(data, status) {}
+            });
+            //var file = $('#coverEdit')[0].files[0];
+            // brandRemote.updateCover(brandId, file, function(data) {
+            //     if (data.error == undefined) {
+            //         $scope.brand.cover = $scope.brandCover;
+            //         dataFactory.setCurrentBrand($scope.brand);
+            //     } else {
+            //         $scope.brandCover = $scope.brand.cover;
+            //     }
+            // }, function() {
+
+            // });
+        };
     }
 ])
 

@@ -25,12 +25,18 @@ angular.module('smg.services')
                     if (currentShop != null && currentShop.id == id)
                         return currentShop;
                     else {
-                        shopRemote.get(id, fields, function(data) {
+                        shopRemote.get({
+                            fields: fields,
+                            shop_id: id,
+                        }, function(data) {
                             currentShop = data;
                             success(data);
                         }, error);
                     }
 
+                },
+                setCurrentShop: function(shop) {
+                    currentShop = shop;
                 },
                 setUsernameAvatar: function(username, avatar) {
                     user_pre.username = username;
@@ -50,7 +56,9 @@ angular.module('smg.services')
                         success(brands);
                     else {
                         var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "id", "owner_phone", "owner_address", "logo"]';
-                        brandRemote.getList(fields, function(data) {
+                        brandRemote.getList({
+                            fields: fields
+                        }, function(data) {
                             brands = data;
                             success(brands);
                         }, error);
@@ -61,7 +69,10 @@ angular.module('smg.services')
                         success(currentBrand);
                     } else {
                         var fields = '["name", "id", "cover", "type_business", "website", "fanpage", "description", "shops", "id", "owner_phone", "owner_address", "logo"]';
-                        brandRemote.get(fields, id, function(data) {
+                        brandRemote.get({
+                            fields: fields,
+                            id: id,
+                        }, function(data) {
                             currentBrand = data;
                             success(currentBrand);
                         }, error);
@@ -72,14 +83,15 @@ angular.module('smg.services')
                         success(userProfile);
                     } else {
                         var fields = '["dob", "name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline", "city", "gender", "facebook"]';
-                        userRemote.get(fields, brandId, userId, function(data) {
+                        userRemote.get({
+                            fields: fields,
+                            brand_id: brandId,
+                            user_id: userId
+                        }, function(data) {
                             userProfile = data;
                             success(userProfile);
                         }, error);
                     }
-                },
-                getBaseUrl: function() {
-                    return base_url;
                 }
             }
 

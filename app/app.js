@@ -17,7 +17,8 @@ var app = angular.module('Smg', [
     'smgDirectives',
     'ui.bootstrap.datetimepicker',
     'ui.date',
-    'nvd3ChartDirectives'
+    'nvd3ChartDirectives',
+    'angularFileUpload'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',

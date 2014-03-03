@@ -20,21 +20,20 @@
                         </div>
                     </div>
                 </div> <!-- shop info-->
-                    <div id="add_shop">
-                        <input class="shop_name form-control" type="text" placeholder="Nhập tên cửa hàng">    
-                        <a class="btn-flat success icon-plus">Thêm cửa hàng mới</a>
-                    </div>
-                    
+                <div id="add_shop" style="text-align: center;">
+                    <img src="vendor/theme/img/super-qr-code.gif" style="height:150px;align-content:center;">
+                </div>
+                
 
-                    <ul id="shop_list">
-                        <li ng-repeat="shop in shop.shops">
-                            <img src="{{shop.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="42" width="42"/>
-                            <a href="user-profile.html" class="name">{{shop.name}}</a>
-                            <span class="subtext">{{shop.full_address}}</span>
-                            <i class="icon-remove-sign"></i>
-                        </li>
-                        <div class="clearfix"></div>
-                    </ul>
+                <ul id="shop_list">
+                    <li ng-repeat="shop in shop.shops">
+                        <img src="{{shop.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="42" width="42"/>
+                        <a href="user-profile.html" class="name">{{shop.name}}</a>
+                        <span class="subtext">{{shop.full_address}}</span>
+                        <i class="icon-remove-sign"></i>
+                    </li>
+                    <div class="clearfix"></div>
+                </ul>
             </div>
             <div class="col-md-4 property-box">
                 <ul class="nav nav-tabs">
