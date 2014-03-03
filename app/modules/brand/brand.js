@@ -4,10 +4,15 @@ angular.module('brand')
     function($scope, $http, $location, $routeParams, brandRemote, commentRemote, dataFactory) {
 
         var brandId = $routeParams.brandId;
+        $scope.gallery = null;
+        $scope.usersGallery = null;
+        $scope.products = null;
+
         $scope.brand = null;
         $scope.brands = null;
         $scope.commentInput = '';
         $scope.editName = false;
+
         $scope.bundle = {
             brandName: '',
             brandDescription: '',
@@ -250,6 +255,55 @@ angular.module('brand')
 
             // });
         };
+
+        $scope.showGallery = function() {
+
+            if ($scope.gallery == null) {
+                var fields = {
+                    id: brandId,
+                    fields: '["gallery"]'
+                };
+
+                brandRemote.get(fields, function(data) {
+                    if (data.gallery == null)
+                        $scope.gallery = [];
+                    else
+                        $scope.gallery = JSON.parseJSON(data.gallery);
+                }, function() {});
+            }
+        }
+
+        $scope.showUsersGallery = function() {
+            if ($scope.usersGallery == null) {
+                var fields = {
+                    id: brandId,
+                    fields: '["user_gallery"]'
+                };
+
+                brandRemote.get(fields, function(data) {
+                    if (data.user_gallery == null)
+                        $scope.usersGallery = [];
+                    else
+                        $scope.usersGallery = JSON.parseJSON(data.user_gallery);
+                }, function() {});
+            }
+        }
+
+        $scope.showProducts = function() {
+            if ($scope.products == null) {
+                var fields = {
+                    id: brandId,
+                    fields: '["user_gallery"]'
+                };
+
+                brandRemote.get(fields, function(data) {
+                    if (data.user_gallery == null)
+                        $scope.usersGallery = [];
+                    else
+                        $scope.usersGallery = JSON.parseJSON(data.user_gallery);
+                }, function() {});
+            }
+        }
     }
 ])
 

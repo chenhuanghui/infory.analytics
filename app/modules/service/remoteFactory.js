@@ -183,7 +183,58 @@ angular.module('smg.services')
                         "nhà khoa học"
                     ]
                 },
-
+                meta_profile: {
+                    name: "profile",
+                    name_display: "profile",
+                    properties: [{
+                        name: "city",
+                        name_display: "thành phố",
+                        type: "group",
+                        available_values: "cities"
+                    }, {
+                        name: "dob",
+                        name_display: "ngày sinh",
+                        type: "time"
+                    }, {
+                        name: "age",
+                        name_display: "tuổi",
+                        type: "number"
+                    }, {
+                        name: "gender",
+                        name_display: "giới tính",
+                        type: "group",
+                        available_values: "genders"
+                    }, {
+                        name: "career",
+                        name_display: "nghề nghiệp",
+                        type: "group",
+                        available_values: "careers"
+                    }, {
+                        name: "charge",
+                        name_display: "tổng chi tiêu",
+                        type: "number"
+                    }, {
+                        name: "view_count",
+                        name_display: "số lần xem",
+                        type: "number"
+                    }, {
+                        name: "checkin_count",
+                        name_display: "số lần đến cửa hàng",
+                        type: "number"
+                    }, {
+                        name: "checkout_count",
+                        name_display: "số lần mua hàng",
+                        type: "number"
+                    }, {
+                        name: "last_visit",
+                        name_display: "lần gần nhất đến cửa hàng",
+                        type: "time"
+                    }, {
+                        name: "first_visit",
+                        name_display: "lần đầu đến cửa hàng",
+                        type: "time"
+                    }]
+                },
                 meta_events: [{
                     name: "view",
                     name_display: "view",

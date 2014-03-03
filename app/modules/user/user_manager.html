@@ -13,7 +13,7 @@
             </div>
             
             <div class="block">
-                <div class="block_header">
+               <!--  <div class="block_header">
                     <div class="left control">
                         Thống kê lượt 
                         <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
@@ -22,13 +22,13 @@
 
                     <span class="btn-flat success icon-bookmark-empty right">Lưu</span>
 
-                </div>
+                </div> -->
                 <div class="block_content">
-                    <p class="notify"> Chỉ thống kê các lượt <span>{{event.name_display}}</span> thoả điều kiện</p>
+                    <p class="notify">Danh sách khách hàng thoả điều kiện</p>
                     <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>
                 </div>
                 <div class="block_footer">
-                    <span class="btn-flat primary right" ng-click="getAllFilter()">Xem</span>
+                    <span class="btn-flat primary right" ng-click="getResult()">Xem</span>
                 </div>
             </div>
             
