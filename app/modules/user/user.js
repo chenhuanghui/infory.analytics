@@ -116,35 +116,15 @@ angular.module('user')
         $scope.metadata = remoteFactory.meta_lists;
 
         $scope.subfilters = null;
-
-        // dataFactory.getUsersOfBrand(brandId, function(data) {
-        //     $scope.userList = data.users;
-
-        //     for (var i = 0; i < $scope.userList.length; i++) {
-
-        //         var user = $scope.userList[i];
-        //         if (user.email == null)
-        //             user.email = "Không xác định";
-
-        //         if (user.gender == 1)
-        //             user.gender = 'Nam';
-        //         else
-        //             user.gender = 'Nữ';
-
-        //         if (user.city == null)
-        //             user.city = "Không xác định";
-
-        //         if (user.dob != null)
-        //             user.age = new Date().getFullYear() - new Date(user.dob).getFullYear();
-        //         else
-        //             user.age = "Không xác định";
-        //     }
-
-        //     dataFactory.setUsersOfBrand(brandId, $scope.userList);
-        // }, function() {})
+        $scope.userList = dataFactory.getCurrentResultUserFilter();
 
         $scope.getResult = function() {
-            var query = filterHelper.buildQuery($scope.metas, $scope.events, $scope.metadata, $scope.event, $scope.subfilters, 'AND');
+            var operator = "AND";
+            if ($scope.subfilters.length > 1)
+                operator = $scope.subfilters[1].getValue().operator;
+
+            var query = filterHelper.buildQuery($scope.metas, $scope.events, $scope.metadata, $scope.event, $scope.subfilters, operator);
+
             var fields = {
                 filter: JSON.stringify(query),
                 fields: '["name", "dob", "gender", "city", "last_visit"]',
@@ -176,6 +156,8 @@ angular.module('user')
                         else
                             user.age = "Không xác định";
                     }
+
+                    dataFactory.setCurrentResultUserFilter($scope.userList);
                 }
 
             }, function() {});

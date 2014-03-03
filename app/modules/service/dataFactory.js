@@ -13,6 +13,7 @@ angular.module('smg.services')
             var userProfile = null;
             var currentShop = null;
             var currentBrand = null;
+            var currentResultUserFilter = null;
             var usersOfBrand = {
                 id: null,
                 users: null
@@ -20,6 +21,12 @@ angular.module('smg.services')
 
 
             return {
+                setCurrentResultUserFilter: function(result) {
+                    currentResultUserFilter = result;
+                },
+                getCurrentResultUserFilter: function() {
+                    return currentResultUserFilter;
+                },
                 setUsersOfBrand: function(brandId, users) {
                     usersOfBrand = {
                         id: brandId,
