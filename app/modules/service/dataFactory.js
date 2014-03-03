@@ -13,8 +13,38 @@ angular.module('smg.services')
             var userProfile = null;
             var currentShop = null;
             var currentBrand = null;
+            var usersOfBrand = {
+                id: null,
+                users: null
+            }
 
             return {
+                setUsersOfBrand: function(brandId, users) {
+                    usersOfBrand = {
+                        id: brandId,
+                        users: users
+                    }
+                },
+                getUsersOfBrand: function(brandId, success, error) {
+                    if (usersOfBrand != null && usersOfBrand.id == brandId) {
+                        success(usersOfBrand);
+                    } else {
+                        var fields = {
+                            id: brandId,
+                            fields: '["users"]'
+                        }
+
+                        usersOfBrand.id = brandId;
+
+                        brandRemote.get(fields, function(data) {
+                            usersOfBrand.users = data.users;
+                            success(data);
+                        }, function() {
+                            usersOfBrand.id = null;
+                            error;
+                        });
+                    }
+                },
                 setTempShop: function(shop) {
                     tempShop = shop;
                 },
