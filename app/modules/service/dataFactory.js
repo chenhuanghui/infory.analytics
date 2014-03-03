@@ -18,6 +18,7 @@ angular.module('smg.services')
                 users: null
             }
 
+
             return {
                 setUsersOfBrand: function(brandId, users) {
                     usersOfBrand = {
