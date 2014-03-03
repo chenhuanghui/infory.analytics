@@ -18,19 +18,21 @@
                     <i class="icon-home"></i>
                 </a>
             </li>
-            <li class="dropdown z-btn">
-                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+            <li class="notification-dropdown hidden-xs hidden-sm z-btn">
+                <a href="#" class="trigger">
                     {{brand.name}}
                     <b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu" ng-repeat="b in brands">
-                    <li><a ng-click="setCurrentBrand(b)">{{b.name}}</a></li>
-                    <li class="create-box">
-                        <i class="icon-plus"></i>
-                        <input id="id_name" type="text" placeholder="New brand"/>
-                        <input id="create_submit" class="disabled" type="button" value="CREATE BRAND"/>
-                    </li>
-                </ul>
+                <div class="pop-dialog">
+                    <ul ng-repeat="b in brands">
+                        <li><a ng-click="setCurrentBrand(b)">{{b.name}}</a></li>
+                        <li class="create-box">
+                            <i class="icon-plus"></i>
+                            <input id="id_name" type="text" placeholder="New brand"/>
+                            <input id="create_submit" class="disabled" type="button" value="CREATE BRAND"/>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>
