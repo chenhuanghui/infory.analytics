@@ -53,6 +53,9 @@
                     <li ng-class="{active: main.active.tab == 'gallery'}">
                       <a ng-click='main.active.tab = "gallery" ' href=""> Hình ảnh</a>
                     </li>
+                    <li ng-class="{active: main.active.tab == 'gallery_user'}">
+                      <a ng-click='main.active.tab = "gallery_user" ' href=""> Hình ảnh KH</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div ng-switch = "main.active.tab">
@@ -66,6 +69,10 @@
 
                         <div ng-switch-when='gallery'>
                             <div ng-include='"modules/brand/brand/tabs/_gallery.html"'> </div>  
+                        </div>
+                        
+                        <div ng-switch-when='gallery_user'>
+                            <div ng-include='"modules/brand/brand/tabs/_gallery_user.html"'> </div>  
                         </div>
 
                     </div>

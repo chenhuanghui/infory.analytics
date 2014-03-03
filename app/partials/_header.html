@@ -25,6 +25,11 @@
                 </a>
                 <ul class="dropdown-menu" ng-repeat="b in brands">
                     <li><a ng-click="setCurrentBrand(b)">{{b.name}}</a></li>
+                    <li class="create-box">
+                        <i class="icon-plus"></i>
+                        <input id="id_name" type="text" placeholder="New brand"/>
+                        <input id="create_submit" class="disabled" type="button" value="CREATE BRAND"/>
+                    </li>
                 </ul>
             </li>
         </ul>
