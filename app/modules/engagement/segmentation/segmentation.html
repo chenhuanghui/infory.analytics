@@ -61,7 +61,7 @@
                         </div>
                     </span>
 
-                     <select class="type_menu right" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-init="chartType=chartTypes[0]"></select>
+                     <select class="type_menu right" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-init="chartType=chartTypes[0]" ng-hide="hideTypeChart"></select>
 
                      <select class="type_menu pull-right" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-init="time_unit=time_units[0]" ng-change="updateChart()"></select>
 

@@ -15,6 +15,8 @@ angular.module('smgDirectives')
                 return scope.chartData;
             }, function(value) {
                 if (!value) return;
+                if (scope.chartData.title == undefined)
+                    return;
                 scope.chartData.chart.renderTo = element[0];
                 var chart = new Highcharts.Chart(scope.chartData);
             });

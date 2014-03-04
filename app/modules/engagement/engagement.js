@@ -31,6 +31,8 @@ angular.module('engagement')
             name_display: 'Tháng'
         }];
 
+        $scope.hideTypeChart = true;
+
         var fields = null;
         $scope.getResult = function() {
             var query = filterHelper.buildQuery($scope.subfilters);
@@ -48,25 +50,32 @@ angular.module('engagement')
                 compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
             }
 
-            if (compareToObject != null)
+            if (compareToObject != null) {
                 fields.compare_by = JSON.stringify(compareToObject);
+                $scope.hideTypeChart = false;
+            } else
+                $scope.hideTypeChart = true;
 
-            eventRemote.count(fields, function(data) {
-                if (data.error == undefined) {
-                    $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
-                }
-            }, function() {});
+            updateChart(fields);
         }
 
         $scope.updateChart = function() {
             if (fields != null) {
                 fields.time_unit = $scope.time_unit.name;
-                eventRemote.count(fields, function(data) {
-                    if (data.error == undefined) {
-                        $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
-                    }
-                }, function() {});
+                updateChart(fields);
             }
+        }
+
+        function updateChart(fields) {
+            eventRemote.count(fields, function(data) {
+                if (data.error == undefined) {
+                    console.log(data);
+
+                    $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
+                    $scope.chartData[1] = chartHelper.buildPieChart(data, $scope.event.name_display);
+                    $scope.chartData[2] = chartHelper.buildColumnChart(data, $scope.event.name_display);
+                }
+            }, function() {});
         }
 
         $scope.chartData = [{}, {}, {}];
@@ -88,11 +97,7 @@ angular.module('engagement')
 
             if (fields != null) {
                 fields.date_beg = $scope.data[0].dateDisplay;
-                eventRemote.count(fields, function(data) {
-                    if (data.error == undefined) {
-                        $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
-                    }
-                }, function() {});
+                updateChart(fields);
             }
         }
 
@@ -104,11 +109,7 @@ angular.module('engagement')
             $scope.data[1].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
             if (fields != null) {
                 fields.date_end = $scope.data[1].dateDisplay;
-                eventRemote.count(fields, function(data) {
-                    if (data.error == undefined) {
-                        $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
-                    }
-                }, function() {});
+                updateChart(fields);
             }
         }
 
