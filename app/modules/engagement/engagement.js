@@ -54,8 +54,6 @@ angular.module('engagement')
                 fields.compare_by = JSON.stringify(compareToObject);
 
             eventRemote.count(fields, function(data) {
-                console.log(data);
-
                 if (data.error == undefined) {
                     $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
                 }
