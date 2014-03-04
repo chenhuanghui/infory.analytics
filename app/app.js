@@ -33,6 +33,11 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
                 controller: 'HomeCtrl',
                 access: access.user
             })
+            .when('/home', {
+                templateUrl: 'modules/home/home.html',
+                controller: 'HomeCtrl',
+                access: access.user
+            })
             .otherwise({
                 redirectTo: '/404'
             });

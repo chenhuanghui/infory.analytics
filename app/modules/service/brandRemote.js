@@ -20,6 +20,9 @@ angular.module('smg.services')
                 },
                 getHome: function(fields, success, error) {
                     $http.post(base_url + 'brand/get_home', fields).success(success).error(error);
+                },
+                getCostChart: function(fields, success, error) {
+                    $http.post(base_url + 'brand/get_cost_chart', fields).success(success).error(error);
                 }
             }
         }

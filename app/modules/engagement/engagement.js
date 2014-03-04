@@ -39,8 +39,8 @@ angular.module('engagement')
                 event: $scope.event.name,
                 filter: JSON.stringify(query),
                 time_unit: $scope.time_unit.name,
-                date_beg: $scope.dateBegin.toString(),
-                date_end: $scope.dateEnd.toString()
+                date_beg: $scope.data[0].dateDisplay,
+                date_end: $scope.data[1].dateDisplay
             };
 
             var compareToObject = null;
@@ -79,16 +79,21 @@ angular.module('engagement')
             dateDisplay: "22-02-2014",
         }];
 
-        $scope.dateBegin = '2013-10-22';
-        $scope.dateEnd = '2014-02-22';
-
         $scope.onTimeSetOne = function(newDate, oldDate) {
             var d = newDate.getDate();
             var m = newDate.getMonth() + 1;
             var y = newDate.getFullYear();
 
             $scope.data[0].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
-            $scope.dateBegin = $scope.data[0].dateDisplay;
+
+            if (fields != null) {
+                fields.date_beg = $scope.data[0].dateDisplay;
+                eventRemote.count(fields, function(data) {
+                    if (data.error == undefined) {
+                        $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
+                    }
+                }, function() {});
+            }
         }
 
         $scope.onTimeSetTwo = function(newDate, oldDate) {
@@ -97,7 +102,14 @@ angular.module('engagement')
             var y = newDate.getFullYear();
 
             $scope.data[1].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
-            $scope.dateEnd = $scope.data[1].dateDisplay;
+            if (fields != null) {
+                fields.date_end = $scope.data[1].dateDisplay;
+                eventRemote.count(fields, function(data) {
+                    if (data.error == undefined) {
+                        $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
+                    }
+                }, function() {});
+            }
         }
 
     }
