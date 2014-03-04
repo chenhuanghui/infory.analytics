@@ -30,6 +30,7 @@ angular.module('engagement')
             name: 'month',
             name_display: 'Tháng'
         }];
+
         var fields = null;
         $scope.getResult = function() {
             var query = filterHelper.buildQuery($scope.subfilters);
@@ -78,8 +79,8 @@ angular.module('engagement')
             var m = newDate.getMonth() + 1;
             var y = newDate.getFullYear();
 
-            $scope.dateBegin = newDate;
             $scope.data[0].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $scope.dateBegin = $scope.data[0].dateDisplay;
         }
 
         $scope.onTimeSetTwo = function(newDate, oldDate) {
@@ -87,8 +88,8 @@ angular.module('engagement')
             var m = newDate.getMonth() + 1;
             var y = newDate.getFullYear();
 
-            $scope.dateEnd = newDate;
             $scope.data[1].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $scope.dateEnd = $scope.data[1].dateDisplay;
         }
 
     }

@@ -1,6 +1,6 @@
 <div class="query_record">
 
-    <select class="qr_1" ng-model="property" ng-options="property as property.name_display for property in event.properties" ng-init="property=event.properties[0]"></select>
+    <select class="qr_1" ng-model="property" ng-options="property as property.name_display for property in event.properties" ng-init="property=event.properties[0]" ng-change="updateFields()"></select>
 
     <select class="qr_2" ng-model="meta" ng-options="meta as meta for meta in metas[property.type].operators_display" ng-init="meta=metas[property.type].operators_display[0]"></select>
 
