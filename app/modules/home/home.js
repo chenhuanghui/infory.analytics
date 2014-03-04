@@ -9,7 +9,7 @@ angular.module('home')
         var fields = [null, null, null];
 
         $scope.updateTimeUnit = function(time_unit, id) {
-            fields[id].time_unit = time_unit.name_display;
+            fields[id].time_unit = time_unit.name;
             updateChart(fields[id], id);
         };
 
@@ -21,26 +21,26 @@ angular.module('home')
                 $scope.brandInfo = data;
 
                 fields[0] = {
-                    brandId: $scope.brandId,
-                    time_units: $scope.time_unit_1.name_display,
-                    date_beg: $scope.data[0].dateDisplay,
-                    date_end: $scope.data[1].dateDisplay
+                    brand_id: $scope.brandId,
+                    time_unit: $scope.time_unit_1.name,
+                    date_beg: $scope.data[0].dateDropDownInput,
+                    date_end: $scope.data[1].dateDropDownInput
                 };
 
 
                 fields[1] = {
-                    brandId: $scope.brandId,
-                    time_units: $scope.time_unit_2.name_display,
-                    date_beg: $scope.data[2].dateDisplay,
-                    date_end: $scope.data[3].dateDisplay
+                    brand_id: $scope.brandId,
+                    time_unit: $scope.time_unit_2.name,
+                    date_beg: $scope.data[2].dateDropDownInput,
+                    date_end: $scope.data[3].dateDropDownInput
                 };
 
 
                 fields[2] = {
-                    brandId: $scope.brandId,
-                    time_units: $scope.time_unit_3.name_display,
-                    date_beg: $scope.data[4].dateDisplay,
-                    date_end: $scope.data[5].dateDisplay
+                    brand_id: $scope.brandId,
+                    time_unit: $scope.time_unit_3.name,
+                    date_beg: $scope.data[4].dateDropDownInput,
+                    date_end: $scope.data[5].dateDropDownInput
                 };
 
                 updateChart(fields[0], 0);
@@ -51,11 +51,24 @@ angular.module('home')
         };
 
         function updateChart(fields, id) {
+            fields.date_beg = normalizeDate(fields.date_beg);
+            fields.date_end = normalizeDate(fields.date_end);
             brandRemote.getCostChart(fields, function(data) {
                 if (data.error == undefined)
                     $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
             }, function() {});
         }
+
+        function normalizeDate(date) {
+            var newDate = new Date(date);
+            var d = newDate.getDate();
+            var m = newDate.getMonth() + 1;
+            var y = newDate.getFullYear();
+
+            return y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+
+        }
+
         dataFactory.setUpdateHomeFunc($scope.updateHome);
 
         $scope.time_units = [{
@@ -96,7 +109,7 @@ angular.module('home')
 
             $scope.data[0].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
             if (fields[0] != null) {
-                fields[0].date_beg = $scope.data[0].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                fields[0].date_beg = $scope.data[0].dateDropDownInput;
                 updateChart(fields[0], 0);
             }
         }
@@ -108,7 +121,7 @@ angular.module('home')
 
             $scope.data[1].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
             if (fields[0] != null) {
-                fields[0].date_end = $scope.data[1].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                fields[0].date_end = $scope.data[1].dateDropDownInput;
                 updateChart(fields[0], 0);
             }
         }
@@ -120,7 +133,7 @@ angular.module('home')
 
             $scope.data[2].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
             if (fields[1] != null) {
-                fields[1].date_beg = $scope.data[2].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                fields[1].date_beg = $scope.data[2].dateDropDownInput;
                 updateChart(fields[1], 1);
             }
         }
@@ -132,7 +145,7 @@ angular.module('home')
 
             $scope.data[3].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
             if (fields[1] != null) {
-                fields[1].date_end = $scope.data[3].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                fields[1].date_end = $scope.data[3].dateDropDownInput;
                 updateChart(fields[1], 1);
             }
         }
@@ -144,7 +157,7 @@ angular.module('home')
 
             $scope.data[4].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
             if (fields[2] != null) {
-                fields[2].date_beg = $scope.data[4].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                fields[2].date_beg = $scope.data[4].dateDropDownInput;
                 updateChart(fields[2], 2);
             }
         }
@@ -156,7 +169,7 @@ angular.module('home')
 
             $scope.data[5].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
             if (fields[2] != null) {
-                fields[2].date_end = $scope.data[5].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                fields[2].date_end = $scope.data[5].dateDropDownInput;
                 updateChart(fields[2], 2);
             }
         }
