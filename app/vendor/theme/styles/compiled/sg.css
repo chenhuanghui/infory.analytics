@@ -1151,3 +1151,8 @@ table.comment{
     height: 50px !important;
     width: 665px;
 }
+
+.comment_content{
+    font-family: Tahoma !important;
+    font-size: 13px;
+}
