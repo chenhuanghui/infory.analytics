@@ -112,9 +112,9 @@ angular.module('smgDirectives', ['ui.date'])
                     }
 
                     scope.updateFields = function() {
-                        meta = metas[property.type].operators_display[0];
-                        if (metas[property.type].operators_ui_controller[metas[property.type].operators_display.indexOf(meta)] == 'dropdown')
-                            paremeters.firstInput = metadata[property.available_values][0];
+                        meta = scope.metas[scope.property.type].operators_display[0];
+                        if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(meta)] == 'dropdown')
+                            scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
                     }
 
                     scope.onTimeSetOne = function(newDate, oldDate) {
