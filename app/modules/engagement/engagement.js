@@ -31,6 +31,17 @@ angular.module('engagement')
             name_display: 'Tháng'
         }];
 
+        $scope.compareUnits = [{
+            name: 'day',
+            name_display: 'Ngày'
+        }, {
+            name: 'week',
+            name_display: 'Tuần'
+        }, {
+            name: 'month',
+            name_display: 'Tháng'
+        }];
+
         var fields = null;
         $scope.getResult = function() {
             var query = filterHelper.buildQuery($scope.subfilters);

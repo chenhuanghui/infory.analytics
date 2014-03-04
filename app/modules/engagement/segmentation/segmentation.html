@@ -7,7 +7,7 @@
                 <div class='col-md-12'>
                     <p class="title">Hệ thống bình luận tại mỗi cửa hàng</p>
                 </div>
-                
+                <p class="sub" style="margin-left:40px;">Quản lý hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch khuyến mãi của bạn dễ dàng theo dạng danh sách và thao tác đơn giản mang lại hiệu quả cao</p>
                 <div class="clearfix"></div>
             </div>
             
@@ -28,6 +28,9 @@
                     <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>
                 </div>
                 <div class="block_footer">
+                    <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> So sánh theo</p>
+                    <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in compareUnits" ng-init="compareUnit=compareUnits[0]" style="margin-left: 10px;margin-top: 10px;"></select>
+
                     <span class="btn-flat primary right" ng-click="getResult()">Xem</span>
                 </div>
             </div>
