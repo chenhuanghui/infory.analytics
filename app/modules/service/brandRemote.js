@@ -17,6 +17,9 @@ angular.module('smg.services')
                 },
                 get: function(fields, success, error) {
                     $http.post(base_url + 'brand/get', fields).success(success).error(error);
+                },
+                getHome: function(fields, success, error) {
+                    $http.post(base_url + 'brand/get_home', fields).success(success).error(error);
                 }
             }
         }

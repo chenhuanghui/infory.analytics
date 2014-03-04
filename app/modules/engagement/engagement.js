@@ -48,8 +48,6 @@ angular.module('engagement')
                 compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
             }
 
-            console.log(compareToObject);
-
             if (compareToObject != null)
                 fields.compare_by = JSON.stringify(compareToObject);
 

@@ -52,6 +52,7 @@ angular.module('brand')
                         $scope.shop = $scope.brand.shops[0];
                         saveBundle($scope.brand);
                         refactorDateTimeMessage($scope.brand);
+                        dataFactory.updateHome($scope.brand.id);
                     }, function() {})
                 } else {
                     for (var i = 0; i < brands.length; i++) {
@@ -61,6 +62,7 @@ angular.module('brand')
                                 $scope.shop = $scope.brand.shops[0];
                                 saveBundle($scope.brand);
                                 refactorDateTimeMessage($scope.brand);
+                                dataFactory.updateHome($scope.brand.id);
                             }, function() {})
                             break;
                         }

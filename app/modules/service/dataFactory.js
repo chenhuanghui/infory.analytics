@@ -3,6 +3,7 @@ angular.module('smg.services')
 
         function($http, remoteFactory, brandRemote, shopRemote, userRemote, accountRemote) {
 
+            var updateHomeFunc = null;
             var brands = null;
             var tempShop = null;
             var user_pre = {
@@ -21,6 +22,13 @@ angular.module('smg.services')
 
 
             return {
+                setUpdateHomeFunc: function(func) {
+                    updateHomeFunc = func;
+                },
+                updateHome: function(brandId) {
+                    if (updateHomeFunc != null)
+                        updateHomeFunc(brandId);
+                },
                 setCurrentResultUserFilter: function(result) {
                     currentResultUserFilter = result;
                 },

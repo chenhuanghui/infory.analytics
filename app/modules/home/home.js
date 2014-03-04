@@ -1,8 +1,17 @@
 angular.module('home')
 
-.controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth',
+.controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth', 'brandRemote',
 
-    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth) {
+    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth, brandRemote) {
+        $scope.updateHome = function(brandId) {
+            brandRemote.getHome({
+                brand_id: brandId
+            }, function(data) {
+                console.log(data);
+            }, function() {});
+        };
+
+        dataFactory.setUpdateHomeFunc($scope.updateHome);
 
         $scope.lineChart = {
             chart: {
