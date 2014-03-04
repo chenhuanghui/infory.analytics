@@ -306,6 +306,14 @@ angular.module('brand')
                 }, function() {});
             }
         }
+
+        $scope.$watch('brand', function() {
+            dataFactory.updateBrandHeader($scope.brand);
+        });
+
+        $scope.$watch('brands', function() {
+            dataFactory.updateBrandsHeader($scope.brands);
+        });
     }
 ])
 

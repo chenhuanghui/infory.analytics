@@ -1,5 +1,5 @@
 <!-- navbar -->
-<header class="navbar navbar-inverse blue-header" role="banner">
+<header class="navbar navbar-inverse blue-header" role="banner" ng-controller="HeaderCtrl">
     <div class="navbar-header">
         <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
             <span class="sr-only">Toggle navigation</span>
@@ -12,7 +12,7 @@
             <img src="img/logo.png" alt="logo" />
         </a>
         -->
-        <ul class="nav navbar-nav pull-left hidden-xs" ng-controller="BrandCtrl">
+        <ul class="nav navbar-nav pull-left hidden-xs">
             <li class="settings hidden-xs hidden-sm">
                 <a href="/" role="button">
                     <i class="icon-home"></i>
@@ -120,12 +120,12 @@
             </div>
         </li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown" ng-controller="AccountCtrl">
+            <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
                 {{_username}}
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="#personal">Personal info</a></li>
+                <li><a href="#/personal">Personal info</a></li>
                 <li><a href="#">Account settings</a></li>
                 <li><a href="#">Billing</a></li>
                 <li><a href="#">Export your data</a></li>

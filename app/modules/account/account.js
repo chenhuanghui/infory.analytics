@@ -2,6 +2,10 @@ angular.module('account')
     .controller('AccountCtrl', ['$scope', '$http', '$location', '$routeParams', 'dataFactory', 'Auth', 'accountRemote',
         function($scope, $http, $location, $routeParams, dataFactory, Auth, accountRemote) {
 
+            $scope.$watch('_username', function() {
+                dataFactory.updateAccountNameHeader($scope._username);
+            });
+
             $scope._username = Auth.user.name;
 
             $scope.activeTab = "inbox";

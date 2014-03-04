@@ -12,6 +12,7 @@ var app = angular.module('Smg', [
     'account',
     'user',
     'promotion',
+    'header',
     'smg.services',
     'engagement',
     'smgDirectives',
@@ -128,6 +129,10 @@ angular.module('brand', [
 ]);
 
 angular.module('shop', [
+    'ngRoute'
+]);
+
+angular.module('header', [
     'ngRoute'
 ]);
 
