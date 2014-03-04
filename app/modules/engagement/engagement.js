@@ -1,7 +1,7 @@
 angular.module('engagement')
 
-.controller('SegmentationCtrl', ['$scope', '$routeParams', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper',
-    function($scope, $routeParams, remoteFactory, filterHelper, eventRemote, chartHelper) {
+.controller('SegmentationCtrl', ['$scope', '$routeParams', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper',
+    function($scope, $routeParams, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper) {
 
         var brandId = $routeParams.brandId;
 
@@ -31,17 +31,6 @@ angular.module('engagement')
             name_display: 'Tháng'
         }];
 
-        $scope.compareUnits = [{
-            name: 'day',
-            name_display: 'Ngày'
-        }, {
-            name: 'week',
-            name_display: 'Tuần'
-        }, {
-            name: 'month',
-            name_display: 'Tháng'
-        }];
-
         var fields = null;
         $scope.getResult = function() {
             var query = filterHelper.buildQuery($scope.subfilters);
@@ -54,7 +43,19 @@ angular.module('engagement')
                 date_end: $scope.dateEnd.toString()
             };
 
+            var compareToObject = null;
+            if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
+                compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
+            }
+
+            console.log(compareToObject);
+
+            if (compareToObject != null)
+                fields.compare_by = JSON.stringify(compareToObject);
+
             eventRemote.count(fields, function(data) {
+                console.log(data);
+
                 if (data.error == undefined) {
                     $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
                 }

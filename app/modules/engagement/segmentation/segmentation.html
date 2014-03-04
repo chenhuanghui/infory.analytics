@@ -29,7 +29,7 @@
                 </div>
                 <div class="block_footer">
                     <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> So sánh theo</p>
-                    <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in compareUnits" ng-init="compareUnit=compareUnits[0]" style="margin-left: 10px;margin-top: 10px;"></select>
+                    <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" ng-init="compareUnit=event.compare_properties[0]" style="margin-left: 10px;margin-top: 10px;"></select>
 
                     <span class="btn-flat primary right" ng-click="getResult()">Xem</span>
                 </div>

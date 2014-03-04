@@ -25,7 +25,7 @@ angular.module('smg.services')
                     return request;
                 },
 
-                meta_property_types: {
+        meta_property_types: {
                     number: {
                         operators: [
                             "larger_than",
@@ -265,12 +265,12 @@ angular.module('smg.services')
                         name: "user_gender",
                         name_display: "user gender",
                         type: "group",
-                        available_values: "genders"
+                        available_values: "gender"
                     }, {
                         name: "user_career",
                         name_display: "user career",
                         type: "group",
-                        available_values: "careers"
+                        availables_values: "careers"
                     }, {
                         name: "user_total_charge",
                         name_display: "user total charge",
@@ -289,6 +289,74 @@ angular.module('smg.services')
                         type: "number"
                     }, {
                         name: "user_comment_count",
+                        name_display: "user comment count",
+                        type: "number"
+                    }],
+                    compare_properties: [{
+                        name_display: "Chọn thuộc tính"
+                    }, {
+                        name: "shop",
+                        name_display: "shop",
+                        type: "group"
+                    }, {
+                        name: "time",
+                        unit: "hour",
+                        name_display: "hour in day",
+                        type: "time"
+                    }, {
+                        name: "time",
+                        unit: "weekday",
+                        name_display: "weekday",
+                        type: "time"
+                    }, {
+                        name: "time",
+                        unit: "month",
+                        name_display: "month in year",
+                        type: "time"
+                    }, {
+                        name: "platform",
+                        name_display: "user platform",
+                        type: "group"
+                    }, {
+                        name: "user_city",
+                        name_display: "user city",
+                        type: "group"
+                    }, {
+                        name: "user_age",
+                        min_diff: 5,
+                        name_display: "user age",
+                        type: "number"
+                    }, {
+                        name: "user_gender",
+                        name_display: "user gender",
+                        type: "group"
+                    }, {
+                        name: "user_career",
+                        name_display: "user career",
+                        type: "group"
+                    }, {
+                        name: "user_total_charge",
+                        min_diff: 5,
+                        name_display: "user total charge",
+                        type: "number"
+                    }, {
+                        name: "user_view_count",
+                        min_diff: 5,
+                        name_display: "user view count",
+                        type: "number"
+                    }, {
+                        name: "user_checkin_count",
+                        min_diff: 5,
+                        name_display: "user checkin count",
+                        type: "number"
+                    }, {
+                        name: "user_checkout_count",
+                        min_diff: 5,
+                        name_display: "user checkout count",
+                        type: "number"
+                    }, {
+                        name: "user_comment_count",
+                        min_diff: 5,
                         name_display: "user comment count",
                         type: "number"
                     }]
@@ -331,7 +399,7 @@ angular.module('smg.services')
                         name: "user_career",
                         name_display: "user career",
                         type: "group",
-                        available_values: "careers"
+                        availables_values: "careers"
                     }, {
                         name: "user_total_charge",
                         name_display: "user total charge",
@@ -350,6 +418,79 @@ angular.module('smg.services')
                         type: "number"
                     }, {
                         name: "user_comment_count",
+                        name_display: "user comment count",
+                        type: "number"
+                    }],
+                    compare_properties: [{
+                        name_display: "Chọn thuộc tính"
+                    }, {
+                        name: "shop",
+                        name_display: "shop",
+                        type: "group"
+                    }, {
+                        name: "time",
+                        unit: "hour",
+                        name_display: "hour in day",
+                        type: "time"
+                    }, {
+                        name: "time",
+                        unit: "weekday",
+                        name_display: "weekday",
+                        type: "time"
+                    }, {
+                        name: "time",
+                        unit: "month",
+                        name_display: "month in year",
+                        type: "time"
+                    }, {
+                        name: "platform",
+                        name_display: "user platform",
+                        type: "group"
+                    }, {
+                        name: "friend_count",
+                        min_diff: 5,
+                        name_display: "friend count",
+                        type: "number"
+                    }, {
+                        name: "user_city",
+                        name_display: "user city",
+                        type: "group"
+                    }, {
+                        name: "user_age",
+                        min_diff: 5,
+                        name_display: "user age",
+                        type: "number"
+                    }, {
+                        name: "user_gender",
+                        name_display: "user gender",
+                        type: "group"
+                    }, {
+                        name: "user_career",
+                        name_display: "user career",
+                        type: "group"
+                    }, {
+                        name: "user_total_charge",
+                        min_diff: 5,
+                        name_display: "user total charge",
+                        type: "number"
+                    }, {
+                        name: "user_view_count",
+                        min_diff: 5,
+                        name_display: "user view count",
+                        type: "number"
+                    }, {
+                        name: "user_checkin_count",
+                        min_diff: 5,
+                        name_display: "user checkin count",
+                        type: "number"
+                    }, {
+                        name: "user_checkout_count",
+                        min_diff: 5,
+                        name_display: "user checkout count",
+                        type: "number"
+                    }, {
+                        name: "user_comment_count",
+                        min_diff: 5,
                         name_display: "user comment count",
                         type: "number"
                     }]
@@ -392,7 +533,7 @@ angular.module('smg.services')
                         name: "user_career",
                         name_display: "user career",
                         type: "group",
-                        available_values: "careers"
+                        availables_values: "careers"
                     }, {
                         name: "user_total_charge",
                         name_display: "user total charge",
@@ -413,11 +554,86 @@ angular.module('smg.services')
                         name: "user_comment_count",
                         name_display: "user comment count",
                         type: "number"
+                    }],
+                    compare_properties: [{
+                        name_display: "Chọn thuộc tính"
+                    }, {
+                        name: "shop",
+                        name_display: "shop",
+                        type: "group"
+                    }, {
+                        name: "time",
+                        unit: "hour",
+                        name_display: "hour in day",
+                        type: "time"
+                    }, {
+                        name: "time",
+                        unit: "weekday",
+                        name_display: "weekday",
+                        type: "time"
+                    }, {
+                        name: "time",
+                        unit: "month",
+                        name_display: "month in year",
+                        type: "time"
+                    }, {
+                        name: "platform",
+                        name_display: "user platform",
+                        type: "group"
+                    }, {
+                        name: "charge",
+                        min_diff: 5,
+                        name_display: "user expense",
+                        type: "number"
+                    }, {
+                        name: "user_city",
+                        name_display: "user city",
+                        type: "group"
+                    }, {
+                        name: "user_age",
+                        min_diff: 5,
+                        name_display: "user age",
+                        type: "number"
+                    }, {
+                        name: "user_gender",
+                        name_display: "user gender",
+                        type: "group"
+                    }, {
+                        name: "user_career",
+                        name_display: "user career",
+                        type: "group"
+                    }, {
+                        name: "user_total_charge",
+                        min_diff: 5,
+                        name_display: "user total charge",
+                        type: "number"
+                    }, {
+                        name: "user_view_count",
+                        min_diff: 5,
+                        name_display: "user view count",
+                        type: "number"
+                    }, {
+                        name: "user_checkin_count",
+                        min_diff: 5,
+                        name_display: "user checkin count",
+                        type: "number"
+                    }, {
+                        name: "user_checkout_count",
+                        min_diff: 5,
+                        name_display: "user checkout count",
+                        type: "number"
+                    }, {
+                        name: "user_comment_count",
+                        min_diff: 5,
+                        name_display: "user comment count",
+                        type: "number"
                     }]
                 }, {
                     name: "comment",
                     name_display: "comment",
                     properties: [{
+                        name_display: "Chọn thuộc tính"
+                    }, {
                         name: "shop",
                         name_display: "shop",
                         type: "group",
@@ -457,7 +673,7 @@ angular.module('smg.services')
                         name: "user_career",
                         name_display: "user career",
                         type: "group",
-                        available_values: "careers"
+                        availables_values: "careers"
                     }, {
                         name: "user_total_charge",
                         name_display: "user total charge",
@@ -476,6 +692,74 @@ angular.module('smg.services')
                         type: "number"
                     }, {
                         name: "user_comment_count",
+                        name_display: "user comment count",
+                        type: "number"
+                    }],
+                    compare_properties: [{
+                        name_display: "Chọn thuộc tính"
+                    }, {
+                        name: "shop",
+                        name_display: "shop",
+                        type: "group"
+                    }, {
+                        name: "created_time",
+                        unit: "hour",
+                        name_display: "time comment by hour",
+                        type: "time"
+                    }, {
+                        name: "created_time",
+                        unit: "weekday",
+                        name_display: "time comment by weekday",
+                        type: "time"
+                    }, {
+                        name: "created_time",
+                        unit: "month",
+                        name_display: "time comment by month",
+                        type: "time"
+                    }, {
+                        name: "platform",
+                        name_display: "user platform",
+                        type: "group"
+                    }, {
+                        name: "user_city",
+                        name_display: "user city",
+                        type: "group"
+                    }, {
+                        name: "user_age",
+                        min_diff: 5,
+                        name_display: "user age",
+                        type: "number"
+                    }, {
+                        name: "user_gender",
+                        name_display: "user gender",
+                        type: "group"
+                    }, {
+                        name: "user_career",
+                        name_display: "user career",
+                        type: "group"
+                    }, {
+                        name: "user_total_charge",
+                        min_diff: 5,
+                        name_display: "user total charge",
+                        type: "number"
+                    }, {
+                        name: "user_view_count",
+                        min_diff: 5,
+                        name_display: "user view count",
+                        type: "number"
+                    }, {
+                        name: "user_checkin_count",
+                        min_diff: 5,
+                        name_display: "user checkin count",
+                        type: "number"
+                    }, {
+                        name: "user_checkout_count",
+                        min_diff: 5,
+                        name_display: "user checkout count",
+                        type: "number"
+                    }, {
+                        name: "user_comment_count",
+                        min_diff: 5,
                         name_display: "user comment count",
                         type: "number"
                     }]

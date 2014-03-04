@@ -5,7 +5,7 @@ angular.module('Smg')
         function() {
             return {
                 buildLineChart: function(data, event) {
-                    return {
+                    var chartData = {
                         chart: {
                             type: 'line'
                         },
@@ -39,11 +39,25 @@ angular.module('Smg')
                             verticalAlign: 'middle',
                             borderWidth: 0
                         },
-                        series: [{
+
+                    };
+
+                    if (data.groups == undefined) {
+                        chartData.series = [{
                             name: event,
                             data: data.values
-                        }]
-                    };
+                        }];
+                    } else {
+                        chartData.series = [];
+                        for (var i = 0; i < data.groups.length; i++) {
+                            chartData.series.push({
+                                name: data.groups[i],
+                                data: data.values[i]
+                            })
+                        }
+                    }
+
+                    return chartData;
                 }
             }
         }
