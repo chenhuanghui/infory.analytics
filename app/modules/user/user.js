@@ -119,7 +119,7 @@ angular.module('user')
         $scope.userList = dataFactory.getCurrentResultUserFilter();
 
         $scope.getResult = function() {
-            var query = filterHelper.buildQuery($scope.metas, $scope.events, $scope.metadata, $scope.event, $scope.subfilters);
+            var query = filterHelper.buildQuery($scope.subfilters);
 
             var fields = {
                 filter: JSON.stringify(query),

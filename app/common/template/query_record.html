@@ -16,7 +16,7 @@
     	</span>
     	<span ng-switch-when="dropdown">
 
-    		<select class="qr_3" ng-model="paremeters.firstInput" ng-options="value as value for value in metadata[property.available_values]"></select>
+    		<select class="qr_3" ng-model="paremeters.firstInput" ng-options="value as value for value in metadata[property.available_values]" ng-init="paremeters.firstInput=metadata[property.available_values][0]"></select>
     	</span>
     	<span ng-switch-when="text">
     		<input type="text" class="form-control qr_3" data-ng-model="paremeters.firstInput">

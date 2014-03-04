@@ -32,7 +32,7 @@ angular.module('engagement')
         }];
         var fields = null;
         $scope.getResult = function() {
-            var query = filterHelper.buildQuery($scope.metas, $scope.events, $scope.metadata, $scope.event, $scope.subfilters);
+            var query = filterHelper.buildQuery($scope.subfilters);
             fields = {
                 brand_id: brandId,
                 event: $scope.event.name,

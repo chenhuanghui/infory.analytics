@@ -169,9 +169,9 @@ angular.module('smg.services')
                         "Hồ Chí Minh"
                     ],
                     platforms: [
-                        "iOS",
-                        "Android",
-                        "Web"
+                        "ios",
+                        "android",
+                        "web"
                     ],
                     genders: ["Nam", "Nữ"],
                     careers: [

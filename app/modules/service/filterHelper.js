@@ -4,7 +4,7 @@ angular.module('Smg')
     .factory('filterHelper',
         function() {
             return {
-                buildQuery: function(metas, events, metadata, event, subfilters, type) {
+                buildQuery: function(subfilters) {
                     var type = "AND";
                     if (subfilters.length > 1)
                         type = subfilters[1].getValue().operator;
