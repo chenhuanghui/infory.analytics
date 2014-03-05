@@ -9,6 +9,20 @@ angular.module('promotion')
             $scope.brand = data;
         }, function() {});
 
+        $scope.orderPromotions = [{
+            name: '',
+            name_display: 'Tất cả'
+        }, {
+            name: 'news',
+            name_display: 'Đăng tin'
+        }, {
+            name: 'score',
+            name_display: 'Tích luỹ điểm'
+        }, {
+            name: 'voucher',
+            name_display: 'Voucher'
+        }];
+
         $scope.promotionTypes = [{
             name: 'news',
             name_display: 'Đăng tin'
@@ -43,6 +57,64 @@ angular.module('promotion')
             $scope.data[1].dateDisplay = serviceHelper.normalizeTimeWithMinute(newDate);
             updateTime();
         }
+
+        $scope.sortPromotionList = function() {
+            $scope.promotionList = [];
+            switch ($scope.orderPromotion.name) {
+                case '':
+                    $scope.promotionList = $scope.promotionListFull;
+                    break;
+
+                default:
+                    sortByType($scope.orderPromotion.name);
+            }
+        }
+
+
+        function sortByType(type) {
+            for (var i = 0; i < $scope.promotionListFull.length; i++) {
+                if ($scope.promotionListFull[i].type == type)
+                    $scope.promotionList.push($scope.promotionListFull[i]);
+            }
+        }
+
+        var fields = '["id, "type", "name", "status"]';
+        promotionRemote.list({
+            brand_id: brandId,
+            fields: fields
+        }, function(data) {
+            for (var i = 0; i < data.length; i++) {
+                switch (data[i].type) {
+                    case 'voucher':
+                        data[i].typeDisplay = 'Voucher';
+                        break;
+                    case 'news':
+                        data[i].typeDisplay = 'Đăng tin';
+                        break;
+                    case 'score':
+                        data[i].typeDisplay = 'Tích luỹ điểm';
+                        break;
+                }
+
+                data[i].stt = (i % 2 == 0) ? 'even' : 'odd';
+
+                switch (data[i].status) {
+                    case 'running':
+                        data[i].statusClass = 'btn-flat success';
+                        break;
+                    case 'waiting':
+                        data[i].statusClass = 'btn-flat gray';
+                        break;
+                    case 'stopped':
+                        data[i].statusClass = 'btn-flat inverse';
+                        break;
+                }
+                data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg)) + " đến " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end));
+            }
+
+            $scope.promotionList = data;
+            $scope.promotionListFull = data;
+        }, function() {});
     }
 ])
     .config(function($routeProvider) {
