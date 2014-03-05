@@ -1,0 +1,176 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div id="promotion-new" class="content">
+    <div id="funnel-fuelux-wizard" class="wizard">
+        <ul class="wizard-steps">
+            <li data-target="#funnel-step1" class="active">
+                <span class="z-step">TẠO CHUỖI MỚI</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#funnel-step2">
+                <span class="z-step">KẾT QUẢ</span><img class="line-step" src="img/line_step.png" />
+            </li>
+        </ul>                            
+    </div>
+    <div id="funnel-step-content" class="step-content form-page">
+        <form>
+            <div class="step-pane active" id="funnel-step1">
+                <div class="step-description">
+                    <div class="step-title">
+                        Tạo chuỗi hành vi người dùng
+                    </div>
+                    Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+                </div>
+                <div class="form-wrapper">
+                    <div class="wapper">
+                        <div class="step-wapper">
+                            <div class="field-box">
+                                <span class="title">TÊN CHUỖI HÀNH VI</span>
+                                <input type="text" class="form-control" style="width: 50%;"/>
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <div class="z-box">
+                                <div class="z-box-header">
+                                    <div class="left">
+                                        <span>Hành vi thứ nhất</span> 
+                                        <div class="ui-select">
+                                            <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="z-box-content">
+                                    <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <div class="add-bar shadow">
+                                <i class="icon-plus"></i>
+                                THÊM HÀNH VI NGƯỜI DÙNG
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-pane" id="funnel-step2">
+                <div class="step-description">
+                    <div class="step-title">
+                        Chuỗi hành vi người dùng
+                    </div>
+                    Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
+                </div>
+                <div class="form-wrapper">
+                    <div class="wapper">
+                        <div class="step-wapper">
+                            <div class="step-wapper-header">
+                                <div class="left">
+                                    <h4>Tổng quan</h4>
+                                </div>
+                                <div class="right">
+                                    <div class="controller">
+                                        <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]" class="ng-pristine ng-valid"><option value="0" selected="selected">view</option><option value="1">checkin</option><option value="2">checkout</option><option value="3">comment</option></select>
+                                        <span class="btn-glow success"><i class="icon-bookmark-empty"></i> Lưu</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <div class="z-box">
+                                <div class="z-box-header">
+                                    <div class="left">
+                                        <div class="btn-glow">Từ <input type="text" value="1/1/1111"/><i class="icon-sort-down"></i></div>
+                                        <div class="btn-glow">Từ <input type="text" value="1/1/1111"/><i class="icon-sort-down"></i></div>
+                                    </div>
+                                    <div class="right">
+                                        <span>Thống kê theo lượt <div class="ui-select">
+                                                                    <select>
+                                                                        <option selected="">Dropdown</option>
+                                                                        <option>Custom selects</option>
+                                                                        <option>Pure css styles</option>
+                                                                    </select>
+                                                                </div>
+                                        </span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="z-box-content" style="position: relative;">
+                                    <div class="bar">Status bar</div>
+                                        <chart value='columnChart'>
+                                        </chart>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- display step info -->
+        </form>
+    </div>
+    <div class="col-md-12 with-sidebar">
+        <div class="col-md-11">
+            <div class="funnel-wizard-actions wizard-actions">
+                <!--
+                <button type="button" disabled class="btn-glow primary btn-prev"> 
+                    <i class="icon-chevron-left"></i> Prev
+                </button>
+                -->
+                <button type="button" class="btn-glow primary success">
+                    <i class="icon-bookmark-empty"></i>Lưu
+                </button>
+                <button type="button" class="btn-glow primary btn-next" data-last="Finish">
+                    Theo dõi hành vi người dùng
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- scripts -->
+<style scoped>@import url('vendor/theme/styles/lib/flexslider.css')</style>
+<script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="vendor/theme/scripts/fuelux.wizard.js"></script>
+<script src="vendor/theme/scripts/jquery.flexslider.js"></script>
+<script>
+//winzard create promotion
+$(function () {
+    var $wizard = $('#funnel-fuelux-wizard'),
+        $btnPrev = $('.funnel-wizard-actions .btn-prev'),
+        $btnNext = $('.funnel-wizard-actions .btn-next'),
+        $btnFinish = $(".funnel-wizard-actions .btn-finish");
+
+    $wizard.wizard().on('finished', function(e) {
+        // wizard complete code
+    }).on("changed", function(e) {
+        var step = $wizard.wizard("selectedItem");
+        // reset states
+        $btnNext.removeAttr("disabled");
+        $btnPrev.removeAttr("disabled");
+        $btnNext.show();
+        $btnFinish.hide();
+
+        if (step.step === 1) {
+            $btnPrev.attr("disabled", "disabled");
+        } else if (step.step === 4) {
+            $btnNext.hide();
+            $btnFinish.show();
+        }
+    });
+
+    $btnPrev.on('click', function() {
+        $wizard.wizard('previous');
+    });
+    $btnNext.on('click', function() {
+        $wizard.wizard('next');
+    });
+});
+/** slide image **/
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: false,
+  });
+});
+</script>

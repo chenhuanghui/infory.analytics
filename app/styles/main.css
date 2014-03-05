@@ -156,21 +156,21 @@ body {
     margin-left: 15px;
 }
 
-.block_header .controller{
+.controller{
   background-color: #fff;
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border: 1px solid #99BD56;
 }
-.block_header .controller select{
+.controller select{
     border: none;
     border-color: transparent;
     margin: 0;
     padding: 0 3px;
 }
 
-.block_header .controller .btn-glow{
+.controller .btn-glow{
     border: none;
     border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
