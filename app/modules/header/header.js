@@ -1,8 +1,8 @@
 angular.module('header')
 
-.controller('HeaderCtrl', ['$scope', 'dataFactory', 'Auth', 'brandRemote',
+.controller('HeaderCtrl', ['$scope', '$location', 'dataFactory', 'Auth', 'brandRemote',
 
-    function($scope, dataFactory, Auth, brandRemote) {
+    function($scope, $location, dataFactory, Auth, brandRemote) {
 
         $scope._username = Auth.user.name;
         $scope.newBrandName = 'New brand';
@@ -22,6 +22,8 @@ angular.module('header')
             $scope.brand = brand;
             dataFactory.updateHome($scope.brand.id);
             dataFactory.updateBrandSideBar($scope.brand.id);
+            $('.z-btn .pop-dialog .close-icon').click();
+            $location.path('/brand/infor/' + $scope.brand.id);
         }
 
         $scope.createBrand = function(name) {

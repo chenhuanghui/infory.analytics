@@ -105,14 +105,21 @@
                                         <input type="text" class="search right small-input no-margin" placeholder="Tìm kiếm..."/>
                                     </div>
                                     <div class="block_content no-padding">
-                                        <table class="z-table" ng-repeat="shop in brand.shops">
+                                        <table class="z-table">
                                             <thead>
                                                 <tr>
                                                     <th><input type="checkbox" /></th>
-                                                    <th class="name">{{shop.name}}</th>
-                                                    <th>{{shop.address}}</th>
+                                                    <th class="name">Tên cửa hàng</th>
+                                                    <th>Địa chỉ</th>
                                                 </tr>
                                             </thead>
+                                            <tbody  ng-repeat="shop in brand.shops">
+                                                <tr>
+                                                    <td><input type="checkbox" /></td>
+                                                    <td class="name">{{shop.name}}</td>
+                                                    <td>{{shop.full_address}}</td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -131,86 +138,88 @@
                 <div class="form-wrapper">
                     <div class="col-md-7">
                         <div class="step-wapper">
-                            <div class="voucher-box">
-                                <div class="z-box">
-                                    <div class="z-box-header">
-                                        <div class="left">
-                                            <span class="circle-box">A</span>
+                            <div ng-switch on="promotionType.name">
+                                <div ng-switch-when="voucher" class="voucher-box">
+                                    <div class="z-box">
+                                        <div class="z-box-header">
+                                            <div class="left">
+                                                <span class="circle-box">A</span>
+                                            </div>
+                                            <i class="icon-remove-sign right"></i>
                                         </div>
-                                        <i class="icon-remove-sign right"></i>
-                                    </div>
-                                    <div class="z-box-content">
-                                        <div class="detail-voucher">
-                                            <div class="field-box">
-                                                <div class="inline-block">
-                                                    <span class="title">MÔ TẢ PHẦN QUÀ</span>
-                                                    <input type="text" class="description form-control"/>
+                                        <div class="z-box-content">
+                                            <div class="detail-voucher">
+                                                <div class="field-box">
+                                                    <div class="inline-block">
+                                                        <span class="title">MÔ TẢ PHẦN QUÀ</span>
+                                                        <input type="text" class="description form-control"/>
+                                                    </div>
+                                                    <div class="inline-block">
+                                                        <span class="title">SỐ LƯỢNG</span>
+                                                        <input type="text" class="quality form-control"/>
+                                                    </div>
+                                                    <div class="inline-block">
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="option1"> Không giới hạn
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                                <div class="inline-block">
-                                                    <span class="title">SỐ LƯỢNG</span>
-                                                    <input type="text" class="quality form-control"/>
-                                                </div>
-                                                <div class="inline-block">
-                                                    <label class="checkbox-inline">
-                                                      <input type="checkbox" id="inlineCheckbox1" value="option1"> Không giới hạn
-                                                    </label>
+                                                <div class="field-box">
+                                                    <span class="title">ĐIỀU KIỆN</span>
+                                                    <div class="condition">
+                                                        <span class="title">Đối tượng</span>
+                                                        <input type="text" class="form-control" />
+                                                        <br />
+                                                        <span class="title">Thời gian</span>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 2
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 3
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 4
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 5
+                                                        </label>
+                                                        <div class="clearfix"></div>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 6
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 7
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1"/> Chủ nhật
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="option1"/> Cả tuần
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="field-box">
-                                                <span class="title">ĐIỀU KIỆN</span>
-                                                <div class="condition">
-                                                    <span class="title">Đối tượng</span>
-                                                    <input type="text" class="form-control" />
-                                                    <br />
-                                                    <span class="title">Thời gian</span>
-                                                    <label class="checkbox-inline">
-                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 2
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 3
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 4
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 5
-                                                    </label>
-                                                    <div class="clearfix"></div>
-                                                    <label class="checkbox-inline">
-                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 6
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Thứ 7
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                      <input type="checkbox" id="inlineCheckbox1" value="1"/> Chủ nhật
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                      <input type="checkbox" id="inlineCheckbox1" value="option1"/> Cả tuần
-                                                    </label>
-                                                </div>
-                                            </div>
+                                            <div class="clearfix"></div>
                                         </div>
-                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="add-bar shadow">
+                                        <i class="icon-plus"></i> THÊM PHẦN QUÀ
                                     </div>
                                 </div>
-                                <div class="add-bar shadow">
-                                    <i class="icon-plus"></i> THÊM PHẦN QUÀ
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="news-box">
-                                <div class="field-box">
-                                    <span class="title">TÊN TIÊU ĐỀ</span>
-                                    <input class="form-control inline-block" type="text"/>
-                                </div>
-                                <div class="field-box">
-                                    <span class="title">HÌNH ẢNH</span>
-                                    <input type="file" class="form-control inline-block"/>  
-                                </div>
-                                <div class="field-box">
-                                    <span class="title">TÊN TIÊU ĐỀ</span>
-                                    <textarea placeholder="Nhập nội dung" class="form-control" rows="6"></textarea>
+                                <div class="clearfix"></div>
+                                <div class="news-box" ng-switch-when="news">
+                                    <div class="field-box">
+                                        <span class="title">TÊN TIÊU ĐỀ</span>
+                                        <input class="form-control inline-block" type="text"/>
+                                    </div>
+                                    <div class="field-box">
+                                        <span class="title">HÌNH ẢNH</span>
+                                        <input type="file" class="form-control inline-block"/>  
+                                    </div>
+                                    <div class="field-box">
+                                        <span class="title">TÊN TIÊU ĐỀ</span>
+                                        <textarea placeholder="Nhập nội dung" class="form-control" rows="6"></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <!--
