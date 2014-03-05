@@ -1237,4 +1237,8 @@ table.comment{
     position: absolute;
     margin-right: 5px;
 }
+
+.funnel-wizard-actions{
+    margin-right: 35px;
+}
 /** funnel **/
