@@ -1,7 +1,8 @@
 angular.module('promotion')
 
-.controller('PromotionCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote', 'serviceHelper',
-    function($scope, $routeParams, remoteFactory, dataFactory, userRemote, serviceHelper) {
+.controller('PromotionCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote', 'serviceHelper', 'promotionRemote',
+
+    function($scope, $routeParams, remoteFactory, dataFactory, userRemote, serviceHelper, promotionRemote) {
 
         var brandId = $routeParams.brandId;
         dataFactory.getBrand(brandId, function(data) {

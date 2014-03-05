@@ -14,7 +14,7 @@
                 <span class="z-step">Kích hoạt</span><img class="line-step" src="img/line_step.png" />
             </li>
             <li data-target="#notify-step4" id="menu-manager" onclick="showManager('#menu-manager', '#notify-step4')">
-                <span class="z-step">Quản lý tin</span><img class="line-step" src="img/line_step.png" />
+                <span class="z-step">Quản lý tin</span>
             </li>
         </ul>                            
     </div>
@@ -190,10 +190,10 @@
                 <div class="step-wapper">
                     <div id="coin-box" class="field-box">
                         <span class="title">NGÂN SÁCH CHO CHIẾN DỊCH</span>
-                        <div class="slider-coin">
-                            <div id="red" ui-slider="colorpicker.options" ng-model="colorpicker.red"></div>
-		                      Red: <input ng-model="colorpicker.red"/>
-                            <span class="coin">50</span> COIN
+                        <div class="once"><span class="coin">40</span> T-COIN</div>
+                        <div class="auto">
+                            <div class="slider" id="red" ui-slider="colorpicker.options" ng-model="colorpicker.red"></div>
+                            <div class="coin"><input ng-model="colorpicker.red"/></span>T-COIN</div>
                         </div>
                         <div class="report">
                             <p><b>Số tin gửi được: <span>15</span> tin</b><i> / 1000</i></p>

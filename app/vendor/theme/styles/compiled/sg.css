@@ -902,20 +902,43 @@ input.datetime{
 	padding: 20px 0 30px;
 }
 
-#coin-box .slider-coin{
+#coin-box .auto{
 	padding-bottom: 10px;
 	color: #48A5F2;
 	font-weight: bold;
 }
 
-#coin-box .slider-coin .slider{
+#coin-box .auto .slider{
 	width: 50%;
 	display:inline-block;
 }
 
-#coin-box .slider-coin .coin{
-	font-size: 25px;
+#coin-box .auto .coin{
+	color: #48A5F2;
+    display: inline-block;
+    font-weight: bold;
 }
+
+#coin-box .auto .coin input{
+    border: none;
+    text-align: center;
+    width: 55px;
+    margin-left: 13px;
+    font-size: 25px;
+    color: #48A5F2;
+    font-weight: bold;
+}
+
+#coin-box .once{
+    color: #48A5F2;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0 5px;
+}
+
+#coin-box .once .coin{
+    font-size: 25px;
+} 
 
 #coin-box .report{
 	color: #737991;
@@ -1242,3 +1265,13 @@ table.comment{
     margin-right: 35px;
 }
 /** funnel **/
+.z-btn{
+    width: 200px;
+}
+.z-btn .pop-dialog .close-icon{
+    position: absolute;
+    top: -25px;
+    right: 5px;
+    top: -20px;
+    right: 8px;
+}

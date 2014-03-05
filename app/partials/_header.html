@@ -21,10 +21,10 @@
             <li class="notification-dropdown hidden-xs hidden-sm z-btn">
                 <a href="#" class="trigger">
                     {{brand.name}}
-                    <b class="caret"></b>
                 </a>
-                <div class="pop-dialog" style="width:200px;">
+                <div class="pop-dialog">
                     <ul >
+                        <a href="#" class="close-icon"><i class="icon-sort-up"></i></a>
                         <li ng-repeat="b in brands" ><a ng-click="setCurrentBrand(b)">{{b.name}}</a></li>
                         <li class="create-box">
                             <i class="icon-plus"></i>
