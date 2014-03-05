@@ -84,7 +84,7 @@
   <script src="vendor/nvd3/nv.d3.js"></script>
   <link rel="stylesheet" href="vendor/nvd3/nv.d3.css"/>
   <script src="vendor/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
-  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="vendor/highchart/highcharts.js"></script>
   <!-- endbuild -->
 
   
@@ -92,6 +92,8 @@
   
   <!-- build:js({.tmp,app}) scripts -->
   <script src="app.js"></script>
+
+  <script src="modules/header/header.js"></script>
 
   <script src="modules/shop/shop.js"></script>
 
@@ -113,16 +115,22 @@
   <script src="modules/service/commentRemote.js"></script>
   <script src="modules/service/shopRemote.js"></script>
   <script src="modules/service/userRemote.js"></script>
+  <script src="modules/service/eventRemote.js"></script>
   <script src="modules/service/remoteFactory.js"></script>
   <script src="modules/service/auth.js"></script>
+  <script src="modules/service/cookie.js"></script>
+  <script src="modules/service/filterHelper.js"></script>
+  <script src="modules/service/chartHelper.js"></script>
+  <script src="modules/service/compareHelper.js"></script>
   
   <script src="modules/engagement/engagement.js"></script>
   <script src="modules/datetimepicker/datetimepicker.js"></script> 
 
   <script src="common/directive/smg.js"></script> 
   <script src="common/directive/highchart.js"></script> 
-  <script src="common/directive/accessLevel.js"></script>  
-
+  <script src="common/directive/equal.js"></script>  
+  <script src="common/directive/accessLevel.js"></script>
+  <script src="common/directive/equal.js"></script>  
   <script src="common/services/routingConfig.js"></script>
 
   <script src="vendor/ng-file-upload/angular-file-upload-shim.min.js"></script> 

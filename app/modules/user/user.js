@@ -1,8 +1,8 @@
 angular.module('user')
 
-.controller('UserCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory',
+.controller('UserCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote',
 
-    function($scope, $routeParams, remoteFactory, dataFactory) {
+    function($scope, $routeParams, remoteFactory, dataFactory, userRemote) {
         $scope.activeTab = "user";
         $scope.cssLink = "user-profile.css";
         var user_pre = dataFactory.getUsernameAvatar();
@@ -85,7 +85,7 @@ angular.module('user')
                 if (userProfile.email == null)
                     userProfile.email = "Không xác định";
 
-                if (userProfile.gender == 1)
+                if (userProfile.gender == 'male')
                     userProfile.gender = 'Nam';
                 else
                     userProfile.gender = 'Nữ';
@@ -106,41 +106,59 @@ angular.module('user')
     }
 ])
 
-.controller('UserManagerCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory',
-    function($scope, $routeParams, dataFactory, remoteFactory) {
+.controller('UserManagerCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote',
+    function($scope, $routeParams, dataFactory, remoteFactory, filterHelper, userRemote) {
         var brandId = $routeParams.brandId;
 
         $scope.metas = remoteFactory.meta_property_types;
+        $scope.event = remoteFactory.meta_profile;
         $scope.events = remoteFactory.meta_events;
         $scope.metadata = remoteFactory.meta_lists;
 
         $scope.subfilters = null;
+        $scope.userList = dataFactory.getCurrentResultUserFilter();
 
-        dataFactory.getUsersOfBrand(brandId, function(data) {
-            $scope.userList = data.users;
+        $scope.getResult = function() {
+            var query = filterHelper.buildQuery($scope.subfilters);
 
-            for (var i = 0; i < $scope.userList.length; i++) {
+            var fields = {
+                filter: JSON.stringify(query),
+                fields: '["name", "dob", "gender", "city", "last_visit"]',
+                brand_id: brandId,
+                page: 0,
+                page_size: 10000
+            };
 
-                var user = $scope.userList[i];
-                if (user.email == null)
-                    user.email = "Không xác định";
+            userRemote.filter(fields, function(data) {
+                if (data.error == undefined) {
+                    $scope.userList = data.data;
 
-                if (user.gender == 1)
-                    user.gender = 'Nam';
-                else
-                    user.gender = 'Nữ';
+                    for (var i = 0; i < $scope.userList.length; i++) {
 
-                if (user.city == null)
-                    user.city = "Không xác định";
+                        var user = $scope.userList[i];
+                        if (user.email == null)
+                            user.email = "Không xác định";
 
-                if (user.dob != null)
-                    user.age = new Date().getFullYear() - new Date(user.dob).getFullYear();
-                else
-                    user.age = "Không xác định";
-            }
+                        if (user.gender == 'male')
+                            user.gender = 'Nam';
+                        else
+                            user.gender = 'Nữ';
 
-            dataFactory.setUsersOfBrand(brandId, $scope.userList);
-        }, function() {})
+                        if (user.city == null)
+                            user.city = "Không xác định";
+
+                        if (user.dob != null)
+                            user.dob = new Date(user.dob).getFullYear();
+                        else
+                            user.dob = "Không xác định";
+                    }
+
+                    dataFactory.setCurrentResultUserFilter($scope.userList);
+                }
+
+            }, function() {});
+        }
+
     }
 ])
 

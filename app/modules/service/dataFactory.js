@@ -3,6 +3,12 @@ angular.module('smg.services')
 
         function($http, remoteFactory, brandRemote, shopRemote, userRemote, accountRemote) {
 
+            var updateHomeFunc = null;
+
+            var updateBrandHeaderFunc = null;
+            var updateBrandsHeaderFunc = null;
+            var updateAccountNameHeaderFunc = null;
+
             var brands = null;
             var tempShop = null;
             var user_pre = {
@@ -13,12 +19,48 @@ angular.module('smg.services')
             var userProfile = null;
             var currentShop = null;
             var currentBrand = null;
+            var currentResultUserFilter = null;
             var usersOfBrand = {
                 id: null,
                 users: null
             }
 
+
             return {
+                updateAccountNameHeader: function(name) {
+                    if (updateAccountNameHeaderFunc != null)
+                        updateAccountNameHeaderFunc(name);
+                },
+                updateBrandsHeader: function(brands) {
+                    if (updateBrandsHeaderFunc != null)
+                        updateBrandsHeaderFunc(brands);
+                },
+                updateBrandHeader: function(brand) {
+                    if (updateBrandHeaderFunc != null)
+                        updateBrandHeaderFunc(brand);
+                },
+                setUpdateBrandHeaderFunc: function(func) {
+                    updateBrandHeaderFunc = func;
+                },
+                setUpdateBrandsHeaderFunc: function(func) {
+                    updateBrandsHeaderFunc = func;
+                },
+                setUpdateAccountNameHeaderFunc: function(func) {
+                    updateAccountNameHeaderFunc = func;
+                },
+                setUpdateHomeFunc: function(func) {
+                    updateHomeFunc = func;
+                },
+                updateHome: function(brandId) {
+                    if (updateHomeFunc != null)
+                        updateHomeFunc(brandId);
+                },
+                setCurrentResultUserFilter: function(result) {
+                    currentResultUserFilter = result;
+                },
+                getCurrentResultUserFilter: function() {
+                    return currentResultUserFilter;
+                },
                 setUsersOfBrand: function(brandId, users) {
                     usersOfBrand = {
                         id: brandId,

@@ -1206,6 +1206,11 @@ table.comment{
     width: 665px;
 }
 
+.comment_content{
+    font-family: Tahoma !important;
+    font-size: 13px;
+}
+
 /** funnel **/
 .step-content .step-pane .step-wapper .step-wapper-header{
     margin-bottom: 50px;

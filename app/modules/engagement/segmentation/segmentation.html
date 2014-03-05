@@ -6,9 +6,8 @@
             <div class="notice shadow">
                 <div class='col-md-12'>
                     <p class="title">Hệ thống bình luận tại mỗi cửa hàng</p>
-                    <p class="sub">Ac diam! Enim eu enim egestas, vel ac, ut? Vel sit urna tempor lectus integer. Ac rhoncus nec porttitor. Aliquet. Vut ultrices pid scelerisque! Porttitor augue et sed? </p>
                 </div>
-                
+                <p class="sub" style="margin-left:40px;">Quản lý hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch khuyến mãi của bạn dễ dàng theo dạng danh sách và thao tác đơn giản mang lại hiệu quả cao</p>
                 <div class="clearfix"></div>
             </div>
             
@@ -29,7 +28,10 @@
                     <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>
                 </div>
                 <div class="block_footer">
-                    <span class="btn-flat primary right" ng-click="getAllFilter()">Xem</span>
+                    <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> So sánh theo</p>
+                    <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" ng-init="compareUnit=event.compare_properties[0]" style="margin-left: 10px;margin-top: 10px;"></select>
+
+                    <span class="btn-flat primary right" ng-click="getResult()">Xem</span>
                 </div>
             </div>
 
@@ -37,40 +39,51 @@
 
             <div class="block home-block">
                 <div class="block_header">
-                    <select class="beg_date date">
-                        <option>01/01/2011</option>
-                    </select>
-                    - 
-                    <select class="end_date date">
-                        <option>01/01/2011</option>
-                    </select>
+                    <span>
+                        <div class="dropdown left" >
+                          <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                            </div>
+                          </a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
+                          </ul>
+                        </div>
 
-                     <select class="type_menu right" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-init="chartType=chartTypes[0]"></select>
+                        <div class="dropdown left" style="margin-left:10px;">
+                          <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                            </div>
+                          </a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'day' }" data-on-set-time="onTimeSetTwo"/>
+                          </ul>
+                        </div>
+                    </span>
 
-                    <select class="type_menu pull-right">
-                        <option>NGÀY</option>
-                        <option>TUẦN</option>
-                        <option>THÁNG</option>
-                    </select>
+                     <select class="type_menu right" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-init="chartType=chartTypes[0]" ng-hide="hideTypeChart"></select>
+
+                     <select class="type_menu pull-right" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-init="time_unit=time_units[0]" ng-change="updateChart()"></select>
+
                 </div>
                 <div ng-switch on="chartType.id" class="block_content">
                     <div ng-switch-when="1">
                         <div>
-                            <chart value='pieChart' height="400">
+                            <chart value='chartData[1]' height="400">
                             </chart>
                         </div>
                     </div>
                    
                     <div ng-switch-when="0">
                         <div>
-                            <chart value='lineChart' height="400">
+                            <chart value='chartData[0]' height="400">
                             </chart>
                         </div>
                     </div>
                     
                     <div ng-switch-when="2">
                         <div>
-                            <chart value='columnChart' height="400">
+                            <chart value='chartData[2]' height="400">
                             </chart>
                         </div>
                     </div>

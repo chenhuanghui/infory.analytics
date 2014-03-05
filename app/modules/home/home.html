@@ -1,35 +1,35 @@
 <div ng-include="'partials/_header.html'"></div>
 <div ng-include="'partials/_sidebar.html'"></div>
 <!-- main container -->
-<div class="content white-background content-home" ng-controller="HomeCtrl">
+<div class="content white-background content-home">
     
     <!-- upper main stats -->
     <div id="main-stats">
         <div class="row stats-row">
             <div class="col-md-3 col-sm-3 stat">
                 <div class="data">
-                    <span class="number">2457</span>
+                    <span class="number">{{brandInfo.user_count}}</span>
                     Khách hàng
                 </div>
                 <span class="date">Trong cơ sở dữ liệu</span>
             </div>
             <div class="col-md-3 col-sm-3 stat">
                 <div class="data">
-                    <span class="number">3240</span>
+                    <span class="number">{{brandInfo.view_count}}</span>
                     lượt xem
                 </div>
                 <span class="date">Kể từ 01/01/02014</span>
             </div>
             <div class="col-md-3 col-sm-3 stat">
                 <div class="data">
-                    <span class="number">322</span>
+                    <span class="number">{{brandInfo.like_count}}</span>
                     lượt like 
                 </div>
                 <span class="date">Kể từ 01/01/02014</span>
             </div>
             <div class="col-md-3 col-sm-3 stat last">
                 <div class="data">
-                    <span class="number">$2,340</span>
+                    <span class="number">${{brandInfo.balance}}</span>
                     t-coin
                 </div>
                 <span class="date">Số dư tài khoản</span>
@@ -44,46 +44,96 @@
         </div>
         <div class="block">
             <div class="block_header">
-                <select class="beg_date date">
-                    <option>01/01/2011</option>
-                </select>
-                - 
-                <select class="end_date date">
-                    <option>01/01/2011</option>
-                </select>
+                <span>
+                    <div class="dropdown left" >
+                      <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                        </div>
+                      </a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
+                      </ul>
+                    </div>
 
-                <select class="type_menu pull-right">
-                    <option>NGÀY</option>
-                    <option>TUẦN</option>
-                    <option>THÁNG</option>
-                </select>
+                    <div class="dropdown left" style="margin-left:10px;">
+                      <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                        </div>
+                      </a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'day' }" data-on-set-time="onTimeSetTwo"/>
+                      </ul>
+                    </div>
+                </span>
+
+                <select class="type_menu pull-right" ng-model="time_unit_1" ng-options="time_unit_1 as time_unit_1.name_display for time_unit_1 in time_units" ng-init="time_unit_1=time_units[0]" ng-change="updateTimeUnit(time_unit_1, 0)"></select>
             </div>
             <div>
-                <chart value='lineChart' height="400"></chart>
+                <chart value='dataChart[0]' height="400"></chart>
             </div>
         </div>
 
         <div class="block">
             <div class="block_header">
-                <select class="beg_date date">
-                    <option>01/01/2011</option>
-                </select>
-                - 
-                <select class="end_date date">
-                    <option>01/01/2011</option>
-                </select>
+                <span>
+                    <div class="dropdown left" >
+                      <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[2].dateDisplay" style="width: 100px;">
+                        </div>
+                      </a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="data[2].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'day' }" data-on-set-time="onTimeSetThree"/>
+                      </ul>
+                    </div>
 
-                <select class="type_menu pull-right">
-                    <option>NGÀY</option>
-                    <option>TUẦN</option>
-                    <option>THÁNG</option>
-                </select>
+                    <div class="dropdown left" style="margin-left:10px;">
+                      <a class="dropdown-toggle" id="dropdown4" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[3].dateDisplay" style="width: 100px;">
+                        </div>
+                      </a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="data[3].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown4', minView: 'day' }" data-on-set-time="onTimeSetFour"/>
+                      </ul>
+                    </div>
+                </span>
+
+                <select class="type_menu pull-right" ng-model="time_unit_2" ng-options="time_unit_2 as time_unit_2.name_display for time_unit_2 in time_units" ng-init="time_unit_2=time_units[0]" ng-change="updateTimeUnit(time_unit_2, 1)"></select>
             </div>
             <div>
-                <chart value='lineChart' height="400"></chart>
+                <chart value='dataChart[1]' height="400"></chart>
             </div>
         </div>
 
+        <div class="block">
+            <div class="block_header">
+                <span>
+                    <div class="dropdown left" >
+                      <a class="dropdown-toggle" id="dropdown5" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[4].dateDisplay" style="width: 100px;">
+                        </div>
+                      </a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="data[4].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown5', minView: 'day' }" data-on-set-time="onTimeSetFive"/>
+                      </ul>
+                    </div>
+
+                    <div class="dropdown left" style="margin-left:10px;">
+                      <a class="dropdown-toggle" id="dropdown6" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[5].dateDisplay" style="width: 100px;">
+                        </div>
+                      </a>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="data[5].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown6', minView: 'day' }" data-on-set-time="onTimeSetSix"/>
+                      </ul>
+                    </div>
+                </span>
+
+                <select class="type_menu pull-right" ng-model="time_unit_3" ng-options="time_unit_3 as time_unit_3.name_display for time_unit_3 in time_units" ng-init="time_unit_3=time_units[0]" ng-change="updateTimeUnit(time_unit_3, 2)"></select>
+            </div>
+            <div>
+                <chart value='dataChart[2]' height="400"></chart>
+            </div>
+        </div>
         <div class="home-title-2">
             <span >Biểu đồ của bạn</span>
             <span class="btn-flat success right home-watch-chart" id="reply-button">XEM BIỂU ĐỒ</span>

@@ -1,166 +1,178 @@
 angular.module('home')
 
-.controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth',
+.controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth', 'brandRemote', 'chartHelper',
 
-    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth) {
+    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth, brandRemote, chartHelper) {
+        $scope.brandId = -1;
+        $scope.dataChart = [{}, {}];
 
-        $scope.lineChart = {
-            chart: {
-                type: 'line'
-            },
-            title: {
-                text: 'Monthly Average Temperature',
-                x: -20 //center
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com',
-                x: -20
-            },
-            xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-                ]
-            },
-            yAxis: {
-                title: {
-                    text: 'Temperature (°C)'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                valueSuffix: '°C'
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                borderWidth: 0
-            },
-            series: [{
-                name: 'Tokyo',
-                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-            }, {
-                name: 'New York',
-                data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-            }, {
-                name: 'Berlin',
-                data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-            }, {
-                name: 'London',
-                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-            }]
+        var fields = [null, null, null];
+
+        $scope.updateTimeUnit = function(time_unit, id) {
+            fields[id].time_unit = time_unit.name;
+            updateChart(fields[id], id);
         };
 
-        $scope.columnChart = {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Monthly Average Rainfall'
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com'
-            },
-            xAxis: {
-                categories: [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ]
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Rainfall (mm)'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                name: 'Tokyo',
-                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+        $scope.updateHome = function(brandId) {
+            $scope.brandId = brandId;
+            brandRemote.getHome({
+                brand_id: brandId
+            }, function(data) {
+                $scope.brandInfo = data;
 
-            }, {
-                name: 'New York',
-                data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+                fields[0] = {
+                    brand_id: $scope.brandId,
+                    time_unit: $scope.time_unit_1.name,
+                    date_beg: $scope.data[0].dateDropDownInput,
+                    date_end: $scope.data[1].dateDropDownInput
+                };
 
-            }, {
-                name: 'London',
-                data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
 
-            }, {
-                name: 'Berlin',
-                data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+                fields[1] = {
+                    brand_id: $scope.brandId,
+                    time_unit: $scope.time_unit_2.name,
+                    date_beg: $scope.data[2].dateDropDownInput,
+                    date_end: $scope.data[3].dateDropDownInput
+                };
 
-            }]
+
+                fields[2] = {
+                    brand_id: $scope.brandId,
+                    time_unit: $scope.time_unit_3.name,
+                    date_beg: $scope.data[4].dateDropDownInput,
+                    date_end: $scope.data[5].dateDropDownInput
+                };
+
+                updateChart(fields[0], 0);
+                updateChart(fields[1], 1);
+                updateChart(fields[2], 2);
+
+            }, function() {});
         };
 
-        $scope.pieChart = {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: 'Browser market shares at a specific website, 2010'
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000000',
-                        connectorColor: '#000000',
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                    }
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Browser share',
-                data: [
-                    ['Firefox', 45.0],
-                    ['IE', 26.8], {
-                        name: 'Chrome',
-                        y: 12.8,
-                        sliced: true,
-                        selected: true
-                    },
-                    ['Safari', 8.5],
-                    ['Opera', 6.2],
-                    ['Others', 0.7]
-                ]
-            }]
-        };
+        function updateChart(fields, id) {
+            fields.date_beg = normalizeDate(fields.date_beg);
+            fields.date_end = normalizeDate(fields.date_end);
+            brandRemote.getCostChart(fields, function(data) {
+                if (data.error == undefined)
+                    $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
+            }, function() {});
+        }
+
+        function normalizeDate(date) {
+            var newDate = new Date(date);
+            var d = newDate.getDate();
+            var m = newDate.getMonth() + 1;
+            var y = newDate.getFullYear();
+
+            return y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+
+        }
+
+        dataFactory.setUpdateHomeFunc($scope.updateHome);
+
+        $scope.time_units = [{
+            name: 'day',
+            name_display: 'Ngày'
+        }, {
+            name: 'week',
+            name_display: 'Tuần'
+        }, {
+            name: 'month',
+            name_display: 'Tháng'
+        }];
+
+        $scope.data = [{
+            dateDropDownInput: moment("2013-10-22T00:00:00.000").toDate(),
+            dateDisplay: "22-10-2013",
+        }, {
+            dateDropDownInput: moment("2014-02-22T00:00:00.000").toDate(),
+            dateDisplay: "22-02-2014",
+        }, {
+            dateDropDownInput: moment("2013-10-22T00:00:00.000").toDate(),
+            dateDisplay: "22-10-2013",
+        }, {
+            dateDropDownInput: moment("2014-02-22T00:00:00.000").toDate(),
+            dateDisplay: "22-02-2014",
+        }, {
+            dateDropDownInput: moment("2013-10-22T00:00:00.000").toDate(),
+            dateDisplay: "22-10-2013",
+        }, {
+            dateDropDownInput: moment("2014-02-22T00:00:00.000").toDate(),
+            dateDisplay: "22-02-2014",
+        }];
+
+        $scope.onTimeSetOne = function(newDate, oldDate) {
+            var d = newDate.getDate();
+            var m = newDate.getMonth() + 1;
+            var y = newDate.getFullYear();
+
+            $scope.data[0].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            if (fields[0] != null) {
+                fields[0].date_beg = $scope.data[0].dateDropDownInput;
+                updateChart(fields[0], 0);
+            }
+        }
+
+        $scope.onTimeSetTwo = function(newDate, oldDate) {
+            var d = newDate.getDate();
+            var m = newDate.getMonth() + 1;
+            var y = newDate.getFullYear();
+
+            $scope.data[1].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            if (fields[0] != null) {
+                fields[0].date_end = $scope.data[1].dateDropDownInput;
+                updateChart(fields[0], 0);
+            }
+        }
+
+        $scope.onTimeSetThree = function(newDate, oldDate) {
+            var d = newDate.getDate();
+            var m = newDate.getMonth() + 1;
+            var y = newDate.getFullYear();
+
+            $scope.data[2].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            if (fields[1] != null) {
+                fields[1].date_beg = $scope.data[2].dateDropDownInput;
+                updateChart(fields[1], 1);
+            }
+        }
+
+        $scope.onTimeSetFour = function(newDate, oldDate) {
+            var d = newDate.getDate();
+            var m = newDate.getMonth() + 1;
+            var y = newDate.getFullYear();
+
+            $scope.data[3].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            if (fields[1] != null) {
+                fields[1].date_end = $scope.data[3].dateDropDownInput;
+                updateChart(fields[1], 1);
+            }
+        }
+
+        $scope.onTimeSetFive = function(newDate, oldDate) {
+            var d = newDate.getDate();
+            var m = newDate.getMonth() + 1;
+            var y = newDate.getFullYear();
+
+            $scope.data[4].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            if (fields[2] != null) {
+                fields[2].date_beg = $scope.data[4].dateDropDownInput;
+                updateChart(fields[2], 2);
+            }
+        }
+
+        $scope.onTimeSetSix = function(newDate, oldDate) {
+            var d = newDate.getDate();
+            var m = newDate.getMonth() + 1;
+            var y = newDate.getFullYear();
+
+            $scope.data[5].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            if (fields[2] != null) {
+                fields[2].date_end = $scope.data[5].dateDropDownInput;
+                updateChart(fields[2], 2);
+            }
+        }
 
     }
 ])

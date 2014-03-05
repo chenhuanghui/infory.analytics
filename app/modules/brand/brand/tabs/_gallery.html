@@ -1,17 +1,8 @@
 <div class="z-gallery">
     <div class="z-header">
-        <span>50</span> hình ảnh được tải lên
+        <span>{{gallery.length}}</span> hình ảnh được tải lên
         <input type="file" class="right"/>
     </div>
-    <div class="z-content">
-        <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
-        <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
-        <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
-        <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
-        <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
-        <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
-        <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
-        <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
-        <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
-    </div>
+    <div class="z-content" ng-repeat="image in gallery">
+        
 </div>

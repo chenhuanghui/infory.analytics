@@ -12,6 +12,7 @@ var app = angular.module('Smg', [
     'account',
     'user',
     'promotion',
+    'header',
     'smg.services',
     'engagement',
     'smgDirectives',
@@ -28,6 +29,11 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
 
         $routeProvider
             .when('/', {
+                templateUrl: 'modules/home/home.html',
+                controller: 'HomeCtrl',
+                access: access.user
+            })
+            .when('/home', {
                 templateUrl: 'modules/home/home.html',
                 controller: 'HomeCtrl',
                 access: access.user
@@ -128,6 +134,10 @@ angular.module('brand', [
 ]);
 
 angular.module('shop', [
+    'ngRoute'
+]);
+
+angular.module('header', [
     'ngRoute'
 ]);
 

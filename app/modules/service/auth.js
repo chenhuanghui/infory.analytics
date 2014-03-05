@@ -1,38 +1,8 @@
 'use strict';
 
 angular.module('Smg')
-    .factory('Auth', ['$cookieStore', '$document', 'accountRemote',
-        function($cookieStore, $document, accountRemote) {
-
-            function deleteCookie(name) {
-                $document.context.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-            };
-
-            function setCookie(cname, cvalue, exdays) {
-                var d = new Date();
-                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-                var expires = "expires=" + d.toGMTString();
-                $document.context.cookie = cname + "=" + cvalue + "; " + expires;
-            }
-
-            function normalize(str) {
-                if (str[0] == '%')
-                    return str.substr(3, str.length - 6);
-                else
-                    return str;
-            }
-
-            function getCookie(cname) {
-                var name = cname + "=";
-                var ca = $document.context.cookie.split(';');
-                for (var i = 0; i < ca.length; i++) {
-                    var c = ca[i].trim();
-                    if (c.indexOf(name) == 0) return normalize(c.substring(name.length, c.length));
-                }
-
-                return "";
-            }
-
+    .factory('Auth', ['$cookieStore', '$document', 'accountRemote', 'cookie',
+        function($cookieStore, $document, accountRemote, cookie) {
             function changeUser(user) {
                 _.extend(currentUser, user);
             };
@@ -46,10 +16,10 @@ angular.module('Smg')
                 role: userRoles.public
             };
 
-            if (getCookie('user')) {
+            if (cookie.getCookie('user')) {
                 var role = userRoles.public;
 
-                switch (getCookie('role')) {
+                switch (cookie.getCookie('role')) {
                     case 'user':
                         role = userRoles.user;
                         break;
@@ -59,10 +29,10 @@ angular.module('Smg')
                 }
 
                 currentUser = {
-                    name: getCookie('name'),
-                    username: getCookie('user'),
-                    role: role,
-                    access_token: getCookie('access_token')
+                    name: cookie.getCookie('name'),
+                    username: cookie.getCookie('user'),
+                    role: cookie.role,
+                    access_token: cookie.getCookie('access_token')
                 }
             }
 
@@ -91,19 +61,19 @@ angular.module('Smg')
                                 access_token: res.data.access_token
                             };
 
-                            deleteCookie('name');
-                            deleteCookie('user');
-                            deleteCookie('access_token');
-                            deleteCookie('role');
+                            cookie.deleteCookie('name');
+                            cookie.deleteCookie('user');
+                            cookie.deleteCookie('access_token');
+                            cookie.deleteCookie('role');
 
                             if (rememberme) {
                                 var expires = 7;
-                                setCookie('name', user.name, expires);
-                                setCookie('user', user.username, expires);
-                                setCookie('access_token', user.access_token, expires);
-                                setCookie('role', user.role.title, expires);
+                                cookie.setCookie('name', user.name, expires);
+                                cookie.setCookie('user', user.username, expires);
+                                cookie.setCookie('access_token', user.access_token, expires);
+                                cookie.setCookie('role', user.role.title, expires);
                             } else {
-                                setCookie('name', user.name, expires);
+                                cookie.setCookie('name', user.name, expires);
                                 $cookieStore.put('user', user.username);
                                 $cookieStore.put('access_token', user.access_token);
                                 $cookieStore.put('role', user.role.title);
@@ -125,9 +95,9 @@ angular.module('Smg')
 
                     accountRemote.logout(user, function(res) {
                         if (res.status) {
-                            deleteCookie('user');
-                            deleteCookie('role');
-                            deleteCookie('access_token');
+                            cookie.deleteCookie('user');
+                            cookie.deleteCookie('role');
+                            cookie.deleteCookie('access_token');
                         }
 
                         changeUser({

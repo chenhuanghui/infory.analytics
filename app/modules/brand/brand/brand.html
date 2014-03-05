@@ -1,7 +1,7 @@
 <div ng-include="'partials/_header.html'"></div>
 <div ng-include="'partials/_sidebar.html'"></div>
 <!-- main container -->
-<div class="content" ng-controller="BrandCtrl">
+<div class="content">
     <div id="brand_wrap">
         <div class="row">
             <div class="col-md-7 brand_overview block">
@@ -47,14 +47,14 @@
                   </li>
                   
                   <li ng-class="{active: main.active.tab == 'product'}">
-                    <a ng-click='main.active.tab = "product" ' href=""> Sản phẩm</a>
+                    <a ng-click='main.active.tab = "product";showProducts()' href=""> Sản phẩm</a>
                   </li>
 
                     <li ng-class="{active: main.active.tab == 'gallery'}">
-                      <a ng-click='main.active.tab = "gallery" ' href=""> Hình ảnh</a>
+                      <a ng-click='main.active.tab = "gallery"; showGallery();' href=""> Hình ảnh</a>
                     </li>
                     <li ng-class="{active: main.active.tab == 'gallery_user'}">
-                      <a ng-click='main.active.tab = "gallery_user" ' href=""> Hình ảnh KH</a>
+                      <a ng-click='main.active.tab = "gallery_user";showUsersGallery();' href=""> Hình ảnh KH</a>
                     </li>
                 </ul>
                 <div class="tab-content">

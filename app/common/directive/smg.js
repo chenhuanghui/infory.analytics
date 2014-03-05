@@ -63,7 +63,7 @@ angular.module('smgDirectives', ['ui.date'])
 
                     var action_nor = $compile('<span class="btn-flat white action action_child clearfix  row_' + qc + '">{{operator}}</span>')(scope);
 
-                    var query_row = $compile('<div query-record id="' + qc + '" events="events" metas="metas" event="event" metadata="metadata" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
+                    var query_row = $compile('<div query-record operator="operator" id="' + qc + '" events="events" metas="metas" event="event" metadata="metadata" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
 
                     if (element.find(".action").length > 0) {
                         $actionGroup.append(action_nor);
@@ -89,6 +89,7 @@ angular.module('smgDirectives', ['ui.date'])
                 require: '^smgFilter',
                 restrict: 'A',
                 scope: {
+                    operator: "=",
                     metas: "=",
                     events: "=",
                     event: "=",
@@ -108,6 +109,12 @@ angular.module('smgDirectives', ['ui.date'])
                     scope.paremeters = {
                         firstInput: '',
                         secondInput: ''
+                    }
+
+                    scope.updateFields = function() {
+                        meta = scope.metas[scope.property.type].operators_display[0];
+                        if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(meta)] == 'dropdown')
+                            scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
                     }
 
                     scope.onTimeSetOne = function(newDate, oldDate) {
@@ -150,7 +157,8 @@ angular.module('smgDirectives', ['ui.date'])
                             id: scope.id,
                             property: scope.property,
                             meta: scope.meta,
-                            paremeters: scope.paremeters
+                            paremeters: scope.paremeters,
+                            operator: scope.operator
                         };
                     }
                     ctrl.addFilter(scope);
