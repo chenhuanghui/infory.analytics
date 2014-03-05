@@ -4,7 +4,7 @@ angular.module('home')
 
     function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth, brandRemote, chartHelper) {
         $scope.brandId = -1;
-        $scope.dataChart = [{}, {}];
+        $scope.dataChart = [{}, {}, {}];
 
         var fields = [null, null, null];
 

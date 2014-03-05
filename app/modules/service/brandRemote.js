@@ -23,6 +23,9 @@ angular.module('smg.services')
                 },
                 getCostChart: function(fields, success, error) {
                     $http.post(base_url + 'brand/get_cost_chart', fields).success(success).error(error);
+                },
+                create: function(fields, success, error) {
+                    $http.post(base_url + 'brand/create', fields).success(success).error(error);
                 }
             }
         }

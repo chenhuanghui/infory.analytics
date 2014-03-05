@@ -19,6 +19,7 @@ var app = angular.module('Smg', [
     'ui.bootstrap.datetimepicker',
     'ui.date',
     'nvd3ChartDirectives',
+    'placeholderShim',
     'angularFileUpload'
 ]);
 
@@ -138,6 +139,10 @@ angular.module('shop', [
 ]);
 
 angular.module('header', [
+    'ngRoute'
+]);
+
+angular.module('sidebar', [
     'ngRoute'
 ]);
 

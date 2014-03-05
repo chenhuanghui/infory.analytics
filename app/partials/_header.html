@@ -23,13 +23,13 @@
                     {{brand.name}}
                     <b class="caret"></b>
                 </a>
-                <div class="pop-dialog">
-                    <ul ng-repeat="b in brands">
-                        <li><a ng-click="setCurrentBrand(b)">{{b.name}}</a></li>
+                <div class="pop-dialog" style="width:200px;">
+                    <ul >
+                        <li ng-repeat="b in brands" ><a ng-click="setCurrentBrand(b)">{{b.name}}</a></li>
                         <li class="create-box">
                             <i class="icon-plus"></i>
-                            <input id="id_name" type="text" placeholder="New brand"/>
-                            <input id="create_submit" class="disabled" type="button" value="CREATE BRAND"/>
+                            <input id="id_name" place-holder="New brand" ng-model="newBrandName"/>
+                            <input id="create_submit" class="disabled" type="button" value="CREATE BRAND" ng-click="createBrand(newBrandName)"/>
                         </li>
                     </ul>
                 </div>

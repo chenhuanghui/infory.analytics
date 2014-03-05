@@ -1,11 +1,11 @@
 angular.module('header')
 
-.controller('HeaderCtrl', ['$scope', 'dataFactory', 'Auth',
+.controller('HeaderCtrl', ['$scope', 'dataFactory', 'Auth', 'brandRemote',
 
-    function($scope, dataFactory, Auth) {
+    function($scope, dataFactory, Auth, brandRemote) {
 
         $scope._username = Auth.user.name;
-
+        $scope.newBrandName = 'New brand';
         $scope.updateBrand = function(brand) {
             $scope.brand = brand;
         }
@@ -16,6 +16,29 @@ angular.module('header')
 
         $scope.updateAccountName = function(name) {
             $scope._username = name;
+        }
+
+        $scope.setCurrentBrand = function(brand) {
+            $scope.brand = brand;
+            dataFactory.updateHome($scope.brand.id);
+            dataFactory.updateBrandSideBar($scope.brand.id);
+        }
+
+        $scope.createBrand = function(name) {
+            if (name.length == '')
+                return;
+
+            brandRemote.create({
+                name: name
+            }, function(data) {
+                if (data.error == undefined) {
+                    $scope.brands.push({
+                        id: data.brand_id,
+                        name: name
+                    });
+                    $scope.newBrandName = 'New brand';
+                }
+            }, function() {});
         }
 
         dataFactory.setUpdateBrandHeaderFunc($scope.updateBrand);

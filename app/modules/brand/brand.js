@@ -309,11 +309,18 @@ angular.module('brand')
 
         $scope.$watch('brand', function() {
             dataFactory.updateBrandHeader($scope.brand);
+            dataFactory.updateBrandSideBar($scope.brand.id);
         });
 
         $scope.$watch('brands', function() {
             dataFactory.updateBrandsHeader($scope.brands);
         });
+
+        $scope.updateBrandIdSideBar = function(id) {
+            $scope.brandIdSideBar = id;
+        }
+
+        dataFactory.setUpdateBrandSideBarFunc($scope.updateBrandIdSideBar);
     }
 ])
 
