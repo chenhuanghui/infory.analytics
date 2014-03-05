@@ -1269,9 +1269,8 @@ table.comment{
     width: 200px;
 }
 .z-btn .pop-dialog .close-icon{
-    position: absolute;
     top: -25px;
-    right: 5px;
-    top: -20px;
-    right: 8px;
+    width: 197px;
+    height: 20px;
+    position: absolute;
 }
