@@ -165,14 +165,12 @@ angular.module('user')
 .controller('UserNotifyCtrl', ['$scope', 'remoteFactory',
     function($scope, remoteFactory) {
         $scope.colorpicker = {
-                        red: 255
+                        red: 50,
                         options: {
-                        orientation: horizontal
-                        min: 0
-                        max: 255
-                        range: min
-                        change: undefined
-                        slide: undefined
+                        orientation: 'horizontal',
+                        min: 0,
+                        max: 255,
+                        range: 'min'
                         }
                     };
         $scope.metas = remoteFactory.meta_property_types;
