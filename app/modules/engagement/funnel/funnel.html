@@ -102,7 +102,57 @@
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
-                                        
+                            <div class="clearfix"></div>
+                            <div class="wapper">
+                                <div class="block" style="margin: 0 -10px;">
+                                    <div class="block_header">
+                                        <div class="left control">
+                                            So sánh theo <div class="ui-select">
+                                                            <select>
+                                                                <option selected="">Giới tính</option>
+                                                                <option>Độ tuổi</option>
+                                                            </select>
+                                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="block_content no-padding">
+                                        <table class="z-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Giới tình</th>
+                                                    <th>Số lượng bước trước</th>
+                                                    <th>Thời gian trung bình<br/>giữa 2 bước</th>
+                                                    <th>Số lượng bước sau</th>
+                                                    <th>Tỷ lệ giữa 2 bước</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Nữ</td>
+                                                    <td>1371</td>
+                                                    <td>1 ngày</td>
+                                                    <td>601</td>
+                                                    <td class="name">43.83%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nam</td>
+                                                    <td>200</td>
+                                                    <td>2 ngày</td>
+                                                    <td>200</td>
+                                                    <td class="name">100%</td>
+                                                </tr>
+                                                <tr class="total">
+                                                    <td>Tất cả</td>
+                                                    <td>1521</td>
+                                                    <td>1.5 ngày</td>
+                                                    <td>801</td>
+                                                    <td class="name">50%</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -111,20 +161,13 @@
         </form>
     </div>
     <div class="col-md-12 with-sidebar">
-        <div class="col-md-11">
-            <div class="funnel-wizard-actions wizard-actions">
-                <!--
-                <button type="button" disabled class="btn-glow primary btn-prev"> 
-                    <i class="icon-chevron-left"></i> Prev
-                </button>
-                -->
-                <button type="button" class="btn-glow primary success">
-                    <i class="icon-bookmark-empty"></i>Lưu
-                </button>
-                <button type="button" class="btn-glow primary btn-next" data-last="Finish">
-                    Theo dõi hành vi người dùng
-                </button>
-            </div>
+        <div class="funnel-wizard-actions wizard-actions">
+            <button type="button" class="btn-glow primary success btn-save">
+                <i class="icon-bookmark-empty"></i>Lưu
+            </button>
+            <button type="button" class="btn-glow primary btn-next" data-last="Finish">
+                Theo dõi hành vi người dùng
+            </button>
         </div>
     </div>
 </div>
@@ -137,31 +180,27 @@
 //winzard create promotion
 $(function () {
     var $wizard = $('#funnel-fuelux-wizard'),
-        $btnPrev = $('.funnel-wizard-actions .btn-prev'),
         $btnNext = $('.funnel-wizard-actions .btn-next'),
-        $btnFinish = $(".funnel-wizard-actions .btn-finish");
+        $btnSave = $(".funnel-wizard-actions .btn-save");
 
     $wizard.wizard().on('finished', function(e) {
         // wizard complete code
     }).on("changed", function(e) {
         var step = $wizard.wizard("selectedItem");
         // reset states
-        $btnNext.removeAttr("disabled");
-        $btnPrev.removeAttr("disabled");
         $btnNext.show();
-        $btnFinish.hide();
 
         if (step.step === 1) {
-            $btnPrev.attr("disabled", "disabled");
-        } else if (step.step === 4) {
+            //$btnPrev.attr("disabled", "disabled");
+        } else if (step.step === 2) {
             $btnNext.hide();
-            $btnFinish.show();
+            $btnSave.hide();
         }
     });
 
-    $btnPrev.on('click', function() {
-        $wizard.wizard('previous');
-    });
+    //$btnPrev.on('click', function() {
+    //        $wizard.wizard('previous');
+    //    });
     $btnNext.on('click', function() {
         $wizard.wizard('next');
     });
