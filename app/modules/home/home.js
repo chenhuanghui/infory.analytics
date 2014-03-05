@@ -1,8 +1,8 @@
 angular.module('home')
 
-.controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth', 'brandRemote', 'chartHelper',
+.controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth', 'brandRemote', 'chartHelper', 'serviceHelper',
 
-    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth, brandRemote, chartHelper) {
+    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth, brandRemote, chartHelper, serviceHelper) {
         $scope.brandId = -1;
         $scope.dataChart = [{}, {}, {}];
 
@@ -103,11 +103,7 @@ angular.module('home')
         }];
 
         $scope.onTimeSetOne = function(newDate, oldDate) {
-            var d = newDate.getDate();
-            var m = newDate.getMonth() + 1;
-            var y = newDate.getFullYear();
-
-            $scope.data[0].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
             if (fields[0] != null) {
                 fields[0].date_beg = $scope.data[0].dateDropDownInput;
                 updateChart(fields[0], 0);
@@ -115,11 +111,7 @@ angular.module('home')
         }
 
         $scope.onTimeSetTwo = function(newDate, oldDate) {
-            var d = newDate.getDate();
-            var m = newDate.getMonth() + 1;
-            var y = newDate.getFullYear();
-
-            $scope.data[1].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $scope.data[1].dateDisplay = serviceHelper.normalizeTime(newDate);
             if (fields[0] != null) {
                 fields[0].date_end = $scope.data[1].dateDropDownInput;
                 updateChart(fields[0], 0);
@@ -127,11 +119,7 @@ angular.module('home')
         }
 
         $scope.onTimeSetThree = function(newDate, oldDate) {
-            var d = newDate.getDate();
-            var m = newDate.getMonth() + 1;
-            var y = newDate.getFullYear();
-
-            $scope.data[2].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $scope.data[2].dateDisplay = serviceHelper.normalizeTime(newDate);
             if (fields[1] != null) {
                 fields[1].date_beg = $scope.data[2].dateDropDownInput;
                 updateChart(fields[1], 1);
@@ -139,11 +127,7 @@ angular.module('home')
         }
 
         $scope.onTimeSetFour = function(newDate, oldDate) {
-            var d = newDate.getDate();
-            var m = newDate.getMonth() + 1;
-            var y = newDate.getFullYear();
-
-            $scope.data[3].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $scope.data[3].dateDisplay = serviceHelper.normalizeTime(newDate);
             if (fields[1] != null) {
                 fields[1].date_end = $scope.data[3].dateDropDownInput;
                 updateChart(fields[1], 1);
@@ -151,11 +135,7 @@ angular.module('home')
         }
 
         $scope.onTimeSetFive = function(newDate, oldDate) {
-            var d = newDate.getDate();
-            var m = newDate.getMonth() + 1;
-            var y = newDate.getFullYear();
-
-            $scope.data[4].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $scope.data[4].dateDisplay = serviceHelper.normalizeTime(newDate);
             if (fields[2] != null) {
                 fields[2].date_beg = $scope.data[4].dateDropDownInput;
                 updateChart(fields[2], 2);
@@ -163,11 +143,7 @@ angular.module('home')
         }
 
         $scope.onTimeSetSix = function(newDate, oldDate) {
-            var d = newDate.getDate();
-            var m = newDate.getMonth() + 1;
-            var y = newDate.getFullYear();
-
-            $scope.data[5].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $scope.data[5].dateDisplay = serviceHelper.normalizeTime(newDate);
             if (fields[2] != null) {
                 fields[2].date_end = $scope.data[5].dateDropDownInput;
                 updateChart(fields[2], 2);

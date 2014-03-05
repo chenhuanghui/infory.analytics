@@ -82,9 +82,9 @@ angular.module('smgDirectives', ['ui.date'])
             }
         };
     })
-    .directive('queryRecord', [
+    .directive('queryRecord', ['serviceHelper',
 
-        function() {
+        function(serviceHelper) {
             return {
                 require: '^smgFilter',
                 restrict: 'A',
@@ -112,26 +112,19 @@ angular.module('smgDirectives', ['ui.date'])
                     }
 
                     scope.updateFields = function() {
-                        meta = scope.metas[scope.property.type].operators_display[0];
+                        scope.meta = scope.metas[scope.property.type].operators_display[0];
                         if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(meta)] == 'dropdown')
                             scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
                     }
 
                     scope.onTimeSetOne = function(newDate, oldDate) {
-                        var d = newDate.getDate();
-                        var m = newDate.getMonth() + 1;
-                        var y = newDate.getFullYear();
                         scope.paremeters.firstInput = '';
-                        scope.data[0].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                        scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
                     }
 
                     scope.onTimeSetTwo = function(newDate, oldDate) {
-                        var d = newDate.getDate();
-                        var m = newDate.getMonth() + 1;
-                        var y = newDate.getFullYear();
-
                         scope.paremeters.secondInput = '';
-                        scope.data[1].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                        scope.data[1].dateDisplay = serviceHelper.normalizeTime(newDate);
                     }
 
                     scope.removeCondition = function($event) {

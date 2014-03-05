@@ -51,11 +51,7 @@
                             <div class="field-box">
                                 <span class="title">CHỌN HÌNH THỨC SỰ KIỆN</span>
                                 <div class="ui-select">
-                                    <select>
-                                        <option selected>Dropdown</option>
-                                        <option>Custom selects</option>
-                                        <option>Pure css styles</option>
-                                    </select>
+                                    <select ng-model="promotionType" ng-options="promotionType as promotionType.name_display for promotionType in promotionTypes" ng-init="promotionType=promotionTypes[0]"></select>
                                 </div>
                             </div>
                         </div>
@@ -69,33 +65,33 @@
                     </div>
                     Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
                 </div>
-                <div class="form-wrapper">
+                <form class="form-wrapper" name="promotionInfo">
                     <div class="col-md-8">
                         <div class="step-wapper">
                             <div class="field-box">
                                 <span class="title">TÊN CHIẾN DỊCH</span>
-                                <input class="form-control inline-block" type="text"/>
+                                <input class="form-control inline-block" ng-model="name"/>
                             </div>
                             <div class="field-box">
                                 <span class="title">THỜI GIAN</span>
                                 <div class="dropdown inline-block">
                                   <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                    <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data.dateDisplay">
+                                    <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data[0].dateDisplay">
                                         <span class="add-on hide"><i class="icon-calendar"></i></span>
                                     </div>
                                   </a>
                                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'minute' }" data-on-set-time="onTimeSet"/>
+                                    <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'minute' }" data-on-set-time="onTimeSetOne"/>
                                   </ul>
                                 </div>
                                 <div class="dropdown inline-block">
-                                  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                    <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data.dateDisplay">
+                                  <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                    <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data[1].dateDisplay">
                                         <span class="add-on hide"><i class="icon-calendar"></i></span>
                                     </div>
                                   </a>
                                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'minute' }" data-on-set-time="onTimeSet"/>
+                                    <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'minute' }" data-on-set-time="onTimeSetTwo"/>
                                   </ul>
                                 </div> 
                             </div>
@@ -135,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="step-pane" id="promotion-step3">
                 <div class="step-description">
@@ -350,10 +346,10 @@
                                 <tr><th>Thuộc tính</th><th>Nội dung</th></tr>
                             </thead>
                             <tbody>
-                                <tr><td>Loại</td><td></td></tr>
-                                <tr><td>Chương trình</td><td></td></tr>
-                                <tr><td>Thời gian</td><td></td></tr>
-                                <tr><td>Mô tả</td><td></td></tr>
+                                <tr><td>Loại</td><td>{{promotionType.name_display}}</td></tr>
+                                <tr><td>Chương trình</td><td>{{name}}</td></tr>
+                                <tr><td>Thời gian</td><td>{{time}}</td></tr>
+                                <tr><td>Mô tả</td><td>{{description}}</td></tr>
                             </tbody>
                           </table>
                         </tab>

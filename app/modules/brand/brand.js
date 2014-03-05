@@ -359,11 +359,6 @@ angular.module('brand')
                 controller: 'brandCreateCtrl',
                 access: access.user
             })
-            .when('/brand/promotion/:brandId', {
-                templateUrl: 'modules/brand/promotion_new.html',
-                controller: 'BrandCtrl',
-                access: access.user
-            })
             .when('/brand/comment/:brandId', {
                 templateUrl: 'modules/brand/comment/comment.html',
                 controller: 'BrandCtrl',

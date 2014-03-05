@@ -1,97 +1,56 @@
 angular.module('promotion')
 
-.controller('promotionCtrl', ['$scope',
-    function($scope) {
-        $scope.activeTab = "user";
-        $scope.brands = getBrands();
+.controller('PromotionCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote', 'serviceHelper',
+    function($scope, $routeParams, remoteFactory, dataFactory, userRemote, serviceHelper) {
+
+        var brandId = $routeParams.brandId;
+        dataFactory.getBrand(brandId, function(data) {
+            $scope.brand = data;
+        }, function() {});
+
         $scope.promotionTypes = [{
-            value: '1',
-            label: 'Giảm giá trực tiếp (voucher)'
+            name: 'news',
+            name_display: 'Đăng tin'
         }, {
-            value: '2',
-            label: 'Tích luỹ điểm'
+            name: 'score',
+            name_display: 'Tích luỹ điểm'
+        }, {
+            name: 'voucher',
+            name_display: 'Voucher'
         }];
 
-        $scope.promotionList = [{
-            name: "Chến dịch tết",
-            logo: "img/contact-img.png",
-            type: "Tích luỹ điểm",
-            viewed: 500,
-            used: 20,
-            status: "Dang chay",
-            created: "09/05/2014"
+        $scope.data = [{
+            dateDropDownInput: moment("2013-10-22T00:00:00.000").toDate(),
+            dateDisplay: "22-10-2013 00:00",
         }, {
-            name: "Chến dịch hè",
-            logo: "img/contact-img.png",
-            type: "Tích luỹ điểm",
-            viewed: 200,
-            used: 100,
-            status: "Tam dung",
-            created: "27/04/2014"
-        }, ];
-        $scope.promotionDetail = {
-            name: "Chến dịch tết",
-            logo: "img/contact-img.png",
-            type: "Tích luỹ điểm",
-            viewed: 500,
-            used: 20,
-            status: "Dang chay",
-            created: "09/05/2014",
-            transactions: [{
-                id: 1,
-                created: "27/04/2014",
-                user: "Tran",
-                status: "Thành công"
-            }, {
-                id: 2,
-                created: "28/04/2014",
-                user: "Hoang",
-                status: "Thành công"
-            }, {
-                id: 3,
-                created: "29/04/2014",
-                user: "Huy",
-                status: "Pending"
-            }]
+            dateDropDownInput: moment("2014-02-22T00:00:00.000").toDate(),
+            dateDisplay: "22-02-2014 00:00",
+        }];
+
+        $scope.time = '22-10-2013 00:00 đến 22-02-2014 00:00';
+
+        function updateTime() {
+            $scope.time = $scope.data[0].dateDisplay + " đến " + $scope.data[1].dateDisplay;
         }
 
-
-        // function
-        function getBrands() {
-            var data = [{
-                id: 100,
-                name: "Trung Nguyen"
-            }, {
-                id: 101,
-                name: "GJC"
-            }, {
-                id: 100,
-                name: "Passio"
-            }]
-            return data;
+        $scope.onTimeSetOne = function(newDate, oldDate) {
+            $scope.data[0].dateDisplay = serviceHelper.normalizeTimeWithMinute(newDate);
+            updateTime();
         }
 
+        $scope.onTimeSetTwo = function(newDate, oldDate) {
+            $scope.data[1].dateDisplay = serviceHelper.normalizeTimeWithMinute(newDate);
+            updateTime();
+        }
     }
 ])
+    .config(function($routeProvider) {
+        var access = routingConfig.accessLevels;
 
-.config(function($routeProvider) {
-    var access = routingConfig.accessLevels;
-
-    $routeProvider
-        .when('/promotion', {
-            templateUrl: 'modules/promotion/promotion_list.html',
-            controller: 'promotionCtrl',
-            access: access.user
-        })
-        .when('/promotion/new', {
-            templateUrl: 'modules/promotion/promotion_new.html',
-            controller: 'promotionCtrl',
-            access: access.user
-        })
-        .when('/promotion/:promotion_id', {
-            templateUrl: 'modules/promotion/promotion_detail.html',
-            controller: 'promotionCtrl',
-            access: access.user
-        })
-
-});
+        $routeProvider
+            .when('/brand/promotion/:brandId', {
+                templateUrl: 'modules/brand/promotion_new.html',
+                controller: 'PromotionCtrl',
+                access: access.user
+            })
+    });

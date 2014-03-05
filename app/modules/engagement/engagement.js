@@ -1,7 +1,8 @@
 angular.module('engagement')
 
-.controller('SegmentationCtrl', ['$scope', '$routeParams', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper',
-    function($scope, $routeParams, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper) {
+.controller('SegmentationCtrl', ['$scope', '$routeParams', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper',
+
+    function($scope, $routeParams, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper) {
 
         var brandId = $routeParams.brandId;
 
@@ -69,8 +70,6 @@ angular.module('engagement')
         function updateChart(fields) {
             eventRemote.count(fields, function(data) {
                 if (data.error == undefined) {
-                    console.log(data);
-
                     $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
                     $scope.chartData[1] = chartHelper.buildPieChart(data, $scope.event.name_display);
                     $scope.chartData[2] = chartHelper.buildColumnChart(data, $scope.event.name_display);
@@ -89,11 +88,7 @@ angular.module('engagement')
         }];
 
         $scope.onTimeSetOne = function(newDate, oldDate) {
-            var d = newDate.getDate();
-            var m = newDate.getMonth() + 1;
-            var y = newDate.getFullYear();
-
-            $scope.data[0].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
 
             if (fields != null) {
                 fields.date_beg = $scope.data[0].dateDisplay;
@@ -102,11 +97,7 @@ angular.module('engagement')
         }
 
         $scope.onTimeSetTwo = function(newDate, oldDate) {
-            var d = newDate.getDate();
-            var m = newDate.getMonth() + 1;
-            var y = newDate.getFullYear();
-
-            $scope.data[1].dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+            $scope.data[1].dateDisplay = serviceHelper.normalizeTime(newDate);
             if (fields != null) {
                 fields.date_end = $scope.data[1].dateDisplay;
                 updateChart(fields);
