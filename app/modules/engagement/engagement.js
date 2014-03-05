@@ -118,13 +118,11 @@ angular.module('engagement')
 
 .controller('FunnelCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory',
     function($scope, $routeParams, dataFactory, remoteFactory) {
-        
-        console.log(remoteFactory.meta_events);
         $scope.metas = remoteFactory.meta_property_types;
         $scope.events = remoteFactory.meta_events;
         $scope.metadata = remoteFactory.meta_lists;
         $scope.subfilters = null;
-        
+
         $scope.columnChart = {
             chart: {
                 type: 'column'
@@ -192,17 +190,17 @@ angular.module('engagement')
 
     }
 ])
-.config(function($routeProvider) {
-    var access = routingConfig.accessLevels;
-    $routeProvider
-        .when('/segmentation/:brandId', {
-            templateUrl: 'modules/engagement/segmentation/segmentation.html',
-            controller: 'SegmentationCtrl',
-            access: access.user
-        })
-        .when('/funnel', {
-            templateUrl: 'modules/engagement/funnel/funnel.html',
-            controller: 'FunnelCtrl',
-            access: access.user
-        })
-});
+    .config(function($routeProvider) {
+        var access = routingConfig.accessLevels;
+        $routeProvider
+            .when('/segmentation/:brandId', {
+                templateUrl: 'modules/engagement/segmentation/segmentation.html',
+                controller: 'SegmentationCtrl',
+                access: access.user
+            })
+            .when('/funnel/:brandId', {
+                templateUrl: 'modules/engagement/funnel/funnel.html',
+                controller: 'FunnelCtrl',
+                access: access.user
+            })
+    });
