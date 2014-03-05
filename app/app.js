@@ -20,7 +20,8 @@ var app = angular.module('Smg', [
     'ui.date',
     'nvd3ChartDirectives',
     'placeholderShim',
-    'angularFileUpload'
+    'angularFileUpload',
+    'ui.slider'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',

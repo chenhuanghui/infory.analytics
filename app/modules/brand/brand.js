@@ -309,7 +309,8 @@ angular.module('brand')
 
         $scope.$watch('brand', function() {
             dataFactory.updateBrandHeader($scope.brand);
-            dataFactory.updateBrandSideBar($scope.brand.id);
+            if (brand.id != undefined)
+                dataFactory.updateBrandSideBar($scope.brand.id);
         });
 
         $scope.$watch('brands', function() {
