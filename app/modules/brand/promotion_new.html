@@ -100,31 +100,19 @@
                                 <div class="block">
                                     <div class="block_header">
                                         <div class="left control">
-                                            <span class="highlight">2</span> của hàng được chọn
+                                            <span class="highlight">0</span> của hàng được chọn
                                         </div>
                                         <input type="text" class="search right small-input no-margin" placeholder="Tìm kiếm..."/>
                                     </div>
                                     <div class="block_content no-padding">
-                                        <table class="z-table">
+                                        <table class="z-table" ng-repeat="shop in brand.shops">
                                             <thead>
                                                 <tr>
                                                     <th><input type="checkbox" /></th>
-                                                    <th class="name">Tên cửa hàng</th>
-                                                    <th>Địa chỉ</th>
+                                                    <th class="name">{{shop.name}}</th>
+                                                    <th>{{shop.address}}</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" /></td>
-                                                    <td class="name">wayne rooney</td>
-                                                    <td>Manchester United</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" /></td>
-                                                    <td class="name">wayne rooney</td>
-                                                    <td>Manchester United</td>
-                                                </tr>
-                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
