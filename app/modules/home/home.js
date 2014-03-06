@@ -58,8 +58,8 @@ angular.module('home')
         };
 
         function updateChart(fields, id) {
-            fields.date_beg = serviceHelper.normalizeTime(fields.date_beg);
-            fields.date_end = serviceHelper.normalizeTime(fields.date_end);
+            fields.date_beg = serviceHelper.normalizeTime($scope.data[id * 2].dateDropDownInput);
+            fields.date_end = serviceHelper.normalizeTime($scope.data[id * 2 + 1].dateDropDownInput);
             brandRemote.getCostChart(fields, function(data) {
                 if (data.error == undefined)
                     $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
