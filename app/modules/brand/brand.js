@@ -234,13 +234,12 @@ angular.module('brand')
             });
         };
 
-        $scope.changeCover = function() {
-            var file = $files[0];
+        $scope.changeCover = function(id) {
             $.ajaxFileUpload({
-                url: url,
-                data: {
-                    brand_id: brandId
-                },
+                url: 'http://dev2.smartguide.vn/entity/brand/imgUpload',
+                //data: {
+                //    brand_id: brandId
+                //},
                 secureuri: false,
                 fileElementId: id,
                 dataType: 'json',
