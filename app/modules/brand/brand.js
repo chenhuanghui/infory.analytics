@@ -276,21 +276,21 @@ angular.module('brand')
             }
         }
 
-        $scope.showUsersGallery = function() {
-            if ($scope.usersGallery == null) {
-                var fields = {
-                    id: brandId,
-                    fields: '["user_gallery"]'
-                };
+        // $scope.showUsersGallery = function() {
+        //     if ($scope.usersGallery == null) {
+        //         var fields = {
+        //             id: brandId,
+        //             fields: '["user_gallery"]'
+        //         };
 
-                brandRemote.get(fields, function(data) {
-                    if (data.user_gallery == null)
-                        $scope.usersGallery = [];
-                    else
-                        $scope.usersGallery = JSON.parseJSON(data.user_gallery);
-                }, function() {});
-            }
-        }
+        //         brandRemote.get(fields, function(data) {
+        //             if (data.user_gallery == null)
+        //                 $scope.usersGallery = [];
+        //             else
+        //                 $scope.usersGallery = JSON.parseJSON(data.user_gallery);
+        //         }, function() {});
+        //     }
+        // }
 
         $scope.showProducts = function() {
             if ($scope.products == null) {

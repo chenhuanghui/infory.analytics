@@ -36,17 +36,41 @@
                 </ul>
             </div>
             <div class="col-md-4 property-box">
+
                 <ul class="nav nav-tabs">
-                  <li class="active"><a onclick="javascript:void(0)">Thuộc tính</a></li>
+                  <li ng-class="{active: main.active.tab == 'info'}" class="active">
+                    <a ng-click='main.active.tab = "info" ' href=""> Thông tin</a>
+                  </li>
+                  
+                  <li ng-class="{active: main.active.tab == 'product'}">
+                    <a ng-click='main.active.tab = "product";showProducts()' href=""> Sản phẩm</a>
+                  </li>
+
+                    <!-- <li ng-class="{active: main.active.tab == 'gallery'}">
+                      <a ng-click='main.active.tab = "gallery"; showGallery();' href=""> Hình ảnh</a>
+                    </li> -->
+                    
+                    <li ng-class="{active: main.active.tab == 'gallery_user'}">
+                      <a ng-click='main.active.tab = "gallery_user";showUsersGallery();' href=""> Hình ảnh KH</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active">
-                        <ul>
-                            <li>
-                                <span class="property">Email</span><span class="value">R10@gmail.com</span>
-                            </li>
-                            <li><span class="property">Tên</span><span class="value">wayne rooney</span></li>
-                        </ul>
+                    <div ng-switch = "main.active.tab">
+                        <div ng-switch-default>
+                            <div ng-include='"modules/shop/tabs/_info.html"'> </div>  
+                        </div>
+
+                        <div ng-switch-when='product'>
+                            <div ng-include='"modules/shop/tabs/_product.html"'> </div>  
+                        </div>
+
+                        <!-- <div ng-switch-when='gallery'>
+                            <div ng-include='"modules/shop/tabs/_gallery.html"'> </div>  
+                        </div> -->
+                        
+                        <div ng-switch-when='gallery_user'>
+                            <div ng-include='"modules/brand/brand/tabs/_gallery_user.html"'> </div>  
+                        </div>
                     </div>
                 </div>
             </div>

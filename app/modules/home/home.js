@@ -11,7 +11,6 @@ angular.module('home')
             }, function() {})
         }
 
-
         $scope.dataChart = [{}, {}, {}];
 
         var fields = [null, null, null];

@@ -1,0 +1,67 @@
+<ul>
+    <li>
+        <div class="property col-md-4">Ảnh nền</div>
+        <div class="value col-md-8">
+            <img src="{{bundle.shopCover}}" width="45" height="45" />
+            <input id="logoInput" type="file" ng-file-select="changeCover($files)" />
+        </div>
+    </li>
+
+    <li>
+        <div class="property col-md-4">Tên cửa hàng</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="bundle.editName">
+                <span>{{bundle.shopName}}</span>
+                <a ng-click="bundle.editName = true" style="cursor:pointer" >sửa</a>
+            </div>
+            <div class="edit" ng-hide="!bundle.editName">
+                <input ng-model="bundle.shopName" class="form-control inline-block"/>
+                <i ng-click="changeName()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <div class="property col-md-4">Tên đường</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="bundle.editStreetAddress">
+                <span>{{bundle.shopStreetAddress}}</span>
+                <a ng-click="bundle.editStreetAddress = true" style="cursor:pointer" >sửa</a>
+            </div>
+            <div class="edit" ng-hide="!bundle.editStreetAddress">
+                <input ng-model="bundle.shopStreetAddress" class="form-control inline-block"/>
+                <i ng-click="changeStreetAddress()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            </div>
+        </div>
+    </li>
+
+    
+
+    <li>
+        <div class="property col-md-4">Tên quận</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="bundle.editDistrictAddress">
+                <span>{{bundle.shopDistrictAddress}}</span>
+                <a ng-click="bundle.editDistrictAddress = true" style="cursor:pointer" >sửa</a>
+            </div>
+            <div class="edit" ng-hide="!bundle.editDistrictAddress">
+                <input ng-model="bundle.shopDistrictAddress" class="form-control inline-block"/>
+                <i ng-click="changeDistrictAddress()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            </div>
+        </div>
+    </li>
+
+    <li>
+        <div class="property col-md-4">Thành phố</div>
+        <div class="value col-md-8">
+            <div class="overview" ng-hide="bundle.editCityAddress">
+                <span>{{bundle.shopCityAddress}}</span>
+                <a ng-click="bundle.editCityAddress = true" style="cursor:pointer" >sửa</a>
+            </div>
+            <div class="edit" ng-hide="!bundle.editCityAddress">
+                <input ng-model="bundle.shopCityAddress" class="form-control inline-block"/>
+                <i ng-click="changeCityAddress()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            </div>
+        </div>
+    </li>
+</ul>
