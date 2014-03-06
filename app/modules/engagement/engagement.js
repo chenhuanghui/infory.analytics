@@ -180,10 +180,7 @@ angular.module('engagement')
         $scope.updateComputeBy = function() {
             fields.by = $scope.computeBy.name;
             funnelRemote.get(fields, function(data) {
-                $scope.data = [];
-                for (var i = 0; i < data.groups.length; i++) {
-                    $scope.data.push(name: data.groups[i]);
-                }
+
             }, function() {});
         };
 
