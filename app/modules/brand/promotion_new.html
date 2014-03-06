@@ -57,6 +57,52 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-4" style="height: 0;">
+                    <div class="step-view-content">
+                        XEM TRƯỚC
+                        <tabset>
+                            <tab>
+                              <tab-heading>
+                                <i class="icon-reorder"></i>
+                              </tab-heading>
+                              <table class="table attribute-table">
+                                <thead>
+                                    <tr><th>Thuộc tính</th><th>Nội dung</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Loại</td><td>{{promotionType.name_display}}</td></tr>
+                                    <tr><td>Chương trình</td><td>{{name}}</td></tr>
+                                    <tr><td>Thời gian</td><td>{{time}}</td></tr>
+                                    <tr><td>Mô tả</td><td>{{description}}</td></tr>
+                                </tbody>
+                              </table>
+                            </tab>
+                            <tab>
+                              <tab-heading>
+                                <i class="icon-mobile-phone"></i>
+                              </tab-heading>
+                              <img src="http://wowcamera.net/image/cache/data/phone/iphone-5-16gb-white-360x360.jpg" />
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+
+                <div class="col-md-8 with-sidebar">
+                    <div class="col-md-11">
+                        <div class="promotion-wizard-actions wizard-actions">
+                            <button type="button" disabled class="btn-glow primary btn-prev"> 
+                                <i class="icon-chevron-left"></i> Prev
+                            </button>
+                            <button type="button" class="btn-glow primary btn-next" data-last="Finish">
+                                Next <i class="icon-chevron-right"></i>
+                            </button>
+                            <button type="button" class="btn-glow success btn-finish">
+                                Trở lại trang quản lý
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="step-pane" id="promotion-step2">
                 <div class="step-description">
@@ -65,12 +111,20 @@
                     </div>
                     Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
                 </div>
-                <form class="form-wrapper" name="promotionInfo">
+                <div class="form-wrapper">
                     <div class="col-md-8">
-                        <div class="step-wapper">
+                        <form class="form-horizontal" role="form" name="updateForm">
+                           
+                        </form>
+                        <form class="step-wapper" name="step_2_form">
                             <div class="field-box">
                                 <span class="title">TÊN CHIẾN DỊCH</span>
-                                <input class="form-control inline-block" ng-model="name"/>
+                                <input class="form-control inline-block" name="promotionName" type="text" ng-model="name" required/>
+
+                                <span class="alert-msg" ng-show="step_2_form.promotionName.$error.required">
+                                    <i class="icon-remove-sign"></i>
+                                    Vui lòng nhập tên chiến dịch
+                                </span>
                             </div>
                             <div class="field-box">
                                 <span class="title">THỜI GIAN</span>
@@ -100,22 +154,23 @@
                                 <div class="block">
                                     <div class="block_header">
                                         <div class="left control">
-                                            <span class="highlight">0</span> của hàng được chọn
+                                            <span class="highlight">{{numOfSelectedShops}}</span> của hàng được chọn
                                         </div>
-                                        <input type="text" class="search right small-input no-margin" placeholder="Tìm kiếm..."/>
+                                        <input type="text" class="search right small-input no-margin" placeholder="Tìm kiếm..." ng-model="searchText"/>
                                     </div>
                                     <div class="block_content no-padding">
                                         <table class="z-table">
                                             <thead>
                                                 <tr>
-                                                    <th><input type="checkbox" /></th>
+                                                    <th><input type="checkbox" ng-model="checkAllShops" ng-change="checkAll()"/></th>
                                                     <th class="name">Tên cửa hàng</th>
                                                     <th>Địa chỉ</th>
                                                 </tr>
                                             </thead>
-                                            <tbody  ng-repeat="shop in brand.shops">
+
+                                            <tbody  ng-repeat="shop in brand.shops | filter:searchText">
                                                 <tr>
-                                                    <td><input type="checkbox" /></td>
+                                                    <td><input type="checkbox" ng-model="$parent.selectedShops[shop.selectedId]" ng-change="updateSelectedShops()"></td>
                                                     <td class="name">{{shop.name}}</td>
                                                     <td>{{shop.full_address}}</td>
                                                 </tr>
@@ -124,9 +179,25 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-8 with-sidebar">
+                        <div class="col-md-11">
+                            <div class="promotion-wizard-actions wizard-actions">
+                                <button type="button" disabled class="btn-glow primary btn-prev"> 
+                                    <i class="icon-chevron-left"></i> Prev
+                                </button>
+                                <button type="button" class="btn-glow primary btn-next" data-last="Finish" ng-disabled="{{step_2_form.$invalid || numOfSelectedShops == 0}}">
+                                    Next <i class="icon-chevron-right"></i>
+                                </button>
+                                <button type="button" class="btn-glow success btn-finish">
+                                    Trở lại trang quản lý
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="step-pane" id="promotion-step3">
                 <div class="step-description">
@@ -261,6 +332,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-8 with-sidebar">
+                        <div class="col-md-11">
+                            <div class="promotion-wizard-actions wizard-actions">
+                                <button type="button" disabled class="btn-glow primary btn-prev"> 
+                                    <i class="icon-chevron-left"></i> Prev
+                                </button>
+                                <button type="button" class="btn-glow primary btn-next" data-last="Finish" ng-disabled="{{step_2_form.$invalid || numOfSelectedShops == 0}}">
+                                    Next <i class="icon-chevron-right"></i>
+                                </button>
+                                <button type="button" class="btn-glow success btn-finish">
+                                    Trở lại trang quản lý
+                                </button>
+                            </div>
+                        </div>
+                    </div>
             </div>
             <div class="step-pane" id="promotion-step4">
                 <div class="step-description">
@@ -302,51 +388,7 @@
             </div>
             
             <!-- display step info -->
-            <div class="col-md-4" style="height: 0;">
-                <div class="step-view-content">
-                    XEM TRƯỚC
-                    <tabset>
-                        <tab>
-                          <tab-heading>
-                            <i class="icon-reorder"></i>
-                          </tab-heading>
-                          <table class="table attribute-table">
-                            <thead>
-                                <tr><th>Thuộc tính</th><th>Nội dung</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>Loại</td><td>{{promotionType.name_display}}</td></tr>
-                                <tr><td>Chương trình</td><td>{{name}}</td></tr>
-                                <tr><td>Thời gian</td><td>{{time}}</td></tr>
-                                <tr><td>Mô tả</td><td>{{description}}</td></tr>
-                            </tbody>
-                          </table>
-                        </tab>
-                        <tab>
-                          <tab-heading>
-                            <i class="icon-mobile-phone"></i>
-                          </tab-heading>
-                          <img src="http://wowcamera.net/image/cache/data/phone/iphone-5-16gb-white-360x360.jpg" />
-                        </tab>
-                    </tabset>
-                </div>
-            </div>
         </form>
-    </div>
-    <div class="col-md-8 with-sidebar">
-        <div class="col-md-11">
-            <div class="promotion-wizard-actions wizard-actions">
-                <button type="button" disabled class="btn-glow primary btn-prev"> 
-                    <i class="icon-chevron-left"></i> Prev
-                </button>
-                <button type="button" class="btn-glow primary btn-next" data-last="Finish">
-                    Next <i class="icon-chevron-right"></i>
-                </button>
-                <button type="button" class="btn-glow success btn-finish">
-                    Trở lại trang quản lý
-                </button>
-            </div>
-        </div>
     </div>
 </div>
 <!-- scripts -->
