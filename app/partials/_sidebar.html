@@ -2,7 +2,7 @@
 <div id="sidebar-nav" ng-controller="BrandCtrl">
     <ul id="dashboard-menu">
         <li class="active open">
-            <a href="#/home">
+            <a href="#/home/{{brand.id}}">
                 <i class="icon-home"></i>
                 <span>Hoạt động</span>
             </a>
@@ -11,25 +11,25 @@
             <i class="icon-certificate"></i>
             <span>Nhãn hiệu</span>
             <ul class="submenu">
-                <li><a href="#/brand/infor/{{brandIdSideBar}}"><i class="icon-info-sign sub-icon"></i>Thông tin</a></li>
-                <li><a href="#/brand/promotion/{{brandIdSideBar}}"><i class="icon-tag sub-icon"></i>Khuyến mãi</a></li>
-                <li><a href="#/brand/comment/{{brandIdSideBar}}"><i class="icon-comment sub-icon"></i>Bình luận</a></li>
+                <li><a href="#/brand/infor/{{brand.id}}"><i class="icon-info-sign sub-icon"></i>Thông tin</a></li>
+                <li><a href="#/brand/promotion/{{brand.id}}"><i class="icon-tag sub-icon"></i>Khuyến mãi</a></li>
+                <li><a href="#/brand/comment/{{brand.id}}"><i class="icon-comment sub-icon"></i>Bình luận</a></li>
             </ul>
         </li>
         <li class="active open">
             <i class="icon-signal"></i>
             <span>Thống kê</span>
             <ul class="submenu">
-                <li><a href="#/segmentation/{{brandIdSideBar}}"><i class="icon-bar-chart sub-icon"></i>Biểu đồ</a></li>
-                <li><a href="#/funnel/{{brandIdSideBar}}"><i class="icon-filter sub-icon"></i>Đánh giá</a></li>
+                <li><a href="#/segmentation/{{brand.id}}"><i class="icon-bar-chart sub-icon"></i>Biểu đồ</a></li>
+                <li><a href="#/funnel/{{brand.id}}"><i class="icon-filter sub-icon"></i>Đánh giá</a></li>
             </ul>
         </li>
         <li class="active open">
             <i class="icon-group"></i>
             <span>Khách hàng</span>
             <ul class="submenu">
-                <li><a href="#/user/manager/{{brandIdSideBar}}"><i class="icon-reorder sub-icon"></i>Danh sách</a></li>
-                <li><a href="#/user/notify-new/{{brandIdSideBar}}"><i class="icon-bullhorn sub-icon"></i>Thông báo</a></li>
+                <li><a href="#/user/manager/{{brand.id}}"><i class="icon-reorder sub-icon"></i>Danh sách</a></li>
+                <li><a href="#/user/notify-new/{{brand.id}}"><i class="icon-bullhorn sub-icon"></i>Thông báo</a></li>
             </ul>
         </li>      
     </ul>

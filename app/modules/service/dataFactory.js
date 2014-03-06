@@ -9,6 +9,7 @@ angular.module('smg.services')
             var updateBrandsHeaderFunc = null;
             var updateAccountNameHeaderFunc = null;
             var updateBrandSideBarFunc = null;
+            var updateHomeBrandFunc = null;
 
             var brands = null;
             var tempShop = null;
@@ -28,6 +29,13 @@ angular.module('smg.services')
 
 
             return {
+                setUpdateHomeBrandFunc: function(func) {
+                    updateHomeBrandFunc = func;
+                },
+                updateHomeBrand: function(brand) {
+                    if (updateHomeBrandFunc != null)
+                        updateHomeBrandFunc(brand);
+                },
                 updateBrandSideBar: function(id) {
                     if (updateBrandSideBarFunc != null) {
                         updateBrandSideBarFunc(id);

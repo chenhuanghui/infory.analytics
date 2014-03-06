@@ -6,6 +6,7 @@ angular.module('header')
 
         $scope._username = Auth.user.name;
         $scope.newBrandName = 'New brand';
+
         $scope.updateBrand = function(brand) {
             $scope.brand = brand;
         }
@@ -20,10 +21,10 @@ angular.module('header')
 
         $scope.setCurrentBrand = function(brand) {
             $scope.brand = brand;
-            dataFactory.updateHome($scope.brand.id);
+            //dataFactory.updateHomeBrand($scope.brand);
             dataFactory.updateBrandSideBar($scope.brand.id);
             $('.z-btn .pop-dialog .close-icon').click();
-            $location.path('/brand/infor/' + $scope.brand.id);
+            $location.path('/home/' + $scope.brand.id);
         }
 
         $scope.createBrand = function(name) {
@@ -38,6 +39,10 @@ angular.module('header')
                         id: data.brand_id,
                         name: name
                     });
+
+                    $('.z-btn .pop-dialog .close-icon').click();
+                    $location.path('/brand/infor/' + $scope.brand.id);
+
                     $scope.newBrandName = 'New brand';
                 }
             }, function() {});

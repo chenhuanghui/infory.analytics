@@ -113,7 +113,7 @@ angular.module('smgDirectives', ['ui.date'])
 
                     scope.updateFields = function() {
                         scope.meta = scope.metas[scope.property.type].operators_display[0];
-                        if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(meta)] == 'dropdown')
+                        if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
                             scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
                     }
 

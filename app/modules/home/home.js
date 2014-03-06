@@ -3,7 +3,15 @@ angular.module('home')
 .controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth', 'brandRemote', 'chartHelper', 'serviceHelper',
 
     function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth, brandRemote, chartHelper, serviceHelper) {
-        $scope.brandId = -1;
+
+        $scope.brandId = $routeParams.brandId;
+        if ($scope.brandId != null) {
+            dataFactory.getBrand($scope.brandId, function(data) {
+                $scope.brand = data;
+            }, function() {})
+        }
+
+
         $scope.dataChart = [{}, {}, {}];
 
         var fields = [null, null, null];
@@ -51,24 +59,19 @@ angular.module('home')
         };
 
         function updateChart(fields, id) {
-            fields.date_beg = normalizeDate(fields.date_beg);
-            fields.date_end = normalizeDate(fields.date_end);
+            fields.date_beg = serviceHelper.normalizeTime(fields.date_beg);
+            fields.date_end = serviceHelper.normalizeTime(fields.date_end);
             brandRemote.getCostChart(fields, function(data) {
                 if (data.error == undefined)
                     $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
             }, function() {});
         }
 
-        function normalizeDate(date) {
-            var newDate = new Date(date);
-            var d = newDate.getDate();
-            var m = newDate.getMonth() + 1;
-            var y = newDate.getFullYear();
-
-            return y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
-
+        $scope.updateBrand = function(brand) {
+            $scope.brand = brand;
         }
 
+        dataFactory.setUpdateHomeBrandFunc($scope.updateBrand);
         dataFactory.setUpdateHomeFunc($scope.updateHome);
 
         $scope.time_units = [{
