@@ -24,10 +24,10 @@
                         <input type="file">
                     </div>
                 </div> <!-- brand info-->
-                    <div id="add_shop">
+                    <!-- <div id="add_shop">
                         <input class="shop_name form-control" type="text" placeholder="Nhập tên cửa hàng">    
                         <a class="btn-flat success icon-plus">Thêm cửa hàng mới</a>
-                    </div>        
+                    </div>  -->       
 
                     <ul id="shop_list">
                         <li ng-repeat="shop in brand.shops">
@@ -53,9 +53,9 @@
                     <li ng-class="{active: main.active.tab == 'gallery'}">
                       <a ng-click='main.active.tab = "gallery"; showGallery();' href=""> Hình ảnh</a>
                     </li>
-                    <li ng-class="{active: main.active.tab == 'gallery_user'}">
+                    <!-- <li ng-class="{active: main.active.tab == 'gallery_user'}">
                       <a ng-click='main.active.tab = "gallery_user";showUsersGallery();' href=""> Hình ảnh KH</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <div class="tab-content">
                     <div ng-switch = "main.active.tab">
@@ -71,9 +71,9 @@
                             <div ng-include='"modules/brand/brand/tabs/_gallery.html"'> </div>  
                         </div>
                         
-                        <div ng-switch-when='gallery_user'>
+                        <!-- <div ng-switch-when='gallery_user'>
                             <div ng-include='"modules/brand/brand/tabs/_gallery_user.html"'> </div>  
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>

@@ -278,11 +278,7 @@
                                         <tr>
                                             <th>
                                                 <div class="ui-select">
-                                                    <select>
-                                                        <option value="all">Tất cả</option>
-                                                        <option value="">Đăng tin khuyến mãi</option>
-                                                        <option value="">Tặng quà</option>
-                                                    </select>
+                                                    <select ng-model="orderPromotion" ng-options="orderPromotion as orderPromotion.name_display for orderPromotion in orderPromotions" ng-init="orderPromotion=orderPromotions[0]" ng-change="sortPromotionList()"></select>
                                                 </div>
                                             </th>
                                             <th>Chiến dịch</th>
@@ -290,36 +286,12 @@
                                             <th>Trạng thái</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr class="even">
-                                            <td>Đăng tin khuyến mãi</td>
-                                            <td class="name">Valentine ấm áp</td>
-                                            <td>từ 14/2/2014 đến 14/3/2014</td>
-                                            <td><a class="btn-flat success">Đang chạy</a></td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td>Đăng tin khuyến mãi</td>
-                                            <td class="name">Valentine ấm áp</td>
-                                            <td>từ 14/2/2014 đến 14/3/2014</td>
-                                            <td><a class="btn-flat gray">Chờ</a></td>
-                                        </tr>
-                                        <tr class="even">
-                                            <td>Đăng tin khuyến mãi</td>
-                                            <td class="name">Valentine ấm áp</td>
-                                            <td>từ 14/2/2014 đến 14/3/2014</td>
-                                            <td><a class="btn-flat success">Đang chạy</a></td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td>Đăng tin khuyến mãi</td>
-                                            <td class="name">Valentine ấm áp</td>
-                                            <td>từ 14/2/2014 đến 14/3/2014</td>
-                                            <td><a class="btn-flat inverse">Kết thúc</a></td>
-                                        </tr>
-                                        <tr class="even">
-                                            <td>Đăng tin khuyến mãi</td>
-                                            <td class="name">Valentine ấm áp</td>
-                                            <td>từ 14/2/2014 đến 14/3/2014</td>
-                                            <td><a class="btn-flat success">Đang chạy</a></td>
+                                    <tbody ng-repeat="promotion in promotionList">
+                                        <tr class="{{promotion.stt}}">
+                                            <td>{{promotion.typeDisplay}}</td>
+                                            <td class="name">{{promotion.name}}</td>
+                                            <td>{{promotion.time}}</td>
+                                            <td><a class="{{promotion.statusClass}}">{{promotion.status}}</a></td>
                                         </tr>
                                     </tbody>
                                 </table>

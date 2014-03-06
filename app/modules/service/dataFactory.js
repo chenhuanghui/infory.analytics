@@ -9,6 +9,7 @@ angular.module('smg.services')
             var updateBrandsHeaderFunc = null;
             var updateAccountNameHeaderFunc = null;
             var updateBrandSideBarFunc = null;
+            var updateHomeBrandFunc = null;
 
             var brands = null;
             var tempShop = null;
@@ -28,6 +29,23 @@ angular.module('smg.services')
 
 
             return {
+                updateShopInBrand: function(shopId, brandId, shop) {
+                    if (currentBrand != null && currentBrand.id == brandId) {
+                        for (var i = 0; i < currentBrand.shops.length; i++) {
+                            if (currentBrand.shops[i].id == shopId) {
+                                currentBrand.shops[i] = shop;
+                                return;
+                            }
+                        }
+                    }
+                },
+                setUpdateHomeBrandFunc: function(func) {
+                    updateHomeBrandFunc = func;
+                },
+                updateHomeBrand: function(brand) {
+                    if (updateHomeBrandFunc != null)
+                        updateHomeBrandFunc(brand);
+                },
                 updateBrandSideBar: function(id) {
                     if (updateBrandSideBarFunc != null) {
                         updateBrandSideBarFunc(id);
@@ -104,7 +122,7 @@ angular.module('smg.services')
                 },
                 getShop: function(id, fields, success, error) {
                     if (currentShop != null && currentShop.id == id)
-                        return currentShop;
+                        success(currentShop);
                     else {
                         shopRemote.get({
                             fields: fields,

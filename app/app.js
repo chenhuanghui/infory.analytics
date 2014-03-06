@@ -35,7 +35,7 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
                 controller: 'HomeCtrl',
                 access: access.user
             })
-            .when('/home', {
+            .when('/home/:brandId', {
                 templateUrl: 'modules/home/home.html',
                 controller: 'HomeCtrl',
                 access: access.user

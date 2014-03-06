@@ -4,6 +4,7 @@ angular.module('brand')
     function($scope, $http, $location, $routeParams, brandRemote, commentRemote, dataFactory) {
 
         var brandId = $routeParams.brandId;
+        dataFactory.updateBrandSideBar(brandId);
         $scope.gallery = null;
         $scope.usersGallery = null;
         $scope.products = null;
@@ -275,21 +276,21 @@ angular.module('brand')
             }
         }
 
-        $scope.showUsersGallery = function() {
-            if ($scope.usersGallery == null) {
-                var fields = {
-                    id: brandId,
-                    fields: '["user_gallery"]'
-                };
+        // $scope.showUsersGallery = function() {
+        //     if ($scope.usersGallery == null) {
+        //         var fields = {
+        //             id: brandId,
+        //             fields: '["user_gallery"]'
+        //         };
 
-                brandRemote.get(fields, function(data) {
-                    if (data.user_gallery == null)
-                        $scope.usersGallery = [];
-                    else
-                        $scope.usersGallery = JSON.parseJSON(data.user_gallery);
-                }, function() {});
-            }
-        }
+        //         brandRemote.get(fields, function(data) {
+        //             if (data.user_gallery == null)
+        //                 $scope.usersGallery = [];
+        //             else
+        //                 $scope.usersGallery = JSON.parseJSON(data.user_gallery);
+        //         }, function() {});
+        //     }
+        // }
 
         $scope.showProducts = function() {
             if ($scope.products == null) {
@@ -308,20 +309,17 @@ angular.module('brand')
         }
 
         $scope.$watch('brand', function() {
-            dataFactory.updateBrandHeader($scope.brand);
-            if ($scope.brand != null)
+            if ($scope.brand != null) {
+                dataFactory.updateBrandHeader($scope.brand);
                 dataFactory.updateBrandSideBar($scope.brand.id);
+                dataFactory.updateHomeBrand($scope.brand.id);
+            }
         });
 
         $scope.$watch('brands', function() {
-            dataFactory.updateBrandsHeader($scope.brands);
+            if ($scope.brands != null)
+                dataFactory.updateBrandsHeader($scope.brands);
         });
-
-        $scope.updateBrandIdSideBar = function(id) {
-            $scope.brandIdSideBar = id;
-        }
-
-        dataFactory.setUpdateBrandSideBarFunc($scope.updateBrandIdSideBar);
     }
 ])
 
