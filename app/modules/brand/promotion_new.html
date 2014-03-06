@@ -185,10 +185,10 @@
                     <div class="col-md-8 with-sidebar">
                         <div class="col-md-11">
                             <div class="promotion-wizard-actions wizard-actions">
-                                <button type="button" disabled class="btn-glow primary btn-prev"> 
+                                <button type="button" class="btn-glow primary btn-prev"> 
                                     <i class="icon-chevron-left"></i> Prev
                                 </button>
-                                <button type="button" class="btn-glow primary btn-next" data-last="Finish" ng-disabled="{{step_2_form.$invalid || numOfSelectedShops == 0}}">
+                                <button class="btn-glow primary btn-next" ng-disabled="{{step_2_form.$invalid || numOfSelectedShops == 0}}" data-last="Finish">
                                     Next <i class="icon-chevron-right"></i>
                                 </button>
                                 <button type="button" class="btn-glow success btn-finish">
@@ -409,8 +409,8 @@ $(function () {
     }).on("changed", function(e) {
         var step = $wizard.wizard("selectedItem");
         // reset states
-        $btnNext.removeAttr("disabled");
-        $btnPrev.removeAttr("disabled");
+        //$btnNext.removeAttr("disabled");
+        //$btnPrev.removeAttr("disabled");
         $btnNext.show();
         $btnFinish.hide();
 

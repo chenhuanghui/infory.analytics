@@ -111,6 +111,10 @@ angular.module('smgDirectives', ['ui.date'])
                         secondInput: ''
                     }
 
+                    scope.$watch('event', function() {
+                        scope.property = scope.event.properties[0];
+                    });
+
                     scope.updateFields = function() {
                         scope.meta = scope.metas[scope.property.type].operators_display[0];
                         if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
