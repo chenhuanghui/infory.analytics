@@ -26,7 +26,7 @@ angular.module('shop')
             $scope.shop = tempShop;
 
         if (brand != null) {
-            fields = '["name", "id", "phone", "cover", "street_address", "district_address", "city_address"]';
+            fields = '["name", "id", "phone", "cover", "street_address", "district_address", "city_address", "user_gallery"]';
 
             $scope.shop.brand_logo = brand.logo;
             $scope.shop.brand_website = brand.website;
@@ -37,7 +37,7 @@ angular.module('shop')
 
             $scope.shop.brand_id = brand.id;
         } else {
-            fields = '["name", "id", "cover", phone", "full_address", "cover", "brand_logo", "brand_website", "brand_fanpage", "brand_type_business", "brand_description", "street_address", "district_address", "city_address"]';
+            fields = '["name", "id", "cover", phone", "full_address", "cover", "brand_logo", "brand_website", "brand_fanpage", "brand_type_business", "brand_description", "street_address", "district_address", "city_address", "user_gallery"]';
         }
 
         dataFactory.getShop(shopId, fields, function(data) {
@@ -149,7 +149,7 @@ angular.module('shop')
         }
 
         $scope.changeCityAddress = function() {
-        if ($scope.bundle.shopCityAddress.length <= 0) {
+            if ($scope.bundle.shopCityAddress.length <= 0) {
                 $scope.bundle.shopCityAddress = $scope.shop.city_address;
             } else {
                 shopRemote.update({
@@ -170,6 +170,24 @@ angular.module('shop')
                 });
             }
         }
+
+        $scope.showUsersGallery = function() {
+            if ($scope.usersGallery == null) {
+                var fields = {
+                    shop_id: shopId,
+                    fields: '["user_gallery"]'
+                };
+
+                shopRemote.get(fields, function(data) {
+                    if (data.user_gallery == null)
+                        $scope.usersGallery = [];
+                    else {
+                        $scope.usersGallery = data.user_gallery;
+                    }
+                }, function() {});
+            }
+        }
+
     }
 ])
 
