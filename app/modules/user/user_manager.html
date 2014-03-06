@@ -42,7 +42,7 @@
                             </select>
                         </div>
                         cho
-                        <input type="text" class="search right" placeholder="Tìm kiếm..."/>
+                        <input type="text" class="search right" placeholder="Tìm kiếm..." ng-model="searchText"/>
                     </div>
                 </div>
                 <div class="block_content no-padding">
@@ -65,7 +65,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="user in userList">
+                        <tbody ng-repeat="user in userList | filter:searchText">
                             <tr>
                                 <td><input type="checkbox" /></td>
                                 <td class="name">{{user.name}}</td>

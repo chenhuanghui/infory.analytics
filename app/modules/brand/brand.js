@@ -322,8 +322,11 @@ angular.module('brand')
     }
 ])
 
-.controller('createPromotionCtrl', ['$scope', 'remoteFactory',
-    function($scope, remoteFactory) {
+.controller('createPromotionCtrl', ['$scope', '$routeParams', 'remoteFactory',
+    function($scope, $routeParams, remoteFactory) {
+        var brandId = $routeParams.brandId;
+
+
         $scope.data = {
             dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
             dateDisplay: "22-01-2013"
@@ -335,8 +338,6 @@ angular.module('brand')
             var y = newDate.getFullYear();
 
             $scope.data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
-            console.log(newDate);
-            console.log(oldDate);
         }
     }
 

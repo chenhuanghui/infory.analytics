@@ -21,7 +21,8 @@ var app = angular.module('Smg', [
     'nvd3ChartDirectives',
     'placeholderShim',
     'angularFileUpload',
-    'ui.slider'
+    'ui.slider',
+    'checklist-model'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',

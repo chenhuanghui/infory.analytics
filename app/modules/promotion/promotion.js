@@ -5,8 +5,16 @@ angular.module('promotion')
     function($scope, $routeParams, remoteFactory, dataFactory, userRemote, serviceHelper, promotionRemote) {
 
         var brandId = $routeParams.brandId;
+        $scope.selectedShops = [];
+        $scope.checkAllShops = false;
+
         dataFactory.getBrand(brandId, function(data) {
             $scope.brand = data;
+            for (var i = 0; i < $scope.brand.shops.length; i++) {
+                $scope.brand.shops[i].selectedId = i;
+                $scope.selectedShops.push(i == 0);
+            }
+
         }, function() {});
 
         $scope.orderPromotions = [{
@@ -34,6 +42,7 @@ angular.module('promotion')
             name_display: 'Voucher'
         }];
 
+        $scope.name = "Tên chương trình khuyến mãi mới";
         $scope.data = [{
             dateDropDownInput: moment("2013-10-22T00:00:00.000").toDate(),
             dateDisplay: "22-10-2013 00:00",
@@ -115,6 +124,27 @@ angular.module('promotion')
             $scope.promotionList = data;
             $scope.promotionListFull = data;
         }, function() {});
+
+        $scope.numOfSelectedShops = 1;
+        $scope.updateSelectedShops = function() {
+            var num = 0;
+            for (var i = 0; i < $scope.brand.shops.length; i++) {
+                if ($scope.selectedShops[i] == true)
+                    num++;
+            }
+
+            $scope.numOfSelectedShops = num;
+        }
+
+        $scope.checkAll = function() {
+            for (var i = 0; i < $scope.brand.shops.length; i++)
+                $scope.selectedShops[i] = $scope.checkAllShops;
+
+            if ($scope.checkAllShops == true)
+                $scope.numOfSelectedShops = $scope.selectedShops.length;
+            else
+                $scope.numOfSelectedShops = 0;
+        }
     }
 ])
     .config(function($routeProvider) {
