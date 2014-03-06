@@ -5,7 +5,7 @@ angular.module('header')
     function($scope, $location, dataFactory, Auth, brandRemote) {
 
         $scope._username = Auth.user.name;
-        $scope.newBrandName = 'New brand';
+        $scope.newBrandName = 'Brand name';
 
         $scope.updateBrand = function(brand) {
             $scope.brand = brand;

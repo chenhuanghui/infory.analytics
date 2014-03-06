@@ -26,27 +26,27 @@
                         <div class="step-wapper">
                             <div class="field-box">
                                 <span class="title">TÊN CHUỖI HÀNH VI</span>
-                                <input type="text" class="form-control" style="width: 50%;"/>
+                                <input type="text" class="form-control" style="width: 50%;" placeholder="Thống kê hành vi sử dụng" ng-model="nameOfChainOfBehaviours"/>
                             </div>
                             <div class="clearfix"></div>
                             
-                            <div class="z-box">
+                            <div class="z-box" ng-repeat="behaviour in behaviours" style="margin-top:10px;">
                                 <div class="z-box-header">
                                     <div class="left">
-                                        <span>Hành vi thứ nhất</span> 
+                                        <span>Hành vi thứ {{behaviour.id + 1}}</span> 
                                         <div class="ui-select">
-                                            <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
+                                            <select ng-model="event" ng-options="event as event.name_display for event in behaviour.events" ng-init="event=behaviour.events[0]"></select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="z-box-content">
-                                    <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>
+                                    <div smg-filter metas="behaviour.metas" events="behaviour.events" metadata="behaviour.metadata" event="event" subfilters="behaviour.subfilters"></div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             
-                            <div class="add-bar shadow">
+                            <div class="add-bar shadow" ng-click="addBehaviour()" style="cursor:pointer">
                                 <i class="icon-plus"></i>
                                 THÊM HÀNH VI NGƯỜI DÙNG
                             </div>
@@ -80,16 +80,31 @@
                             <div class="z-box">
                                 <div class="z-box-header">
                                     <div class="left">
-                                        <div class="btn-glow">Từ <input type="text" value="1/1/1111"/><i class="icon-sort-down"></i></div>
-                                        <div class="btn-glow">Từ <input type="text" value="1/1/1111"/><i class="icon-sort-down"></i></div>
+                                        <span>
+                                            <div class="dropdown left" >
+                                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                                                </div>
+                                              </a>
+                                              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
+                                              </ul>
+                                            </div>
+
+                                            <div class="dropdown left" style="margin-left:10px;">
+                                              <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                                                </div>
+                                              </a>
+                                              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'day' }" data-on-set-time="onTimeSetTwo"/>
+                                              </ul>
+                                            </div>
+                                        </span>
                                     </div>
                                     <div class="right">
-                                        <span>Thống kê theo lượt <div class="ui-select">
-                                                                    <select>
-                                                                        <option selected="">Dropdown</option>
-                                                                        <option>Custom selects</option>
-                                                                        <option>Pure css styles</option>
-                                                                    </select>
+                                        <span>Thống kê theo <div class="ui-select">
+                                                                     <select ng-model="computeBy" ng-options="computeBy as computeBy.name_display for computeBy in computeBys" ng-init="computeBy=computeBys[0]" ng-change="updateComputeBy()"></select>
                                                                 </div>
                                         </span>
                                     </div>
@@ -109,14 +124,11 @@
                                     <div class="block_header">
                                         <div class="left control">
                                             So sánh theo <div class="ui-select">
-                                                            <select>
-                                                                <option selected="">Giới tính</option>
-                                                                <option>Độ tuổi</option>
-                                                            </select>
+                                                           <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" ng-init="compareUnit=event.compare_properties[0]" style="margin-left: 10px;margin-top: 10px;" ng-change="updateCompareUnit()"></select>
                                                         </div>
                                         </div>
                                     </div>
-                                    <div class="block_content no-padding">
+                                    <!-- <div class="block_content no-padding">
                                         <table class="z-table">
                                             <thead>
                                                 <tr>
@@ -128,34 +140,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Nữ</td>
+                                                <tr ng-repeat="row in data">
+                                                    <td>row.nam</td>
                                                     <td>1371</td>
                                                     <td>1 ngày</td>
                                                     <td>601</td>
                                                     <td class="name">43.83%</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Nam</td>
-                                                    <td>200</td>
-                                                    <td>2 ngày</td>
-                                                    <td>200</td>
-                                                    <td class="name">100%</td>
-                                                </tr>
-                                                <tr class="total">
-                                                    <td>Tất cả</td>
-                                                    <td>1521</td>
-                                                    <td>1.5 ngày</td>
-                                                    <td>801</td>
-                                                    <td class="name">50%</td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <!-- modal -->
-                            <button class="btn btn-default" ng-click="open()">Open me!</button>
                         </div>
                     </div>
                 </div>
@@ -168,7 +166,7 @@
             <button type="button" class="btn-glow primary success btn-save">
                 <i class="icon-bookmark-empty"></i>Lưu
             </button>
-            <button type="button" class="btn-glow primary btn-next" data-last="Finish">
+            <button type="button" class="btn-glow primary btn-next" data-last="Finish" ng-click="funnel()">
                 Theo dõi hành vi người dùng
             </button>
         </div>

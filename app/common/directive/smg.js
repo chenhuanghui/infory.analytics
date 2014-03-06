@@ -155,7 +155,8 @@ angular.module('smgDirectives', ['ui.date'])
                             property: scope.property,
                             meta: scope.meta,
                             paremeters: scope.paremeters,
-                            operator: scope.operator
+                            operator: scope.operator,
+                            event: event.name
                         };
                     }
                     ctrl.addFilter(scope);

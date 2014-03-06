@@ -4,6 +4,52 @@ angular.module('Smg')
     .factory('chartHelper',
         function() {
             return {
+                buildLineChartForFunnel: function(values, columnNames) {
+                    var chartData = {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Thống kê ',
+                            x: -20 //center
+                        },
+                        subtitle: {
+                            text: 'Source: infory.vn',
+                            x: -20
+                        },
+                        xAxis: {
+                            categories: columnNames
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Số lượng người dùng'
+                            },
+                            plotLines: [{
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                            }]
+                        },
+                        tooltip: {
+                            valueSuffix: 'người dùng'
+                        },
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle',
+                            borderWidth: 0
+                        },
+
+                    };
+
+
+                    chartData.series = [{
+                        name: 'abc',
+                        data: values
+                    }];
+
+                    return chartData;
+                },
                 buildLineChart: function(data, event) {
                     var chartData = {
                         chart: {
