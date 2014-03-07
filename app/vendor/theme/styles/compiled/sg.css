@@ -1085,8 +1085,13 @@ table.comment{
 }
 
 .z-product .list-product li .name{
-	margin: 5px;
+	margin-left: 5px;
 	font-weight: bold;
+}
+
+.z-product .list-product li .description{
+	margin-left: 5px;
+    width: 240px;
 }
 .z-product .detail-product li{
     border-bottom: none !important;    
@@ -1096,10 +1101,6 @@ table.comment{
 	width: 45px;
 	height: 45px;
 	border-radius: 4px;
-}
-
-.z-product .list-product li a{
-	margin-top: 15px
 }
 
 .nav > li > a{
