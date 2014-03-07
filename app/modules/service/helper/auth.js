@@ -31,7 +31,7 @@ angular.module('Smg')
                 currentUser = {
                     name: cookie.getCookie('name'),
                     username: cookie.getCookie('user'),
-                    role: cookie.role,
+                    role: role,
                     access_token: cookie.getCookie('access_token')
                 }
             }
