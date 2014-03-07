@@ -27,10 +27,10 @@ angular.module('brand')
         };
 
         $scope.oderComments = [{
-            field: 'like_count',
+            field: '-like_count',
             display: 'Lượt thích'
         }, {
-            field: 'updated_time',
+            field: '-updated_time',
             display: 'Thời gian'
         }];
 
