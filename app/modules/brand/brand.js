@@ -269,6 +269,11 @@ angular.module('brand')
             }
         }
 
+        $scope.productTemp = {
+            name: '',
+            description: ''
+        };
+
         $scope.changeProductName = function(categoryId, productId, name) {
             var fields = {
                 product_id: productId,
@@ -277,8 +282,6 @@ angular.module('brand')
             };
 
             productRemote.update(fields, function(data) {
-                console.log(data);
-
                 if (data.error == undefined) {
                     for (var i = 0; i < $scope.brand.categories.length; i++) {
                         if ($scope.brand.categories[i].id == categoryId) {
@@ -293,6 +296,68 @@ angular.module('brand')
                 }
             }, function() {});
         }
+
+        $scope.changeProductDescription = function(categoryId, productId, description) {
+            var fields = {
+                product_id: productId,
+                category_id: categoryId,
+                description: description
+            };
+
+            productRemote.update(fields, function(data) {
+                if (data.error == undefined) {
+                    for (var i = 0; i < $scope.brand.categories.length; i++) {
+                        if ($scope.brand.categories[i].id == categoryId) {
+                            for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
+                                if ($scope.brand.categories[i].products[i].id == productId) {
+                                    $scope.brand.categories[i].products[i].full_description = description;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }, function() {});
+        }
+
+        $scope.addProduct = function(categoryId) {
+
+            if ($scope.productTemp.name == '' || $scope.productTemp.description == '')
+                return;
+
+            var fields = {
+                category_id: categoryId,
+                name: $scope.productTemp.name,
+                full_description: $scope.productTemp.description,
+                price: 0
+
+            };
+
+            productRemote.create(fields, function(data) {
+                if (data.error == undefined) {
+                    for (var i = 0; i < $scope.brand.categories.length; i++) {
+                        if ($scope.brand.categories[i].id == categoryId) {
+                            $scope.brand.categories[i].products.unshift({
+                                name: $scope.productTemp.name,
+                                id: data.product_id,
+                                category_id: $scope.category.id,
+                                full_description: $scope.productTemp.description,
+                                images: ['']
+                            });
+                            return;
+                        }
+                    }
+
+
+                    dataFactory.setCurrentBrand($scope.brand);
+                }
+
+                $scope.productTemp = {
+                    name: '',
+                    description: ''
+                };
+            }, function() {});
+        };
 
         $scope.$watch('brand', function() {
             if ($scope.brand != null) {
