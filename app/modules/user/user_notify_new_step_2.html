@@ -1,0 +1,134 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div id="notify-new" class="content">
+    <div id="notify-fuelux-wizard" class="wizard">
+        <ul class="wizard-steps">
+            <li data-target="#notify-step1">
+                <span class="z-step">Soạn tin</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#notify-step2" class="active">
+                <span class="z-step">Đối tượng</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#notify-step3">
+                <span class="z-step">Kích hoạt</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#notify-step4" id="menu-manager" onclick="showManager('#menu-manager', '#notify-step4')">
+                <span class="z-step">Quản lý tin</span>
+            </li>
+        </ul>                            
+    </div>
+    <div id="notify-step-content" class="step-content form-page">
+        <div class="step-pane active" id="notify-step2">
+            <div class="step-description">
+                <div class="step-title">
+                    <span class="step-name">Bước 2:</span> Chọn lọc khách hàng trong danh sách
+                </div>
+                Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
+            </div>
+            
+            <div class="wapper">
+                <div class="block">
+                    <div class="block_header">
+                        <div class="left control">
+                            Lọc danh sách khách hàng theo
+                        </div>
+                        <div class="right">
+                            <div class="controller">
+                                <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
+                                <span class="btn-glow success"><i class="icon-bookmark-empty"></i> Lưu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block_content">
+                        <p class="notify"> Danh sách khách hàng nhận thông báo <span>{{event.name_display}}</span> thoả điều kiện</p>
+                        <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>
+                    </div>
+                    <div class="block_footer">
+                        <div class="left method">
+                            Phương thức <div class="ui-select">
+                                            <select>
+                                                <option selected="">Gửi 1 lần</option>
+                                                <option>Gửi tự động</option>
+                                            </select>
+                                        </div>
+                        </div>
+                        <button ng-click="getAllFilter()" type="button" class="btn-glow primary right"><i class="icon-ok"></i> View</button>
+                    </div><!-- block footer-->
+                </div><!-- block -->
+                
+                <div class="block">
+                    <div class="block_header">
+                        <div class="left control">
+                            <span class="highlight">2</span> khách hàng được chọn / <span class="highlight">200</span> khách hàng thoả điều kiện
+                        </div>
+                        <input type="text" class="search right" placeholder="Tìm kiếm..."/>
+                        <div class="fee right">
+                            Chi phí: <span>40</span> T-coin
+                        </div>
+                    </div>
+                    <div class="block_content no-padding">
+                        <table class="z-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" /></th>
+                                    <th class="name">Tên</th>
+                                    <th>Tuổi</th>
+                                    <th>Giới tính</th>
+                                    <th>Vị trí</th>
+                                    <th>Lần sử dụng cuối</th>
+                                    <th>
+                                        <div class="ui-select">
+                                            <select>
+                                                <option>giờ / ngày</option>
+                                                <option>giờ / tuần</option>
+                                            </select>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" /></td>
+                                    <td class="name">wayne rooney</td>
+                                    <td>28</td>
+                                    <td>Nam</td>
+                                    <td>Manchester United</td>
+                                    <td>12:23 PM 2/20/2014</td>
+                                    <td>1 giờ / ngày</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" /></td>
+                                    <td>wayne rooney</td>
+                                    <td>28</td>
+                                    <td>Nam</td>
+                                    <td>Manchester United</td>
+                                    <td>12:23 PM 2/20/2014</td>
+                                    <td>1 giờ / ngày</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--chart here-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 with-sidebar">
+        <div class="col-md-11">
+            <div class="notify-wizard-actions wizard-actions">
+                <button type="button" disabled class="btn-glow primary btn-prev"> 
+                    <i class="icon-chevron-left"></i> Prev
+                </button>
+                <button type="button" class="btn-glow primary btn-next" data-last="Finish">
+                    Next <i class="icon-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- scripts -->
+<script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="vendor/theme/scripts/fuelux.wizard.js"></script>
+<script src="vendor/theme/scripts/tinymce/tinymce.min.js"></script>
+<script src="vendor/theme/scripts/tinymce/themes/modern/theme.min.js"></script>

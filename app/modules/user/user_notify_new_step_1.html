@@ -1,0 +1,106 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div id="notify-new" class="content">
+    <div id="notify-fuelux-wizard" class="wizard">
+        <ul class="wizard-steps">
+            <li data-target="#notify-step1" class="active">
+                <span class="z-step">Soạn tin</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#notify-step2">
+                <span class="z-step">Đối tượng</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#notify-step3">
+                <span class="z-step">Kích hoạt</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#notify-step4" id="menu-manager" onclick="showManager('#menu-manager', '#notify-step4')">
+                <span class="z-step">Quản lý tin</span>
+            </li>
+        </ul>                            
+    </div>
+    <div id="notify-step-content" class="step-content form-page">
+        <div class="step-pane active" id="notify-step1">
+            <div class="step-description">
+                <div class="step-title">
+                    <span class="step-name">Bước 1:</span> Soạn tin thông báo cho từng khách hàng
+                </div>
+                Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+            </div>
+            <div class="form-wrapper">
+                <div class="col-md-8">
+                    <div class="step-wapper">
+                        <form>
+                            <div class="field-box">
+                                <span class="title">TÊN CHIẾN DỊCH</span>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected>Khuyến mãi valentin</option>
+                                        <option selected>Khuyến mãi cá t4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field-box">
+                                <span class="title">CHỌN LOẠI HÌNH THÔNG BÁO</span>
+                                <div class="ui-select">
+                                    <select ng-model="notifyType" ng-options="s=nt.name for nt in notifyTypes" ng-init="notifyType=notifyTypes[0]"></select>
+                                </div>
+                            </div>
+                            <div ng-switch on="notifyType.id">
+                                <div ng-switch-when="1">
+                                    <div class="sms-box">
+                                        <div class="field-box">
+                                            <span class="title">TÊN NGƯỜI GỬI</span>
+                                            <input class="form-control inline-block" type="text">
+                                        </div>
+                                        <div class="field-box">
+                                            <span class="title">NỘI DUNG</span>
+                                            <textarea class="form-control" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-switch-when="2">
+                                    <div class="email-box">
+                                        <div class="subject">
+                                            <div class="field-box">
+                                                <span class="title">TIÊU ĐỀ</span>
+                                                <input class="form-control inline-block" type="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="sender">
+                                            <div class="field-box">
+                                                <span class="title">EMAIL NGƯỜI GỬI</span>
+                                                <input class="form-control inline-block" type="text"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="field-box">
+                                            <span class="title">Nội dung</span>
+                                            <textarea class="editor"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 with-sidebar">
+        <div class="col-md-11">
+            <div class="notify-wizard-actions wizard-actions">
+                <button type="button" disabled class="btn-glow primary btn-prev"> 
+                    <i class="icon-chevron-left"></i> Prev
+                </button>
+                <button type="button" class="btn-glow primary btn-next" data-last="Finish">
+                    Next <i class="icon-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- scripts -->
+<script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="vendor/theme/scripts/fuelux.wizard.js"></script>
+<script src="vendor/theme/scripts/tinymce/tinymce.min.js"></script>
+<script src="vendor/theme/scripts/tinymce/themes/modern/theme.min.js"></script>

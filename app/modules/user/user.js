@@ -225,14 +225,24 @@ angular.module('user')
             controller: 'UserManagerCtrl',
             access: access.user
         })
-        .when('/user/notify-new/:brandId', {
-            templateUrl: 'modules/user/user_notify_new.html',
+        .when('/user/notify-new/step1/:brandId', {
+            templateUrl: 'modules/user/user_notify_new_step_1.html',
             controller: 'UserNotifyCtrl',
             access: access.user
         })
-        .when('/user/:brandId/:userId', {
-            templateUrl: 'modules/user/user_profile.html',
-            controller: 'UserCtrl',
+        .when('/user/notify-new/step2/:brandId', {
+            templateUrl: 'modules/user/user_notify_new_step_2.html',
+            controller: 'UserNotifyCtrl',
+            access: access.user
+        })
+        .when('/user/notify-new/step3/:brandId', {
+            templateUrl: 'modules/user/user_notify_new_step_3.html',
+            controller: 'UserNotifyCtrl',
+            access: access.user
+        })
+        .when('/user/notify-new/step4/:brandId', {
+            templateUrl: 'modules/user/user_notify_new_step_4.html',
+            controller: 'UserNotifyCtrl',
             access: access.user
         })
 });

@@ -1,0 +1,113 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div id="notify-new" class="content">
+    <div id="notify-fuelux-wizard" class="wizard">
+        <ul class="wizard-steps">
+            <li data-target="#notify-step1" >
+                <span class="z-step">Soạn tin</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#notify-step2">
+                <span class="z-step">Đối tượng</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#notify-step3">
+                <span class="z-step">Kích hoạt</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#notify-step4" class="active" id="menu-manager" onclick="showManager('#menu-manager', '#notify-step4')">
+                <span class="z-step">Quản lý tin</span>
+            </li>
+        </ul>                            
+    </div>
+    <div id="notify-step-content" class="step-content form-page">
+        <div class="step-pane active" id="notify-step4">
+            <div class="step-description">
+                <div class="step-title">
+                    Quản lý tin gửi cho khách hàng
+                </div>
+                Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+                <div class="btn-glow success"><i class="icon-plus"></i> Tạo Tin Mới</div>
+            </div>
+            <div class="form-wrapper">
+                <div class="col-md-12">
+                    <table class="z-table bordered-table">
+                        <thead>
+                            <tr>
+                                <th>Tự đề</th>
+                                <th>Loại hình</th>
+                                <th>Lịch trình</th>
+                                <th>Đã gửi</th>
+                                <th>
+                                    <div class="ui-select">
+                                        <select>
+                                            <option>Trạng thái</option>
+                                        </select>
+                                    </div>
+                                </th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even">
+                                <td class="name">Thông báo số 11</td>
+                                <td>Gửi SMS</td>
+                                <td>30 sau khi kích hoạt</td>
+                                <td>10 tin</td>
+                                <td><a class="btn-flat success">Kích hoạt</a></td>
+                                <td><i class="icon-remove-sign"></i> Xoá</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="name">Thông báo số 11</td>
+                                <td>Gửi SMS</td>
+                                <td>30 sau khi kích hoạt</td>
+                                <td>10 tin</td>
+                                <td><a class="btn-flat gray">Chờ</a></td>
+                                <td><i class="icon-remove-sign"></i> Xoá</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="name">Thông báo số 11</td>
+                                <td>Gửi SMS</td>
+                                <td>30 sau khi kích hoạt</td>
+                                <td>10 tin</td>
+                                <td><a class="btn-flat gray">Chờ</a></td>
+                                <td><i class="icon-remove-sign"></i> Xoá</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="name">Thông báo số 11</td>
+                                <td>Gửi SMS</td>
+                                <td>30 sau khi kích hoạt</td>
+                                <td>10 tin</td>
+                                <td><a class="btn-flat gray">Chờ</a></td>
+                                <td><i class="icon-remove-sign"></i> Xoá</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="name">Thông báo số 11</td>
+                                <td>Gửi SMS</td>
+                                <td>30 sau khi kích hoạt</td>
+                                <td>10 tin</td>
+                                <td><a class="btn-flat gray">Chờ</a></td>
+                                <td><i class="icon-remove-sign"></i> Xoá</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 with-sidebar">
+        <div class="col-md-11">
+            <div class="notify-wizard-actions wizard-actions">
+                <button type="button" disabled class="btn-glow primary btn-prev"> 
+                    <i class="icon-chevron-left"></i> Prev
+                </button>
+                <button type="button" class="btn-glow primary btn-next">
+                    Next <i class="icon-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- scripts -->
+<script src="vendor/theme/scripts/jquery-ui-1.10.2.custom.min.js"></script>
+<script src="vendor/theme/scripts/fuelux.wizard.js"></script>
+<script src="vendor/theme/scripts/tinymce/tinymce.min.js"></script>
+<script src="vendor/theme/scripts/tinymce/themes/modern/theme.min.js"></script>
