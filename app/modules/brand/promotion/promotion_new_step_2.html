@@ -1,0 +1,119 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div id="promotion-new" class="content">
+    <div id="promotion-fuelux-wizard" class="wizard">
+        <ul class="wizard-steps">
+            <li data-target="#promotion-step1">
+                <span class="z-step">Loại sự kiện</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step2" class="active">
+                <span class="z-step">Thông tin</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step3">
+                <span class="z-step">Nội dung</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step4">
+                <span class="z-step">Hoàn thành</span>
+            </li>
+        </ul>                            
+    </div>
+    <div id="promotion-step-content" class="step-content form-page">
+        <div>
+            <div class="step-pane active" id="promotion-step2">
+                <div class="step-description">
+                    <div class="step-title">
+                        <span class="step-name">Bước 2:</span> Thông tin chiến dịch
+                    </div>
+                    Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
+                </div>
+                <div class="form-wrapper">
+                    <div class="col-md-8">
+                        <form class="step-wapper" name="step_2_form">
+                            <div class="field-box">
+                                <span class="title">TÊN CHIẾN DỊCH</span>
+                                <input class="form-control inline-block" name="promotionName" type="text" ng-model="name" placeholder="Tên chương trình khuyến mãi mới" required/>
+
+                                <span class="alert-msg" ng-show="step_2_form.promotionName.$error.required">
+                                    <i class="icon-remove-sign"></i>
+                                    Vui lòng nhập tên chiến dịch
+                                </span>
+                            </div>
+                            <div class="field-box">
+                                <span class="title">THỜI GIAN</span>
+                                <div class="dropdown inline-block">
+                                  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                    <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data[0].dateDisplay">
+                                        <span class="add-on hide"><i class="icon-calendar"></i></span>
+                                    </div>
+                                  </a>
+                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'minute' }" data-on-set-time="onTimeSetOne"/>
+                                  </ul>
+                                </div>
+                                <div class="dropdown inline-block">
+                                  <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                    <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data[1].dateDisplay">
+                                        <span class="add-on hide"><i class="icon-calendar"></i></span>
+                                    </div>
+                                  </a>
+                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'minute' }" data-on-set-time="onTimeSetTwo"/>
+                                  </ul>
+                                </div> 
+                            </div>
+                            <div class="field-box">
+                                <span class="title">MÔ TẢ</span>
+                                <div class="block">
+                                    <div class="block_header">
+                                        <div class="left control">
+                                            <span class="highlight">{{numOfSelectedShops}}</span> của hàng được chọn
+                                        </div>
+                                        <input type="text" class="search right small-input no-margin" placeholder="Tìm kiếm..." ng-model="searchText"/>
+                                    </div>
+                                    <div class="block_content no-padding">
+                                        <table class="z-table">
+                                            <thead>
+                                                <tr>
+                                                    <th><input type="checkbox" ng-model="checkAllShops" ng-change="checkAll()"/></th>
+                                                    <th class="name">Tên cửa hàng</th>
+                                                    <th>Địa chỉ</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody  ng-repeat="shop in brand.shops | filter:searchText">
+                                                <tr>
+                                                    <td><input type="checkbox" ng-model="$parent.selectedShops[shop.selectedId]" ng-change="updateSelectedShops()"></td>
+                                                    <td class="name">{{shop.name}}</td>
+                                                    <td>{{shop.full_address}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-8 with-sidebar">
+                        <div class="col-md-11">
+                            <div class="promotion-wizard-actions wizard-actions">
+                                <button type="button" class="btn-glow primary btn-prev" ng-click="goToStep1()"> 
+                                    <i class="icon-chevron-left"></i> Prev
+                                </button>
+                                <button class="btn-glow primary btn-next" ng-disabled="step_2_form.$invalid || numOfSelectedShops == 0" ng-click="goToStep3()">
+                                    Next <i class="icon-chevron-right"></i>
+                                </button>
+                                <button type="button" class="btn-glow success btn-finish">
+                                    Trở lại trang quản lý
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- scripts -->
+<style scoped>@import url('vendor/theme/styles/lib/flexslider.css')</style>

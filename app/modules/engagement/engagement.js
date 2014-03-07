@@ -1,8 +1,8 @@
 angular.module('engagement')
 
-.controller('SegmentationCtrl', ['$scope', '$routeParams', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper',
+.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper',
 
-    function($scope, $routeParams, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper) {
+    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper) {
 
         var brandId = $routeParams.brandId;
 
@@ -107,45 +107,11 @@ angular.module('engagement')
     }
 ])
 
-.controller('FunnelCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper',
-    function($scope, $routeParams, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper) {
+.controller('FunnelCtrl', ['$scope', '$routeParams', '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper', 'funnelFactory',
+    function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory) {
 
         var brandId = $routeParams.brandId;
-        $scope.metas = remoteFactory.meta_property_types;
-        $scope.events = remoteFactory.meta_events;
-        $scope.metadata = remoteFactory.meta_lists;
-        $scope.subfilters = null;
-
-        $scope.nameOfChainOfBehaviours = '';
-
-        $scope.behaviours = [{
-            id: 0,
-            metas: $scope.metas,
-            events: $scope.events,
-            metadata: $scope.metadata,
-            subfilters: null
-        }];
-
-        $scope.computeBys = [{
-            name: 'turn',
-            name_display: 'lượt'
-        }, {
-            name: 'customer',
-            name_display: 'lượng khách hàng'
-        }];
-
-        $scope.addBehaviour = function() {
-            var tempBehaviour = {
-                id: 0,
-                metas: $scope.metas,
-                events: $scope.events,
-                metadata: $scope.metadata,
-                subfilters: null
-            };
-
-            tempBehaviour.id = $scope.behaviours.length;
-            $scope.behaviours.push(tempBehaviour);
-        }
+        var path = $location.path().substring(0, 14);
 
         $scope.data = [{
             dateDropDownInput: moment("2013-10-22T00:00:00.000").toDate(),
@@ -155,112 +121,137 @@ angular.module('engagement')
             dateDisplay: "22-02-2014",
         }];
 
-        var fields = {
-            brand_id: brandId,
-            date_beg: $scope.data[0].dateDisplay,
-            date_end: $scope.data[1].dateDisplay,
-            by: 'turn',
-            funnel: ''
-        };
+        $scope.metas = remoteFactory.meta_property_types;
+        $scope.events = remoteFactory.meta_events;
+        $scope.metadata = remoteFactory.meta_lists;
 
-        $scope.updateCompareUnit = function() {
-            var compareToObject = null;
+        switch (path) {
+            case '/funnel/step1/':
+                funnelFactory.setDataStep1(null);
+                $scope.subfilters = null;
 
-            if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
-                compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
-            }
+                $scope.nameOfChainOfBehaviours = '';
+                $scope.behaviours = [{
+                    id: 0,
+                    metas: $scope.metas,
+                    events: $scope.events,
+                    metadata: $scope.metadata,
+                    subfilters: null
+                }];
 
-            if (compareToObject != null)
-                fields.compare_by = JSON.stringify(compareToObject);
+                var fields = {
+                    brand_id: brandId,
+                    date_beg: $scope.data[0].dateDisplay,
+                    date_end: $scope.data[1].dateDisplay,
+                    by: 'turn',
+                    funnel: ''
+                };
 
-            updateChart(fields);
-        }
+                $scope.addBehaviour = function() {
+                    var tempBehaviour = {
+                        id: 0,
+                        metas: $scope.metas,
+                        events: $scope.events,
+                        metadata: $scope.metadata,
+                        subfilters: null
+                    };
 
-        $scope.data = [];
-        $scope.updateComputeBy = function() {
-            fields.by = $scope.computeBy.name;
-            funnelRemote.get(fields, function(data) {
-
-            }, function() {});
-        };
-
-        function updateChart(fields) {
-            funnelRemote.get(fields, function(data) {
-                var values = [];
-                for (var i = 0; i < data.length; i++)
-                    values.push(data[i].count);
-
-                $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames);
-            }, function() {});
-        }
-
-        var columnNames = [];
-
-        $scope.funnel = function() {
-            fields.funnel = [];
-            columnNames = [];
-
-            for (var i = 0; i < $scope.behaviours.length; i++) {
-
-                var compareToObject = null;
-                if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
-                    compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
+                    tempBehaviour.id = $scope.behaviours.length;
+                    $scope.behaviours.push(tempBehaviour);
                 }
 
-                if (compareToObject != null)
-                    fields.compare_by = JSON.stringify(compareToObject);
+                $scope.funnel = function() {
+                    $location.path('/funnel/step2/' + brandId);
+                    fields.funnel = [];
+                    columnNames = [];
 
-                fields.funnel.push({
-                    filter: filterHelper.buildQuery($scope.behaviours[i].subfilters),
-                    event: $scope.behaviours[i].subfilters[0].event.name
-                });
+                    for (var i = 0; i < $scope.behaviours.length; i++) {
+                        fields.funnel.push({
+                            filter: filterHelper.buildQuery($scope.behaviours[i].subfilters),
+                            event: $scope.behaviours[i].subfilters[0].event.name
+                        });
 
-                columnNames.push($scope.behaviours[i].subfilters[0].event.name_display);
-            }
+                        columnNames.push($scope.behaviours[i].subfilters[0].event.name_display);
+                    }
 
-            fields.funnel = JSON.stringify(fields.funnel);
-            updateChart(fields);
-        }
+                    fields.funnel = JSON.stringify(fields.funnel);
+                    funnelFactory.setDataStep1(fields);
+                    $location.path('/funnel/step2/' + brandId);
 
-        $scope.onTimeSetOne = function(newDate, oldDate) {
-            $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
+                }
 
-            if (fields != null) {
-                fields.date_beg = $scope.data[0].dateDisplay;
+                break;
+
+            case '/funnel/step2/':
+                var fields = funnelFactory.getDataStep1();
+
+                if (fields == null) {
+                    $location.path('/funnel/step1/' + brandId);
+                    return;
+                }
+
                 updateChart(fields);
-            }
-        }
 
-        $scope.onTimeSetTwo = function(newDate, oldDate) {
-            $scope.data[1].dateDisplay = serviceHelper.normalizeTime(newDate);
-            if (fields != null) {
-                fields.date_end = $scope.data[1].dateDisplay;
-                updateChart(fields);
-            }
-        }
+                $scope.computeBys = [{
+                    name: 'turn',
+                    name_display: 'lượt'
+                }, {
+                    name: 'customer',
+                    name_display: 'lượng khách hàng'
+                }];
 
-        $scope.columnChart = {};
+                $scope.updateCompareUnit = function() {
+                    var compareToObject = null;
 
-        /** modal **/
-        $scope.open = function() {
-            $scope.modalInstance = $modal.open({
-                templateUrl: 'common/template/modal.html',
-                controller: ModalInstanceCtrl,
-                resolve: {
-                    lineChart: function() {
-                        return $scope.lineChart;
+                    if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
+                        compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
+                    }
+
+                    if (compareToObject != null)
+                        fields.compare_by = JSON.stringify(compareToObject);
+
+                    updateChart(fields);
+                }
+
+                $scope.updateComputeBy = function() {
+                    fields.by = $scope.computeBy.name;
+                    updateChart(fields);
+                };
+
+                function updateChart(fields) {
+                    funnelFactory.setDataStep1(fields);
+
+                    funnelRemote.get(fields, function(data) {
+                        var values = [];
+                        for (var i = 0; i < data.length; i++)
+                            values.push(data[i].count);
+
+                        $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames);
+                    }, function() {});
+                }
+
+                var columnNames = [];
+
+                $scope.onTimeSetOne = function(newDate, oldDate) {
+                    $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
+
+                    if (fields != null) {
+                        fields.date_beg = $scope.data[0].dateDisplay;
+                        updateChart(fields);
                     }
                 }
-            });
-        };
 
-        var ModalInstanceCtrl = function($scope, $modalInstance, lineChart) {
-            $scope.lineChart = lineChart;
-            $scope.cancel = function() {
-                $modalInstance.dismiss('cancel');
-            };
-        };
+                $scope.onTimeSetTwo = function(newDate, oldDate) {
+                    $scope.data[1].dateDisplay = serviceHelper.normalizeTime(newDate);
+                    if (fields != null) {
+                        fields.date_end = $scope.data[1].dateDisplay;
+                        updateChart(fields);
+                    }
+                }
 
+                $scope.columnChart = {};
+                break;
+        }
     }
 ])
     .config(function($routeProvider) {
@@ -271,8 +262,13 @@ angular.module('engagement')
                 controller: 'SegmentationCtrl',
                 access: access.user
             })
-            .when('/funnel/:brandId', {
-                templateUrl: 'modules/engagement/funnel/funnel.html',
+            .when('/funnel/step1/:brandId', {
+                templateUrl: 'modules/engagement/funnel/funnel_step_1.html',
+                controller: 'FunnelCtrl',
+                access: access.user
+            })
+            .when('/funnel/step2/:brandId', {
+                templateUrl: 'modules/engagement/funnel/funnel_step_2.html',
                 controller: 'FunnelCtrl',
                 access: access.user
             })

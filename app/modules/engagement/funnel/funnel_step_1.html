@@ -1,0 +1,70 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div id="promotion-new" class="content">
+    <div id="funnel-fuelux-wizard" class="wizard">
+        <ul class="wizard-steps">
+            <li data-target="#funnel-step1" class="active">
+                <span class="z-step">TẠO CHUỖI MỚI</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#funnel-step2">
+                <span class="z-step">KẾT QUẢ</span><img class="line-step" src="img/line_step.png" />
+            </li>
+        </ul>                            
+    </div>
+    <div id="funnel-step-content" class="step-content form-page">
+        <form>
+            <div class="step-pane active" id="funnel-step1">
+                <div class="step-description">
+                    <div class="step-title">
+                        Tạo chuỗi hành vi người dùng
+                    </div>
+                    Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+                </div>
+                <div class="form-wrapper">
+                    <div class="wapper">
+                        <div class="step-wapper">
+                            <div class="field-box">
+                                <span class="title">TÊN CHUỖI HÀNH VI</span>
+                                <input type="text" class="form-control" style="width: 50%;" placeholder="Thống kê hành vi sử dụng" ng-model="nameOfChainOfBehaviours"/>
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <div class="z-box" ng-repeat="behaviour in behaviours" style="margin-top:10px;">
+                                <div class="z-box-header">
+                                    <div class="left">
+                                        <span>Hành vi thứ {{behaviour.id + 1}}</span> 
+                                        <div class="ui-select">
+                                            <select ng-model="event" ng-options="event as event.name_display for event in behaviour.events" ng-init="event=behaviour.events[0]"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="z-box-content">
+                                    <div smg-filter metas="behaviour.metas" events="behaviour.events" metadata="behaviour.metadata" event="event" subfilters="behaviour.subfilters"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <div class="add-bar shadow" ng-click="addBehaviour()" style="cursor:pointer">
+                                <i class="icon-plus"></i>
+                                THÊM HÀNH VI NGƯỜI DÙNG
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- display step info -->
+        </form>
+    </div>
+    <div class="col-md-12 with-sidebar">
+        <div class="funnel-wizard-actions wizard-actions">
+            <button type="button" class="btn-glow primary success btn-save">
+                <i class="icon-bookmark-empty"></i>Lưu
+            </button>
+            <button type="button" class="btn-glow primary btn-next" ng-click="funnel()">
+                Theo dõi hành vi người dùng
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,179 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div id="promotion-new" class="content">
+    <div id="promotion-fuelux-wizard" class="wizard">
+        <ul class="wizard-steps">
+            <li data-target="#promotion-step1">
+                <span class="z-step">Loại sự kiện</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step2">
+                <span class="z-step">Thông tin</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step3" class="active">
+                <span class="z-step">Nội dung</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step4">
+                <span class="z-step">Hoàn thành</span>
+            </li>
+        </ul>                            
+    </div>
+    <div id="promotion-step-content" class="step-content form-page">
+        <form>
+            <div class="step-pane active" id="promotion-step3">
+                <div class="step-description">
+                    <div class="step-title">
+                        <span class="step-name">Bước 3:</span> chọn loại khuyến mãi hoặc sự kiện cho chiến dịch của bạn.
+                    </div>
+                    Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+                </div>
+                <div class="form-wrapper">
+                    <div class="col-md-7">
+                        <div class="step-wapper">
+                            <div ng-switch on="promotionType.name">
+                                <div ng-switch-when="voucher" class="voucher-box">
+                                    <div class="z-box"  ng-repeat="present in presentDescriptions" style="margin-top:10px;">
+                                        <div class="z-box-header">
+                                            <div class="left">
+                                                <span class="circle-box">{{present.id + 1}}</span>
+                                            </div>
+                                            <i class="icon-remove-sign right" ng-click="removePresent(present.id)"></i>
+                                        </div>
+                                        <div class="z-box-content">
+                                            <div class="detail-voucher">
+                                                <div class="field-box">
+                                                    <div class="inline-block">
+                                                        <span class="title">MÔ TẢ PHẦN QUÀ</span>
+                                                        <input type="text" class="description form-control" ng-model = "$parent.presentDescriptions[present.id].description" placeholder="Nhập mô tả phần quà" />
+                                                    </div>
+                                                    <div class="inline-block">
+                                                        <span class="title">SỐ LƯỢNG</span>
+                                                        <input type="text" class="quality form-control" ng-model="$parent.presentDescriptions[present.id].amount"/>
+                                                    </div>
+                                                    <div class="inline-block">
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="option1" ng-model"$parent.presentDescriptions[present.id].noLimitedChecked"> Không giới hạn
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="field-box">
+                                                    <span class="title">ĐIỀU KIỆN</span>
+                                                    <div class="condition">
+                                                        <span class="title">Đối tượng</span>
+                                                        <input type="text" class="form-control" placeholder="Nhập đối tượng" ng-model="$parent.presentDescriptions[present.id].target"/>
+                                                        <br />
+                                                        <span class="title">Thời gian</span>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].monChecked"
+                                                            /> Thứ 2
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].tueChecked"/> Thứ 3
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].wedChecked"/> Thứ 4
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].thuChecked"/> Thứ 5
+                                                        </label>
+                                                        <div class="clearfix"></div>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].friChecked"/> Thứ 6
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].satChecked"/> Thứ 7
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].sunChecked" /> Chủ nhật
+                                                        </label>
+                                                        <label class="checkbox-inline">
+                                                          <input type="checkbox" id="inlineCheckbox1" value="option1" ng-model="$parent.presentDescriptions[present.id].allChecked" ng-change="allCheck(present.id)"/> Cả tuần
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <div class="add-bar shadow" style="cursor:pointer" ng-click="addPresent()">
+                                        <i class="icon-plus"></i> THÊM PHẦN QUÀ
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="news-box" ng-switch-when="news">
+                                    <div class="field-box">
+                                        <span class="title">TÊN TIÊU ĐỀ</span>
+                                        <input class="form-control inline-block" type="text"/>
+                                    </div>
+                                    <div class="field-box">
+                                        <span class="title">HÌNH ẢNH</span>
+                                        <input type="file" class="form-control inline-block"/>  
+                                    </div>
+                                    <div class="field-box">
+                                        <span class="title">TÊN TIÊU ĐỀ</span>
+                                        <textarea placeholder="Nhập nội dung" class="form-control" rows="6"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="field-box">
+                                <span class="title">Phần thưởng</span>
+                                <input placeholder="Điều kiện" class="form-control inline-block small-input" type="text"/><input placeholder="Phần thưởng" class="form-control inline-block small-input" type="text"/>
+                            </div>
+                            <div class="field-box">
+                                <span class="title">LOẠI THẺ</span>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected>Dropdown</option>
+                                        <option>Custom selects</option>
+                                        <option>Pure css styles</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            <div class="field-box">
+                                <span class="title">SỐ LƯỢNG</span>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected>Dropdown</option>
+                                        <option>Custom selects</option>
+                                        <option>Pure css styles</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            <div class="field-box">
+                                <span class="title">THỜI GIAN ÁP DỤNG</span>
+                                <div class="ui-select">
+                                    <select>
+                                        <option selected>Dropdown</option>
+                                        <option>Custom selects</option>
+                                        <option>Pure css styles</option>
+                                    </select>
+                                </div> 
+                            </div>
+                            -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 with-sidebar">
+                        <div class="col-md-11">
+                            <div class="promotion-wizard-actions wizard-actions">
+                                <button type="button" class="btn-glow primary btn-prev" ng-click="goToStep2()"> 
+                                    <i class="icon-chevron-left"></i> Prev
+                                </button>
+                                <button type="button" class="btn-glow primary btn-next" ng-click="goToStep4()">
+                                    Next <i class="icon-chevron-right"></i>
+                                </button>
+                                <button type="button" class="btn-glow success btn-finish">
+                                    Trở lại trang quản lý
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            
+            <!-- display step info -->
+        </form>
+    </div>
+</div>
+<!-- scripts -->
+<style scoped>@import url('vendor/theme/styles/lib/flexslider.css')</style>

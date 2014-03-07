@@ -286,8 +286,8 @@ angular.module('brand')
                     for (var i = 0; i < $scope.brand.categories.length; i++) {
                         if ($scope.brand.categories[i].id == categoryId) {
                             for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
-                                if ($scope.brand.categories[i].products[i].id == productId) {
-                                    $scope.brand.categories[i].products[i].name = name;
+                                if ($scope.brand.categories[i].products[j].id == productId) {
+                                    $scope.brand.categories[i].products[j].name = name;
                                     return;
                                 }
                             }
@@ -309,8 +309,8 @@ angular.module('brand')
                     for (var i = 0; i < $scope.brand.categories.length; i++) {
                         if ($scope.brand.categories[i].id == categoryId) {
                             for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
-                                if ($scope.brand.categories[i].products[i].id == productId) {
-                                    $scope.brand.categories[i].products[i].full_description = description;
+                                if ($scope.brand.categories[i].products[j].id == productId) {
+                                    $scope.brand.categories[i].products[j].full_description = description;
                                     return;
                                 }
                             }

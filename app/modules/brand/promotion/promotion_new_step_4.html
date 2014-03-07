@@ -1,0 +1,67 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div id="promotion-new" class="content">
+    <div id="promotion-fuelux-wizard" class="wizard">
+        <ul class="wizard-steps">
+            <li data-target="#promotion-step1">
+                <span class="z-step">Loại sự kiện</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step2">
+                <span class="z-step">Thông tin</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step3">
+                <span class="z-step">Nội dung</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#promotion-step4" class="active">
+                <span class="z-step">Hoàn thành</span>
+            </li>
+        </ul>                            
+    </div>
+    <div id="promotion-step-content" class="step-content form-page">
+        <form>
+            <div class="step-pane active" id="promotion-step4">
+                <div class="step-description">
+                    <div class="step-title">
+                        <span class="step-name">Hoàn thành:</span> chọn loại khuyến mãi hoặc sự kiện cho chiến dịch của bạn.
+                    </div>
+                    Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+                </div>
+                <div class="form-wrapper">
+                    <div class="col-md-12">
+                        <div class="step-wapper">
+                            <div class="step-success">
+                                <table class="z-table bordered-table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="ui-select">
+                                                    <select ng-model="orderPromotion" ng-options="orderPromotion as orderPromotion.name_display for orderPromotion in orderPromotions" ng-init="orderPromotion=orderPromotions[0]" ng-change="sortPromotionList()"></select>
+                                                </div>
+                                            </th>
+                                            <th>Chiến dịch</th>
+                                            <th>Thời gian</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="promotion in promotionList">
+                                        <tr class="{{promotion.stt}}">
+                                            <td>{{promotion.typeDisplay}}</td>
+                                            <td class="name">{{promotion.name}}</td>
+                                            <td>{{promotion.time}}</td>
+                                            <td><a class="{{promotion.statusClass}}">{{promotion.status}}</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- display step info -->
+        </form>
+    </div>
+</div>
+<!-- scripts -->
+<style scoped>@import url('vendor/theme/styles/lib/flexslider.css')</style>

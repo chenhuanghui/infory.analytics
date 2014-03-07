@@ -1,0 +1,126 @@
+<div ng-include="'partials/_header.html'"></div>
+<div ng-include="'partials/_sidebar.html'"></div>
+<!-- main container -->
+<div id="promotion-new" class="content">
+    <div id="funnel-fuelux-wizard" class="wizard">
+        <ul class="wizard-steps">
+            <li data-target="#funnel-step1" >
+                <span class="z-step">TẠO CHUỖI MỚI</span><img class="line-step" src="img/line_step.png" />
+            </li>
+            <li data-target="#funnel-step2" class="active">
+                <span class="z-step">KẾT QUẢ</span><img class="line-step" src="img/line_step.png" />
+            </li>
+        </ul>                            
+    </div>
+    <div id="funnel-step-content" class="step-content form-page">
+        <form>
+            <div class="step-pane active" id="funnel-step2">
+                <div class="step-description">
+                    <div class="step-title">
+                        Chuỗi hành vi người dùng
+                    </div>
+                    Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
+                </div>
+                <div class="form-wrapper">
+                    <div class="wapper">
+                        <div class="step-wapper">
+                            <div class="step-wapper-header">
+                                <div class="left">
+                                    <h4>Tổng quan</h4>
+                                </div>
+                                <div class="right">
+                                    <div class="controller">
+                                        <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]" class="ng-pristine ng-valid"><option value="0" selected="selected">view</option><option value="1">checkin</option><option value="2">checkout</option><option value="3">comment</option></select>
+                                        <span class="btn-glow success"><i class="icon-bookmark-empty"></i> Lưu</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <div class="z-box">
+                                <div class="z-box-header">
+                                    <div class="left">
+                                        <span>
+                                            <div class="dropdown left" >
+                                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                                                </div>
+                                              </a>
+                                              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
+                                              </ul>
+                                            </div>
+
+                                            <div class="dropdown left" style="margin-left:10px;">
+                                              <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                                                </div>
+                                              </a>
+                                              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'day' }" data-on-set-time="onTimeSetTwo"/>
+                                              </ul>
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="right">
+                                        <span>Thống kê theo <div class="ui-select">
+                                                                     <select ng-model="computeBy" ng-options="computeBy as computeBy.name_display for computeBy in computeBys" ng-init="computeBy=computeBys[0]" ng-change="updateComputeBy()"></select>
+                                                                </div>
+                                        </span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="z-box-content" style="position: relative;">
+                                    <div class="bar">Status bar</div>
+                                        <chart value='columnChart'>
+                                        </chart>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <!-- <div class="wapper">
+                                <div class="block" style="margin: 0 -10px;">
+                                    <div class="block_header">
+                                        <div class="left control">
+                                            So sánh theo <div class="ui-select">
+                                                           <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" ng-init="compareUnit=event.compare_properties[0]" style="margin-left: 10px;margin-top: 10px;" ng-change="updateCompareUnit()"></select>
+                                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="block_content no-padding">
+                                        <table class="z-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Giới tính</th>
+                                                    <th>Số lượng bước trước</th>
+                                                    <th>Thời gian trung bình<br/>giữa 2 bước</th>
+                                                    <th>Số lượng bước sau</th>
+                                                    <th>Tỷ lệ giữa 2 bước</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>1371</td>
+                                                    <td>1 ngày</td>
+                                                    <td>601</td>
+                                                    <td class="name">43.83%</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- modal -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- display step info -->
+        </form>
+    </div>
+</div>
+<!-- scripts -->
+<style scoped>@import url('vendor/theme/styles/lib/flexslider.css')</style>
