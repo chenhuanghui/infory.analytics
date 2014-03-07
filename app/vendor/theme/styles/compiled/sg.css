@@ -1275,3 +1275,9 @@ table.comment{
     height: 20px;
     position: absolute;
 }
+
+#sidebar-nav #dashboard-menu > li .toggle{
+    border-bottom: none;
+    box-shadow: none;
+    margin-bottom: 0;
+}
