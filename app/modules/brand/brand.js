@@ -253,8 +253,6 @@ angular.module('brand')
             }
         }
 
-        $scope.totalProduct = 0;
-
         $scope.showProducts = function() {
             if ($scope.products == null) {
                 var fields = {
@@ -266,10 +264,6 @@ angular.module('brand')
                     if (data.undefined == null) {
                         $scope.brand.categories = data.menu;
                         $scope.category = $scope.brand.categories[0];
-
-                        $scope.totalProduct = 0;
-                        for (var i = 0; i < $scope.brand.categories.length; i++)
-                            $scope.totalProduct += $scope.brand.categories[i].products.length;
                     }
                 }, function() {});
             }
@@ -326,12 +320,13 @@ angular.module('brand')
             }, function() {});
         }
 
-        $scope.addProduct = function() {
+        $scope.addProduct = function(categoryId) {
+
             if ($scope.productTemp.name == '' || $scope.productTemp.description == '')
                 return;
 
             var fields = {
-                category_id: $scope.category.id,
+                category_id: categoryId,
                 name: $scope.productTemp.name,
                 full_description: $scope.productTemp.description,
                 price: 0
@@ -340,15 +335,23 @@ angular.module('brand')
 
             productRemote.create(fields, function(data) {
                 if (data.error == undefined) {
-                    $scope.brand.categories.unshift({
-                        id: data.product_id,
-                        category_id: $scope.category.id,
-                        full_description: $scope.productTemp.description,
-                        images: ['']
-                    });
+                    for (var i = 0; i < $scope.brand.categories.length; i++) {
+                        if ($scope.brand.categories[i].id == categoryId) {
+                            $scope.brand.categories[i].products.unshift({
+                                name: $scope.productTemp.name,
+                                id: data.product_id,
+                                category_id: $scope.category.id,
+                                full_description: $scope.productTemp.description,
+                                images: ['']
+                            });
+                            return;
+                        }
+                    }
+
 
                     dataFactory.setCurrentBrand($scope.brand);
                 }
+
                 $scope.productTemp = {
                     name: '',
                     description: ''

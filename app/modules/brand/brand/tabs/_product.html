@@ -3,7 +3,7 @@
         <div class="ui-select left">
              <select ng-model="category" ng-options="category as category.name for category in brand.categories"></select>
         </div>
-        <span>{{totalProduct}}</span> sản phẩm
+        <span>{{category.products.length}}</span> sản phẩm
     </div>
     <div class="add-product" style="cursor:pointer" ng-click="hideAdd = !hideAdd" ng-init="hideAdd = true">
         <i class="icon-plus"></i> THÊM SẢN PHẨM
@@ -32,7 +32,7 @@
                 <div class="value col-md-9">
                     <div class="edit">
                         <input class="form-control inline-block" ng-model="productTemp.description" placeholder="Thêm mô tả sản phẩm"/>
-                        <i style="cursor:pointer" class="icon-ok-sign success" ng-click="addProduct(); hideAdd = !hideAdd;"></i>
+                        <i style="cursor:pointer" class="icon-ok-sign success" ng-click="addProduct(category.id); hideAdd = !hideAdd;"></i>
                     </div>
                 </div>
             </li>
