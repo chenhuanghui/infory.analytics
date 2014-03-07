@@ -1,7 +1,7 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'brandRemote', 'commentRemote', 'dataFactory',
-    function($scope, $http, $location, $routeParams, brandRemote, commentRemote, dataFactory) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote',
+    function($scope, $http, $location, $routeParams, brandRemote, commentRemote, dataFactory, productRemote) {
 
         var brandId = $routeParams.brandId;
         dataFactory.updateBrandSideBar(brandId);
@@ -234,29 +234,7 @@ angular.module('brand')
             });
         };
 
-        $scope.changeCover = function(id) {
-            $.ajaxFileUpload({
-                url: 'http://dev2.smartguide.vn/entity/brand/imgUpload',
-                //data: {
-                //    brand_id: brandId
-                //},
-                secureuri: false,
-                fileElementId: id,
-                dataType: 'json',
-                success: function(data, status) {}
-            });
-            //var file = $('#coverEdit')[0].files[0];
-            // brandRemote.updateCover(brandId, file, function(data) {
-            //     if (data.error == undefined) {
-            //         $scope.brand.cover = $scope.brandCover;
-            //         dataFactory.setCurrentBrand($scope.brand);
-            //     } else {
-            //         $scope.brandCover = $scope.brand.cover;
-            //     }
-            // }, function() {
-
-            // });
-        };
+        $scope.changeCover = function(id) {};
 
         $scope.showGallery = function() {
 
@@ -275,36 +253,45 @@ angular.module('brand')
             }
         }
 
-        // $scope.showUsersGallery = function() {
-        //     if ($scope.usersGallery == null) {
-        //         var fields = {
-        //             id: brandId,
-        //             fields: '["user_gallery"]'
-        //         };
-
-        //         brandRemote.get(fields, function(data) {
-        //             if (data.user_gallery == null)
-        //                 $scope.usersGallery = [];
-        //             else
-        //                 $scope.usersGallery = JSON.parseJSON(data.user_gallery);
-        //         }, function() {});
-        //     }
-        // }
-
         $scope.showProducts = function() {
             if ($scope.products == null) {
                 var fields = {
                     id: brandId,
-                    fields: '["user_gallery"]'
+                    fields: '["menu"]'
                 };
 
                 brandRemote.get(fields, function(data) {
-                    if (data.user_gallery == null)
-                        $scope.usersGallery = [];
-                    else
-                        $scope.usersGallery = JSON.parseJSON(data.user_gallery);
+                    if (data.undefined == null) {
+                        $scope.brand.categories = data.menu;
+                        $scope.category = $scope.brand.categories[0];
+                    }
                 }, function() {});
             }
+        }
+
+        $scope.changeProductName = function(categoryId, productId, name) {
+            var fields = {
+                product_id: productId,
+                category_id: categoryId,
+                name: name
+            };
+
+            productRemote.update(fields, function(data) {
+                console.log(data);
+
+                if (data.error == undefined) {
+                    for (var i = 0; i < $scope.brand.categories.length; i++) {
+                        if ($scope.brand.categories[i].id == categoryId) {
+                            for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
+                                if ($scope.brand.categories[i].products[i].id == productId) {
+                                    $scope.brand.categories[i].products[i].name = name;
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }, function() {});
         }
 
         $scope.$watch('brand', function() {
