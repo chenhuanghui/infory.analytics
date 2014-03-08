@@ -32,12 +32,12 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
 
         $routeProvider
             .when('/', {
-                templateUrl: 'modules/home/home.html',
+                templateUrl: 'modules/home/template/home.html',
                 controller: 'HomeCtrl',
                 access: access.user
             })
             .when('/home/:brandId', {
-                templateUrl: 'modules/home/home.html',
+                templateUrl: 'modules/home/template/home.html',
                 controller: 'HomeCtrl',
                 access: access.user
             })

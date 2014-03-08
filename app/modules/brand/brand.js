@@ -401,23 +401,23 @@ angular.module('brand')
 
         $routeProvider
             .when('/brand/infor/:brandId', {
-                templateUrl: 'modules/brand/brand/brand.html',
+                templateUrl: 'modules/brand/template/brand/brand.html',
                 controller: 'BrandCtrl',
                 access: access.user
             })
             .when('/brand/new', {
-                templateUrl: 'modules/brand/brand_new.html',
+                templateUrl: 'modules/brand/template/brand_new.html',
                 controller: 'brandCreateCtrl',
                 access: access.user
             })
             .when('/brand/comment/:brandId', {
-                templateUrl: 'modules/brand/comment/comment.html',
+                templateUrl: 'modules/brand/template/comment/comment.html',
                 controller: 'BrandCtrl',
                 access: access.user
 
             })
             .when('/brand/new', {
-                templateUrl: 'modules/brand/brand_new.html',
+                templateUrl: 'modules/brand/template/brand_new.html',
                 controller: 'BrandCtrl',
                 access: access.user
             })

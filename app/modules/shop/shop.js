@@ -195,12 +195,12 @@ angular.module('shop')
     var access = routingConfig.accessLevels;
     $routeProvider
         .when('/shop/:brandId/:shopId', {
-            templateUrl: 'modules/shop/shop.html',
+            templateUrl: 'modules/shop/template/shop.html',
             controller: 'ShopCtrl',
             access: access.user
         })
         .when('/create-shop', {
-            templateUrl: 'modules/shop/shop_create.html',
+            templateUrl: 'modules/shop/template/shop_create.html',
             controller: 'CreateShopCtrl',
             access: access.user
         })
