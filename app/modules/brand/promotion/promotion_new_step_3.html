@@ -31,11 +31,11 @@
                     <div class="col-md-7">
                         <div class="step-wapper">
                             <div ng-switch on="promotionType.name">
-                                <div ng-switch-when="voucher" class="voucher-box">
+                                <div ng-switch-when="voucher" class="voucher-box" name="voucher">
                                     <div class="z-box"  ng-repeat="present in presentDescriptions" style="margin-top:10px;">
                                         <div class="z-box-header">
                                             <div class="left">
-                                                <span class="circle-box">{{present.id + 1}}</span>
+                                                <span class="circle-box">{{$parent.presentDescriptions[$parent.indexInArray[present.id]].stt + 1}}</span>
                                             </div>
                                             <i class="icon-remove-sign right" ng-click="removePresent(present.id)"></i>
                                         </div>
@@ -44,15 +44,31 @@
                                                 <div class="field-box">
                                                     <div class="inline-block">
                                                         <span class="title">MÔ TẢ PHẦN QUÀ</span>
-                                                        <input type="text" class="description form-control" ng-model = "$parent.presentDescriptions[present.id].description" placeholder="Nhập mô tả phần quà" />
+                                                        <input type="text" class="description form-control" ng-model = "$parent.presentDescriptions[$parent.indexInArray[present.id]].description" placeholder="Nhập mô tả phần quà" name="description" required ng-change="updateValidation(present.id, 0)"/>
+                                                    </div>
+                                                    <div>
+                                                        <span class="alert-msg" ng-show="$parent.presentDescriptions[$parent.indexInArray[present.id]].validation[0]">
+                                                            <i class="icon-remove-sign"></i>
+                                                        Vui lòng nhập mô tả
+                                                        </span>
                                                     </div>
                                                     <div class="inline-block">
                                                         <span class="title">SỐ LƯỢNG</span>
-                                                        <input type="text" class="quality form-control" ng-model="$parent.presentDescriptions[present.id].amount"/>
+                                                        <input type="text" class="quality form-control" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].amount" ng-change="updateValidation(present.id, 2)"/>
+                                                    </div>
+                                                    <div>
+                                                        <span class="alert-msg" ng-show="$parent.presentDescriptions[$parent.indexInArray[present.id]].validation[1]">
+                                                            <i class="icon-remove-sign"></i>
+                                                        Vui lòng số lượng
+                                                        </span>
+                                                        <span class="alert-msg" ng-show="$parent.presentDescriptions[$parent.indexInArray[present.id]].validation[2]">
+                                                            <i class="icon-remove-sign"></i>
+                                                        Số lượng phải là số và lớn hơn 0
+                                                        </span>
                                                     </div>
                                                     <div class="inline-block">
                                                         <label class="checkbox-inline">
-                                                          <input type="checkbox" id="inlineCheckbox1" value="option1" ng-model"$parent.presentDescriptions[present.id].noLimitedChecked"> Không giới hạn
+                                                          <input type="checkbox" id="inlineCheckbox1" value="option1" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].noLimitedChecked" ng-change="updateValidation(present.id)"> Không giới hạn
                                                         </label>
                                                     </div>
                                                 </div>
@@ -60,35 +76,45 @@
                                                     <span class="title">ĐIỀU KIỆN</span>
                                                     <div class="condition">
                                                         <span class="title">Đối tượng</span>
-                                                        <input type="text" class="form-control" placeholder="Nhập đối tượng" ng-model="$parent.presentDescriptions[present.id].target"/>
+                                                        <input type="text" class="form-control" placeholder="Nhập đối tượng" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].target" ng-change="updateValidation(present.id, 3)"/>
+                                                        <span class="alert-msg" ng-show="$parent.presentDescriptions[$parent.indexInArray[present.id]].validation[3]">
+                                                            <i class="icon-remove-sign"></i>
+                                                        Vui lòng nhập đối tượng
+                                                        </span>
                                                         <br />
                                                         <span class="title">Thời gian</span>
                                                         <label class="checkbox-inline">
-                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].monChecked"
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].monChecked" ng-change="updateValidation(present.id, 4)"
                                                             /> Thứ 2
                                                         </label>
                                                         <label class="checkbox-inline">
-                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].tueChecked"/> Thứ 3
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].tueChecked" ng-change="updateValidation(present.id, 4)"/> Thứ 3
                                                         </label>
                                                         <label class="checkbox-inline">
-                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].wedChecked"/> Thứ 4
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].wedChecked" ng-change="updateValidation(present.id, 4)"/> Thứ 4
                                                         </label>
                                                         <label class="checkbox-inline">
-                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].thuChecked"/> Thứ 5
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].thuChecked" ng-change="updateValidation(present.id, 4)"/> Thứ 5
                                                         </label>
                                                         <div class="clearfix"></div>
                                                         <label class="checkbox-inline">
-                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].friChecked"/> Thứ 6
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].friChecked" ng-change="updateValidation(present.id, 4)"/> Thứ 6
                                                         </label>
                                                         <label class="checkbox-inline">
-                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].satChecked"/> Thứ 7
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].satChecked" ng-change="updateValidation(present.id, 4)"/> Thứ 7
                                                         </label>
                                                         <label class="checkbox-inline">
-                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[present.id].sunChecked" /> Chủ nhật
+                                                          <input type="checkbox" id="inlineCheckbox1" value="1" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].sunChecked" ng-change="updateValidation(present.id, 4)"/> Chủ nhật
                                                         </label>
                                                         <label class="checkbox-inline">
-                                                          <input type="checkbox" id="inlineCheckbox1" value="option1" ng-model="$parent.presentDescriptions[present.id].allChecked" ng-change="allCheck(present.id)"/> Cả tuần
+                                                          <input type="checkbox" id="inlineCheckbox1" value="option1" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].allChecked" ng-change="allCheck(present.id)"/> Cả tuần
                                                         </label>
+
+                                                        <span class="alert-msg" ng-show="$parent.presentDescriptions[$parent.indexInArray[present.id]].validation[4]" style="margin-top: 30px">
+                                                            <i class="icon-remove-sign"></i>
+                                                        Vui lòng chọn một ngày trong tuần
+                                                        </span>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,15 +129,24 @@
                                 <div class="news-box" ng-switch-when="news">
                                     <div class="field-box">
                                         <span class="title">TÊN TIÊU ĐỀ</span>
-                                        <input class="form-control inline-block" type="text"/>
+                                        <input class="form-control inline-block" type="text" ng-model="$parent.title" ng-change="updateValidationNews(0)"/>
+
+                                        <span class="alert-msg" ng-show="$parent.validation[0]" style="margin-top: 30px">
+                                                            <i class="icon-remove-sign"></i>
+                                                        Vui lòng nhập tiêu đề
+                                                        </span>
                                     </div>
                                     <div class="field-box">
                                         <span class="title">HÌNH ẢNH</span>
                                         <input type="file" class="form-control inline-block"/>  
                                     </div>
                                     <div class="field-box">
-                                        <span class="title">TÊN TIÊU ĐỀ</span>
-                                        <textarea placeholder="Nhập nội dung" class="form-control" rows="6"></textarea>
+                                        <span class="title">NỘI DUNG</span>
+                                        <textarea placeholder="Nhập nội dung" class="form-control" rows="6" ng-model="$parent.content" ng-change="updateValidationNews(2)"></textarea>
+                                         <span class="alert-msg" ng-show="$parent.validation[2]" style="margin-top: 30px">
+                                                            <i class="icon-remove-sign"></i>
+                                                        Vui lòng nhập nội dung
+                                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -160,8 +195,8 @@
                                 <button type="button" class="btn-glow primary btn-prev" ng-click="goToStep2()"> 
                                     <i class="icon-chevron-left"></i> Prev
                                 </button>
-                                <button type="button" class="btn-glow primary btn-next" ng-click="goToStep4()">
-                                    Next <i class="icon-chevron-right"></i>
+                                <button type="button" class="btn-glow primary btn-next" ng-disabled="!isCanGoNext" ng-click="goToStep4()">
+                                    Kích hoạt <i class="icon-chevron-right"></i>
                                 </button>
                                 <button type="button" class="btn-glow success btn-finish">
                                     Trở lại trang quản lý
