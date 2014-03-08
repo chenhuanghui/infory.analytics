@@ -8,7 +8,7 @@ angular.module('account')
 .config(function($routeProvider) {
     $routeProvider
         .when('/signup', {
-            templateUrl: 'modules/account/signup.html',
+            templateUrl: 'modules/account/template/signup.html',
             controller: 'signUpCtrl'
         })
 });

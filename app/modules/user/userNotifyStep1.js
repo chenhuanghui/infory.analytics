@@ -3,7 +3,7 @@ angular.module('user')
         function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote) {
 
             var brandId = $routeParams.brandId;
-            var path = $location.path().substring(0, 23);
+
             dataFactory.getBrand(brandId, function(data) {
                 $scope.brand = data;
             }, function() {});

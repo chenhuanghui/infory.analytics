@@ -57,27 +57,27 @@ angular.module('account')
 
     $routeProvider
         .when('/inbox', {
-            templateUrl: 'modules/account/inbox.html',
+            templateUrl: 'modules/account/template/inbox.html',
             controller: 'AccountCtrl',
             access: access.user
         })
         .when('/money', {
-            templateUrl: 'modules/account/money.html',
+            templateUrl: 'modules/account/template/money.html',
             controller: 'AccountCtrl',
             access: access.user
         })
         .when('/personal', {
-            templateUrl: 'modules/account/personal.html',
+            templateUrl: 'modules/account/template/personal.html',
             controller: 'AccountCtrl',
             access: access.user
         })
         .when('/signin', {
-            templateUrl: 'modules/account/signin.html',
+            templateUrl: 'modules/account/template/signin.html',
             controller: 'AccountCtrl',
             access: access.user
         })
         .when('/signup', {
-            templateUrl: 'modules/account/signup.html',
+            templateUrl: 'modules/account/template/signup.html',
             controller: 'AccountCtrl',
             access: access.user
         })

@@ -3,20 +3,10 @@ angular.module('user')
         function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper) {
 
             var brandId = $routeParams.brandId;
-            var path = $location.path().substring(0, 23);
+
             dataFactory.getBrand(brandId, function(data) {
                 $scope.brand = data;
             }, function() {});
-
-            var intervalDate = serviceHelper.getIntervalDate();
-            $scope.data = {
-                dateDropDownInput: intervalDate.date_beg,
-                dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
-            };
-
-            $scope.onTimeSet = function(newDate, oldDate) {
-                $scope.data.dateDisplay = serviceHelper.normalizeTimeWithMinute(newDate);
-            }
 
 
             $scope.metas = remoteFactory.meta_property_types;
