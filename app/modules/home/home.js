@@ -4,6 +4,8 @@ angular.module('home')
 
     function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth, brandRemote, chartHelper, serviceHelper) {
 
+        var intervalDate = serviceHelper.getIntervalDate();
+
         $scope.brandId = $routeParams.brandId;
         if ($scope.brandId != null) {
             dataFactory.getBrand($scope.brandId, function(data) {
@@ -85,23 +87,23 @@ angular.module('home')
         }];
 
         $scope.data = [{
-            dateDropDownInput: moment("2013-10-22T00:00:00.000").toDate(),
-            dateDisplay: "22-10-2013",
+            dateDropDownInput: intervalDate.date_beg,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
         }, {
-            dateDropDownInput: moment("2014-02-22T00:00:00.000").toDate(),
-            dateDisplay: "22-02-2014",
+            dateDropDownInput: intervalDate.date_end,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
         }, {
-            dateDropDownInput: moment("2013-10-22T00:00:00.000").toDate(),
-            dateDisplay: "22-10-2013",
+            dateDropDownInput: intervalDate.date_beg,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
         }, {
-            dateDropDownInput: moment("2014-02-22T00:00:00.000").toDate(),
-            dateDisplay: "22-02-2014",
+            dateDropDownInput: intervalDate.date_end,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
         }, {
-            dateDropDownInput: moment("2013-10-22T00:00:00.000").toDate(),
-            dateDisplay: "22-10-2013",
+            dateDropDownInput: intervalDate.date_beg,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
         }, {
-            dateDropDownInput: moment("2014-02-22T00:00:00.000").toDate(),
-            dateDisplay: "22-02-2014",
+            dateDropDownInput: intervalDate.date_end,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
         }];
 
         $scope.onTimeSetOne = function(newDate, oldDate) {

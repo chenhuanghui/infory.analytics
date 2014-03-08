@@ -5,6 +5,7 @@ angular.module('brand')
 
         var brandId = $routeParams.brandId;
         dataFactory.updateBrandSideBar(brandId);
+
         $scope.gallery = null;
         $scope.usersGallery = null;
         $scope.products = null;

@@ -98,12 +98,14 @@ angular.module('smgDirectives', ['ui.date'])
                 },
                 templateUrl: 'common/template/query_record.html',
                 link: function(scope, element, attr, ctrl) {
+
+                    var intervalDate = serviceHelper.getIntervalDate();
                     scope.data = [{
-                        dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
-                        dateDisplay: "22-01-2013",
+                        dateDropDownInput: intervalDate.date_beg,
+                        dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
                     }, {
-                        dateDropDownInput: moment("2013-01-22T00:00:00.000").toDate(),
-                        dateDisplay: "22-01-2013",
+                        dateDropDownInput: intervalDate.date_end,
+                        dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
                     }];
 
                     scope.paremeters = {
