@@ -5,7 +5,14 @@ angular.module('smg.services')
             var dataStep2 = null;
             var dataStep3 = null;
             var dataStep4 = null;
+            var userList = null;
             return {
+                setCurrentResultUserFilter: function(list) {
+                    userList = list;
+                },
+                getCurrentResultUserFilter: function() {
+                    return userList;
+                },
                 getDataStep1: function() {
                     return dataStep1;
                 },

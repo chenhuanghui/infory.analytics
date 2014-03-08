@@ -35,8 +35,8 @@
                         </div>
                         <div class="right">
                             <div class="controller">
-                                <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
-                                <span class="btn-glow success"><i class="icon-bookmark-empty"></i> Lưu</span>
+                                <!-- <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
+                                <span class="btn-glow success"><i class="icon-bookmark-empty"></i> Lưu</span> -->
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                             </select>
                                         </div>
                         </div>
-                        <button ng-click="getAllFilter()" type="button" class="btn-glow primary right"><i class="icon-ok"></i> View</button>
+                        <button ng-click="getResult()" type="button" class="btn-glow primary right"><i class="icon-ok"></i> View</button>
                     </div><!-- block footer-->
                 </div><!-- block -->
                 
@@ -62,52 +62,43 @@
                         <div class="left control">
                             <span class="highlight">2</span> khách hàng được chọn / <span class="highlight">200</span> khách hàng thoả điều kiện
                         </div>
-                        <input type="text" class="search right" placeholder="Tìm kiếm..."/>
+                        <input type="text" class="search right" placeholder="Tìm kiếm..." ng-model="searchText"/>
                         <div class="fee right">
                             Chi phí: <span>40</span> T-coin
                         </div>
                     </div>
                     <div class="block_content no-padding">
                         <table class="z-table">
-                            <thead>
-                                <tr>
-                                    <th><input type="checkbox" /></th>
-                                    <th class="name">Tên</th>
-                                    <th>Tuổi</th>
-                                    <th>Giới tính</th>
-                                    <th>Vị trí</th>
-                                    <th>Lần sử dụng cuối</th>
-                                    <th>
-                                        <div class="ui-select">
-                                            <select>
-                                                <option>giờ / ngày</option>
-                                                <option>giờ / tuần</option>
-                                            </select>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="checkbox" /></td>
-                                    <td class="name">wayne rooney</td>
-                                    <td>28</td>
-                                    <td>Nam</td>
-                                    <td>Manchester United</td>
-                                    <td>12:23 PM 2/20/2014</td>
-                                    <td>1 giờ / ngày</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" /></td>
-                                    <td>wayne rooney</td>
-                                    <td>28</td>
-                                    <td>Nam</td>
-                                    <td>Manchester United</td>
-                                    <td>12:23 PM 2/20/2014</td>
-                                    <td>1 giờ / ngày</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" /></th>
+                                <th class="name">Tên</th>
+                                <th>Năm sinh</th>
+                                <th>Giới tính</th>
+                                <th>Vị trí</th>
+                                <th>Lần sử dụng cuối</th>
+                                <th>
+                                    <div class="ui-select">
+                                        <select>
+                                            <option>giờ / ngày</option>
+                                            <option>giờ / tuần</option>
+                                        </select>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="user in userList | filter:searchText">
+                            <tr>
+                                <td><input type="checkbox" /></td>
+                                <td class="name">{{user.name}}</td>
+                                <td>{{user.dob}}</td>
+                                <td>{{user.gender}}</td>
+                                <td>{{user.city}}</td>
+                                <td>{{user.last_visit}}</td>
+                                <td>Api thieu</td>
+                            </tr>
+                        </tbody>
+                    </table>
                         <!--chart here-->
                     </div>
                 </div>
@@ -120,7 +111,7 @@
                 <button type="button" class="btn-glow primary btn-prev" ng-click="goToStep1()"> 
                     <i class="icon-chevron-left"></i> Prev
                 </button>
-                <button type="button" class="btn-glow primary btn-next" data-last="Finish">
+                <button type="button" class="btn-glow primary btn-next" ng-click="goToStep3()">
                     Next <i class="icon-chevron-right"></i>
                 </button>
             </div>
