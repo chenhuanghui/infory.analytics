@@ -23,10 +23,16 @@
                 </div>
                 <div class="form-wrapper">
                     <div class="wapper">
-                        <div class="step-wapper">
+                        <form class="step-wapper" name="funnelForm">
                             <div class="field-box">
                                 <span class="title">TÊN CHUỖI HÀNH VI</span>
-                                <input type="text" class="form-control" style="width: 50%;" placeholder="Thống kê hành vi sử dụng" ng-model="nameOfChainOfBehaviours"/>
+
+                                <input type="text" class="form-control" style="width: 50%;" placeholder="Thống kê hành vi sử dụng" ng-model="nameOfChainOfBehaviours" name="nameOfFunnel" ng-change="updateValidate()"/>
+
+                                <span class="alert-msg" ng-show="validation">
+                                    <i class="icon-remove-sign"></i>
+                                    Vui lòng nhập chuỗi hành vi
+                                </span>
                             </div>
                             <div class="clearfix"></div>
                             
@@ -50,7 +56,7 @@
                                 <i class="icon-plus"></i>
                                 THÊM HÀNH VI NGƯỜI DÙNG
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -59,10 +65,10 @@
     </div>
     <div class="col-md-12 with-sidebar">
         <div class="funnel-wizard-actions wizard-actions">
-            <button type="button" class="btn-glow primary success btn-save">
+            <button type="button" class="btn-glow primary success btn-save" ng-disabled="validation" ng-click="bookmark()">
                 <i class="icon-bookmark-empty"></i>Lưu
             </button>
-            <button type="button" class="btn-glow primary btn-next" ng-click="funnel()">
+            <button type="button" class="btn-glow primary btn-next" ng-click="funnel()" ng-disabled="validation">
                 Theo dõi hành vi người dùng
             </button>
         </div>

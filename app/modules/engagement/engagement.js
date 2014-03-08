@@ -1,8 +1,8 @@
 angular.module('engagement')
 
-.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper',
+.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper', 'bookmarkRemote',
 
-    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper) {
+    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote) {
 
         var brandId = $routeParams.brandId;
 
@@ -35,6 +35,31 @@ angular.module('engagement')
         $scope.hideTypeChart = true;
 
         var fields = null;
+
+        $scope.saveFilter = function() {
+            var query = filterHelper.buildQuery($scope.subfilters);
+            fields = {
+                bookmark_name: 'user_platform',
+                brand_id: brandId,
+                event: $scope.event.name,
+                filter: JSON.stringify(query),
+                time_unit: $scope.time_unit.name
+            };
+
+            var compareToObject = null;
+            if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
+                compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
+            }
+
+            if (compareToObject != null) {
+                fields.compare_by = JSON.stringify(compareToObject);
+            }
+
+            bookmarkRemote.eventCreate(fields, function(data) {
+                console.log(data)
+            }, function() {});
+        }
+
         $scope.getResult = function() {
             var query = filterHelper.buildQuery($scope.subfilters);
             fields = {
@@ -107,8 +132,8 @@ angular.module('engagement')
     }
 ])
 
-.controller('FunnelCtrl', ['$scope', '$routeParams', '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper', 'funnelFactory',
-    function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory) {
+.controller('FunnelCtrl', ['$scope', '$routeParams', '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper', 'funnelFactory', 'bookmarkRemote',
+    function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote) {
 
         var brandId = $routeParams.brandId;
         var path = $location.path().substring(0, 14);
@@ -147,6 +172,15 @@ angular.module('engagement')
                     funnel: ''
                 };
 
+                $scope.validation = true;
+                $scope.updateValidate = function() {
+                    if ($scope.nameOfChainOfBehaviours == undefined || $scope.nameOfChainOfBehaviours == '')
+                        $scope.validation = true;
+                    else
+                        $scope.validation = false;
+
+                }
+
                 $scope.addBehaviour = function() {
                     var tempBehaviour = {
                         id: 0,
@@ -158,6 +192,29 @@ angular.module('engagement')
 
                     tempBehaviour.id = $scope.behaviours.length;
                     $scope.behaviours.push(tempBehaviour);
+                }
+
+                $scope.bookmark = function() {
+
+                    var fields = {
+                        bookmark_name: $scope.nameOfChainOfBehaviours,
+                        brand_id: brandId,
+                        time_unit: 'day',
+                        funnel: []
+                    }
+
+                    for (var i = 0; i < $scope.behaviours.length; i++) {
+                        fields.funnel.push({
+                            filter: filterHelper.buildQuery($scope.behaviours[i].subfilters),
+                            event: $scope.behaviours[i].subfilters[0].event.name
+                        });
+                    }
+
+                    fields.funnel = JSON.stringify(fields.funnel);
+
+                    bookmarkRemote.funnelCreate(fields, function(data) {
+                        console.log(data);
+                    }, function() {});
                 }
 
                 $scope.funnel = function() {
@@ -179,7 +236,6 @@ angular.module('engagement')
                     $location.path('/funnel/step2/' + brandId);
 
                 }
-
                 break;
 
             case '/funnel/step2/':
