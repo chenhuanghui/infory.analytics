@@ -34,6 +34,14 @@ angular.module('home')
                 time_unit: $scope.time_unit_4.name
             };
 
+            if ($scope.eventBookmark.compare_by != undefined) {
+                var object = JSON.parse($scope.eventBookmark.compare_by);
+                for (var o in object)
+                    $scope.compareUnit = getCompareTo({
+                        name: object[o].property
+                    });
+            }
+
             var compareToObject = null;
             if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
                 compareToObject = compareHelper.buildCompareToString($scope.compareUnit);

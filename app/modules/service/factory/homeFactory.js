@@ -36,6 +36,11 @@ angular.module('smg.services')
                         return homeData;
                     else
                         null;
+                },
+                addEventBookmark: function(id, bookmark) {
+                    if (homeData.id == id) {
+                        homeData.event_bookmarks.push(bookmark);
+                    }
                 }
             }
         }

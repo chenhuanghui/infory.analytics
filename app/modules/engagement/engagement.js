@@ -1,8 +1,8 @@
 angular.module('engagement')
 
-.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper', 'bookmarkRemote',
+.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper', 'bookmarkRemote', 'homeFactory',
 
-    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote) {
+    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote, homeFactory) {
 
         var brandId = $routeParams.brandId;
 
@@ -41,7 +41,10 @@ angular.module('engagement')
             fields.bookmark_name = 'user_age';
 
             bookmarkRemote.eventCreate(fields, function(data) {
-                console.log(data)
+                if (data.error == undefined) {
+                    homeFactory.addEventBookmark(brandId, fields);
+                }
+
             }, function() {});
         }
 
