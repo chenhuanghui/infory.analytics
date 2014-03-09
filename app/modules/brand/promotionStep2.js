@@ -47,16 +47,19 @@ angular.module('promotion')
         $scope.promotionType = promotionType.promotionType;
         $scope.checkAllShops = false;
 
-        $scope.updateSelectedShops = function() {
-            var num = 0;
-            for (var i = 0; i < $scope.brand.shops.length; i++) {
-                if ($scope.selectedShops[i] == true)
-                    num++;
-                $scope.numOfSelectedShops = num;
-            }
+        $scope.updateSelectedShops = function(isChecked) {
+            if (isChecked == true)
+                $scope.numOfSelectedShops++;
+            else
+                $scope.numOfSelectedShops--;
         }
 
-        $scope.updateSelectedShops();
+
+        $scope.numOfSelectedShops = 0;
+        for (var i = 0; i < $scope.selectedShops.length; i++) {
+            if ($scope.selectedShops[i] == true)
+                $scope.numOfSelectedShops++;
+        }
 
         function updateTime() {
             $scope.time = $scope.data[0].dateDisplay + " đến " + $scope.data[1].dateDisplay;

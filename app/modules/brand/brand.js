@@ -1,7 +1,7 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote',
-    function($scope, $http, $location, $routeParams, brandRemote, commentRemote, dataFactory, productRemote) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote',
+    function($scope, $http, $location, $routeParams, brandRemote, commentRemote, dataFactory, productRemote, shopRemote) {
 
         var brandId = $routeParams.brandId;
         dataFactory.updateBrandSideBar(brandId);
@@ -360,6 +360,26 @@ angular.module('brand')
             }, function() {});
         };
 
+        $scope.addShop = function(name) {
+            shopRemote.create({
+                shop_name: name,
+                brand_id: brandId
+            }, function(data) {
+
+                console.log(data);
+                if (data.error == undefined) {
+                    var shop = {
+                        id: data.shop_id,
+                        name: name
+                    };
+
+                    $scope.brand.shops.push(shop);
+                    dataFactory.setCurrentBrand($scope.brand);
+                    goToShopInfo(shop);
+                }
+
+            }, function() {})
+        }
         $scope.$watch('brand', function() {
             if ($scope.brand != null) {
                 dataFactory.updateBrandHeader($scope.brand);

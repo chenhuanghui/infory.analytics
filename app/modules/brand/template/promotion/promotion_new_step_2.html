@@ -83,7 +83,7 @@
 
                                             <tbody  ng-repeat="shop in brand.shops | filter:searchText">
                                                 <tr>
-                                                    <td><input type="checkbox" ng-model="$parent.selectedShops[shop.selectedId]" ng-change="updateSelectedShops()"></td>
+                                                    <td><input type="checkbox" ng-model="$parent.selectedShops[shop.selectedId]" ng-change="updateSelectedShops($parent.selectedShops[shop.selectedId])"></td>
                                                     <td class="name">{{shop.name}}</td>
                                                     <td>{{shop.full_address}}</td>
                                                 </tr>

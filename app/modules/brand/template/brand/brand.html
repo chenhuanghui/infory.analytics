@@ -25,8 +25,8 @@
                     </div>
                 </div> <!-- brand info-->
                     <div id="add_shop">
-                        <input class="shop_name form-control" type="text" placeholder="Nhập tên cửa hàng">    
-                        <a class="btn-flat success icon-plus">Thêm cửa hàng mới</a>
+                        <input class="shop_name form-control" type="text" placeholder="Nhập tên cửa hàng" ng-model="newShopName">    
+                        <a class="btn-flat success icon-plus" ng-click="addShop(newShopName)">Thêm cửa hàng mới</a>
                     </div>       
 
                     <ul id="shop_list">

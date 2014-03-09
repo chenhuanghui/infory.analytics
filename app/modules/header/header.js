@@ -5,7 +5,7 @@ angular.module('header')
     function($scope, $location, dataFactory, Auth, brandRemote) {
 
         $scope._username = Auth.user.name;
-        $scope.newBrandName = 'Brand name';
+        //$scope.newBrandName = 'Brand name';
 
         $scope.updateBrand = function(brand) {
             $scope.brand = brand;
@@ -41,9 +41,7 @@ angular.module('header')
                     });
 
                     $('.z-btn .pop-dialog .close-icon').click();
-                    $location.path('/brand/infor/' + $scope.brand.id);
-
-                    $scope.newBrandName = 'New brand';
+                    $location.path('/brand/infor/' + data.brand_id);
                 }
             }, function() {});
         }

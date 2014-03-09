@@ -14,8 +14,9 @@ angular.module('user')
             $scope.events = remoteFactory.meta_profile;
             $scope.metadata = remoteFactory.meta_lists;
             $scope.subfilters = [];
-
+            $scope.all = false;
             $scope.userList = userNotifyFactory.getCurrentResultUserFilter();
+            $scope.numOfSelectedUsers = 0;
 
             $scope.getResult = function() {
                 var query = filterHelper.buildQuery($scope.subfilters);
@@ -31,10 +32,13 @@ angular.module('user')
                 userRemote.filter(fields, function(data) {
                     if (data.error == undefined) {
                         $scope.userList = data.data;
+                        $scope.isChecked = [];
 
                         for (var i = 0; i < $scope.userList.length; i++) {
 
                             var user = $scope.userList[i];
+                            user.stt = i;
+
                             if (user.email == null)
                                 user.email = "Không xác định";
 
@@ -50,12 +54,34 @@ angular.module('user')
                                 user.dob = new Date(user.dob).getFullYear();
                             else
                                 user.dob = "Không xác định";
+
+                            $scope.isChecked.push(false);
+
                         }
 
                         userNotifyFactory.setCurrentResultUserFilter($scope.userList);
                     }
 
                 }, function() {});
+            }
+
+            $scope.updateSelectedUsers = function(isChecked) {
+                if (isChecked)
+                    $scope.numOfSelectedUsers++;
+                else
+                    $scope.numOfSelectedUsers--;
+            }
+
+            $scope.checkAll = function() {
+                var isChecked = $scope.all;
+
+                for (var i = 0; i < $scope.isChecked.length; i++)
+                    $scope.isChecked[i] = isChecked;
+
+                if (isChecked)
+                    $scope.numOfSelectedUsers = $scope.isChecked.length;
+                else
+                    $scope.numOfSelectedUsers = 0;
             }
 
             $scope.goToStep3 = function() {
