@@ -118,7 +118,7 @@ angular.module('brand')
                     if (data.error == undefined) {
                         $scope.brand.name = $scope.bundle.brandName;
                         $scope.bundle.editName = !$scope.bundle.editName;
-                        dataFactory.setCurrentBrand($scope.brand);
+                        updateBrand($scope.brand);
                     } else {
                         $scope.bundle.editName = !$scope.bundle.editName;
                         $scope.bundle.brandName = $scope.brand.name;
@@ -140,7 +140,7 @@ angular.module('brand')
                     if (data.error == undefined) {
                         $scope.brand.description = $scope.bundle.brandDescription;
                         $scope.bundle.editDescription = !$scope.bundle.editDescription;
-                        dataFactory.setCurrentBrand($scope.brand);
+                        updateBrand($scope.brand);
                     } else {
                         $scope.bundle.editDescription = !$scope.bundle.editDescription;
                         $scope.bundle.brandDescription = $scope.brand.description;
@@ -162,7 +162,7 @@ angular.module('brand')
                     if (data.error == undefined) {
                         $scope.brand.website = $scope.bundle.brandWebsite;
                         $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
-                        dataFactory.setCurrentBrand($scope.brand);
+                        updateBrand($scope.brand);
                     } else {
                         $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
                         $scope.bundle.brandWebsite = $scope.brand.website;
@@ -184,7 +184,7 @@ angular.module('brand')
                     if (data.error == undefined) {
                         $scope.brand.fanpage = $scope.bundle.brandFanpage;
                         $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
-                        dataFactory.setCurrentBrand($scope.brand);
+                        updateBrand($scope.brand);
                     } else {
                         $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
                         $scope.bundle.brandFanpage = $scope.brand.fanpage;
@@ -203,6 +203,7 @@ angular.module('brand')
                     for (var i = $scope.shop.comments.length - 1; i >= 0; i--) {
                         if ($scope.shop.comments[i].id == id) {
                             $scope.shop.comments.splice(i, 1);
+                            updateShop($scope.shop);
                             return;
                         }
                     }
@@ -230,6 +231,7 @@ angular.module('brand')
                         data.timeDisplay = (h <= 9 ? '0' + h : h) + ' : ' + (min <= 9 ? '0' + min : min);
                         $scope.shop.comments.unshift(data);
                         $scope.commentInput = '';
+                        updateShop($scope.shop);
                     });
                 }
             });
@@ -289,6 +291,7 @@ angular.module('brand')
                             for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
                                 if ($scope.brand.categories[i].products[j].id == productId) {
                                     $scope.brand.categories[i].products[j].name = name;
+                                    updateBrand($scope.brand);
                                     return;
                                 }
                             }
@@ -312,6 +315,7 @@ angular.module('brand')
                             for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
                                 if ($scope.brand.categories[i].products[j].id == productId) {
                                     $scope.brand.categories[i].products[j].full_description = description;
+                                    updateBrand($scope.brand);
                                     return;
                                 }
                             }
@@ -350,7 +354,7 @@ angular.module('brand')
                     }
 
 
-                    dataFactory.setCurrentBrand($scope.brand);
+                    updateBrand($scope.brand);
                 }
 
                 $scope.productTemp = {
@@ -370,12 +374,13 @@ angular.module('brand')
                 if (data.error == undefined) {
                     var shop = {
                         id: data.shop_id,
-                        name: name
+                        name: name,
+                        comments: []
                     };
 
                     $scope.brand.shops.push(shop);
-                    dataFactory.setCurrentBrand($scope.brand);
-                    goToShopInfo(shop);
+                    updateBrand($scope.brand);
+                    $scope.goToShopInfo(shop);
                 }
 
             }, function() {})
@@ -392,6 +397,28 @@ angular.module('brand')
             if ($scope.brands != null)
                 dataFactory.updateBrandsHeader($scope.brands);
         });
+
+        function updateBrand(brand) {
+            for (var i = 0; i < $scope.brands.length; i++) {
+                if (brand.id == $scope.brands[i].id) {
+                    $scope.brands[i] = brand;
+                    $scope.brand = brand;
+                    dataFactory.setCurrentBrand($scope.brand);
+                    dataFactory.setCurrentBrands($scope.brands);
+                }
+            }
+        }
+
+        function updateShop(shop) {
+            for (var i = 0; j < $scope.brand.shops.length; i++) {
+                if ($scope.brand.shops[i].id == shop.id) {
+                    $scope.brand.shops[i] = shop;
+                    updateBrand($scope.brand);
+                    return;
+                }
+            }
+
+        }
     }
 ])
 

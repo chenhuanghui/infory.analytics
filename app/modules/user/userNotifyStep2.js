@@ -17,6 +17,9 @@ angular.module('user')
             $scope.all = false;
             $scope.userList = userNotifyFactory.getCurrentResultUserFilter();
             $scope.numOfSelectedUsers = 0;
+            $scope.isChecked = [];
+
+            function saveInfor() {}
 
             $scope.getResult = function() {
                 var query = filterHelper.buildQuery($scope.subfilters);

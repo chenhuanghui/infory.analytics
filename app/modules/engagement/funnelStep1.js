@@ -18,7 +18,7 @@ angular.module('engagement')
             $scope.metadata = remoteFactory.meta_lists;
 
 
-            funnelFactory.setDataStep1(null);
+            funnelFactory.setData(0, null);
             $scope.subfilters = null;
 
             $scope.nameOfChainOfBehaviours = '';
@@ -98,7 +98,7 @@ angular.module('engagement')
                 }
 
                 fields.funnel = JSON.stringify(fields.funnel);
-                funnelFactory.setDataStep1(fields);
+                funnelFactory.setData(0, fields);
                 $location.path('/funnel/step2/' + brandId);
 
             }

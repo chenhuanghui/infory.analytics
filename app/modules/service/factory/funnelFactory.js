@@ -1,14 +1,15 @@
 angular.module('smg.services')
     .factory('funnelFactory', ['$http',
         function($http) {
-            var dataStep1 = null;
+            var data = [null, null];
+
             return {
-                getDataStep1: function() {
-                    return dataStep1;
+                setData: function(id, newData) {
+                    data[id] = newData;
                 },
-                setDataStep1: function(data) {
-                    dataStep1 = data;
-                }
+                getData: function(id) {
+                    return data[id];
+                },
             }
         }
     ])

@@ -134,14 +134,14 @@
                 <chart value='dataChart[2]' height="400"></chart>
             </div>
         </div>
-        <div class="home-title-2">
+        <div class="home-title-2" ng-hide="!isHasBookmark">
             <span >Biểu đồ của bạn</span>
             <span class="btn-flat success right home-watch-chart" id="reply-button">XEM BIỂU ĐỒ</span>
              <div class="iu-select right ">
                  <select class="type_menu pull-right" ng-model="eventBookmark" ng-options="eventBookmark as eventBookmark.bookmark_name for eventBookmark in eventBookmarks" ng-change="updateEventBookmark(true)" style="height: 31px;margin-top: 11px;"></select>
             </div>
         </div>
-        <div class="block">
+        <div class="block" ng-hide="!isHasBookmark">
             <div class="block_header">
                 <span>
                     <div class="dropdown left" >

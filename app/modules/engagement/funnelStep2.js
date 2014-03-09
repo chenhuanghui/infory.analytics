@@ -18,7 +18,7 @@ angular.module('engagement')
             $scope.metadata = remoteFactory.meta_lists;
 
 
-            var fields = funnelFactory.getDataStep1();
+            var fields = funnelFactory.getData(0);
 
             if (fields == null) {
                 $location.path('/funnel/step1/' + brandId);
@@ -54,7 +54,7 @@ angular.module('engagement')
             };
 
             function updateChart(fields) {
-                funnelFactory.setDataStep1(fields);
+                funnelFactory.setData(0, fields);
 
                 funnelRemote.get(fields, function(data) {
                     var values = [];

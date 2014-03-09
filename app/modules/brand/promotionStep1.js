@@ -24,7 +24,7 @@ angular.module('promotion')
 
 
 
-        var promotionType = promotionFactory.getDataStep1();
+        var promotionType = promotionFactory.getData(0);
 
         if (promotionType != null) {
             for (var i = 0; i < $scope.promotionTypes.length; i++)
@@ -34,7 +34,7 @@ angular.module('promotion')
             $scope.promotionType = $scope.promotionTypes[0];
 
         $scope.goToStep2 = function() {
-            promotionFactory.setDataStep1({
+            promotionFactory.setData(0, {
                 promotionType: $scope.promotionType
             });
             $location.path('/brand/promotion/step2/' + brandId);

@@ -11,7 +11,7 @@ angular.module('promotion')
 
         $scope.selectedShops = [];
 
-        var step2Data = promotionFactory.getDataStep2();
+        var step2Data = promotionFactory.getData(1);
         if (step2Data == null) {
             $location.path('/brand/promotion/step2/' + brandId);
             return;
@@ -19,7 +19,7 @@ angular.module('promotion')
 
         $scope.isCanGoNext = false;
 
-        var step3Data = promotionFactory.getDataStep3();
+        var step3Data = promotionFactory.getData(2);
         $scope.promotionType = step2Data.promotionType;
 
         switch ($scope.promotionType.name) {
@@ -191,7 +191,7 @@ angular.module('promotion')
                 }
 
                 function saveInforTypeOne() {
-                    promotionFactory.setDataStep3({
+                    promotionFactory.setData(2, {
                         presentDescriptions: $scope.presentDescriptions,
                         isCanGoNext: $scope.isCanGoNext,
                         promotionType: $scope.promotionType,
@@ -238,7 +238,7 @@ angular.module('promotion')
                 }
 
                 function saveInforTypeTwo() {
-                    promotionFactory.setDataStep3({
+                    promotionFactory.setData(2, {
                         validation: $scope.validation,
                         isCanGoNext: $scope.isCanGoNext,
                         promotionType: $scope.promotionType,

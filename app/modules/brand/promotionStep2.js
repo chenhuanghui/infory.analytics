@@ -29,14 +29,14 @@ angular.module('promotion')
         updateTime();
 
 
-        var promotionType = promotionFactory.getDataStep1();
+        var promotionType = promotionFactory.getData(0);
 
         if (promotionType == null) {
             $location.path('/brand/promotion/step1/' + brandId);
             return;
         }
 
-        var data = promotionFactory.getDataStep2();
+        var data = promotionFactory.getData(1);
         if (data != null) {
             $scope.name = data.name;
             $scope.data[0] = data.date_beg;
@@ -53,7 +53,6 @@ angular.module('promotion')
             else
                 $scope.numOfSelectedShops--;
         }
-
 
         $scope.numOfSelectedShops = 0;
         for (var i = 0; i < $scope.selectedShops.length; i++) {
@@ -86,7 +85,7 @@ angular.module('promotion')
         }
 
         $scope.goToStep3 = function() {
-            promotionFactory.setDataStep2({
+            promotionFactory.setData(1, {
                 promotionType: $scope.promotionType,
                 selectedShops: $scope.selectedShops,
                 shops: $scope.brand.shops,
@@ -99,7 +98,7 @@ angular.module('promotion')
         }
 
         $scope.goToStep1 = function() {
-            promotionFactory.setDataStep2({
+            promotionFactory.setData(1, {
                 promotionType: $scope.promotionType,
                 selectedShops: $scope.selectedShops,
                 shops: $scope.brand.shops,

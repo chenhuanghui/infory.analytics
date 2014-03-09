@@ -28,12 +28,12 @@ angular.module('promotion')
             name_display: 'Voucher'
         }];
 
-        var dataStep3 = promotionFactory.getDataStep3();
+        var dataStep3 = promotionFactory.getData(2);
         if (dataStep3 == null) {
             listPromotion();
             return;
         } else {
-            var dataStep2 = promotionFactory.getDataStep2();
+            var dataStep2 = promotionFactory.getData(1);
             var shops_apply = [];
 
             for (var i = 0; i < dataStep2.selectedShops.length; i++) {

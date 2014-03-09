@@ -199,6 +199,9 @@ angular.module('smg.services')
                         }, error);
                     }
                 },
+                setCurrentBrands: function(brands) {
+                    brands = brands;
+                },
                 getBrand: function(id, success, error) {
                     if (currentBrand != null && currentBrand.id == id) {
                         success(currentBrand);

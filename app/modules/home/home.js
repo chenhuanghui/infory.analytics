@@ -27,6 +27,9 @@ angular.module('home')
             if (isNeedUpdateEvent)
                 updateEvent();
 
+            if ($scope.eventBookmark == null)
+                return;
+
             fields[3] = {
                 brand_id: $scope.brandId,
                 event: $scope.eventBookmark.event,
@@ -57,70 +60,82 @@ angular.module('home')
         $scope.updateHome = function(brandId) {
             $scope.brandId = brandId;
             brandRemote.getHome({
-                brand_id: brandId
-            }, function(data) {
+                    brand_id: brandId
+                }, function(data) {
 
-                var oldData = homeFactory.getHomeData(brandId);
-                if (oldData == null) {
-                    $scope.brandInfo = data;
-                    $scope.time_unit_1 = $scope.time_units[0];
-                    $scope.time_unit_2 = $scope.time_units[0];
-                    $scope.time_unit_3 = $scope.time_units[0];
-                    $scope.time_unit_4 = $scope.time_units[0];
+                    var oldData = homeFactory.getHomeData(brandId);
+                    if (oldData == null) {
+                        $scope.brandInfo = data;
+                        $scope.time_unit_1 = $scope.time_units[0];
+                        $scope.time_unit_2 = $scope.time_units[0];
+                        $scope.time_unit_3 = $scope.time_units[0];
+                        $scope.time_unit_4 = $scope.time_units[0];
 
-                    fields[0] = {
-                        brand_id: $scope.brandId,
-                        time_unit: $scope.time_unit_1.name,
-                        date_beg: $scope.data[0].dateDropDownInput,
-                        date_end: $scope.data[1].dateDropDownInput
-                    };
+                        fields[0] = {
+                            brand_id: $scope.brandId,
+                            time_unit: $scope.time_unit_1.name,
+                            date_beg: $scope.data[0].dateDropDownInput,
+                            date_end: $scope.data[1].dateDropDownInput
+                        };
 
-                    fields[1] = {
-                        brand_id: $scope.brandId,
-                        time_unit: $scope.time_unit_2.name,
-                        date_beg: $scope.data[2].dateDropDownInput,
-                        date_end: $scope.data[3].dateDropDownInput
-                    };
+                        fields[1] = {
+                            brand_id: $scope.brandId,
+                            time_unit: $scope.time_unit_2.name,
+                            date_beg: $scope.data[2].dateDropDownInput,
+                            date_end: $scope.data[3].dateDropDownInput
+                        };
 
 
-                    fields[2] = {
-                        brand_id: $scope.brandId,
-                        time_unit: $scope.time_unit_3.name,
-                        date_beg: $scope.data[4].dateDropDownInput,
-                        date_end: $scope.data[5].dateDropDownInput
-                    };
+                        fields[2] = {
+                            brand_id: $scope.brandId,
+                            time_unit: $scope.time_unit_3.name,
+                            date_beg: $scope.data[4].dateDropDownInput,
+                            date_end: $scope.data[5].dateDropDownInput
+                        };
 
-                    updateChart(fields[0], 0);
-                    updateChart(fields[1], 1);
-                    updateChart(fields[2], 2);
+                        updateChart(fields[0], 0);
+                        updateChart(fields[1], 1);
+                        updateChart(fields[2], 2);
 
-                    dataFactory.getBookmarks(brandId, function(data) {
-                        $scope.eventBookmarks = data.bookmarks.event_bookmarks;
-                        $scope.eventBookmark = data.bookmarks.event_bookmarks[0];
-                        $scope.updateEventBookmark(true);
+                        dataFactory.getBookmarks(brandId, function(data) {
+                                $scope.eventBookmarks = data.bookmarks.event_bookmarks;
+                                if ($scope.eventBookmarks.length > 0) {
+                                    $scope.eventBookmark = data.bookmarks.event_bookmarks[0];
+                                    $scope.isHasBookmark = true;
+                                } else {
+                                    $scope.eventBookmark = null;
+                                    $scope.isHasBookmark = false;
+                                }
 
-                    }, function() {});
+                                $scope.updateEventBookmark(true);
 
-                } else {
-                    fields = oldData.fields;
-                    $scope.dataChart = oldData.data_chart;
-                    $scope.eventBookmarks = oldData.event_bookmarks;
-                    $scope.eventBookmark = oldData.event_bookmark;
-                    $scope.data = oldData.data;
+                            },
+                            function() {});
 
-                    $scope.time_unit_1 = getTimeUnit(oldData.time_unit_1);
-                    $scope.time_unit_2 = getTimeUnit(oldData.time_unit_2);
-                    $scope.time_unit_3 = getTimeUnit(oldData.time_unit_3);
-                    $scope.time_unit_4 = getTimeUnit(oldData.time_unit_4);
+                    } else {
+                        fields = oldData.fields;
+                        $scope.dataChart = oldData.data_chart;
+                        $scope.eventBookmarks = oldData.event_bookmarks;
+                        $scope.eventBookmark = oldData.event_bookmark;
+                        $scope.data = oldData.data;
 
-                    updateEvent();
-                    $scope.compareUnit = getCompareTo(oldData.compare_unit);
-                }
+                        $scope.time_unit_1 = getTimeUnit(oldData.time_unit_1);
+                        $scope.time_unit_2 = getTimeUnit(oldData.time_unit_2);
+                        $scope.time_unit_3 = getTimeUnit(oldData.time_unit_3);
+                        $scope.time_unit_4 = getTimeUnit(oldData.time_unit_4);
 
-            }, function() {});
+                        updateEvent();
+                        $scope.compareUnit = getCompareTo(oldData.compare_unit);
+                        $scope.isHasBookmark = oldData.is_has_bookmark;
+                    }
+
+                },
+                function() {});
         };
 
         function updateEvent() {
+            if ($scope.eventBookmark == null)
+                return;
             for (var i = 0; i < events.length; i++) {
                 if (events[i].name == $scope.eventBookmark.event) {
                     $scope.event = events[i];
@@ -173,10 +188,20 @@ angular.module('home')
                     break;
             }
 
-            homeFactory.setHomeData($scope.brandId, fields, $scope.eventBookmarks,
-                $scope.eventBookmark, $scope.dataChart, $scope.data,
-                $scope.time_unit_1, $scope.time_unit_2, $scope.time_unit_3,
-                $scope.time_unit_4, $scope.compareUnit);
+            homeFactory.setHomeData({
+                id: $scope.brandId,
+                fields: fields,
+                event_bookmarks: $scope.eventBookmarks,
+                event_bookmark: $scope.eventBookmark,
+                data_chart: $scope.dataChart,
+                data: $scope.data,
+                time_unit_1: $scope.time_unit_1,
+                time_unit_2: $scope.time_unit_2,
+                time_unit_3: $scope.time_unit_3,
+                time_unit_4: $scope.time_unit_4,
+                compare_unit: $scope.compareUnit,
+                is_has_bookmark: $scope.isHasBookmark
+            });
         }
 
         $scope.updateBrand = function(brand) {

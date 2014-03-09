@@ -9,7 +9,7 @@ angular.module('user')
             }, function() {});
 
 
-            var oldData = userNotifyFactory.getDataStep1();
+            var oldData = userNotifyFactory.getData(1);
 
             $scope.notifyTypes = [{
                 id: 0,
@@ -114,7 +114,7 @@ angular.module('user')
             }
 
             $scope.goToStep2 = function() {
-                userNotifyFactory.setDataStep1({
+                userNotifyFactory.setData(1, {
                     isCanGo: $scope.isCanGo,
                     isOk: $scope.isOk,
                     validation: $scope.validation,
