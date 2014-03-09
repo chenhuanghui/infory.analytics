@@ -63,12 +63,12 @@ angular.module('promotion')
         }
 
         $scope.onTimeSetOne = function(newDate, oldDate) {
-            $scope.data[0].dateDisplay = serviceHelper.normalizeTimeWithMinute(newDate);
+            $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
             updateTime();
         }
 
         $scope.onTimeSetTwo = function(newDate, oldDate) {
-            $scope.data[1].dateDisplay = serviceHelper.normalizeTimeWithMinute(newDate);
+            $scope.data[1].dateDisplay = serviceHelper.normalizeTime(newDate);
             updateTime();
         }
 

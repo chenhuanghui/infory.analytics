@@ -25,87 +25,146 @@ angular.module('promotion')
             name_display: 'Voucher'
         }];
 
-        // var dataStep3 = promotionFactory.getDataStep3();
-        // var dataStep2 = promotionFactory.getDataStep2();
-        // var shops_apply = [];
+        var dataStep3 = promotionFactory.getDataStep3();
+        if (dataStep3 == null) {
+            listPromotion();
+            return;
+        } else {
+            var dataStep2 = promotionFactory.getDataStep2();
+            var shops_apply = [];
 
-        // for (var i = 0; i < dataStep2.selectedShops.length; i++) {
-        //     if (dataStep2.selectedShops[i] == true) {
-        //         shops_apply.push(dataStep2.shops[i].id);
-        //     }
-        // }
+            for (var i = 0; i < dataStep2.selectedShops.length; i++) {
+                if (dataStep2.selectedShops[i] == true) {
+                    shops_apply.push(dataStep2.shops[i].id);
+                }
+            }
 
-        // var fields = {
-        //     name: dataStep2.name,
-        //     brand_id: brandId,
-        //     shops_apply: JSON.stringify(shops_apply),
-        //     // date_beg: serviceHelper.normalizeTime(dataStep2.date_beg),
-        //     // date_end: serviceHelper.normalizeTime(dataStep2.date_end),
-        //     type: dataStep3.promotionType.name,
-        // }
+            var fields = {
+                name: dataStep2.name,
+                brand_id: brandId,
+                shops_apply: JSON.stringify(shops_apply),
+                date_beg: serviceHelper.normalizeTime(dataStep2.date_beg.dateDropDownInput),
+                date_end: serviceHelper.normalizeTime(dataStep2.date_end.dateDropDownInput),
+                type: dataStep3.promotionType.name,
+                requirement: ''
+            }
 
-        // if (dataStep3 == null) {
-        //     $location.path('/brand/promotion/step3/' + brandId);
-        //     return;
-        // }
-
-        $scope.sortPromotionList = function() {
-            $scope.promotionList = [];
-            switch ($scope.orderPromotion.name) {
-                case '':
-                    $scope.promotionList = $scope.promotionListFull;
+            switch (dataStep3.promotionType.name) {
+                case 'news':
+                    fields.title = dataStep3.title;
                     break;
+                case 'voucher':
+                    var vouchers = [];
 
-                default:
-                    sortByType($scope.orderPromotion.name);
+
+                    for (var i = 0; i < dataStep3.presentDescriptions.length; i++) {
+                        var description = dataStep3.presentDescriptions[i];
+                        if (description.nonoLimitedChecked == true)
+                            description.amount = 0;
+
+                        var available_days = [];
+
+                        if (description.allChecked == true)
+                            available_day = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+                        else {
+                            if (description.monChecked == true)
+                                available_days.push("mon");
+                            if (description.tueChecked == true)
+                                available_days.push("tue");
+                            if (description.wedChecked == true)
+                                available_days.push("wed");
+                            if (description.thuChecked == true)
+                                available_days.push("thu");
+                            if (description.friChecked == true)
+                                available_days.push("fri");
+                            if (description.satChecked == true)
+                                available_days.push("sat");
+                            if (description.sunChecked == true)
+                                available_days.push("sun");
+                        }
+
+                        vouchers.push({
+                            description: description.description,
+                            total: description.amount,
+                            voucher_number: (i + 1).toString(),
+                            requirement: description.target,
+                            available_time: '7:30-15:30',
+                            available_days: available_days,
+                        });
+                    }
+
+                    fields.vouchers = JSON.stringify(vouchers);
+                    break;
+                case 'score':
+                    break;
             }
-        }
 
+            promotionRemote.create(fields, function(data) {
+                if (data.error == undefined) {
+                    listPromotion();
+                }
+            }, function() {});
 
-        function sortByType(type) {
-            for (var i = 0; i < $scope.promotionListFull.length; i++) {
-                if ($scope.promotionListFull[i].type == type)
-                    $scope.promotionList.push($scope.promotionListFull[i]);
-            }
-        }
+            function listPromotion() {
+                $scope.sortPromotionList = function() {
+                    $scope.promotionList = [];
+                    switch ($scope.orderPromotion.name) {
+                        case '':
+                            $scope.promotionList = $scope.promotionListFull;
+                            break;
 
-        var fields = '["id, "type", "name", "status"]';
-        promotionRemote.list({
-            brand_id: brandId,
-            fields: fields
-        }, function(data) {
-            for (var i = 0; i < data.length; i++) {
-                switch (data[i].type) {
-                    case 'voucher':
-                        data[i].typeDisplay = 'Voucher';
-                        break;
-                    case 'news':
-                        data[i].typeDisplay = 'Đăng tin';
-                        break;
-                    case 'score':
-                        data[i].typeDisplay = 'Tích luỹ điểm';
-                        break;
+                        default:
+                            sortByType($scope.orderPromotion.name);
+                    }
                 }
 
-                data[i].stt = (i % 2 == 0) ? 'even' : 'odd';
 
-                switch (data[i].status) {
-                    case 'running':
-                        data[i].statusClass = 'btn-flat success';
-                        break;
-                    case 'waiting':
-                        data[i].statusClass = 'btn-flat gray';
-                        break;
-                    case 'stopped':
-                        data[i].statusClass = 'btn-flat inverse';
-                        break;
+                function sortByType(type) {
+                    for (var i = 0; i < $scope.promotionListFull.length; i++) {
+                        if ($scope.promotionListFull[i].type == type)
+                            $scope.promotionList.push($scope.promotionListFull[i]);
+                    }
                 }
-                data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg)) + " đến " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end));
+
+                var fields = '["id, "type", "name", "status"]';
+                promotionRemote.list({
+                    brand_id: brandId,
+                    fields: fields
+                }, function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        switch (data[i].type) {
+                            case 'voucher':
+                                data[i].typeDisplay = 'Voucher';
+                                break;
+                            case 'news':
+                                data[i].typeDisplay = 'Đăng tin';
+                                break;
+                            case 'score':
+                                data[i].typeDisplay = 'Tích luỹ điểm';
+                                break;
+                        }
+
+                        data[i].stt = (i % 2 == 0) ? 'even' : 'odd';
+
+                        switch (data[i].status) {
+                            case 'running':
+                                data[i].statusClass = 'btn-flat success';
+                                break;
+                            case 'waiting':
+                                data[i].statusClass = 'btn-flat gray';
+                                break;
+                            case 'stopped':
+                                data[i].statusClass = 'btn-flat inverse';
+                                break;
+                        }
+                        data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg)) + " đến " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end));
+                    }
+
+                    $scope.promotionList = data;
+                    $scope.promotionListFull = data;
+                }, function() {});
             }
-
-            $scope.promotionList = data;
-            $scope.promotionListFull = data;
-        }, function() {});
-
+        }
     }
+
 ])

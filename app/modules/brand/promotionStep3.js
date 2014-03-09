@@ -203,11 +203,11 @@ angular.module('promotion')
 
             case 'news':
                 $scope.validation = [true, false, true];
-                $scope.isCanGo = false;
+                $scope.isCanGoNext = false;
 
                 if (step3Data != null && step3Data.validation != undefined) {
                     $scope.validation = step3Data.validation;
-                    $scope.isCanGo = step3Data.isCanGo;
+                    $scope.isCanGoNext = step3Data.isCanGoNext;
                     $scope.promotionType = step3Data.promotionType;
                     $scope.content = step3Data.content;
                     $scope.title = step3Data.title;
@@ -232,9 +232,9 @@ angular.module('promotion')
                     }
 
                     if (!$scope.validation[2] && !$scope.validation[0])
-                        $scope.isCanGo = true;
+                        $scope.isCanGoNext = true;
                     else
-                        $scope.isCanGo = false;
+                        $scope.isCanGoNext = false;
                 }
 
                 function saveInforTypeTwo() {
