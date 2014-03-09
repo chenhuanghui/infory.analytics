@@ -21,6 +21,9 @@ angular.module('smg.services')
                 getHome: function(fields, success, error) {
                     $http.post(base_url + 'get_home', fields).success(success).error(error);
                 },
+                getDevelopmentChart: function(fields, success, error) {
+                    $http.post(base_url + 'get_development_chart', fields).success(success).error(error);
+                },
                 getCostChart: function(fields, success, error) {
                     $http.post(base_url + 'get_cost_chart', fields).success(success).error(error);
                 },

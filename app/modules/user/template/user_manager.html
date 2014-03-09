@@ -13,16 +13,15 @@
             </div>
             
             <div class="block">
-               <!--  <div class="block_header">
-                    <div class="left control">
+                <div class="block_header">
+                    <!-- <div class="left control">
                         Thống kê lượt 
                         <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
                         theo thời gian
-                    </div>
+                    </div> -->
 
-                    <span class="btn-flat success icon-bookmark-empty right">Lưu</span>
-
-                </div> -->
+                    <span class="btn-flat success icon-bookmark-empty right" ng-click="bookmark()">Lưu</span>
+                </div>
                 <div class="block_content">
                     <p class="notify">Danh sách khách hàng thoả điều kiện</p>
                     <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>

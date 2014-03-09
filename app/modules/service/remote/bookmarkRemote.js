@@ -9,6 +9,9 @@ angular.module('smg.services')
                 eventCreate: function(fields, success, error) {
                     $http.post(base_url + 'event/create', fields).success(success).error(error);
                 },
+                profileCreate: function(fields, success, error) {
+                    $http.post(base_url + 'profiles/create', fields).success(success).error(error);
+                },
 
             }
         }

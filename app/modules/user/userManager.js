@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserManagerCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote',
-        function($scope, $routeParams, dataFactory, remoteFactory, filterHelper, userRemote) {
+    .controller('UserManagerCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote',
+        function($scope, $routeParams, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote) {
             var brandId = $routeParams.brandId;
 
             $scope.metas = remoteFactory.meta_property_types;
@@ -11,7 +11,20 @@ angular.module('user')
             $scope.subfilters = null;
             $scope.userList = dataFactory.getCurrentResultUserFilter();
 
-            $scope.getResult = function() {
+            $scope.bookmark = function() {
+                var query = buildQuery();
+                var fields = {
+                    bookmark_name: 'user profile',
+                    brand_id: brandId,
+                    filter: query.filter
+                }
+
+                bookmarkRemote.profileCreate(fields, function(data) {
+                    console.log(data);
+                }, function() {});
+            }
+
+            function buildQuery() {
                 var query = filterHelper.buildQuery($scope.subfilters);
 
                 var fields = {
@@ -21,8 +34,11 @@ angular.module('user')
                     page: 0,
                     page_size: 10000
                 };
+                return fields;
+            }
 
-                userRemote.filter(fields, function(data) {
+            $scope.getResult = function() {
+                userRemote.filter(buildQuery(), function(data) {
                     if (data.error == undefined) {
                         $scope.userList = data.data;
 

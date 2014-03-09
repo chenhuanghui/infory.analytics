@@ -37,30 +37,15 @@ angular.module('engagement')
         var fields = null;
 
         $scope.saveFilter = function() {
-            var query = filterHelper.buildQuery($scope.subfilters);
-            fields = {
-                bookmark_name: 'user_platform',
-                brand_id: brandId,
-                event: $scope.event.name,
-                filter: JSON.stringify(query),
-                time_unit: $scope.time_unit.name
-            };
-
-            var compareToObject = null;
-            if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
-                compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
-            }
-
-            if (compareToObject != null) {
-                fields.compare_by = JSON.stringify(compareToObject);
-            }
+            buildQuery();
+            fields.bookmark_name = 'user_age';
 
             bookmarkRemote.eventCreate(fields, function(data) {
                 console.log(data)
             }, function() {});
         }
 
-        $scope.getResult = function() {
+        function buildQuery() {
             var query = filterHelper.buildQuery($scope.subfilters);
             fields = {
                 brand_id: brandId,
@@ -78,10 +63,11 @@ angular.module('engagement')
 
             if (compareToObject != null) {
                 fields.compare_by = JSON.stringify(compareToObject);
-                $scope.hideTypeChart = false;
-            } else
-                $scope.hideTypeChart = true;
+            }
+        }
 
+        $scope.getResult = function() {
+            buildQuery();
             updateChart(fields);
         }
 

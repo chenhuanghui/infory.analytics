@@ -27,8 +27,44 @@ angular.module('smg.services')
                 users: null
             }
 
+            var bookmarks = {
+                brand_id: -1,
+                bookmarks: {
+                    event_bookmarks: null,
+                    funnel_bookmarks: null,
+                    profiles_bookmarks: null
+                }
+            }
+
 
             return {
+                setBookmarks: function(brandId, bookmarks) {
+                    bookmarks.brand_id = brandId;
+                    bookmarks.bookmarks.event_bookmarks = data.event_bookmarks;
+                    bookmarks.bookmarks.funnel_bookmarks = data.funnel_bookmarks;
+                    bookmarks.bookmarks.profiles_bookmarks = data.profiles_bookmarks;
+                },
+                getBookmarks: function(brandId, success, error) {
+                    if (bookmarks.brand_id == brandId) {
+                        success(bookmarks);
+                    } else {
+                        var fields = {
+                            id: brandId,
+                            fields: '["event_bookmarks", "funnel_bookmarks", "profiles_bookmarks"]'
+                        }
+
+                        brandRemote.get(fields, function(data) {
+                            if (data.error == undefined) {
+                                bookmarks.brand_id = brandId;
+                                bookmarks.bookmarks.event_bookmarks = data.event_bookmarks;
+                                bookmarks.bookmarks.funnel_bookmarks = data.funnel_bookmarks;
+                                bookmarks.bookmarks.profiles_bookmarks = data.profiles_bookmarks;
+
+                                success(bookmarks);
+                            }
+                        }, function() {})
+                    }
+                },
                 updateShopInBrand: function(shopId, brandId, shop) {
                     if (currentBrand != null && currentBrand.id == brandId) {
                         for (var i = 0; i < currentBrand.shops.length; i++) {
