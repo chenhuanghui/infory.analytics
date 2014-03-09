@@ -115,6 +115,11 @@ angular.module('user')
             controller: 'UserCtrl',
             access: access.user
         })
+        .when('/user/:brandId/:userId', {
+            templateUrl: 'modules/user/template/user_profile.html',
+            controller: 'UserCtrl',
+            access: access.user
+        })
         .when('/user/new', {
             templateUrl: 'modules/user/template/new_user.html',
             controller: 'UserCtrl',
