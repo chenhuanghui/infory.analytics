@@ -11,6 +11,9 @@ angular.module('promotion')
 
         }, function() {});
 
+        $scope.goToStep1 = function() {
+            $location.path('/brand/promotion/step1/' + brandId);
+        }
         $scope.orderPromotions = [{
             name: '',
             name_display: 'Tất cả'
