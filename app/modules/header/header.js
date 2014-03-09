@@ -22,7 +22,7 @@ angular.module('header')
         $scope.setCurrentBrand = function(brand) {
             $scope.brand = brand;
             //dataFactory.updateHomeBrand($scope.brand);
-            dataFactory.updateBrandSideBar($scope.brand.id);
+
             $('.z-btn .pop-dialog .close-icon').click();
             $location.path('/home/' + $scope.brand.id);
         }
@@ -39,7 +39,7 @@ angular.module('header')
                         id: data.brand_id,
                         name: name
                     });
-
+                    dataFactory.setCurrentBrand(null);
                     $('.z-btn .pop-dialog .close-icon').click();
                     $location.path('/brand/infor/' + data.brand_id);
                 }

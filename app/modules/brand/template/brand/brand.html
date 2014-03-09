@@ -34,7 +34,7 @@
                             <img src="{{brand.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="45" width="45"/>
                             <a ng-click="goToShopInfo(shop)" style="cursor:pointer" class="name">{{shop.name}}</a>
                             <span class="subtext">{{shop.full_address}}</span>
-                            <i class="icon-remove-sign"></i>
+                            <i class="icon-remove-sign" ng-click="delShop(shop.id)"></i>
                         </li>
                         <div class="clearfix"></div>
                     </ul>
