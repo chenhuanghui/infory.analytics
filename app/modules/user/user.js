@@ -115,19 +115,14 @@ angular.module('user')
             controller: 'UserCtrl',
             access: access.user
         })
-        .when('/user/:brandId/:userId', {
-            templateUrl: 'modules/user/template/user_profile.html',
-            controller: 'UserCtrl',
+        .when('/user/manager/:brandId', {
+            templateUrl: 'modules/user/template/user_manager.html',
+            controller: 'UserManagerCtrl',
             access: access.user
         })
         .when('/user/new', {
             templateUrl: 'modules/user/template/new_user.html',
             controller: 'UserCtrl',
-            access: access.user
-        })
-        .when('/user/manager/:brandId', {
-            templateUrl: 'modules/user/template/user_manager.html',
-            controller: 'UserManagerCtrl',
             access: access.user
         })
         .when('/user/notify-new/step1/:brandId', {
@@ -148,6 +143,11 @@ angular.module('user')
         .when('/user/notify-new/step4/:brandId', {
             templateUrl: 'modules/user/template/user_notify_new_step_4.html',
             controller: 'UserNotifyStep4Ctrl',
+            access: access.user
+        })
+        .when('/user/:brandId/:userId', {
+            templateUrl: 'modules/user/template/user_profile.html',
+            controller: 'UserCtrl',
             access: access.user
         })
 });

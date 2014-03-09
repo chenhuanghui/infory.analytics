@@ -41,6 +41,11 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
                 controller: 'HomeCtrl',
                 access: access.user
             })
+            .when('/login', {
+                templateUrl: 'modules/account/template/signin.html',
+                controller: 'SignInCtrl',
+                access: access.anon
+            })
             .otherwise({
                 redirectTo: '/404'
             });

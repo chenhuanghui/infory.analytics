@@ -71,14 +71,4 @@ angular.module('account')
             controller: 'AccountCtrl',
             access: access.user
         })
-        .when('/signin', {
-            templateUrl: 'modules/account/template/signin.html',
-            controller: 'AccountCtrl',
-            access: access.user
-        })
-        .when('/signup', {
-            templateUrl: 'modules/account/template/signup.html',
-            controller: 'AccountCtrl',
-            access: access.user
-        })
 });

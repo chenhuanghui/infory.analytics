@@ -70,3 +70,10 @@ angular.module('user')
 
         }
     ])
+    .config(function($routeProvider) {
+        var access = routingConfig.accessLevels;
+
+        $routeProvider
+
+
+    });

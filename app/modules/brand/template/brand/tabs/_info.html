@@ -10,7 +10,7 @@
         <div class="property col-md-4">Ảnh nền</div>
         <div class="value col-md-8">
             <img src="{{bundle.brandCover}}" width="45" height="45" />
-            <input type="file" id="coverInput" name="imgUpload" ng-file-select="changeCover(this.id)" />
+            <input type="file" id="cover" name="cover" ng-file-select="changeCover($files)" />
         </div>
     </li>
 

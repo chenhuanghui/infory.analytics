@@ -1,7 +1,7 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote',
-    function($scope, $http, $location, $routeParams, brandRemote, commentRemote, dataFactory, productRemote, shopRemote) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote',
+    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote) {
 
         var brandId = $routeParams.brandId;
         dataFactory.updateBrandSideBar(brandId);
@@ -98,7 +98,7 @@ angular.module('brand')
             dataFactory.setUsernameAvatar(username, avatar);
 
             //FOR TESTING REASON
-            userId = 411;
+
             $location.path('/user/' + brandId + '/' + userId);
         }
 
@@ -235,7 +235,58 @@ angular.module('brand')
             });
         };
 
-        $scope.changeCover = function(id) {};
+        $scope.changeCover = function($files) {
+            // $upload.upload({
+            //     url: 'http://smartguide.dev/dashboard/api/v1/brand/update', //upload.php script, node.js route, or servlet url
+            //     // method: POST,
+            //     // headers: {'headerKey': 'headerValue'},
+            //     //withCredentials: true,
+            //     data: {
+            //         brand_id: brandId
+            //     },
+            //     file: $files[0],
+
+            // }).progress(function(evt) {
+            //     console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+            // }).success(function(data, status, headers, config) {
+            //     console.log(data);
+            // });
+            $.ajaxFileUpload({
+                type: 'POST',
+                url: 'http://smartguide.dev/dashboard/api/v1/brand/update',
+                crossDomain: true,
+                fileElementId: 'cover',
+                data: {
+                    brand_id: brandId,
+                },
+                dataType: 'json',
+                success: function(responseData, textStatus, jqXHR) {
+                    console.log(responseData);
+                },
+                error: function(responseData, textStatus, errorThrown) {
+                    console.warn(responseData, textStatus, errorThrown);
+                    alert('CORS failed - ' + textStatus);
+                }
+            });
+
+            // $http({
+            //     method: 'POST',
+            //     url: "http://smartguide.dev/dashboard/api/v1/brand/update",
+            //     headers: {
+            //         'Content-Type': false
+            //     },
+            //     data: {
+            //         brand_id: brandId,
+            //         cover: $files[0]
+            //     }
+            // }).
+            // success(function(data, status, headers, config) {
+            //     console.log(data);
+            // }).
+            // error(function(data, status, headers, config) {
+            //     alert("failed!");
+            // });
+        };
 
         $scope.showGallery = function() {
 
