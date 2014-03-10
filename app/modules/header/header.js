@@ -4,6 +4,11 @@ angular.module('header')
 
     function($scope, $location, dataFactory, Auth, brandRemote) {
 
+        $scope.isVisibleBrandMenu = true;
+
+        if ($location.path() == '/personal')
+            $scope.isVisibleBrandMenu = false;
+
         $scope._username = Auth.user.name;
         //$scope.newBrandName = 'Brand name';
 
