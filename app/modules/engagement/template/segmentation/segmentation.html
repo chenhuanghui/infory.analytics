@@ -42,8 +42,11 @@
                     <span>
                         <div class="dropdown left" >
                           <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                            <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
-                            </div>
+                                <div class="select-date btn-glow">
+                                    <div class="input-append"><input type="text" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                                    </div>
+                                    <i class="icon-sort-down"></i>
+                                </div>
                           </a>
                           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                             <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
@@ -52,7 +55,10 @@
 
                         <div class="dropdown left" style="margin-left:10px;">
                           <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
-                            <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                            <div class="select-date btn-glow">
+                                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                                </div>
+                                <i class="icon-sort-down"></i>
                             </div>
                           </a>
                           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -63,7 +69,7 @@
 
                      <select class="type_menu right" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-init="chartType=chartTypes[0]" ng-hide="hideTypeChart"></select>
 
-                     <select class="type_menu pull-right" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-init="time_unit=time_units[0]" ng-change="updateChart()"></select>
+                     <select class="type_menu pull-right z-select" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-init="time_unit=time_units[0]" ng-change="updateChart()"></select>
 
                 </div>
                 <div ng-switch on="chartType.id" class="block_content">

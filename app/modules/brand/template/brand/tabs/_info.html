@@ -32,11 +32,11 @@
         <div class="property col-md-4">Mô tả</div>
         <div class="value col-md-8">
             <div class="overview" ng-hide="bundle.editDescription">
-                <span>{{bundle.brandDescription}}</span>
+                <span class="description">{{bundle.brandDescription}}</span>
                 <a ng-click="bundle.editDescription = true" style="cursor:pointer" >sửa</a>
             </div>
             <div class="edit" ng-hide="!bundle.editDescription">
-                <input ng-model="bundle.brandDescription" class="form-control inline-block"/>
+                <textarea ng-model="bundle.brandDescription" class="form-control inline-block" rows="5"></textarea>
                 <i ng-click="changeDescription()" class="icon-ok-sign success" style="cursor:pointer" ></i>
             </div>
         </div>
@@ -46,7 +46,7 @@
         <div class="property col-md-4">Website</div>
         <div class="value col-md-8">
             <div class="overview" ng-hide="bundle.editWebsite">
-                <span>{{bundle.brandWebsite}}</span>
+                <span><a href="{{bundle.brandWebsite}}">{{bundle.brandWebsite}}</a></span>
                 <a ng-click="bundle.editWebsite = true" style="cursor:pointer" >sửa</a>
             </div>
             <div class="edit" ng-hide="!bundle.editWebsite">
@@ -60,7 +60,7 @@
         <div class="property col-md-4">Fanpage</div>
         <div class="value col-md-8">
             <div class="overview" ng-hide="bundle.editFanpage">
-                <span>{{bundle.brandFanpage}}</span>
+                <span><a href="{{bundle.brandFanpage}}">{{bundle.brandFanpage}}</a></span>
                 <a ng-click="bundle.editFanpage = true" style="cursor:pointer" >sửa</a>
             </div>
             <div class="edit" ng-hide="!bundle.editFanpage">

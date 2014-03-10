@@ -43,8 +43,11 @@
                                         <span>
                                             <div class="dropdown left" >
                                               <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
-                                                </div>
+                                                    <div class="select-date btn-glow">
+                                                        Từ<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay"/>
+                                                        </div>
+                                                        <i class="icon-sort-down"></i>
+                                                    </div>
                                               </a>
                                               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                                 <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
@@ -53,7 +56,10 @@
 
                                             <div class="dropdown left" style="margin-left:10px;">
                                               <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                                                <div class="select-date btn-glow">
+                                                    đến<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                                                    </div>
+                                                    <i class="icon-sort-down"></i>
                                                 </div>
                                               </a>
                                               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">

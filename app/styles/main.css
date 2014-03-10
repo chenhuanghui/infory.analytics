@@ -110,10 +110,11 @@ body {
 }
  
 .block {
-  border-left: 1px solid #dae3e9;
-  border-bottom: 1px solid #dae3e9;
-  box-shadow: -3px 3px 3px -2px #f1f1f3;
-  border-radius: 0px 0px 0px 5px;
+  border: 1px solid #dae3e9;
+  box-shadow: 0px 1px 2px 1px #F1F1F3;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
   -webkit-transition: margin-left .3s ease;
   -moz-transition: margin-left .3s ease;
   -o-transition: margin-left .3s ease;
@@ -124,10 +125,17 @@ body {
   margin: 0px 15px 20px;
 }
 .block_header {
-  background-color: #f5fafc;
-  min-height: 45px;
-  padding: 9px 20px;
-  border-bottom: 1px solid #dae3e9;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    background-color: #F5FAFC;
+    min-height: 45px;
+    padding: 9px 20px;
+    border-bottom: 1px solid rgba(218, 234, 245, 0.72);
+    box-shadow: 0px 2px 2px #E9EDEF;
+    margin-bottom: 4px;
+    
+    
 }
 
 .block_header select{
@@ -137,11 +145,15 @@ body {
 .block_content {
   padding: 10px 20px 50px;
 }
+
 .block_footer {
   background-color: rgb(243, 243, 243);
   border-top: 1px solid #dae3e9;
   height: 45px;
   display: block;
+  border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
 }
 
 .block_footer button{
@@ -157,24 +169,38 @@ body {
 }
 
 .controller{
+    height: 32px;
   background-color: #fff;
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border: 1px solid #99BD56;
+  display: inline-flex;
 }
 .controller select{
     border: none;
     border-color: transparent;
-    margin: 0;
+    margin: 2px 0 0 0;
     padding: 0 3px;
+    font-weight: bold;
+}
+
+.controller select.large{
+    padding: 0 85px 0 3px;
 }
 
 .controller .btn-glow{
+    border-top: none;
     border: none;
     border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.controller ._large{
+    padding: 5px 20px;
 }
 
 .block_header .highlight{
@@ -326,7 +352,6 @@ body {
   float: right;
   margin: -20px 20px 0px 0px;
   font-size: 20px;
-  color: #555;
 }
 
 .nav-tabs {

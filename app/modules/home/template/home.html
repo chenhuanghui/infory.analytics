@@ -47,7 +47,10 @@
                 <span>
                     <div class="dropdown left" >
                       <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                        <div class="select-date btn-glow">
+                            Từ<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay"/>
+                            </div>
+                            <i class="icon-sort-down"></i>
                         </div>
                       </a>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -57,7 +60,10 @@
 
                     <div class="dropdown left" style="margin-left:10px;">
                       <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
-                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                        <div class="select-date btn-glow">
+                            Đến<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay"/>
+                            </div>
+                        <i class="icon-sort-down"></i>
                         </div>
                       </a>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -66,7 +72,7 @@
                     </div>
                 </span>
 
-                <select class="type_menu pull-right" ng-model="time_unit_1" ng-options="time_unit_1 as time_unit_1.name_display for time_unit_1 in time_units" ng-change="updateTimeUnit(time_unit_1, 0)"></select>
+                <select class="type_menu pull-right z-select" ng-model="time_unit_1" ng-options="time_unit_1 as time_unit_1.name_display for time_unit_1 in time_units" ng-change="updateTimeUnit(time_unit_1, 0)"></select>
             </div>
             <div>
                 <chart value='dataChart[0]' height="400"></chart>
@@ -78,8 +84,11 @@
                 <span>
                     <div class="dropdown left" >
                       <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
-                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[2].dateDisplay" style="width: 100px;">
-                        </div>
+                         <div class="select-date btn-glow">
+                            Từ<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[2].dateDisplay">
+                            </div>
+                            <i class="icon-sort-down"></i>
+                         </div>
                       </a>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                         <datetimepicker data-ng-model="data[2].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'day' }" data-on-set-time="onTimeSetThree"/>
@@ -88,7 +97,10 @@
 
                     <div class="dropdown left" style="margin-left:10px;">
                       <a class="dropdown-toggle" id="dropdown4" role="button" data-toggle="dropdown" data-target="#" href="#">
-                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[3].dateDisplay" style="width: 100px;">
+                        <div class="select-date btn-glow">
+                            Đến<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[3].dateDisplay"/>
+                            </div>
+                            <i class="icon-sort-down"></i>
                         </div>
                       </a>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -97,7 +109,7 @@
                     </div>
                 </span>
 
-                <select class="type_menu pull-right" ng-model="time_unit_2" ng-options="time_unit_2 as time_unit_2.name_display for time_unit_2 in time_units" ng-change="updateTimeUnit(time_unit_2, 1)"></select>
+                <select class="type_menu pull-right z-select" ng-model="time_unit_2" ng-options="time_unit_2 as time_unit_2.name_display for time_unit_2 in time_units" ng-change="updateTimeUnit(time_unit_2, 1)"></select>
             </div>
             <div>
                 <chart value='dataChart[1]' height="400"></chart>
@@ -109,7 +121,10 @@
                 <span>
                     <div class="dropdown left" >
                       <a class="dropdown-toggle" id="dropdown5" role="button" data-toggle="dropdown" data-target="#" href="#">
-                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[4].dateDisplay" style="width: 100px;">
+                        <div class="select-date btn-glow">
+                            Từ<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[4].dateDisplay"/>
+                            </div>
+                            <i class="icon-sort-down"></i>
                         </div>
                       </a>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -119,7 +134,10 @@
 
                     <div class="dropdown left" style="margin-left:10px;">
                       <a class="dropdown-toggle" id="dropdown6" role="button" data-toggle="dropdown" data-target="#" href="#">
-                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[5].dateDisplay" style="width: 100px;">
+                        <div class="select-date btn-glow">
+                            Đến<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[5].dateDisplay"/>
+                            </div>
+                            <i class="icon-sort-down"></i>
                         </div>
                       </a>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -128,7 +146,7 @@
                     </div>
                 </span>
 
-                <select class="type_menu pull-right" ng-model="time_unit_3" ng-options="time_unit_3 as time_unit_3.name_display for time_unit_3 in time_units" ng-change="updateTimeUnit(time_unit_3, 2)"></select>
+                <select class="type_menu pull-right z-select" ng-model="time_unit_3" ng-options="time_unit_3 as time_unit_3.name_display for time_unit_3 in time_units" ng-change="updateTimeUnit(time_unit_3, 2)"></select>
             </div>
             <div>
                 <chart value='dataChart[2]' height="400"></chart>
@@ -136,9 +154,11 @@
         </div>
         <div class="home-title-2" ng-hide="!isHasBookmark">
             <span >Biểu đồ của bạn</span>
-            <span class="btn-flat success right home-watch-chart" id="reply-button">XEM BIỂU ĐỒ</span>
-             <div class="iu-select right ">
-                 <select class="type_menu pull-right" ng-model="eventBookmark" ng-options="eventBookmark as eventBookmark.bookmark_name for eventBookmark in eventBookmarks" ng-change="updateEventBookmark(true)" style="height: 31px;margin-top: 11px;"></select>
+            <div class="right">
+                <div class="controller">
+                    <select class="large" ng-model="eventBookmark" ng-options="eventBookmark as eventBookmark.bookmark_name for eventBookmark in eventBookmarks" ng-change="updateEventBookmark(true)"></select>
+                    <span class="btn-glow success _large">XEM BIỂU ĐỒ</span>
+                </div>
             </div>
         </div>
         <div class="block" ng-hide="!isHasBookmark">
@@ -146,7 +166,10 @@
                 <span>
                     <div class="dropdown left" >
                       <a class="dropdown-toggle" id="dropdown7" role="button" data-toggle="dropdown" data-target="#" href="#">
-                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[6].dateDisplay" style="width: 100px;">
+                        <div class="select-date btn-glow">
+                            Từ<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[6].dateDisplay"/>
+                            </div>
+                            <i class="icon-sort-down"></i>
                         </div>
                       </a>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -156,7 +179,10 @@
 
                     <div class="dropdown left" style="margin-left:10px;">
                       <a class="dropdown-toggle" id="dropdown8" role="button" data-toggle="dropdown" data-target="#" href="#">
-                        <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[7].dateDisplay" style="width: 100px;">
+                        <div class="select-date btn-glow">
+                            Đến<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[7].dateDisplay" />
+                            </div>
+                            <i class="icon-sort-down"></i>
                         </div>
                       </a>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -165,13 +191,16 @@
                     </div>
                 </span>
 
-                <select class="type_menu pull-right" ng-model="time_unit_4" ng-options="time_unit_4 as time_unit_4.name_display for time_unit_4 in time_units" ng-change="updateTimeUnit(time_unit_4, 3)"></select>
+                <select class="type_menu pull-right z-select" ng-model="time_unit_4" ng-options="time_unit_4 as time_unit_4.name_display for time_unit_4 in time_units" ng-change="updateTimeUnit(time_unit_4, 3)"></select>
             </div>
             <div>
                 <chart value='dataChart[3]' height="400"></chart>
                 <div class="block_footer">
                     <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> So sánh theo</p>
-                    <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" style="margin-left: 10px;margin-top: 10px;" ng-change="updateEventBookmark()"></select>
+                    <div class="z-ui-select">
+                        <select ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" ng-change="updateEventBookmark()"></select>
+                        <i class="icon-sort-down"></i>
+                    </div>
                 </div>
             </div>
         </div>
