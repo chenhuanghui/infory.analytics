@@ -1,7 +1,7 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote',
-    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory',
+    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory) {
 
         var brandId = $routeParams.brandId;
         dataFactory.updateBrandSideBar(brandId);
@@ -50,21 +50,13 @@ angular.module('brand')
             if (brands.length != 0) {
                 if (brandId == null) {
                     dataFactory.getBrand(brands[0].id, function(data) {
-                        $scope.brand = data;
-                        $scope.shop = $scope.brand.shops[0];
-                        saveBundle($scope.brand);
-                        refactorDateTimeMessage($scope.brand);
-                        dataFactory.updateHome($scope.brand.id);
+                        resetData(data);
                     }, function() {})
                 } else {
                     for (var i = 0; i < brands.length; i++) {
                         if (brands[i].id == brandId) {
                             dataFactory.getBrand(brands[i].id, function(data) {
-                                $scope.brand = data;
-                                $scope.shop = $scope.brand.shops[0];
-                                saveBundle($scope.brand);
-                                refactorDateTimeMessage($scope.brand);
-                                dataFactory.updateHome($scope.brand.id);
+                                resetData(data);
                             }, function() {})
                             break;
                         }
@@ -72,6 +64,37 @@ angular.module('brand')
                 }
             }
         }, function() {});
+
+        function resetData(data) {
+            var path = $location.path().substring(0, 14);
+
+            $scope.brand = data;
+            switch (path) {
+                case '/brand/comment':
+                    var oldData = commentFactory.getData(brandId);
+                    if (oldData != null) {
+                        for (var i = 0; i < $scope.brand.shops.length; i++)
+                            if (oldData.shop.id == $scope.brand.shops[i].id) {
+                                $scope.shop = $scope.brand.shops[i];
+                                for (var j = 0; j < $scope.oderComments.length; j++)
+                                    if (oldData.sorter.field == $scope.oderComments[j].field) {
+                                        $scope.sorter = $scope.oderComments[j];
+                                        break;
+                                    }
+                            }
+                    } else {
+                        $scope.sorter = $scope.oderComments[0];
+                        $scope.shop = $scope.brand.shops[0];
+                    }
+                    break;
+                default:
+                    $scope.shop = $scope.brand.shops[0];
+            }
+
+            saveBundle($scope.brand);
+            refactorDateTimeMessage($scope.brand);
+            dataFactory.updateHome($scope.brand.id);
+        }
 
         function refactorDateTimeMessage(brand) {
             for (var i = 0; i < brand.shops.length; i++) {
@@ -87,6 +110,18 @@ angular.module('brand')
                     brand.shops[i].comments[j].timeDisplay = (h <= 9 ? '0' + h : h) + ' : ' + (min <= 9 ? '0' + min : min);
                 }
             }
+        }
+
+        function saveInforShopComment() {
+            commentFactory.setData({
+                brand_id: brandId,
+                shop: $scope.shop,
+                sorter: $scope.sorter
+            });
+        }
+
+        $scope.updateShopComment = function() {
+            saveInforShopComment();
         }
 
         $scope.setCurrentBrand = function(brand) {
