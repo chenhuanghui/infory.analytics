@@ -36,110 +36,111 @@
                     <u class="right price-form">Xem bảng giá</u>
                 </div>
                 <h5 class="personal-title">Thông tin chủ doanh nghiệp</h5>
-
-                <form class="form-horizontal" role="form" name="updateForm">
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Họ và tên:</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" ng-model="account.name" ng-minlength="6" name="name" required/>
-                            <span class="alert-msg" ng-show="updateForm.name.$error.minlength">
-                                <i class="icon-remove-sign"></i>
-                            Họ và tên phải ít nhất 6 ký tự
-                            </span>
-
-                            <span class="alert-msg" ng-show="updateForm.name.$error.required">
-                                <i class="icon-remove-sign"></i>
-                            Vui lòng nhập họ và tên
-                            </span>
-
+                <div class="form-wrapper">
+                    <form class="form-horizontal" role="form" name="updateForm">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Họ và tên:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="text" ng-model="account.name" ng-minlength="6" name="name" required/>
+                                <span class="alert-msg" ng-show="updateForm.name.$error.minlength">
+                                    <i class="icon-remove-sign"></i>
+                                Họ và tên phải ít nhất 6 ký tự
+                                </span>
+    
+                                <span class="alert-msg" ng-show="updateForm.name.$error.required">
+                                    <i class="icon-remove-sign"></i>
+                                Vui lòng nhập họ và tên
+                                </span>
+    
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Công ty:</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" ng-model="account.company" ng-minlength="6" name="company" required/>
-
-                            <span class="alert-msg" ng-show="updateForm.company.$error.minlength">
-                                <i class="icon-remove-sign"></i>
-                            Tên công ty phải ít nhất 6 ký tự
-                            </span>
-
-                            <span class="alert-msg" ng-show="updateForm.company.$error.required">
-                                <i class="icon-remove-sign"></i>
-                            Vui lòng nhập tên công ty
-                            </span>
+    
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Công ty:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="text" ng-model="account.company" ng-minlength="6" name="company" required/>
+    
+                                <span class="alert-msg" ng-show="updateForm.company.$error.minlength">
+                                    <i class="icon-remove-sign"></i>
+                                Tên công ty phải ít nhất 6 ký tự
+                                </span>
+    
+                                <span class="alert-msg" ng-show="updateForm.company.$error.required">
+                                    <i class="icon-remove-sign"></i>
+                                Vui lòng nhập tên công ty
+                                </span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Email:</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="email" ng-model="account.email" name="email" required/>
-
-                            <span class="alert-msg" ng-show="updateForm.email.$error.email">
-                                <i class="icon-remove-sign"></i>
-                            Email không hợp lệ
-                            </span>
-
-                            <span class="alert-msg" ng-show="updateForm.email.$error.required">
-                                <i class="icon-remove-sign"></i>
-                            Vui lòng nhập email
-                            </span>
+    
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Email:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="email" ng-model="account.email" name="email" required/>
+    
+                                <span class="alert-msg" ng-show="updateForm.email.$error.email">
+                                    <i class="icon-remove-sign"></i>
+                                Email không hợp lệ
+                                </span>
+    
+                                <span class="alert-msg" ng-show="updateForm.email.$error.required">
+                                    <i class="icon-remove-sign"></i>
+                                Vui lòng nhập email
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Mật khẩu:</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="password" ng-model="account.password" ng-minlength="6" name="password" required/>
-
-                            <span class="alert-msg" ng-show="updateForm.password.$error.required">
-                                <i class="icon-remove-sign"></i>
-                            Vui lòng nhập mật khẩu
-                            </span>
-
-                            <span class="alert-msg" ng-show="updateForm.password.$error.minlength">
-                                <i class="icon-remove-sign"></i>
-                            Mật khẩu ít nhất 6 ký tự
-                            </span>
-
+                        
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Mật khẩu:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="password" ng-model="account.password" ng-minlength="6" name="password" required/>
+    
+                                <span class="alert-msg" ng-show="updateForm.password.$error.required">
+                                    <i class="icon-remove-sign"></i>
+                                Vui lòng nhập mật khẩu
+                                </span>
+    
+                                <span class="alert-msg" ng-show="updateForm.password.$error.minlength">
+                                    <i class="icon-remove-sign"></i>
+                                Mật khẩu ít nhất 6 ký tự
+                                </span>
+    
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-2 control-label">Xác nhận mật khẩu:</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="password" ng-model="account.confirmPassword" ng-minlength="6" name="confirmPassword" nx-equal="account.password" required/>
-
-                            <span class="alert-msg" ng-show="updateForm.confirmPassword.$error.required">
-                                <i class="icon-remove-sign"></i>
-                            Vui lòng nhập xác nhận mật khẩu
-                            </span>
-
-                            <span class="alert-msg" ng-show="updateForm.confirmPassword.$error.nxEqual">
-                                <i class="icon-remove-sign"></i>
-                            Mật khẩu xác nhận không khớp 
-                            </span>
-
+    
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Xác nhận mật khẩu:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="password" ng-model="account.confirmPassword" ng-minlength="6" name="confirmPassword" nx-equal="account.password" required/>
+    
+                                <span class="alert-msg" ng-show="updateForm.confirmPassword.$error.required">
+                                    <i class="icon-remove-sign"></i>
+                                Vui lòng nhập xác nhận mật khẩu
+                                </span>
+    
+                                <span class="alert-msg" ng-show="updateForm.confirmPassword.$error.nxEqual">
+                                    <i class="icon-remove-sign"></i>
+                                Mật khẩu xác nhận không khớp 
+                                </span>
+    
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="actions">
-                        <input type="button" class="btn-glow primary" value="Lưu" ng-click="update()" ng-disabled="updateForm.$invalid">
-                        <span>OR</span>
-                        <input type="reset" value="Huỷ bỏ" class="reset" ng-click="cancel()">
-                    </div>
-
-                    <div ng-hide="!showSuccessNotify">
-                        <span class="alert-msg">
-                            Đã lưu thay đổi 
-                        </span>
-                    <div>
-                    <div class="error">
-
-                    </div>
-                </form>
+    
+                        <div class="actions">
+                            <input type="button" class="btn-glow primary" value="Lưu" ng-click="update()" ng-disabled="updateForm.$invalid">
+                            <span>OR</span>
+                            <input type="reset" value="Huỷ bỏ" class="reset" ng-click="cancel()">
+                        </div>
+    
+                        <div ng-hide="!showSuccessNotify">
+                            <span class="alert-msg">
+                                Đã lưu thay đổi 
+                            </span>
+                        <div>
+                        <div class="error">
+    
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>            
     </div>

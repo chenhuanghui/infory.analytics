@@ -60,21 +60,21 @@
 
                 <div class="col-md-4" style="height: 0;">
                     <div class="step-view-content">
-                        XEM TRƯỚC
+                        <h5>XEM TRƯỚC</h5>
                         <tabset>
                             <tab>
                               <tab-heading>
                                 <i class="icon-reorder"></i>
                               </tab-heading>
-                              <table class="table attribute-table">
+                              <table class="attribute-table">
                                 <thead>
-                                    <tr><th>Thuộc tính</th><th>Nội dung</th></tr>
+                                    <tr><th class="col-md-5">Thuộc tính</th><th>Nội dung</th></tr>
                                 </thead>
                                 <tbody>
                                     <tr><td>Loại</td><td>{{promotionType.name_display}}</td></tr>
-                                    <tr><td>Chương trình</td><td>{{name}}</td></tr>
+                                    <tr class="odd"><td>Chương trình</td><td>{{name}}</td></tr>
                                     <tr><td>Thời gian</td><td>{{time}}</td></tr>
-                                    <tr><td>Mô tả</td><td>{{description}}</td></tr>
+                                    <tr class="odd"><td>Mô tả</td><td>{{description}}</td></tr>
                                 </tbody>
                               </table>
                             </tab>
@@ -110,3 +110,11 @@
 </div>
 <!-- scripts -->
 <style scoped>@import url('vendor/theme/styles/lib/flexslider.css')</style>
+<script>
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: false,
+  });
+});
+</script>

@@ -138,7 +138,7 @@ div.navbar-header ul li i.icon-home{
     height: auto;
 }
 
-.line-step{
+._line-step{
     width: 17px;
     height: 48px;
     background: url('../img/line_step.png');
@@ -1491,4 +1491,56 @@ input, button, select, textarea {
 
 .z-dropdown.open>ul{
     display: block;
+}
+
+.step-view-content h5{
+    font-weight: bold;
+}
+
+.attribute-table{
+    width: 100%
+}
+.attribute-table th, td{
+    padding: 10px;
+}
+
+.attribute-table thead{
+    background-color: #F5FAFC;
+}
+
+.attribute-table tbody tr td:first-child{
+    font-weight: bold;
+}
+
+.attribute-table thead:first-child tr:first-child>th:first-child{
+    -webkit-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+}
+
+.attribute-tablethead:first-child tr:first-child>th:last-child{
+    -webkit-border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+}
+
+.attribute-table tbody:last-child tr:last-child>td:first-child{
+    -webkit-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px
+}
+
+.attribute-table tbody:last-child tr:last-child>td:last-child{
+    -webkit-border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+}
+
+.attribute-table .odd td{
+    background-color: #f3f3f3;
+}
+
+.form-wrapper .alert-msg{
+    margin-left: 0;
+    color: #C73939;
 }

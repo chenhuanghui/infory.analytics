@@ -110,7 +110,7 @@
                                                           <input type="checkbox" id="inlineCheckbox1" value="option1" ng-model="$parent.presentDescriptions[$parent.indexInArray[present.id]].allChecked" ng-change="allCheck(present.id)"/> Cả tuần
                                                         </label>
 
-                                                        <span class="alert-msg" ng-show="$parent.presentDescriptions[$parent.indexInArray[present.id]].validation[4]" style="margin-top: 30px">
+                                                        <span class="alert-msg" ng-show="$parent.presentDescriptions[$parent.indexInArray[present.id]].validation[4]">
                                                             <i class="icon-remove-sign"></i>
                                                         Vui lòng chọn một ngày trong tuần
                                                         </span>
@@ -154,7 +154,7 @@
                                         <span class="title">TÊN TIÊU ĐỀ</span>
                                         <input class="form-control inline-block" type="text" ng-model="$parent.title" ng-change="updateValidationNews(0)"/>
 
-                                        <span class="alert-msg" ng-show="$parent.validation[0]" style="margin-top: 30px">
+                                        <span class="alert-msg" ng-show="$parent.validation[0]">
                                                             <i class="icon-remove-sign"></i>
                                                         Vui lòng nhập tiêu đề
                                                         </span>
@@ -166,7 +166,7 @@
                                     <div class="field-box">
                                         <span class="title">NỘI DUNG</span>
                                         <textarea placeholder="Nhập nội dung" class="form-control" rows="6" ng-model="$parent.content" ng-change="updateValidationNews(2)"></textarea>
-                                         <span class="alert-msg" ng-show="$parent.validation[2]" style="margin-top: 30px">
+                                         <span class="alert-msg" ng-show="$parent.validation[2]">
                                                             <i class="icon-remove-sign"></i>
                                                         Vui lòng nhập nội dung
                                                         </span>
@@ -215,21 +215,21 @@
                 
                 <div class="col-md-4" style="height: 0;">
                     <div class="step-view-content">
-                        XEM TRƯỚC
+                        <h5>XEM TRƯỚC</h5>
                         <tabset>
                             <tab>
                               <tab-heading>
                                 <i class="icon-reorder"></i>
                               </tab-heading>
-                              <table class="table attribute-table">
+                              <table class="attribute-table">
                                 <thead>
-                                    <tr><th>Thuộc tính</th><th>Nội dung</th></tr>
+                                    <tr><th class="col-md-5">Thuộc tính</th><th>Nội dung</th></tr>
                                 </thead>
                                 <tbody>
                                     <tr><td>Loại</td><td>{{promotionType.name_display}}</td></tr>
-                                    <tr><td>Chương trình</td><td>{{name}}</td></tr>
+                                    <tr class="odd"><td>Chương trình</td><td>{{name}}</td></tr>
                                     <tr><td>Thời gian</td><td>{{time}}</td></tr>
-                                    <tr><td>Mô tả</td><td>{{description}}</td></tr>
+                                    <tr class="odd"><td>Mô tả</td><td>{{description}}</td></tr>
                                 </tbody>
                               </table>
                             </tab>

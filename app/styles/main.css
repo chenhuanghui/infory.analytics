@@ -190,8 +190,7 @@ body {
 }
 
 .controller .btn-glow{
-    border-top: none;
-    border: none;
+    border: none !important;
     border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
