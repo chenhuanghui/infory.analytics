@@ -638,7 +638,8 @@ div.navbar-header ul li i.icon-home{
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    border: 2px solid #dae3e9;
+    border: 1px solid #DAE3E9;
+    box-shadow: 0px 1px 2px 1px #F1F1F3;
     background-color: #fff;
     padding:0;
     margin: 10px;
@@ -696,7 +697,6 @@ div.navbar-header ul li i.icon-home{
 
 .property-box .tab-content ul li div.property{
     font-weight: bold;
-    color: #787e94;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -787,7 +787,7 @@ div.navbar-header ul li i.icon-home{
 .z-table thead tr th, .z-table tbody tr td{
 	border-right: 1px solid #dedede;
 	text-align:center;
-	padding: 5px 0;
+	padding: 5px;
 	
 }
 
@@ -1077,15 +1077,18 @@ table.comment{
 }
 
 .z-product .list-product li .circle{
-	padding: 4px 8px;
 	border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-	background-color: #757a7e;
+	background-color: #A5A5A5;
 	text-align: center;
 	color: #fff;
-	font-size: 12px;
+	font-size: 10px;
+    font-weight: bold;
 	margin: 10px 10px 10px 0;
+    width: 20px;
+    height: 20px;
+    line-height: 18px;
 }
 
 .z-product .list-product li img{
@@ -1329,7 +1332,7 @@ table.comment{
 }
 
 /** global color **/
-.z-select, .select-date .input-append input, .select-date, .wizard-steps li.active span.z-step, 
+body, .z-select, .select-date .input-append input, .select-date, .wizard-steps li.active span.z-step, 
 .z-box .z-box-header, .field-box span.title, #coin-box .report, .controller select, .z-ui-select .icon-sort-down,
 .z-ui-select, #shop_list i{
     color: #6c7487;
@@ -1390,4 +1393,102 @@ table.comment{
 
 .info_detail p span{
     font-weight: bold;
+}
+
+.blur{
+    bottom: 0;
+    z-index: 1;
+    position: absolute;
+    height: 118px;
+    width: 100%;
+    background: url("../../img/blur_line.png");
+}
+
+#brand_info .info{
+    z-index: 2;
+}
+
+#brand_info .info_detail {
+    width: 85%;
+}
+
+.cover_wapper{
+    position: relative;
+}
+
+.z-content{
+    background: #F7F7F9;
+    border: none;
+    box-shadow: none;
+}
+
+.block_content .z-table{
+    margin-top: -2px;
+}
+
+.property-box .tab-content ul li div.value img{
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.name{
+    font-weight: bold;
+}
+
+input, button, select, textarea {
+    font-family: Tahoma,Arial,sans-serif;
+}
+
+#add_shop .btn-flat{
+    font-weight: bold;
+}
+
+.property-box .tab-content ul li div.value .edit img{
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border: 1px solid #DAE3E9;
+}
+
+.z-dropdown{
+    font-weight: normal;
+    text-align: left;
+}
+
+.z-dropdown>ul{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0 !important;
+    list-style: none;
+    font-size: 14px;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+}
+
+.z-dropdown>a{
+    width: 150px;
+    display: block;
+    text-decoration: none;
+}
+.z-dropdown>ul>li{
+    width: 200px;
+    list-style: none;
+    text-align: left;
+    border-bottom: none !important;
+    padding: 3px 20px;
+}
+
+.z-dropdown.open>ul{
+    display: block;
 }

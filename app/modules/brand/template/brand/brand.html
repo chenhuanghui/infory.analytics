@@ -1,12 +1,15 @@
 <div ng-include="'partials/_header.html'"></div>
 <div ng-include="'partials/_sidebar.html'"></div>
 <!-- main container -->
-<div class="content">
+<div class="content z-content">
     <div id="brand_wrap">
         <div class="row">
             <div class="col-md-7 brand_overview block">
                 <div id="brand_info" class="shadow">
-                    <img src="{{brand.cover}}" class="cover col-md-12">
+                    <div class="cover_wapper">
+                        <div class="blur"></div>
+                        <img src="{{brand.cover}}" class="cover col-md-12"/>
+                    </div>
                     <div class="info">
                         <img src="{{brand.logo}}" alt="contact" class="img-circle logo hidden-phone"/>
                         <h4>{{brand.name}} - <span>{{brand.type_business}}</span></h4>
@@ -17,7 +20,7 @@
                             <p> <span>Fanpage: </span> <a href="{{brand.fanpage}}">{{brand.fanpage}}</a></p>
                             <p> <span>Liên hệ: </span> <a> {{brand.owner_phone}}</a></p>
                             
-                            <div class="alert alert-danger" style="width: 500px">
+                            <div class="alert alert-danger">
                                 <i class="icon-remove-sign"></i>
                                 Chưa xác nhận quyền sở hữu nhãn hiệu - API THIEU
                             </div>
@@ -27,9 +30,8 @@
                 </div> <!-- brand info-->
                     <div id="add_shop">
                         <input class="shop_name form-control" type="text" placeholder="Nhập tên cửa hàng" ng-model="newShopName">    
-                        <a class="btn-flat success icon-plus" ng-click="addShop(newShopName)">Thêm cửa hàng mới</a>
+                        <a class="btn-flat success" ng-click="addShop(newShopName)"><i class="icon-plus"></i>Thêm cửa hàng mới</a>
                     </div>       
-
                     <ul id="shop_list">
                         <li ng-repeat="shop in brand.shops">
                             <img src="{{brand.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="45" width="45"/>

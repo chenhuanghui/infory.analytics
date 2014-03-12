@@ -43,8 +43,11 @@
                                 <span class="title">THỜI GIAN</span>
                                 <div class="dropdown inline-block">
                                   <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                    <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data[0].dateDisplay">
-                                        <span class="add-on hide"><i class="icon-calendar"></i></span>
+                                    <div class="select-date btn-glow">
+                                        <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data[0].dateDisplay">
+                                            <span class="add-on hide"><i class="icon-calendar"></i></span>
+                                        </div>
+                                        <i class="icon-sort-down"></i>
                                     </div>
                                   </a>
                                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -53,8 +56,11 @@
                                 </div>
                                 <div class="dropdown inline-block">
                                   <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                    <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data[1].dateDisplay">
-                                        <span class="add-on hide"><i class="icon-calendar"></i></span>
+                                    <div class="select-date btn-glow">
+                                        <div class="input-append"><input type="text" class="form-control date inline-block" data-ng-model="data[1].dateDisplay">
+                                            <span class="add-on hide"><i class="icon-calendar"></i></span>
+                                        </div>
+                                        <i class="icon-sort-down"></i>
                                     </div>
                                   </a>
                                   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -94,6 +100,36 @@
                             </div>
                         </form>
                     </div>
+                    
+                    <div class="col-md-4" style="height: 0;">
+                    <div class="step-view-content">
+                        XEM TRƯỚC
+                        <tabset>
+                            <tab>
+                              <tab-heading>
+                                <i class="icon-reorder"></i>
+                              </tab-heading>
+                              <table class="table attribute-table">
+                                <thead>
+                                    <tr><th>Thuộc tính</th><th>Nội dung</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Loại</td><td>{{promotionType.name_display}}</td></tr>
+                                    <tr><td>Chương trình</td><td>{{name}}</td></tr>
+                                    <tr><td>Thời gian</td><td>{{time}}</td></tr>
+                                    <tr><td>Mô tả</td><td>{{description}}</td></tr>
+                                </tbody>
+                              </table>
+                            </tab>
+                            <tab>
+                              <tab-heading>
+                                <i class="icon-mobile-phone"></i>
+                              </tab-heading>
+                              <img src="http://wowcamera.net/image/cache/data/phone/iphone-5-16gb-white-360x360.jpg" />
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
 
                     <div class="col-md-8 with-sidebar">
                         <div class="col-md-11">

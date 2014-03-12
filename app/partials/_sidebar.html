@@ -47,7 +47,7 @@
     $(window).scroll(function (event) {
         var y = $(this).scrollTop();
         if(y > side_bar_top){
-            $('#sidebar-nav').css({"position": "fixed", "top": 10});
+            $('#sidebar-nav').css({"position": "fixed", "top": 0});
         }else{
             $('#sidebar-nav').css({"position": "relative", "top": 0});
         }
