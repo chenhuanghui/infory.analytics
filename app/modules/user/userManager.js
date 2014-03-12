@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserManagerCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote',
-        function($scope, $routeParams, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote) {
+    .controller('UserManagerCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote', 'userManagerFactory',
+        function($scope, $routeParams, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote, userManagerFactory) {
             var brandId = $routeParams.brandId;
 
             $scope.metas = remoteFactory.meta_property_types;
@@ -9,7 +9,30 @@ angular.module('user')
             $scope.metadata = remoteFactory.meta_lists;
 
             $scope.subfilters = null;
-            $scope.userList = dataFactory.getCurrentResultUserFilter();
+            $scope.checkList = [];
+            $scope.checkAll = false;
+
+            var oldData = userManagerFactory.getData(brandId);
+            if (oldData != null) {
+                $scope.userList = oldData.userList;
+                $scope.checkList = oldData.checkList;
+                $scope.checkAll = oldData.checkAll;
+            }
+
+            $scope.checkAllUser = function() {
+                var isChecked = $scope.checkAll;
+                for (var i = 0; i < $scope.checkList.length; i++)
+                    $scope.checkList[i] = isChecked;
+            }
+
+            $scope.saveInfor = function() {
+                userManagerFactory.setData({
+                    brand_id: brandId,
+                    checkList: $scope.checkList,
+                    userList: $scope.userList,
+                    checkAll: $scope.checkAll
+                })
+            }
 
             $scope.bookmark = function() {
                 var query = buildQuery();
@@ -20,7 +43,7 @@ angular.module('user')
                 }
 
                 bookmarkRemote.profileCreate(fields, function(data) {
-                    console.log(data);
+                    //console.log(data);
                 }, function() {});
             }
 
@@ -39,6 +62,8 @@ angular.module('user')
 
             $scope.getResult = function() {
                 userRemote.filter(buildQuery(), function(data) {
+
+                    $scope.checkList = [];
                     if (data.error == undefined) {
                         $scope.userList = data.data;
 
@@ -60,9 +85,12 @@ angular.module('user')
                                 user.dob = new Date(user.dob).getFullYear();
                             else
                                 user.dob = "Không xác định";
+
+                            user.stt = i;
+                            $scope.checkList.push(false);
                         }
 
-                        dataFactory.setCurrentResultUserFilter($scope.userList);
+                        $scope.saveInfor();
                     }
 
                 }, function() {});
