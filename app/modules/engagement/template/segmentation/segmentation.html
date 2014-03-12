@@ -19,9 +19,27 @@
                         <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
                         theo thời gian
                     </div>
-
-                    <span class="btn-flat success icon-bookmark-empty right" ng-click="saveFilter()">Lưu</span>
-
+                    <div class="right">
+                        <div class="controller">
+                            <!--<select class="large ng-pristine ng-valid" ng-model="eventBookmark" ng-options="eventBookmark as eventBookmark.bookmark_name for eventBookmark in eventBookmarks" ng-change="updateEventBookmark(true)"><option value="0" selected="selected">user_platform</option><option value="1">user_platform</option><option value="2">user_platform</option><option value="3">user_age</option><option value="4">user_age</option><option value="5">user_age</option><option value="6">user_age</option><option value="7">user_age</option></select>
+                            -->
+                            <div class="z-dropdown-wapper">
+                                <div class="z-dropdown">
+                                    <a class="trigger"><span>category 1</span></a>
+                                    <ul>
+                                        <li>category 1</li>
+                                        <li>category 2</li>
+                                        <li>category 3</li>
+                                        <li>category 4</li>
+                                        <li><input type="text" placeholder="new category"/></li>
+                                        <li><input type="submit" placeholder="CREATE CATEGORY"/></li>
+                                    </ul>
+                                </div>
+                                <i class="icon-sort-down"></i>
+                            </div>
+                            <span class="btn-glow success _large" ng-click="saveFilter()"><i class="icon-bookmark-empty"></i>Lưu</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="block_content">
                     <p class="notify"> Chỉ thống kê các lượt <span>{{event.name_display}}</span> thoả điều kiện</p>

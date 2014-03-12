@@ -4,22 +4,23 @@
              <select ng-model="category" ng-options="category as category.name for category in brand.categories"></select>
         </div>
         -->
-        <div class="select-date btn-glow left">
+        <div class="z-dropdown-wapper z-dropdown-btn left">
             <div class="z-dropdown">
-                <a class="trigger">category 1</a>
+                <a class="trigger"><span>category 1</span></a>
                 <ul>
                     <li>category 1</li>
                     <li>category 2</li>
                     <li>category 3</li>
                     <li>category 4</li>
-                    <li><input type="text" placeholder="new category" /></li>
-                    <li><input type="submit" placeholder="CREATE CATEGORY" /></li>
+                    <li><input type="text" placeholder="new category"/></li>
+                    <li><input type="submit" placeholder="CREATE CATEGORY"/></li>
                 </ul>
             </div>
             <i class="icon-sort-down"></i>
         </div>
         <span>{{category.products.length}}</span> sản phẩm
     </div>
+    <div class="clearfix"></div>
     <div class="add-product" style="cursor:pointer" ng-click="hideAdd = !hideAdd" ng-init="hideAdd = true">
         <i class="icon-plus"></i> THÊM SẢN PHẨM
     </div>
@@ -95,22 +96,3 @@
         </ul>
     </div>
 </div>
-<script>
-    $(document).mouseup(function (e)
-    {
-        if(e.which === 1){
-            var container = $('.z-dropdown>ul');
-            var trigger = $('.z-dropdown>a.trigger');
-            if (trigger.is(e.target))
-            {
-                trigger.parent().toggleClass('open');
-            }else{
-                if (!container.is(e.target) // if the target of the click isn't the container...
-                && container.has(e.target).length === 0) // ... nor a descendant of the container
-                {
-                    container.parent().removeClass('open');
-                }
-            }   
-        } 
-    });
-</script>
