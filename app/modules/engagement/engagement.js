@@ -1,8 +1,8 @@
 angular.module('engagement')
 
-.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper', 'bookmarkRemote', 'homeFactory',
+.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper', 'bookmarkRemote', 'homeFactory', 'segmentationFactory',
 
-    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote, homeFactory) {
+    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote, homeFactory, segmentationFactory) {
 
         var brandId = $routeParams.brandId;
 
@@ -34,7 +34,65 @@ angular.module('engagement')
 
         $scope.hideTypeChart = true;
 
+        $scope.chartData = [{}, {}, {}];
+
+        var intervalDate = serviceHelper.getIntervalDate();
+        $scope.data = [{
+            dateDropDownInput: intervalDate.date_beg,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
+        }, {
+            dateDropDownInput: intervalDate.date_end,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
+        }];
+
         var fields = null;
+
+        var oldData = segmentationFactory.getData(brandId);
+        if (oldData != null) {
+            for (var i = 0; i < $scope.chartTypes.length; i++)
+                if ($scope.chartTypes[i].id == oldData.chartType.id) {
+                    $scope.chartType = $scope.chartTypes[i];
+                    break;
+                }
+
+            for (var i = 0; i < $scope.time_units.length; i++)
+                if ($scope.time_units[i].name == oldData.time_unit.name) {
+                    $scope.time_unit = $scope.time_units[i];
+                    break;
+                }
+
+            $scope.event = oldData.event;
+
+            for (var i = 0; i < $scope.event.compare_properties.length; i++)
+                if ($scope.event.compare_properties[i].name == oldData.compareUnit.name) {
+                    $scope.compareUnit = $scope.event.compare_properties[i];
+                    break;
+                }
+
+            $scope.hideTypeChart = oldData.hideTypeChart;
+            $scope.chartData = oldData.chartData;
+            $scope.data = oldData.data;
+            fields = oldData.fields;
+        } else {
+            $scope.time_unit = $scope.time_units[0];
+            $scope.chartType = $scope.chartTypes[0];
+            $scope.event = $scope.events[0];
+            $scope.compareUnit = $scope.event.compare_properties[0];
+        }
+
+        function saveInfor() {
+            segmentationFactory.setData({
+                brand_id: brandId,
+                chartType: $scope.chartType,
+                time_unit: $scope.time_unit,
+                hideTypeChart: $scope.hideTypeChart,
+                chartData: $scope.chartData,
+                data: $scope.data,
+                fields: fields,
+                compareUnit: $scope.compareUnit,
+                event: $scope.event
+            })
+        }
 
         $scope.saveFilter = function() {
             buildQuery();
@@ -62,11 +120,10 @@ angular.module('engagement')
             var compareToObject = null;
             if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
                 compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
-            }
-
-            if (compareToObject != null) {
                 fields.compare_by = JSON.stringify(compareToObject);
-            }
+                $scope.hideTypeChart = false;
+            } else
+                $scope.hideTypeChart = true;
         }
 
         $scope.getResult = function() {
@@ -87,20 +144,11 @@ angular.module('engagement')
                     $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
                     $scope.chartData[1] = chartHelper.buildPieChart(data, $scope.event.name_display);
                     $scope.chartData[2] = chartHelper.buildColumnChart(data, $scope.event.name_display);
+
+                    saveInfor();
                 }
             }, function() {});
         }
-
-        $scope.chartData = [{}, {}, {}];
-
-        var intervalDate = serviceHelper.getIntervalDate();
-        $scope.data = [{
-            dateDropDownInput: intervalDate.date_beg,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
-        }, {
-            dateDropDownInput: intervalDate.date_end,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
-        }];
 
         $scope.onTimeSetOne = function(newDate, oldDate) {
             $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
@@ -117,6 +165,10 @@ angular.module('engagement')
                 fields.date_end = $scope.data[1].dateDisplay;
                 updateChart(fields);
             }
+        }
+
+        $scope.updateEvent = function() {
+            $scope.compareUnit = $scope.event.compare_properties[0];
         }
 
     }

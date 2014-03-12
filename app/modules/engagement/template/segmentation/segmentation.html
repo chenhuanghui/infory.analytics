@@ -16,7 +16,7 @@
                 <div class="block_header">
                     <div class="left control">
                         Thống kê lượt 
-                        <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
+                        <select ng-model="event" ng-options="event as event.name_display for event in events" ng-change="updateEvent()"></select>
                         theo thời gian
                     </div>
                     <div class="right">
@@ -47,7 +47,7 @@
                 </div>
                 <div class="block_footer">
                     <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> So sánh theo</p>
-                    <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" ng-init="compareUnit=event.compare_properties[0]" style="margin-left: 10px;margin-top: 10px;"></select>
+                    <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" style="margin-left: 10px;margin-top: 10px;"></select>
 
                     <span class="btn-flat primary right" ng-click="getResult()">Xem</span>
                 </div>
@@ -85,9 +85,9 @@
                         </div>
                     </span>
 
-                     <select class="type_menu right" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-init="chartType=chartTypes[0]" ng-hide="hideTypeChart"></select>
+                     <select class="type_menu right z-select" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-hide="hideTypeChart"></select>
 
-                     <select class="type_menu pull-right z-select" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-init="time_unit=time_units[0]" ng-change="updateChart()"></select>
+                     <select class="type_menu pull-right z-select" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-change="updateChart()"></select>
 
                 </div>
                 <div ng-switch on="chartType.id" class="block_content">
