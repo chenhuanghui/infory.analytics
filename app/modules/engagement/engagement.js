@@ -84,13 +84,13 @@ angular.module('engagement')
         }
 
         function saveInfor() {
-            var subfilters = [];
-            if ($scope.subfilters.length = !0) {
-                for (var i = 0; i < $scope.subfilters.length; i++) {
-                    subfilters.push($scope.subfilters[i].getValue());
-                }
+            var saveSubfilters = [];
+            var size = $scope.subfilters.length;
 
+            for (var i = 0; i < size; i++) {
+                saveSubfilters.push($scope.subfilters[i].getValue());
             }
+
             segmentationFactory.setData({
                 brand_id: brandId,
                 chartType: $scope.chartType,
@@ -101,7 +101,7 @@ angular.module('engagement')
                 fields: fields,
                 compareUnit: $scope.compareUnit,
                 event: $scope.event,
-                subfilters: subfilters
+                subfilters: saveSubfilters
             })
         }
 
