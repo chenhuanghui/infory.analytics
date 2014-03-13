@@ -16,9 +16,6 @@ angular.module('engagement')
             $scope.metas = remoteFactory.meta_property_types;
             $scope.events = remoteFactory.meta_events;
             $scope.metadata = remoteFactory.meta_lists;
-
-
-            funnelFactory.setData(0, null);
             $scope.subfilters = null;
 
             $scope.nameOfChainOfBehaviours = '';
@@ -47,6 +44,19 @@ angular.module('engagement')
 
             }
 
+            var oldData = funnelFactory.getData(0, brandId);
+            if (oldData != null) {
+                fields = oldData.fields;
+                $scope.nameOfChainOfBehaviours = oldData.nameOfChainOfBehaviours;
+                $scope.behaviours = oldData.behaviours;
+
+                for (var i = 0; i < $scope.behaviours.length; i++) {
+                    $scope.behaviours[i].subfilters = oldData.saveSubfilters[i];
+                }
+
+                $scope.validation = oldData.validation;
+            }
+
             $scope.addBehaviour = function() {
                 var tempBehaviour = {
                     id: 0,
@@ -62,7 +72,7 @@ angular.module('engagement')
 
             $scope.bookmark = function() {
 
-                var fields = {
+                fields = {
                     bookmark_name: $scope.nameOfChainOfBehaviours,
                     brand_id: brandId,
                     time_unit: 'day',
@@ -98,9 +108,33 @@ angular.module('engagement')
                 }
 
                 fields.funnel = JSON.stringify(fields.funnel);
-                funnelFactory.setData(0, fields);
+                var saveSubfilters = [];
+                for (var i = 0; i < $scope.behaviours.length; i++) {
+                    saveSubfilters.push(saveFilter($scope.behaviours[i].subfilters));
+                }
+
+                funnelFactory.setData(0, {
+                    brand_id: brandId,
+                    fields: fields,
+                    saveSubfilters: saveSubfilters,
+                    nameOfChainOfBehaviours: $scope.nameOfChainOfBehaviours,
+                    behaviours: $scope.behaviours,
+                    validation: $scope.validation
+                });
+
                 $location.path('/funnel/step2/' + brandId);
 
+            }
+
+            function saveFilter(subfilters) {
+                var saveSubfilters = [];
+                var size = subfilters.length;
+
+                for (var i = 0; i < size; i++) {
+                    saveSubfilters.push(subfilters[i].getValue());
+                }
+
+                return saveSubfilters;
             }
 
         }

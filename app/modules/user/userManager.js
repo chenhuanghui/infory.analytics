@@ -8,7 +8,7 @@ angular.module('user')
             $scope.events = remoteFactory.meta_events;
             $scope.metadata = remoteFactory.meta_lists;
 
-            $scope.subfilters = null;
+
             $scope.checkList = [];
             $scope.checkAll = false;
 
@@ -17,7 +17,9 @@ angular.module('user')
                 $scope.userList = oldData.userList;
                 $scope.checkList = oldData.checkList;
                 $scope.checkAll = oldData.checkAll;
-            }
+                $scope.subfilters = oldData.subfilters;
+            } else
+                $scope.subfilters = [];
 
             $scope.checkAllUser = function() {
                 var isChecked = $scope.checkAll;
@@ -26,11 +28,19 @@ angular.module('user')
             }
 
             $scope.saveInfor = function() {
+                var saveSubfilters = [];
+                var size = $scope.subfilters.length;
+
+                for (var i = 0; i < size; i++) {
+                    saveSubfilters.push($scope.subfilters[i].getValue());
+                }
+
                 userManagerFactory.setData({
                     brand_id: brandId,
                     checkList: $scope.checkList,
                     userList: $scope.userList,
-                    checkAll: $scope.checkAll
+                    checkAll: $scope.checkAll,
+                    subfilters: saveSubfilters
                 })
             }
 
@@ -98,10 +108,3 @@ angular.module('user')
 
         }
     ])
-    .config(function($routeProvider) {
-        var access = routingConfig.accessLevels;
-
-        $routeProvider
-
-
-    });

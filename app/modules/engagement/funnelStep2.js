@@ -17,15 +17,14 @@ angular.module('engagement')
             $scope.events = remoteFactory.meta_events;
             $scope.metadata = remoteFactory.meta_lists;
 
+            var oldData = funnelFactory.getData(0, brandId);
 
-            var fields = funnelFactory.getData(0);
-
-            if (fields == null) {
+            if (oldData == null) {
                 $location.path('/funnel/step1/' + brandId);
                 return;
             }
 
-            updateChart(fields);
+            updateChart(oldData.fields);
 
             $scope.computeBys = [{
                 name: 'turn',
@@ -54,8 +53,6 @@ angular.module('engagement')
             };
 
             function updateChart(fields) {
-                funnelFactory.setData(0, fields);
-
                 funnelRemote.get(fields, function(data) {
                     var values = [];
                     for (var i = 0; i < data.length; i++)

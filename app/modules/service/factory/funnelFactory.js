@@ -7,8 +7,11 @@ angular.module('smg.services')
                 setData: function(id, newData) {
                     data[id] = newData;
                 },
-                getData: function(id) {
-                    return data[id];
+                getData: function(id, brand_id) {
+                    if (data[id] != null && data[id].brand_id == brand_id)
+                        return data[id];
+                    else
+                        return null;
                 },
             }
         }
