@@ -9,9 +9,12 @@ angular.module('smgDirectives', ['ui.date'])
                 metas: "=",
                 events: "=",
                 metadata: "=",
-                event: "="
+                event: "=",
             },
             controller: function($scope) {
+                if ($scope.subfilters != null && $scope.subfilters != undefined && $scope.subfilters.length != 0)
+                    $scope.olddata = $scope.subfilters;
+
                 $scope.subfilters = [];
                 var num = 0;
 
@@ -43,13 +46,28 @@ angular.module('smgDirectives', ['ui.date'])
                 metas: "=",
                 events: "=",
                 event: "=",
-                metadata: "="
+                metadata: "=",
+                olddata: "="
 
             },
             link: function(scope, element, attr, ctrl) {
-                scope.addCondition = function() {
+
+                scope.dataString = [];
+                scope.addCondition = function(data) {
                     $actionGroup = element.find(".action_group");
                     $queryGroup = element.find(".query_builder");
+
+                    var oldDataString = ' olddata=' + '"null" ';
+                    if (data != null) {
+                        scope.dataString.push(JSON.stringify(data));
+                        var index = scope.dataString.length - 1;
+                        index = '[' + index + ']';
+
+                        oldDataString = ' olddata="{{dataString' + index + '}}" ';
+                    }
+
+                    if (data != null && data != undefined)
+                        qc = data.id;
 
                     _prop = "property" + qc,
                     _meta = "meta" + qc;
@@ -63,7 +81,7 @@ angular.module('smgDirectives', ['ui.date'])
 
                     var action_nor = $compile('<span class="btn-flat white action action_child clearfix  row_' + qc + '">{{operator}}</span>')(scope);
 
-                    var query_row = $compile('<div query-record operator="operator" id="' + qc + '" events="events" metas="metas" event="event" metadata="metadata" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
+                    var query_row = $compile('<div query-record operator="operator" id="' + qc + '" events="events" metas="metas" event="event"' + oldDataString + 'metadata="metadata" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
 
                     if (element.find(".action").length > 0) {
                         $actionGroup.append(action_nor);
@@ -78,6 +96,15 @@ angular.module('smgDirectives', ['ui.date'])
                     });
 
                     qc++;
+                }
+
+                if (scope.olddata != undefined && scope.olddata.length != 0) {
+                    scope.firstData = JSON.stringify(scope.olddata[0]);
+                    for (var i = 1; i < scope.olddata.length; i++) {
+                        scope.addCondition(scope.olddata[i]);
+                    }
+                } else {
+                    scope.firstData = null;
                 }
             }
         };
@@ -94,12 +121,14 @@ angular.module('smgDirectives', ['ui.date'])
                     events: "=",
                     event: "=",
                     metadata: "=",
-                    id: "@"
+                    id: "@",
+                    olddata: "@"
                 },
                 templateUrl: 'common/template/query_record.html',
                 link: function(scope, element, attr, ctrl) {
-
                     var intervalDate = serviceHelper.getIntervalDate();
+                    var count = 0;
+
                     scope.data = [{
                         dateDropDownInput: intervalDate.date_beg,
                         dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
@@ -113,14 +142,63 @@ angular.module('smgDirectives', ['ui.date'])
                         secondInput: ''
                     }
 
+                    if (scope.olddata == 'null' || scope.olddata == '[]' || scope.olddata == null || scope.olddata == '') {
+                        scope.property = scope.event.properties[0];
+                        scope.meta = scope.metas[scope.property.type].operators_display[0];
+                        if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
+                            scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
+                    } else {
+                        scope.olddata = JSON.parse(scope.olddata);
+                        var olddata = scope.olddata;
+                        var event = olddata.event;
+                        var property = olddata.property;
+                        var paremeters = olddata.paremeters;
+                        var meta = olddata.meta;
+                        var data = olddata.data;
+                        var paremeters = olddata.paremeters;
+                        var operator = olddata.operator;
+                        var id = olddata.id;
+
+                        for (var i = 0; i < scope.events.length; i++)
+                            if (scope.events[i].name == event) {
+                                scope.event = scope.events[i];
+                                break;
+                            }
+
+                        for (var i = 0; i < scope.event.properties.length; i++) {
+                            if (scope.event.properties[i].name == property.name) {
+                                scope.property = scope.event.properties[i];
+                                break;
+                            }
+                        }
+
+                        for (var i = 0; i < scope.metas[scope.property.type].operators_display.length; i++)
+                            if (scope.metas[scope.property.type].operators_display[i] == meta) {
+                                scope.meta = scope.metas[scope.property.type].operators_display[i];
+                                break;
+                            }
+
+                        scope.data = data;
+                        scope.paremeters = paremeters;
+                        scope.operator = operator;
+                        scope.id = id;
+                    }
+
                     scope.$watch('event', function() {
+                        if (olddata != undefined && scope.olddata != null && count++ == 0)
+                            return;
+
                         scope.property = scope.event.properties[0];
                     });
 
                     scope.updateFields = function() {
+                        if (olddata != undefined && scope.olddata != null && count++ == 1)
+                            return;
+
                         scope.meta = scope.metas[scope.property.type].operators_display[0];
                         if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
                             scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
+
                     }
 
                     scope.onTimeSetOne = function(newDate, oldDate) {
@@ -136,7 +214,6 @@ angular.module('smgDirectives', ['ui.date'])
                     scope.removeCondition = function($event) {
                         rowId = $($event.target).parent().parent().attr("data");
                         element.parents().find(rowId).remove();
-
                         ctrl.removeFilter(scope.id);
                     }
 
@@ -157,8 +234,9 @@ angular.module('smgDirectives', ['ui.date'])
                             property: scope.property,
                             meta: scope.meta,
                             paremeters: scope.paremeters,
+                            data: scope.data,
                             operator: scope.operator,
-                            event: event.name
+                            event: scope.event.name
                         };
                     }
                     ctrl.addFilter(scope);

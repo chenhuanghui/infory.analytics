@@ -10,6 +10,7 @@ angular.module('engagement')
         $scope.events = remoteFactory.meta_events;
         $scope.metadata = remoteFactory.meta_lists;
         $scope.subfilters = [];
+
         $scope.chartTypes = [{
             display_name: "Biểu đồ đường",
             id: 0
@@ -72,6 +73,8 @@ angular.module('engagement')
             $scope.hideTypeChart = oldData.hideTypeChart;
             $scope.chartData = oldData.chartData;
             $scope.data = oldData.data;
+            $scope.subfilters = oldData.subfilters;
+
             fields = oldData.fields;
         } else {
             $scope.time_unit = $scope.time_units[0];
@@ -81,6 +84,13 @@ angular.module('engagement')
         }
 
         function saveInfor() {
+            var subfilters = [];
+            if ($scope.subfilters.length = !0) {
+                for (var i = 0; i < $scope.subfilters.length; i++) {
+                    subfilters.push($scope.subfilters[i].getValue());
+                }
+
+            }
             segmentationFactory.setData({
                 brand_id: brandId,
                 chartType: $scope.chartType,
@@ -90,7 +100,8 @@ angular.module('engagement')
                 data: $scope.data,
                 fields: fields,
                 compareUnit: $scope.compareUnit,
-                event: $scope.event
+                event: $scope.event,
+                subfilters: subfilters
             })
         }
 
@@ -107,6 +118,7 @@ angular.module('engagement')
         }
 
         function buildQuery() {
+
             var query = filterHelper.buildQuery($scope.subfilters);
             fields = {
                 brand_id: brandId,
