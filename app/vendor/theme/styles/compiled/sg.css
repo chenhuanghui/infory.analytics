@@ -461,10 +461,10 @@ div.navbar-header ul li i.icon-home{
 .circle-box{
 	background-color: #4f5e71;
 	border-radius: 50%;
-	width: 30px;
-	height: 30px;
+	width: 28px;
+	height: 28px;
 	text-align: center;
-	line-height: 28px;
+	line-height: 27px;
 	font-size: 17px;
 	color: #fff;
     display: block;
@@ -787,11 +787,11 @@ div.navbar-header ul li i.icon-home{
 .z-table thead tr th, .z-table tbody tr td{
 	border-right: 1px solid #dedede;
 	text-align: left;
-	padding: 5px 15px;	
+	padding: 5px 14px;	
 }
 
 .z-table tbody tr td{
-    padding: 15px;
+    padding: 10px 10px 9px 10px;
 }
 
 .z-table thead tr th:last-child, .z-table tbody tr td:last-child{
@@ -1374,7 +1374,7 @@ table.comment{
 /** global color **/
 body, .z-select, .select-date .input-append input, .select-date, .wizard-steps li.active span.z-step, 
 .z-box .z-box-header, .field-box span.title, #coin-box .report, .controller select, .z-ui-select .icon-sort-down,
-.z-ui-select, #shop_list i{
+.z-ui-select, #shop_list i, .detail-voucher .condition .rule-time .item a, .detail-voucher .condition .rule-time .item a:hover{
     color: #6c7487;
 }
 /** ============ **/
@@ -1647,4 +1647,39 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
 
 .klaus {
     background-image: url("../../img/klaus.png");
+}
+
+.z-table tbody tr td._checkbox{
+    padding-left: 15px;
+}
+
+.z-table thead tr th.center, .z-table tbody tr td.center{
+    text-align: center;
+}
+
+.detail-voucher .condition .rule-time{
+    display: inline-block;
+    
+}
+
+.detail-voucher .condition .rule-time .item{
+    margin-top: 10px;
+    padding-top: 10px;
+    clear: both;
+}
+
+.detail-voucher .condition .rule-time .item a{
+    text-decoration: none;
+}
+
+.detail-voucher .condition .add-time{
+    display: inline-block;
+    position: relative;
+}
+
+.detail-voucher .condition .add-time .icon-plus-sign{
+    position: absolute;
+    font-size: 25px;
+    top: -30px;
+    left: 10px;
 }

@@ -37,22 +37,26 @@
                                 <table class="z-table bordered-table">
                                     <thead>
                                         <tr>
-                                            <th>
-                                                <div class="ui-select">
-                                                    <select ng-model="orderPromotion" ng-options="orderPromotion as orderPromotion.name_display for orderPromotion in orderPromotions" ng-init="orderPromotion=orderPromotions[0]" ng-change="sortPromotionList()"></select>
-                                                </div>
+                                            <th class="center">
+                                                <select class="z-select" ng-model="orderPromotion" ng-options="orderPromotion as orderPromotion.name_display for orderPromotion in orderPromotions" ng-init="orderPromotion=orderPromotions[0]" ng-change="sortPromotionList()"></select>
                                             </th>
-                                            <th>Chiến dịch</th>
-                                            <th>Thời gian</th>
-                                            <th>Trạng thái</th>
+                                            <th class="center">Chiến dịch</th>
+                                            <th class="center">Thời gian</th>
+                                            <th class="center">
+                                                <select class="z-select"> 
+                                                    <option>Đang chạy</option>
+                                                    <option>Chờ duyệt</option>
+                                                    <option>Đã dừng</option>
+                                                </select>
+                                            </th>
                                         </tr>
                                     </thead>
-                                    <tbody ng-repeat="promotion in promotionList">
-                                        <tr class="{{promotion.stt}}">
-                                            <td>{{promotion.typeDisplay}}</td>
+                                    <tbody>
+                                        <tr class="{{promotion.stt}}" ng-repeat="promotion in promotionList">
+                                            <td class="bold">{{promotion.typeDisplay}}</td>
                                             <td class="name">{{promotion.name}}</td>
                                             <td>{{promotion.time}}</td>
-                                            <td><a class="{{promotion.statusClass}}">{{promotion.status}}</a></td>
+                                            <td class="center"><a class="{{promotion.statusClass}}">{{promotion.status}}</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
