@@ -109,31 +109,51 @@
                                                             <i class="icon-remove-sign"></i>
                                                         Vui lòng chọn một ngày trong tuần
                                                         </span>
+                                                        <div class="rule-time">
+                                                            <div class="item">
+                                                                <div class="dropdown left" >
+                                                                  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <div class="input-append"> Từ <input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                                                                    </div>
+                                                                  </a>
+                                                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'minute', startView: 'hour' }" data-on-set-time="onTimeSetOne"/>
+                                                                  </ul>
+                                                                </div>
+        
+                                                                <div class="dropdown left" style="margin-left:10px;">
+                                                                  <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <div class="input-append">đến <input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                                                                    </div>
+                                                                  </a>
+                                                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'minute' , startView: 'hour' }" data-on-set-time="onTimeSetTwo"/>
+                                                                  </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="item">
+                                                                <div class="dropdown left" >
+                                                                  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <div class="input-append"> Từ <input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                                                                    </div>
+                                                                  </a>
+                                                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'minute', startView: 'hour' }" data-on-set-time="onTimeSetOne"/>
+                                                                  </ul>
+                                                                </div>
+        
+                                                                <div class="dropdown left" style="margin-left:10px;">
+                                                                  <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <div class="input-append">đến <input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                                                                    </div>
+                                                                  </a>
+                                                                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'minute' , startView: 'hour' }" data-on-set-time="onTimeSetTwo"/>
+                                                                  </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div><div class="add-time"><i class="icon-plus-sign"></i></div>
                                                     </div>
-
-                                                    <div class="clearfix"></div>
-                                                    <!-- <span>
-                                                        <div class="dropdown left" >
-                                                          <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                                            <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[0].dateDisplay" style="width: 100px;">
-                                                            </div>
-                                                          </a>
-                                                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                            <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'minute', startView: 'hour' }" data-on-set-time="onTimeSetOne"/>
-                                                          </ul>
-                                                        </div>
-
-                                                        <div class="dropdown left" style="margin-left:10px;">
-                                                          <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                                            <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
-                                                            </div>
-                                                          </a>
-                                                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                            <datetimepicker data-ng-model="data[1].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', minView: 'minute' , startView: 'hour' }" data-on-set-time="onTimeSetTwo"/>
-                                                          </ul>
-                                                        </div>
-                                                    </span>
- -->
                                                 </div>
                                             </div>
                                             <div class="clearfix"></div>

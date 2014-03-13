@@ -81,15 +81,21 @@
                                         <table class="z-table">
                                             <thead>
                                                 <tr>
-                                                    <th><input type="checkbox" ng-model="checkAllShops" ng-change="checkAll()"/></th>
+                                                    <th>
+                                						<input type="checkbox" class="css-checkbox lrg" id="checkbox_klaus" ng-model="checkAllShops" ng-change="checkAll()"/>
+                                						<label for="checkbox_klaus" class="css-label lrg klaus"></label>
+                                					</th>
                                                     <th class="name">Tên cửa hàng</th>
                                                     <th>Địa chỉ</th>
                                                 </tr>
                                             </thead>
 
-                                            <tbody  ng-repeat="shop in brand.shops | filter:searchText">
-                                                <tr>
-                                                    <td><input type="checkbox" ng-model="$parent.selectedShops[shop.selectedId]" ng-change="updateSelectedShops($parent.selectedShops[shop.selectedId])"></td>
+                                            <tbody>
+                                                <tr ng-repeat="shop in brand.shops | filter:searchText">
+                                                    <td class="_checkbox">
+                                                        <input type="checkbox" class="css-checkbox lrg" id="{{shop.id}}" ng-model="$parent.selectedShops[shop.selectedId]" ng-change="updateSelectedShops($parent.selectedShops[shop.selectedId])"/>
+                                						<label for="{{shop.id}}" class="css-label lrg klaus"></label>
+                                                    </td>
                                                     <td class="name">{{shop.name}}</td>
                                                     <td>{{shop.full_address}}</td>
                                                 </tr>
@@ -138,7 +144,7 @@
                                     <i class="icon-chevron-left"></i> Trở lại
                                 </button>
                                 <button class="btn-glow primary btn-next" ng-disabled="step_2_form.$invalid || numOfSelectedShops == 0" ng-click="goToStep3()">
-                                    Tiếp tục<i class="icon-chevron-right"></i>
+                                    Tiếp tục <i class="icon-chevron-right"></i>
                                 </button>
                                 <button type="button" class="btn-glow success btn-finish">
                                     Trở lại trang quản lý
