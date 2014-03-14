@@ -3,6 +3,11 @@
         <span>{{gallery.length}}</span> hình ảnh được tải lên
         <input type="file" class="right"/>
     </div>
-    <div class="z-content" ng-repeat="image in gallery">
-        
+    <div class="z-content">
+        <div class="item" ng-repeat="image in gallery">
+            <i class="icon-remove-sign"></i>
+            <div class="mask"><img src="{{image.url}}" /></div>
+            <!--<img src="{{image.url}}" ng-repeat="image in gallery"/>-->
+        </div>
+    </div>   
 </div>

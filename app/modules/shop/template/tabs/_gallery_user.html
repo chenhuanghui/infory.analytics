@@ -3,7 +3,11 @@
         <span>{{usersGallery.length}}</span> hình ảnh được tải lên
         <input type="file" class="right"/>
     </div>
-    <div class="z-content" ng-repeat="image in usersGallery">
-        <img src="{{image.url}}" />
-    </div>
+    <div class="z-content">
+        <div class="item" ng-repeat="image in usersGallery">
+            <i class="icon-remove-sign" ng-click="$parent.deleteUserImage(image.id)"></i>
+            <div class="mask"><img src="{{image.url}}" /></div>
+            <!--<img src="{{image.url}}" ng-repeat="image in gallery"/>-->
+        </div>
+    </div>  
 </div>

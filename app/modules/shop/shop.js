@@ -171,6 +171,10 @@ angular.module('shop')
             }
         }
 
+        $scope.deleteUserImage = function(id) {
+            console.log(id);
+        }
+
         $scope.showUsersGallery = function() {
             if ($scope.usersGallery == null) {
                 var fields = {

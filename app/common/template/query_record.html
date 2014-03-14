@@ -1,8 +1,8 @@
 <div class="query_record">
 
-    <select class="qr_1" ng-model="property" ng-options="property as property.name_display for property in event.properties" ng-init="property=event.properties[0]" ng-change="updateFields()"></select>
+    <select class="qr_1" ng-model="property" ng-options="property as property.name_display for property in event.properties" ng-change="updateFields()"></select>
 
-    <select class="qr_2" ng-model="meta" ng-options="meta as meta for meta in metas[property.type].operators_display" ng-init="meta=metas[property.type].operators_display[0]"></select>
+    <select class="qr_2" ng-model="meta" ng-options="meta as meta for meta in metas[property.type].operators_display"></select>
 
 
     <span class="qr_3" ng-switch on="metas[property.type].operators_ui_controller[metas[property.type].operators_display.indexOf(meta)]">
@@ -16,7 +16,7 @@
     	</span>
     	<span ng-switch-when="dropdown">
 
-    		<select class="qr_3" ng-model="paremeters.firstInput" ng-options="value as value for value in metadata[property.available_values]" ng-init="paremeters.firstInput=metadata[property.available_values][0]"></select>
+    		<select class="qr_3" ng-model="paremeters.firstInput" ng-options="value as value for value in metadata[property.available_values]"></select>
     	</span>
     	<span ng-switch-when="text">
     		<input type="text" class="form-control qr_3" data-ng-model="paremeters.firstInput">
@@ -35,7 +35,7 @@
                 </div>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
+                <datetimepicker data-ng-model="data[0].dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown1', minView: 'day' }" data-on-set-time="onTimeSetOne"/>
               </ul>
             </div>
         </span>
