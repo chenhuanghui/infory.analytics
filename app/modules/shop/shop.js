@@ -211,10 +211,10 @@ angular.module('shop')
                 shopRemote.get(fields, function(data) {
                     if (data.user_gallery == null)
                         $scope.usersGallery = [];
-                    else {
+                    else
                         $scope.usersGallery = data.user_gallery;
-                        saveImageToFactory();
-                    }
+
+                    saveImageToFactory();
                 }, function() {});
             } else
                 $scope.usersGallery = oldData.usersGallery;

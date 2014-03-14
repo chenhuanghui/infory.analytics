@@ -326,7 +326,7 @@ angular.module('brand')
         $scope.showGallery = function() {
             var oldData = brandFactory.getData(brandId);
 
-            if (oldData == null) {
+            if (oldData == null || (oldData != null && oldData.gallery == null)) {
                 var fields = {
                     id: brandId,
                     fields: '["gallery"]'
@@ -335,13 +335,13 @@ angular.module('brand')
                 brandRemote.get(fields, function(data) {
                     if (data.gallery == null)
                         $scope.gallery = [];
-                    else {
+                    else
                         $scope.gallery = JSON.parseJSON(data.gallery);
-                        saveToFactory();
-                    }
+
+                    saveToFactory();
                 }, function() {});
             } else
-                oldData.gallery;
+                $scope.gallery = oldData.gallery;
         }
 
         function saveToFactory() {
@@ -354,7 +354,8 @@ angular.module('brand')
         }
 
         $scope.showProducts = function() {
-            if ($scope.products == null) {
+            var oldData = brandFactory.getData(brandId);
+            if (oldData == null || (oldData != null && oldData.categories == null)) {
                 var fields = {
                     id: brandId,
                     fields: '["menu"]'
@@ -371,6 +372,9 @@ angular.module('brand')
 
                     }
                 }, function() {});
+            } else {
+                $scope.categories = oldData.categories;
+                $scope.currentCategory = oldData.currentCategory;
             }
         }
 
