@@ -1,7 +1,20 @@
 angular.module('account')
-    .controller('AccountCtrl', ['$scope', '$http', '$location', '$routeParams', 'dataFactory', 'Auth', 'accountRemote',
-        function($scope, $http, $location, $routeParams, dataFactory, Auth, accountRemote) {
-
+    .controller('AccountCtrl', ['$scope', '$http', '$location', '$routeParams', 'dataFactory', 'Auth', 'accountRemote', '$modal',
+        function($scope, $http, $location, $routeParams, dataFactory, Auth, accountRemote, $modal) {
+            /*modal*/
+            $scope.showBill = function () {
+                var modalInstance = $modal.open({
+                  templateUrl: 'modules/account/template/bill.html',
+                  controller: $scope.ModalInstanceCtrl
+                });
+            };
+            
+            $scope.ModalInstanceCtrl = function ($scope, $modalInstance) {
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+            };
+            
             $scope.$watch('_username', function() {
                 dataFactory.updateAccountNameHeader($scope._username);
             });

@@ -399,7 +399,7 @@ body {
   margin-top: 50px; 
 }
 
-#content_wrapper .content {
+#content_wrapper .gray-background {
   margin: 10px;
   background-color: white;
   border-radius: 5px;
@@ -407,14 +407,13 @@ body {
   -moz-border-radius: 5px;
 }
 
-#content_wrapper .content table{
+#content_wrapper .gray-background table{
   
   border: 1px solid #b5c1c7;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-collapse: separate;
-  border-spacing: 1px;
   /*border: solid #ccc 1px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -423,21 +422,58 @@ body {
   -moz-box-shadow: 0 1px 1px #ccc;
   box-shadow: 0 1px 1px #ccc;*/
 }
-#content_wrapper .content table thead{
+#content_wrapper .gray-background table thead{
   background-color: #f5fafc;
   color: #797f92;
 }
-#content_wrapper .content table thead th{
-  text-align: center;
-  text-transform: capitalize;
-  font-size: 12px;
-
+#content_wrapper .gray-background table thead th{
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 12px;
+    border-bottom: 1px solid #DAE3E9;
+    padding: 10px;
+    box-shadow: 0px 2px 2px #E9EDEF;
+    -webkit-box-shadow: 0px 2px 2px #E9EDEF;
+    -moz-box-shadow: 0px 2px 2px #e9edef;
 }
+
+#content_wrapper .gray-background table thead:first-child tr:first-child>th:first-child{
+    -webkit-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+}
+
+#content_wrapper .gray-background table thead:first-child tr:first-child>th:last-child{
+    -webkit-border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+}
+
+#content_wrapper .gray-background table tbody:last-child tr:last-child>td:first-child{
+    -webkit-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+}
+
+#content_wrapper .gray-background table tbody:last-child tr:last-child>td:last-child{
+    -webkit-border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -moz-border-radius-bottomright: 4px;
+}
+
+#content_wrapper .gray-background table tbody:last-child tr:last-child td{
+    background: #f3f3f3;
+}
+
+#content_wrapper .gray-background table tbody tr td{
+    border-bottom: 1px solid #DAE3EA;
+}
+
 .table td{
   text-align: center !important;
 }
 
-#content_wrapper .content table a {
+#content_wrapper .gray-background table a {
   font-weight: bold;
   text-decoration: underline;
 }
