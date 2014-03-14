@@ -7,7 +7,11 @@
             <div class="col-md-7 shop_overview block">
                 <div id="shop_info" class="shadow">
                     <a class="btn-glow btn-return" href="/#/brand/infor/{{brandId}}"><i class="icon-share-alt"></i> Trở lại nhãn hiệu</a>
-                    <img src="{{shop.cover}}" class="cover col-md-12">
+                    
+                    <div class="cover_wapper">
+                        <div class="blur"></div>
+                        <img src="{{shop.cover}}" class="cover col-md-12">
+                    </div>
                     <div class="info">
                         <img src="{{shop.brand_logo}}" alt="contact" class="img-circle logo hidden-phone"/>
                         <h4>{{shop.name}}- <span>{{shop.brand_type_business}}</span></h4>
