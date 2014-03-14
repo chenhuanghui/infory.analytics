@@ -29,7 +29,7 @@ angular.module('smg.services')
                 },
                 create: function(fields, success, error) {
                     $http.post(base_url + 'create', fields).success(success).error(error);
-                }
+                },
             }
         }
     ])

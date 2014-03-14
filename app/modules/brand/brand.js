@@ -1,7 +1,7 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory',
-    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory', 'productCategoryRemote',
+    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory, productCategoryRemote) {
 
         var brandId = $routeParams.brandId;
         dataFactory.updateBrandSideBar(brandId);
@@ -337,19 +337,22 @@ angular.module('brand')
                         $scope.gallery = [];
                     else {
                         $scope.gallery = JSON.parseJSON(data.gallery);
-                        saveGalleryToFactory();
+                        saveToFactory();
                     }
                 }, function() {});
             } else
                 oldData.gallery;
         }
 
-        function saveGalleryToFactory() {
+        function saveToFactory() {
             brandFactory.setData({
                 brand_id: brandId,
-                gallery: $scope.gallery
+                gallery: $scope.gallery,
+                categories: $scope.brand.categories,
+                currentCategory: $scope.category
             })
         }
+
         $scope.showProducts = function() {
             if ($scope.products == null) {
                 var fields = {
@@ -360,9 +363,45 @@ angular.module('brand')
                 brandRemote.get(fields, function(data) {
                     if (data.undefined == null) {
                         $scope.brand.categories = data.menu;
-                        $scope.category = $scope.brand.categories[0];
+                        if ($scope.brand.categories.length > 0) {
+                            $('.z-dropdown').click();
+                            $scope.category = $scope.brand.categories[0];
+                            saveToFactory();
+                        }
+
                     }
                 }, function() {});
+            }
+        }
+
+        $scope.createCategory = function(name) {
+            if (name == '')
+                return;
+
+            productCategoryRemote.create({
+                brand_id: brandId,
+                name: name
+            }, function(data) {
+                if (data.error == undefined) {
+                    $scope.brand.categories.unshift({
+                        id: data.category_id,
+                        name: name,
+                        products: []
+                    })
+
+                    $scope.category = $scope.brand.categories[0];
+                    saveToFactory();
+                }
+            }, function() {});
+        }
+
+        $scope.changeCategory = function(id) {
+            for (var i = 0; i < $scope.brand.categories.length; i++) {
+                if ($scope.brand.categories[i].id == id) {
+                    $scope.category = $scope.brand.categories[i];
+                    saveToFactory();
+                    return;
+                }
             }
         }
 
@@ -495,6 +534,7 @@ angular.module('brand')
 
             }, function() {})
         }
+
         $scope.$watch('brand', function() {
             if ($scope.brand != null) {
                 dataFactory.updateBrandHeader($scope.brand);

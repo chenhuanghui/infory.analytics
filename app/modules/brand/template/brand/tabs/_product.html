@@ -6,16 +6,13 @@
         -->
         <div class="z-dropdown-wapper z-dropdown-btn left">
             <div class="z-dropdown">
-                <a class="trigger"><span>category 1</span></a>
+                <a class="trigger"><span>{{category.name}}</span></a>
                 <ul>
-                    <li><a>category 1</a></li>
-                    <li><a>category 2</a></li>
-                    <li><a>category 3</a></li>
-                    <li><a>category 4</a></li>
+                    <li style="cursor:pointer" ng-repeat="category in brand.categories"><a  ng-click="changeCategory(category.id)">{{category.name}}</a></li>
                     <li class="create-box">
                         <i class="icon-plus"></i>
-                        <input type="text" placeholder="new category"/>
-                        <input type="button" value="CREATE CATEGORY"/>
+                        <input type="text" placeholder="new category" ng-model="newCategoryName"/>
+                        <input type="button" value="CREATE CATEGORY" ng-click="createCategory(newCategoryName)"/>
                     </li>
                 </ul>
             </div>
