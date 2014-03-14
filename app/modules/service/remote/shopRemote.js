@@ -14,7 +14,10 @@ angular.module('smg.services')
                 },
                 delete: function(fields, success, error) {
                     $http.post(base_url + 'delete', fields).success(success).error(error);
-                }
+                },
+                removeImage: function(fields, success, error) {
+                    $http.post(base_url + 'remove_image', fields).success(success).error(error);
+                },
             }
         }
     ])

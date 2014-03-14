@@ -1,10 +1,11 @@
 angular.module('shop')
 
-.controller('ShopCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'shopRemote',
+.controller('ShopCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'shopRemote', 'shopFactory',
 
-    function($scope, $routeParams, remoteFactory, dataFactory, shopRemote) {
+    function($scope, $routeParams, remoteFactory, dataFactory, shopRemote, shopFactory) {
         var shopId = $routeParams.shopId;
         $scope.brandId = $routeParams.brandId;
+        var brandId = $routeParams.brandId;
         var tempShop = dataFactory.getTempShop();
         var brand = dataFactory.getCurrentBrand();
         var fields = null;
@@ -172,11 +173,27 @@ angular.module('shop')
         }
 
         $scope.deleteUserImage = function(id) {
-            console.log(id);
+            shopRemote.removeImage({
+                shop_id: shopId,
+                image_id: id
+            }, function(data) {
+                if (data.error == undefined) {
+                    for (var i = $scope.usersGallery.length - 1; i >= 0; i--) {
+                        if ($scope.usersGallery[i].id == id) {
+                            $scope.usersGallery.splice(i, 1);
+                            saveImageToFactory();
+                            return;
+                        }
+                    }
+                }
+            }, function() {});
         }
 
         $scope.showUsersGallery = function() {
-            if ($scope.usersGallery == null) {
+            var oldData = shopFactory.getData(brandId, shopId);
+
+
+            if (oldData == null) {
                 var fields = {
                     shop_id: shopId,
                     fields: '["user_gallery"]'
@@ -187,9 +204,20 @@ angular.module('shop')
                         $scope.usersGallery = [];
                     else {
                         $scope.usersGallery = data.user_gallery;
+                        saveImageToFactory();
                     }
                 }, function() {});
-            }
+            } else
+                $scope.usersGallery = oldData.usersGallery;
+
+        }
+
+        function saveImageToFactory() {
+            shopFactory.setData({
+                brand_id: brandId,
+                shop_id: shopId,
+                usersGallery: $scope.usersGallery
+            })
         }
 
     }
