@@ -173,9 +173,18 @@ angular.module('shop')
         }
 
         $scope.deleteUserImage = function(id) {
+            var index = -1;
+
+            for (var i = 0; i < $scope.usersGallery.length; i++) {
+                if ($scope.usersGallery[i].id == id) {
+                    index = i;
+                    break;
+                }
+            }
+
             shopRemote.removeImage({
                 shop_id: shopId,
-                image_id: id
+                image_id: index
             }, function(data) {
                 if (data.error == undefined) {
                     for (var i = $scope.usersGallery.length - 1; i >= 0; i--) {
