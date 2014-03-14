@@ -1,7 +1,7 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory',
-    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory',
+    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory) {
 
         var brandId = $routeParams.brandId;
         dataFactory.updateBrandSideBar(brandId);
@@ -324,8 +324,9 @@ angular.module('brand')
         };
 
         $scope.showGallery = function() {
+            var oldData = brandFactory.getData(brandId);
 
-            if ($scope.gallery == null) {
+            if (oldData == null) {
                 var fields = {
                     id: brandId,
                     fields: '["gallery"]'
@@ -334,12 +335,21 @@ angular.module('brand')
                 brandRemote.get(fields, function(data) {
                     if (data.gallery == null)
                         $scope.gallery = [];
-                    else
+                    else {
                         $scope.gallery = JSON.parseJSON(data.gallery);
+                        saveGalleryToFactory();
+                    }
                 }, function() {});
-            }
+            } else
+                oldData.gallery;
         }
 
+        function saveGalleryToFactory() {
+            brandFactory.setData({
+                brand_id: brandId,
+                gallery: $scope.gallery
+            })
+        }
         $scope.showProducts = function() {
             if ($scope.products == null) {
                 var fields = {
