@@ -11,6 +11,7 @@ angular.module('engagement')
         $scope.events = remoteFactory.meta_events;
         $scope.metadata = remoteFactory.meta_lists;
         $scope.subfilters = [];
+        $scope.oldsubfilters = [];
 
         $scope.chartTypes = [{
             display_name: "Biểu đồ đường",
@@ -74,7 +75,7 @@ angular.module('engagement')
             $scope.hideTypeChart = oldData.hideTypeChart;
             $scope.chartData = oldData.chartData;
             $scope.data = oldData.data;
-            $scope.subfilters = oldData.subfilters;
+            $scope.oldsubfilters = oldData.oldsubfilters;
 
             fields = oldData.fields;
 
@@ -105,12 +106,36 @@ angular.module('engagement')
         $scope.changeEventBookmark = function(id) {
             for (var i = 0; i < $scope.eventBookmarks.length; i++) {
                 if ($scope.eventBookmarks[i].id == id) {
+
                     $scope.eventBookmark = $scope.eventBookmarks[i];
-                    $scope.subfilters = queryHelper.decode($scope.eventBookmark);
-                    //saveInfor();
+
+                    for (var j = 0; j < $scope.events.length; j++) {
+                        if ($scope.events[i] == $scope.eventBookmark.event) {
+                            $scope.event = $scope.events[i];
+                            break;
+                        }
+                    }
+
+                    if ($scope.eventBookmark.compare_by != undefined) {
+                        var object = JSON.parse($scope.eventBookmark.compare_by);
+                        for (var o in object)
+                            $scope.compareUnit = getCompareTo({
+                                name: object[o].property
+                            });
+                    }
+
+                    $scope.oldsubfilters = queryHelper.decode($scope.eventBookmark);
+
                     return;
                 }
             }
+        }
+
+
+        function getCompareTo(old) {
+            for (var i = 0; i < $scope.event.compare_properties.length; i++)
+                if ($scope.event.compare_properties[i].name == old.name)
+                    return $scope.event.compare_properties[i];
         }
 
         function saveInfor() {
@@ -131,7 +156,7 @@ angular.module('engagement')
                 fields: fields,
                 compareUnit: $scope.compareUnit,
                 event: $scope.event,
-                subfilters: saveSubfilters,
+                oldsubfilters: saveSubfilters,
                 eventBookmark: $scope.eventBookmark,
                 eventBookmarks: $scope.eventBookmarks,
                 isHasBookmark: $scope.isHasBookmark

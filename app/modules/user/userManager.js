@@ -17,9 +17,9 @@ angular.module('user')
                 $scope.userList = oldData.userList;
                 $scope.checkList = oldData.checkList;
                 $scope.checkAll = oldData.checkAll;
-                $scope.subfilters = oldData.subfilters;
+                $scope.oldsubfilters = oldData.oldsubfilters;
             } else
-                $scope.subfilters = [];
+                $scope.oldsubfilters = [];
 
             $scope.checkAllUser = function() {
                 var isChecked = $scope.checkAll;
@@ -40,7 +40,7 @@ angular.module('user')
                     checkList: $scope.checkList,
                     userList: $scope.userList,
                     checkAll: $scope.checkAll,
-                    subfilters: saveSubfilters
+                    oldsubfilters: saveSubfilters
                 })
             }
 

@@ -5,6 +5,7 @@ angular.module('smgDirectives', ['ui.date'])
             restrict: "A",
             templateUrl: 'common/template/filter.html',
             scope: {
+                oldsubfilters: '=',
                 subfilters: "=",
                 metas: "=",
                 events: "=",
@@ -12,14 +13,19 @@ angular.module('smgDirectives', ['ui.date'])
                 event: "=",
             },
             controller: function($scope) {
-                if ($scope.subfilters != null && $scope.subfilters != undefined && $scope.subfilters.length != 0)
-                    $scope.olddata = $scope.subfilters;
+                if ($scope.oldsubfilters != null && $scope.oldsubfilters != undefined && $scope.oldsubfilters.length != 0) {
+                    $scope.olddata = $scope.oldsubfilters;
+                }
 
                 $scope.subfilters = [];
 
-                $scope.$watch('subfilters', function() {
-                    if ($scope.subfilters != null && $scope.subfilters != undefined && $scope.subfilters.length != 0)
-                        $scope.olddata = $scope.subfilters;
+                $scope.$watch('oldsubfilters', function() {
+                    if ($scope.oldsubfilters != null && $scope.oldsubfilters != undefined && $scope.oldsubfilters.length != 0 && $scope.oldsubfilters[0].event != undefined) {
+                        $scope.olddata = $scope.oldsubfilters;
+                        var old = $scope.subfilters;
+                        $scope.subfilters = [];
+                        $scope.subfilters.push(old[0]);
+                    }
                 })
 
                 var num = 0;
@@ -38,7 +44,6 @@ angular.module('smgDirectives', ['ui.date'])
                 }
             }
         };
-
     })
     .directive('subfilter', function($compile) {
         var qc = 1,
@@ -104,11 +109,13 @@ angular.module('smgDirectives', ['ui.date'])
                     qc++;
                 }
 
-                scope.$watch('olddata', function() {
-                    update();
+                scope.$watch('olddata', function(newValue, oldValue) {
+                    if (scope.olddata != undefined && scope.olddata.length != 0 && scope.olddata.event == undefined) {
+                        update();
+                    }
                 });
 
-                update();
+                //update();
 
                 function update() {
                     if (scope.olddata != undefined && scope.olddata.length != 0) {
@@ -167,8 +174,7 @@ angular.module('smgDirectives', ['ui.date'])
                             if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
                                 scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
                         } else {
-                            scope.olddata = JSON.parse(scope.olddata);
-                            var olddata = scope.olddata;
+                            var olddata = JSON.parse(scope.olddata);
                             var event = olddata.event;
                             var property = olddata.property;
                             var paremeters = olddata.paremeters;
