@@ -125,7 +125,9 @@ angular.module('home')
                         $scope.time_unit_4 = getTimeUnit(oldData.time_unit_4);
 
                         updateEvent();
-                        $scope.compareUnit = getCompareTo(oldData.compare_unit);
+                        if (oldData.compare_unit != null)
+                            $scope.compareUnit = getCompareTo(oldData.compare_unit);
+
                         $scope.isHasBookmark = oldData.is_has_bookmark;
                     }
 

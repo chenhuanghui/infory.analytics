@@ -365,7 +365,7 @@ angular.module('brand')
                     if (data.undefined == null) {
                         $scope.brand.categories = data.menu;
                         if ($scope.brand.categories.length > 0) {
-                            $('.z-dropdown').click();
+
                             $scope.category = $scope.brand.categories[0];
                             saveToFactory();
                         }
@@ -374,7 +374,7 @@ angular.module('brand')
                 }, function() {});
             } else {
                 $scope.categories = oldData.categories;
-                $scope.currentCategory = oldData.currentCategory;
+                $scope.category = oldData.currentCategory;
             }
         }
 

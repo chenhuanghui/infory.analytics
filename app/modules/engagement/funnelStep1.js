@@ -22,6 +22,7 @@ angular.module('engagement')
             $scope.behaviours = [{
                 id: 0,
                 metas: $scope.metas,
+                event: $scope.events[0],
                 events: $scope.events,
                 metadata: $scope.metadata,
                 subfilters: null
@@ -94,7 +95,6 @@ angular.module('engagement')
             }
 
             $scope.funnel = function() {
-                $location.path('/funnel/step2/' + brandId);
                 fields.funnel = [];
                 columnNames = [];
 

@@ -25,12 +25,10 @@
                             -->
                             <div class="z-dropdown-wapper">
                                 <div class="z-dropdown">
-                                    <a class="trigger"><span>category 1</span></a>
+                                    <a class="trigger"><span>{{eventBookmark.bookmark_name}}</span></a>
                                     <ul>
-                                        <li><a>category 1</a></li>
-                                        <li><a>category 2</a></li>
-                                        <li><a>category 3</a></li>
-                                        <li><a>category 4</a></li>
+                                        <li ng-repeat="eventBookmark in eventBookmarks"><a ng-click="changeEventBookmark(eventBookmark.id)">{{eventBookmark.bookmark_name}}</a></li>
+                                        
                                         <li class="create-box">
                                             <i class="icon-plus"></i>
                                             <input type="text" placeholder="new category"/>

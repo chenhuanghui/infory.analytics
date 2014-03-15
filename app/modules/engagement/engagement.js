@@ -1,8 +1,8 @@
 angular.module('engagement')
 
-.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper', 'bookmarkRemote', 'homeFactory', 'segmentationFactory',
+.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper', 'bookmarkRemote', 'homeFactory', 'segmentationFactory', 'dataFactory', 'queryHelper',
 
-    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote, homeFactory, segmentationFactory) {
+    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote, homeFactory, segmentationFactory, dataFactory, queryHelper) {
 
         var brandId = $routeParams.brandId;
 
@@ -76,11 +76,40 @@ angular.module('engagement')
             $scope.subfilters = oldData.subfilters;
 
             fields = oldData.fields;
+
+            $scope.eventBookmark = oldData.eventBookmark;
+            $scope.eventBookmarks = oldData.eventBookmarks;
+            $scope.isHasBookmark = oldData.isHasBookmark;
+
         } else {
             $scope.time_unit = $scope.time_units[0];
             $scope.chartType = $scope.chartTypes[0];
             $scope.event = $scope.events[0];
             $scope.compareUnit = $scope.event.compare_properties[0];
+
+            dataFactory.getBookmarks(brandId, function(data) {
+                    data.bookmarks.event_bookmarks.unshift({
+                        bookmark_name: 'Chọn bộ lọc đã lưu'
+                    });
+
+                    $scope.eventBookmarks = data.bookmarks.event_bookmarks;
+                    $scope.eventBookmark = data.bookmarks.event_bookmarks[0];
+
+                    saveInfor();
+
+                },
+                function() {});
+        }
+
+        $scope.changeEventBookmark = function(id) {
+            for (var i = 0; i < $scope.eventBookmarks.length; i++) {
+                if ($scope.eventBookmarks[i].id == id) {
+                    $scope.eventBookmark = $scope.eventBookmarks[i];
+                    $scope.subfilters = queryHelper.decode($scope.eventBookmark);
+                    //saveInfor();
+                    return;
+                }
+            }
         }
 
         function saveInfor() {
@@ -101,7 +130,10 @@ angular.module('engagement')
                 fields: fields,
                 compareUnit: $scope.compareUnit,
                 event: $scope.event,
-                subfilters: saveSubfilters
+                subfilters: saveSubfilters,
+                eventBookmark: $scope.eventBookmark,
+                eventBookmarks: $scope.eventBookmarks,
+                isHasBookmark: $scope.isHasBookmark
             })
         }
 
