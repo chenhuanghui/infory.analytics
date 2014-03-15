@@ -3,6 +3,8 @@ angular.module('shop')
 .controller('ShopCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'shopRemote', 'shopFactory',
 
     function($scope, $routeParams, remoteFactory, dataFactory, shopRemote, shopFactory) {
+
+        var base_url = remoteFactory.getBaseUrl();
         var shopId = $routeParams.shopId;
         $scope.brandId = $routeParams.brandId;
         dataFactory.updateBrandSideBar($scope.brandId);
@@ -221,6 +223,53 @@ angular.module('shop')
             })
         }
 
+        $scope.changeCover = function($files) {
+            var fd = new FormData();
+            fd.append('cover', $files[0]);
+            fd.append('shop_id', shopId);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', base_url + 'shop/update', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var respone = JSON.parse(xhr.responseText);
+                    if (respone.cover != undefined) {
+                        $scope.$apply(function() {
+                            $scope.shop.cover = respone.cover;
+                        });
+
+                        dataFactory.setCurrentShop($scope.shop);
+                        dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
+                    }
+                }
+            }
+            xhr.send(fd);
+        };
+
+        $scope.uploadImage = function($files) {
+            var fd = new FormData();
+            fd.append('shop_id', shopId);
+            fd.append('image', $files[0]);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', base_url + 'shop/add_image', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var respone = JSON.parse(xhr.responseText);
+                    if (respone.thumbnail_url != undefined) {
+                        $scope.$apply(function() {
+                            $scope.usersGallery.unshift({
+                                url: respone.thumbnail_url,
+                                id: respone.id
+                            });
+
+                            saveImageToFactory();
+                        });
+                    }
+                }
+            }
+            xhr.send(fd);
+        }
     }
 ])
 

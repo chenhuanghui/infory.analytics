@@ -1,7 +1,7 @@
 <div class="z-gallery">
     <div class="z-header">
         <span>{{usersGallery.length}}</span> hình ảnh được tải lên
-        <input type="file" class="right"/>
+        <input type="file" class="right" ng-file-select="uploadImage($files)"/>
     </div>
     <div class="z-content">
         <div class="item" ng-repeat="image in usersGallery">
