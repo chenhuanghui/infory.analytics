@@ -1,5 +1,5 @@
 angular.module('smgDirectives', ['ui.date'])
-    .directive('smgFilter', function($compile) {
+    .directive('smgFilter', function($compile, $document) {
 
         return {
             restrict: "A",
@@ -24,9 +24,15 @@ angular.module('smgDirectives', ['ui.date'])
                         $scope.olddata = $scope.oldsubfilters;
                         var old = $scope.subfilters;
 
-                        /** not fixed yet **/
-                        // for (var i = 1; i < old.length; i++)
-                        //     old[i].removeCondition();
+                        /** not fixed yet**/
+                        for (var i = 1; i < old.length; i++) {
+                            var id = old[i].getValue().id;
+                            var name1 = '.special_' + id;
+                            var name2 = '.row_' + id;
+
+                            $(name1).remove();
+                            $(name2).remove();
+                        }
 
                         $scope.subfilters = [];
                         $scope.subfilters.push(old[0]);
@@ -97,7 +103,7 @@ angular.module('smgDirectives', ['ui.date'])
 
                     var action_nor = $compile('<span class="btn-flat white action action_child clearfix  row_' + qc + '">{{operator}}</span>')(scope);
 
-                    var query_row = $compile('<div query-record operator="operator" id="' + qc + '" events="events" metas="metas" event="event"' + oldDataString + 'metadata="metadata" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
+                    var query_row = $compile('<div query-record operator="operator" class="special_' + qc + '" id="' + qc + '" events="events" metas="metas" event="event"' + oldDataString + 'metadata="metadata" class="row_' + qc + '" data=".row_' + qc + '"></div>')(scope);
 
                     if (element.find(".action").length > 0) {
                         $actionGroup.append(action_nor);
