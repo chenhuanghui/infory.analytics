@@ -31,8 +31,8 @@
                                         
                                         <li class="create-box">
                                             <i class="icon-plus"></i>
-                                            <input type="text" placeholder="new category"/>
-                                            <input type="button" value="CREATE CATEGORY"/>
+                                            <input type="text" placeholder="new category" ng-model="newCategoryName"/>
+                                            <input type="button" value="CREATE CATEGORY" ng-click="createEvent(newCategoryName)"/>
                                         </li>
                                     </ul>
                                 </div>

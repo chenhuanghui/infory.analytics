@@ -72,18 +72,21 @@ angular.module('engagement')
                     break;
                 }
 
+            $scope.time_unit = getTimeUnit(oldData.time_unit.name);
+            $scope.compareUnit = getCompareTo(oldData.compareUnit);
+
             $scope.hideTypeChart = oldData.hideTypeChart;
             $scope.chartData = oldData.chartData;
             $scope.data = oldData.data;
-            $scope.oldsubfilters = oldData.oldsubfilters;
+
+            //$scope.oldsubfilters = oldData.oldsubfilters;
 
             fields = oldData.fields;
 
             $scope.eventBookmark = oldData.eventBookmark;
+            $scope.oldsubfilters = queryHelper.decode($scope.eventBookmark);
             $scope.eventBookmarks = oldData.eventBookmarks;
             $scope.isHasBookmark = oldData.isHasBookmark;
-            $scope.time_unit = oldData.time_unit;
-            $scope.compareUnit = oldData.compareUnit;
 
         } else {
             $scope.time_unit = $scope.time_units[0];
@@ -131,11 +134,11 @@ angular.module('engagement')
                     $scope.time_unit = getTimeUnit($scope.eventBookmark.time_unit);
                     $scope.oldsubfilters = queryHelper.decode($scope.eventBookmark);
 
+                    saveInfor();
                     return;
                 }
             }
         }
-
 
         function getTimeUnit(old) {
             for (var i = 0; i < $scope.time_units.length; i++)
@@ -192,22 +195,26 @@ angular.module('engagement')
                     pare.compare_by = fields.compare_by;
 
                 bookmarkRemote.eventUpdate(pare, function(data) {
-
+                    saveInfor();
                 }, function() {});
             }
 
         }
 
-        $scope.saveFilter = function() {
+        $scope.createEvent = function(name) {
+            if (name == '')
+                return;
+
             buildQuery();
-            fields.bookmark_name = 'user_age';
+            fields.bookmark_name = name;
+            homeFactory.addEventBookmark(brandId, fields);
 
-            bookmarkRemote.eventCreate(fields, function(data) {
-                if (data.error == undefined) {
-                    homeFactory.addEventBookmark(brandId, fields);
-                }
+            // bookmarkRemote.eventCreate(fields, function(data) {
+            //     if (data.error == undefined) {
+            //         homeFactory.addEventBookmark(brandId, fields);
+            //     }
 
-            }, function() {});
+            // }, function() {});
         }
 
         function buildQuery() {
