@@ -58,7 +58,7 @@
         <ul class="list-product">
             <li>
                 <span class="circle left">1</span>
-                <img src="{{product.images[0]}}" class="left" />
+                <img ng-src="{{product.images[0]}}" class="left"/>
                 <span class="name">{{product.name}}</span>
                 <br />
                 <span class="description">{{product.full_description}}</span>
@@ -70,8 +70,8 @@
                 <div class="property col-md-3">Hình ảnh phẩm</div>
                 <div class="value col-md-9">
                     <div class="edit">
-                        <img src="{{product.images[0]}}" class="left" /> 
-                        <input type="file" class="right"/>
+                        <img ng-src="{{product.images[0]}}" class="left" /> 
+                        <input type="file" class="right" ng-file-select="changeProductLogo(product.category_id, product.id, $files)"/>
                     </div>
                 </div>
             </li>

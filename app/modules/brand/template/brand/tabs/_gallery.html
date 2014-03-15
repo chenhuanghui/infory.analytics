@@ -1,13 +1,13 @@
 <div class="z-gallery">
     <div class="z-header">
         <span>{{gallery.length}}</span> hình ảnh được tải lên
-        <input type="file" class="right"/>
+        <input type="file" class="right" ng-file-select="uploadImage($files)"/>
     </div>
     <div class="z-content">
         <div class="item" ng-repeat="image in gallery">
             <i class="icon-remove-sign"></i>
-            <div class="mask"><img src="img/kitchen_adventurer_caramel.jpg" /></div>
+            <div class="mask"><img ng-src="{{image.url}}" /></div>
             <!--<img src="{{image.url}}" ng-repeat="image in gallery"/>-->
         </div>
-    </div>        
+    </div>          
 </div>

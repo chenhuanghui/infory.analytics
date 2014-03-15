@@ -3,7 +3,7 @@ angular.module('brand')
 .controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory', 'productCategoryRemote', 'remoteFactory',
     function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory, productCategoryRemote, remoteFactory) {
 
-        var base_url = remoteFactory.getBaseUrl() + 'brand/';
+        var base_url = remoteFactory.getBaseUrl();
         var brandId = $routeParams.brandId;
         if (brandId != null) {
             $scope.brandId = brandId;
@@ -284,7 +284,7 @@ angular.module('brand')
             fd.append('brand_id', brandId);
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://dev2.smartguide.vn/dashboard/api/v1/brand/update', true);
+            xhr.open('POST', base_url + 'brand/update', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
@@ -306,7 +306,7 @@ angular.module('brand')
             fd.append('brand_id', brandId);
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://dev2.smartguide.vn/dashboard/api/v1/brand/update', true);
+            xhr.open('POST', base_url + 'brand/update', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
@@ -434,6 +434,57 @@ angular.module('brand')
                     }
                 }
             }, function() {});
+        }
+
+        $scope.changeProductLogo = function(categoryId, productId, $files) {
+            var fd = new FormData();
+            fd.append('product_id', productId);
+            fd.append('category_id', categoryId);
+            fd.append('images', $files[0]);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', base_url + 'product/update', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var respone = JSON.parse(xhr.responseText);
+                    $scope.$apply(function() {
+                        for (var i = 0; i < $scope.brand.categories.length; i++) {
+                            if ($scope.brand.categories[i].id == categoryId) {
+                                for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
+                                    if ($scope.brand.categories[i].products[j].id == productId) {
+                                        $scope.brand.categories[i].products[j].images = respone.images;
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+            xhr.send(fd);
+        }
+
+        $scope.uploadImage = function($files) {
+            var fd = new FormData();
+            fd.append('brand_id', brandId);
+            fd.append('image', $files[0]);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', base_url + 'brand/add_image', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var respone = JSON.parse(xhr.responseText);
+                    if (respone.thumbnail_url != undefined) {
+                        $scope.$apply(function() {
+                            $scope.gallery.unshift({
+                                url: respone.thumbnail_url,
+                                id: respone.id
+                            });
+                        });
+                    }
+                }
+            }
+            xhr.send(fd);
         }
 
         $scope.changeProductDescription = function(categoryId, productId, description) {
