@@ -1,9 +1,9 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory', 'productCategoryRemote',
-    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory, productCategoryRemote) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory', 'productCategoryRemote', 'remoteFactory',
+    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory, productCategoryRemote, remoteFactory) {
 
-
+        var base_url = remoteFactory.getBaseUrl() + 'brand/';
         var brandId = $routeParams.brandId;
         if (brandId != null) {
             $scope.brandId = brandId;
@@ -278,57 +278,48 @@ angular.module('brand')
             });
         };
 
-        $scope.changeCover = function($files) {
-            // $upload.upload({
-            //     url: 'http://smartguide.dev/dashboard/api/v1/brand/update', //upload.php script, node.js route, or servlet url
-            //     // method: POST,
-            //     // headers: {'headerKey': 'headerValue'},
-            //     //withCredentials: true,
-            //     data: {
-            //         brand_id: brandId
-            //     },
-            //     file: $files[0],
+        $scope.changeLogo = function($files) {
+            var fd = new FormData();
+            fd.append('logo', $files[0]);
+            fd.append('brand_id', brandId);
 
-            // }).progress(function(evt) {
-            //     console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-            // }).success(function(data, status, headers, config) {
-            //     console.log(data);
-            // });
-            $.ajaxFileUpload({
-                type: 'POST',
-                url: 'http://smartguide.dev/dashboard/api/v1/brand/update',
-                crossDomain: true,
-                fileElementId: 'cover',
-                data: {
-                    brand_id: brandId,
-                },
-                dataType: 'json',
-                success: function(responseData, textStatus, jqXHR) {
-                    console.log(responseData);
-                },
-                error: function(responseData, textStatus, errorThrown) {
-                    console.warn(responseData, textStatus, errorThrown);
-                    alert('CORS failed - ' + textStatus);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://dev2.smartguide.vn/dashboard/api/v1/brand/update', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var respone = JSON.parse(xhr.responseText);
+                    if (respone.logo != undefined) {
+                        $scope.$apply(function() {
+                            $scope.brand.logo = respone.logo;
+                        });
+
+                        dataFactory.setCurrentBrand($scope.brand);
+                    }
                 }
-            });
+            }
+            xhr.send(fd);
+        };
 
-            // $http({
-            //     method: 'POST',
-            //     url: "http://smartguide.dev/dashboard/api/v1/brand/update",
-            //     headers: {
-            //         'Content-Type': false
-            //     },
-            //     data: {
-            //         brand_id: brandId,
-            //         cover: $files[0]
-            //     }
-            // }).
-            // success(function(data, status, headers, config) {
-            //     console.log(data);
-            // }).
-            // error(function(data, status, headers, config) {
-            //     alert("failed!");
-            // });
+        $scope.changeCover = function($files) {
+            var fd = new FormData();
+            fd.append('cover', $files[0]);
+            fd.append('brand_id', brandId);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://dev2.smartguide.vn/dashboard/api/v1/brand/update', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    var respone = JSON.parse(xhr.responseText);
+                    if (respone.cover != undefined) {
+                        $scope.$apply(function() {
+                            $scope.brand.cover = respone.cover;
+                        });
+
+                        dataFactory.setCurrentBrand($scope.brand);
+                    }
+                }
+            }
+            xhr.send(fd);
         };
 
         $scope.showGallery = function() {
