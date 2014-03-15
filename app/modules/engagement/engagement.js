@@ -195,7 +195,25 @@ angular.module('engagement')
                     pare.compare_by = fields.compare_by;
 
                 bookmarkRemote.eventUpdate(pare, function(data) {
-                    saveInfor();
+                    if (data.error == undefined) {
+                        for (var i = 0; i < $scope.eventBookmarks.length; i++)
+                            if ($scope.eventBookmarks[i].id == id) {
+                                var bookmark = {
+                                    bookmark_name: $scope.eventBookmark.name,
+                                    id: id,
+                                    brand_id: brandId,
+                                    event: fields.event,
+                                    filter: fields.filter,
+                                    compare_by: fields.compare_by,
+                                    time_unit: fields.time_unit
+                                }
+
+                                $scope.eventBookmarks[i] = bookmark;
+                                $scope.eventBookmark = bookmark;
+                                dataFactory.setEventBookmarks(brandId, $scope.eventBookmarks);
+                                return;
+                            }
+                    }
                 }, function() {});
             }
 
@@ -207,14 +225,27 @@ angular.module('engagement')
 
             buildQuery();
             fields.bookmark_name = name;
-            homeFactory.addEventBookmark(brandId, fields);
 
-            // bookmarkRemote.eventCreate(fields, function(data) {
-            //     if (data.error == undefined) {
-            //         homeFactory.addEventBookmark(brandId, fields);
-            //     }
+            bookmarkRemote.eventCreate(fields, function(data) {
+                if (data.error == undefined) {
+                    var bookmark = {
+                        bookmark_name: name,
+                        id: data.bookmark_id,
+                        brand_id: brandId,
+                        event: fields.event,
+                        filter: fields.filter,
+                        compare_by: fields.compare_by,
+                        time_unit: fields.time_unit
+                    }
 
-            // }, function() {});
+                    $scope.eventBookmarks.push(bookmark);
+                    $scope.changeEventBookmark(bookmark.id);
+
+                    dataFactory.setEventBookmarks(brandId, $scope.eventBookmarks);
+                    homeFactory.addEventBookmark(brandId, fields);
+                }
+
+            }, function() {});
         }
 
         function buildQuery() {
