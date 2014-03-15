@@ -199,7 +199,7 @@ angular.module('engagement')
                         for (var i = 0; i < $scope.eventBookmarks.length; i++)
                             if ($scope.eventBookmarks[i].id == id) {
                                 var bookmark = {
-                                    bookmark_name: $scope.eventBookmark.name,
+                                    bookmark_name: $scope.eventBookmark.bookmark_name,
                                     id: id,
                                     brand_id: brandId,
                                     event: fields.event,
@@ -209,7 +209,7 @@ angular.module('engagement')
                                 }
 
                                 $scope.eventBookmarks[i] = bookmark;
-                                $scope.eventBookmark = bookmark;
+                                $scope.eventBookmark = $scope.eventBookmarks[i];
                                 dataFactory.setEventBookmarks(brandId, $scope.eventBookmarks);
 
                                 saveInfor();

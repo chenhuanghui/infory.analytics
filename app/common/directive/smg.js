@@ -255,8 +255,17 @@ angular.module('smgDirectives', ['ui.date'])
                     }
 
                     scope.removeCondition = function($event) {
-                        rowId = $($event.target).parent().parent().attr("data");
-                        element.parents().find(rowId).remove();
+                        // rowId = $($event.target).parent().parent().attr("data");
+                        // element.parents().find(rowId).remove();
+                        // ctrl.removeFilter(scope.id);
+
+                        var id = scope.id;
+                        var name1 = '.special_' + id;
+                        var name2 = '.row_' + id;
+
+                        $(name1).remove();
+                        $(name2).remove();
+
                         ctrl.removeFilter(scope.id);
                     }
 

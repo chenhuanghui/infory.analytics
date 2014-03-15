@@ -38,9 +38,9 @@ angular.module('smg.services')
 
 
             return {
-                setEventBookmarks: function(brandId, bookmarks) {
+                setEventBookmarks: function(brandId, event_bookmarks) {
                     bookmarks.brand_id = brandId;
-                    bookmarks.bookmarks.event_bookmarks = bookmarks.event_bookmarks;
+                    bookmarks.bookmarks.event_bookmarks = event_bookmarks;
                 },
                 setBookmarks: function(brandId, bookmarks) {
                     bookmarks.brand_id = brandId;
