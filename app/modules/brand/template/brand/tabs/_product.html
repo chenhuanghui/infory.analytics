@@ -71,7 +71,7 @@
                 <div class="value col-md-9">
                     <div class="edit">
                         <img ng-src="{{product.images[0]}}" class="left" /> 
-                        <input type="file" class="right" ng-file-select="changeProductLogo(product.category_id, product.id, $files)"/>
+                        <input type="file" class="right" ng-file-select="changeProductLogo(product.category_id, product.id, $files); hideDetail = !hideDetail"/>
                     </div>
                 </div>
             </li>

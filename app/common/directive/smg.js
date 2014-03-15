@@ -24,7 +24,6 @@ angular.module('smgDirectives', ['ui.date'])
                         $scope.olddata = $scope.oldsubfilters;
                         var old = $scope.subfilters;
 
-                        /** not fixed yet**/
                         for (var i = 1; i < old.length; i++) {
                             var id = old[i].getValue().id;
                             var name1 = '.special_' + id;
