@@ -3,6 +3,7 @@ angular.module('user')
         function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote) {
 
             var brandId = $routeParams.brandId;
+            dataFactory.updateBrandSideBar(brandId);
 
             dataFactory.getBrand(brandId, function(data) {
                 $scope.brand = data;

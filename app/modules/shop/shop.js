@@ -5,6 +5,7 @@ angular.module('shop')
     function($scope, $routeParams, remoteFactory, dataFactory, shopRemote, shopFactory) {
         var shopId = $routeParams.shopId;
         $scope.brandId = $routeParams.brandId;
+        dataFactory.updateBrandSideBar($scope.brandId);
         var brandId = $routeParams.brandId;
         var tempShop = dataFactory.getTempShop();
         var brand = dataFactory.getCurrentBrand();

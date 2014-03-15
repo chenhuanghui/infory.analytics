@@ -10,6 +10,7 @@ angular.module('user')
         $scope.username = user_pre.username;
         $scope.avatar = user_pre.avatar;
         $scope.brandId = $routeParams.brandId;
+        dataFactory.updateBrandSideBar($scope.brandId);
         $scope.userId = $routeParams.userId;
 
         dataFactory.getUserProfile($scope.brandId, $scope.userId, function(userProfile) {

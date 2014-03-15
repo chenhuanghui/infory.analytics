@@ -5,6 +5,7 @@ angular.module('engagement')
     function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote, homeFactory, segmentationFactory, dataFactory, queryHelper) {
 
         var brandId = $routeParams.brandId;
+        dataFactory.updateBrandSideBar(brandId);
 
         $scope.metas = remoteFactory.meta_property_types;
         $scope.events = remoteFactory.meta_events;

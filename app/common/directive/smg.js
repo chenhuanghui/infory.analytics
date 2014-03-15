@@ -16,6 +16,12 @@ angular.module('smgDirectives', ['ui.date'])
                     $scope.olddata = $scope.subfilters;
 
                 $scope.subfilters = [];
+
+                $scope.$watch('subfilters', function() {
+                    if ($scope.subfilters != null && $scope.subfilters != undefined && $scope.subfilters.length != 0)
+                        $scope.olddata = $scope.subfilters;
+                })
+
                 var num = 0;
 
                 this.addFilter = function(scope) {
@@ -98,13 +104,21 @@ angular.module('smgDirectives', ['ui.date'])
                     qc++;
                 }
 
-                if (scope.olddata != undefined && scope.olddata.length != 0) {
-                    scope.firstData = JSON.stringify(scope.olddata[0]);
-                    for (var i = 1; i < scope.olddata.length; i++) {
-                        scope.addCondition(scope.olddata[i]);
+                scope.$watch('olddata', function() {
+                    update();
+                });
+
+                update();
+
+                function update() {
+                    if (scope.olddata != undefined && scope.olddata.length != 0) {
+                        scope.firstData = JSON.stringify(scope.olddata[0]);
+                        for (var i = 1; i < scope.olddata.length; i++) {
+                            scope.addCondition(scope.olddata[i]);
+                        }
+                    } else {
+                        scope.firstData = null;
                     }
-                } else {
-                    scope.firstData = null;
                 }
             }
         };
@@ -142,57 +156,69 @@ angular.module('smgDirectives', ['ui.date'])
                         secondInput: ''
                     }
 
-                    if (scope.olddata == 'null' || scope.olddata == '[]' || scope.olddata == null || scope.olddata == '') {
-                        scope.property = scope.event.properties[0];
-                        scope.meta = scope.metas[scope.property.type].operators_display[0];
-                        if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
-                            scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
-                    } else {
-                        scope.olddata = JSON.parse(scope.olddata);
-                        var olddata = scope.olddata;
-                        var event = olddata.event;
-                        var property = olddata.property;
-                        var paremeters = olddata.paremeters;
-                        var meta = olddata.meta;
-                        var data = olddata.data;
-                        var paremeters = olddata.paremeters;
-                        var operator = olddata.operator;
-                        var id = olddata.id;
+                    scope.$watch('olddata', function() {
+                        update();
+                    });
 
-                        for (var i = 0; i < scope.events.length; i++)
-                            if (scope.events[i].name == event) {
-                                scope.event = scope.events[i];
-                                break;
+                    function update() {
+                        if (scope.olddata == 'null' || scope.olddata == '[]' || scope.olddata == null || scope.olddata == '') {
+                            scope.property = scope.event.properties[0];
+                            scope.meta = scope.metas[scope.property.type].operators_display[0];
+                            if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
+                                scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
+                        } else {
+                            scope.olddata = JSON.parse(scope.olddata);
+                            var olddata = scope.olddata;
+                            var event = olddata.event;
+                            var property = olddata.property;
+                            var paremeters = olddata.paremeters;
+                            var meta = olddata.meta;
+                            var data = olddata.data;
+                            var paremeters = olddata.paremeters;
+                            var operator = olddata.operator;
+                            var id = olddata.id;
+
+                            for (var i = 0; i < scope.events.length; i++)
+                                if (scope.events[i].name == event) {
+                                    scope.event = scope.events[i];
+                                    break;
+                                }
+
+                            for (var i = 0; i < scope.event.properties.length; i++) {
+                                if (scope.event.properties[i].name == property.name) {
+                                    scope.property = scope.event.properties[i];
+                                    break;
+                                }
                             }
 
-                        for (var i = 0; i < scope.event.properties.length; i++) {
-                            if (scope.event.properties[i].name == property.name) {
-                                scope.property = scope.event.properties[i];
-                                break;
-                            }
+                            for (var i = 0; i < scope.metas[scope.property.type].operators_display.length; i++)
+                                if (scope.metas[scope.property.type].operators_display[i] == meta) {
+                                    scope.meta = scope.metas[scope.property.type].operators_display[i];
+                                    break;
+                                }
+
+                            scope.data = data;
+                            scope.paremeters = paremeters;
+                            scope.operator = operator;
+                            scope.id = id;
                         }
-
-                        for (var i = 0; i < scope.metas[scope.property.type].operators_display.length; i++)
-                            if (scope.metas[scope.property.type].operators_display[i] == meta) {
-                                scope.meta = scope.metas[scope.property.type].operators_display[i];
-                                break;
-                            }
-
-                        scope.data = data;
-                        scope.paremeters = paremeters;
-                        scope.operator = operator;
-                        scope.id = id;
                     }
 
+                    update();
+
                     scope.$watch('event', function() {
-                        if (olddata != undefined && scope.olddata != null && count++ == 0)
+                        if (scope.olddata != undefined && scope.olddata != null && count++ == 0)
                             return;
 
-                        scope.property = scope.event.properties[0];
+                        scope.updateFields();
+                    });
+
+                    scope.$watch('property', function() {
+                        scope.updateFields();
                     });
 
                     scope.updateFields = function() {
-                        if (olddata != undefined && scope.olddata != null && count++ == 1)
+                        if (scope.olddata != undefined && scope.olddata != null && count++ == 1)
                             return;
 
                         scope.meta = scope.metas[scope.property.type].operators_display[0];

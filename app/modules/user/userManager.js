@@ -2,7 +2,7 @@ angular.module('user')
     .controller('UserManagerCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote', 'userManagerFactory',
         function($scope, $routeParams, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote, userManagerFactory) {
             var brandId = $routeParams.brandId;
-
+            dataFactory.updateBrandSideBar(brandId);
             $scope.metas = remoteFactory.meta_property_types;
             $scope.event = remoteFactory.meta_profile;
             $scope.events = remoteFactory.meta_events;

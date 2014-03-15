@@ -3,6 +3,7 @@ angular.module('engagement')
         function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote) {
 
             var brandId = $routeParams.brandId;
+            dataFactory.updateBrandSideBar(brandId);
 
             var intervalDate = serviceHelper.getIntervalDate();
             $scope.data = [{

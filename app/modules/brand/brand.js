@@ -3,8 +3,15 @@ angular.module('brand')
 .controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory', 'productCategoryRemote',
     function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory, productCategoryRemote) {
 
+
         var brandId = $routeParams.brandId;
-        dataFactory.updateBrandSideBar(brandId);
+        if (brandId != null) {
+            $scope.brandId = brandId;
+        }
+
+        dataFactory.setUpdateBrandSideBarFunc(function(id) {
+            $scope.brandId = id;
+        });
 
         $scope.gallery = null;
         $scope.usersGallery = null;
@@ -46,6 +53,7 @@ angular.module('brand')
         }
 
         dataFactory.getBrands(function(brands) {
+
             $scope.brands = brands;
             if (brands.length != 0) {
                 if (brandId == null) {
