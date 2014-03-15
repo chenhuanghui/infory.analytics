@@ -211,6 +211,8 @@ angular.module('engagement')
                                 $scope.eventBookmarks[i] = bookmark;
                                 $scope.eventBookmark = bookmark;
                                 dataFactory.setEventBookmarks(brandId, $scope.eventBookmarks);
+
+                                saveInfor();
                                 return;
                             }
                     }
@@ -243,6 +245,7 @@ angular.module('engagement')
 
                     dataFactory.setEventBookmarks(brandId, $scope.eventBookmarks);
                     homeFactory.addEventBookmark(brandId, fields);
+                    saveInfor();
                 }
 
             }, function() {});
