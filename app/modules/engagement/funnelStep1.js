@@ -26,7 +26,8 @@ angular.module('engagement')
                 event: $scope.events[0],
                 events: $scope.events,
                 metadata: $scope.metadata,
-                subfilters: null
+                subfilters: null,
+                oldsubfilters: []
             }];
 
             var fields = {
@@ -53,7 +54,7 @@ angular.module('engagement')
                 $scope.behaviours = oldData.behaviours;
 
                 for (var i = 0; i < $scope.behaviours.length; i++) {
-                    $scope.behaviours[i].subfilters = oldData.saveSubfilters[i];
+                    $scope.behaviours[i].oldsubfilters = oldData.saveSubfilters[i];
                 }
 
                 $scope.validation = oldData.validation;
