@@ -9,7 +9,7 @@ angular.module('home')
 
         $scope.brandId = $routeParams.brandId;
         if ($scope.brandId != null) {
-            dataFactory.updateBrandSideBar(brandId);
+            dataFactory.updateBrandSideBar($scope.brandId);
             dataFactory.getBrand($scope.brandId, function(data) {
                 $scope.brand = data;
             }, function() {})

@@ -23,6 +23,11 @@ angular.module('smgDirectives', ['ui.date'])
                     if ($scope.oldsubfilters != null && $scope.oldsubfilters != undefined && $scope.oldsubfilters.length != 0 && $scope.oldsubfilters[0].event != undefined) {
                         $scope.olddata = $scope.oldsubfilters;
                         var old = $scope.subfilters;
+
+                        /** not fixed yet **/
+                        // for (var i = 1; i < old.length; i++)
+                        //     old[i].removeCondition();
+
                         $scope.subfilters = [];
                         $scope.subfilters.push(old[0]);
                     }

@@ -82,6 +82,8 @@ angular.module('engagement')
             $scope.eventBookmark = oldData.eventBookmark;
             $scope.eventBookmarks = oldData.eventBookmarks;
             $scope.isHasBookmark = oldData.isHasBookmark;
+            $scope.time_unit = oldData.time_unit;
+            $scope.compareUnit = oldData.compareUnit;
 
         } else {
             $scope.time_unit = $scope.time_units[0];
@@ -91,7 +93,8 @@ angular.module('engagement')
 
             dataFactory.getBookmarks(brandId, function(data) {
                     data.bookmarks.event_bookmarks.unshift({
-                        bookmark_name: 'Chọn bộ lọc đã lưu'
+                        bookmark_name: 'Chọn bộ lọc đã lưu',
+                        id: -1
                     });
 
                     $scope.eventBookmarks = data.bookmarks.event_bookmarks;
@@ -120,10 +123,12 @@ angular.module('engagement')
                         var object = JSON.parse($scope.eventBookmark.compare_by);
                         for (var o in object)
                             $scope.compareUnit = getCompareTo({
-                                name: object[o].property
+                                name: object[o].property,
+
                             });
                     }
 
+                    $scope.time_unit = getTimeUnit($scope.eventBookmark.time_unit);
                     $scope.oldsubfilters = queryHelper.decode($scope.eventBookmark);
 
                     return;
@@ -131,6 +136,12 @@ angular.module('engagement')
             }
         }
 
+
+        function getTimeUnit(old) {
+            for (var i = 0; i < $scope.time_units.length; i++)
+                if ($scope.time_units[i].name == old)
+                    return $scope.time_units[i];
+        }
 
         function getCompareTo(old) {
             for (var i = 0; i < $scope.event.compare_properties.length; i++)
@@ -159,8 +170,32 @@ angular.module('engagement')
                 oldsubfilters: saveSubfilters,
                 eventBookmark: $scope.eventBookmark,
                 eventBookmarks: $scope.eventBookmarks,
-                isHasBookmark: $scope.isHasBookmark
+                isHasBookmark: $scope.isHasBookmark,
+                time_unit: $scope.time_unit,
+                compareUnit: $scope.compareUnit
             })
+        }
+
+        $scope.updateDateEvent = function() {
+            var id = $scope.eventBookmark.id;
+            if (id != -1) {
+                buildQuery();
+                var pare = {
+                    bookmark_id: id,
+                    bookmark_name: $scope.eventBookmark.bookmark_name,
+                    event: fields.event,
+                    filter: fields.filter,
+                    time_unit: fields.time_unit
+                };
+
+                if (fields.compare_by != undefined)
+                    pare.compare_by = fields.compare_by;
+
+                bookmarkRemote.eventUpdate(pare, function(data) {
+
+                }, function() {});
+            }
+
         }
 
         $scope.saveFilter = function() {
