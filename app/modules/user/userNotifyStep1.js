@@ -9,9 +9,6 @@ angular.module('user')
                 $scope.brand = data;
             }, function() {});
 
-
-            var oldData = userNotifyFactory.getData(1);
-
             $scope.notifyTypes = [{
                 id: 0,
                 name: 'sms',
@@ -31,15 +28,24 @@ angular.module('user')
             $scope.validation = [
                 [true, true],
                 [true, true, true],
+                [true],
                 [true]
             ];
 
-            $scope.isOk = [false, false, false];
+            $scope.isOk = [false, false, false, false];
+            $scope.name = '';
 
+            var oldData = userNotifyFactory.getData(0, brandId);
             if (oldData != null) {
                 $scope.isCanGo = oldData.isCanGo;
                 $scope.validation = oldData.validation;
-                $scope.notifyType = oldData.notifyType;
+
+                for (var i = 0; i < $scope.notifyTypes.length; i++)
+                    if ($scope.notifyTypes[i].id == oldData.notifyType.id) {
+                        $scope.notifyType = $scope.notifyTypes[i];
+                        break;
+                    }
+
                 $scope.isOk = oldData.isOk;
                 $scope.sms_sender = oldData.sms_sender;
                 $scope.sms_content = oldData.sms_content;
@@ -47,6 +53,7 @@ angular.module('user')
                 $scope.email_content = oldData.email_content;
                 $scope.email_sender = oldData.email_sender;
                 $scope.in_app_content = oldData.in_app_content;
+                $scope.name = oldData.name;
             } else
                 $scope.notifyType = $scope.notifyTypes[0];
 
@@ -78,6 +85,8 @@ angular.module('user')
                     case 2:
                         $scope.validation[id][idChange] = checkString($scope.in_app_content);
                         break;
+                    case 3:
+                        $scope.validation[id][idChange] = checkString($scope.name);
                 }
 
                 $scope.isOk[id] = isOk(id);
@@ -92,10 +101,11 @@ angular.module('user')
 
             $scope.updateGoNext = function() {
                 for (var i = 0; i < $scope.isOk.length; i++)
-                    if ($scope.isOk[i] == true && $scope.notifyType.id == i) {
+                    if ($scope.isOk[i] == true && $scope.notifyType.id == i && $scope.isOk[3] == true) {
                         $scope.isCanGo = true;
                         return;
                     }
+
                 $scope.isCanGo = false;
             }
 
@@ -115,7 +125,8 @@ angular.module('user')
             }
 
             $scope.goToStep2 = function() {
-                userNotifyFactory.setData(1, {
+                userNotifyFactory.setData(0, {
+                    brand_id: brandId,
                     isCanGo: $scope.isCanGo,
                     isOk: $scope.isOk,
                     validation: $scope.validation,
@@ -126,6 +137,7 @@ angular.module('user')
                     email_content: $scope.email_content,
                     email_sender: $scope.email_sender,
                     in_app_content: $scope.in_app_content,
+                    name: $scope.name
                 });
                 $location.path('/user/notify-new/step2/' + brandId);
 

@@ -335,7 +335,7 @@ angular.module('brand')
                     if (data.gallery == null)
                         $scope.gallery = [];
                     else
-                        $scope.gallery = JSON.parseJSON(data.gallery);
+                        $scope.gallery = data.gallery;
 
                     saveToFactory();
                 }, function() {});

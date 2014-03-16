@@ -34,7 +34,23 @@
                             Lọc danh sách khách hàng theo
                         </div>
                         <div class="right">
-                            <div class="controller">
+                            <div class="controller" ng-hide="true">
+                                <div class="z-dropdown-wapper">
+                                <div class="z-dropdown">
+                                    <a class="trigger"><span>{{profileBookmark.bookmark_name}}</span></a>
+                                    <ul>
+                                        <li ng-repeat="profileBookmark in profileBookmarks"><a ng-click="changeProfileBookmark(profileBookmark.id)" style="cursor:pointer">{{profileBookmark.bookmark_name}}</a></li>
+                                        
+                                        <li class="create-box">
+                                            <i class="icon-plus"></i>
+                                            <input type="text" placeholder="new category" ng-model="newCategoryName"/>
+                                            <input type="button" value="CREATE CATEGORY" ng-click="createProfile(newCategoryName)"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <i class="icon-sort-down"></i>
+                            </div>
+                            <span class="btn-glow success _large" ng-click="updateDataProfile()"><i class="icon-bookmark-empty"></i>Lưu</span>
                                 <!-- <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
                                 <span class="btn-glow success"><i class="icon-bookmark-empty"></i> Lưu</span> -->
                             </div>
@@ -42,22 +58,17 @@
                     </div>
                     <div class="block_content">
                         <p class="notify"> Danh sách khách hàng nhận thông báo <span>{{event.name_display}}</span> thoả điều kiện</p>
-                        <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters"></div>
+                        <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters" oldsubfilters="oldsubfilters"></div>
                     </div>
                     <div class="block_footer">
                         <div class="left method">
-                            Phương thức <div class="ui-select">
-                                            <select>
-                                                <option selected="">Gửi 1 lần</option>
-                                                <option>Gửi tự động</option>
-                                            </select>
-                                        </div>
+                            Phương thức  <select ng-model="sendMethod" ng-options="sendMethod as sendMethod.name_display for sendMethod in sendMethods" ng-change="updateIsCanGo()"></select>
                         </div>
-                        <button ng-click="getResult()" type="button" class="btn-glow primary right"><i class="icon-ok"></i> Xem</button>
+                        <button ng-hide="sendMethod.name == 'auto'" ng-click="getResult()" type="button" class="btn-glow primary right"><i class="icon-ok"></i> Xem</button>
                     </div><!-- block footer-->
                 </div><!-- block -->
                 
-                <div class="block">
+                <div class="block" ng-hide="sendMethod.name == 'auto'">
                     <div class="block_header">
                         <div class="left control">
                             <span class="highlight">{{numOfSelectedUsers}}</span> khách hàng được chọn / <span class="highlight">{{isChecked.length}}</span> khách hàng thoả điều kiện
@@ -71,7 +82,7 @@
                         <table class="z-table">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" ng-model="all" ng-change="checkAll()"/></th>
+                                <th><input type="checkbox" ng-model="all" ng-change="checkAll(); updateIsCanGo();"/></th>
                                 <th class="name">Tên</th>
                                 <th>Năm sinh</th>
                                 <th>Giới tính</th>
@@ -89,7 +100,7 @@
                         </thead>
                         <tbody ng-repeat="user in userList | filter:searchText">
                             <tr>
-                                <td><input type="checkbox" ng-model="$parent.isChecked[user.stt]" ng-change="updateSelectedUsers($parent.isChecked[user.stt])"/></td>
+                                <td><input type="checkbox" ng-model="$parent.isChecked[user.stt]" ng-change="updateSelectedUsers($parent.isChecked[user.stt]); updateIsCanGo();"/></td>
                                 <td class="name">{{user.name}}</td>
                                 <td>{{user.dob}}</td>
                                 <td>{{user.gender}}</td>
@@ -111,7 +122,7 @@
                 <button type="button" class="btn-glow primary btn-prev" ng-click="goToStep1()"> 
                     <i class="icon-chevron-left"></i> Trở lại
                 </button>
-                <button type="button" class="btn-glow primary btn-next" ng-click="goToStep3()">
+                <button type="button" class="btn-glow primary btn-next" ng-click="goToStep3()" ng-disable="!isCanGo">
                     Tiếp tục <i class="icon-chevron-right"></i>
                 </button>
             </div>

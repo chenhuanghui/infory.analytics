@@ -194,11 +194,13 @@ angular.module('smgDirectives', ['ui.date'])
                             var operator = olddata.operator;
                             var id = olddata.id;
 
-                            for (var i = 0; i < scope.events.length; i++)
-                                if (scope.events[i].name == event) {
-                                    scope.event = scope.events[i];
-                                    break;
-                                }
+                            if (event != 'profile') {
+                                for (var i = 0; i < scope.events.length; i++)
+                                    if (scope.events[i].name == event) {
+                                        scope.event = scope.events[i];
+                                        break;
+                                    }
+                            }
 
                             for (var i = 0; i < scope.event.properties.length; i++) {
                                 if (scope.event.properties[i].name == property.name) {

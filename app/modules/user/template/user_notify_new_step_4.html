@@ -32,59 +32,27 @@
                     <table class="z-table bordered-table">
                         <thead>
                             <tr>
-                                <th>Tự đề</th>
+                                <th>Tựa đề</th>
                                 <th>Loại hình</th>
-                                <th>Lịch trình</th>
-                                <th>Đã gửi</th>
+                                <th>Phương thức</th>
+                                <th>Thời điểm gửi</th>
+                                <th>Tin đã gửi</th>
                                 <th>
                                     <div class="ui-select">
-                                        <select>
-                                            <option>Trạng thái</option>
-                                        </select>
+                                        <select ng-model="statusType" ng-options="statusType as statusType.name_display for statusType in statusTypes" ng-init="statusType=statusTypes[0]" ng-change="sortMessageList()"></select>
                                     </div>
                                 </th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="even">
-                                <td class="name">Thông báo số 11</td>
-                                <td>Gửi SMS</td>
-                                <td>30 sau khi kích hoạt</td>
-                                <td>10 tin</td>
-                                <td><a class="btn-flat success">Kích hoạt</a></td>
-                                <td><i class="icon-remove-sign"></i> Xoá</td>
-                            </tr>
-                            <tr class="odd">
-                                <td class="name">Thông báo số 11</td>
-                                <td>Gửi SMS</td>
-                                <td>30 sau khi kích hoạt</td>
-                                <td>10 tin</td>
-                                <td><a class="btn-flat gray">Chờ</a></td>
-                                <td><i class="icon-remove-sign"></i> Xoá</td>
-                            </tr>
-                            <tr class="even">
-                                <td class="name">Thông báo số 11</td>
-                                <td>Gửi SMS</td>
-                                <td>30 sau khi kích hoạt</td>
-                                <td>10 tin</td>
-                                <td><a class="btn-flat gray">Chờ</a></td>
-                                <td><i class="icon-remove-sign"></i> Xoá</td>
-                            </tr>
-                            <tr class="odd">
-                                <td class="name">Thông báo số 11</td>
-                                <td>Gửi SMS</td>
-                                <td>30 sau khi kích hoạt</td>
-                                <td>10 tin</td>
-                                <td><a class="btn-flat gray">Chờ</a></td>
-                                <td><i class="icon-remove-sign"></i> Xoá</td>
-                            </tr>
-                            <tr class="even">
-                                <td class="name">Thông báo số 11</td>
-                                <td>Gửi SMS</td>
-                                <td>30 sau khi kích hoạt</td>
-                                <td>10 tin</td>
-                                <td><a class="btn-flat gray">Chờ</a></td>
+                            <tr class="{{message.sttClass}}" ng-repeat="message in messageList">
+                                <td class="name">{{message.name}}</td>
+                                <td>{{message.typeName}}</td>
+                                <td>{{message.methodName}}</td>
+                                <td>{{message.time_begin}}</td>
+                                <td>Api thieu</td>
+                                <td><a class="btn-flat success">{{message.statusName}}</a></td>
                                 <td><i class="icon-remove-sign"></i> Xoá</td>
                             </tr>
                         </tbody>

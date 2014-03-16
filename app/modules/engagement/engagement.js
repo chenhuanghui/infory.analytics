@@ -5,6 +5,9 @@ angular.module('engagement')
     function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote, homeFactory, segmentationFactory, dataFactory, queryHelper) {
 
         var brandId = $routeParams.brandId;
+        var intervalDate = serviceHelper.getIntervalDate();
+        var fields = null;
+
         dataFactory.updateBrandSideBar(brandId);
 
         $scope.metas = remoteFactory.meta_property_types;
@@ -36,10 +39,8 @@ angular.module('engagement')
         }];
 
         $scope.hideTypeChart = true;
-
         $scope.chartData = [{}, {}, {}];
 
-        var intervalDate = serviceHelper.getIntervalDate();
         $scope.data = [{
             dateDropDownInput: intervalDate.date_beg,
             dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
@@ -47,8 +48,6 @@ angular.module('engagement')
             dateDropDownInput: intervalDate.date_end,
             dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
         }];
-
-        var fields = null;
 
         var oldData = segmentationFactory.getData(brandId);
         if (oldData != null) {

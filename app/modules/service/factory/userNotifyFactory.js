@@ -8,8 +8,11 @@ angular.module('smg.services')
                 setData: function(id, newData) {
                     data[id] = newData;
                 },
-                getData: function(id) {
-                    return data[id];
+                getData: function(id, brandId) {
+                    if (data[id] != null && data[id].brand_id == brandId)
+                        return data[id];
+                    else
+                        return null;
                 },
                 setCurrentResultUserFilter: function(list) {
                     userList = list;

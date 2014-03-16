@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper) {
+    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper',
+        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper) {
 
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
@@ -9,25 +9,162 @@ angular.module('user')
                 $scope.brand = data;
             }, function() {});
 
-
             $scope.metas = remoteFactory.meta_property_types;
             $scope.event = remoteFactory.meta_profile;
-            $scope.events = remoteFactory.meta_profile;
             $scope.metadata = remoteFactory.meta_lists;
             $scope.subfilters = [];
             $scope.all = false;
-            $scope.userList = userNotifyFactory.getCurrentResultUserFilter();
             $scope.numOfSelectedUsers = 0;
             $scope.isChecked = [];
+            $scope.oldsubfilters = [];
+            $scope.isCanGo = true;
 
-            function saveInfor() {}
+            $scope.sendMethods = [{
+                name: 'once',
+                name_display: 'Gửi một lần'
+            }, {
+                name: 'auto',
+                name_display: 'Gửi tự động'
+            }];
+
+            $scope.sendMethod = $scope.sendMethods[0];
+
+            $scope.goToStep3 = function() {
+                saveInfor();
+                $location.path('/user/notify-new/step3/' + brandId);
+            }
+            $scope.goToStep1 = function() {
+                saveInfor();
+                $location.path('/user/notify-new/step1/' + brandId);
+            }
+
+            var step1Data = userNotifyFactory.getData(0, brandId);
+            if (step1Data == null) {
+                $scope.goToStep1();
+                return;
+            }
+
+            var oldData = userNotifyFactory.getData(1, brandId);
+            if (oldData != null) {
+                $scope.userList = oldData.userList;
+                $scope.all = oldData.all;
+                $scope.isChecked = oldData.isChecked;
+                $scope.numOfSelectedUsers = oldData.numOfSelectedUsers;
+                $scope.oldsubfilters = oldData.oldsubfilters;
+                $scope.isCanGo = oldData.isCanGo;
+
+                for (var i = 0; i < $scope.sendMethods.length; i++)
+                    if ($scope.sendMethods[i].name == oldData.sendMethod.name) {
+                        $scope.sendMethod = $scope.sendMethods[i];
+                        break;
+                    }
+
+            } else {
+
+                dataFactory.getBookmarks(brandId, function(data) {
+                        data.bookmarks.profiles_bookmarks.unshift({
+                            bookmark_name: 'Chọn bộ lọc đã lưu',
+                            id: -1
+                        });
+
+                        $scope.profileBookmarks = data.bookmarks.profiles_bookmarks;
+                        $scope.profileBookmark = data.bookmarks.profiles_bookmarks[0];
+
+                        saveInfor();
+
+                    },
+                    function() {});
+            }
+
+            $scope.updateIsCanGo = function() {
+                if ($scope.sendMethod.name == "once" && $scope.numOfSelectedUsers == 0)
+                    $scope.isCanGo = false;
+                else
+                    $scope.isCanGo = true;
+            }
+
+            $scope.updateIsCanGo();
+
+            function saveInfor() {
+                var query = filterHelper.buildQuery($scope.subfilters);
+                var saveSubfilters = [];
+                var size = $scope.subfilters.length;
+
+                for (var i = 0; i < size; i++) {
+                    saveSubfilters.push($scope.subfilters[i].getValue());
+                }
+
+                userNotifyFactory.setData(1, {
+                    brand_id: brandId,
+                    userList: $scope.userList,
+                    oldsubfilters: saveSubfilters,
+                    all: $scope.all,
+                    numOfSelectedUsers: $scope.numOfSelectedUsers,
+                    isChecked: $scope.isChecked,
+                    profileBookmark: $scope.profileBookmark,
+                    profileBookmarks: $scope.profileBookmarks,
+                    sendMethod: $scope.sendMethod,
+                    filter: JSON.stringify(query),
+                    isCanGo: $scope.isCanGo
+                });
+            }
+
+            $scope.createProfile = function(name) {
+                if (name == '')
+                    return;
+
+                var query = filterHelper.buildQuery($scope.subfilters);
+                var fields = {
+                    filter: JSON.stringify(query),
+                    brand_id: brandId,
+                    bookmark_name: name
+                };
+
+                bookmarkRemote.profileCreate(fields, function(data) {
+                    console.log(data);
+
+                    if (data.error == undefined) {
+                        // var bookmark = {
+                        //     bookmark_name: name,
+                        //     id: data.bookmark_id,
+                        //     brand_id: brandId,
+                        //     event: fields.event,
+                        //     filter: fields.filter,
+                        //     compare_by: fields.compare_by,
+                        //     time_unit: fields.time_unit
+                        // }
+
+                        // $scope.eventBookmarks.push(bookmark);
+                        // $scope.changeEventBookmark(bookmark.id);
+
+                        // dataFactory.setEventBookmarks(brandId, $scope.eventBookmarks);
+                        // homeFactory.addEventBookmark(brandId, fields);
+                        // saveInfor();
+                    }
+
+                }, function() {});
+            }
+
+            $scope.changeProfileBookmark = function(id) {
+                for (var i = 0; i < $scope.profileBookmarks.length; i++) {
+                    if ($scope.profileBookmarks[i].id == id) {
+
+                        $scope.profileBookmark = $scope.profileBookmarks[i];
+                        $scope.profileBookmark.event = $scope.event;
+                        $scope.oldsubfilters = queryHelper.decode($scope.profileBookmark);
+
+                        saveInfor();
+                        return;
+                    }
+                }
+            }
 
             $scope.getResult = function() {
                 var query = filterHelper.buildQuery($scope.subfilters);
 
                 var fields = {
                     filter: JSON.stringify(query),
-                    fields: '["name", "dob", "gender", "city", "last_visit"]',
+                    fields: '["id", "name", "dob", "gender", "city", "last_visit"]',
                     brand_id: brandId,
                     page: 0,
                     page_size: 10000
@@ -86,13 +223,6 @@ angular.module('user')
                     $scope.numOfSelectedUsers = $scope.isChecked.length;
                 else
                     $scope.numOfSelectedUsers = 0;
-            }
-
-            $scope.goToStep3 = function() {
-                $location.path('/user/notify-new/step3/' + brandId);
-            }
-            $scope.goToStep1 = function() {
-                $location.path('/user/notify-new/step1/' + brandId);
             }
         }
 

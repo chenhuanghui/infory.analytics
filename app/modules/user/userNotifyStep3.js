@@ -3,21 +3,17 @@ angular.module('user')
         function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper) {
 
             var brandId = $routeParams.brandId;
-            dataFactory.updateBrandSideBar(brandId);
+            var intervalDate = serviceHelper.getIntervalDate();
 
+            dataFactory.updateBrandSideBar(brandId);
             dataFactory.getBrand(brandId, function(data) {
                 $scope.brand = data;
             }, function() {});
 
-            var intervalDate = serviceHelper.getIntervalDate();
             $scope.data = {
                 dateDropDownInput: intervalDate.date_beg,
                 dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
             };
-
-            $scope.onTimeSet = function(newDate, oldDate) {
-                $scope.data.dateDisplay = serviceHelper.normalizeTimeWithMinute(newDate);
-            }
 
             $scope.colorpicker = {
                 red: 50,
@@ -30,10 +26,35 @@ angular.module('user')
             };
 
             $scope.goToStep4 = function() {
+                saveInfor();
                 $location.path('/user/notify-new/step4/' + brandId);
             }
             $scope.goToStep2 = function() {
+                saveInfor();
                 $location.path('/user/notify-new/step2/' + brandId);
             }
+
+            var step2Data = userNotifyFactory.getData(1, brandId);
+            if (step2Data == null) {
+                $scope.goToStep2();
+                return;
+            }
+            var oldData = userNotifyFactory.getData(2, brandId);
+            if (oldData != null) {
+                $scope.data = oldData.data;
+            }
+
+            function saveInfor() {
+                userNotifyFactory.setData(2, {
+                    brand_id: brandId,
+                    data: $scope.data
+                });
+            }
+
+            $scope.onTimeSet = function(newDate, oldDate) {
+                $scope.data.dateDisplay = serviceHelper.normalizeTimeWithMinute(newDate);
+            }
+
+
         }
     ])

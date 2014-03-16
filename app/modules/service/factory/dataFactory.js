@@ -42,6 +42,10 @@ angular.module('smg.services')
                     bookmarks.brand_id = brandId;
                     bookmarks.bookmarks.event_bookmarks = event_bookmarks;
                 },
+                setProfileBookmarks: function(brandId, profile_bookmarks) {
+                    bookmarks.brand_id = brandId;
+                    bookmarks.bookmarks.profiles_bookmarks = profile_bookmarks;
+                },
                 setBookmarks: function(brandId, bookmarks) {
                     bookmarks.brand_id = brandId;
                     bookmarks.bookmarks.event_bookmarks = data.event_bookmarks;

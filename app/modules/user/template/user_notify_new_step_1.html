@@ -31,12 +31,13 @@
                     <div class="step-wapper">
                         <form>
                             <div class="field-box">
-                                <span class="title">TÊN CHIẾN DỊCH</span>
-                                <div class="ui-select">
-                                    <select>
-                                        <option selected>Khuyến mãi valentin</option>
-                                        <option selected>Khuyến mãi cá t4</option>
-                                    </select>
+                                <div class="field-box">
+                                            <span class="title">TÊN CHIẾN DỊCH</span>
+                                            <input class="form-control inline-block" type="text" ng-model="name" ng-change="updateValidation(3, 0)">
+                                            <span class="alert-msg" ng-show="validation[3][0]">
+                                                            <i class="icon-remove-sign"></i>
+                                                        Vui lòng nhập tên chiến dịch
+                                            </span>
                                 </div>
                             </div>
                             <div class="field-box">
