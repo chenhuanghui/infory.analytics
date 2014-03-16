@@ -43,11 +43,7 @@
                                             <th class="center">Chiến dịch</th>
                                             <th class="center">Thời gian</th>
                                             <th class="center">
-                                                <select class="z-select"> 
-                                                    <option>Đang chạy</option>
-                                                    <option>Chờ duyệt</option>
-                                                    <option>Đã dừng</option>
-                                                </select>
+                                                <select class="z-select" ng-model="statusType" ng-options="statusType as statusType.name_display for statusType in statusTypes" ng-init="statusType=statusTypes[0]" ng-change="sortPromotionListByStatus()"></select>
                                             </th>
                                         </tr>
                                     </thead>

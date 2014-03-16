@@ -10,7 +10,6 @@ angular.module('header')
             $scope.isVisibleBrandMenu = false;
 
         $scope._username = Auth.user.name;
-        //$scope.newBrandName = 'Brand name';
 
         $scope.updateBrand = function(brand) {
             $scope.brand = brand;
@@ -26,8 +25,6 @@ angular.module('header')
 
         $scope.setCurrentBrand = function(brand) {
             $scope.brand = brand;
-            //dataFactory.updateHomeBrand($scope.brand);
-
             $('.z-btn .pop-dialog .close-icon').click();
             $location.path('/home/' + $scope.brand.id);
         }

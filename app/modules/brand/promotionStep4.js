@@ -109,6 +109,20 @@ angular.module('promotion')
             }, function() {});
 
             function listPromotion() {
+                $scope.statusTypes = [{
+                    name: '',
+                    name_display: 'Trạng thái'
+                }, {
+                    name: 'running',
+                    name_display: 'Đang chạy'
+                }, {
+                    name: 'stopped',
+                    name_display: 'Đã dừng'
+                }, {
+                    name: '',
+                    name_display: 'Chờ duyệt'
+                }];
+
                 $scope.sortPromotionList = function() {
                     $scope.promotionList = [];
                     switch ($scope.orderPromotion.name) {
@@ -125,6 +139,19 @@ angular.module('promotion')
                 function sortByType(type) {
                     for (var i = 0; i < $scope.promotionListFull.length; i++) {
                         if ($scope.promotionListFull[i].type == type)
+                            $scope.promotionList.push($scope.promotionListFull[i]);
+                    }
+                }
+
+                $scope.sortPromotionListByStatus = function() {
+                    var status = $scope.statusType.name;
+                    if ($scope.statusType.name == '')
+                        $scope.promotionList = $scope.promotionListFull;
+                    else
+                        $scope.promotionList = [];
+
+                    for (var i = 0; i < $scope.promotionListFull.length; i++) {
+                        if ($scope.promotionListFull[i].status == status)
                             $scope.promotionList.push($scope.promotionListFull[i]);
                     }
                 }

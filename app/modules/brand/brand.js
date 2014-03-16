@@ -20,7 +20,6 @@ angular.module('brand')
         $scope.brand = null;
         $scope.brands = null;
         $scope.commentInput = '';
-        $scope.editName = false;
 
         $scope.bundle = {
             brandName: '',
