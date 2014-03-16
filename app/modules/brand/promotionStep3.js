@@ -15,6 +15,9 @@ angular.module('promotion')
         if (step2Data == null) {
             $location.path('/brand/promotion/step2/' + brandId);
             return;
+        } else {
+            $scope.name = step2Data.name;
+            $scope.time = step2Data.date_beg.dateDisplay + " đến " + step2Data.date_end.dateDisplay;
         }
 
         $scope.isCanGoNext = false;

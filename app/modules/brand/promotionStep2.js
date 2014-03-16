@@ -17,13 +17,14 @@ angular.module('promotion')
         }, function() {});
 
         var intervalDate = serviceHelper.getIntervalDate();
+        var date_end = new Date(new Date().setTime(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
         $scope.name = "";
         $scope.data = [{
             dateDropDownInput: intervalDate.date_beg,
             dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
         }, {
-            dateDropDownInput: intervalDate.date_end,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
+            dateDropDownInput: date_end,
+            dateDisplay: serviceHelper.normalizeTime(date_end)
         }];
 
         updateTime();
