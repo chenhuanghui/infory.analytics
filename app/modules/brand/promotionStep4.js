@@ -91,7 +91,7 @@ angular.module('promotion')
                             total: description.amount,
                             voucher_number: (i + 1).toString(),
                             requirement: description.target,
-                            available_time: '7:30-15:30',
+                            available_time: '0:00-23:59',
                             available_days: available_days,
                         });
                     }
