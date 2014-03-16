@@ -67,7 +67,7 @@
                         <tbody ng-repeat="user in userList | filter:searchText">
                             <tr>
                                 <td><input type="checkbox" ng-model="$parent.checkList[user.stt]" ng-change="saveInfor()"/></td>
-                                <td class="name">{{user.name}}</td>
+                                <td class="name" style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.name}}</td>
                                 <td>{{user.dob}}</td>
                                 <td>{{user.gender}}</td>
                                 <td>{{user.city}}</td>

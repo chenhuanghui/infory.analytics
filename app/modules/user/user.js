@@ -1,8 +1,8 @@
 angular.module('user')
 
-.controller('UserCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote',
+.controller('UserCtrl', ['$scope', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote',
 
-    function($scope, $routeParams, remoteFactory, dataFactory, userRemote) {
+    function($scope, $location, $routeParams, remoteFactory, dataFactory, userRemote) {
         $scope.activeTab = "user";
         $scope.cssLink = "user-profile.css";
         var user_pre = dataFactory.getUsernameAvatar();
@@ -12,6 +12,13 @@ angular.module('user')
         $scope.brandId = $routeParams.brandId;
         dataFactory.updateBrandSideBar($scope.brandId);
         $scope.userId = $routeParams.userId;
+
+        $scope.oldUrl = dataFactory.getUrl();
+        $scope.goBack = function() {
+            if ($scope.oldUrl != '') {
+                $location.path($scope.oldUrl);
+            }
+        }
 
         dataFactory.getUserProfile($scope.brandId, $scope.userId, function(userProfile) {
                 $scope.userProfile = userProfile;

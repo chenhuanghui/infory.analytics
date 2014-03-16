@@ -138,9 +138,6 @@ angular.module('brand')
 
         $scope.showUserProfile = function(brandId, userId, username, avatar) {
             dataFactory.setUsernameAvatar(username, avatar);
-
-            //FOR TESTING REASON
-
             $location.path('/user/' + brandId + '/' + userId);
         }
 

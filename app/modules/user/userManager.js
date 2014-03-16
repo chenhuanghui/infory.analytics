@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserManagerCtrl', ['$scope', '$routeParams', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote', 'userManagerFactory',
-        function($scope, $routeParams, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote, userManagerFactory) {
+    .controller('UserManagerCtrl', ['$scope', '$location', '$routeParams', '$window', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote', 'userManagerFactory',
+        function($scope, $location, $routeParams, $window, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote, userManagerFactory) {
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
             $scope.metas = remoteFactory.meta_property_types;
@@ -62,12 +62,18 @@ angular.module('user')
 
                 var fields = {
                     filter: JSON.stringify(query),
-                    fields: '["name", "dob", "gender", "city", "last_visit"]',
+                    fields: '["id", "name", "dob", "gender", "city", "last_visit"]',
                     brand_id: brandId,
                     page: 0,
                     page_size: 10000
                 };
                 return fields;
+            }
+
+            $scope.showUserProfile = function(userId) {
+                dataFactory.setUrl($location.path());
+                $location.path('/user/' + brandId + '/' + userId);
+                //$window.open('/user/' + brandId + '/' + userId);
             }
 
             $scope.getResult = function() {

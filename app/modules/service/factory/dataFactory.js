@@ -36,6 +36,7 @@ angular.module('smg.services')
                 }
             }
 
+            var URL = '';
 
             return {
                 setEventBookmarks: function(brandId, event_bookmarks) {
@@ -238,6 +239,12 @@ angular.module('smg.services')
                             success(userProfile);
                         }, error);
                     }
+                },
+                setUrl: function(url) {
+                    URL = url;
+                },
+                getUrl: function() {
+                    return URL;
                 }
             }
 
