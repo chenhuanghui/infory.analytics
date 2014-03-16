@@ -101,7 +101,7 @@
                         <tbody ng-repeat="user in userList | filter:searchText">
                             <tr>
                                 <td><input type="checkbox" ng-model="$parent.isChecked[user.stt]" ng-change="updateSelectedUsers($parent.isChecked[user.stt]); updateIsCanGo();"/></td>
-                                <td class="name">{{user.name}}</td>
+                                <td class="name" ng-click="showUserProfile(user.id)" style="cursor:pointer">{{user.name}}</td>
                                 <td>{{user.dob}}</td>
                                 <td>{{user.gender}}</td>
                                 <td>{{user.city}}</td>

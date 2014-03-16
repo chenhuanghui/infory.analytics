@@ -38,6 +38,11 @@ angular.module('user')
                 $location.path('/user/notify-new/step1/' + brandId);
             }
 
+            $scope.showUserProfile = function(userId) {
+                dataFactory.setUrl($location.path());
+                $location.path('/user/' + brandId + '/' + userId);
+            }
+
             var step1Data = userNotifyFactory.getData(0, brandId);
             if (step1Data == null) {
                 $scope.goToStep1();
@@ -200,7 +205,7 @@ angular.module('user')
 
                         }
 
-                        userNotifyFactory.setCurrentResultUserFilter($scope.userList);
+                        saveInfor();
                     }
 
                 }, function() {});
@@ -211,6 +216,8 @@ angular.module('user')
                     $scope.numOfSelectedUsers++;
                 else
                     $scope.numOfSelectedUsers--;
+
+                saveInfor();
             }
 
             $scope.checkAll = function() {
@@ -223,6 +230,8 @@ angular.module('user')
                     $scope.numOfSelectedUsers = $scope.isChecked.length;
                 else
                     $scope.numOfSelectedUsers = 0;
+
+                saveInfor();
             }
         }
 
