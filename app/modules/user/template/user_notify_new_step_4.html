@@ -25,7 +25,7 @@
                     Quản lý tin gửi cho khách hàng
                 </div>
                 Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
-                <div class="btn-glow success"><i class="icon-plus"></i> Tạo Tin Mới</div>
+                <div class="btn-glow success" ng-click="goToStep1()"><i class="icon-plus"></i> Tạo Tin Mới</div>
             </div>
             <div class="form-wrapper">
                 <div class="col-md-12">
@@ -39,7 +39,7 @@
                                 <th>Tin đã gửi</th>
                                 <th>
                                     <div class="ui-select">
-                                        <select ng-model="statusType" ng-options="statusType as statusType.name_display for statusType in statusTypes" ng-init="statusType=statusTypes[0]" ng-change="sortMessageList()"></select>
+                                        <select ng-model="statusType" ng-options="statusType as statusType.name_display for statusType in statusTypes" ng-init="statusType=statusTypes[0]" ng-change="sortNotificationListByStatus()"></select>
                                     </div>
                                 </th>
                                 <th>Thao tác</th>

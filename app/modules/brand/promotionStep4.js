@@ -119,7 +119,7 @@ angular.module('promotion')
                     name: 'stopped',
                     name_display: 'Đã dừng'
                 }, {
-                    name: '',
+                    name: 'waiting',
                     name_display: 'Chờ duyệt'
                 }];
 
