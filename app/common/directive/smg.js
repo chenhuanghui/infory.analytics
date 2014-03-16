@@ -240,6 +240,11 @@ angular.module('smgDirectives', ['ui.date'])
                             return;
 
                         scope.meta = scope.metas[scope.property.type].operators_display[0];
+                        scope.paremeters = {
+                            firstInput: '',
+                            secondInput: ''
+                        }
+
                         if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
                             scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
 
