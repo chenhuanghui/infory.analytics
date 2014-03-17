@@ -1,6 +1,6 @@
 angular.module('shop')
 
-.controller('ShopCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'shopRemote', 'shopFactory', 'dialogHelper'
+.controller('ShopCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'shopRemote', 'shopFactory', 'dialogHelper',
 
     function($scope, $routeParams, remoteFactory, dataFactory, shopRemote, shopFactory, dialogHelper) {
 

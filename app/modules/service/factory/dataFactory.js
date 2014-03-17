@@ -1,7 +1,7 @@
 angular.module('smg.services')
-    .factory('dataFactory', ['$http', 'remoteFactory', 'brandRemote', 'shopRemote', 'userRemote', 'accountRemote',
+    .factory('dataFactory', ['$http', 'remoteFactory', 'brandRemote', 'shopRemote', 'userRemote', 'accountRemote', 'dialogHelper',
 
-        function($http, remoteFactory, brandRemote, shopRemote, userRemote, accountRemote) {
+        function($http, remoteFactory, brandRemote, shopRemote, userRemote, accountRemote, dialogHelper) {
 
             var updateHomeFunc = null;
 
@@ -68,7 +68,8 @@ angular.module('smg.services')
                                 bookmarks.bookmarks.event_bookmarks = data.event_bookmarks;
                                 bookmarks.bookmarks.funnel_bookmarks = data.funnel_bookmarks;
                                 success(bookmarks);
-                            }
+                            } else
+                                dialogHelper.showError(data.error.message);
                         }, function() {})
                     }
                 },
@@ -149,8 +150,11 @@ angular.module('smg.services')
                         usersOfBrand.id = brandId;
 
                         brandRemote.get(fields, function(data) {
-                            usersOfBrand.users = data.users;
-                            success(data);
+                            if (data.error == undefined) {
+                                usersOfBrand.users = data.users;
+                                success(data);
+                            } else
+                                dialogHelper.showError(data.error.message);
                         }, function() {
                             usersOfBrand.id = null;
                             error;
@@ -171,8 +175,11 @@ angular.module('smg.services')
                             fields: fields,
                             shop_id: id,
                         }, function(data) {
-                            currentShop = data;
-                            success(data);
+                            if (data.error == undefined) {
+                                currentShop = data;
+                                success(data);
+                            } else
+                                dialogHelper.showError(data.error.message);
                         }, error);
                     }
 
@@ -201,8 +208,11 @@ angular.module('smg.services')
                         brandRemote.getList({
                             fields: fields
                         }, function(data) {
-                            brands = data;
-                            success(brands);
+                            if (data.error == undefined) {
+                                brands = data;
+                                success(brands);
+                            } else
+                                dialogHelper.showError(data.error.message);
                         }, error);
                     }
                 },
@@ -218,8 +228,11 @@ angular.module('smg.services')
                             fields: fields,
                             id: id,
                         }, function(data) {
-                            currentBrand = data;
-                            success(currentBrand);
+                            if (data.error == undefined) {
+                                currentBrand = data;
+                                success(currentBrand);
+                            } else
+                                dialogHelper.showError(data.error.message);
                         }, error);
                     }
                 },
@@ -233,8 +246,11 @@ angular.module('smg.services')
                             brand_id: brandId,
                             user_id: userId
                         }, function(data) {
-                            userProfile = data;
-                            success(userProfile);
+                            if (data.error == undefined) {
+                                userProfile = data;
+                                success(userProfile);
+                            } else
+                                dialogHelper.showError(data.error.message);
                         }, error);
                     }
                 },
