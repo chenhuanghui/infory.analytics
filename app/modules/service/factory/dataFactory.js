@@ -59,7 +59,7 @@ angular.module('smg.services')
                     } else {
                         var fields = {
                             id: brandId,
-                            fields: '["event_bookmarks", "funnel_bookmarks", "profiles_bookmarks"]'
+                            fields: '["event_bookmarks", "profiles_bookmarks"]'
                         }
 
                         brandRemote.get(fields, function(data) {
@@ -67,8 +67,6 @@ angular.module('smg.services')
                                 bookmarks.brand_id = brandId;
                                 bookmarks.bookmarks.event_bookmarks = data.event_bookmarks;
                                 bookmarks.bookmarks.funnel_bookmarks = data.funnel_bookmarks;
-                                bookmarks.bookmarks.profiles_bookmarks = data.profiles_bookmarks;
-
                                 success(bookmarks);
                             }
                         }, function() {})

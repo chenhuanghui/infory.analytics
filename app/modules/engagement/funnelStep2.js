@@ -1,6 +1,6 @@
 angular.module('engagement')
-    .controller('FunnelStep2Ctrl', ['$scope', '$routeParams', '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper', 'funnelFactory', 'bookmarkRemote',
-        function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote) {
+    .controller('FunnelStep2Ctrl', ['$scope', '$routeParams', '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper', 'funnelFactory', 'bookmarkRemote', 'brandRemote',
+        function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote, brandRemote) {
 
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
@@ -27,6 +27,40 @@ angular.module('engagement')
 
             var fields = oldData.fields;
             updateChart(fields);
+
+            var pros = {
+                id: brandId,
+                fields: '["funnel_bookmarks"]'
+            }
+
+            brandRemote.get(pros, function(data) {
+                if (data.error == undefined) {
+                    data.funnel_bookmarks.unshift({
+                        bookmark_name: 'Chọn các hành vi đã lưu',
+                        id: -1
+                    });
+
+                    $scope.funnelBookmarks = data.funnel_bookmarks;
+                    $scope.funnelBookmark = data.funnel_bookmarks[0];
+                }
+            }, function() {})
+
+            $scope.changeFunnelBookmark = function(id) {
+                for (var i = 0; i < $scope.funnelBookmarks.length; i++) {
+                    if ($scope.funnelBookmarks[i].id == id) {
+                        $scope.funnelBookmark = $scope.funnelBookmarks[i];
+                        fields = {
+                            brand_id: brandId,
+                            date_beg: $scope.data[0].dateDisplay,
+                            date_end: $scope.data[1].dateDisplay,
+                            by: $scope.computeBy.name,
+                            funnel: $scope.funnelBookmark.funnel
+                        };
+                        updateChart(fields);
+                        return;
+                    }
+                }
+            }
 
             $scope.computeBys = [{
                 name: 'turn',
