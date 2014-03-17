@@ -159,6 +159,7 @@ angular.module('smgDirectives', ['ui.date'])
                 link: function(scope, element, attr, ctrl) {
                     var intervalDate = serviceHelper.getIntervalDate();
                     var count = 0;
+                    var isNeedClearData = true;
 
                     scope.data = [{
                         dateDropDownInput: intervalDate.date_beg,
@@ -193,6 +194,8 @@ angular.module('smgDirectives', ['ui.date'])
                             var paremeters = olddata.paremeters;
                             var operator = olddata.operator;
                             var id = olddata.id;
+
+                            isNeedClearData = false;
 
                             if (event != 'profile') {
                                 for (var i = 0; i < scope.events.length; i++)
@@ -240,10 +243,14 @@ angular.module('smgDirectives', ['ui.date'])
                             return;
 
                         scope.meta = scope.metas[scope.property.type].operators_display[0];
-                        scope.paremeters = {
-                            firstInput: '',
-                            secondInput: ''
-                        }
+                        if (isNeedClearData) {
+                            scope.paremeters = {
+                                firstInput: '',
+                                secondInput: ''
+                            }
+
+                        } else
+                            isNeedClearData = true;
 
                         if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
                             scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];

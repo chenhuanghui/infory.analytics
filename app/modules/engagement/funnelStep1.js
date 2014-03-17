@@ -66,7 +66,9 @@ angular.module('engagement')
                     metas: $scope.metas,
                     events: $scope.events,
                     metadata: $scope.metadata,
-                    subfilters: null
+                    subfilters: null,
+                    oldsubfilters: [],
+                    event: $scope.events[0]
                 };
 
                 tempBehaviour.id = $scope.behaviours.length;
