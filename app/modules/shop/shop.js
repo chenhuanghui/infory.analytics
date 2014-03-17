@@ -252,6 +252,7 @@ angular.module('shop')
 
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
+                        dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                     } else
                         dialogHelper.showError(data.error.message);
                 }
@@ -277,6 +278,7 @@ angular.module('shop')
                             });
 
                             saveImageToFactory();
+                            dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                         });
                     } else
                         dialogHelper.showError(data.error.message);

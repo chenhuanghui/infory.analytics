@@ -302,6 +302,7 @@ angular.module('brand')
                         });
 
                         dataFactory.setCurrentBrand($scope.brand);
+                        dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                     } else
                         dialogHelper.showError(data.error.message);
                 }
@@ -325,6 +326,7 @@ angular.module('brand')
                         });
 
                         dataFactory.setCurrentBrand($scope.brand);
+                        dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                     } else
                         dialogHelper.showError(data.error.message);
                 }
@@ -469,6 +471,7 @@ angular.module('brand')
                                     for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
                                         if ($scope.brand.categories[i].products[j].id == productId) {
                                             $scope.brand.categories[i].products[j].images = respone.images;
+                                            dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                                             return;
                                         }
                                     }
@@ -499,6 +502,7 @@ angular.module('brand')
                                 id: respone.id
                             });
                         });
+                        dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                     } else
                         dialogHelper.showError(data.error.message);
                 }
