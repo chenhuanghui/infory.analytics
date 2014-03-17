@@ -1,8 +1,8 @@
 angular.module('engagement')
 
-.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper', 'bookmarkRemote', 'homeFactory', 'segmentationFactory', 'dataFactory', 'queryHelper',
+.controller('SegmentationCtrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'filterHelper', 'eventRemote', 'chartHelper', 'compareHelper', 'serviceHelper', 'bookmarkRemote', 'homeFactory', 'segmentationFactory', 'dataFactory', 'queryHelper', 'dialogHelper',
 
-    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote, homeFactory, segmentationFactory, dataFactory, queryHelper) {
+    function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote, homeFactory, segmentationFactory, dataFactory, queryHelper, dialogHelper) {
 
         var brandId = $routeParams.brandId;
         var intervalDate = serviceHelper.getIntervalDate();
@@ -214,7 +214,8 @@ angular.module('engagement')
                                 saveInfor();
                                 return;
                             }
-                    }
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }, function() {});
             }
 
@@ -245,7 +246,8 @@ angular.module('engagement')
                     dataFactory.setEventBookmarks(brandId, $scope.eventBookmarks);
                     homeFactory.addEventBookmark(brandId, fields);
                     saveInfor();
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
 
             }, function() {});
         }
@@ -291,7 +293,8 @@ angular.module('engagement')
                     $scope.chartData[2] = chartHelper.buildColumnChart(data, $scope.event.name_display);
 
                     saveInfor();
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
             }, function() {});
         }
 

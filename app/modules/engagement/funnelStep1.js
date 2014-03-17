@@ -1,6 +1,6 @@
 angular.module('engagement')
-    .controller('FunnelStep1Ctrl', ['$scope', '$routeParams', '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper', 'funnelFactory', 'bookmarkRemote',
-        function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote) {
+    .controller('FunnelStep1Ctrl', ['$scope', '$routeParams', '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper', 'funnelFactory', 'bookmarkRemote', 'dialogHelper',
+        function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote, dialogHelper) {
 
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
@@ -94,7 +94,10 @@ angular.module('engagement')
                 fields.funnel = JSON.stringify(fields.funnel);
 
                 bookmarkRemote.funnelCreate(fields, function(data) {
-                    console.log(data);
+                    if (data.error == undefined)
+                        dialogHelper.showError('Lưu hành vi người dùng thành công');
+                    else
+                        dialogHelper.showError(data.error.message);
                 }, function() {});
             }
 

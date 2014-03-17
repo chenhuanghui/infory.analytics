@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserManagerCtrl', ['$scope', '$location', '$routeParams', '$window', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote', 'userManagerFactory',
-        function($scope, $location, $routeParams, $window, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote, userManagerFactory) {
+    .controller('UserManagerCtrl', ['$scope', '$location', '$routeParams', '$window', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote', 'userManagerFactory', 'dialogHelper',
+        function($scope, $location, $routeParams, $window, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote, userManagerFactory, dialogHelper) {
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
             $scope.metas = remoteFactory.meta_property_types;
@@ -53,7 +53,10 @@ angular.module('user')
                 }
 
                 bookmarkRemote.profileCreate(fields, function(data) {
-                    //console.log(data);
+                    if (data.error == undefined)
+                        dialogHelper.showError('Lưu profile người dùng thành công');
+                    else
+                        dialogHelper.showError(data.error.message);
                 }, function() {});
             }
 
@@ -78,7 +81,6 @@ angular.module('user')
 
             $scope.getResult = function() {
                 userRemote.filter(buildQuery(), function(data) {
-
                     $scope.checkList = [];
                     if (data.error == undefined) {
                         $scope.userList = data.data;
@@ -107,7 +109,8 @@ angular.module('user')
                         }
 
                         $scope.saveInfor();
-                    }
+                    } else
+                        dialogHelper.showError(data.error.message);
 
                 }, function() {});
             }

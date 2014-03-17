@@ -1,7 +1,7 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory', 'productCategoryRemote', 'remoteFactory',
-    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory, productCategoryRemote, remoteFactory) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory', 'productCategoryRemote', 'remoteFactory', 'dialogHelper',
+    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory, productCategoryRemote, remoteFactory, dialogHelper) {
 
         var base_url = remoteFactory.getBaseUrl();
         var brandId = $routeParams.brandId;
@@ -159,6 +159,7 @@ angular.module('brand')
                         $scope.bundle.editName = !$scope.bundle.editName;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
+                        dialogHelper.showError(data.error.message);
                         $scope.bundle.editName = !$scope.bundle.editName;
                         $scope.bundle.brandName = $scope.brand.name;
                     }
@@ -181,6 +182,7 @@ angular.module('brand')
                         $scope.bundle.editDescription = !$scope.bundle.editDescription;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
+                        dialogHelper.showError(data.error.message);
                         $scope.bundle.editDescription = !$scope.bundle.editDescription;
                         $scope.bundle.brandDescription = $scope.brand.description;
                     }
@@ -203,6 +205,7 @@ angular.module('brand')
                         $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
+                        dialogHelper.showError(data.error.message);
                         $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
                         $scope.bundle.brandWebsite = $scope.brand.website;
                     }
@@ -225,6 +228,7 @@ angular.module('brand')
                         $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
+                        dialogHelper.showError(data.error.message);
                         $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
                         $scope.bundle.brandFanpage = $scope.brand.fanpage;
                     }
@@ -235,18 +239,22 @@ angular.module('brand')
         }
 
         $scope.delComment = function(id) {
-            commentRemote.delete({
-                comment_id: id
-            }, function(data) {
-                if (data.error == undefined) {
-                    for (var i = $scope.shop.comments.length - 1; i >= 0; i--) {
-                        if ($scope.shop.comments[i].id == id) {
-                            $scope.shop.comments.splice(i, 1);
-                            return;
+            dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Thao tác xóa bình luận của bạn không thể phục hồi được. Vui lòng xác nhận', function() {
+                commentRemote.delete({
+                    comment_id: id
+                }, function(data) {
+                    if (data.error == undefined) {
+                        for (var i = $scope.shop.comments.length - 1; i >= 0; i--) {
+                            if ($scope.shop.comments[i].id == id) {
+                                $scope.shop.comments.splice(i, 1);
+                                return;
+                            }
                         }
-                    }
-                }
-            }, function() {})
+                    } else
+                        dialogHelper.showError(data.error.message);
+
+                }, function() {})
+            });
         };
 
         $scope.addComment = function() {
@@ -270,7 +278,8 @@ angular.module('brand')
                         $scope.shop.comments.unshift(data);
                         $scope.commentInput = '';
                     });
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
             });
         };
 
@@ -290,7 +299,8 @@ angular.module('brand')
                         });
 
                         dataFactory.setCurrentBrand($scope.brand);
-                    }
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }
             }
             xhr.send(fd);
@@ -312,7 +322,8 @@ angular.module('brand')
                         });
 
                         dataFactory.setCurrentBrand($scope.brand);
-                    }
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }
             }
             xhr.send(fd);
@@ -328,10 +339,13 @@ angular.module('brand')
                 };
 
                 brandRemote.get(fields, function(data) {
-                    if (data.gallery == null)
-                        $scope.gallery = [];
-                    else
-                        $scope.gallery = data.gallery;
+                    if (data.error == undefined) {
+                        if (data.gallery == null)
+                            $scope.gallery = [];
+                        else
+                            $scope.gallery = data.gallery;
+                    } else
+                        dialogHelper.showError(data.error.message);
 
                     saveToFactory();
                 }, function() {});
@@ -357,15 +371,15 @@ angular.module('brand')
                 };
 
                 brandRemote.get(fields, function(data) {
-                    if (data.undefined == null) {
+                    if (data.error == undefined) {
                         $scope.brand.categories = data.menu;
                         if ($scope.brand.categories.length > 0) {
 
                             $scope.category = $scope.brand.categories[0];
                             saveToFactory();
                         }
-
-                    }
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }, function() {});
             } else {
                 $scope.categories = oldData.categories;
@@ -390,7 +404,8 @@ angular.module('brand')
 
                     $scope.category = $scope.brand.categories[0];
                     saveToFactory();
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
             }, function() {});
         }
 
@@ -428,7 +443,8 @@ angular.module('brand')
                             }
                         }
                     }
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
             }, function() {});
         }
 
@@ -443,18 +459,21 @@ angular.module('brand')
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
-                    $scope.$apply(function() {
-                        for (var i = 0; i < $scope.brand.categories.length; i++) {
-                            if ($scope.brand.categories[i].id == categoryId) {
-                                for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
-                                    if ($scope.brand.categories[i].products[j].id == productId) {
-                                        $scope.brand.categories[i].products[j].images = respone.images;
-                                        return;
+                    if (respone.error == undefined) {
+                        $scope.$apply(function() {
+                            for (var i = 0; i < $scope.brand.categories.length; i++) {
+                                if ($scope.brand.categories[i].id == categoryId) {
+                                    for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
+                                        if ($scope.brand.categories[i].products[j].id == productId) {
+                                            $scope.brand.categories[i].products[j].images = respone.images;
+                                            return;
+                                        }
                                     }
                                 }
                             }
-                        }
-                    });
+                        });
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }
             }
             xhr.send(fd);
@@ -477,7 +496,8 @@ angular.module('brand')
                                 id: respone.id
                             });
                         });
-                    }
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }
             }
             xhr.send(fd);
@@ -502,7 +522,8 @@ angular.module('brand')
                             }
                         }
                     }
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
             }, function() {});
         }
 
@@ -533,10 +554,9 @@ angular.module('brand')
                             return;
                         }
                     }
-
-
                     dataFactory.setCurrentBrand($scope.brand);
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
 
                 $scope.productTemp = {
                     name: '',
@@ -560,7 +580,8 @@ angular.module('brand')
                     $scope.brand.shops.unshift(shop);
                     dataFactory.setCurrentBrand($scope.brand);
                     $scope.goToShopInfo(shop);
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
 
             }, function() {})
         }
@@ -580,7 +601,8 @@ angular.module('brand')
                     }
 
                     dataFactory.setCurrentBrand($scope.brand);
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
 
             }, function() {})
         }

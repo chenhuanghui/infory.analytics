@@ -1,8 +1,8 @@
 angular.module('header')
 
-.controller('HeaderCtrl', ['$scope', '$location', 'dataFactory', 'Auth', 'brandRemote',
+.controller('HeaderCtrl', ['$scope', '$location', 'dataFactory', 'Auth', 'brandRemote', 'dialogHelper',
 
-    function($scope, $location, dataFactory, Auth, brandRemote) {
+    function($scope, $location, dataFactory, Auth, brandRemote, dialogHelper) {
 
         $scope.isVisibleBrandMenu = true;
 
@@ -44,7 +44,8 @@ angular.module('header')
                     dataFactory.setCurrentBrand(null);
                     $('.z-btn .pop-dialog .close-icon').click();
                     $location.path('/brand/infor/' + data.brand_id);
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
             }, function() {});
         }
 

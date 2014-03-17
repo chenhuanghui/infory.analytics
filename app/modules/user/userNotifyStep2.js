@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper) {
+    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper', 'dialogHelper',
+        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper, dialogHelper) {
 
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
@@ -126,8 +126,6 @@ angular.module('user')
                 };
 
                 bookmarkRemote.profileCreate(fields, function(data) {
-                    console.log(data);
-
                     if (data.error == undefined) {
                         // var bookmark = {
                         //     bookmark_name: name,
@@ -206,7 +204,8 @@ angular.module('user')
                         }
 
                         saveInfor();
-                    }
+                    } else
+                        dialogHelper.showError(data.error.message);
 
                 }, function() {});
             }

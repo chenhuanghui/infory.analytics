@@ -22,7 +22,8 @@ var app = angular.module('Smg', [
     'placeholderShim',
     'angularFileUpload',
     'ui.slider',
-    'checklist-model'
+    'checklist-model',
+    'fundoo.services'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',

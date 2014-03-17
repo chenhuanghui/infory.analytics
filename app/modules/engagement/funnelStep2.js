@@ -1,6 +1,6 @@
 angular.module('engagement')
-    .controller('FunnelStep2Ctrl', ['$scope', '$routeParams', '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper', 'funnelFactory', 'bookmarkRemote', 'brandRemote',
-        function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote, brandRemote) {
+    .controller('FunnelStep2Ctrl', ['$scope', '$routeParams', '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper', 'funnelFactory', 'bookmarkRemote', 'brandRemote', 'dialogHelper',
+        function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote, brandRemote, dialogHelper) {
 
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
@@ -42,7 +42,8 @@ angular.module('engagement')
 
                     $scope.funnelBookmarks = data.funnel_bookmarks;
                     $scope.funnelBookmark = data.funnel_bookmarks[0];
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
             }, function() {})
 
             $scope.changeFunnelBookmark = function(id) {
@@ -90,11 +91,14 @@ angular.module('engagement')
 
             function updateChart(fields) {
                 funnelRemote.get(fields, function(data) {
-                    var values = [];
-                    for (var i = 0; i < data.length; i++)
-                        values.push(data[i].count);
+                    if (data.error == undefined) {
+                        var values = [];
+                        for (var i = 0; i < data.length; i++)
+                            values.push(data[i].count);
 
-                    $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames);
+                        $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames);
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }, function() {});
             }
 

@@ -1,8 +1,8 @@
 angular.module('shop')
 
-.controller('ShopCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'shopRemote', 'shopFactory',
+.controller('ShopCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'shopRemote', 'shopFactory', 'dialogHelper'
 
-    function($scope, $routeParams, remoteFactory, dataFactory, shopRemote, shopFactory) {
+    function($scope, $routeParams, remoteFactory, dataFactory, shopRemote, shopFactory, dialogHelper) {
 
         var base_url = remoteFactory.getBaseUrl();
         var shopId = $routeParams.shopId;
@@ -45,17 +45,20 @@ angular.module('shop')
         }
 
         dataFactory.getShop(shopId, fields, function(data) {
-            if (data.full_address != null)
-                $scope.shop = data;
-            else {
-                $scope.shop.phone = data.phone;
-            }
+            if (data.error == undefined) {
+                if (data.full_address != null)
+                    $scope.shop = data;
+                else {
+                    $scope.shop.phone = data.phone;
+                }
 
-            $scope.bundle.shopName = data.name;
-            $scope.bundle.shopCover = data.cover;
-            $scope.bundle.shopStreetAddress = data.street_address;
-            $scope.bundle.shopDistrictAddress = data.district_address;
-            $scope.bundle.shopCityAddress = data.city_address;
+                $scope.bundle.shopName = data.name;
+                $scope.bundle.shopCover = data.cover;
+                $scope.bundle.shopStreetAddress = data.street_address;
+                $scope.bundle.shopDistrictAddress = data.district_address;
+                $scope.bundle.shopCityAddress = data.city_address;
+            } else
+                dialogHelper.showError(data.error.message);
 
         }, function() {});
 
@@ -73,6 +76,7 @@ angular.module('shop')
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
+                        dialogHelper.showError(data.error.message);
                         $scope.bundle.editName = !$scope.bundle.editName;
                         $scope.bundle.shopName = $scope.shop.name;
                     }
@@ -96,6 +100,7 @@ angular.module('shop')
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
+
                         $scope.bundle.editName = !$scope.bundle.editName;
                         $scope.bundle.shopName = $scope.shop.name;
                     }
@@ -120,6 +125,7 @@ angular.module('shop')
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
+                        dialogHelper.showError(data.error.message);
                         $scope.bundle.editStreetAddress = !$scope.bundle.editStreetAddress;
                         $scope.bundle.shopStreetAddress = $scope.shop.street_address;
                     }
@@ -143,6 +149,7 @@ angular.module('shop')
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
+                        dialogHelper.showError(data.error.message);
                         $scope.bundle.editDistrictAddress = !$scope.bundle.editDistrictAddress;
                         $scope.bundle.shopDistrictAddress = $scope.shop.district_address;
                     }
@@ -166,6 +173,7 @@ angular.module('shop')
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
+                        dialogHelper.showError(data.error.message);
                         $scope.bundle.editCityAddress = !$scope.bundle.editCityAddress;
                         $scope.bundle.shopCityAddress = $scope.shop.city_address;
                     }
@@ -188,14 +196,13 @@ angular.module('shop')
                             return;
                         }
                     }
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
             }, function() {});
         }
 
         $scope.showUsersGallery = function() {
             var oldData = shopFactory.getData(brandId, shopId);
-
-
             if (oldData == null) {
                 var fields = {
                     shop_id: shopId,
@@ -203,12 +210,15 @@ angular.module('shop')
                 };
 
                 shopRemote.get(fields, function(data) {
-                    if (data.user_gallery == null)
-                        $scope.usersGallery = [];
-                    else
-                        $scope.usersGallery = data.user_gallery;
+                    if (data.error == undefined) {
+                        if (data.user_gallery == null)
+                            $scope.usersGallery = [];
+                        else
+                            $scope.usersGallery = data.user_gallery;
 
-                    saveImageToFactory();
+                        saveImageToFactory();
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }, function() {});
             } else
                 $scope.usersGallery = oldData.usersGallery;
@@ -240,7 +250,8 @@ angular.module('shop')
 
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
-                    }
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }
             }
             xhr.send(fd);
@@ -265,7 +276,8 @@ angular.module('shop')
 
                             saveImageToFactory();
                         });
-                    }
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }
             }
             xhr.send(fd);

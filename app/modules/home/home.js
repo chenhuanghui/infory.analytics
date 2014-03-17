@@ -1,8 +1,8 @@
 angular.module('home')
 
-.controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth', 'brandRemote', 'chartHelper', 'serviceHelper', 'eventRemote', 'compareHelper', 'homeFactory',
+.controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth', 'brandRemote', 'chartHelper', 'serviceHelper', 'eventRemote', 'compareHelper', 'homeFactory', 'dialogHelper',
 
-    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth, brandRemote, chartHelper, serviceHelper, eventRemote, compareHelper, homeFactory) {
+    function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth, brandRemote, chartHelper, serviceHelper, eventRemote, compareHelper, homeFactory, dialogHelper) {
 
         var events = remoteFactory.meta_events;
         var intervalDate = serviceHelper.getIntervalDate();
@@ -168,25 +168,32 @@ angular.module('home')
                     brandRemote.getCostChart(field, function(data) {
                         if (data.error == undefined)
                             $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
+                        else
+                            dialogHelper.showError(data.error.message);
                     }, function() {});
                     break;
                 case 1:
                     brandRemote.getDevelopmentChart(field, function(data) {
                         if (data.error == undefined)
                             $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
+                        else
+                            dialogHelper.showError(data.error.message);
                     }, function() {});
                     break;
                 case 2:
                     brandRemote.getCostChart(field, function(data) {
                         if (data.error == undefined)
                             $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
+                        else
+                            dialogHelper.showError(data.error.message);
                     }, function() {});
                     break;
                 case 3:
                     eventRemote.count(field, function(data) {
                         if (data.error == undefined) {
                             $scope.dataChart[id] = chartHelper.buildLineChart(data, field.event);
-                        }
+                        } else
+                            dialogHelper.showError(data.error.message);
                     }, function() {});
                     break;
             }

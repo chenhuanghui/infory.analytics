@@ -38,9 +38,9 @@ angular.module('account')
     .config(function($routeProvider) {
         var access = routingConfig.accessLevels;
         $routeProvider
-        .when('/login', {
-            templateUrl: 'modules/account/template/signin.html',
-            controller: 'SignInCtrl',
-            access: access.anon
-        });
+            .when('/login', {
+                templateUrl: 'modules/account/template/signin.html',
+                controller: 'SignInCtrl',
+                access: access.anon
+            });
     });

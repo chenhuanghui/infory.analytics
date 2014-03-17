@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'messageRemote',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, messageRemote) {
+    .controller('UserNotifyStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'messageRemote', 'dialogHelper',
+        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, messageRemote, dialogHelper) {
 
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
@@ -67,7 +67,8 @@ angular.module('user')
             messageRemote.create(fields, function(data) {
                 if (data.error == undefined) {
                     listNotification();
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
             }, function() {})
 
             function listNotification() {
@@ -151,7 +152,8 @@ angular.module('user')
 
                             $scope.messageList = $scope.messageListFull;
                         }
-                    }
+                    } else
+                        dialogHelper.showError(data.error.message);
                 }, function() {});
             }
         }

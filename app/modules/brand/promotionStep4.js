@@ -1,8 +1,8 @@
 angular.module('promotion')
 
-.controller('PromotionStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userRemote', 'serviceHelper', 'promotionRemote', 'promotionFactory', 'serviceHelper',
+.controller('PromotionStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userRemote', 'serviceHelper', 'promotionRemote', 'promotionFactory', 'serviceHelper', 'dialogHelper',
 
-    function($scope, $routeParams, $location, remoteFactory, dataFactory, userRemote, serviceHelper, promotionRemote, promotionFactory, serviceHelper) {
+    function($scope, $routeParams, $location, remoteFactory, dataFactory, userRemote, serviceHelper, promotionRemote, promotionFactory, serviceHelper, dialogHelper) {
 
         var brandId = $routeParams.brandId;
 
@@ -105,7 +105,8 @@ angular.module('promotion')
             promotionRemote.create(fields, function(data) {
                 if (data.error == undefined) {
                     listPromotion();
-                }
+                } else
+                    dialogHelper.showError(data.error.message);
             }, function() {});
 
             function listPromotion() {
@@ -161,37 +162,43 @@ angular.module('promotion')
                     brand_id: brandId,
                     fields: fields
                 }, function(data) {
-                    for (var i = 0; i < data.length; i++) {
-                        switch (data[i].type) {
-                            case 'voucher':
-                                data[i].typeDisplay = 'Voucher';
-                                break;
-                            case 'news':
-                                data[i].typeDisplay = 'Đăng tin';
-                                break;
-                            case 'score':
-                                data[i].typeDisplay = 'Tích luỹ điểm';
-                                break;
+                    if (data.error == undefined) {
+                        for (var i = 0; i < data.length; i++) {
+                            switch (data[i].type) {
+                                case 'voucher':
+                                    data[i].typeDisplay = 'Voucher';
+                                    break;
+                                case 'news':
+                                    data[i].typeDisplay = 'Đăng tin';
+                                    break;
+                                case 'score':
+                                    data[i].typeDisplay = 'Tích luỹ điểm';
+                                    break;
+                            }
+
+                            data[i].stt = (i % 2 == 0) ? 'even' : 'odd';
+
+                            switch (data[i].status) {
+                                case 'running':
+                                    data[i].statusClass = 'btn-flat success';
+                                    break;
+                                case 'waiting':
+                                    data[i].statusClass = 'btn-flat gray';
+                                    break;
+                                case 'stopped':
+                                    data[i].statusClass = 'btn-flat inverse';
+                                    break;
+                            }
+                            data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg)) + " đến " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end));
                         }
 
-                        data[i].stt = (i % 2 == 0) ? 'even' : 'odd';
-
-                        switch (data[i].status) {
-                            case 'running':
-                                data[i].statusClass = 'btn-flat success';
-                                break;
-                            case 'waiting':
-                                data[i].statusClass = 'btn-flat gray';
-                                break;
-                            case 'stopped':
-                                data[i].statusClass = 'btn-flat inverse';
-                                break;
-                        }
-                        data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg)) + " đến " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end));
+                        $scope.promotionList = data;
+                        $scope.promotionListFull = data;
+                    } else {
+                        $scope.promotionList = [];
+                        $scope.promotionListFull = [];
+                        dialogHelper.showError(data.error.message);
                     }
-
-                    $scope.promotionList = data;
-                    $scope.promotionListFull = data;
                 }, function() {});
             }
         }
