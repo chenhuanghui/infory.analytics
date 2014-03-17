@@ -25,7 +25,8 @@ angular.module('engagement')
                 return;
             }
 
-            updateChart(oldData.fields);
+            var fields = oldData.fields;
+            updateChart(fields);
 
             $scope.computeBys = [{
                 name: 'turn',
