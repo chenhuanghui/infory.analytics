@@ -103,10 +103,11 @@ angular.module('promotion')
             }
 
             promotionRemote.create(fields, function(data) {
-                if (data.error == undefined) {
-                    listPromotion();
-                } else
-                    dialogHelper.showError(data.error.message);
+                if (data.error != undefined)
+                    dialogHelper.showError('Quá trình tạo chiến dịch có lỗi: ' + data.error.message);
+
+                listPromotion();
+
             }, function() {});
 
             function listPromotion() {
@@ -123,6 +124,8 @@ angular.module('promotion')
                     name: 'waiting',
                     name_display: 'Chờ duyệt'
                 }];
+
+                $scope.statusType = $scope.statusTypes[0];
 
                 $scope.sortPromotionList = function() {
                     $scope.promotionList = [];

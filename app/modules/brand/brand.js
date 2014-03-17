@@ -266,17 +266,20 @@ angular.module('brand')
                     commentRemote.get({
                         comment_id: data.comment_id
                     }, function(data) {
-                        var newDate = new Date(data.updated_time);
-                        var d = newDate.getDate();
-                        var m = newDate.getMonth() + 1;
-                        var y = newDate.getFullYear();
-                        var h = newDate.getHours();
-                        var min = newDate.getMinutes();
+                        if (data.error == undefined) {
+                            var newDate = new Date(data.updated_time);
+                            var d = newDate.getDate();
+                            var m = newDate.getMonth() + 1;
+                            var y = newDate.getFullYear();
+                            var h = newDate.getHours();
+                            var min = newDate.getMinutes();
 
-                        data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
-                        data.timeDisplay = (h <= 9 ? '0' + h : h) + ' : ' + (min <= 9 ? '0' + min : min);
-                        $scope.shop.comments.unshift(data);
-                        $scope.commentInput = '';
+                            data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
+                            data.timeDisplay = (h <= 9 ? '0' + h : h) + ' : ' + (min <= 9 ? '0' + min : min);
+                            $scope.shop.comments.unshift(data);
+                            $scope.commentInput = '';
+                        } else
+                            dialogHelper.showError(data.error.message);
                     });
                 } else
                     dialogHelper.showError(data.error.message);
@@ -587,24 +590,25 @@ angular.module('brand')
         }
 
         $scope.delShop = function(id) {
-            shopRemote.delete({
-                shop_id: id
-            }, function(data) {
-                if (data.error == undefined) {
-                    console.log(data);
 
-                    for (var i = $scope.brand.shops.length - 1; i >= 0; i--) {
-                        if ($scope.brand.shops[i].id == id) {
-                            $scope.brand.shops.splice(i, 1);
-                            break;
+            dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Thao tác xóa cửa hàng của bạn không thể phục hồi được. Vui lòng xác nhận', function() {
+                shopRemote.delete({
+                    shop_id: id
+                }, function(data) {
+                    if (data.error == undefined) {
+                        for (var i = $scope.brand.shops.length - 1; i >= 0; i--) {
+                            if ($scope.brand.shops[i].id == id) {
+                                $scope.brand.shops.splice(i, 1);
+                                break;
+                            }
                         }
-                    }
 
-                    dataFactory.setCurrentBrand($scope.brand);
-                } else
-                    dialogHelper.showError(data.error.message);
+                        dataFactory.setCurrentBrand($scope.brand);
+                    } else
+                        dialogHelper.showError(data.error.message);
 
-            }, function() {})
+                }, function() {});
+            });
         }
 
         $scope.$watch('brand', function() {
@@ -640,8 +644,6 @@ angular.module('brand')
             $scope.data.dateDisplay = '' + (d <= 9 ? '0' + d : d) + '-' + (m <= 9 ? '0' + m : m) + '-' + y;
         }
     }
-
-
 ])
     .config(function($routeProvider) {
         var access = routingConfig.accessLevels;

@@ -184,21 +184,23 @@ angular.module('shop')
         }
 
         $scope.deleteUserImage = function(id) {
-            shopRemote.removeUserImage({
-                shop_id: shopId,
-                image_id: id
-            }, function(data) {
-                if (data.error == undefined) {
-                    for (var i = $scope.usersGallery.length - 1; i >= 0; i--) {
-                        if ($scope.usersGallery[i].id == id) {
-                            $scope.usersGallery.splice(i, 1);
-                            saveImageToFactory();
-                            return;
+            dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Thao tác xóa ảnh của bạn không thể phục hồi được. Vui lòng xác nhận', function() {
+                shopRemote.removeUserImage({
+                    shop_id: shopId,
+                    image_id: id
+                }, function(data) {
+                    if (data.error == undefined) {
+                        for (var i = $scope.usersGallery.length - 1; i >= 0; i--) {
+                            if ($scope.usersGallery[i].id == id) {
+                                $scope.usersGallery.splice(i, 1);
+                                saveImageToFactory();
+                                return;
+                            }
                         }
-                    }
-                } else
-                    dialogHelper.showError(data.error.message);
-            }, function() {});
+                    } else
+                        dialogHelper.showError(data.error.message);
+                }, function() {});
+            });
         }
 
         $scope.showUsersGallery = function() {
