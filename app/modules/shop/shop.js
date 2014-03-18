@@ -171,6 +171,7 @@ angular.module('shop')
         }
 
         $scope.changeCityAddress = function(name) {
+            $('.z-dropdown').removeClass('open');
             $scope.bundle.shopCityAddress = name;
             $scope.bundle.editCityAddress = !$scope.bundle.editCityAddress;
             if ($scope.bundle.shopCityAddress.length <= 0) {

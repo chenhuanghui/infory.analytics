@@ -47,6 +47,7 @@ angular.module('engagement')
             }, function() {})
 
             $scope.changeFunnelBookmark = function(id) {
+                $('.z-dropdown').removeClass('open');
                 for (var i = 0; i < $scope.funnelBookmarks.length; i++) {
                     if ($scope.funnelBookmarks[i].id == id) {
                         $scope.funnelBookmark = $scope.funnelBookmarks[i];

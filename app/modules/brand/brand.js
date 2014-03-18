@@ -411,6 +411,7 @@ angular.module('brand')
         }
 
         $scope.changeCategory = function(id) {
+            $('.z-dropdown').removeClass('open');
             for (var i = 0; i < $scope.brand.categories.length; i++) {
                 if ($scope.brand.categories[i].id == id) {
                     $scope.category = $scope.brand.categories[i];
