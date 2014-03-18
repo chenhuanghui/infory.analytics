@@ -353,7 +353,7 @@
             "name": "user_gender",
             "name_display": "giới tính",
             "type": "group",
-            "available_values": "gender"
+            "available_values": "genders"
         }, {
             "name": "user_career",
             "name_display": "nghề nghiệp",
@@ -449,7 +449,7 @@
             "name": "user_gender",
             "name_display": "giới tính",
             "type": "group",
-            "available_values": "gender"
+            "available_values": "genders"
         }, {
             "name": "user_career",
             "name_display": "nghề nghiệp",
