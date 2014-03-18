@@ -18,6 +18,9 @@ angular.module('smg.services')
                 removeUserImage: function(fields, success, error) {
                     $http.post(base_url + 'userimage/delete', fields).success(success).error(error);
                 },
+                getQRCode: function(fields, success, error) {
+                    $http.post(base_url + 'get_qrcode', fields).success(success).error(error);
+                }
             }
         }
     ])

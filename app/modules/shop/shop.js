@@ -14,6 +14,19 @@ angular.module('shop')
         var fields = null;
 
         $scope.cities = remoteFactory.cities;
+        $scope.qrCode = '';
+
+        shopRemote.getQRCode({
+            shop_id: shopId
+        }, function(data) {
+            if (data.error == undefined) {
+                $scope.$watch(function() {
+                    $scope.qrCode = data.url;
+                });
+            } else
+                dialogHelper.showError(data.error.message);
+        }, function() {});
+
         $scope.shop = null;
         $scope.bundle = {
             shopName: '',
