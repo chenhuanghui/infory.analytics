@@ -75,7 +75,7 @@ angular.module('engagement')
             $scope.updateCompareUnit = function() {
                 var compareToObject = null;
 
-                if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
+                if ($scope.compareUnit.name_display != 'chọn thuộc tính') {
                     compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
                 }
 

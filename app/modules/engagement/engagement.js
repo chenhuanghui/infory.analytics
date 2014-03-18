@@ -269,7 +269,7 @@ angular.module('engagement')
             };
 
             var compareToObject = null;
-            if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
+            if ($scope.compareUnit.name_display != 'chọn thuộc tính') {
                 compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
                 fields.compare_by = JSON.stringify(compareToObject);
                 $scope.hideTypeChart = false;
