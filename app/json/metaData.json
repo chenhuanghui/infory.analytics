@@ -332,6 +332,8 @@
         "name": "view",
         "name_display": "xem thông tin",
         "properties": [{
+            "name_display": "chọn thuộc tính"
+        }, {
             "name": "shop",
             "name_display": "cửa hàng",
             "type": "group",
@@ -381,7 +383,7 @@
             "type": "number"
         }],
         "compare_properties": [{
-            "name_display": "Chọn thuộc tính"
+            "name_display": "chọn thuộc tính"
         }, {
             "name": "shop",
             "name_display": "cửa hàng",
@@ -428,6 +430,8 @@
         "name": "checkin",
         "name_display": "đến cửa hàng",
         "properties": [{
+            "name_display": "chọn thuộc tính"
+        }, {
             "name": "shop",
             "name_display": "cửa hàng",
             "type": "group",
@@ -477,7 +481,7 @@
             "type": "number"
         }],
         "compare_properties": [{
-            "name_display": "Chọn thuộc tính"
+            "name_display": "chọn thuộc tính"
         }, {
             "name": "shop",
             "name_display": "cửa hàng",
@@ -524,6 +528,8 @@
         "name": "checkout",
         "name_display": "mua hàng",
         "properties": [{
+            "name_display": "chọn thuộc tính"
+        }, {
             "name": "shop",
             "name_display": "cửa hàng",
             "type": "group",
@@ -549,7 +555,7 @@
             "name": "user_gender",
             "name_display": "giới tính",
             "type": "group",
-            "available_values": "gender"
+            "available_values": "genders"
         }, {
             "name": "user_career",
             "name_display": "nghề nghiệp",
@@ -577,7 +583,7 @@
             "type": "number"
         }],
         "compare_properties": [{
-            "name_display": "Chọn thuộc tính"
+            "name_display": "chọn thuộc tính"
         }, {
             "name": "shop",
             "name_display": "cửa hàng",
@@ -629,6 +635,8 @@
         "name": "comment",
         "name_display": "bình luận",
         "properties": [{
+            "name_display": "chọn thuộc tính"
+        }, {
             "name": "shop",
             "name_display": "cửa hàng",
             "type": "group",
@@ -654,7 +662,7 @@
             "name": "user_gender",
             "name_display": "giới tính",
             "type": "group",
-            "available_values": "gender"
+            "available_values": "genders"
         }, {
             "name": "user_career",
             "name_display": "nghề nghiệp",
@@ -682,7 +690,7 @@
             "type": "number"
         }],
         "compare_properties": [{
-            "name_display": "Chọn thuộc tính"
+            "name_display": "chọn thuộc tính"
         }, {
             "name": "shop",
             "name_display": "cửa hàng",
@@ -827,6 +835,8 @@
         "name": "profile",
         "name_display": "profile",
         "properties": [{
+            "name_display": "chọn thuộc tính"
+        }, {
             "name": "dob",
             "name_display": "ngày sinh",
             "type": "time"
@@ -838,12 +848,12 @@
             "name": "gender",
             "name_display": "giới tính",
             "type": "group",
-            "accepted_values": "genders"
+            "available_values": "genders"
         }, {
             "name": "career",
             "name_display": "nghề nghiệp",
             "type": "group",
-            "accepted_values": "careers"
+            "available_values": "careers"
         }, {
             "name": "charge",
             "name_display": "tổng chi tiêu",
@@ -927,13 +937,11 @@
                 "between_dates"
             ],
             "operators_display": [
-                "cách đây",
                 "trước ngày",
                 "sau ngày",
                 "trong khoảng thời gian"
             ],
             "operators_ui_controller": [
-                "time dropdown",
                 "date picker",
                 "date picker",
                 "two date picker"

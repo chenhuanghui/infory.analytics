@@ -21,8 +21,6 @@ angular.module('user')
                 page_size: 10000
             }, function(data) {
                 if (data.error == undefined) {
-                    console.log(data);
-
                     if ($scope.userList.length == 0) {
                         $scope.userList = data.data;
                         normalizeUser();

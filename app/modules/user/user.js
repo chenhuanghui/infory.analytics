@@ -73,7 +73,7 @@ angular.module('user')
                         return {
                             time_str: key,
                             hour: _.pluck(value, 'hour'),
-                            name: _.pluck(value, 'name')
+                            name: _.pluck(value, 'name_display')
                         }
                     })
                     .value();
