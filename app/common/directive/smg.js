@@ -242,7 +242,7 @@ angular.module('smgDirectives', ['ui.date'])
                         if (scope.olddata != undefined && scope.olddata != null && count++ == 1)
                             return;
 
-                        scope.property = scope.event.properties[0];
+                        //scope.property = scope.event.properties[0];
                         scope.meta = scope.metas[scope.property.type].operators_display[0];
                         if (isNeedClearData) {
                             scope.paremeters = {
