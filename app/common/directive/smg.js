@@ -227,9 +227,12 @@ angular.module('smgDirectives', ['ui.date'])
 
                     update();
 
-                    scope.$watch('event', function() {
+                    scope.$watch('event', function(newValue, oldValue) {
                         if (scope.olddata != undefined && scope.olddata != null && count++ == 0)
                             return;
+
+                        if (newValue.name != oldValue.name)
+                            scope.property = scope.event.properties[0];
 
                         scope.updateFields();
                     });
