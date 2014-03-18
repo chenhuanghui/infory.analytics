@@ -112,6 +112,7 @@ angular.module('engagement')
         }
 
         $scope.changeEventBookmark = function(id) {
+            $('.z-dropdown>a.trigger').click();
             for (var i = 0; i < $scope.eventBookmarks.length; i++) {
                 if ($scope.eventBookmarks[i].id == id) {
 
