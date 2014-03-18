@@ -220,7 +220,7 @@ angular.module('smgDirectives', ['ui.date'])
 
                             scope.data = data;
                             scope.paremeters = paremeters;
-                            scope.operator = operator;
+                            scop - e.operator = operator;
                             scope.id = id;
                         }
                     }

@@ -6,7 +6,7 @@ angular.module('Smg')
                     createDialog({
                         id: 'simpleDialog',
                         template: '<div class="row-fluid">' +
-                            ' <h3>' + content + '</h3>' +
+                            ' <h4>' + content + '</h4>' +
                             ' <div>',
                         title: title,
                         backdrop: true,
