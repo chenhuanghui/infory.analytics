@@ -21,11 +21,8 @@ angular.module('promotion')
             name: 'news',
             name_display: 'Đăng tin'
         }, {
-            name: 'score',
-            name_display: 'Tích luỹ điểm'
-        }, {
             name: 'voucher',
-            name_display: 'Voucher'
+            name_display: 'Khuyến mãi'
         }];
 
         var dataStep3 = promotionFactory.getData(2);

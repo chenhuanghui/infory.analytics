@@ -23,7 +23,10 @@ angular.module('user')
         dataFactory.getUserProfile($scope.brandId, $scope.userId, function(userProfile) {
                 $scope.userProfile = userProfile;
                 $scope.username = userProfile.name;
+
+                //$scope.$apply(function() {
                 $scope.avatar = userProfile.avatar;
+                //});
 
                 // REVIEW API - timeline group by day - it's not client job
 

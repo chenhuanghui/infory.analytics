@@ -242,7 +242,7 @@ angular.module('smg.services')
                     }
                 },
                 getUserProfile: function(brandId, userId, success, error) {
-                    if (userProfile != null) {
+                    if (userProfile != null && userProfile.userId == userId && userProfile.brand_id == brandId) {
                         success(userProfile);
                     } else {
                         var fields = '["dob", "name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline", "city", "gender", "facebook"]';
@@ -253,6 +253,8 @@ angular.module('smg.services')
                         }, function(data) {
                             if (data.error == undefined) {
                                 userProfile = data;
+                                userProfile.brand_id = brandId;
+                                userProfile.userId = userId;
                                 success(userProfile);
                             } else
                                 dialogHelper.showError(data.error.message);
