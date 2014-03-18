@@ -59,8 +59,17 @@
                 <a ng-click="bundle.editCityAddress = true" style="cursor:pointer" >sửa</a>
             </div>
             <div class="edit" ng-hide="!bundle.editCityAddress">
-                <input ng-model="bundle.shopCityAddress" class="form-control inline-block"/>
-                <i ng-click="changeCityAddress()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+                <div class="controller">
+                    <div class="z-dropdown-wapper">
+                        <div class="z-dropdown">
+                            <a class="trigger"><span>{{bundle.shopCityAddress}}</span></a>
+                            <ul>
+                                <li ng-repeat="city in cities"><a ng-click="changeCityAddress(city.name)" style="cursor:pointer">{{city.name}}</a></li>
+                            </ul>
+                        </div>
+                        <i class="icon-sort-down"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </li>

@@ -147,6 +147,7 @@ angular.module('brand')
         }
 
         $scope.changeName = function() {
+            $scope.bundle.editName = !$scope.bundle.editName;
             if ($scope.bundle.brandName.length <= 0) {
                 $scope.bundle.brandName = $scope.brand.name;
             } else {
@@ -156,11 +157,9 @@ angular.module('brand')
                 }, function(data) {
                     if (data.error == undefined) {
                         $scope.brand.name = $scope.bundle.brandName;
-                        $scope.bundle.editName = !$scope.bundle.editName;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
                         dialogHelper.showError(data.error.message);
-                        $scope.bundle.editName = !$scope.bundle.editName;
                         $scope.bundle.brandName = $scope.brand.name;
                     }
                 }, function() {
@@ -170,6 +169,7 @@ angular.module('brand')
         }
 
         $scope.changeDescription = function() {
+            $scope.bundle.editDescription = !$scope.bundle.editDescription;
             if ($scope.bundle.brandDescription.length <= 0) {
                 $scope.bundle.brandDescription = $scope.brand.description;
             } else {
@@ -179,11 +179,9 @@ angular.module('brand')
                 }, function(data) {
                     if (data.error == undefined) {
                         $scope.brand.description = $scope.bundle.brandDescription;
-                        $scope.bundle.editDescription = !$scope.bundle.editDescription;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
                         dialogHelper.showError(data.error.message);
-                        $scope.bundle.editDescription = !$scope.bundle.editDescription;
                         $scope.bundle.brandDescription = $scope.brand.description;
                     }
                 }, function() {
@@ -193,6 +191,7 @@ angular.module('brand')
         }
 
         $scope.changeWebsite = function() {
+            $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
             if ($scope.bundle.brandWebsite.length <= 0) {
                 $scope.bundle.brandWebsite = $scope.brand.website;
             } else {
@@ -202,11 +201,9 @@ angular.module('brand')
                 }, function(data) {
                     if (data.error == undefined) {
                         $scope.brand.website = $scope.bundle.brandWebsite;
-                        $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
                         dialogHelper.showError(data.error.message);
-                        $scope.bundle.editWebsite = !$scope.bundle.editWebsite;
                         $scope.bundle.brandWebsite = $scope.brand.website;
                     }
                 }, function() {
@@ -216,6 +213,7 @@ angular.module('brand')
         }
 
         $scope.changeFanpage = function() {
+            $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
             if ($scope.bundle.brandFanpage.length <= 0) {
                 $scope.bundle.brandFanpage = $scope.brand.fanpage;
             } else {
@@ -225,11 +223,9 @@ angular.module('brand')
                 }, function(data) {
                     if (data.error == undefined) {
                         $scope.brand.fanpage = $scope.bundle.brandFanpage;
-                        $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
                         dataFactory.setCurrentBrand($scope.brand);
                     } else {
                         dialogHelper.showError(data.error.message);
-                        $scope.bundle.editFanpage = !$scope.bundle.editFanpage;
                         $scope.bundle.brandFanpage = $scope.brand.fanpage;
                     }
                 }, function() {

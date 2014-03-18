@@ -13,6 +13,7 @@ angular.module('shop')
         var brand = dataFactory.getCurrentBrand();
         var fields = null;
 
+        $scope.cities = remoteFactory.cities;
         $scope.shop = null;
         $scope.bundle = {
             shopName: '',
@@ -63,6 +64,7 @@ angular.module('shop')
         }, function() {});
 
         $scope.changeName = function() {
+            $scope.bundle.editName = !$scope.bundle.editName;
             if ($scope.bundle.shopName.length <= 0) {
                 $scope.bundle.shopName = $scope.shop.name;
             } else {
@@ -77,7 +79,6 @@ angular.module('shop')
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
                         dialogHelper.showError(data.error.message);
-                        $scope.bundle.editName = !$scope.bundle.editName;
                         $scope.bundle.shopName = $scope.shop.name;
                     }
                 }, function() {
@@ -87,6 +88,7 @@ angular.module('shop')
         }
 
         $scope.changeName = function() {
+            $scope.bundle.editName = !$scope.bundle.editName;
             if ($scope.bundle.shopName.length <= 0) {
                 $scope.bundle.shopName = $scope.shop.name;
             } else {
@@ -96,12 +98,10 @@ angular.module('shop')
                 }, function(data) {
                     if (data.error == undefined) {
                         $scope.shop.name = $scope.bundle.shopName;
-                        $scope.bundle.editName = !$scope.bundle.editName;
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
-
-                        $scope.bundle.editName = !$scope.bundle.editName;
+                        dialogHelper.showError(data.error.message);
                         $scope.bundle.shopName = $scope.shop.name;
                     }
                 }, function() {
@@ -112,6 +112,7 @@ angular.module('shop')
 
 
         $scope.changeStreetAddress = function() {
+            $scope.bundle.editStreetAddress = !$scope.bundle.editStreetAddress;
             if ($scope.bundle.shopStreetAddress.length <= 0) {
                 $scope.bundle.shopStreetAddress = $scope.shop.street_address;
             } else {
@@ -121,12 +122,10 @@ angular.module('shop')
                 }, function(data) {
                     if (data.error == undefined) {
                         $scope.shop.street_address = $scope.bundle.shopStreetAddress;
-                        $scope.bundle.editStreetAddress = !$scope.bundle.editStreetAddress;
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
                         dialogHelper.showError(data.error.message);
-                        $scope.bundle.editStreetAddress = !$scope.bundle.editStreetAddress;
                         $scope.bundle.shopStreetAddress = $scope.shop.street_address;
                     }
                 }, function() {
@@ -136,6 +135,7 @@ angular.module('shop')
         }
 
         $scope.changeDistrictAddress = function() {
+            $scope.bundle.editDistrictAddress = !$scope.bundle.editDistrictAddress;
             if ($scope.bundle.shopDistrictAddress.length <= 0) {
                 $scope.bundle.shopDistrictAddress = $scope.shop.district_address;
             } else {
@@ -145,12 +145,10 @@ angular.module('shop')
                 }, function(data) {
                     if (data.error == undefined) {
                         $scope.shop.district_address = $scope.bundle.shopDistrictAddress;
-                        $scope.bundle.editDistrictAddress = !$scope.bundle.editDistrictAddress;
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
                         dialogHelper.showError(data.error.message);
-                        $scope.bundle.editDistrictAddress = !$scope.bundle.editDistrictAddress;
                         $scope.bundle.shopDistrictAddress = $scope.shop.district_address;
                     }
                 }, function() {
@@ -159,7 +157,9 @@ angular.module('shop')
             }
         }
 
-        $scope.changeCityAddress = function() {
+        $scope.changeCityAddress = function(name) {
+            $scope.bundle.shopCityAddress = name;
+            $scope.bundle.editCityAddress = !$scope.bundle.editCityAddress;
             if ($scope.bundle.shopCityAddress.length <= 0) {
                 $scope.bundle.shopCityAddress = $scope.shop.city_address;
             } else {
@@ -169,12 +169,10 @@ angular.module('shop')
                 }, function(data) {
                     if (data.error == undefined) {
                         $scope.shop.city_address = $scope.bundle.shopCityAddress;
-                        $scope.bundle.editCityAddress = !$scope.bundle.editCityAddress;
                         dataFactory.setCurrentShop($scope.shop);
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
                         dialogHelper.showError(data.error.message);
-                        $scope.bundle.editCityAddress = !$scope.bundle.editCityAddress;
                         $scope.bundle.shopCityAddress = $scope.shop.city_address;
                     }
                 }, function() {
