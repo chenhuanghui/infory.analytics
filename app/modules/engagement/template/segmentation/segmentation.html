@@ -25,7 +25,9 @@
                             -->
                             <div class="z-dropdown-wapper">
                                 <div class="z-dropdown">
-                                    <a class="trigger"><span>{{eventBookmark.bookmark_name}}</span></a>
+                                    <a class="trigger">
+                                        <span>{{eventBookmark.bookmark_name}}</span>
+                                        <i class="icon-sort-down"></i></a>
                                     <ul>
                                         <li ng-repeat="eventBookmark in eventBookmarks"><a ng-click="changeEventBookmark(eventBookmark.id)" style="cursor:pointer">{{eventBookmark.bookmark_name}}</a></li>
                                         
@@ -36,7 +38,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <i class="icon-sort-down"></i>
                             </div>
                             <span class="btn-glow success _large" ng-click="updateDateEvent()"><i class="icon-bookmark-empty"></i>Lưu</span>
                         </div>

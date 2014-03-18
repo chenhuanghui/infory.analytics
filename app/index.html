@@ -29,6 +29,7 @@
     <link rel="stylesheet" type="text/css" href="vendor/theme/styles/compiled/form-showcase.css" />
     <link rel="stylesheet" type="text/css" href="vendor/theme/scripts/tinymce/skins/lightgray/content.min.css" />
     <link rel="stylesheet" type="text/css" href="vendor/theme/scripts/tinymce/skins/lightgray/skin.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/jquery-gmaps/css/jquery-gmaps-latlon-picker.css" />
     
     <!-- this page specific styles -->
     <!-- <link rel="stylesheet" href="vendor/theme/styles/compiled/index.css" type="text/css" media="screen" />
@@ -53,10 +54,11 @@
   </div>
 
   <!-- build:js vendor -->
-	<script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/jquery/jquery.js"></script>
   <script src="vendor/theme/scripts/theme.js"></script>
   <script src="vendor/theme/scripts/bootstrap.min.js"></script>
-  <script src="vendor/theme/scripts/fuelux.wizard.js"></script> 
+  <script src="vendor/theme/scripts/fuelux.wizard.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 
   <!-- new promotion page -->
@@ -192,7 +194,8 @@
             var container = $('.z-dropdown>ul');
             var trigger = $('.z-dropdown>a.trigger');
             var trigger2 = $('.z-dropdown>a.trigger span');
-            if (trigger.is(e.target) || trigger2.is(e.target))
+            var trigger3 = $('.z-dropdown>a.trigger .icon-sort-down');
+            if (trigger.is(e.target) || trigger2.is(e.target) || trigger3.is(e.target))
             {
                 trigger.parent().toggleClass('open');
             }else{

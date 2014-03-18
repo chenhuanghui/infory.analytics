@@ -1379,7 +1379,8 @@ table.comment{
 /** global color **/
 body, .z-select, .select-date .input-append input, .select-date, .wizard-steps li.active span.z-step, 
 .z-box .z-box-header, .field-box span.title, #coin-box .report, .controller select, .z-ui-select .icon-sort-down,
-.z-ui-select, #shop_list i, .detail-voucher .condition .rule-time .item a, .detail-voucher .condition .rule-time .item a:hover{
+.z-ui-select, #shop_list i, .detail-voucher .condition .rule-time .item a, 
+.detail-voucher .condition .rule-time .item a:hover, .z-dropdown-wapper .icon-sort-down{
     color: #6c7487;
 }
 /** ============ **/

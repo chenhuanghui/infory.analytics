@@ -6,7 +6,10 @@
         -->
         <div class="z-dropdown-wapper z-dropdown-btn left">
             <div class="z-dropdown">
-                <a class="trigger"><span>{{category.name}}</span></a>
+                <a class="trigger">
+                    <span>{{category.name}}</span>
+                    <i class="icon-sort-down"></i>
+                </a>
                 <ul>
                     <li style="cursor:pointer" ng-repeat="category in brand.categories"><a  ng-click="changeCategory(category.id)">{{category.name}}</a></li>
                     <li class="create-box">
@@ -16,7 +19,6 @@
                     </li>
                 </ul>
             </div>
-            <i class="icon-sort-down"></i>
         </div>
         <span>{{category.products.length}}</span> sản phẩm
     </div>
