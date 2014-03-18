@@ -10,6 +10,27 @@ angular.module('user')
 
             $scope.checkList = [];
             $scope.checkAll = false;
+            $scope.userList = [];
+
+            userRemote.filter({
+                brand_id: brandId,
+                filter: '',
+                fields: '["id", "name", "dob", "gender", "city", "last_visit"]',
+                brand_id: brandId,
+                page: 0,
+                page_size: 10000
+            }, function(data) {
+                if (data.error == undefined) {
+                    console.log(data);
+
+                    if ($scope.userList.length == 0) {
+                        $scope.userList = data.data;
+                        normalizeUser();
+                        $scope.saveInfor();
+                    }
+                } else
+                    dialogHelper.showError(data.error.message);
+            }, function() {});
 
             var oldData = userManagerFactory.getData(brandId);
             if (oldData != null) {
@@ -78,35 +99,37 @@ angular.module('user')
                 //$window.open('/user/' + brandId + '/' + userId);
             }
 
+            function normalizeUser() {
+                for (var i = 0; i < $scope.userList.length; i++) {
+
+                    var user = $scope.userList[i];
+                    if (user.email == null)
+                        user.email = "Không xác định";
+
+                    if (user.gender == 'male')
+                        user.gender = 'Nam';
+                    else
+                        user.gender = 'Nữ';
+
+                    if (user.city == null)
+                        user.city = "Không xác định";
+
+                    if (user.dob != null)
+                        user.dob = new Date(user.dob).getFullYear();
+                    else
+                        user.dob = "Không xác định";
+
+                    user.stt = i;
+                    $scope.checkList.push(false);
+                }
+            }
+
             $scope.getResult = function() {
                 userRemote.filter(buildQuery(), function(data) {
                     $scope.checkList = [];
                     if (data.error == undefined) {
                         $scope.userList = data.data;
-
-                        for (var i = 0; i < $scope.userList.length; i++) {
-
-                            var user = $scope.userList[i];
-                            if (user.email == null)
-                                user.email = "Không xác định";
-
-                            if (user.gender == 'male')
-                                user.gender = 'Nam';
-                            else
-                                user.gender = 'Nữ';
-
-                            if (user.city == null)
-                                user.city = "Không xác định";
-
-                            if (user.dob != null)
-                                user.dob = new Date(user.dob).getFullYear();
-                            else
-                                user.dob = "Không xác định";
-
-                            user.stt = i;
-                            $scope.checkList.push(false);
-                        }
-
+                        normalizeUser();
                         $scope.saveInfor();
                     } else
                         dialogHelper.showError(data.error.message);
