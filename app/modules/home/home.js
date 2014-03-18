@@ -108,7 +108,6 @@ angular.module('home')
                                     $scope.isHasBookmark = false;
                                 }
 
-                                updateEvent();
                                 $scope.updateEventBookmark(true);
 
                             },
