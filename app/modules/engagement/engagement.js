@@ -16,6 +16,10 @@ angular.module('engagement')
         $scope.subfilters = [];
         $scope.oldsubfilters = [];
 
+        dataFactory.getMetaData(brandId, function(data) {
+            $scope.metadata = data.meta_lists;
+        }, function() {});
+
         $scope.chartTypes = [{
             display_name: "Biểu đồ đường",
             id: 0
@@ -78,12 +82,11 @@ angular.module('engagement')
             $scope.chartData = oldData.chartData;
             $scope.data = oldData.data;
 
-            //$scope.oldsubfilters = oldData.oldsubfilters;
+            $scope.oldsubfilters = oldData.oldsubfilters;
 
             fields = oldData.fields;
 
             $scope.eventBookmark = oldData.eventBookmark;
-            $scope.oldsubfilters = queryHelper.decode($scope.eventBookmark);
             $scope.eventBookmarks = oldData.eventBookmarks;
             $scope.isHasBookmark = oldData.isHasBookmark;
 

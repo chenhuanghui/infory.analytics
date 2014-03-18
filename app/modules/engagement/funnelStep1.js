@@ -20,15 +20,20 @@ angular.module('engagement')
             $scope.subfilters = null;
 
             $scope.nameOfChainOfBehaviours = '';
-            $scope.behaviours = [{
-                id: 0,
-                metas: $scope.metas,
-                event: $scope.events[0],
-                events: $scope.events,
-                metadata: $scope.metadata,
-                subfilters: null,
-                oldsubfilters: []
-            }];
+
+            dataFactory.getMetaData(brandId, function(data) {
+                $scope.metadata = data.meta_lists;
+
+                $scope.behaviours = [{
+                    id: 0,
+                    metas: $scope.metas,
+                    event: $scope.events[0],
+                    events: $scope.events,
+                    metadata: $scope.metadata,
+                    subfilters: null,
+                    oldsubfilters: []
+                }];
+            }, function() {});
 
             var fields = {
                 brand_id: brandId,

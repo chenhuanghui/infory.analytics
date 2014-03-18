@@ -26,108 +26,128 @@ var app = angular.module('Smg', [
     'fundoo.services'
 ]);
 
-app.config(['$routeProvider', '$locationProvider', '$httpProvider',
-    function($routeProvider, $locationProvider, $httpProvider) {
+angular.element(document).ready(function() {
 
-        var access = routingConfig.accessLevels;
+    //first, we create the callback that will fire after the data is down
+    function xhrCallback() {
+        var myData = this.responseText; // the XHR output
 
-        $routeProvider
-            .when('/', {
-                templateUrl: 'modules/home/template/home.html',
-                controller: 'HomeCtrl',
-                access: access.user
-            })
-            .when('/home/:brandId', {
-                templateUrl: 'modules/home/template/home.html',
-                controller: 'HomeCtrl',
-                access: access.user
-            })
-            .when('/login', {
-                templateUrl: 'modules/account/template/signin.html',
-                controller: 'SignInCtrl',
-                access: access.anon
-            })
-            .otherwise({
-                redirectTo: '/404'
-            });
+        // here's where we attach a constant containing the API data to our app 
+        // module. Don't forget to parse JSON, which `$http` normally does for you.
+        app.constant('metaData', JSON.parse(myData));
 
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-        //delete $httpProvider.defaults.headers.post['Content-type']
+        app.config(['$routeProvider', '$locationProvider', '$httpProvider',
+            function($routeProvider, $locationProvider, $httpProvider) {
 
-        $httpProvider.interceptors.push(function($q, $location) {
-            return {
-                'responseError': function(response) {
-                    if (response.status === 401 || response.status === 403) {
-                        $location.path('/login');
-                        return $q.reject(response);
-                    } else {
-                        return $q.reject(response);
-                    }
-                }
-            }
-        });
+                var access = routingConfig.accessLevels;
 
-        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+                $routeProvider
+                    .when('/', {
+                        templateUrl: 'modules/home/template/home.html',
+                        controller: 'HomeCtrl',
+                        access: access.user
+                    })
+                    .when('/home/:brandId', {
+                        templateUrl: 'modules/home/template/home.html',
+                        controller: 'HomeCtrl',
+                        access: access.user
+                    })
+                    .when('/login', {
+                        templateUrl: 'modules/account/template/signin.html',
+                        controller: 'SignInCtrl',
+                        access: access.anon
+                    })
+                    .otherwise({
+                        redirectTo: '/404'
+                    });
 
-        // Override $http service's default transformRequest
-        $httpProvider.defaults.transformRequest = [
+                $httpProvider.defaults.useXDomain = true;
+                delete $httpProvider.defaults.headers.common['X-Requested-With'];
+                //delete $httpProvider.defaults.headers.post['Content-type']
 
-            function(data) {
-                /**
-                 * The workhorse; converts an object to x-www-form-urlencoded serialization.
-                 * @param {Object} obj
-                 * @return {String}
-                 */
-                var param = function(obj) {
-                    var query = '';
-                    var name, value, fullSubName, subName, subValue, innerObj, i;
-
-                    for (name in obj) {
-                        value = obj[name];
-
-                        if (value instanceof Array) {
-                            for (i = 0; i < value.length; ++i) {
-                                subValue = value[i];
-                                fullSubName = name + '[' + i + ']';
-                                innerObj = {};
-                                innerObj[fullSubName] = subValue;
-                                query += param(innerObj) + '&';
+                $httpProvider.interceptors.push(function($q, $location) {
+                    return {
+                        'responseError': function(response) {
+                            if (response.status === 401 || response.status === 403) {
+                                $location.path('/login');
+                                return $q.reject(response);
+                            } else {
+                                return $q.reject(response);
                             }
-                        } else if (value instanceof Object) {
-                            for (subName in value) {
-                                subValue = value[subName];
-                                fullSubName = name + '[' + subName + ']';
-                                innerObj = {};
-                                innerObj[fullSubName] = subValue;
-                                query += param(innerObj) + '&';
-                            }
-                        } else if (value !== undefined && value !== null) {
-                            query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
                         }
                     }
+                });
 
-                    return query.length ? query.substr(0, query.length - 1) : query;
-                };
+                $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
-                return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
+                // Override $http service's default transformRequest
+                $httpProvider.defaults.transformRequest = [
+
+                    function(data) {
+                        /**
+                         * The workhorse; converts an object to x-www-form-urlencoded serialization.
+                         * @param {Object} obj
+                         * @return {String}
+                         */
+                        var param = function(obj) {
+                            var query = '';
+                            var name, value, fullSubName, subName, subValue, innerObj, i;
+
+                            for (name in obj) {
+                                value = obj[name];
+
+                                if (value instanceof Array) {
+                                    for (i = 0; i < value.length; ++i) {
+                                        subValue = value[i];
+                                        fullSubName = name + '[' + i + ']';
+                                        innerObj = {};
+                                        innerObj[fullSubName] = subValue;
+                                        query += param(innerObj) + '&';
+                                    }
+                                } else if (value instanceof Object) {
+                                    for (subName in value) {
+                                        subValue = value[subName];
+                                        fullSubName = name + '[' + subName + ']';
+                                        innerObj = {};
+                                        innerObj[fullSubName] = subValue;
+                                        query += param(innerObj) + '&';
+                                    }
+                                } else if (value !== undefined && value !== null) {
+                                    query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+                                }
+                            }
+
+                            return query.length ? query.substr(0, query.length - 1) : query;
+                        };
+
+                        return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
+                    }
+                ];
             }
-        ];
-    }
-]);
+        ]);
 
-app.run(['$rootScope', '$location', '$http', 'Auth',
-    function($rootScope, $location, $http, Auth) {
-        $rootScope.$on("$routeChangeStart", function(event, next, current) {
-            $rootScope.error = null;
-            if (!Auth.authorize(next.access)) {
-                if (Auth.isLoggedIn()) $location.path('/');
-                else $location.path('/login');
+        app.run(['$rootScope', '$location', '$http', 'Auth',
+            function($rootScope, $location, $http, Auth) {
+                $rootScope.$on("$routeChangeStart", function(event, next, current) {
+                    $rootScope.error = null;
+                    if (!Auth.authorize(next.access)) {
+                        if (Auth.isLoggedIn()) $location.path('/');
+                        else $location.path('/login');
+                    }
+                });
+
             }
-        });
+        ]);
 
-    }
-]);
+        angular.bootstrap(document, ['Smg']);
+    };
+
+    //here, the basic mechanics of the XHR, which you can customize.
+    var oReq = new XMLHttpRequest();
+    oReq.onload = xhrCallback;
+    oReq.open("get", "/json/metaData.json", true); // your specific API URL
+    oReq.send();
+});
 // Define modules
 
 angular.module('smg.services', []);

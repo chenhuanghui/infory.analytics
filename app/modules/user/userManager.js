@@ -8,7 +8,6 @@ angular.module('user')
             $scope.events = remoteFactory.meta_events;
             $scope.metadata = remoteFactory.meta_lists;
 
-
             $scope.checkList = [];
             $scope.checkAll = false;
 

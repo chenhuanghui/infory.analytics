@@ -1,7 +1,7 @@
 angular.module('smg.services')
-    .factory('dataFactory', ['$http', 'remoteFactory', 'brandRemote', 'shopRemote', 'userRemote', 'accountRemote', 'dialogHelper',
+    .factory('dataFactory', ['$http', 'remoteFactory', 'brandRemote', 'shopRemote', 'userRemote', 'accountRemote', 'dialogHelper', 'systemRemote',
 
-        function($http, remoteFactory, brandRemote, shopRemote, userRemote, accountRemote, dialogHelper) {
+        function($http, remoteFactory, brandRemote, shopRemote, userRemote, accountRemote, dialogHelper, systemRemote) {
 
             var updateHomeFunc = null;
 
@@ -38,6 +38,11 @@ angular.module('smg.services')
 
             var URL = '';
 
+            var metaData = {
+                brand_id: -1,
+                meta_lists: null
+            }
+
             return {
                 setEventBookmarks: function(brandId, event_bookmarks) {
                     bookmarks.brand_id = brandId;
@@ -70,7 +75,7 @@ angular.module('smg.services')
                                 success(bookmarks);
                             } else
                                 dialogHelper.showError(data.error.message);
-                        }, function() {})
+                        }, error)
                     }
                 },
                 updateShopInBrand: function(shopId, brandId, shop) {
@@ -259,8 +264,27 @@ angular.module('smg.services')
                 },
                 getUrl: function() {
                     return URL;
+                },
+                getMetaData: function(brandId, success, error) {
+                    if (metaData.brand_id == brandId) {
+                        success(metaData);
+                        return;
+                    }
+
+                    var fields = {
+                        brand_id: brandId,
+                        fields: '["meta_lists"]'
+                    };
+
+                    systemRemote.get(fields, function(data) {
+                        if (data.error == undefined) {
+                            metaData.brand_id = brandId;
+                            metaData.meta_lists = data.meta_lists;
+                            success(metaData);
+                        } else
+                            dialogHelper.showError(data.error.message);
+                    }, error);
                 }
             }
-
         }
     ])
