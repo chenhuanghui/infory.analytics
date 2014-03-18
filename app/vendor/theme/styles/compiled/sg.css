@@ -1855,3 +1855,14 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
     margin: 0 auto;
 }
 
+.titleDialog{
+    font-family: Tahoma;
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+}
+
+.modal-dialog-s{
+    width: 450px;
+}
+
