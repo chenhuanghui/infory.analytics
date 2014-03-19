@@ -21,13 +21,13 @@ angular.module('user')
                 $location.path('/user/notify-new/step3/' + brandId);
             }
 
-            if (step3Data == null) {
+            var step2Data = userNotifyFactory.getData(1, brandId);
+            var step1Data = userNotifyFactory.getData(0, brandId);
+
+            if ((step3Data == null && step2Data == null) || (step3Data == null && step2Data != null && step2Data.sendMethod.name == 'auto')) {
                 listNotification();
                 return;
             }
-
-            var step2Data = userNotifyFactory.getData(1, brandId);
-            var step1Data = userNotifyFactory.getData(0, brandId);
 
             var fields = {
                 brand_id: brandId,

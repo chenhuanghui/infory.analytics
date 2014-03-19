@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper', 'dialogHelper',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper, dialogHelper) {
+    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper', 'dialogHelper', 'accountRemote',
+        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper, dialogHelper, accountRemote) {
 
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
@@ -18,6 +18,17 @@ angular.module('user')
             $scope.isChecked = [];
             $scope.oldsubfilters = [];
             $scope.isCanGo = true;
+            $scope.balance = null;
+
+            var fields = '["balance"]';
+            accountRemote.get(fields, function(data) {
+                if (data.balance == null)
+                    $scope.balance = 0;
+                else
+                    $scope.balance = data.balance;
+
+                orignalAccount = data;
+            }, function() {});
 
             $scope.sendMethods = [{
                 name: 'once',
@@ -31,6 +42,14 @@ angular.module('user')
 
             $scope.goToStep3 = function() {
                 saveInfor();
+                if ($scope.sendMethod.name == 'once') {
+                    if ($scope.numOfSelectedUsers * 8 > $scope.balance) {
+                        dialogHelper.showError('Số dư tài khoản của bạn là ' + $scope.balance + ' T-Coin không đủ thực hiện thao tác này');
+                        return;
+                    } else
+                        $location.path('/user/notify-new/step4/' + brandId);
+                }
+
                 $location.path('/user/notify-new/step3/' + brandId);
             }
             $scope.goToStep1 = function() {
