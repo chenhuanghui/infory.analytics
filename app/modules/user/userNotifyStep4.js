@@ -30,7 +30,7 @@ angular.module('user')
                 });
 
 
-            if ((step3Data == null && step2Data == null) || (step3Data == null && step2Data != null && step2Data.sendMethod.name == 'auto')) {
+            if (step1Data == null || (step3Data == null && step2Data == null) || (step3Data == null && step2Data != null && step2Data.sendMethod.name == 'auto')) {
                 listNotification();
                 return;
             }
