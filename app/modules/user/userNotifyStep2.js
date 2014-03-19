@@ -203,7 +203,7 @@ angular.module('user')
                             user.stt = i;
 
                             if (user.email == null)
-                                user.email = "Không xác định";
+                                user.email = " - ";
 
                             if (user.gender == 'male')
                                 user.gender = 'Nam';
@@ -211,12 +211,12 @@ angular.module('user')
                                 user.gender = 'Nữ';
 
                             if (user.city == null)
-                                user.city = "Không xác định";
+                                user.city = " - ";
 
                             if (user.dob != null)
                                 user.dob = new Date(user.dob).getFullYear();
                             else
-                                user.dob = "Không xác định";
+                                user.dob = " - ";
 
                             $scope.isChecked.push(false);
 

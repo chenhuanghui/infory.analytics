@@ -31,7 +31,7 @@ angular.module('Smg')
                             }]
                         },
                         tooltip: {
-                            valueSuffix: 'người dùng'
+                            valueSuffix: ' người dùng'
                         },
                         legend: {
                             layout: 'vertical',
@@ -77,7 +77,7 @@ angular.module('Smg')
                             }]
                         },
                         tooltip: {
-                            valueSuffix: 'người dùng'
+                            valueSuffix: ' người dùng'
                         },
                         legend: {
                             layout: 'vertical',

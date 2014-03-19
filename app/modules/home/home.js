@@ -170,7 +170,7 @@ angular.module('home')
                 case 0:
                     brandRemote.getCostChart(field, function(data) {
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Chi phí sửa dụng các dịch vụ');
+                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Dịch vụ vận hành');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
@@ -178,7 +178,7 @@ angular.module('home')
                 case 1:
                     brandRemote.getDevelopmentChart(field, function(data) {
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Tình hình tăng trưởng của thương hiệu');
+                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Tình hình tăng trưởng');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
