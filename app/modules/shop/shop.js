@@ -227,8 +227,10 @@ angular.module('shop')
                     if (data.error == undefined) {
                         if (data.user_gallery == null)
                             $scope.usersGallery = [];
-                        else
+                        else {
+                            data.user_gallery = data.user_gallery.reverse;
                             $scope.usersGallery = data.user_gallery;
+                        }
 
                         saveImageToFactory();
                     } else

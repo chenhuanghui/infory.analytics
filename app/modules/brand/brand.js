@@ -343,8 +343,10 @@ angular.module('brand')
                     if (data.error == undefined) {
                         if (data.gallery == null)
                             $scope.gallery = [];
-                        else
+                        else {
+                            data.gallery = data.gallery.reverse();
                             $scope.gallery = data.gallery;
+                        }
                     } else
                         dialogHelper.showError(data.error.message);
 
@@ -499,12 +501,33 @@ angular.module('brand')
                                 id: respone.id
                             });
                         });
+                        saveToFactory();
                         dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                     } else
                         dialogHelper.showError(data.error.message);
                 }
             }
             xhr.send(fd);
+        }
+
+        $scope.removeImage = function(thumbnail_url) {
+            dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Thao tác xóa ảnh của bạn không thể phục hồi được. Vui lòng xác nhận', function() {
+                for (var i = 0; i < $scope.gallery.length; i++) {
+                    if ($scope.gallery[i].thumbnail == thumbnail_url) {
+                        brandRemote.removeImage({
+                            brand_id: brandId,
+                            image_id: $scope.gallery.length - 1 - i
+                        }, function(data) {
+                            if (data.error == undefined) {
+                                $scope.gallery.splice(i, 1);
+                                saveToFactory();
+                            } else
+                                dialogHelper.showError(data.error.message);
+                        }, function() {});
+                        return;
+                    }
+                }
+            });
         }
 
         $scope.changeProductDescription = function(categoryId, productId, description) {
