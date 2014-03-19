@@ -334,7 +334,7 @@
         "properties": [{
             "name_display": "chọn thuộc tính"
         }, {
-            "name": "shop",
+            "name": "shop_name",
             "name_display": "cửa hàng",
             "type": "group",
             "available_values": "shops"
@@ -385,7 +385,7 @@
         "compare_properties": [{
             "name_display": "chọn thuộc tính"
         }, {
-            "name": "shop",
+            "name": "shop_name",
             "name_display": "cửa hàng",
             "type": "group"
         }, {
@@ -432,7 +432,7 @@
         "properties": [{
             "name_display": "chọn thuộc tính"
         }, {
-            "name": "shop",
+            "name": "shop_name",
             "name_display": "cửa hàng",
             "type": "group",
             "available_values": "shops"
@@ -483,7 +483,7 @@
         "compare_properties": [{
             "name_display": "chọn thuộc tính"
         }, {
-            "name": "shop",
+            "name": "shop_name",
             "name_display": "cửa hàng",
             "type": "group"
         }, {
@@ -530,7 +530,7 @@
         "properties": [{
             "name_display": "chọn thuộc tính"
         }, {
-            "name": "shop",
+            "name": "shop_name",
             "name_display": "cửa hàng",
             "type": "group",
             "available_values": "shops"
@@ -585,7 +585,7 @@
         "compare_properties": [{
             "name_display": "chọn thuộc tính"
         }, {
-            "name": "shop",
+            "name": "shop_name",
             "name_display": "cửa hàng",
             "type": "group"
         }, {
@@ -637,7 +637,7 @@
         "properties": [{
             "name_display": "chọn thuộc tính"
         }, {
-            "name": "shop",
+            "name": "shop_name",
             "name_display": "cửa hàng",
             "type": "group",
             "available_values": "shops"
@@ -692,7 +692,7 @@
         "compare_properties": [{
             "name_display": "chọn thuộc tính"
         }, {
-            "name": "shop",
+            "name": "shop_name",
             "name_display": "cửa hàng",
             "type": "group"
         }, {
