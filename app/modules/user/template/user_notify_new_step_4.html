@@ -52,7 +52,7 @@
                                 <td>{{message.methodName}}</td>
                                 <td>{{message.time_begin}}</td>
                                 <td>Api thieu</td>
-                                <td><a class="btn-flat success">{{message.statusName}}</a></td>
+                                <td><a class="{{$parent.messageListFull[message.index].statusClass}}" ng-click="changeStatus(message.index)" style="width:auto;">{{$parent.messageListFull[message.index].statusName}}</a></td>
                                 <td><i class="icon-remove-sign"></i> Xoá</td>
                             </tr>
                         </tbody>

@@ -8,6 +8,9 @@ angular.module('smg.services')
                 },
                 list: function(fields, success, error) {
                     $http.post(base_url + 'list', fields).success(success).error(error);
+                },
+                update: function(fields, success, error) {
+                    $http.post(base_url + 'update', fields).success(success).error(error);
                 }
             }
         }

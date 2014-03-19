@@ -107,6 +107,7 @@ angular.module('promotion')
 
             }, function() {});
 
+
             function listPromotion() {
                 $scope.statusTypes = [{
                     name: '',
@@ -123,6 +124,46 @@ angular.module('promotion')
                 }];
 
                 $scope.statusType = $scope.statusTypes[0];
+
+                $scope.changeStatus = function(id) {
+                    var status = $scope.promotionListFull[id].status;
+                    var nextStatus = '';
+                    switch (status) {
+                        case 'running':
+                            $scope.promotionListFull[id].statusClass = 'btn-flat inverse';
+                            $scope.promotionListFull[id].status = 'stopped';
+                            $scope.promotionListFull[id].statusName = 'Đã dừng';
+                            nextStatus = 'stopped';
+                            break;
+                        case 'waiting':
+                            return;
+                        case 'stopped':
+                            $scope.promotionListFull[id].statusClass = 'btn-flat success';
+                            $scope.promotionListFull[id].status = 'running';
+                            $scope.promotionListFull[id].statusName = 'Đang chạy';
+                            nextStatus = 'running';
+                            break;
+                    }
+
+                    promotionRemote.update({
+                        promotion_id: $scope.promotionListFull[id].id,
+                        status: nextStatus
+                    }, function(data) {
+                        if (data.error == undefined) {
+
+                        } else {
+                            dialogHelper.showError(data.error.message);
+                            $scope.promotionListFull[id].status = status;
+                            if ($scope.promotionListFull[id].status == 'running') {
+                                $scope.promotionListFull[id].statusClass = 'btn-flat success';
+                                $scope.promotionListFull[id].statusName = 'Đang chạy';
+                            } else {
+                                $scope.promotionListFull[id].statusClass = 'btn-flat inverse';
+                                $scope.promotionListFull[id].statusName = 'Đã dừng';
+                            }
+                        }
+                    }, function() {});
+                }
 
                 $scope.sortPromotionList = function() {
                     $scope.promotionList = [];
@@ -177,16 +218,20 @@ angular.module('promotion')
                             }
 
                             data[i].stt = (i % 2 == 0) ? 'even' : 'odd';
+                            data[i].index = i;
 
                             switch (data[i].status) {
                                 case 'running':
                                     data[i].statusClass = 'btn-flat success';
+                                    data[i].statusName = 'Đang chạy';
                                     break;
                                 case 'waiting':
                                     data[i].statusClass = 'btn-flat gray';
+                                    data[i].statusName = 'Chờ duyệt';
                                     break;
                                 case 'stopped':
                                     data[i].statusClass = 'btn-flat inverse';
+                                    data[i].statusName = 'Đã dừng';
                                     break;
                             }
                             data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg)) + " đến " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end));
