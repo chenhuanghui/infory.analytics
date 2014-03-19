@@ -94,7 +94,7 @@ angular.module('user')
                 }
 
                 if (userProfile.email == null)
-                    userProfile.email = "Không xác định";
+                    userProfile.email = " - ";
 
                 if (userProfile.gender == 'male')
                     userProfile.gender = 'Nam';
@@ -102,7 +102,7 @@ angular.module('user')
                     userProfile.gender = 'Nữ';
 
                 if (userProfile.city == null)
-                    userProfile.city = "Không xác định";
+                    userProfile.city = " - ";
 
                 if (userProfile.facebook[0] != 'h')
                     userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
@@ -110,7 +110,7 @@ angular.module('user')
                 if (userProfile.dob != null)
                     userProfile.age = new Date().getFullYear() - new Date(userProfile.dob).getFullYear();
                 else
-                    userProfile.age = "Không xác định";
+                    userProfile.age = " - ";
 
             },
             function() {});

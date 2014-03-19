@@ -64,15 +64,15 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="user in userList | filter:searchText">
-                            <tr>
+                        <tbody >
+                            <tr ng-repeat="user in userList | filter:searchText">
                                 <td><input type="checkbox" ng-model="$parent.checkList[user.stt]" ng-change="saveInfor()"/></td>
                                 <td class="name" style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.name}}</td>
                                 <td>{{user.dob}}</td>
                                 <td>{{user.gender}}</td>
                                 <td>{{user.city}}</td>
                                 <td>{{user.last_visit}}</td>
-                                <td>Api thieu</td>
+                                <td> --- </td>
                             </tr>
                         </tbody>
                     </table>
