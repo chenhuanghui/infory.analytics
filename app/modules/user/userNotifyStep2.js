@@ -85,19 +85,19 @@ angular.module('user')
 
             } else {
 
-                dataFactory.getBookmarks(brandId, function(data) {
-                        data.bookmarks.profiles_bookmarks.unshift({
-                            bookmark_name: 'Chọn bộ lọc đã lưu',
-                            id: -1
-                        });
+                // dataFactory.getBookmarks(brandId, function(data) {
+                //         data.bookmarks.profiles_bookmarks.unshift({
+                //             bookmark_name: 'Chọn bộ lọc đã lưu',
+                //             id: -1
+                //         });
 
-                        $scope.profileBookmarks = data.bookmarks.profiles_bookmarks;
-                        $scope.profileBookmark = data.bookmarks.profiles_bookmarks[0];
+                //         $scope.profileBookmarks = data.bookmarks.profiles_bookmarks;
+                //         $scope.profileBookmark = data.bookmarks.profiles_bookmarks[0];
 
-                        saveInfor();
+                //         saveInfor();
 
-                    },
-                    function() {});
+                //     },
+                //     function() {});
             }
 
             $scope.updateIsCanGo = function() {
