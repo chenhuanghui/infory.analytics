@@ -15,6 +15,7 @@ angular.module('shop')
 
         $scope.cities = remoteFactory.cities;
         $scope.qrCode = '';
+        $scope.usersGallery = [];
 
         shopRemote.getQRCode({
             shop_id: shopId

@@ -13,7 +13,7 @@ angular.module('brand')
             $scope.brandId = id;
         });
 
-        $scope.gallery = null;
+        $scope.gallery = [];
         $scope.usersGallery = null;
         $scope.products = null;
 
