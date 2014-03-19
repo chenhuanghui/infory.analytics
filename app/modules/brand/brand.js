@@ -495,11 +495,12 @@ angular.module('brand')
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
                     if (respone.thumbnail_url != undefined) {
+                        $scope.gallery.unshift({
+                            thumbnail: respone.thumbnail_url
+                        });
+
                         $scope.$apply(function() {
-                            $scope.gallery.unshift({
-                                url: respone.thumbnail_url,
-                                id: respone.id
-                            });
+                            $scope.gallery = $scope.gallery;
                         });
                         saveToFactory();
                         dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
