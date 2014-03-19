@@ -90,6 +90,7 @@ angular.module('Smg')
 
                     if (data.time == undefined) {
                         chartData.xAxis.categories = data.groups;
+                        chartData.series = [];
                         chartData.series.push({
                             name: 'người dùng',
                             data: data.values
