@@ -1,6 +1,6 @@
 angular.module('account')
-    .controller('AccountCtrl', ['$scope', '$http', '$location', '$routeParams', 'dataFactory', 'Auth', 'accountRemote', '$modal', 'remoteFactory', 'fileHelper', 'dialogHelper',
-        function($scope, $http, $location, $routeParams, dataFactory, Auth, accountRemote, $modal, remoteFactory, fileHelper, dialogHelper) {
+    .controller('AccountCtrl', ['$scope', '$http', '$location', '$routeParams', 'dataFactory', 'Auth', 'accountRemote', '$modal', 'remoteFactory', 'fileHelper', 'dialogHelper', 'cookie',
+        function($scope, $http, $location, $routeParams, dataFactory, Auth, accountRemote, $modal, remoteFactory, fileHelper, dialogHelper, cookie) {
             /*modal*/
 
             var base_url = remoteFactory.getBaseUrl();
@@ -94,6 +94,8 @@ angular.module('account')
                                     $scope.account.avatar = respone.avatar;
                                 });
                                 fileAvatar = null;
+                                dataFactory.updateAccountNameHeader($scope.account.name);
+                                cookie.setCookie('user', $scope.account.email, 7);
                             } else
                                 dialogHelper.showError(respone.error.message);
                         }
@@ -102,8 +104,10 @@ angular.module('account')
                 } else {
                     accountRemote.update(fields, function(data) {
                         if (data.error == undefined) {
-                            orignalAccount = $scope.account;
                             dialogHelper.showError('Đã cập nhật thay đổi');
+                            orignalAccount = $scope.account;
+                            dataFactory.updateAccountNameHeader($scope.account.name);
+                            cookie.setCookie('user', $scope.account.email, 7);
                         } else {
                             $scope.account = orignalAccount;
                             dialogHelper.showError(data.error.message);
