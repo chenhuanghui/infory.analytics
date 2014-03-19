@@ -170,7 +170,7 @@ angular.module('home')
                 case 0:
                     brandRemote.getCostChart(field, function(data) {
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Dịch vụ vận hành');
+                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Dịch vụ');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
