@@ -42,6 +42,11 @@ angular.module('engagement')
 
                     $scope.funnelBookmarks = data.funnel_bookmarks;
                     $scope.funnelBookmark = data.funnel_bookmarks[0];
+
+                    if (oldData == null && $scope.funnelBookmarks.length >= 2) {
+                        $scope.funnelBookmark = data.funnel_bookmarks[1];
+                        $scope.changeFunnelBookmark($scope.funnelBookmark.id);
+                    }
                 } else
                     dialogHelper.showError(data.error.message);
             }, function() {})
