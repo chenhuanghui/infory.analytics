@@ -1,6 +1,6 @@
 angular.module('account')
-    .controller('AccountCtrl', ['$scope', '$http', '$location', '$routeParams', 'dataFactory', 'Auth', 'accountRemote', '$modal', 'remoteFactory',
-        function($scope, $http, $location, $routeParams, dataFactory, Auth, accountRemote, $modal, remoteFactory) {
+    .controller('AccountCtrl', ['$scope', '$http', '$location', '$routeParams', 'dataFactory', 'Auth', 'accountRemote', '$modal', 'remoteFactory', 'fileHelper',
+        function($scope, $http, $location, $routeParams, dataFactory, Auth, accountRemote, $modal, remoteFactory, fileHelper) {
             /*modal*/
 
             var base_url = remoteFactory.getBaseUrl();
@@ -39,13 +39,20 @@ angular.module('account')
                 var fields = '["name"], ["avatar"], ["balance"], ["company"], ["email"]';
                 accountRemote.get(fields, function(data) {
                     $scope.account = data;
-                    $scope.account.password = "111111";
-                    $scope.account.confirmPassword = "111111";
+                    $scope.account.password = "123456";
+                    $scope.account.confirmPassword = "123456";
                     $scope._username = data.name;
                     if ($scope.account.balance == null)
                         $scope.account.balance = 0;
                     orignalAccount = data;
                 }, function() {});
+            }
+
+            $scope.changeAvatar = function($files) {
+                fileHelper.readAsDataUrl($files[0], $scope)
+                    .then(function(result) {
+                        $scope.account.avatar = result;
+                    });
             }
 
             $scope.update = function() {

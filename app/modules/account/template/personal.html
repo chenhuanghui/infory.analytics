@@ -7,10 +7,10 @@
             <!-- avatar column -->
             <div class="col-md-3 col-md-offset-1 avatar-box">
                 <div class="personal-image">
-                    <img src="{{user.avatar}}" class="avatar img-circle" alt="avatar" />
+                    <img ng-src="{{user.avatar}}" class="avatar img-circle" alt="avatar" />
                     <p>Upload a different photo...</p>
                     
-                    <input type="file" />
+                    <input type="file" ng-file-select="changeAvatar($files)"/>
                 </div>
             </div>
 

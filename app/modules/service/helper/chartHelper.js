@@ -164,6 +164,9 @@ angular.module('Smg')
 
                 },
                 buildColumnChart: function(data, event) {
+                    if (data.time == undefined)
+                        data.time = data.groups;
+
                     if (data.groups == undefined)
                         return '';
 
