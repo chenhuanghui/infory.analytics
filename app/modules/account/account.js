@@ -93,6 +93,7 @@ angular.module('account')
                                 $scope.$apply(function() {
                                     $scope.account.avatar = respone.avatar;
                                 });
+                                fileAvatar = null;
                             } else
                                 dialogHelper.showError(respone.error.message);
                         }
