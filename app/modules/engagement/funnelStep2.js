@@ -19,14 +19,14 @@ angular.module('engagement')
             $scope.metadata = remoteFactory.meta_lists;
 
             var oldData = funnelFactory.getData(0, brandId);
+            var fields = null;
 
             if (oldData == null) {
-                $location.path('/funnel/step1/' + brandId);
-                return;
+                //$location.path('/funnel/step1/' + brandId);
+            } else {
+                fields = oldData.fields;
+                updateChart(fields);
             }
-
-            var fields = oldData.fields;
-            updateChart(fields);
 
             var pros = {
                 id: brandId,
@@ -104,6 +104,10 @@ angular.module('engagement')
             }
 
             var columnNames = [];
+
+            $scope.goToStep1 = function() {
+                $location.path('/funnel/step1/' + brandId);
+            }
 
             $scope.onTimeSetOne = function(newDate, oldDate) {
                 $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
