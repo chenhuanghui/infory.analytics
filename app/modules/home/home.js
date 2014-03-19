@@ -47,7 +47,7 @@ angular.module('home')
             }
 
             var compareToObject = null;
-            if ($scope.compareUnit.name_display != 'chọn thuộc tính') {
+            if ($scope.eventBookmark.compare_by != undefined && $scope.compareUnit.name_display != 'chọn thuộc tính') {
                 compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
             }
 
@@ -101,7 +101,10 @@ angular.module('home')
                         dataFactory.getBookmarks(brandId, function(data) {
                                 $scope.eventBookmarks = data.bookmarks.event_bookmarks;
                                 if ($scope.eventBookmarks.length > 0) {
-                                    $scope.eventBookmark = data.bookmarks.event_bookmarks[0];
+                                    if (data.bookmarks.event_bookmarks[0].id != -1)
+                                        $scope.eventBookmark = data.bookmarks.event_bookmarks[0];
+                                    else
+                                        $scope.eventBookmark = data.bookmarks.event_bookmarks[1];
                                     $scope.isHasBookmark = true;
                                 } else {
                                     $scope.eventBookmark = null;
