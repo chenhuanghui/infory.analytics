@@ -88,18 +88,27 @@ angular.module('Smg')
 
                     };
 
-                    if (data.groups == undefined) {
-                        chartData.series = [{
-                            name: event,
+                    if (data.time == undefined) {
+                        chartData.xAxis.categories = data.groups;
+                        chartData.series.push({
+                            name: 'người dùng',
                             data: data.values
-                        }];
+                        })
                     } else {
-                        chartData.series = [];
-                        for (var i = 0; i < data.groups.length; i++) {
-                            chartData.series.push({
-                                name: data.groups[i],
-                                data: data.values[i]
-                            })
+
+                        if (data.groups == undefined) {
+                            chartData.series = [{
+                                name: event,
+                                data: data.values
+                            }];
+                        } else {
+                            chartData.series = [];
+                            for (var i = 0; i < data.groups.length; i++) {
+                                chartData.series.push({
+                                    name: data.groups[i],
+                                    data: data.values[i]
+                                })
+                            }
                         }
                     }
 
