@@ -56,7 +56,7 @@ angular.module('Smg')
                             type: 'line'
                         },
                         title: {
-                            text: 'Thống kê ' + event,
+                            text: event,
                             x: -20 //center
                         },
                         subtitle: {
@@ -126,7 +126,7 @@ angular.module('Smg')
                             plotShadow: false
                         },
                         title: {
-                            text: 'Thống kê ' + event
+                            text: event
                         },
                         tooltip: {
                             pointFormat: '{<b>{point.percentage:.1f}%</b>'
@@ -180,7 +180,7 @@ angular.module('Smg')
                             type: 'column'
                         },
                         title: {
-                            text: 'Thống kê ' + event,
+                            text: event,
                         },
                         subtitle: {
                             text: 'Source: infory.vn',

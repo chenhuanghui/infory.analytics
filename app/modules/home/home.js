@@ -87,16 +87,16 @@ angular.module('home')
                         };
 
 
-                        fields[2] = {
-                            brand_id: $scope.brandId,
-                            time_unit: $scope.time_unit_3.name,
-                            date_beg: $scope.data[4].dateDropDownInput,
-                            date_end: $scope.data[5].dateDropDownInput
-                        };
+                        // fields[2] = {
+                        //     brand_id: $scope.brandId,
+                        //     time_unit: $scope.time_unit_3.name,
+                        //     date_beg: $scope.data[4].dateDropDownInput,
+                        //     date_end: $scope.data[5].dateDropDownInput
+                        // };
 
                         updateChart(fields[0], 0);
                         updateChart(fields[1], 1);
-                        updateChart(fields[2], 2);
+                        //updateChart(fields[2], 2);
 
                         dataFactory.getBookmarks(brandId, function(data) {
                                 $scope.eventBookmarks = data.bookmarks.event_bookmarks;
@@ -170,7 +170,7 @@ angular.module('home')
                 case 0:
                     brandRemote.getCostChart(field, function(data) {
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
+                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Chi phí sửa dụng các dịch vụ');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
@@ -178,19 +178,19 @@ angular.module('home')
                 case 1:
                     brandRemote.getDevelopmentChart(field, function(data) {
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
+                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Tình hình tăng trưởng của thương hiệu');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
                     break;
-                case 2:
-                    brandRemote.getCostChart(field, function(data) {
-                        if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
-                        else
-                            dialogHelper.showError(data.error.message);
-                    }, function() {});
-                    break;
+                    // case 2:
+                    //     brandRemote.getCostChart(field, function(data) {
+                    //         if (data.error == undefined)
+                    //             $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
+                    //         else
+                    //             dialogHelper.showError(data.error.message);
+                    //     }, function() {});
+                    //     break;
                 case 3:
                     eventRemote.count(field, function(data) {
                         if (data.error == undefined) {
