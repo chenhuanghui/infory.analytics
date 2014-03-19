@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'messageRemote', 'dialogHelper',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, messageRemote, dialogHelper) {
+    .controller('UserNotifyStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'messageRemote', 'dialogHelper', 'serviceHelper',
+        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, messageRemote, dialogHelper, serviceHelper) {
 
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
@@ -30,7 +30,7 @@ angular.module('user')
                 });
 
 
-            if ((step3Data == null && step2Data == null) || (step3Data == null && step2Data != null && step2Data.sendMethod.name == 'auto')) {
+            if (step1Data == null || (step3Data == null && step2Data == null) || (step3Data == null && step2Data != null && step2Data.sendMethod.name == 'auto')) {
                 listNotification();
                 return;
             }
@@ -39,10 +39,14 @@ angular.module('user')
                 brand_id: brandId,
                 name: step1Data.name,
                 type: step1Data.notifyType.name,
-                time_begin: step3Data.data.dateDisplay,
                 send_method: step2Data.sendMethod.name,
                 target_user_filter: step2Data.filter
             }
+
+            if (step3Data != null)
+                fields.time_begin = step3Data.data.dateDisplay;
+            else
+                fields.time_begin = serviceHelper.normalizeTime(new Date());
 
             switch (step1Data.notifyType.name) {
                 case 'sms':

@@ -48,9 +48,9 @@ angular.module('user')
                         return;
                     } else
                         $location.path('/user/notify-new/step4/' + brandId);
-                }
 
-                $location.path('/user/notify-new/step3/' + brandId);
+                } else
+                    $location.path('/user/notify-new/step3/' + brandId);
             }
             $scope.goToStep1 = function() {
                 saveInfor();
