@@ -24,6 +24,12 @@ angular.module('user')
             var step2Data = userNotifyFactory.getData(1, brandId);
             var step1Data = userNotifyFactory.getData(0, brandId);
 
+            for (var i = 0; i < 3; i++)
+                userNotifyFactory.setData(i, {
+                    brand_id: -1
+                });
+
+
             if ((step3Data == null && step2Data == null) || (step3Data == null && step2Data != null && step2Data.sendMethod.name == 'auto')) {
                 listNotification();
                 return;

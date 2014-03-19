@@ -247,6 +247,11 @@ angular.module('promotion')
                 }, function() {});
             }
         }
+
+        for (var i = 0; i < 3; i++)
+            promotionFactory.setData(i, {
+                brand_id: -1
+            });
     }
 
 ])
