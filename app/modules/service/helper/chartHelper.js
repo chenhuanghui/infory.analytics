@@ -149,24 +149,29 @@ angular.module('Smg')
                             data: []
                         }]
                     };
+                    if (data.time != undefined) {
+                        for (var i = 0; i < data.groups.length; i++) {
+                            var sum = 0;
+                            for (var j = 0; j < data.values[i].length; j++)
+                                sum += data.values[i][j];
 
-                    for (var i = 0; i < data.groups.length; i++) {
-                        var sum = 0;
-                        for (var j = 0; j < data.values[i].length; j++)
-                            sum += data.values[i][j];
-
-                        chartData.series[0].data.push([data.groups[i],
-                            sum
-                        ]);
+                            chartData.series[0].data.push({
+                                name: data.groups[i],
+                                y: sum
+                            });
+                        }
+                    } else {
+                        for (var i = 0; i < data.groups.length; i++) {
+                            chartData.series[0].data.push({
+                                name: data.groups[i],
+                                y: data.values[i]
+                            });
+                        }
                     }
-
                     return chartData;
 
                 },
                 buildColumnChart: function(data, event) {
-                    if (data.time == undefined)
-                        data.time = data.groups;
-
                     if (data.groups == undefined)
                         return '';
 
@@ -203,13 +208,20 @@ angular.module('Smg')
                         series: []
                     };
 
-                    for (var i = 0; i < data.groups.length; i++) {
-                        chartData.series.push({
-                            name: data.groups[i],
-                            data: data.values[i]
-                        })
+                    if (data.time != undefined) {
+                        for (var i = 0; i < data.groups.length; i++) {
+                            chartData.series.push({
+                                name: data.groups[i],
+                                data: data.values[i]
+                            })
+                        }
+                    } else {
+                        chartData.xAxis.categories = data.groups;
+                        chartData.series = [{
+                            name: event,
+                            data: data.values
+                        }];
                     }
-
                     return chartData;
                 }
             }
