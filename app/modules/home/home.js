@@ -38,7 +38,7 @@ angular.module('home')
                 time_unit: $scope.time_unit_4.name
             };
 
-            if ($scope.eventBookmark.compare_by != undefined) {
+            if ($scope.eventBookmark.compare_by != undefined && $scope.eventBookmark.compare_by != '') {
                 var object = JSON.parse($scope.eventBookmark.compare_by);
                 for (var o in object)
                     $scope.compareUnit = getCompareTo({
