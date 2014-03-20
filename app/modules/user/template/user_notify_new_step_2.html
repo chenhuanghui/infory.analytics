@@ -84,17 +84,18 @@
                             <tr>
                                 <th><input type="checkbox" ng-model="all" ng-change="checkAll(); updateIsCanGo();"/></th>
                                 <th class="name">Tên</th>
-                                <th>Năm sinh</th>
+                                <th>Tuổi</th>
                                 <th>Giới tính</th>
                                 <th>Vị trí</th>
                                 <th>Lần sử dụng cuối</th>
                                 <th>
-                                    <div class="ui-select">
+                                    Số điện thoại
+                                    <!-- <div class="ui-select">
                                         <select>
                                             <option>giờ / ngày</option>
                                             <option>giờ / tuần</option>
                                         </select>
-                                    </div>
+                                    </div> -->
                                 </th>
                             </tr>
                         </thead>
@@ -106,7 +107,7 @@
                                 <td>{{user.gender}}</td>
                                 <td>{{user.city}}</td>
                                 <td>{{user.last_visit}}</td>
-                                <td> --- </td>
+                                <td>{{user.phone}}</td>
                             </tr>
                         </tbody>
                     </table>
