@@ -3,12 +3,6 @@ angular.module('smg.services')
         function($http, $upload, remoteFactory) {
             var base_url = remoteFactory.getBaseUrl() + 'brand/';
             return {
-                updateCover: function(brandId, cover, success, error) {
-                    $http.post(base_url + 'update', {
-                        cover: cover,
-                        brand_id: brandId
-                    }).success(success).error(error);
-                },
                 update: function(fields, success, error) {
                     $http.post(base_url + 'update', fields).success(success).error(error);
                 },
@@ -29,6 +23,9 @@ angular.module('smg.services')
                 },
                 create: function(fields, success, error) {
                     $http.post(base_url + 'create', fields).success(success).error(error);
+                },
+                removeImage: function(fields, success, error) {
+                    $http.post(base_url + 'remove_image', fields).success(success).error(error);
                 },
             }
         }

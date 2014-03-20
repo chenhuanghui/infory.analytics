@@ -31,7 +31,7 @@ angular.module('Smg')
                             }]
                         },
                         tooltip: {
-                            valueSuffix: 'người dùng'
+                            valueSuffix: ' người dùng'
                         },
                         legend: {
                             layout: 'vertical',
@@ -56,7 +56,7 @@ angular.module('Smg')
                             type: 'line'
                         },
                         title: {
-                            text: 'Thống kê ' + event,
+                            text: event,
                             x: -20 //center
                         },
                         subtitle: {
@@ -68,7 +68,7 @@ angular.module('Smg')
                         },
                         yAxis: {
                             title: {
-                                text: 'Số lượng người dùng'
+                                text: 'Lượt ' + event
                             },
                             plotLines: [{
                                 value: 0,
@@ -77,7 +77,7 @@ angular.module('Smg')
                             }]
                         },
                         tooltip: {
-                            valueSuffix: 'người dùng'
+                            valueSuffix: ' lượt'
                         },
                         legend: {
                             layout: 'vertical',
@@ -88,18 +88,28 @@ angular.module('Smg')
 
                     };
 
-                    if (data.groups == undefined) {
-                        chartData.series = [{
-                            name: event,
-                            data: data.values
-                        }];
-                    } else {
+                    if (data.time == undefined) {
+                        chartData.xAxis.categories = data.groups;
                         chartData.series = [];
-                        for (var i = 0; i < data.groups.length; i++) {
-                            chartData.series.push({
-                                name: data.groups[i],
-                                data: data.values[i]
-                            })
+                        chartData.series.push({
+                            name: 'người dùng',
+                            data: data.values
+                        })
+                    } else {
+
+                        if (data.groups == undefined) {
+                            chartData.series = [{
+                                name: event,
+                                data: data.values
+                            }];
+                        } else {
+                            chartData.series = [];
+                            for (var i = 0; i < data.groups.length; i++) {
+                                chartData.series.push({
+                                    name: data.groups[i],
+                                    data: data.values[i]
+                                })
+                            }
                         }
                     }
 
@@ -116,7 +126,7 @@ angular.module('Smg')
                             plotShadow: false
                         },
                         title: {
-                            text: 'Thống kê ' + event
+                            text: event
                         },
                         tooltip: {
                             pointFormat: '{<b>{point.percentage:.1f}%</b>'
@@ -139,17 +149,25 @@ angular.module('Smg')
                             data: []
                         }]
                     };
+                    if (data.time != undefined) {
+                        for (var i = 0; i < data.groups.length; i++) {
+                            var sum = 0;
+                            for (var j = 0; j < data.values[i].length; j++)
+                                sum += data.values[i][j];
 
-                    for (var i = 0; i < data.groups.length; i++) {
-                        var sum = 0;
-                        for (var j = 0; j < data.values[i].length; j++)
-                            sum += data.values[i][j];
-
-                        chartData.series[0].data.push([data.groups[i],
-                            sum
-                        ]);
+                            chartData.series[0].data.push({
+                                name: data.groups[i],
+                                y: sum
+                            });
+                        }
+                    } else {
+                        for (var i = 0; i < data.groups.length; i++) {
+                            chartData.series[0].data.push({
+                                name: data.groups[i],
+                                y: data.values[i]
+                            });
+                        }
                     }
-
                     return chartData;
 
                 },
@@ -162,7 +180,7 @@ angular.module('Smg')
                             type: 'column'
                         },
                         title: {
-                            text: 'Thống kê ' + event,
+                            text: event,
                         },
                         subtitle: {
                             text: 'Source: infory.vn',
@@ -176,7 +194,7 @@ angular.module('Smg')
                         tooltip: {
                             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                                '<td style="padding:0"><b>{point.y:.1f} người dùng</b></td></tr>',
                             footerFormat: '</table>',
                             shared: true,
                             useHTML: true
@@ -190,13 +208,20 @@ angular.module('Smg')
                         series: []
                     };
 
-                    for (var i = 0; i < data.groups.length; i++) {
-                        chartData.series.push({
-                            name: data.groups[i],
-                            data: data.values[i]
-                        })
+                    if (data.time != undefined) {
+                        for (var i = 0; i < data.groups.length; i++) {
+                            chartData.series.push({
+                                name: data.groups[i],
+                                data: data.values[i]
+                            })
+                        }
+                    } else {
+                        chartData.xAxis.categories = data.groups;
+                        chartData.series = [{
+                            name: event,
+                            data: data.values
+                        }];
                     }
-
                     return chartData;
                 }
             }

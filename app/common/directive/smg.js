@@ -181,6 +181,8 @@ angular.module('smgDirectives', ['ui.date'])
                     function update() {
                         if (scope.olddata == 'null' || scope.olddata == '[]' || scope.olddata == null || scope.olddata == '') {
                             scope.property = scope.event.properties[0];
+                            if (scope.property.name_display == 'chọn thuộc tính')
+                                return;
                             scope.meta = scope.metas[scope.property.type].operators_display[0];
                             if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
                                 scope.paremeters.firstInput = scope.metadata[scope.property.available_values][0];
@@ -220,16 +222,19 @@ angular.module('smgDirectives', ['ui.date'])
 
                             scope.data = data;
                             scope.paremeters = paremeters;
-                            scop - e.operator = operator;
+                            scope.operator = operator;
                             scope.id = id;
                         }
                     }
 
                     update();
 
-                    scope.$watch('event', function() {
+                    scope.$watch('event', function(newValue, oldValue) {
                         if (scope.olddata != undefined && scope.olddata != null && count++ == 0)
                             return;
+
+                        if (newValue.name != oldValue.name)
+                            scope.property = scope.event.properties[0];
 
                         scope.updateFields();
                     });
@@ -242,7 +247,10 @@ angular.module('smgDirectives', ['ui.date'])
                         if (scope.olddata != undefined && scope.olddata != null && count++ == 1)
                             return;
 
-                        scope.property = scope.event.properties[0];
+                        //scope.property = scope.event.properties[0];
+                        if (scope.property.name_display == 'chọn thuộc tính')
+                            return;
+
                         scope.meta = scope.metas[scope.property.type].operators_display[0];
                         if (isNeedClearData) {
                             scope.paremeters = {
@@ -284,6 +292,9 @@ angular.module('smgDirectives', ['ui.date'])
                     }
 
                     scope.getValue = function() {
+                        if (scope.property.name_display == 'chọn thuộc tính')
+                            return;
+
                         switch (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)]) {
                             case 'date picker':
                                 scope.paremeters.firstInput = scope.data[0].dateDropDownInput;

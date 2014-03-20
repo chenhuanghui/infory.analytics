@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper', 'dialogHelper',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper, dialogHelper) {
+    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper', 'dialogHelper', 'accountRemote',
+        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper, dialogHelper, accountRemote) {
 
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
@@ -18,6 +18,17 @@ angular.module('user')
             $scope.isChecked = [];
             $scope.oldsubfilters = [];
             $scope.isCanGo = true;
+            $scope.balance = null;
+
+            var fields = '["balance"]';
+            accountRemote.get(fields, function(data) {
+                if (data.balance == null)
+                    $scope.balance = 0;
+                else
+                    $scope.balance = data.balance;
+
+                orignalAccount = data;
+            }, function() {});
 
             $scope.sendMethods = [{
                 name: 'once',
@@ -31,7 +42,15 @@ angular.module('user')
 
             $scope.goToStep3 = function() {
                 saveInfor();
-                $location.path('/user/notify-new/step3/' + brandId);
+                if ($scope.sendMethod.name == 'once') {
+                    if ($scope.numOfSelectedUsers * 8 > $scope.balance) {
+                        dialogHelper.showError('Số dư tài khoản của bạn là ' + $scope.balance + ' T-Coin không đủ thực hiện thao tác này');
+                        return;
+                    } else
+                        $location.path('/user/notify-new/step4/' + brandId);
+
+                } else
+                    $location.path('/user/notify-new/step3/' + brandId);
             }
             $scope.goToStep1 = function() {
                 saveInfor();
@@ -66,19 +85,19 @@ angular.module('user')
 
             } else {
 
-                dataFactory.getBookmarks(brandId, function(data) {
-                        data.bookmarks.profiles_bookmarks.unshift({
-                            bookmark_name: 'Chọn bộ lọc đã lưu',
-                            id: -1
-                        });
+                // dataFactory.getBookmarks(brandId, function(data) {
+                //         data.bookmarks.profiles_bookmarks.unshift({
+                //             bookmark_name: 'Chọn bộ lọc đã lưu',
+                //             id: -1
+                //         });
 
-                        $scope.profileBookmarks = data.bookmarks.profiles_bookmarks;
-                        $scope.profileBookmark = data.bookmarks.profiles_bookmarks[0];
+                //         $scope.profileBookmarks = data.bookmarks.profiles_bookmarks;
+                //         $scope.profileBookmark = data.bookmarks.profiles_bookmarks[0];
 
-                        saveInfor();
+                //         saveInfor();
 
-                    },
-                    function() {});
+                //     },
+                //     function() {});
             }
 
             $scope.updateIsCanGo = function() {
@@ -167,7 +186,7 @@ angular.module('user')
 
                 var fields = {
                     filter: JSON.stringify(query),
-                    fields: '["id", "name", "dob", "gender", "city", "last_visit"]',
+                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
                     brand_id: brandId,
                     page: 0,
                     page_size: 10000
@@ -183,8 +202,11 @@ angular.module('user')
                             var user = $scope.userList[i];
                             user.stt = i;
 
+                            if (user.phone == '' || user.phone == null)
+                                user.phone = '-';
+
                             if (user.email == null)
-                                user.email = "Không xác định";
+                                user.email = " - ";
 
                             if (user.gender == 'male')
                                 user.gender = 'Nam';
@@ -192,12 +214,12 @@ angular.module('user')
                                 user.gender = 'Nữ';
 
                             if (user.city == null)
-                                user.city = "Không xác định";
+                                user.city = " - ";
 
                             if (user.dob != null)
-                                user.dob = new Date(user.dob).getFullYear();
+                                user.dob = new Date().getFullYear() - new Date(user.dob).getFullYear();
                             else
-                                user.dob = "Không xác định";
+                                user.dob = " - ";
 
                             $scope.isChecked.push(false);
 

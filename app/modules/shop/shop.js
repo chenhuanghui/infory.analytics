@@ -15,6 +15,7 @@ angular.module('shop')
 
         $scope.cities = remoteFactory.cities;
         $scope.qrCode = '';
+        $scope.usersGallery = [];
 
         shopRemote.getQRCode({
             shop_id: shopId
@@ -171,6 +172,7 @@ angular.module('shop')
         }
 
         $scope.changeCityAddress = function(name) {
+            $('.z-dropdown').removeClass('open');
             $scope.bundle.shopCityAddress = name;
             $scope.bundle.editCityAddress = !$scope.bundle.editCityAddress;
             if ($scope.bundle.shopCityAddress.length <= 0) {
@@ -226,8 +228,10 @@ angular.module('shop')
                     if (data.error == undefined) {
                         if (data.user_gallery == null)
                             $scope.usersGallery = [];
-                        else
+                        else {
+                            data.user_gallery = data.user_gallery.reverse;
                             $scope.usersGallery = data.user_gallery;
+                        }
 
                         saveImageToFactory();
                     } else

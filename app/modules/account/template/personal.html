@@ -7,10 +7,10 @@
             <!-- avatar column -->
             <div class="col-md-3 col-md-offset-1 avatar-box">
                 <div class="personal-image">
-                    <img src="{{user.avatar}}" class="avatar img-circle" alt="avatar" />
+                    <img ng-src="{{account.avatar}}" class="avatar img-circle" alt="avatar" style="height:100px; width:100px;"/>
                     <p>Upload a different photo...</p>
                     
-                    <input type="file" />
+                    <input type="file" ng-file-select="changeAvatar($files)"/>
                 </div>
             </div>
 
@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Mật khẩu:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="password" ng-model="account.password" ng-minlength="6" name="password" required/>
+                                <input class="form-control" type="password" ng-model="account.password" ng-minlength="6" name="password" ng-change="markPassChange()" required/>
     
                                 <span class="alert-msg" ng-show="updateForm.password.$error.required">
                                     <i class="icon-remove-sign"></i>
@@ -110,7 +110,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Xác nhận mật khẩu:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="password" ng-model="account.confirmPassword" ng-minlength="6" name="confirmPassword" nx-equal="account.password" required/>
+                                <input class="form-control" type="password" ng-model="account.confirmPassword" ng-minlength="6" name="confirmPassword" nx-equal="account.password" ng-change="markPassChange()" required/>
     
                                 <span class="alert-msg" ng-show="updateForm.confirmPassword.$error.required">
                                     <i class="icon-remove-sign"></i>

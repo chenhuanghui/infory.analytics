@@ -20,6 +20,10 @@
                         Chuỗi hành vi người dùng
                     </div>
                     Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
+
+                    <div>
+                        <a class="btn-flat success right" ng-click="goToStep1()">Tạo chuỗi hành vi mới</a>
+                    </div>
                 </div>
                 <div class="form-wrapper">
                     <div class="wapper">
@@ -32,7 +36,8 @@
                                     <div class="controller">
                                         <div class="z-dropdown-wapper">
                                             <div class="z-dropdown">
-                                                <a class="trigger"><span>{{funnelBookmark.bookmark_name}}</span></a>
+                                                <a class="trigger" style="cursor:pointer"><span>{{funnelBookmark.bookmark_name}}</span>
+                                                <i class="icon-sort-down"></i></a>
                                                 <ul>
                                                     <li ng-repeat="funnelBookmark in funnelBookmarks"><a ng-click="changeFunnelBookmark(funnelBookmark.id)" style="cursor:pointer">{{funnelBookmark.bookmark_name}}</a></li>
                                                 </ul>

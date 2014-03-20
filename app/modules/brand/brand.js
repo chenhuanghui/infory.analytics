@@ -13,7 +13,7 @@ angular.module('brand')
             $scope.brandId = id;
         });
 
-        $scope.gallery = null;
+        $scope.gallery = [];
         $scope.usersGallery = null;
         $scope.products = null;
 
@@ -137,6 +137,7 @@ angular.module('brand')
         }
 
         $scope.showUserProfile = function(brandId, userId, username, avatar) {
+            dataFactory.setUrl($location.path());
             dataFactory.setUsernameAvatar(username, avatar);
             $location.path('/user/' + brandId + '/' + userId);
         }
@@ -343,8 +344,10 @@ angular.module('brand')
                     if (data.error == undefined) {
                         if (data.gallery == null)
                             $scope.gallery = [];
-                        else
+                        else {
+                            data.gallery = data.gallery.reverse();
                             $scope.gallery = data.gallery;
+                        }
                     } else
                         dialogHelper.showError(data.error.message);
 
@@ -411,6 +414,7 @@ angular.module('brand')
         }
 
         $scope.changeCategory = function(id) {
+            $('.z-dropdown').removeClass('open');
             for (var i = 0; i < $scope.brand.categories.length; i++) {
                 if ($scope.brand.categories[i].id == id) {
                     $scope.category = $scope.brand.categories[i];
@@ -492,18 +496,40 @@ angular.module('brand')
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
                     if (respone.thumbnail_url != undefined) {
-                        $scope.$apply(function() {
-                            $scope.gallery.unshift({
-                                url: respone.thumbnail_url,
-                                id: respone.id
-                            });
+                        $scope.gallery.unshift({
+                            thumbnail: respone.thumbnail_url
                         });
+
+                        $scope.$apply(function() {
+                            $scope.gallery = $scope.gallery;
+                        });
+                        saveToFactory();
                         dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                     } else
                         dialogHelper.showError(data.error.message);
                 }
             }
             xhr.send(fd);
+        }
+
+        $scope.removeImage = function(thumbnail_url) {
+            dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Thao tác xóa ảnh của bạn không thể phục hồi được. Vui lòng xác nhận', function() {
+                for (var i = 0; i < $scope.gallery.length; i++) {
+                    if ($scope.gallery[i].thumbnail == thumbnail_url) {
+                        brandRemote.removeImage({
+                            brand_id: brandId,
+                            image_id: $scope.gallery.length - 1 - i
+                        }, function(data) {
+                            if (data.error == undefined) {
+                                $scope.gallery.splice(i, 1);
+                                saveToFactory();
+                            } else
+                                dialogHelper.showError(data.error.message);
+                        }, function() {});
+                        return;
+                    }
+                }
+            });
         }
 
         $scope.changeProductDescription = function(categoryId, productId, description) {

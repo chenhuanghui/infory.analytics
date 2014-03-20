@@ -1,8 +1,8 @@
 angular.module('header')
 
-.controller('HeaderCtrl', ['$scope', '$location', 'dataFactory', 'Auth', 'brandRemote', 'dialogHelper',
+.controller('HeaderCtrl', ['$scope', '$location', 'dataFactory', 'Auth', 'brandRemote', 'dialogHelper', 'cookie',
 
-    function($scope, $location, dataFactory, Auth, brandRemote, dialogHelper) {
+    function($scope, $location, dataFactory, Auth, brandRemote, dialogHelper, cookie) {
 
         $scope.isVisibleBrandMenu = true;
 
@@ -21,6 +21,7 @@ angular.module('header')
 
         $scope.updateAccountName = function(name) {
             $scope._username = name;
+            cookie.setCookie('name', name, 7);
         }
 
         $scope.setCurrentBrand = function(brand) {

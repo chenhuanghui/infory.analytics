@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'messageRemote', 'dialogHelper',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, messageRemote, dialogHelper) {
+    .controller('UserNotifyStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'messageRemote', 'dialogHelper', 'serviceHelper',
+        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, messageRemote, dialogHelper, serviceHelper) {
 
             var brandId = $routeParams.brandId;
             dataFactory.updateBrandSideBar(brandId);
@@ -21,22 +21,32 @@ angular.module('user')
                 $location.path('/user/notify-new/step3/' + brandId);
             }
 
-            if (step3Data == null) {
+            var step2Data = userNotifyFactory.getData(1, brandId);
+            var step1Data = userNotifyFactory.getData(0, brandId);
+
+            for (var i = 0; i < 3; i++)
+                userNotifyFactory.setData(i, {
+                    brand_id: -1
+                });
+
+
+            if (step1Data == null || (step3Data == null && step2Data == null) || (step3Data == null && step2Data != null && step2Data.sendMethod.name == 'auto')) {
                 listNotification();
                 return;
             }
-
-            var step2Data = userNotifyFactory.getData(1, brandId);
-            var step1Data = userNotifyFactory.getData(0, brandId);
 
             var fields = {
                 brand_id: brandId,
                 name: step1Data.name,
                 type: step1Data.notifyType.name,
-                time_begin: step3Data.data.dateDisplay,
                 send_method: step2Data.sendMethod.name,
                 target_user_filter: step2Data.filter
             }
+
+            if (step3Data != null)
+                fields.time_begin = step3Data.data.dateDisplay;
+            else
+                fields.time_begin = serviceHelper.normalizeTime(new Date());
 
             switch (step1Data.notifyType.name) {
                 case 'sms':
@@ -89,7 +99,7 @@ angular.module('user')
 
                 var properties = {
                     brand_id: brandId,
-                    fields: '["name", "type", "send_method", "time_begin", "status"]'
+                    fields: '["id", "name", "type", "send_method", "time_begin", "status"]'
                 }
 
                 $scope.sortNotificationListByStatus = function() {
@@ -105,6 +115,46 @@ angular.module('user')
                     }
                 }
 
+                $scope.changeStatus = function(id) {
+                    var status = $scope.messageListFull[id].status;
+                    var nextStatus = '';
+                    switch (status) {
+                        case 'running':
+                            $scope.messageListFull[id].statusClass = 'btn-flat inverse';
+                            $scope.messageListFull[id].status = 'stopped';
+                            $scope.messageListFull[id].statusName = 'Đã dừng';
+                            nextStatus = 'stopped';
+                            break;
+                        case 'waiting':
+                            return;
+                        case 'stopped':
+                            $scope.messageListFull[id].statusClass = 'btn-flat success';
+                            $scope.messageListFull[id].status = 'running';
+                            $scope.messageListFull[id].statusName = 'Đang chạy';
+                            nextStatus = 'running';
+                            break;
+                    }
+
+                    messageRemote.update({
+                        message_id: $scope.messageListFull[id].id,
+                        status: nextStatus
+                    }, function(data) {
+                        if (data.error == undefined) {
+
+                        } else {
+                            dialogHelper.showError(data.error.message);
+                            $scope.messageListFull[id].status = status;
+                            if ($scope.messageListFull[id].status == 'running') {
+                                $scope.messageListFull[id].statusClass = 'btn-flat success';
+                                $scope.messageListFull[id].statusName = 'Đang chạy';
+                            } else {
+                                $scope.messageListFull[id].statusClass = 'btn-flat inverse';
+                                $scope.messageListFull[id].statusName = 'Đã dừng';
+                            }
+                        }
+                    }, function() {});
+                }
+
                 messageRemote.list(properties, function(data) {
                     if (data.error == undefined) {
                         $scope.messageListFull = data;
@@ -113,6 +163,8 @@ angular.module('user')
                                 $scope.messageListFull[i].sttClass = 'even';
                             else
                                 $scope.messageListFull[i].sttClass = 'odd';
+
+                            $scope.messageListFull[i].index = i;
 
                             switch ($scope.messageListFull[i].status) {
                                 case 'running':

@@ -27,6 +27,8 @@ angular.module('Smg')
 
                     for (var i = 0; i < subfilters.length; i++) {
                         var pre_query = subfilters[i].getValue();
+                        if (pre_query == null || pre_query == undefined)
+                            return null;
                         if (pre_query.paremeters.firstInput != 0 && pre_query.paremeters.firstInput == '')
                             continue;
                         switch (pre_query.meta) {

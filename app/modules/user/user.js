@@ -23,7 +23,10 @@ angular.module('user')
         dataFactory.getUserProfile($scope.brandId, $scope.userId, function(userProfile) {
                 $scope.userProfile = userProfile;
                 $scope.username = userProfile.name;
+
+                //$scope.$apply(function() {
                 $scope.avatar = userProfile.avatar;
+                //});
 
                 // REVIEW API - timeline group by day - it's not client job
 
@@ -73,7 +76,7 @@ angular.module('user')
                         return {
                             time_str: key,
                             hour: _.pluck(value, 'hour'),
-                            name: _.pluck(value, 'name')
+                            name: _.pluck(value, 'name_display')
                         }
                     })
                     .value();
@@ -91,7 +94,7 @@ angular.module('user')
                 }
 
                 if (userProfile.email == null)
-                    userProfile.email = "Không xác định";
+                    userProfile.email = " - ";
 
                 if (userProfile.gender == 'male')
                     userProfile.gender = 'Nam';
@@ -99,7 +102,7 @@ angular.module('user')
                     userProfile.gender = 'Nữ';
 
                 if (userProfile.city == null)
-                    userProfile.city = "Không xác định";
+                    userProfile.city = " - ";
 
                 if (userProfile.facebook[0] != 'h')
                     userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
@@ -107,7 +110,7 @@ angular.module('user')
                 if (userProfile.dob != null)
                     userProfile.age = new Date().getFullYear() - new Date(userProfile.dob).getFullYear();
                 else
-                    userProfile.age = "Không xác định";
+                    userProfile.age = " - ";
 
             },
             function() {});

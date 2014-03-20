@@ -112,6 +112,7 @@ angular.module('engagement')
         }
 
         $scope.changeEventBookmark = function(id) {
+            $('.z-dropdown').removeClass('open');
             for (var i = 0; i < $scope.eventBookmarks.length; i++) {
                 if ($scope.eventBookmarks[i].id == id) {
 
@@ -268,7 +269,7 @@ angular.module('engagement')
             };
 
             var compareToObject = null;
-            if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
+            if ($scope.compareUnit.name_display != 'chọn thuộc tính') {
                 compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
                 fields.compare_by = JSON.stringify(compareToObject);
                 $scope.hideTypeChart = false;

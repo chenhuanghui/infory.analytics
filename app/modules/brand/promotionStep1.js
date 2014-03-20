@@ -12,17 +12,18 @@ angular.module('promotion')
         }, function() {});
 
         $scope.promotionTypes = [{
-            name: 'news',
-            name_display: 'Đăng tin'
-        }, {
-            name: 'score',
-            name_display: 'Tích luỹ điểm'
-        }, {
-            name: 'voucher',
-            name_display: 'Voucher'
-        }];
-
-
+                name: 'news',
+                name_display: 'Đăng tin'
+            },
+            // {
+            //     name: 'score',
+            //     name_display: 'Tích luỹ điểm'
+            // },
+            {
+                name: 'voucher',
+                name_display: 'Khuyến mãi'
+            }
+        ];
 
         var promotionType = promotionFactory.getData(0);
 

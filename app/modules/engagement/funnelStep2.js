@@ -19,14 +19,14 @@ angular.module('engagement')
             $scope.metadata = remoteFactory.meta_lists;
 
             var oldData = funnelFactory.getData(0, brandId);
+            var fields = null;
 
             if (oldData == null) {
-                $location.path('/funnel/step1/' + brandId);
-                return;
+                //$location.path('/funnel/step1/' + brandId);
+            } else {
+                fields = oldData.fields;
+                updateChart(fields);
             }
-
-            var fields = oldData.fields;
-            updateChart(fields);
 
             var pros = {
                 id: brandId,
@@ -42,11 +42,17 @@ angular.module('engagement')
 
                     $scope.funnelBookmarks = data.funnel_bookmarks;
                     $scope.funnelBookmark = data.funnel_bookmarks[0];
+
+                    if (oldData == null && $scope.funnelBookmarks.length >= 2) {
+                        $scope.funnelBookmark = data.funnel_bookmarks[1];
+                        $scope.changeFunnelBookmark($scope.funnelBookmark.id);
+                    }
                 } else
                     dialogHelper.showError(data.error.message);
             }, function() {})
 
             $scope.changeFunnelBookmark = function(id) {
+                $('.z-dropdown').removeClass('open');
                 for (var i = 0; i < $scope.funnelBookmarks.length; i++) {
                     if ($scope.funnelBookmarks[i].id == id) {
                         $scope.funnelBookmark = $scope.funnelBookmarks[i];
@@ -74,7 +80,7 @@ angular.module('engagement')
             $scope.updateCompareUnit = function() {
                 var compareToObject = null;
 
-                if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
+                if ($scope.compareUnit.name_display != 'chọn thuộc tính') {
                     compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
                 }
 
@@ -103,6 +109,10 @@ angular.module('engagement')
             }
 
             var columnNames = [];
+
+            $scope.goToStep1 = function() {
+                $location.path('/funnel/step1/' + brandId);
+            }
 
             $scope.onTimeSetOne = function(newDate, oldDate) {
                 $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);

@@ -38,7 +38,7 @@ angular.module('home')
                 time_unit: $scope.time_unit_4.name
             };
 
-            if ($scope.eventBookmark.compare_by != undefined) {
+            if ($scope.eventBookmark.compare_by != undefined && $scope.eventBookmark.compare_by != '') {
                 var object = JSON.parse($scope.eventBookmark.compare_by);
                 for (var o in object)
                     $scope.compareUnit = getCompareTo({
@@ -47,7 +47,7 @@ angular.module('home')
             }
 
             var compareToObject = null;
-            if ($scope.compareUnit.name_display != 'Chọn thuộc tính') {
+            if ($scope.eventBookmark.compare_by != undefined && $scope.compareUnit.name_display != 'chọn thuộc tính') {
                 compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
             }
 
@@ -87,21 +87,24 @@ angular.module('home')
                         };
 
 
-                        fields[2] = {
-                            brand_id: $scope.brandId,
-                            time_unit: $scope.time_unit_3.name,
-                            date_beg: $scope.data[4].dateDropDownInput,
-                            date_end: $scope.data[5].dateDropDownInput
-                        };
+                        // fields[2] = {
+                        //     brand_id: $scope.brandId,
+                        //     time_unit: $scope.time_unit_3.name,
+                        //     date_beg: $scope.data[4].dateDropDownInput,
+                        //     date_end: $scope.data[5].dateDropDownInput
+                        // };
 
                         updateChart(fields[0], 0);
                         updateChart(fields[1], 1);
-                        updateChart(fields[2], 2);
+                        //updateChart(fields[2], 2);
 
                         dataFactory.getBookmarks(brandId, function(data) {
                                 $scope.eventBookmarks = data.bookmarks.event_bookmarks;
                                 if ($scope.eventBookmarks.length > 0) {
-                                    $scope.eventBookmark = data.bookmarks.event_bookmarks[0];
+                                    if (data.bookmarks.event_bookmarks[0].id != -1)
+                                        $scope.eventBookmark = data.bookmarks.event_bookmarks[0];
+                                    else
+                                        $scope.eventBookmark = data.bookmarks.event_bookmarks[1];
                                     $scope.isHasBookmark = true;
                                 } else {
                                     $scope.eventBookmark = null;
@@ -167,7 +170,7 @@ angular.module('home')
                 case 0:
                     brandRemote.getCostChart(field, function(data) {
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
+                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Dịch vụ');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
@@ -175,19 +178,19 @@ angular.module('home')
                 case 1:
                     brandRemote.getDevelopmentChart(field, function(data) {
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
+                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Tình hình tăng trưởng');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
                     break;
-                case 2:
-                    brandRemote.getCostChart(field, function(data) {
-                        if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
-                        else
-                            dialogHelper.showError(data.error.message);
-                    }, function() {});
-                    break;
+                    // case 2:
+                    //     brandRemote.getCostChart(field, function(data) {
+                    //         if (data.error == undefined)
+                    //             $scope.dataChart[id] = chartHelper.buildLineChart(data, id + 1);
+                    //         else
+                    //             dialogHelper.showError(data.error.message);
+                    //     }, function() {});
+                    //     break;
                 case 3:
                     eventRemote.count(field, function(data) {
                         if (data.error == undefined) {
