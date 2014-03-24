@@ -4,11 +4,10 @@ angular.module('smg.services')
             var mode = 'dev';
             var domain = (mode == 'dev') ? 'http://dev2.smartguide.vn/' : 'https://api.infory.vn/'
             var base_url = domain + "dashboard/api/v1/";
-            var tail_url = '?dashboard_token=' + Auth.user.access_token;
-
+            
             return {
                 getTailUrl: function() {
-                    return tail_url;
+                    return '?dashboard_token=' + Auth.user.access_token;
                 },
                 getBaseUrl: function() {
                     return base_url;
