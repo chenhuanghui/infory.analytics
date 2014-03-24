@@ -1523,7 +1523,7 @@ input, button, select, textarea {
 }
 
 .z-dropdown>a{
-    width: 150px;
+    width: 100%;
     display: block;
     text-decoration: none;
     padding: 7px;
@@ -1531,8 +1531,17 @@ input, button, select, textarea {
 
 .z-dropdown>a span{
     color: #6C7487 !important;
+    width: 150px;
 }
 
+.z-dropdown>a>i{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 13px !important;
+    color: #6C7487 !important;
+}
+ 
 .z-dropdown>ul>li{
     width: 200px;
     list-style: none;
@@ -1607,17 +1616,12 @@ input, button, select, textarea {
 
 .z-dropdown.open>ul{
     display: block;
+    height: 300px;
+    overflow-y: scroll;
 }
 
 .z-dropdown-wapper {
     position: relative;
-}
-
-.z-dropdown-wapper .icon-sort-down{
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    font-size: 13px;
 }
 
 .z-dropdown-btn{

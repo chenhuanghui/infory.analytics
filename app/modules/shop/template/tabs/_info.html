@@ -71,4 +71,20 @@
         </div>
     </li>
     <div class="clearfix"></div>
+    <fieldset class="gllpLatlonPicker" id="custom_id">
+    	<input type="text" class="gllpSearchField">
+    	<input type="button" class="gllpSearchButton" value="search">
+    	<div class="gllpMap">Google Maps</div>
+    	<input type="hidden" class="gllpLatitude" value="60"/>
+    	<input type="hidden" class="gllpLongitude" value="30"/>
+    	<input type="hidden" class="gllpZoom" value="12"/>
+    </fieldset>
 </ul>
+<script src="vendor/jquery-gmaps/js/jquery-gmaps-latlon-picker.js"></script>
+<script src="/vendor/theme/scripts/select2.min.js"></script>
+<script>
+// select2 plugin for select elements
+$(".select2").select2({
+    placeholder: "xxxx"
+});
+</script>
