@@ -4,12 +4,12 @@ angular.module('smg.services')
             var base_url = remoteFactory.getBaseUrl();
             var tail_url = remoteFactory.getTailUrl();
             return {
-                login: function(fields, success, error) {
-                    $http.post('http://dev2.smartguide.vn/dashboard/auth', fields).success(success).error(error);
-                },
-                logout: function(fields, success, error) {
-                    $http.post(base_url + 'logout', fields).success(success).error(error);
-                },
+                // login: function(fields, success, error) {
+                //     $http.post('http://smartguide.dev/dashboard/auth', fields).success(success).error(error);
+                // },
+                // logout: function(fields, success, error) {
+                //     $http.post(base_url + 'logout', fields).success(success).error(error);
+                // },
                 get: function(fields, success, error) {
                     $http.post(base_url + 'account/get' + tail_url, fields).success(success).error(error);
                 },

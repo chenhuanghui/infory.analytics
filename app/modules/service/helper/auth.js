@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Smg')
-    .factory('Auth', ['$cookieStore', '$document', 'accountRemote', 'cookie',
-        function($cookieStore, $document, accountRemote, cookie) {
+    .factory('Auth', ['$http', '$cookieStore', '$document', /*'accountRemote', */'cookie',
+        function($http, $cookieStore, $document, /*accountRemote, */cookie) {
             function changeUser(user) {
                 _.extend(currentUser, user);
             };
@@ -36,6 +36,9 @@ angular.module('Smg')
                 }
             }
 
+            var loginRoute = "http://dev2.smartguide.vn/dashboard/auth";
+            var logoutRoute = "http://dev2.smartguide.vn/dashboard/api/v1/logout";
+
             return {
                 authorize: function(accessLevel, role) {
                     if (role === undefined)
@@ -51,40 +54,42 @@ angular.module('Smg')
                 login: function(user, success, error) {
                     var rememberme = user.rememberme;
 
-                    accountRemote.login(user, function(res) {
+                    $http.post(loginRoute, user)
+                        .success(function(res)
+                        {
+                            if (res.status) {
+                                var user = {
+                                    name: res.data.name,
+                                    username: res.data.username,
+                                    role: res.data.role,
+                                    access_token: res.data.access_token
+                                };
 
-                        if (res.status) {
-                            var user = {
-                                name: res.data.name,
-                                username: res.data.username,
-                                role: res.data.role,
-                                access_token: res.data.access_token
-                            };
+                                cookie.deleteCookie('name');
+                                cookie.deleteCookie('user');
+                                cookie.deleteCookie('access_token');
+                                cookie.deleteCookie('role');
 
-                            cookie.deleteCookie('name');
-                            cookie.deleteCookie('user');
-                            cookie.deleteCookie('access_token');
-                            cookie.deleteCookie('role');
+                                if (rememberme) {
+                                    var expires = 7;
+                                    cookie.setCookie('name', user.name, expires);
+                                    cookie.setCookie('user', user.username, expires);
+                                    cookie.setCookie('access_token', user.access_token, expires);
+                                    cookie.setCookie('role', user.role.title, expires);
+                                } else {
+                                    cookie.setCookie('name', user.name, expires);
+                                    $cookieStore.put('user', user.username);
+                                    $cookieStore.put('access_token', user.access_token);
+                                    $cookieStore.put('role', user.role.title);
+                                }
 
-                            if (rememberme) {
-                                var expires = 7;
-                                cookie.setCookie('name', user.name, expires);
-                                cookie.setCookie('user', user.username, expires);
-                                cookie.setCookie('access_token', user.access_token, expires);
-                                cookie.setCookie('role', user.role.title, expires);
+                                changeUser(user);
+                                success(user);
                             } else {
-                                cookie.setCookie('name', user.name, expires);
-                                $cookieStore.put('user', user.username);
-                                $cookieStore.put('access_token', user.access_token);
-                                $cookieStore.put('role', user.role.title);
+                                error(res.message);
                             }
-
-                            changeUser(user);
-                            success(user);
-                        } else {
-                            error(res.message);
-                        }
-                    }, error);
+                        })
+                        .error(error);
                 },
 
                 logout: function(success, error) {
@@ -93,20 +98,23 @@ angular.module('Smg')
                         dashboard_token: currentUser.access_token
                     };
 
-                    accountRemote.logout(user, function(res) {
-                        if (res.status) {
-                            cookie.deleteCookie('user');
-                            cookie.deleteCookie('role');
-                            cookie.deleteCookie('access_token');
-                        }
+                    $http.post(logoutRoute + "?dashboard_token=" + user.dashboard_token, user)
+                        .success(function(res) 
+                        {
+                            if (res.status) {
+                                cookie.deleteCookie('user');
+                                cookie.deleteCookie('role');
+                                cookie.deleteCookie('access_token');
+                            }
 
-                        changeUser({
-                            username: '',
-                            role: userRoles.public
-                        });
+                            changeUser({
+                                username: '',
+                                role: userRoles.public
+                            });
 
-                        success();
-                    }, error);
+                            success();
+                        })
+                        .error(error);
                 },
 
                 accessLevels: accessLevels,

@@ -2,9 +2,10 @@ angular.module('smg.services')
     .factory('productCategoryRemote', ['$http', 'remoteFactory',
         function($http, remoteFactory) {
             var base_url = remoteFactory.getBaseUrl() + 'product_category/';
+            var tail_url = remoteFactory.getTailUrl();
             return {
                 create: function(fields, success, error) {
-                    $http.post(base_url + 'create', fields).success(success).error(error);
+                    $http.post(base_url + 'create' + tail_url, fields).success(success).error(error);
                 },
             }
         }

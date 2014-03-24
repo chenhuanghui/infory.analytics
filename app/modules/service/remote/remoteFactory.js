@@ -1,8 +1,10 @@
 angular.module('smg.services')
-    .factory('remoteFactory', ['$http', 'cookie', 'metaData',
-        function($http, cookie, metaData) {
-            var base_url = "http://dev2.smartguide.vn/dashboard/api/v1/";
-            var tail_url = '?access_token=' + cookie.getCookie('access_token');
+    .factory('remoteFactory', ['$http', 'Auth', 'metaData', 
+        function($http, Auth, metaData) {
+            var mode = 'dev';
+            var domain = (mode == 'dev') ? 'http://dev2.smartguide.vn/' : 'https://api.infory.vn/'
+            var base_url = domain + "dashboard/api/v1/";
+            var tail_url = '?dashboard_token=' + Auth.user.access_token;
 
             return {
                 getTailUrl: function() {
