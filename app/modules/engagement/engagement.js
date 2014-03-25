@@ -273,8 +273,10 @@ angular.module('engagement')
                 compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
                 fields.compare_by = JSON.stringify(compareToObject);
                 $scope.hideTypeChart = false;
-            } else
+            } else {
                 $scope.hideTypeChart = true;
+                $scope.chartType = $scope.chartTypes[0];
+            }
         }
 
         $scope.getResult = function() {
