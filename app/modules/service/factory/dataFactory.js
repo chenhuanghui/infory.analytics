@@ -282,6 +282,8 @@ angular.module('smg.services')
                         if (data.error == undefined) {
                             metaData.brand_id = brandId;
                             metaData.meta_lists = data.meta_lists;
+                            metaData.meta_profile = data.meta_profile;
+                            metaData.meta_events = data.meta_events;
                             success(metaData);
                         } else
                             dialogHelper.showError(data.error.message);
