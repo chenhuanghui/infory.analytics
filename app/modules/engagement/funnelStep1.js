@@ -52,7 +52,8 @@ angular.module('engagement')
 
             }
 
-            var oldData = funnelFactory.getData(0, brandId);
+            //var oldData = funnelFactory.getData(0, brandId);
+            var oldData = null;
             if (oldData != null) {
                 fields = oldData.fields;
                 $scope.nameOfChainOfBehaviours = oldData.nameOfChainOfBehaviours;

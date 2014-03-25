@@ -278,7 +278,7 @@ angular.module('smg.services')
                         fields: '["meta_lists"]'
                     };
 
-                    systemRemote.get(fields, function(data) {
+                    systemRemote.getParams(fields, function(data) {
                         if (data.error == undefined) {
                             metaData.brand_id = brandId;
                             metaData.meta_lists = data.meta_lists;
