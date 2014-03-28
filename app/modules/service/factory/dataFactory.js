@@ -284,6 +284,7 @@ angular.module('smg.services')
                             metaData.meta_lists = data.meta_lists;
                             metaData.meta_profile = data.meta_profile;
                             metaData.meta_events = data.meta_events;
+                            metaData.meta_property_types = data.meta_property_types;
                             success(metaData);
                         } else
                             dialogHelper.showError(data.error.message);
