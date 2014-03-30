@@ -48,6 +48,14 @@ angular.module('Smg')
                                 })
                                 break;
                                 ///
+                            case 'có':
+                                elements.push({
+                                    belong: {
+                                        property: pre_query.property.name,
+                                        value: pre_query.paremeters.firstInput
+                                    }
+                                })
+                                break;
                             case 'lớn hơn':
                                 elements.push({
                                     larger_than: {
