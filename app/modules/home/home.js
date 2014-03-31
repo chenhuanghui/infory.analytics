@@ -112,7 +112,7 @@ angular.module('home')
                                 }
 
                                 $scope.updateEventBookmark(true);
-
+                                saveInfor();
                             },
                             function() {});
 
@@ -122,6 +122,7 @@ angular.module('home')
                         $scope.eventBookmarks = oldData.event_bookmarks;
                         $scope.eventBookmark = oldData.event_bookmark;
                         $scope.data = oldData.data;
+                        $scope.brandInfo = oldData.brandInfo;
 
                         $scope.time_unit_1 = getTimeUnit(oldData.time_unit_1);
                         $scope.time_unit_2 = getTimeUnit(oldData.time_unit_2);
@@ -201,6 +202,10 @@ angular.module('home')
                     break;
             }
 
+            saveInfor();
+        }
+
+        function saveInfor() {
             homeFactory.setHomeData({
                 id: $scope.brandId,
                 fields: fields,
@@ -213,7 +218,8 @@ angular.module('home')
                 time_unit_3: $scope.time_unit_3,
                 time_unit_4: $scope.time_unit_4,
                 compare_unit: $scope.compareUnit,
-                is_has_bookmark: $scope.isHasBookmark
+                is_has_bookmark: $scope.isHasBookmark,
+                brandInfo: $scope.brandInfo
             });
         }
 
