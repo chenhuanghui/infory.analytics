@@ -1616,7 +1616,7 @@ input, button, select, textarea {
 
 .z-dropdown.open>ul{
     display: block;
-    height: 300px;
+    height: auto;
     overflow-y: scroll;
 }
 
