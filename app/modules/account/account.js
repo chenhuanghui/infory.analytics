@@ -84,7 +84,7 @@ angular.module('account')
                     fd.append('email', $scope.account.email);
 
                     var xhr = new XMLHttpRequest();
-                    xhr.open('POST', base_url + 'account/update', true);
+                    xhr.open('POST', base_url + 'account/update' + remoteFactory.getTailUrl(), true);
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState == 4) {
                             var respone = JSON.parse(xhr.responseText);

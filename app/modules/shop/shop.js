@@ -256,7 +256,7 @@ angular.module('shop')
             fd.append('shop_id', shopId);
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', base_url + 'shop/update', true);
+            xhr.open('POST', base_url + 'shop/update' + remoteFactory.getTailUrl(), true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
@@ -281,7 +281,7 @@ angular.module('shop')
             fd.append('image', $files[0]);
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', base_url + 'shop/add_image', true);
+            xhr.open('POST', base_url + 'shop/add_image' + remoteFactory.getTailUrl(), true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);

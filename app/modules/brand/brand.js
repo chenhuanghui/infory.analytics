@@ -289,7 +289,7 @@ angular.module('brand')
             fd.append('brand_id', brandId);
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', base_url + 'brand/update', true);
+            xhr.open('POST', base_url + 'brand/update' + remoteFactory.getTailUrl(), true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
@@ -313,7 +313,7 @@ angular.module('brand')
             fd.append('brand_id', brandId);
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', base_url + 'brand/update', true);
+            xhr.open('POST', base_url + 'brand/update' + remoteFactory.getTailUrl(), true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
@@ -460,7 +460,7 @@ angular.module('brand')
             fd.append('images', $files[0]);
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', base_url + 'product/update', true);
+            xhr.open('POST', base_url + 'product/update' + remoteFactory.getTailUrl(), true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
@@ -491,7 +491,7 @@ angular.module('brand')
             fd.append('image', $files[0]);
 
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', base_url + 'brand/add_image', true);
+            xhr.open('POST', base_url + 'brand/add_image' + remoteFactory.getTailUrl(), true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
