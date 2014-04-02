@@ -82,16 +82,17 @@
                                     </div>
                                     <div class="right">
                                         <span>Thống kê theo <div class="ui-select">
-                                                                     <select ng-model="computeBy" ng-options="computeBy as computeBy.name_display for computeBy in computeBys" ng-init="computeBy=computeBys[0]" ng-change="updateComputeBy()"></select>
+                                                                     <select ng-model="computeBy" ng-options="computeBy as computeBy.name_display for computeBy in computeBys" ng-change="updateComputeBy()"></select>
                                                                 </div>
                                         </span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="z-box-content" style="position: relative;">
-                                    <div class="bar">Status bar</div>
-                                        <chart value='columnChart'>
-                                        </chart>
+                                <div class="z-box-content" style="height: 420px">
+                                    <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-chart loading-icon" ng-hide="hideLoading"></i></div>
+
+                                    <div class="bar"></div>
+                                        <chart value='columnChart' ng-hide="!hideLoading"></chart>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>

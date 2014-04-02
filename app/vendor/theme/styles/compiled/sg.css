@@ -1870,3 +1870,11 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
     width: 450px;
 }
 
+.loading-chart{
+    font-size: 80px;
+}
+
+.loading-icon{
+    
+}
+

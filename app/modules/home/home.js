@@ -3,21 +3,59 @@ angular.module('home')
 .controller('HomeCtrl', ['$scope', '$http', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'Auth', 'brandRemote', 'chartHelper', 'serviceHelper', 'eventRemote', 'compareHelper', 'homeFactory', 'dialogHelper',
 
     function($scope, $http, $location, $routeParams, remoteFactory, dataFactory, Auth, brandRemote, chartHelper, serviceHelper, eventRemote, compareHelper, homeFactory, dialogHelper) {
+        /** Global variables **/
+        var events = remoteFactory.meta_events,
+            intervalDate = serviceHelper.getIntervalDate(),
+            fields = [null, null, null, null];
 
-        var events = remoteFactory.meta_events;
-        var intervalDate = serviceHelper.getIntervalDate();
-
+        /** Scope variables **/
         $scope.brandId = $routeParams.brandId;
+        $scope.dataChart = [{}, {}, {}];
+        $scope.time_units = [{
+            name: 'day',
+            name_display: 'Ngày'
+        }, {
+            name: 'week',
+            name_display: 'Tuần'
+        }, {
+            name: 'month',
+            name_display: 'Tháng'
+        }];
+        $scope.data = [{
+            dateDropDownInput: intervalDate.date_beg,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
+        }, {
+            dateDropDownInput: intervalDate.date_end,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
+        }, {
+            dateDropDownInput: intervalDate.date_beg,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
+        }, {
+            dateDropDownInput: intervalDate.date_end,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
+        }, {
+            dateDropDownInput: intervalDate.date_beg,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
+        }, {
+            dateDropDownInput: intervalDate.date_end,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
+        }, {
+            dateDropDownInput: intervalDate.date_beg,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
+        }, {
+            dateDropDownInput: intervalDate.date_end,
+            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
+        }];
+
+        $scope.hideLoading = [false, false, false, false];
+
+        /** Logic **/
         if ($scope.brandId != null) {
             dataFactory.updateBrandSideBar($scope.brandId);
             dataFactory.getBrand($scope.brandId, function(data) {
                 $scope.brand = data;
             }, function() {})
         }
-
-        $scope.dataChart = [{}, {}, {}];
-
-        var fields = [null, null, null, null];
 
         $scope.updateTimeUnit = function(time_unit, id) {
             fields[id].time_unit = time_unit.name;
@@ -167,9 +205,11 @@ angular.module('home')
         function updateChart(field, id) {
             field.date_beg = $scope.data[id * 2].dateDisplay;
             field.date_end = $scope.data[id * 2 + 1].dateDisplay;
+            $scope.hideLoading[id] = false;
             switch (id) {
                 case 0:
                     brandRemote.getCostChart(field, function(data) {
+                        $scope.hideLoading[id] = true;
                         if (data.error == undefined)
                             $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Dịch vụ');
                         else
@@ -178,6 +218,7 @@ angular.module('home')
                     break;
                 case 1:
                     brandRemote.getDevelopmentChart(field, function(data) {
+                        $scope.hideLoading[id] = true;
                         if (data.error == undefined)
                             $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Tình hình tăng trưởng');
                         else
@@ -194,6 +235,7 @@ angular.module('home')
                     //     break;
                 case 3:
                     eventRemote.count(field, function(data) {
+                        $scope.hideLoading[id] = true;
                         if (data.error == undefined) {
                             $scope.dataChart[id] = chartHelper.buildLineChart(data, field.event);
                         } else
@@ -229,43 +271,6 @@ angular.module('home')
 
         dataFactory.setUpdateHomeBrandFunc($scope.updateBrand);
         dataFactory.setUpdateHomeFunc($scope.updateHome);
-
-        $scope.time_units = [{
-            name: 'day',
-            name_display: 'Ngày'
-        }, {
-            name: 'week',
-            name_display: 'Tuần'
-        }, {
-            name: 'month',
-            name_display: 'Tháng'
-        }];
-
-        $scope.data = [{
-            dateDropDownInput: intervalDate.date_beg,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
-        }, {
-            dateDropDownInput: intervalDate.date_end,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
-        }, {
-            dateDropDownInput: intervalDate.date_beg,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
-        }, {
-            dateDropDownInput: intervalDate.date_end,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
-        }, {
-            dateDropDownInput: intervalDate.date_beg,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
-        }, {
-            dateDropDownInput: intervalDate.date_end,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
-        }, {
-            dateDropDownInput: intervalDate.date_beg,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_beg),
-        }, {
-            dateDropDownInput: intervalDate.date_end,
-            dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
-        }];
 
         $scope.onTimeSetOne = function(newDate, oldDate) {
             $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);

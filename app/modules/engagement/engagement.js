@@ -4,17 +4,20 @@ angular.module('engagement')
 
     function($scope, $routeParams, $location, remoteFactory, filterHelper, eventRemote, chartHelper, compareHelper, serviceHelper, bookmarkRemote, homeFactory, segmentationFactory, dataFactory, queryHelper, dialogHelper) {
 
-        var brandId = $routeParams.brandId;
-        var intervalDate = serviceHelper.getIntervalDate();
-        var fields = null;
+        /** Global variables **/
+        var brandId = $routeParams.brandId,
+            intervalDate = serviceHelper.getIntervalDate(),
+            fields = null,
+            oldData = segmentationFactory.getData(brandId);;
 
-        dataFactory.updateBrandSideBar(brandId);
 
+        /** Scope variables **/
         $scope.metas = remoteFactory.meta_property_types;
         $scope.events = remoteFactory.meta_events;
         $scope.metadata = remoteFactory.meta_lists;
         $scope.subfilters = [];
         $scope.oldsubfilters = [];
+        $scope.hideLoading = true;
 
         dataFactory.getMetaData(brandId, function(data) {
             $scope.metadata = data.meta_lists;
@@ -53,7 +56,11 @@ angular.module('engagement')
             dateDisplay: serviceHelper.normalizeTime(intervalDate.date_end)
         }];
 
-        var oldData = segmentationFactory.getData(brandId);
+        /** Logic **/
+
+        dataFactory.updateBrandSideBar(brandId);
+
+
         if (oldData != null) {
             for (var i = 0; i < $scope.chartTypes.length; i++)
                 if ($scope.chartTypes[i].id == oldData.chartType.id) {
@@ -292,7 +299,9 @@ angular.module('engagement')
         }
 
         function updateChart(fields) {
+            $scope.hideLoading = false;
             eventRemote.count(fields, function(data) {
+                $scope.hideLoading = true;
                 if (data.error == undefined) {
                     $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
                     $scope.chartData[1] = chartHelper.buildPieChart(data, $scope.event.name_display);

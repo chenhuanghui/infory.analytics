@@ -4,7 +4,7 @@ angular.module('Smg')
     .factory('chartHelper',
         function() {
             return {
-                buildLineChartForFunnel: function(values, columnNames) {
+                buildLineChartForFunnel: function(values, columnNames, valueSuffix, unit) {
                     var chartData = {
                         chart: {
                             type: 'column'
@@ -22,7 +22,7 @@ angular.module('Smg')
                         },
                         yAxis: {
                             title: {
-                                text: 'Số lượng người dùng'
+                                text: unit
                             },
                             plotLines: [{
                                 value: 0,
@@ -31,7 +31,7 @@ angular.module('Smg')
                             }]
                         },
                         tooltip: {
-                            valueSuffix: ' người dùng'
+                            valueSuffix: ' ' + valueSuffix
                         },
                         legend: {
                             layout: 'vertical',
@@ -44,7 +44,7 @@ angular.module('Smg')
 
 
                     chartData.series = [{
-                        name: 'abc',
+                        name: ' ',
                         data: values
                     }];
 
