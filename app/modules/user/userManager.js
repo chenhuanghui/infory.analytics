@@ -1,8 +1,11 @@
 angular.module('user')
     .controller('UserManagerCtrl', ['$scope', '$location', '$routeParams', '$window', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote', 'userManagerFactory', 'dialogHelper',
         function($scope, $location, $routeParams, $window, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote, userManagerFactory, dialogHelper) {
-            var brandId = $routeParams.brandId;
-            dataFactory.updateBrandSideBar(brandId);
+            /** Global variables **/
+            var brandId = $routeParams.brandId,
+                oldData = userManagerFactory.getData(brandId);
+
+            /** Scope variables **/
             $scope.metas = remoteFactory.meta_property_types;
             $scope.event = remoteFactory.meta_profile;
             $scope.events = remoteFactory.meta_events;
@@ -11,7 +14,10 @@ angular.module('user')
             $scope.checkList = [];
             $scope.checkAll = false;
             $scope.userList = [];
+            $scope.hideLoading = false;
 
+            /** Logic **/
+            dataFactory.updateBrandSideBar(brandId);
             userRemote.filter({
                 brand_id: brandId,
                 filter: '',
@@ -21,6 +27,7 @@ angular.module('user')
                 page_size: 10000
             }, function(data) {
                 if (data.error == undefined) {
+                    $scope.hideLoading = true;
                     if ($scope.userList.length == 0) {
                         $scope.userList = data.data;
                         normalizeUser();
@@ -30,7 +37,7 @@ angular.module('user')
                     dialogHelper.showError(data.error.message);
             }, function() {});
 
-            var oldData = userManagerFactory.getData(brandId);
+
             if (oldData != null) {
                 $scope.userList = oldData.userList;
                 $scope.checkList = oldData.checkList;
@@ -126,8 +133,10 @@ angular.module('user')
             }
 
             $scope.getResult = function() {
+                $scope.hideLoading = false;
                 userRemote.filter(buildQuery(), function(data) {
                     $scope.checkList = [];
+                    $scope.hideLoading = true;
                     if (data.error == undefined) {
                         $scope.userList = data.data;
                         normalizeUser();

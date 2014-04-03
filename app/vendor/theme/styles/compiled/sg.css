@@ -1904,6 +1904,8 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
     align-items: center;
     align-content: center;
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .loading-container-infor{

@@ -43,6 +43,7 @@ angular.module('brand')
             display: 'Thời gian'
         }];
 
+        /** Logic **/
         if (brandId != null) {
             $scope.brandId = brandId;
         }
