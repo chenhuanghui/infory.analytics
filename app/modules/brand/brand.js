@@ -2,17 +2,13 @@ angular.module('brand')
 
 .controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory', 'productCategoryRemote', 'remoteFactory', 'dialogHelper',
     function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory, productCategoryRemote, remoteFactory, dialogHelper) {
+        /** Global variables **/
+        var base_url = remoteFactory.getBaseUrl(),
+            brandId = $routeParams.brandId;
 
-        var base_url = remoteFactory.getBaseUrl();
-        var brandId = $routeParams.brandId;
-        if (brandId != null) {
-            $scope.brandId = brandId;
-        }
-
-        dataFactory.setUpdateBrandSideBarFunc(function(id) {
-            $scope.brandId = id;
-        });
-
+        /** Scope variables **/
+        $scope.hideLoadingProduct = false;
+        $scope.hideLoadingImage = false;
         $scope.gallery = [];
         $scope.usersGallery = null;
         $scope.products = null;
@@ -33,6 +29,11 @@ angular.module('brand')
             editFanpage: false
         };
 
+        $scope.productTemp = {
+            name: '',
+            description: ''
+        };
+
         $scope.oderComments = [{
             field: '-like_count',
             display: 'Lượt thích'
@@ -40,6 +41,14 @@ angular.module('brand')
             field: '-updated_time',
             display: 'Thời gian'
         }];
+
+        if (brandId != null) {
+            $scope.brandId = brandId;
+        }
+
+        dataFactory.setUpdateBrandSideBarFunc(function(id) {
+            $scope.brandId = id;
+        });
 
         function saveBundle(data) {
             $scope.bundle.brandLogo = data.logo;
@@ -335,12 +344,14 @@ angular.module('brand')
             var oldData = brandFactory.getData(brandId);
 
             if (oldData == null || (oldData != null && oldData.gallery == null)) {
+                $scope.hideLoadingImage = false;
                 var fields = {
                     id: brandId,
                     fields: '["gallery"]'
                 };
 
                 brandRemote.get(fields, function(data) {
+                    $scope.hideLoadingImage = true;
                     if (data.error == undefined) {
                         if (data.gallery == null)
                             $scope.gallery = [];
@@ -353,8 +364,10 @@ angular.module('brand')
 
                     saveToFactory();
                 }, function() {});
-            } else
+            } else {
                 $scope.gallery = oldData.gallery;
+                $scope.hideLoadingImage = true;
+            }
         }
 
         function saveToFactory() {
@@ -369,12 +382,14 @@ angular.module('brand')
         $scope.showProducts = function() {
             var oldData = brandFactory.getData(brandId);
             if (oldData == null || (oldData != null && oldData.categories == null)) {
+                $scope.hideLoadingProduct = false;
                 var fields = {
                     id: brandId,
                     fields: '["menu"]'
                 };
 
                 brandRemote.get(fields, function(data) {
+                    $scope.hideLoadingProduct = true;
                     if (data.error == undefined) {
                         $scope.brand.categories = data.menu;
                         if ($scope.brand.categories.length > 0) {
@@ -386,6 +401,7 @@ angular.module('brand')
                         dialogHelper.showError(data.error.message);
                 }, function() {});
             } else {
+                $scope.hideLoadingProduct = true;
                 $scope.categories = oldData.categories;
                 $scope.category = oldData.currentCategory;
             }
@@ -424,10 +440,6 @@ angular.module('brand')
             }
         }
 
-        $scope.productTemp = {
-            name: '',
-            description: ''
-        };
 
         $scope.changeProductName = function(categoryId, productId, name) {
             var fields = {

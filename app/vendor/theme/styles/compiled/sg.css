@@ -1886,3 +1886,13 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
     padding-top: 150px;
 }
 
+.loading-product-image{
+    font-size: 40px;
+}
+
+.loading-container-image-product{
+    width: auto;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
