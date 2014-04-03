@@ -1,7 +1,10 @@
 <ul>
     <li>
         <div class="property col-md-4">Ảnh nền</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <img ng-src="{{shop.cover}}" width="45" height="45" />
             <input id="logoInput" type="file" ng-file-select="changeCover($files)" name="cover"/>
         </div>
@@ -9,7 +12,10 @@
 
     <li>
         <div class="property col-md-4">Tên cửa hàng</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editName">
                 <span>{{bundle.shopName}}</span>
                 <a ng-click="bundle.editName = true" style="cursor:pointer" >sửa</a>
@@ -23,7 +29,10 @@
 
     <li>
         <div class="property col-md-4">Tên đường</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editStreetAddress">
                 <span>{{bundle.shopStreetAddress}}</span>
                 <a ng-click="bundle.editStreetAddress = true" style="cursor:pointer" >sửa</a>
@@ -36,7 +45,10 @@
     </li>
     <li>
         <div class="property col-md-4">Tên quận</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editDistrictAddress">
                 <span>{{bundle.shopDistrictAddress}}</span>
                 <a ng-click="bundle.editDistrictAddress = true" style="cursor:pointer" >sửa</a>
@@ -50,7 +62,10 @@
 
     <li>
         <div class="property col-md-4">Thành phố</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editCityAddress">
                 <span>{{bundle.shopCityAddress}}</span>
                 <a ng-click="bundle.editCityAddress = true" style="cursor:pointer" >sửa</a>

@@ -4,30 +4,22 @@ angular.module('shop')
 
     function($scope, $routeParams, remoteFactory, dataFactory, shopRemote, shopFactory, dialogHelper) {
 
-        var base_url = remoteFactory.getBaseUrl();
-        var shopId = $routeParams.shopId;
-        $scope.brandId = $routeParams.brandId;
-        dataFactory.updateBrandSideBar($scope.brandId);
-        var brandId = $routeParams.brandId;
-        var tempShop = dataFactory.getTempShop();
-        var brand = dataFactory.getCurrentBrand();
-        var fields = null;
+        /** Global variables **/
+        var base_url = remoteFactory.getBaseUrl(),
+            shopId = $routeParams.shopId,
+            brandId = $routeParams.brandId,
+            tempShop = dataFactory.getTempShop(),
+            brand = dataFactory.getCurrentBrand(),
+            fields = null;
 
+        /** Scope variables **/
+        $scope.hideLoadingInfor = false;
+        $scope.hideLoadingImage = false;
         $scope.cities = remoteFactory.cities;
         $scope.qrCode = '';
         $scope.usersGallery = [];
 
-        shopRemote.getQRCode({
-            shop_id: shopId
-        }, function(data) {
-            if (data.error == undefined) {
-                $scope.$watch(function() {
-                    $scope.qrCode = data.url;
-                });
-            } else
-                dialogHelper.showError(data.error.message);
-        }, function() {});
-
+        $scope.brandId = $routeParams.brandId;
         $scope.shop = null;
         $scope.bundle = {
             shopName: '',
@@ -40,6 +32,21 @@ angular.module('shop')
             editDistrictAddress: false,
             editCityAddress: false,
         };
+
+        /** Logic **/
+        dataFactory.updateBrandSideBar($scope.brandId);
+
+        shopRemote.getQRCode({
+            shop_id: shopId
+        }, function(data) {
+            if (data.error == undefined) {
+                $scope.$watch(function() {
+                    $scope.qrCode = data.url;
+                });
+            } else
+                dialogHelper.showError(data.error.message);
+        }, function() {});
+
 
         if (tempShop != null)
             $scope.shop = tempShop;
@@ -60,7 +67,9 @@ angular.module('shop')
         }
 
         dataFactory.getShop(shopId, fields, function(data) {
+            $scope.hideLoadingInfor = false;
             if (data.error == undefined) {
+                $scope.hideLoadingInfor = true;
                 if (data.full_address != null)
                     $scope.shop = data;
                 else {
@@ -217,14 +226,17 @@ angular.module('shop')
         }
 
         $scope.showUsersGallery = function() {
-            var oldData = shopFactory.getData(brandId, shopId);
+            var oldData = shopFactory.getData(shopId, brandId);
             if (oldData == null) {
                 var fields = {
                     shop_id: shopId,
                     fields: '["user_gallery"]'
                 };
 
+                $scope.hideLoadingImage = false;
+
                 shopRemote.get(fields, function(data) {
+                    $scope.hideLoadingImage = true;
                     if (data.error == undefined) {
                         if (data.user_gallery == null)
                             $scope.usersGallery = [];
@@ -237,8 +249,10 @@ angular.module('shop')
                     } else
                         dialogHelper.showError(data.error.message);
                 }, function() {});
-            } else
+            } else {
                 $scope.usersGallery = oldData.usersGallery;
+                $scope.hideLoadingImage = true;
+            }
 
         }
 

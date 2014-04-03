@@ -14,13 +14,19 @@
                     </div>
                     <div class="info">
                         <img src="{{shop.brand_logo}}" alt="contact" class="img-circle logo hidden-phone"/>
-                        <h4>{{shop.name}}- <span>{{shop.brand_type_business}}</span></h4>
-                        <h6> {{shop.full_address}}</h6>
+        
+                        <h4 ng-hide="hideLoadingInfor"><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i> - <i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i> </h4>
+                        <h4 ng-hide="!hideLoadingInfor">{{shop.name}}- <span>{{shop.brand_type_business}}</span></h4>
+
+                        <h6 ng-hide="hideLoadingInfor"><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></h6>
+                        <h6 ng-hide="!hideLoadingInfor"> {{shop.full_address}}</h6>
+
                         <div class="info_detail">
-                            <p>{{shop.brand_description}}</p>        
-                            <p> <span>Website: </span> <a href="{{shop.brand_website}}"> {{shop.brand_website}}</a></p>
-                            <p> <span>Fanpage: </span> <a href="{{shop.brand_fanpage}}">{{shop.brand_fanpage}}</a></p>
-                            <p> <span>Liên hệ: </span> <a href="http://smartguide.vn">{{shop.phone}}</a></p>
+                            <p ng-hide="hideLoadingInfor"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
+                            <p ng-hide="!hideLoadingInfor">{{shop.brand_description}}</p>        
+                            <p> <span>Website: </span> <a href="{{shop.brand_website}}" ng-hide="!hideLoadingInfor"> {{shop.brand_website}}</a> <i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
+                            <p> <span>Fanpage: </span> <a href="{{shop.brand_fanpage}}" ng-hide="!hideLoadingInfor" >{{shop.brand_fanpage}}</a><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
+                            <p> <span>Liên hệ: </span> <a href="http://smartguide.vn" ng-hide="!hideLoadingInfor">{{shop.phone}}</a><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
                         </div>
                     </div>
                 </div> <!-- shop info-->
