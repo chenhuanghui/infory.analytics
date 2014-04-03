@@ -49,7 +49,7 @@ angular.module('user')
             $scope.goToStep3 = function() {
                 saveInfor();
                 if ($scope.sendMethod.name == 'once') {
-                    if ($scope.numOfSelectedUsers * 8 > $scope.balance) {
+                    if ($scope.numOfSelectedUsers * 10 > $scope.balance) {
                         dialogHelper.showError('Số dư tài khoản của bạn là ' + $scope.balance + ' T-Coin không đủ thực hiện thao tác này');
                         return;
                     } else
