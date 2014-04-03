@@ -2,13 +2,14 @@ angular.module('user')
     .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper', 'dialogHelper', 'accountRemote',
         function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper, dialogHelper, accountRemote) {
 
-            var brandId = $routeParams.brandId;
-            dataFactory.updateBrandSideBar(brandId);
+            /** Global variables **/
+            var brandId = $routeParams.brandId,
+                fields = '["balance"]',
+                step1Data = userNotifyFactory.getData(0, brandId),
+                oldData = userNotifyFactory.getData(1, brandId);
 
-            dataFactory.getBrand(brandId, function(data) {
-                $scope.brand = data;
-            }, function() {});
-
+            /** Scope variables **/
+            $scope.hideLoading = true;
             $scope.metas = remoteFactory.meta_property_types;
             $scope.event = remoteFactory.meta_profile;
             $scope.metadata = remoteFactory.meta_lists;
@@ -19,17 +20,6 @@ angular.module('user')
             $scope.oldsubfilters = [];
             $scope.isCanGo = true;
             $scope.balance = null;
-
-            var fields = '["balance"]';
-            accountRemote.get(fields, function(data) {
-                if (data.balance == null)
-                    $scope.balance = 0;
-                else
-                    $scope.balance = data.balance;
-
-                orignalAccount = data;
-            }, function() {});
-
             $scope.sendMethods = [{
                 name: 'once',
                 name_display: 'Gửi một lần'
@@ -39,6 +29,22 @@ angular.module('user')
             }];
 
             $scope.sendMethod = $scope.sendMethods[0];
+
+            /** Logic **/
+            dataFactory.updateBrandSideBar(brandId);
+
+            dataFactory.getBrand(brandId, function(data) {
+                $scope.brand = data;
+            }, function() {});
+
+            accountRemote.get(fields, function(data) {
+                if (data.balance == null)
+                    $scope.balance = 0;
+                else
+                    $scope.balance = data.balance;
+
+                orignalAccount = data;
+            }, function() {});
 
             $scope.goToStep3 = function() {
                 saveInfor();
@@ -62,13 +68,11 @@ angular.module('user')
                 $location.path('/user/' + brandId + '/' + userId);
             }
 
-            var step1Data = userNotifyFactory.getData(0, brandId);
             if (step1Data == null) {
                 $scope.goToStep1();
                 return;
             }
 
-            var oldData = userNotifyFactory.getData(1, brandId);
             if (oldData != null) {
                 $scope.userList = oldData.userList;
                 $scope.all = oldData.all;
@@ -182,8 +186,13 @@ angular.module('user')
             }
 
             $scope.getResult = function() {
-                var query = filterHelper.buildQuery($scope.subfilters);
+                $scope.hideLoading = false;
+                $scope.all = false;
+                $scope.checkAll();
+                $scope.userList = [];
+                $scope.isChecked = [];
 
+                var query = filterHelper.buildQuery($scope.subfilters);
                 var fields = {
                     filter: JSON.stringify(query),
                     fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
@@ -193,6 +202,7 @@ angular.module('user')
                 };
 
                 userRemote.filter(fields, function(data) {
+                    $scope.hideLoading = true;
                     if (data.error == undefined) {
                         $scope.userList = data.data;
                         $scope.isChecked = [];

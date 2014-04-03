@@ -75,10 +75,14 @@
                         </div>
                         <input type="text" class="search right" placeholder="Tìm kiếm..." ng-model="searchText"/>
                         <div class="fee right">
-                            Chi phí: <span>{{numOfSelectedUsers * 8}}</span> T-coin
+                            Chi phí: <span>{{numOfSelectedUsers * 10}}</span> T-coin
                         </div>
                     </div>
-                    <div class="block_content no-padding">
+                    <div ng-hide="hideLoading" class="loading-container-image-product">
+                        <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-product-image loading-icon"></i></div>
+                    </div>
+                    
+                    <div class="block_content no-padding" ng-hide="!hideLoading">
                         <table class="z-table">
                         <thead>
                             <tr>
