@@ -1878,3 +1878,11 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
     
 }
 
+.loading-container{
+    width: auto;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    padding-top: 150px;
+}
+
