@@ -12,13 +12,17 @@
                     </div>
                     <div class="info">
                         <img src="{{brand.logo}}" alt="contact" class="img-circle logo hidden-phone"/>
-                        <h4>{{brand.name}} - <span>{{brand.type_business}}</span></h4>
+                        <h4 ng-hide="!hideLoadingInfor">{{brand.name}} - <span>{{brand.type_business}}</span></h4>
+                        <h4 ng-hide="!hideLoadingInfor"><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i> - <i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i> </h4>
+
                         <h6> {{brand.owner_address}}</h6>
                         <div class="info_detail">
-                            <p>{{brand.description}}</p>        
-                            <p> <span>Website: </span> <a href="{{brand.website}}"> {{brand.website}}</a></p>
-                            <p> <span>Fanpage: </span> <a href="{{brand.fanpage}}">{{brand.fanpage}}</a></p>
-                            <p> <span>Liên hệ: </span> <a> {{brand.owner_phone}}</a></p>
+                            <p ng-hide="hideLoadingInfor"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>        
+                            <p ng-hide="!hideLoadingInfor">{{brand.description}}</p>
+                            
+                            <p> <span>Website: </span> <a href="{{brand.website}}" ng-hide="!hideLoadingInfor"> {{brand.website}}</a> <i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i> </p>
+                            <p> <span>Fanpage: </span> <a href="{{brand.fanpage}}" ng-hide="!hideLoadingInfor">{{brand.fanpage}}</a> <i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
+                            <p> <span>Liên hệ: </span> <a ng-hide="!hideLoadingInfor"> {{brand.owner_phone}}</a><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
                             
                             <div class="alert alert-danger">
                                 <i class="icon-remove-sign"></i>
@@ -32,7 +36,12 @@
                         <input class="shop_name form-control" type="text" placeholder="Nhập tên cửa hàng" ng-model="newShopName">    
                         <a class="btn-flat success" ng-click="addShop(newShopName)"><i class="icon-plus"></i>Thêm cửa hàng mới</a>
                     </div>       
-                    <ul id="shop_list">
+
+                    <div ng-hide="hideLoadingInfor" class="loading-container-image-product">
+                        <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-product-image loading-icon"></i></div>
+                    </div>
+
+                    <ul id="shop_list" ng-hide="!hideLoadingInfor">
                         <li ng-repeat="shop in brand.shops">
                             <img src="{{brand.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="45" width="45"/>
                             <a ng-click="goToShopInfo(shop)" style="cursor:pointer" class="name">{{shop.name}}</a>

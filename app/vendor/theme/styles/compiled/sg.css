@@ -1890,9 +1890,27 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
     font-size: 40px;
 }
 
+.loading-infor{
+    font-size: 24px;
+}
+
+.loading-small-infor{
+    font-size: 20px;
+}
+
+
 .loading-container-image-product{
     width: auto;
     align-items: center;
     align-content: center;
     text-align: center;
 }
+
+.loading-container-infor{
+    width: auto;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    padding-top: 5px;
+}
+

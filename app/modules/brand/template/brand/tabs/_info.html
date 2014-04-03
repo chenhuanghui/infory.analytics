@@ -1,14 +1,20 @@
 <ul>
     <li>
         <div class="property col-md-4">Logo</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <img ng-src="{{brand.logo}}" width="45" height="45" />
             <input id="logoInput" type="file" ng-file-select="changeLogo($files)" />
         </div>
     </li>
     <li>
         <div class="property col-md-4">Ảnh nền</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <img ng-src="{{brand.cover}}" width="45" height="45" />
             <input type="file" id="cover" name="cover" ng-file-select="changeCover($files)" />
         </div>
@@ -16,7 +22,10 @@
 
     <li>
         <div class="property col-md-4">Tên nhãn hiệu</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editName">
                 <span>{{bundle.brandName}}</span>
                 <a ng-click="bundle.editName = true" style="cursor:pointer" >sửa</a>
@@ -30,7 +39,10 @@
 
     <li>
         <div class="property col-md-4">Mô tả</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editDescription">
                 <span class="description">{{bundle.brandDescription}}</span>
                 <a ng-click="bundle.editDescription = true" style="cursor:pointer" >sửa</a>
@@ -44,7 +56,10 @@
 
     <li>
         <div class="property col-md-4">Website</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editWebsite">
                 <span><a href="{{bundle.brandWebsite}}">{{bundle.brandWebsite}}</a></span>
                 <a ng-click="bundle.editWebsite = true" style="cursor:pointer" >sửa</a>
@@ -58,7 +73,10 @@
 
     <li>
         <div class="property col-md-4">Fanpage</div>
-        <div class="value col-md-8">
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editFanpage">
                 <span><a href="{{bundle.brandFanpage}}">{{bundle.brandFanpage}}</a></span>
                 <a ng-click="bundle.editFanpage = true" style="cursor:pointer" >sửa</a>

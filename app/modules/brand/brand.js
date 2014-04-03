@@ -9,6 +9,7 @@ angular.module('brand')
         /** Scope variables **/
         $scope.hideLoadingProduct = false;
         $scope.hideLoadingImage = false;
+        $scope.hideLoadingInfor = false;
         $scope.gallery = [];
         $scope.usersGallery = null;
         $scope.products = null;
@@ -82,6 +83,8 @@ angular.module('brand')
         }, function() {});
 
         function resetData(data) {
+            $scope.hideLoadingInfor = true;
+
             var path = $location.path().substring(0, 14);
 
             $scope.brand = data;
