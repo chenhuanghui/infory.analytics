@@ -4,16 +4,11 @@ angular.module('promotion')
 
     function($scope, $routeParams, $location, remoteFactory, dataFactory, userRemote, serviceHelper, promotionRemote, promotionFactory, serviceHelper, dialogHelper) {
 
-        var brandId = $routeParams.brandId;
+        /** Global variables **/
+        var brandId = $routeParams.brandId,
+            dataStep3 = promotionFactory.getData(2);
 
-        dataFactory.getBrand(brandId, function(data) {
-            $scope.brand = data;
-
-        }, function() {});
-
-        $scope.goToStep1 = function() {
-            $location.path('/brand/promotion/step1/' + brandId);
-        }
+        /** Scope variables **/
         $scope.orderPromotions = [{
             name: '',
             name_display: 'Tất cả'
@@ -25,7 +20,13 @@ angular.module('promotion')
             name_display: 'Khuyến mãi'
         }];
 
-        var dataStep3 = promotionFactory.getData(2);
+        $scope.hideLoading = false;
+        /** Logic **/
+        dataFactory.getBrand(brandId, function(data) {
+            $scope.brand = data;
+
+        }, function() {});
+
         if (dataStep3 == null) {
             listPromotion();
             return;
@@ -149,6 +150,7 @@ angular.module('promotion')
                         promotion_id: $scope.promotionListFull[id].id,
                         status: nextStatus
                     }, function(data) {
+
                         if (data.error == undefined) {
 
                         } else {
@@ -199,10 +201,12 @@ angular.module('promotion')
                 }
 
                 var fields = '["id, "type", "name", "status"]';
+                $scope.hideLoading = false;
                 promotionRemote.list({
                     brand_id: brandId,
                     fields: fields
                 }, function(data) {
+                    $scope.hideLoading = true;
                     if (data.error == undefined) {
                         for (var i = 0; i < data.length; i++) {
                             switch (data[i].type) {
@@ -246,6 +250,10 @@ angular.module('promotion')
                     }
                 }, function() {});
             }
+        }
+
+        $scope.goToStep1 = function() {
+            $location.path('/brand/promotion/step1/' + brandId);
         }
 
         for (var i = 0; i < 3; i++)

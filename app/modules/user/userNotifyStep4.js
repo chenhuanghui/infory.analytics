@@ -6,6 +6,7 @@ angular.module('user')
             dataFactory.updateBrandSideBar(brandId);
 
             $scope.messageList = [];
+            $scope.hideLoading = false;
 
             dataFactory.getBrand(brandId, function(data) {
                 $scope.brand = data;
@@ -155,8 +156,10 @@ angular.module('user')
                     }, function() {});
                 }
 
+                $scope.hideLoading = false;
                 messageRemote.list(properties, function(data) {
                     if (data.error == undefined) {
+                        $scope.hideLoading = true;
                         $scope.messageListFull = data;
                         for (var i = 0; i < $scope.messageListFull.length; i++) {
                             if (i % 2 == 0)
