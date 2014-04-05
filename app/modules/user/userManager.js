@@ -114,7 +114,9 @@ angular.module('user')
                     if (user.email == null)
                         user.email = " - ";
 
-                    if (user.gender == 'male')
+                    if (user.gender == null)
+                        user.gender = " - ";
+                    else if (user.gender == 'male')
                         user.gender = 'Nam';
                     else
                         user.gender = 'Nữ';
