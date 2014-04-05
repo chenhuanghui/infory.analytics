@@ -1916,3 +1916,9 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
     padding-top: 5px;
 }
 
+.text-area-editor{
+    overflow: hidden;
+    padding: 4px;
+    font-size: 100%;
+}
+
