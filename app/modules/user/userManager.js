@@ -16,6 +16,7 @@ angular.module('user')
             $scope.userList = [];
             $scope.hideLoading = false;
             $scope.subfilters = [];
+
             /** Logic **/
             dataFactory.updateBrandSideBar(brandId);
             userRemote.filter({
