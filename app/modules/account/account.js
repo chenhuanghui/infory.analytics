@@ -47,6 +47,7 @@ angular.module('account')
                     .then(function(result) {
                         $scope.account.avatar = result;
                         fileAvatar = $files[0];
+                        //$scope.account.avatar = 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn1/t1.0-9/s600x600/1904163_10202726642879107_1479781473_n.jpg';
                     });
             }
 
