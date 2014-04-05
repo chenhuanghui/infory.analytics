@@ -155,6 +155,7 @@ angular.module('home')
                             function() {});
 
                     } else {
+                        $scope.hideLoading = [true, true, true, true];
                         fields = oldData.fields;
                         $scope.dataChart = oldData.data_chart;
                         $scope.eventBookmarks = oldData.event_bookmarks;
@@ -206,6 +207,7 @@ angular.module('home')
             field.date_beg = $scope.data[id * 2].dateDisplay;
             field.date_end = $scope.data[id * 2 + 1].dateDisplay;
             $scope.hideLoading[id] = false;
+
             switch (id) {
                 case 0:
                     brandRemote.getCostChart(field, function(data) {
@@ -237,7 +239,12 @@ angular.module('home')
                     eventRemote.count(field, function(data) {
                         $scope.hideLoading[id] = true;
                         if (data.error == undefined) {
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, field.event);
+                            if ($scope.compareUnit.name_display == 'giờ trong ngày' ||
+                                $scope.compareUnit.name_display == 'ngày trong tuần' ||
+                                $scope.compareUnit.name_display == 'tháng trong năm') {
+                                $scope.dataChart[id] = chartHelper.buildPieChart(data, getEventNameDisplay(field.event));
+                            } else
+                                $scope.dataChart[id] = chartHelper.buildLineChart(data, getEventNameDisplay(field.event));
                         } else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
@@ -245,6 +252,13 @@ angular.module('home')
             }
 
             saveInfor();
+        }
+
+        function getEventNameDisplay(name) {
+            for (var i = 0; i < events.length; i++) {
+                if (events[i].name == name)
+                    return events[i].name_display;
+            }
         }
 
         function saveInfor() {
