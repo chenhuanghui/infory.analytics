@@ -52,31 +52,26 @@
                         <thead>
                             <tr>
                                 <th><input type="checkbox" ng-model="checkAll" ng-change="checkAllUser(); saveInfor();"/></th>
+                                <th class = "name">
+                                    Số điện thoại
+                                </th>
                                 <th class="name">Tên</th>
                                 <th>Tuổi</th>
                                 <th>Giới tính</th>
                                 <th>Vị trí</th>
                                 <th>Lần sử dụng cuối</th>
-                                <th>
-                                    Số điện thoại
-                                    <!-- <div class="ui-select">
-                                        <select>
-                                            <option>giờ / ngày</option>
-                                            <option>giờ / tuần</option>
-                                        </select>
-                                    </div> -->
-                                </th>
                             </tr>
                         </thead>
                         <tbody >
                             <tr ng-repeat="user in userList | filter:searchText">
                                 <td><input type="checkbox" ng-model="$parent.checkList[user.stt]" ng-change="saveInfor()"/></td>
-                                <td class="name" style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.name}}</td>
-                                <td>{{user.dob}}</td>
-                                <td>{{user.gender}}</td>
-                                <td>{{user.city}}</td>
-                                <td>{{user.last_visit}}</td>
-                                <td>{{user.phone}}</td>
+                                <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.phone}}</td>
+                                <td class="name"  style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.name}}</td>
+                                <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.dob}}</td>
+                                <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.gender}}</td>
+                                <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.city}}</td>
+                                <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.last_visit}}</td>
+                                
                             </tr>
                         </tbody>
                     </table>
