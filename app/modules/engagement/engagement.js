@@ -303,6 +303,14 @@ angular.module('engagement')
             eventRemote.count(fields, function(data) {
                 $scope.hideLoading = true;
                 if (data.error == undefined) {
+
+                    if ($scope.compareUnit.name_display == 'giờ trong ngày' ||
+                        $scope.compareUnit.name_display == 'ngày trong tuần' ||
+                        $scope.compareUnit.name_display == 'tháng trong năm') {
+                        $scope.chartType = $scope.chartTypes[1];
+                    } else
+                        $scope.chartType = $scope.chartTypes[0];
+
                     $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
                     $scope.chartData[1] = chartHelper.buildPieChart(data, $scope.event.name_display);
                     $scope.chartData[2] = chartHelper.buildColumnChart(data, $scope.event.name_display);
