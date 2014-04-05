@@ -3,10 +3,20 @@ angular.module('account')
         function($scope, $http, $location, $routeParams, dataFactory, Auth, accountRemote, $modal, remoteFactory, fileHelper, dialogHelper, cookie) {
             /*modal*/
 
-            var base_url = remoteFactory.getBaseUrl();
+            /** Global variables **/
+            var base_url = remoteFactory.getBaseUrl(),
+                fileAvatar = null,
+                orignalAccount = null;;
 
+            /** Scope variables **/
             $scope.isChangePass = false;
+            $scope._username = Auth.user.name;
+            $scope.activeTab = "inbox";
+            $scope.activeTab = "personal";
+            $scope.showSuccessNotify = false;
+            $scope.hideLoading = false;
 
+            /** Logic **/
             $scope.markPassChange = function() {
                 $scope.isChangePass = true;
             }
@@ -24,35 +34,13 @@ angular.module('account')
                 };
             };
 
-            var fileAvatar = null;
-
             $scope.$watch('_username', function() {
                 dataFactory.updateAccountNameHeader($scope._username);
             });
 
-            $scope._username = Auth.user.name;
-
-            $scope.activeTab = "inbox";
-            $scope.activeTab = "personal";
-
             $scope.cancel = function() {
                 window.history.back();
             };
-
-            $scope.showSuccessNotify = false;
-            var orignalAccount = null;
-            if ($location.path() == '/personal') {
-                var fields = '["name"], ["avatar"], ["balance"], ["company"], ["email"]';
-                accountRemote.get(fields, function(data) {
-                    $scope.account = data;
-                    $scope.account.password = "123456";
-                    $scope.account.confirmPassword = "123456";
-                    $scope._username = data.name;
-                    if ($scope.account.balance == null)
-                        $scope.account.balance = 0;
-                    orignalAccount = data;
-                }, function() {});
-            }
 
             $scope.changeAvatar = function($files) {
                 fileHelper.readAsDataUrl($files[0], $scope)
@@ -116,6 +104,21 @@ angular.module('account')
                         $scope.account = orignalAccount;
                     })
                 }
+            }
+
+            if ($location.path() == '/personal') {
+                var fields = '["name"], ["avatar"], ["balance"], ["company"], ["email"]';
+                $scope.hideLoading = false;
+                accountRemote.get(fields, function(data) {
+                    $scope.hideLoading = true;
+                    $scope.account = data;
+                    $scope.account.password = "123456";
+                    $scope.account.confirmPassword = "123456";
+                    $scope._username = data.name;
+                    if ($scope.account.balance == null)
+                        $scope.account.balance = 0;
+                    orignalAccount = data;
+                }, function() {});
             }
         }
     ])
