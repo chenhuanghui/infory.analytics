@@ -394,7 +394,7 @@ angular.module('promotion')
                         if (presentDescription.amount == 0)
                             presentDescription.noLimitedChecked = true;
 
-                        for (var j = 0; j < data.vouchers[j].available_days.length; j++) {
+                        for (var j = 0; j < data.vouchers[i].available_days.length; j++) {
                             switch (data.vouchers[i].available_days[j]) {
 
                                 case 'mon':
