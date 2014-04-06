@@ -2,28 +2,109 @@ angular.module('user')
     .controller('UserNotifyStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'messageRemote', 'dialogHelper', 'serviceHelper',
         function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, messageRemote, dialogHelper, serviceHelper) {
 
-            var brandId = $routeParams.brandId;
-            dataFactory.updateBrandSideBar(brandId);
+            var brandId = $routeParams.brandId,
+                step1Data = userNotifyFactory.getData(0, brandId),
+                step2Data = userNotifyFactory.getData(1, brandId),
+                step3Data = userNotifyFactory.getData(2, brandId);
 
             $scope.messageList = [];
             $scope.hideLoading = false;
 
+            dataFactory.updateBrandSideBar(brandId);
             dataFactory.getBrand(brandId, function(data) {
                 $scope.brand = data;
             }, function() {});
 
-            var step3Data = userNotifyFactory.getData(2, brandId);
-
             $scope.goToStep1 = function() {
+                userNotifyFactory.setData(0, null);
+                userNotifyFactory.setData(1, null);
+                userNotifyFactory.setData(2, null);
+
                 $location.path('/user/notify-new/step1/' + brandId);
+            }
+
+            $scope.editMessage = function(message_id) {
+                messageRemote.get({
+                    message_id: message_id
+                }, function(data) {
+                    if (data.error == undefined) {
+                        pushInfoToStep1(data);
+                        pushInfoToStep2(data);
+                        pushInfoToStep3(data);
+
+                        userNotifyFactory.setMode('update');
+                        userNotifyFactory.setMessageId(message_id);
+
+                        $location.path('/user/notify-new/step1/' + brandId);
+
+                    } else
+                        dialogHelper.showError(data.error.message);
+                }, function() {});
+            }
+
+            function pushInfoToStep1(data) {
+                var notifyType = {};
+                var oldData = {
+                    brand_id: brandId,
+                    isCanGo: true,
+                    validation: [
+                        [false, false],
+                        [false, false, false],
+                        [false],
+                        [false]
+                    ],
+                    notifyType: null,
+                    isOk: [true, true, true, true],
+                    name: data.name,
+                    sms_sender: null,
+                    sms_content: data.content,
+                    email_title: null,
+                    email_content: data.content,
+                    in_app_content: data.content
+                };
+
+                switch (data.type) {
+                    case 'email':
+                        oldData.notifyType = {
+                            id: 1,
+                            name: 'email',
+                            name_display: 'Gửi qua email'
+                        };
+                        oldData.email_title = data.title;
+
+                        break;
+                    case 'in-app':
+                        oldData.notifyType = {
+                            id: 2,
+                            name: 'in-app',
+                            name_display: 'Gửi qua ứng dụng'
+                        };
+                        break;
+                    case 'sms':
+                        oldData.notifyType = {
+                            id: 0,
+                            name: 'sms',
+                            name_display: 'Gửi qua SMS'
+
+                        };
+                        oldData.email_sender = data.sender;
+                        break;
+                }
+
+                userNotifyFactory.setData(0, oldData);
+            }
+
+            function pushInfoToStep2(data) {
+
+            }
+
+            function pushInfoToStep3(data) {
+
             }
 
             $scope.goToStep3 = function() {
                 $location.path('/user/notify-new/step3/' + brandId);
             }
-
-            var step2Data = userNotifyFactory.getData(1, brandId);
-            var step1Data = userNotifyFactory.getData(0, brandId);
 
             for (var i = 0; i < 3; i++)
                 userNotifyFactory.setData(i, {

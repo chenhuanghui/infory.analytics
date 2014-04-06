@@ -3,6 +3,8 @@ angular.module('smg.services')
         function($http) {
             var data = [null, null, null, null];
             var userList = [];
+            var mode = 'create';
+            var messageId = -1;
 
             return {
                 setData: function(id, newData) {
@@ -19,6 +21,18 @@ angular.module('smg.services')
                 },
                 getCurrentResultUserFilter: function() {
                     return userList;
+                },
+                setMode: function(value) {
+                    mode = value;
+                },
+                getMode: function() {
+                    return mode;
+                },
+                setMessageId: function(value) {
+                    messageId = value;
+                },
+                setMessageId: function() {
+                    return messageId;
                 }
             }
         }

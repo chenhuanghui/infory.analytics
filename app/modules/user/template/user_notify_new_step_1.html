@@ -49,7 +49,7 @@
                             <div ng-switch on="notifyType.name">
                                 <div ng-switch-when="sms">
                                     <div class="sms-box">
-                                        <div class="field-box">
+                                        <div class="field-box" ng-hide = "true">
                                             <span class="title">TÊN NGƯỜI GỬI</span>
                                             <input class="form-control inline-block" type="text" ng-model="$parent.sms_sender" ng-change="updateValidation(0, 0)" >
                                             <span class="alert-msg" ng-show="$parent.validation[0][0]">

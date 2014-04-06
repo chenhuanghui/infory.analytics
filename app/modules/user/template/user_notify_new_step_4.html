@@ -51,7 +51,7 @@
                         </thead>
                         <tbody>
                             <tr class="{{message.sttClass}}" ng-repeat="message in messageList">
-                                <td class="name">{{message.name}}</td>
+                                <td class="name" style="cursor:pointer;" ng-click="editMessage(message.id)">{{message.name}}</td>
                                 <td>{{message.typeName}}</td>
                                 <td>{{message.methodName}}</td>
                                 <td>{{message.time_begin}}</td>

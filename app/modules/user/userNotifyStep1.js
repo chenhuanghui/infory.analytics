@@ -26,7 +26,7 @@ angular.module('user')
 
             $scope.isCanGo = false;
             $scope.validation = [
-                [true, true],
+                [false, true],
                 [true, true, true],
                 [true],
                 [true]
@@ -34,6 +34,16 @@ angular.module('user')
 
             $scope.isOk = [false, false, false, false];
             $scope.name = '';
+
+            $scope.updateGoNext = function() {
+                for (var i = 0; i < $scope.isOk.length; i++)
+                    if ($scope.isOk[i] == true && $scope.notifyType.id == i && $scope.isOk[3] == true) {
+                        $scope.isCanGo = true;
+                        return;
+                    }
+
+                $scope.isCanGo = false;
+            }
 
             var oldData = userNotifyFactory.getData(0, brandId);
             if (oldData != null) {
@@ -54,6 +64,7 @@ angular.module('user')
                 $scope.email_sender = oldData.email_sender;
                 $scope.in_app_content = oldData.in_app_content;
                 $scope.name = oldData.name;
+                $scope.updateGoNext();
             } else
                 $scope.notifyType = $scope.notifyTypes[0];
 
@@ -98,16 +109,6 @@ angular.module('user')
                 if ($scope.notifyType != null)
                     $scope.updateGoNext();
             });
-
-            $scope.updateGoNext = function() {
-                for (var i = 0; i < $scope.isOk.length; i++)
-                    if ($scope.isOk[i] == true && $scope.notifyType.id == i && $scope.isOk[3] == true) {
-                        $scope.isCanGo = true;
-                        return;
-                    }
-
-                $scope.isCanGo = false;
-            }
 
             function checkString(string) {
                 if (string == undefined || string == '')
