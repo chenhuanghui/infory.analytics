@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'messageRemote', 'dialogHelper', 'serviceHelper',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, messageRemote, dialogHelper, serviceHelper) {
+    .controller('UserNotifyStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'messageRemote', 'dialogHelper', 'serviceHelper', 'queryHelper',
+        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, messageRemote, dialogHelper, serviceHelper, queryHelper) {
 
             var brandId = $routeParams.brandId,
                 step1Data = userNotifyFactory.getData(0, brandId),
@@ -95,7 +95,21 @@ angular.module('user')
             }
 
             function pushInfoToStep2(data) {
+                console.log(data);
 
+                data.target_user_filter.event = remoteFactory.meta_profile;
+
+                var oldData = {
+                    userList: [],
+                    all: false,
+                    isChecked: [],
+                    numOfSelectedUsers: 0,
+                    oldsubfilters: queryHelper.decode(data.target_user_filter),
+                    isCanGo: true,
+                    sendMethod: {
+                        name: data.send_method
+                    }
+                }
             }
 
             function pushInfoToStep3(data) {

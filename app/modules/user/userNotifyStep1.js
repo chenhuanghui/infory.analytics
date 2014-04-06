@@ -2,13 +2,11 @@ angular.module('user')
     .controller('UserNotifyStep1Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote',
         function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote) {
 
-            var brandId = $routeParams.brandId;
-            dataFactory.updateBrandSideBar(brandId);
+            /** Global variables **/
+            var brandId = $routeParams.brandId,
+                oldData = userNotifyFactory.getData(0, brandId);
 
-            dataFactory.getBrand(brandId, function(data) {
-                $scope.brand = data;
-            }, function() {});
-
+            /** Scope variables **/
             $scope.notifyTypes = [{
                 id: 0,
                 name: 'sms',
@@ -35,17 +33,12 @@ angular.module('user')
             $scope.isOk = [false, false, false, false];
             $scope.name = '';
 
-            $scope.updateGoNext = function() {
-                for (var i = 0; i < $scope.isOk.length; i++)
-                    if ($scope.isOk[i] == true && $scope.notifyType.id == i && $scope.isOk[3] == true) {
-                        $scope.isCanGo = true;
-                        return;
-                    }
+            /** Logic **/
+            dataFactory.updateBrandSideBar(brandId);
+            dataFactory.getBrand(brandId, function(data) {
+                $scope.brand = data;
+            }, function() {});
 
-                $scope.isCanGo = false;
-            }
-
-            var oldData = userNotifyFactory.getData(0, brandId);
             if (oldData != null) {
                 $scope.isCanGo = oldData.isCanGo;
                 $scope.validation = oldData.validation;
@@ -109,6 +102,16 @@ angular.module('user')
                 if ($scope.notifyType != null)
                     $scope.updateGoNext();
             });
+
+            $scope.updateGoNext = function() {
+                for (var i = 0; i < $scope.isOk.length; i++)
+                    if ($scope.isOk[i] == true && $scope.notifyType.id == i && $scope.isOk[3] == true) {
+                        $scope.isCanGo = true;
+                        return;
+                    }
+
+                $scope.isCanGo = false;
+            }
 
             function checkString(string) {
                 if (string == undefined || string == '')
