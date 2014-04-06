@@ -4,26 +4,28 @@ angular.module('promotion')
 
     function($scope, $routeParams, $location, remoteFactory, dataFactory, userRemote, serviceHelper, promotionRemote, promotionFactory, serviceHelper) {
 
+        /** Global variables **/
         var brandId = $routeParams.brandId;
+        var step2Data = promotionFactory.getData(1, brandId),
+            step3Data = promotionFactory.getData(2, brandId);
+
+        /** Scope variables **/
+        $scope.selectedShops = [];
+        $scope.isCanGoNext = false;
+
+        /** Logic **/
         dataFactory.getBrand(brandId, function(data) {
             $scope.brand = data;
         }, function() {});
 
-        $scope.selectedShops = [];
-
-        var step2Data = promotionFactory.getData(1);
         if (step2Data == null) {
             $location.path('/brand/promotion/step2/' + brandId);
             return;
         } else {
+            $scope.promotionType = step2Data.promotionType;
             $scope.name = step2Data.name;
             $scope.time = step2Data.date_beg.dateDisplay + " đến " + step2Data.date_end.dateDisplay;
         }
-
-        $scope.isCanGoNext = false;
-
-        var step3Data = promotionFactory.getData(2);
-        $scope.promotionType = step2Data.promotionType;
 
         switch ($scope.promotionType.name) {
             case 'voucher':
@@ -35,10 +37,10 @@ angular.module('promotion')
 
                 if (step3Data != null && step3Data.presentDescriptions != undefined) {
                     $scope.isCanGoNext = step3Data.isCanGoNext;
-                    $scope.promotionType = step3Data.promotionType,
-                    $scope.presentDescriptions = step3Data.presentDescriptions,
-                    $scope.indexInArray = step3Data.indexInArray,
-                    $scope.autoNum = autoNum
+                    $scope.promotionType = step3Data.promotionType;
+                    $scope.presentDescriptions = step3Data.presentDescriptions;
+                    $scope.indexInArray = step3Data.indexInArray;
+                    $scope.autoNum = step3Data.autoNum;
 
                     updateSTT();
                 }
@@ -199,7 +201,8 @@ angular.module('promotion')
                         isCanGoNext: $scope.isCanGoNext,
                         promotionType: $scope.promotionType,
                         indexInArray: $scope.indexInArray,
-                        autoNum: $scope.autoNum
+                        autoNum: $scope.autoNum,
+                        brand_id: brandId
                     });
                 }
                 break;
@@ -246,7 +249,8 @@ angular.module('promotion')
                         isCanGoNext: $scope.isCanGoNext,
                         promotionType: $scope.promotionType,
                         content: $scope.content,
-                        title: $scope.title
+                        title: $scope.title,
+                        brand_id: brandId
                     });
                 }
 

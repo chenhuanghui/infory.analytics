@@ -4,39 +4,38 @@ angular.module('promotion')
 
     function($scope, $routeParams, $location, remoteFactory, dataFactory, userRemote, serviceHelper, promotionRemote, promotionFactory, serviceHelper) {
 
-        var brandId = $routeParams.brandId;
-        var path = $location.path().substring(0, 22);
+        /** Global variables **/
+        var brandId = $routeParams.brandId,
+            path = $location.path().substring(0, 22);
+
+        /** Scope variables **/
+        $scope.promotionTypes = [{
+            name: 'news',
+            name_display: 'Đăng tin'
+        }, {
+            name: 'voucher',
+            name_display: 'Khuyến mãi'
+        }];
+
         dataFactory.getBrand(brandId, function(data) {
             $scope.brand = data;
 
         }, function() {});
 
-        $scope.promotionTypes = [{
-                name: 'news',
-                name_display: 'Đăng tin'
-            },
-            // {
-            //     name: 'score',
-            //     name_display: 'Tích luỹ điểm'
-            // },
-            {
-                name: 'voucher',
-                name_display: 'Khuyến mãi'
-            }
-        ];
-
-        var promotionType = promotionFactory.getData(0);
-
-        if (promotionType != null) {
+        /** Logic **/
+        var oldData = promotionFactory.getData(0, brandId);
+        if (oldData != null) {
             for (var i = 0; i < $scope.promotionTypes.length; i++)
-                if (promotionType.promotionType.name == $scope.promotionTypes[i].name)
+                if (oldData.promotionType.name == $scope.promotionTypes[i].name)
                     $scope.promotionType = $scope.promotionTypes[i];
-        } else
+        } else {
             $scope.promotionType = $scope.promotionTypes[0];
+        }
 
         $scope.goToStep2 = function() {
             promotionFactory.setData(0, {
-                promotionType: $scope.promotionType
+                promotionType: $scope.promotionType,
+                brand_id: brandId
             });
             $location.path('/brand/promotion/step2/' + brandId);
         }

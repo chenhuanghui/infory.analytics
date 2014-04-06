@@ -53,7 +53,7 @@
                                     <tbody>
                                         <tr class="{{promotion.stt}}" ng-repeat="promotion in promotionList">
                                             <td class="bold">{{promotion.typeDisplay}}</td>
-                                            <td class="name">{{promotion.name}}</td>
+                                            <td style="cursor:pointer" class="name" ng-click="editPromotion(promotion.id)">{{promotion.name}}</td>
                                             <td>{{promotion.time}}</td>
                                             <td class="center"><a class="{{$parent.promotionListFull[promotion.index].statusClass}}" ng-click="changeStatus(promotion.index)" style="width:auto;">{{$parent.promotionListFull[promotion.index].statusName}}</a></td>
                                         </tr>

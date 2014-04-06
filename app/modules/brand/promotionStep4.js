@@ -6,7 +6,9 @@ angular.module('promotion')
 
         /** Global variables **/
         var brandId = $routeParams.brandId,
-            dataStep3 = promotionFactory.getData(2);
+            dataStep3 = promotionFactory.getData(2, brandId),
+            dataStep2 = promotionFactory.getData(1, brandId),
+            mode = promotionFactory.getMode();
 
         /** Scope variables **/
         $scope.orderPromotions = [{
@@ -21,17 +23,46 @@ angular.module('promotion')
         }];
 
         $scope.hideLoading = false;
+
+
         /** Logic **/
         dataFactory.getBrand(brandId, function(data) {
             $scope.brand = data;
 
         }, function() {});
 
+        $scope.goToStep1 = function() {
+            promotionFactory.setData(0, null);
+            promotionFactory.setData(1, null);
+            promotionFactory.setData(2, null);
+            promotionFactory.setMode('create');
+
+            $location.path('/brand/promotion/step1/' + brandId);
+        }
+
+        $scope.editPromotion = function(promotion_id) {
+            promotionRemote.get({
+                promotion_id: promotion_id
+            }, function(data) {
+                if (data.error == undefined) {
+                    pushInfoToStep1(data);
+                    pushInfoToStep2(data);
+                    pushInfoToStep3(data);
+
+                    promotionFactory.setMode('update');
+                    promotionFactory.setPromotionId(promotion_id);
+
+                    $location.path('/brand/promotion/step1/' + brandId);
+                } else {
+                    dialogHelper.showError(data.error.message);
+                }
+            }, function() {})
+        }
+
         if (dataStep3 == null) {
             listPromotion();
             return;
         } else {
-            var dataStep2 = promotionFactory.getData(1);
             var shops_apply = [];
 
             for (var i = 0; i < dataStep2.selectedShops.length; i++) {
@@ -53,14 +84,14 @@ angular.module('promotion')
             switch (dataStep3.promotionType.name) {
                 case 'news':
                     fields.title = dataStep3.title;
+                    fields.description = dataStep3.content;
                     break;
                 case 'voucher':
                     var vouchers = [];
 
-
                     for (var i = 0; i < dataStep3.presentDescriptions.length; i++) {
                         var description = dataStep3.presentDescriptions[i];
-                        if (description.nonoLimitedChecked == true)
+                        if (description.noLimitedChecked == true)
                             description.amount = 0;
 
                         var available_days = [];
@@ -100,14 +131,31 @@ angular.module('promotion')
                     break;
             }
 
-            promotionRemote.create(fields, function(data) {
-                if (data.error != undefined)
-                    dialogHelper.showError('Quá trình tạo chiến dịch có lỗi: ' + data.error.message);
 
-                listPromotion();
+            switch (mode) {
+                case 'create':
+                    promotionRemote.create(fields, function(data) {
+                        if (data.error != undefined)
+                            dialogHelper.showError('Quá trình tạo chiến dịch có lỗi: ' + data.error.message);
+                        else
+                            dialogHelper.showError('Tạo chiến dịch thành công`');
+                        listPromotion();
 
-            }, function() {});
+                    }, function() {});
+                    break;
+                case 'update':
+                    fields.promotion_id = promotionFactory.getPromotionId();
+                    promotionRemote.update(fields, function(data) {
+                        if (data.error != undefined)
+                            dialogHelper.showError('Quá trình tạo chiến dịch có lỗi: ' + data.error.message);
+                        else
+                            dialogHelper.showError('Đã cập nhật thông tin chiến dịch');
 
+                        listPromotion();
+
+                    }, function() {});
+                    break;
+            }
 
             function listPromotion() {
                 $scope.statusTypes = [{
@@ -252,14 +300,155 @@ angular.module('promotion')
             }
         }
 
-        $scope.goToStep1 = function() {
-            $location.path('/brand/promotion/step1/' + brandId);
-        }
-
         for (var i = 0; i < 3; i++)
             promotionFactory.setData(i, {
                 brand_id: -1
             });
+
+
+        function pushInfoToStep1(data) {
+
+            var promotionType = {
+                name: data.type
+            };
+            switch (data.type) {
+                case 'news':
+                    promotionType.name_display = 'Đăng tin';
+                    break;
+                case 'voucher':
+                    promotionType.name_display = 'Khuyến mãi';
+                    break;
+            }
+
+            promotionFactory.setData(0, {
+                promotionType: promotionType,
+                brand_id: brandId
+            });
+        }
+
+        function pushInfoToStep2(data) {
+            var date_beg = new Date(data.date_beg);
+            var date_end = new Date(data.date_end);
+
+            promotionFactory.setData(1, {
+                name: data.name,
+                shops_apply: data.shops_apply,
+                selectedShops: null,
+                date_beg: {
+                    dateDropDownInput: date_beg,
+                    dateDisplay: serviceHelper.normalizeTime(date_beg),
+                },
+                date_end: {
+                    dateDropDownInput: date_end,
+                    dateDisplay: serviceHelper.normalizeTime(date_end),
+                },
+                brand_id: brandId
+            });
+        }
+
+        function pushInfoToStep3(data) {
+            var promotionType = {
+                name: data.type
+            };
+
+            switch (data.type) {
+                case 'news':
+                    promotionType.name_display = 'Đăng tin';
+                    promotionFactory.setData(2, {
+                        validation: [false, false, false],
+                        isCanGoNext: true,
+                        promotionType: promotionType,
+                        content: data.content,
+                        title: data.title,
+                        content: data.description,
+                        brand_id: brandId
+                    });
+                    break;
+                case 'voucher':
+                    var presentDescriptions = [];
+                    var autoNum = 0;
+                    var indexInArray = [];
+
+                    for (var i = 0; i < data.vouchers.length; i++) {
+                        indexInArray.push(i);
+
+                        var presentDescription = {
+                            id: autoNum++,
+                            stt: autoNum,
+                            description: data.vouchers[i].description,
+                            amount: data.vouchers[i].total,
+                            noLimitedChecked: false,
+                            target: data.vouchers[i].requirement,
+                            monChecked: false,
+                            tueChecked: false,
+                            wedChecked: false,
+                            thuChecked: false,
+                            friChecked: false,
+                            satChecked: false,
+                            sunChecked: false,
+                            allChecked: false,
+                            validation: [false, false, false, false, false],
+                            isOK: true,
+                        };
+
+                        if (presentDescription.amount == 0)
+                            presentDescription.noLimitedChecked = true;
+
+                        for (var j = 0; j < data.vouchers[j].available_days.length; j++) {
+                            switch (data.vouchers[i].available_days[j]) {
+
+                                case 'mon':
+                                    presentDescription.monChecked = true;
+                                    break;
+                                case 'tue':
+                                    presentDescription.tueChecked = true;
+                                    break;
+                                case 'wed':
+                                    presentDescription.wedChecked = true;
+                                    break;
+                                case 'thu':
+                                    presentDescription.thuChecked = true;
+                                    break;
+                                case 'fri':
+                                    presentDescription.friChecked = true;
+                                    break;
+                                case 'sat':
+                                    presentDescription.satChecked = true;
+                                    break;
+                                case 'sun':
+                                    presentDescription.sunChecked = true;
+                                    break;
+                            }
+                        }
+
+                        if (data.vouchers[i].available_days.length == 7) {
+                            presentDescription.allChecked = true;
+                            presentDescription.monChecked = true;
+                            presentDescription.tueChecked = true;
+                            presentDescription.wedChecked = true;
+                            presentDescription.thuChecked = true;
+                            presentDescription.friChecked = true;
+                            presentDescription.satChecked = true;
+                            presentDescription.sunChecked = true;
+                        }
+
+                        presentDescriptions.push(presentDescription);
+                    }
+
+
+                    promotionType.name_display = 'Khuyến mãi';
+
+                    promotionFactory.setData(2, {
+                        isCanGoNext: true,
+                        promotionType: promotionType,
+                        autoNum: autoNum,
+                        indexInArray: indexInArray,
+                        presentDescriptions: presentDescriptions,
+                        brand_id: brandId
+                    });
+                    break;
+            }
+        }
     }
 
 ])
