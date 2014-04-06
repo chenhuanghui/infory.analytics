@@ -45,10 +45,10 @@
         <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editDescription">
                 <span class="description">{{bundle.brandDescription}}</span>
-                <a ng-click="bundle.editDescription = true; updateEditor()" style="cursor:pointer" >sửa</a>
+                <a ng-click="bundle.editDescription = true" style="cursor:pointer" >sửa</a>
             </div>
             <div class="edit" ng-hide="!bundle.editDescription">
-                <textarea ng-auto-expand ng-model="bundle.brandDescription" class="form-control inline-block text-area-editor" rows="5"></textarea>
+                <textarea ng-model="bundle.brandDescription" class="form-control inline-block" rows="5"></textarea>
                 <i ng-click="changeDescription()" class="icon-ok-sign success" style="cursor:pointer" ></i>
             </div>
         </div>
