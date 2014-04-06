@@ -57,7 +57,6 @@ angular.module('user')
                 $scope.email_sender = oldData.email_sender;
                 $scope.in_app_content = oldData.in_app_content;
                 $scope.name = oldData.name;
-                $scope.updateGoNext();
             } else
                 $scope.notifyType = $scope.notifyTypes[0];
 

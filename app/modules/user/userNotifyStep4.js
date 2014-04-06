@@ -5,7 +5,8 @@ angular.module('user')
             var brandId = $routeParams.brandId,
                 step1Data = userNotifyFactory.getData(0, brandId),
                 step2Data = userNotifyFactory.getData(1, brandId),
-                step3Data = userNotifyFactory.getData(2, brandId);
+                step3Data = userNotifyFactory.getData(2, brandId),
+                mode = userNotifyFactory.getMode();
 
             $scope.messageList = [];
             $scope.hideLoading = false;
@@ -30,13 +31,9 @@ angular.module('user')
                     if (data.error == undefined) {
                         pushInfoToStep1(data);
                         pushInfoToStep2(data);
-                        pushInfoToStep3(data);
 
                         userNotifyFactory.setMode('update');
                         userNotifyFactory.setMessageId(message_id);
-
-                        $location.path('/user/notify-new/step1/' + brandId);
-
                     } else
                         dialogHelper.showError(data.error.message);
                 }, function() {});
@@ -95,21 +92,81 @@ angular.module('user')
             }
 
             function pushInfoToStep2(data) {
-                console.log(data);
-
-                data.target_user_filter.event = remoteFactory.meta_profile;
-
-                var oldData = {
-                    userList: [],
-                    all: false,
-                    isChecked: [],
-                    numOfSelectedUsers: 0,
-                    oldsubfilters: queryHelper.decode(data.target_user_filter),
-                    isCanGo: true,
-                    sendMethod: {
-                        name: data.send_method
-                    }
+                var oldsubfilters = [];
+                if (data.target_user_filter != null) {
+                    data.target_user_filter.event = remoteFactory.meta_profile;
+                    oldsubfilters = queryHelper.decode(data.target_user_filter)
                 }
+
+                var fields = {
+                    filter: data.target_user_filter,
+                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
+                    brand_id: brandId,
+                    page: 0,
+                    page_size: 10000
+                };
+
+                userRemote.filter(fields, function(datax) {
+                    if (data.error == undefined) {
+                        var userList = datax.data;
+                        var isChecked = [];
+
+                        for (var i = 0; i < userList.length; i++) {
+                            if (data.target_users.indexOf(userList[i].id) == -1)
+                                isChecked.push(false);
+                            else
+                                isChecked.push(true);
+                        }
+
+                        for (var i = 0; i < userList.length; i++) {
+
+                            var user = userList[i];
+                            if (user.phone == '' || user.phone == null)
+                                user.phone = '-';
+
+                            if (user.email == null)
+                                user.email = " - ";
+
+                            if (user.gender == null)
+                                user.gender = " - ";
+                            else if (user.gender == 'male')
+                                user.gender = 'Nam';
+                            else
+                                user.gender = 'Nữ';
+
+                            if (user.city == null)
+                                user.city = " - ";
+
+                            if (user.dob != null)
+                                user.dob = new Date().getFullYear() - new Date(user.dob).getFullYear();
+                            else
+                                user.dob = " - ";
+
+                            user.stt = i;
+                        }
+
+                        var oldData = {
+                            userList: userList,
+                            all: false,
+                            isChecked: isChecked,
+                            numOfSelectedUsers: data.target_users.length,
+                            oldsubfilters: oldsubfilters,
+                            isCanGo: true,
+                            sendMethod: {
+                                name: data.send_method
+                            },
+                            brand_id: brandId
+                        }
+
+                        userNotifyFactory.setData(1, oldData);
+
+                        pushInfoToStep3(data);
+                        $location.path('/user/notify-new/step1/' + brandId);
+                    } else {
+                        dialogHelper.showError(data.error.message);
+                    }
+
+                }, function() {});
             }
 
             function pushInfoToStep3(data) {
@@ -170,12 +227,27 @@ angular.module('user')
                 fields.target_users = JSON.stringify(target_users);
             }
 
-            messageRemote.create(fields, function(data) {
-                if (data.error == undefined) {
-                    listNotification();
-                } else
-                    dialogHelper.showError(data.error.message);
-            }, function() {})
+            switch (mode) {
+                case 'create':
+                    messageRemote.create(fields, function(data) {
+                        if (data.error == undefined) {
+                            listNotification();
+                            dialogHelper.showError('Quá trình tạo thành công');
+                        } else
+                            dialogHelper.showError('Quá trình tạo có lỗi: ' + data.error.message);
+                    }, function() {})
+                    break;
+                case 'update':
+                    fields.message_id = userNotifyFactory.getMessageId();
+                    messageRemote.update(fields, function(data) {
+                        if (data.error == undefined) {
+                            listNotification();
+                            dialogHelper.showError('Đã cập nhật thông tin');
+                        } else
+                            dialogHelper.showError('Quá trình cập nhật có lỗi: ' + data.error.message);
+                    }, function() {})
+                    break;
+            }
 
             function listNotification() {
 

@@ -31,7 +31,7 @@ angular.module('smg.services')
                 setMessageId: function(value) {
                     messageId = value;
                 },
-                setMessageId: function() {
+                getMessageId: function() {
                     return messageId;
                 }
             }

@@ -147,7 +147,7 @@ angular.module('promotion')
                     fields.promotion_id = promotionFactory.getPromotionId();
                     promotionRemote.update(fields, function(data) {
                         if (data.error != undefined)
-                            dialogHelper.showError('Quá trình tạo chiến dịch có lỗi: ' + data.error.message);
+                            dialogHelper.showError('Quá trình cập nhật chiến dịch có lỗi: ' + data.error.message);
                         else
                             dialogHelper.showError('Đã cập nhật thông tin chiến dịch');
 
