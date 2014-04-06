@@ -93,18 +93,24 @@ angular.module('user')
 
             function pushInfoToStep2(data) {
                 var oldsubfilters = [];
-                if (data.target_user_filter != null) {
-                    data.target_user_filter.event = remoteFactory.meta_profile;
-                    oldsubfilters = queryHelper.decode(data.target_user_filter)
+                var filters = {
+                    event: 'profile',
+                    filter: JSON.stringify(data.target_user_filter)
                 }
 
                 var fields = {
-                    filter: data.target_user_filter,
+                    filter: null,
                     fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
                     brand_id: brandId,
                     page: 0,
                     page_size: 10000
                 };
+
+                if (data.target_user_filter != null) {
+                    data.target_user_filter.event = remoteFactory.meta_profile;
+                    oldsubfilters = queryHelper.decode(filters);
+                    fields.filter = JSON.stringify(data.target_user_filter);
+                }
 
                 userRemote.filter(fields, function(datax) {
                     if (data.error == undefined) {
