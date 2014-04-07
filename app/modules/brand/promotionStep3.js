@@ -7,11 +7,13 @@ angular.module('promotion')
         /** Global variables **/
         var brandId = $routeParams.brandId;
         var step2Data = promotionFactory.getData(1, brandId),
-            step3Data = promotionFactory.getData(2, brandId);
+            step3Data = promotionFactory.getData(2, brandId),
+            autoNum = 0;
 
         /** Scope variables **/
         $scope.selectedShops = [];
         $scope.isCanGoNext = false;
+        $scope.mode = promotionFactory.getMode() == 'create' ? 'Kích hoạt' : 'Cập nhật';
 
         /** Logic **/
         dataFactory.getBrand(brandId, function(data) {
@@ -31,8 +33,8 @@ angular.module('promotion')
             case 'voucher':
                 $scope.presentDescriptions = [];
                 $scope.indexInArray = [];
-                for (var i = 1; i < 1000; i++) {
-                    $scope.indexInArray[i] = -1;
+                for (var i = 0; i < 1000; i++) {
+                    $scope.indexInArray.push(-1);
                 }
 
                 if (step3Data != null && step3Data.presentDescriptions != undefined) {
@@ -40,7 +42,7 @@ angular.module('promotion')
                     $scope.promotionType = step3Data.promotionType;
                     $scope.presentDescriptions = step3Data.presentDescriptions;
                     $scope.indexInArray = step3Data.indexInArray;
-                    $scope.autoNum = step3Data.autoNum;
+                    autoNum = step3Data.autoNum;
 
                     updateSTT();
                 }
@@ -53,6 +55,7 @@ angular.module('promotion')
                         }
                     }
                     updateSTT();
+                    isCanGo();
                 }
 
                 function updateSTT() {
@@ -62,10 +65,9 @@ angular.module('promotion')
                     }
                 }
 
-                var autoNum = 0;
                 $scope.addPresent = function() {
                     $scope.presentDescriptions.push({
-                        id: autoNum++,
+                        id: autoNum,
                         stt: autoNum,
                         description: '',
                         amount: 1,
@@ -82,6 +84,8 @@ angular.module('promotion')
                         validation: [true, false, false, true, false],
                         isOK: false,
                     });
+
+                    autoNum++;
                     updateSTT();
                     isCanGo();
                 }
@@ -90,7 +94,6 @@ angular.module('promotion')
                     $scope.addPresent();
 
                 $scope.allCheck = function(id) {
-
                     var isChecked = $scope.presentDescriptions[$scope.indexInArray[id]].allChecked;
 
                     $scope.presentDescriptions[$scope.indexInArray[id]].monChecked = isChecked;
@@ -102,7 +105,6 @@ angular.module('promotion')
                     $scope.presentDescriptions[$scope.indexInArray[id]].sunChecked = isChecked;
 
                     $scope.updateValidation(id, 4);
-
                 }
 
                 $scope.updateValidation = function(id, idChange) {
@@ -137,7 +139,6 @@ angular.module('promotion')
                             else
                                 $scope.presentDescriptions[index].validation[4] = true;
                             break;
-
                     }
 
                     if (isAGoodForm($scope.presentDescriptions[index].validation))

@@ -6,10 +6,9 @@ angular.module('promotion')
         /** Global variables **/
         var brandId = $routeParams.brandId,
             intervalDate = serviceHelper.getIntervalDate(),
-            date_end = new Date(new Date().setTime(new Date().getTime() + 7 * 24 * 60 * 60 * 1000));
-
-        var step1Data = promotionFactory.getData(0, brandId);
-        var data = promotionFactory.getData(1, brandId);
+            date_end = new Date(new Date().setTime(new Date().getTime() + 7 * 24 * 60 * 60 * 1000)),
+            step1Data = promotionFactory.getData(0, brandId),
+            data = promotionFactory.getData(1, brandId);
 
         /** Scope variables **/
         $scope.selectedShops = [];
@@ -35,7 +34,6 @@ angular.module('promotion')
         }, function() {});
 
         updateTime();
-
 
         if (step1Data == null) {
             $location.path('/brand/promotion/step1/' + brandId);
@@ -63,7 +61,6 @@ angular.module('promotion')
                         }
                     }
                 }, function() {});
-
             }
 
             updateTime();

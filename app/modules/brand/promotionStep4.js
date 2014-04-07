@@ -138,7 +138,7 @@ angular.module('promotion')
                         if (data.error != undefined)
                             dialogHelper.showError('Quá trình tạo chiến dịch có lỗi: ' + data.error.message);
                         else
-                            dialogHelper.showError('Tạo chiến dịch thành công`');
+                            dialogHelper.showError('Tạo chiến dịch thành công');
                         listPromotion();
 
                     }, function() {});
@@ -369,11 +369,15 @@ angular.module('promotion')
                     var autoNum = 0;
                     var indexInArray = [];
 
+                    for (var i = 0; i < 1000; i++) {
+                        indexInArray.push(-1);
+                    }
+
                     for (var i = 0; i < data.vouchers.length; i++) {
-                        indexInArray.push(i);
+                        indexInArray[i] = i;
 
                         var presentDescription = {
-                            id: autoNum++,
+                            id: autoNum,
                             stt: autoNum,
                             description: data.vouchers[i].description,
                             amount: data.vouchers[i].total,
@@ -390,6 +394,8 @@ angular.module('promotion')
                             validation: [false, false, false, false, false],
                             isOK: true,
                         };
+
+                        autoNum++;
 
                         if (presentDescription.amount == 0)
                             presentDescription.noLimitedChecked = true;

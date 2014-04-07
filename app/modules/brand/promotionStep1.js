@@ -5,8 +5,7 @@ angular.module('promotion')
     function($scope, $routeParams, $location, remoteFactory, dataFactory, userRemote, serviceHelper, promotionRemote, promotionFactory, serviceHelper) {
 
         /** Global variables **/
-        var brandId = $routeParams.brandId,
-            path = $location.path().substring(0, 22);
+        var brandId = $routeParams.brandId;
 
         /** Scope variables **/
         $scope.promotionTypes = [{
@@ -17,10 +16,7 @@ angular.module('promotion')
             name_display: 'Khuyến mãi'
         }];
 
-        dataFactory.getBrand(brandId, function(data) {
-            $scope.brand = data;
-
-        }, function() {});
+        dataFactory.getBrand(brandId, function(data) {}, function() {});
 
         /** Logic **/
         var oldData = promotionFactory.getData(0, brandId);
