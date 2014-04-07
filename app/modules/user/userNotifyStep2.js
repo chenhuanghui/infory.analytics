@@ -27,7 +27,6 @@ angular.module('user')
                 name: 'auto',
                 name_display: 'Gửi tự động'
             }];
-
             $scope.sendMethod = $scope.sendMethods[0];
 
             /** Logic **/
@@ -58,6 +57,7 @@ angular.module('user')
                 } else
                     $location.path('/user/notify-new/step3/' + brandId);
             }
+
             $scope.goToStep1 = function() {
                 saveInfor();
                 $location.path('/user/notify-new/step1/' + brandId);
