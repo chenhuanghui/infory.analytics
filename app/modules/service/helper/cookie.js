@@ -20,7 +20,10 @@ angular.module('Smg')
                     var d = new Date();
                     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
                     var expires = "expires=" + d.toGMTString();
-                    $document.context.cookie = cname + "=" + cvalue + "; " + expires;
+                    if (exdays != 0)
+                        $document.context.cookie = cname + "=" + cvalue + "; " + expires;
+                    else
+                        $document.context.cookie = cname + "=" + cvalue + ";";
                 },
 
                 getCookie: function(cname) {

@@ -63,7 +63,6 @@ angular.module('brand')
         }
 
         dataFactory.getBrands(function(brands) {
-
             $scope.brands = brands;
             if (brands.length != 0) {
                 if (brandId == null) {

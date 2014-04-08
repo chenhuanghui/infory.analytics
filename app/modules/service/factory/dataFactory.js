@@ -199,8 +199,8 @@ angular.module('smg.services')
                 getUsernameAvatar: function() {
                     return user_pre;
                 },
-                setCurrentBrand: function(brand) {
-                    currentBrand = brand;
+                setCurrentBrand: function(newBrand) {
+                    currentBrand = newBrand;
                 },
                 getCurrentBrand: function() {
                     return currentBrand;
@@ -221,8 +221,8 @@ angular.module('smg.services')
                         }, error);
                     }
                 },
-                setCurrentBrands: function(brands) {
-                    brands = brands;
+                setCurrentBrands: function(newBrands) {
+                    brands = newBrands;
                 },
                 getBrand: function(id, success, error) {
                     if (currentBrand != null && currentBrand.id == id) {

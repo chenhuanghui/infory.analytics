@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Smg')
-    .factory('Auth', ['$http', '$cookieStore', '$document', /*'accountRemote', */'cookie',
-        function($http, $cookieStore, $document, /*accountRemote, */cookie) {
+    .factory('Auth', ['$http', '$cookieStore', '$document', /*'accountRemote', */ 'cookie',
+        function($http, $cookieStore, $document, /*accountRemote, */ cookie) {
             function changeUser(user) {
                 _.extend(currentUser, user);
             };
@@ -16,7 +16,7 @@ angular.module('Smg')
                 role: userRoles.public
             };
 
-            if (cookie.getCookie('user')) {
+            if (cookie.getCookie('access_token')) {
                 var role = userRoles.public;
 
                 switch (cookie.getCookie('role')) {
@@ -55,8 +55,7 @@ angular.module('Smg')
                     var rememberme = user.rememberme;
 
                     $http.post(loginRoute, user)
-                        .success(function(res)
-                        {
+                        .success(function(res) {
                             if (res.status) {
                                 var user = {
                                     name: res.data.name,
@@ -78,7 +77,7 @@ angular.module('Smg')
                                     cookie.setCookie('role', user.role.title, expires);
                                 } else {
                                     cookie.setCookie('name', user.name, expires);
-                                    $cookieStore.put('user', user.username);
+                                    cookie.setCookie('user', user.username, expires);
                                     $cookieStore.put('access_token', user.access_token);
                                     $cookieStore.put('role', user.role.title);
                                 }
@@ -99,8 +98,7 @@ angular.module('Smg')
                     };
 
                     $http.post(logoutRoute + "?dashboard_token=" + user.dashboard_token, user)
-                        .success(function(res) 
-                        {
+                        .success(function(res) {
                             if (res.status) {
                                 cookie.deleteCookie('user');
                                 cookie.deleteCookie('role');

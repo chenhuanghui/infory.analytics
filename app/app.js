@@ -135,7 +135,7 @@ angular.element(document).ready(function() {
                         //     $location.path('/');
                         // else
                         // {
-                            $location.path('/login');
+                        $location.path('/login');
                         // }
                     }
                 });

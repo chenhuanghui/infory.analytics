@@ -1,6 +1,6 @@
 angular.module('account')
-    .controller('SignInCtrl', ['$scope', '$location', '$window', 'Auth',
-        function($scope, $location, $window, Auth) {
+    .controller('SignInCtrl', ['$scope', '$location', '$window', 'Auth', 'dataFactory',
+        function($scope, $location, $window, Auth, dataFactory) {
             // $scope.user = Auth.user;
             // $scope.userRoles = Auth.userRoles;
             // $scope.accessLevels = Auth.accessLevels;
@@ -21,6 +21,11 @@ angular.module('account')
                         rememberme: $scope.rememberme
                     },
                     function(res) {
+                        dataFactory.setCurrentBrands(null);
+                        dataFactory.setCurrentBrand(null);
+                        dataFactory.updateBrandsHeader(null);
+                        dataFactory.updateBrandHeader(null);
+
                         $scope.hideMessage = false;
                         $location.path('/');
                     },
