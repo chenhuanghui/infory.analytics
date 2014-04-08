@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper', 'dialogHelper', 'accountRemote',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper, dialogHelper, accountRemote) {
+    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper', 'dialogHelper', 'accountRemote', 'userRemote',
+        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper, dialogHelper, accountRemote, userRemote) {
 
             /** Global variables **/
             var brandId = $routeParams.brandId,
@@ -20,6 +20,8 @@ angular.module('user')
             $scope.oldsubfilters = [];
             $scope.isCanGo = true;
             $scope.balance = null;
+            $scope.userList = [];
+            $scope.isChecked = [];
             $scope.sendMethods = [{
                 name: 'once',
                 name_display: 'Gửi một lần'
@@ -102,6 +104,62 @@ angular.module('user')
 
                 //     },
                 //     function() {});
+            }
+
+            if ($scope.userList.length == 0) {
+
+                $scope.hideLoading = false;
+                $scope.userList = [];
+                $scope.isChecked = [];
+
+                userRemote.filter({
+                    brand_id: brandId,
+                    filter: '',
+                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
+                    brand_id: brandId,
+                    page: 0,
+                    page_size: 10000
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.hideLoading = true;
+                        if ($scope.userList.length == 0) {
+                            $scope.userList = data.data;
+                            normalizeUser();
+                            saveInfor();
+                        }
+                    } else
+                        dialogHelper.showError(data.error.message);
+                }, function() {});
+            }
+
+            function normalizeUser() {
+                for (var i = 0; i < $scope.userList.length; i++) {
+
+                    var user = $scope.userList[i];
+                    if (user.phone == '' || user.phone == null)
+                        user.phone = '-';
+
+                    if (user.email == null)
+                        user.email = " - ";
+
+                    if (user.gender == null)
+                        user.gender = " - ";
+                    else if (user.gender == 'male')
+                        user.gender = 'Nam';
+                    else
+                        user.gender = 'Nữ';
+
+                    if (user.city == null)
+                        user.city = " - ";
+
+                    if (user.dob != null)
+                        user.dob = new Date().getFullYear() - new Date(user.dob).getFullYear();
+                    else
+                        user.dob = " - ";
+
+                    user.stt = i;
+                    $scope.isChecked.push(false);
+                }
             }
 
             $scope.updateIsCanGo = function() {
@@ -207,33 +265,7 @@ angular.module('user')
                         $scope.userList = data.data;
                         $scope.isChecked = [];
 
-                        for (var i = 0; i < $scope.userList.length; i++) {
-
-                            var user = $scope.userList[i];
-                            user.stt = i;
-
-                            if (user.phone == '' || user.phone == null)
-                                user.phone = '-';
-
-                            if (user.email == null)
-                                user.email = " - ";
-
-                            if (user.gender == 'male')
-                                user.gender = 'Nam';
-                            else
-                                user.gender = 'Nữ';
-
-                            if (user.city == null)
-                                user.city = " - ";
-
-                            if (user.dob != null)
-                                user.dob = new Date().getFullYear() - new Date(user.dob).getFullYear();
-                            else
-                                user.dob = " - ";
-
-                            $scope.isChecked.push(false);
-
-                        }
+                        normalizeUser();
 
                         saveInfor();
                     } else
