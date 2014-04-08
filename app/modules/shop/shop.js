@@ -146,6 +146,7 @@ angular.module('shop')
                     if (data.error == undefined) {
                         $scope.shop.street_address = $scope.bundle.shopStreetAddress;
                         dataFactory.setCurrentShop($scope.shop);
+                        makeFullAddress();
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
                         dialogHelper.showError(data.error.message);
@@ -169,6 +170,7 @@ angular.module('shop')
                     if (data.error == undefined) {
                         $scope.shop.district_address = $scope.bundle.shopDistrictAddress;
                         dataFactory.setCurrentShop($scope.shop);
+                        makeFullAddress();
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
                         dialogHelper.showError(data.error.message);
@@ -194,6 +196,7 @@ angular.module('shop')
                     if (data.error == undefined) {
                         $scope.shop.city_address = $scope.bundle.shopCityAddress;
                         dataFactory.setCurrentShop($scope.shop);
+                        makeFullAddress();
                         dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                     } else {
                         dialogHelper.showError(data.error.message);
@@ -314,6 +317,19 @@ angular.module('shop')
                 }
             }
             xhr.send(fd);
+        }
+
+        function makeFullAddress() {
+            if ($scope.shop.street_address != '' && $scope.shop.street_address != null) {
+                $scope.shop.full_address = $scope.shop.street_address;
+                $scope.shop.full_address += ($scope.shop.district_address != null && $scope.shop.district_address != '') ? (', ' + $scope.shop.district_address) : '';
+                $scope.shop.full_address += ($scope.shop.city_address != null && $scope.shop.city_address != '') ? (', ' + $scope.shop.city_address) : '';
+            } else if ($scope.shop.district_address != '' && $scope.shop.district_address != null) {
+                $scope.shop.full_address = $scope.shop.district_address;
+                $scope.shop.full_address += ($scope.shop.city_address != null && $scope.shop.city_address != '') ? (', ' + $scope.shop.city_address) : '';
+            } else if ($scope.shop.city_address != '' && $scope.shop.city_address != null) {
+                $scope.shop.full_address = $scope.shop.city_address;
+            }
         }
     }
 ])
