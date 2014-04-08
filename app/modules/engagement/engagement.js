@@ -342,6 +342,10 @@ angular.module('engagement')
             $scope.compareUnit = $scope.event.compare_properties[0];
         }
 
+        buildQuery();
+        fields.filter = null;
+        updateChart(fields);
+
     }
 ])
     .config(function($routeProvider) {
