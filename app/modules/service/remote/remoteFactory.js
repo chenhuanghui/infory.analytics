@@ -1,10 +1,10 @@
 angular.module('smg.services')
-    .factory('remoteFactory', ['$http', 'Auth', 'metaData', 
+    .factory('remoteFactory', ['$http', 'Auth', 'metaData',
         function($http, Auth, metaData) {
             var mode = 'dev';
             var domain = (mode == 'dev') ? 'http://dev2.smartguide.vn/' : 'https://api.infory.vn/'
             var base_url = domain + "dashboard/api/v1/";
-            
+
             return {
                 getTailUrl: function() {
                     return '?dashboard_token=' + Auth.user.access_token;
@@ -21,7 +21,9 @@ angular.module('smg.services')
 
                 meta_events: metaData.meta_events,
 
-                cities: metaData.cities
+                cities: metaData.cities,
+
+                groupShop: metaData.group_shop
             };
         }
     ]);

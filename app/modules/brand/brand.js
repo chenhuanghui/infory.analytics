@@ -17,6 +17,7 @@ angular.module('brand')
         $scope.brand = null;
         $scope.brands = null;
         $scope.commentInput = '';
+        $scope.groupShops = remoteFactory.groupShop;
 
         $scope.bundle = {
             brandName: '',
@@ -24,10 +25,12 @@ angular.module('brand')
             brandWebsite: '',
             brandFanpage: '',
             brandContact: '',
+            groupShop: '',
             editName: false,
             editDescription: false,
             editWebsite: false,
-            editFanpage: false
+            editFanpage: false,
+            editGroupShop: false
         };
 
         $scope.productTemp = {
@@ -60,6 +63,7 @@ angular.module('brand')
             $scope.bundle.brandWebsite = data.website;
             $scope.bundle.brandFanpage = data.fanpage;
             $scope.bundle.brandContact = data.owner_phone;
+            $scope.bundle.groupShop = data.type_business;
         }
 
         dataFactory.getBrands(function(brands) {
@@ -240,6 +244,30 @@ angular.module('brand')
                     } else {
                         dialogHelper.showError(data.error.message);
                         $scope.bundle.brandFanpage = $scope.brand.fanpage;
+                    }
+                }, function() {
+
+                });
+            }
+        }
+
+        $scope.changeGroupShop = function(name) {
+            $('.z-dropdown').removeClass('open');
+            $scope.bundle.groupShop = name;
+            $scope.bundle.editGroupShop = !$scope.bundle.editGroupShop;
+            if ($scope.bundle.groupShop.length <= 0) {
+                $scope.bundle.groupShop = $scope.brand.type_business;
+            } else {
+                brandRemote.update({
+                    type_business: $scope.bundle.groupShop,
+                    brand_id: brandId,
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.brand.type_business = $scope.bundle.groupShop;
+                        dataFactory.setCurrentBrand($scope.brand);
+                    } else {
+                        dialogHelper.showError(data.error.message);
+                        $scope.bundle.groupShop = $scope.brand.type_business;
                     }
                 }, function() {
 

@@ -36,7 +36,31 @@
             </div>
         </div>
     </li>
-
+    <li>
+        <div class="property col-md-4">Loại hình KD:</div>
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
+            <div class="overview" ng-hide="bundle.editGroupShop">
+                <span>{{bundle.groupShop}}</span>
+                <a ng-click="bundle.editGroupShop = true" style="cursor:pointer" >sửa</a>
+            </div>
+            <div class="edit" ng-hide="!bundle.editGroupShop">
+                <div class="controller">
+                    <div class="z-dropdown-wapper">
+                        <div class="z-dropdown">
+                            <a class="trigger" style="cursor:pointer"><span>{{bundle.groupShop}}</span><i class="icon-sort-down"></i></a>
+                            <ul>
+                                <li ng-repeat="groupShop in groupShops"><a ng-click="changeGroupShop(groupShop.name)" style="cursor:pointer">{{groupShop.name}}</a></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
     <li>
         <div class="property col-md-4">Mô tả</div>
         <div ng-hide="hideLoadingInfor" class="loading-container-infor">
