@@ -115,14 +115,19 @@ angular.module('promotion')
                                 available_days.push("sun");
                         }
 
-                        vouchers.push({
+                        var voucher = {
                             description: description.description,
                             total: description.amount,
                             voucher_number: (i + 1).toString(),
                             requirement: description.target,
                             available_time: '0:00-23:59',
                             available_days: available_days,
-                        });
+                        }
+
+                        if (description.voucherId != undefined)
+                            voucher.id = description.voucherId;
+
+                        vouchers.push(voucher);
                     }
 
                     fields.vouchers = JSON.stringify(vouchers);
@@ -393,6 +398,7 @@ angular.module('promotion')
                             allChecked: false,
                             validation: [false, false, false, false, false],
                             isOK: true,
+                            voucherId: data.vouchers[i].id
                         };
 
                         autoNum++;
