@@ -36,7 +36,7 @@ angular.module('user')
                 // REVIEW API - timeline group by day - it's not client job
 
                 for (var i = 0; i < userProfile.timeline.length; i++) {
-                    var time = new Date(userProfile.timeline[i].time);
+                    var time = new Date(userProfile.timeline[i].time.split("-").join("/"));
                     var dayOfWeek = time.getDay();
                     switch (dayOfWeek) {
                         case 0:
@@ -115,7 +115,7 @@ angular.module('user')
                     userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
 
                 if (userProfile.dob != null)
-                    userProfile.age = new Date().getFullYear() - new Date(userProfile.dob).getFullYear();
+                    userProfile.age = new Date().getFullYear() - new Date(userProfile.dob.split("-").join("/")).getFullYear();
                 else
                     userProfile.age = " - ";
 

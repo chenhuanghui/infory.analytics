@@ -118,7 +118,7 @@ angular.module('brand')
         function refactorDateTimeMessage(brand) {
             for (var i = 0; i < brand.shops.length; i++) {
                 for (var j = 0; j < brand.shops[i].comments.length; j++) {
-                    var newDate = new Date(brand.shops[i].comments[j].updated_time);
+                    var newDate = new Date(brand.shops[i].comments[j].updated_time.split("-").join("/"));
                     var d = newDate.getDate();
                     var m = newDate.getMonth() + 1;
                     var y = newDate.getFullYear();

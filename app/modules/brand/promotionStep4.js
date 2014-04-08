@@ -286,7 +286,7 @@ angular.module('promotion')
                                     data[i].statusName = 'Đã dừng';
                                     break;
                             }
-                            data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg)) + " đến " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end));
+                            data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg.split("-").join("/"))) + " đến " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end.split("-").join("/")));
                         }
 
                         $scope.promotionList = data;
@@ -327,8 +327,8 @@ angular.module('promotion')
         }
 
         function pushInfoToStep2(data) {
-            var date_beg = new Date(data.date_beg);
-            var date_end = new Date(data.date_end);
+            var date_beg = new Date(data.date_beg.split("-").join("/"));
+            var date_end = new Date(data.date_end.split("-").join("/"));
 
             promotionFactory.setData(1, {
                 name: data.name,
