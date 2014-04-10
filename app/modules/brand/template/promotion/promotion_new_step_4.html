@@ -51,7 +51,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="{{promotion.stt}}" ng-repeat="promotion in promotionList">
+                                        <tr class="{{promotion.stt}}" ng-repeat="promotion in dataInCurrentPage">
                                             <td class="bold">{{promotion.typeDisplay}}</td>
                                             <td style="cursor:pointer" class="name" ng-click="editPromotion(promotion.id)">{{promotion.name}}</td>
                                             <td>{{promotion.time}}</td>
@@ -59,6 +59,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <spagination ng-hide="dataInCurrentPage.length == 0" class="right" total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" items-per-page="itemsPerPage" boundary-links="true" first-text="Đầu tiên" last-text="Cuối cùng" next-text="Sau" previous-text="Trước" max-size="10" style="width: 650px;"></spagination>
                             </div>
                         </div>
                     </div>

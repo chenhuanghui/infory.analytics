@@ -24,8 +24,27 @@ angular.module('promotion')
 
         $scope.hideLoading = false;
 
+        $scope.totalItems = 0;
+        $scope.dataInCurrentPage = [];
+        $scope.filteredUsers = [];
+        $scope.itemsPerPage = 10;
+        $scope.boundaryLinks = false;
+        $scope.maxSize = 10;
+        $scope.currentPage = 1;
+        $scope.searchText = '';
 
         /** Logic **/
+        $scope.pageChanged = function(page) {
+            $scope.currentPage = page;
+            $scope.dataInCurrentPage = $scope.promotionList.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
+        }
+
+        function resetPagination(array, page) {
+            $scope.currentPage = page;
+            $scope.totalItems = array.length;
+            $scope.dataInCurrentPage = array.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
+        }
+
         dataFactory.getBrand(brandId, function(data) {
             $scope.brand = data;
 
@@ -230,14 +249,19 @@ angular.module('promotion')
                         default:
                             sortByType($scope.orderPromotion.name);
                     }
+
+                    resetPagination($scope.promotionList, 1);
                 }
 
 
                 function sortByType(type) {
-                    for (var i = 0; i < $scope.promotionListFull.length; i++) {
-                        if ($scope.promotionListFull[i].type == type)
-                            $scope.promotionList.push($scope.promotionListFull[i]);
-                    }
+                    if (type == '') {
+                        $scope.promotionList = $scope.promotionListFull;
+                    } else
+                        for (var i = 0; i < $scope.promotionListFull.length; i++) {
+                            if ($scope.promotionListFull[i].type == type)
+                                $scope.promotionList.push($scope.promotionListFull[i]);
+                        }
                 }
 
                 $scope.sortPromotionListByStatus = function() {
@@ -251,6 +275,8 @@ angular.module('promotion')
                         if ($scope.promotionListFull[i].status == status)
                             $scope.promotionList.push($scope.promotionListFull[i]);
                     }
+
+                    resetPagination($scope.promotionList, 1);
                 }
 
                 var fields = '["id, "type", "name", "status"]';
@@ -296,6 +322,7 @@ angular.module('promotion')
 
                         $scope.promotionList = data;
                         $scope.promotionListFull = data;
+                        resetPagination($scope.promotionList, 1);
                     } else {
                         $scope.promotionList = [];
                         $scope.promotionListFull = [];
