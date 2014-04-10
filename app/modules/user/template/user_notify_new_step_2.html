@@ -73,7 +73,7 @@
                         <div class="left control">
                             <span class="highlight">{{numOfSelectedUsers}}</span> khách hàng được chọn / <span class="highlight">{{isChecked.length}}</span> khách hàng thoả điều kiện
                         </div>
-                        <input type="text" class="search right" placeholder="Tìm kiếm..." ng-model="searchText"/>
+                        <input type="text" class="search right" placeholder="Tìm kiếm..." ng-model="searchText" ng-change="filterUser()"/>
                         <div class="fee right">
                             Chi phí: <span>{{numOfSelectedUsers * 10}}</span> T-coin
                         </div>
@@ -97,7 +97,7 @@
                                 <th>Lần sử dụng cuối</th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="user in userList | filter:searchText">
+                        <tbody ng-repeat="user in dataInCurrentPage">
                             <tr>
                                 <td><input type="checkbox" ng-model="$parent.isChecked[user.stt]" ng-change="updateSelectedUsers($parent.isChecked[user.stt]); updateIsCanGo();"/></td>
                                 <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.phone}}</td>
@@ -110,6 +110,9 @@
                         </tbody>
                     </table>
                         <!--chart here-->
+                    </div>
+                    <div>
+                        <spagination class="right" total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" boundary-links="false" first-text="Đầu tiên" last-text="Cuối cùng" next-text="Sau" previous-text="Trước"></spagination>
                     </div>
                 </div>
             </div>

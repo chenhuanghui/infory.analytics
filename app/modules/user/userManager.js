@@ -20,18 +20,26 @@ angular.module('user')
             $scope.totalItems = 0;
             $scope.dataInCurrentPage = [];
             $scope.filteredUsers = [];
+            $scope.itemsPerPage = 10;
+            $scope.boundaryLinks = false;
+            $scope.maxSize = 10;
+
             /** Logic **/
             $scope.pageChanged = function(page) {
                 if ($scope.searchText == '' || $scope.searchText == undefined || $scope.searchText == null)
-                    $scope.dataInCurrentPage = $scope.userList.slice((page - 1) * 10, (page - 1) * 10 + 10);
+                    $scope.dataInCurrentPage = $scope.userList.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
                 else
-                    $scope.dataInCurrentPage = $scope.filteredUsers.slice((page - 1) * 10, (page - 1) * 10 + 10);
+                    $scope.dataInCurrentPage = $scope.filteredUsers.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
             };
+
+            function resetPagination(array) {
+                $scope.totalItems = array.length;
+                $scope.dataInCurrentPage = array.slice(0, $scope.itemsPerPage);
+            }
 
             $scope.filterUser = function() {
                 $scope.filteredUsers = $filter('filter')($scope.userList, $scope.searchText);
-                $scope.totalItems = $scope.filteredUsers.length;
-                $scope.dataInCurrentPage = $scope.filteredUsers.slice(0, 10);
+                resetPagination($scope.filteredUsers);
             }
 
             dataFactory.updateBrandSideBar(brandId);
@@ -60,6 +68,9 @@ angular.module('user')
                 $scope.checkList = oldData.checkList;
                 $scope.checkAll = oldData.checkAll;
                 $scope.oldsubfilters = oldData.oldsubfilters;
+
+                resetPagination($scope.userList);
+
             } else
                 $scope.oldsubfilters = [];
 
@@ -118,12 +129,9 @@ angular.module('user')
             $scope.showUserProfile = function(userId) {
                 dataFactory.setUrl($location.path());
                 $location.path('/user/' + brandId + '/' + userId);
-                //$window.open('/user/' + brandId + '/' + userId);
             }
 
             function normalizeUser() {
-                $scope.totalItems = $scope.userList.length;
-
                 for (var i = 0; i < $scope.totalItems; i++) {
 
                     var user = $scope.userList[i];
@@ -152,7 +160,7 @@ angular.module('user')
                     $scope.checkList.push(false);
                 }
 
-                $scope.dataInCurrentPage = $scope.userList.slice(0, 10);
+                resetPagination($scope.userList);
             }
 
             $scope.getResult = function() {

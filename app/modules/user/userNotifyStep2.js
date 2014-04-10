@@ -30,8 +30,24 @@ angular.module('user')
                 name_display: 'Gửi tự động'
             }];
             $scope.sendMethod = $scope.sendMethods[0];
+            $scope.totalItems = 0;
+            $scope.dataInCurrentPage = [];
+            $scope.filteredUsers = [];
 
             /** Logic **/
+            $scope.pageChanged = function(page) {
+                if ($scope.searchText == '' || $scope.searchText == undefined || $scope.searchText == null)
+                    $scope.dataInCurrentPage = $scope.userList.slice((page - 1) * 10, (page - 1) * 10 + 10);
+                else
+                    $scope.dataInCurrentPage = $scope.filteredUsers.slice((page - 1) * 10, (page - 1) * 10 + 10);
+            };
+
+            $scope.filterUser = function() {
+                $scope.filteredUsers = $filter('filter')($scope.userList, $scope.searchText);
+                $scope.totalItems = $scope.filteredUsers.length;
+                $scope.dataInCurrentPage = $scope.filteredUsers.slice(0, 10);
+            }
+
             dataFactory.updateBrandSideBar(brandId);
 
             dataFactory.getBrand(brandId, function(data) {
@@ -133,6 +149,7 @@ angular.module('user')
             }
 
             function normalizeUser() {
+                $scope.totalItems = $scope.userList.length;
                 for (var i = 0; i < $scope.userList.length; i++) {
 
                     var user = $scope.userList[i];
@@ -160,6 +177,8 @@ angular.module('user')
                     user.stt = i;
                     $scope.isChecked.push(false);
                 }
+
+                $scope.dataInCurrentPage = $scope.userList.slice(0, 10);
             }
 
             $scope.updateIsCanGo = function() {
@@ -249,6 +268,7 @@ angular.module('user')
                 $scope.checkAll();
                 $scope.userList = [];
                 $scope.isChecked = [];
+                $scope.searchText = '';
 
                 var query = filterHelper.buildQuery($scope.subfilters);
                 var fields = {
