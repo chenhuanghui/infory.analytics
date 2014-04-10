@@ -68,7 +68,7 @@
         </div>
         <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editDescription">
-                <span class="description">{{bundle.brandDescription}}</span>
+                <span class="description ellipsis">{{bundle.brandDescription}}</span>
                 <a ng-click="bundle.editDescription = true; updateEditor()" style="cursor:pointer" >sửa</a>
             </div>
             <div class="edit" ng-hide="!bundle.editDescription">
@@ -109,6 +109,23 @@
             <div class="edit" ng-hide="!bundle.editFanpage">
                 <input ng-model="bundle.brandFanpage" class="form-control inline-block"/>
                 <i ng-click="changeFanpage()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            </div>
+        </div>
+    </li>
+
+    <li ng-hide="true">
+        <div class="property col-md-4">Liên hệ</div>
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
+            <div class="overview" ng-hide="bundle.editPhone">
+                <span><a href="{{bundle.brandPhone}}">{{bundle.brandPhone}}</a></span>
+                <a ng-click="bundle.editPhone = true" style="cursor:pointer" >sửa</a>
+            </div>
+            <div class="edit" ng-hide="!bundle.editPhone">
+                <input ng-model="bundle.brandPhone" class="form-control inline-block"/>
+                <i ng-click="changePhone()" class="icon-ok-sign success" style="cursor:pointer" ></i>
             </div>
         </div>
     </li>
