@@ -1,7 +1,7 @@
 angular.module('brand')
 
-.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory', 'productCategoryRemote', 'remoteFactory', 'dialogHelper',
-    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory, productCategoryRemote, remoteFactory, dialogHelper) {
+.controller('BrandCtrl', ['$scope', '$http', '$location', '$routeParams', '$upload', 'brandRemote', 'commentRemote', 'dataFactory', 'productRemote', 'shopRemote', 'commentFactory', 'brandFactory', 'productCategoryRemote', 'remoteFactory', 'dialogHelper', 'promotionFactory', 'userNotifyFactory',
+    function($scope, $http, $location, $routeParams, $upload, brandRemote, commentRemote, dataFactory, productRemote, shopRemote, commentFactory, brandFactory, productCategoryRemote, remoteFactory, dialogHelper, promotionFactory, userNotifyFactory) {
         /** Global variables **/
         var base_url = remoteFactory.getBaseUrl(),
             brandId = $routeParams.brandId;
@@ -54,6 +54,19 @@ angular.module('brand')
         dataFactory.setUpdateBrandSideBarFunc(function(id) {
             $scope.brandId = id;
         });
+
+        $scope.resetEditPromotionNotification = function() {
+
+            promotionFactory.setData(0, null);
+            promotionFactory.setData(1, null);
+            promotionFactory.setData(2, null);
+            promotionFactory.setMode('create');
+
+            userNotifyFactory.setData(0, null);
+            userNotifyFactory.setData(1, null);
+            userNotifyFactory.setData(2, null);
+            userNotifyFactory.setMode('create');
+        }
 
         function saveBundle(data) {
             $scope.bundle.brandLogo = data.logo;
