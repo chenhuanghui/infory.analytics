@@ -34,6 +34,26 @@ angular.module('user')
                 //});
 
                 // REVIEW API - timeline group by day - it's not client job
+                if (userProfile.email == null)
+                    userProfile.email = " - ";
+
+                if (userProfile.gender == null)
+                    userProfile.gender = " - ";
+                else if (userProfile.gender == 'male')
+                    userProfile.gender = 'Nam';
+                else
+                    userProfile.gender = 'Nữ';
+
+                if (userProfile.city == null)
+                    userProfile.city = " - ";
+
+                if (userProfile.facebook[0] != 'h')
+                    userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
+
+                if (userProfile.dob != null)
+                    userProfile.age = new Date().getFullYear() - new Date(userProfile.dob.split("-").join("/")).getFullYear();
+                else
+                    userProfile.age = " - ";
 
                 for (var i = 0; i < userProfile.timeline.length; i++) {
                     var time = new Date(userProfile.timeline[i].time.split("-").join("/"));
@@ -97,28 +117,6 @@ angular.module('user')
                         });
                     }
                 }
-
-                if (userProfile.email == null)
-                    userProfile.email = " - ";
-
-                if (userProfile.gender == null)
-                    userProfile.gender = " - ";
-                else if (userProfile.gender == 'male')
-                    userProfile.gender = 'Nam';
-                else
-                    userProfile.gender = 'Nữ';
-
-                if (userProfile.city == null)
-                    userProfile.city = " - ";
-
-                if (userProfile.facebook[0] != 'h')
-                    userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
-
-                if (userProfile.dob != null)
-                    userProfile.age = new Date().getFullYear() - new Date(userProfile.dob.split("-").join("/")).getFullYear();
-                else
-                    userProfile.age = " - ";
-
             },
             function() {});
     }

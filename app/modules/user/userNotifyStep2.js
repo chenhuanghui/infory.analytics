@@ -30,22 +30,30 @@ angular.module('user')
                 name_display: 'Gửi tự động'
             }];
             $scope.sendMethod = $scope.sendMethods[0];
+
             $scope.totalItems = 0;
             $scope.dataInCurrentPage = [];
             $scope.filteredUsers = [];
+            $scope.itemsPerPage = 10;
+            $scope.boundaryLinks = false;
+            $scope.maxSize = 10;
 
             /** Logic **/
             $scope.pageChanged = function(page) {
                 if ($scope.searchText == '' || $scope.searchText == undefined || $scope.searchText == null)
-                    $scope.dataInCurrentPage = $scope.userList.slice((page - 1) * 10, (page - 1) * 10 + 10);
+                    $scope.dataInCurrentPage = $scope.userList.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
                 else
-                    $scope.dataInCurrentPage = $scope.filteredUsers.slice((page - 1) * 10, (page - 1) * 10 + 10);
+                    $scope.dataInCurrentPage = $scope.filteredUsers.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
             };
+
+            function resetPagination(array) {
+                $scope.totalItems = array.length;
+                $scope.dataInCurrentPage = array.slice(0, $scope.itemsPerPage);
+            }
 
             $scope.filterUser = function() {
                 $scope.filteredUsers = $filter('filter')($scope.userList, $scope.searchText);
-                $scope.totalItems = $scope.filteredUsers.length;
-                $scope.dataInCurrentPage = $scope.filteredUsers.slice(0, 10);
+                resetPagination($scope.filteredUsers);
             }
 
             dataFactory.updateBrandSideBar(brandId);
@@ -105,6 +113,7 @@ angular.module('user')
                         break;
                     }
 
+                resetPagination();
             } else {
 
                 // dataFactory.getBookmarks(brandId, function(data) {
@@ -149,7 +158,7 @@ angular.module('user')
             }
 
             function normalizeUser() {
-                $scope.totalItems = $scope.userList.length;
+
                 for (var i = 0; i < $scope.userList.length; i++) {
 
                     var user = $scope.userList[i];
@@ -178,7 +187,7 @@ angular.module('user')
                     $scope.isChecked.push(false);
                 }
 
-                $scope.dataInCurrentPage = $scope.userList.slice(0, 10);
+                resetPagination();
             }
 
             $scope.updateIsCanGo = function() {
