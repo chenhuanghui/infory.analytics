@@ -1,15 +1,37 @@
 angular.module('user')
     .controller('UserNotifyStep4Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'messageRemote', 'dialogHelper', 'serviceHelper', 'queryHelper',
         function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, messageRemote, dialogHelper, serviceHelper, queryHelper) {
-
+            /** Global variables **/
             var brandId = $routeParams.brandId,
                 step1Data = userNotifyFactory.getData(0, brandId),
                 step2Data = userNotifyFactory.getData(1, brandId),
                 step3Data = userNotifyFactory.getData(2, brandId),
                 mode = userNotifyFactory.getMode();
 
+            /** Scope variables **/
             $scope.messageList = [];
             $scope.hideLoading = false;
+
+            $scope.totalItems = 0;
+            $scope.dataInCurrentPage = [];
+            $scope.filteredUsers = [];
+            $scope.itemsPerPage = 10;
+            $scope.boundaryLinks = false;
+            $scope.maxSize = 10;
+            $scope.currentPage = 1;
+            $scope.searchText = '';
+
+            /** Logic **/
+            $scope.pageChanged = function(page) {
+                $scope.currentPage = page;
+                $scope.dataInCurrentPage = $scope.messageList.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
+            }
+
+            function resetPagination(array, page) {
+                $scope.currentPage = page;
+                $scope.totalItems = array.length;
+                $scope.dataInCurrentPage = array.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
+            }
 
             dataFactory.updateBrandSideBar(brandId);
             dataFactory.getBrand(brandId, function(data) {
@@ -287,6 +309,8 @@ angular.module('user')
                         if ($scope.messageListFull[i].status == status)
                             $scope.messageList.push($scope.messageListFull[i]);
                     }
+
+                    resetPagination($scope.messageList, 1);
                 }
 
                 $scope.changeStatus = function(id) {
@@ -379,6 +403,7 @@ angular.module('user')
                             }
 
                             $scope.messageList = $scope.messageListFull;
+                            resetPagination($scope.messageList, 1);
                         }
                     } else
                         dialogHelper.showError(data.error.message);
