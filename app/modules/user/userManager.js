@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserManagerCtrl', ['$scope', '$location', '$routeParams', '$window', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote', 'userManagerFactory', 'dialogHelper',
-        function($scope, $location, $routeParams, $window, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote, userManagerFactory, dialogHelper) {
+    .controller('UserManagerCtrl', ['$scope', '$location', '$routeParams', '$window', '$filter', 'dataFactory', 'remoteFactory', 'filterHelper', 'userRemote', 'bookmarkRemote', 'userManagerFactory', 'dialogHelper',
+        function($scope, $location, $routeParams, $window, $filter, dataFactory, remoteFactory, filterHelper, userRemote, bookmarkRemote, userManagerFactory, dialogHelper) {
             /** Global variables **/
             var brandId = $routeParams.brandId,
                 oldData = userManagerFactory.getData(brandId);
@@ -18,15 +18,22 @@ angular.module('user')
             $scope.subfilters = [];
 
             $scope.totalItems = 0;
-            $scope.currentPage = 0;
             $scope.dataInCurrentPage = [];
-
+            $scope.filteredUsers = [];
+            /** Logic **/
             $scope.pageChanged = function(page) {
-                $scope.currentPage = page;
-                $scope.dataInCurrentPage = $scope.userList.slice((page - 1) * 10, (page - 1) * 10 + 10);
+                if ($scope.searchText == '' || $scope.searchText == undefined || $scope.searchText == null)
+                    $scope.dataInCurrentPage = $scope.userList.slice((page - 1) * 10, (page - 1) * 10 + 10);
+                else
+                    $scope.dataInCurrentPage = $scope.filteredUsers.slice((page - 1) * 10, (page - 1) * 10 + 10);
             };
 
-            /** Logic **/
+            $scope.filterUser = function() {
+                $scope.filteredUsers = $filter('filter')($scope.userList, $scope.searchText);
+                $scope.totalItems = $scope.filteredUsers.length;
+                $scope.dataInCurrentPage = $scope.filteredUsers.slice(0, 10);
+            }
+
             dataFactory.updateBrandSideBar(brandId);
             userRemote.filter({
                 brand_id: brandId,
@@ -116,7 +123,6 @@ angular.module('user')
 
             function normalizeUser() {
                 $scope.totalItems = $scope.userList.length;
-                $scope.currentPage = 1;
 
                 for (var i = 0; i < $scope.totalItems; i++) {
 
@@ -151,6 +157,8 @@ angular.module('user')
 
             $scope.getResult = function() {
                 $scope.hideLoading = false;
+                $scope.searchText = '';
+
                 userRemote.filter(buildQuery(), function(data) {
                     $scope.checkList = [];
                     $scope.hideLoading = true;
