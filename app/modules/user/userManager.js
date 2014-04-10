@@ -17,6 +17,15 @@ angular.module('user')
             $scope.hideLoading = false;
             $scope.subfilters = [];
 
+            $scope.totalItems = 0;
+            $scope.currentPage = 0;
+            $scope.dataInCurrentPage = [];
+
+            $scope.pageChanged = function(page) {
+                $scope.currentPage = page;
+                $scope.dataInCurrentPage = $scope.userList.slice((page - 1) * 10, (page - 1) * 10 + 10);
+            };
+
             /** Logic **/
             dataFactory.updateBrandSideBar(brandId);
             userRemote.filter({
@@ -106,7 +115,10 @@ angular.module('user')
             }
 
             function normalizeUser() {
-                for (var i = 0; i < $scope.userList.length; i++) {
+                $scope.totalItems = $scope.userList.length;
+                $scope.currentPage = 1;
+
+                for (var i = 0; i < $scope.totalItems; i++) {
 
                     var user = $scope.userList[i];
                     if (user.phone == '' || user.phone == null)
@@ -133,6 +145,8 @@ angular.module('user')
                     user.stt = i;
                     $scope.checkList.push(false);
                 }
+
+                $scope.dataInCurrentPage = $scope.userList.slice(0, 10);
             }
 
             $scope.getResult = function() {

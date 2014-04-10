@@ -63,7 +63,7 @@
                             </tr>
                         </thead>
                         <tbody >
-                            <tr ng-repeat="user in userList | filter:searchText">
+                            <tr ng-repeat="user in dataInCurrentPage | filter:searchText">
                                 <td><input type="checkbox" ng-model="$parent.checkList[user.stt]" ng-change="saveInfor()"/></td>
                                 <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.phone}}</td>
                                 <td class="name"  style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.name}}</td>
@@ -75,7 +75,10 @@
                             </tr>
                         </tbody>
                     </table>
+
                     <!--chart here-->
+                    
+                    <spagination class="right" total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" boundary-links="true" first-text="Đầu tiên" last-text="Cuối cùng" next-text="Sau" previous-text="Trước"></spagination>
                 </div>
             </div>
         </div> <!-- content_wrapper-->

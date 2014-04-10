@@ -23,7 +23,9 @@ var app = angular.module('Smg', [
     'angularFileUpload',
     'ui.slider',
     'checklist-model',
-    'fundoo.services'
+    'fundoo.services',
+    'SPaging',
+    'textarea-autoresize'
 ]);
 
 angular.element(document).ready(function() {

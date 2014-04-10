@@ -2043,3 +2043,11 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
     opacity:1;
 }
 
+/** Textarea autoresize **/
+.text-area-editor{
+    overflow: hidden;
+    padding: 4px;
+    font-size: 100%;
+}
+
+
