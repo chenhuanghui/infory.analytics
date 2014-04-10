@@ -2048,6 +2048,12 @@ input[type=checkbox].css-checkbox.lrg + label.css-label.lrg {
     overflow: hidden;
     padding: 4px;
     font-size: 100%;
+    resize: none;
 }
+
+textarea{
+    resize: none;
+}
+
 
 
