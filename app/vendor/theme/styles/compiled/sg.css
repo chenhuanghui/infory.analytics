@@ -2055,5 +2055,14 @@ textarea{
     resize: none;
 }
 
+.ellipsis {
+    -webkit-line-clamp: 5 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: -webkit-box !important;
+    max-width: 400px !important;
+    height: 84px !important;
+}
 
 

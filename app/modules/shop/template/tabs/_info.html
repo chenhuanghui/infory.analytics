@@ -85,6 +85,22 @@
             </div>
         </div>
     </li>
+    <li>
+        <div class="property col-md-4">Liên hệ</div>
+        <div ng-hide="hideLoadingInfor" class="loading-container-infor">
+            <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+        </div>
+        <div class="value col-md-8" ng-hide="!hideLoadingInfor">
+            <div class="overview" ng-hide="bundle.editPhone">
+                <span>{{bundle.shopPhone}}</span>
+                <a ng-click="bundle.editPhone = true" style="cursor:pointer" >sửa</a>
+            </div>
+            <div class="edit" ng-hide="!bundle.editPhone">
+                <input ng-model="bundle.shopPhone" class="form-control inline-block"/>
+                <i ng-click="changePhone()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+            </div>
+        </div>
+    </li>
     <div class="clearfix"></div>
     <fieldset class="gllpLatlonPicker" id="custom_id">
     	<input type="text" class="gllpSearchField">

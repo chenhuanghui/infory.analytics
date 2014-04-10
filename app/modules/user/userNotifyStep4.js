@@ -39,10 +39,10 @@ angular.module('user')
             }, function() {});
 
             $scope.goToStep1 = function() {
-                userNotifyFactory.setData(0, null);
-                userNotifyFactory.setData(1, null);
-                userNotifyFactory.setData(2, null);
-
+        userNotifyFactory.setData(0, null);
+        userNotifyFactory.setData(1, null);
+        userNotifyFactory.setData(2, null);
+        userNotifyFactory.setMode('create');
                 $location.path('/user/notify-new/step1/' + brandId);
             }
 

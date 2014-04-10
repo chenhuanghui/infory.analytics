@@ -26,12 +26,14 @@ angular.module('brand')
             brandWebsite: '',
             brandFanpage: '',
             brandContact: '',
+            brandPhone: '',
             groupShop: '',
             editName: false,
             editDescription: false,
             editWebsite: false,
             editFanpage: false,
-            editGroupShop: false
+            editGroupShop: false,
+            editPhone: false
         };
 
         $scope.productTemp = {
@@ -259,6 +261,28 @@ angular.module('brand')
                     } else {
                         dialogHelper.showError(data.error.message);
                         $scope.bundle.brandFanpage = $scope.brand.fanpage;
+                    }
+                }, function() {
+
+                });
+            }
+        }
+
+        $scope.changeFanpage = function() {
+            $scope.bundle.editPhone = !$scope.bundle.editPhone;
+            if ($scope.bundle.brandPhone.length <= 0) {
+                $scope.bundle.brandPhone = $scope.brand.owner_phone;
+            } else {
+                brandRemote.update({
+                    fanpage: $scope.bundle.brandPhone,
+                    brand_id: brandId,
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.brand.fanpage = $scope.bundle.brandPhone;
+                        dataFactory.setCurrentBrand($scope.brand);
+                    } else {
+                        dialogHelper.showError(data.error.message);
+                        $scope.bundle.brandPhone = $scope.brand.owner_phone;
                     }
                 }, function() {
 

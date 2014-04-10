@@ -27,10 +27,12 @@ angular.module('shop')
             shopStreetAddress: '',
             shopDistrictAddress: '',
             shopCityAddress: '',
+            shopPhone: '',
             editName: false,
             editStreetAddress: false,
             editDistrictAddress: false,
             editCityAddress: false,
+            editPhone: false
         };
 
         /** Logic **/
@@ -77,6 +79,7 @@ angular.module('shop')
                 }
 
                 $scope.bundle.shopName = data.name;
+                $scope.bundle.shopPhone = data.phone;
                 $scope.bundle.shopCover = data.cover;
                 $scope.bundle.shopStreetAddress = data.street_address;
                 $scope.bundle.shopDistrictAddress = data.district_address;
@@ -85,30 +88,6 @@ angular.module('shop')
                 dialogHelper.showError(data.error.message);
 
         }, function() {});
-
-        $scope.changeName = function() {
-            $scope.bundle.editName = !$scope.bundle.editName;
-            if ($scope.bundle.shopName.length <= 0) {
-                $scope.bundle.shopName = $scope.shop.name;
-            } else {
-                shopRemote.update({
-                    name: $scope.bundle.shopName,
-                    shop_id: shopId,
-                }, function(data) {
-                    if (data.error == undefined) {
-                        $scope.shop.name = $scope.bundle.shopName;
-                        $scope.bundle.editName = !$scope.bundle.editName;
-                        dataFactory.setCurrentShop($scope.shop);
-                        dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
-                    } else {
-                        dialogHelper.showError(data.error.message);
-                        $scope.bundle.shopName = $scope.shop.name;
-                    }
-                }, function() {
-
-                });
-            }
-        }
 
         $scope.changeName = function() {
             $scope.bundle.editName = !$scope.bundle.editName;
@@ -317,6 +296,29 @@ angular.module('shop')
                 }
             }
             xhr.send(fd);
+        }
+
+        $scope.changePhone = function() {
+            $scope.bundle.editPhone = !$scope.bundle.editPhone;
+            if ($scope.bundle.shopPhone.length <= 0) {
+                $scope.bundle.shopPhone = $scope.shop.phone;
+            } else {
+                shopRemote.update({
+                    tel: $scope.bundle.shopPhone,
+                    shop_id: shopId,
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.shop.phone = $scope.bundle.shopPhone;
+                        dataFactory.setCurrentShop($scope.shop);
+                        dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
+                    } else {
+                        dialogHelper.showError(data.error.message);
+                        $scope.bundle.shopPhone = $scope.shop.phone;
+                    }
+                }, function() {
+
+                });
+            }
         }
 
         function makeFullAddress() {
