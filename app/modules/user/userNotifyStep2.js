@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper', 'dialogHelper', 'accountRemote', 'userRemote',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper, dialogHelper, accountRemote, userRemote) {
+    .controller('UserNotifyStep2Ctrl', ['$scope', '$routeParams', '$location', '$filter', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'serviceHelper', 'bookmarkRemote', 'queryHelper', 'dialogHelper', 'accountRemote', 'userRemote',
+        function($scope, $routeParams, $location, $filter, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, serviceHelper, bookmarkRemote, queryHelper, dialogHelper, accountRemote, userRemote) {
 
             /** Global variables **/
             var brandId = $routeParams.brandId,
@@ -37,23 +37,32 @@ angular.module('user')
             $scope.itemsPerPage = 10;
             $scope.boundaryLinks = false;
             $scope.maxSize = 10;
+            $scope.currentPage = 1;
+            $scope.searchText = '';
 
             /** Logic **/
             $scope.pageChanged = function(page) {
+                $scope.currentPage = page;
                 if ($scope.searchText == '' || $scope.searchText == undefined || $scope.searchText == null)
                     $scope.dataInCurrentPage = $scope.userList.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
                 else
                     $scope.dataInCurrentPage = $scope.filteredUsers.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
+                saveInfor();
             };
 
-            function resetPagination(array) {
+            function resetPagination(array, page) {
+                $scope.currentPage = page;
                 $scope.totalItems = array.length;
-                $scope.dataInCurrentPage = array.slice(0, $scope.itemsPerPage);
+                $scope.dataInCurrentPage = array.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
             }
 
             $scope.filterUser = function() {
-                $scope.filteredUsers = $filter('filter')($scope.userList, $scope.searchText);
-                resetPagination($scope.filteredUsers);
+                if ($scope.searchText != '') {
+                    $scope.filteredUsers = $filter('filter')($scope.userList, $scope.searchText);
+                    resetPagination($scope.filteredUsers, 1);
+                } else {
+                    resetPagination($scope.userList, 1);
+                }
             }
 
             dataFactory.updateBrandSideBar(brandId);
@@ -113,7 +122,17 @@ angular.module('user')
                         break;
                     }
 
-                resetPagination();
+                $scope.searchText = oldData.searchText;
+                if ($scope.searchText == undefined || $scope.searchText == null)
+                    $scope.searchText = '';
+
+                if ($scope.searchText == '' || $scope.searchText == undefined || $scope.searchText == null)
+                    resetPagination($scope.userList, oldData.currentPage);
+                else {
+                    $scope.filteredUsers = oldData.filteredUsers;
+                    resetPagination($scope.filteredUsers, oldData.currentPage);
+                }
+
             } else {
 
                 // dataFactory.getBookmarks(brandId, function(data) {
@@ -129,33 +148,33 @@ angular.module('user')
 
                 //     },
                 //     function() {});
+
+                if ($scope.userList.length == 0) {
+                    $scope.hideLoading = false;
+                    $scope.userList = [];
+                    $scope.isChecked = [];
+
+                    userRemote.filter({
+                        brand_id: brandId,
+                        filter: '',
+                        fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
+                        brand_id: brandId,
+                        page: 0,
+                        page_size: 10000
+                    }, function(data) {
+                        if (data.error == undefined) {
+                            $scope.hideLoading = true;
+                            if ($scope.userList.length == 0) {
+                                $scope.userList = data.data;
+                                normalizeUser();
+                                saveInfor();
+                            }
+                        } else
+                            dialogHelper.showError(data.error.message);
+                    }, function() {});
+                }
             }
 
-            if ($scope.userList.length == 0) {
-
-                $scope.hideLoading = false;
-                $scope.userList = [];
-                $scope.isChecked = [];
-
-                userRemote.filter({
-                    brand_id: brandId,
-                    filter: '',
-                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
-                    brand_id: brandId,
-                    page: 0,
-                    page_size: 10000
-                }, function(data) {
-                    if (data.error == undefined) {
-                        $scope.hideLoading = true;
-                        if ($scope.userList.length == 0) {
-                            $scope.userList = data.data;
-                            normalizeUser();
-                            saveInfor();
-                        }
-                    } else
-                        dialogHelper.showError(data.error.message);
-                }, function() {});
-            }
 
             function normalizeUser() {
 
@@ -187,7 +206,7 @@ angular.module('user')
                     $scope.isChecked.push(false);
                 }
 
-                resetPagination();
+                resetPagination($scope.userList, 1);
             }
 
             $scope.updateIsCanGo = function() {
@@ -219,7 +238,10 @@ angular.module('user')
                     profileBookmarks: $scope.profileBookmarks,
                     sendMethod: $scope.sendMethod,
                     filter: JSON.stringify(query),
-                    isCanGo: $scope.isCanGo
+                    isCanGo: $scope.isCanGo,
+                    searchText: $scope.searchText,
+                    currentPage: $scope.currentPage,
+                    filteredUsers: $scope.filteredUsers
                 });
             }
 

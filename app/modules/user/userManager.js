@@ -24,6 +24,7 @@ angular.module('user')
             $scope.boundaryLinks = false;
             $scope.maxSize = 10;
             $scope.currentPage = 1;
+            $scope.searchText = '';
 
             /** Logic **/
             $scope.pageChanged = function(page) {
@@ -65,7 +66,7 @@ angular.module('user')
                     resetPagination($scope.userList, oldData.currentPage);
                 else {
                     $scope.filteredUsers = oldData.filteredUsers;
-                    resetPagination($filter('filter')($scope.filteredUsers, $scope.searchText), oldData.currentPage);
+                    resetPagination($scope.filteredUsers, oldData.currentPage);
                 }
 
             } else {
