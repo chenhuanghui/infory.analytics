@@ -22,7 +22,7 @@ angular.module('brand')
         $scope.bundle = {
             brandName: '',
             brandDescription: '',
-            brandShortDescription: '';
+            brandShortDescription: '',
             brandWebsite: '',
             brandFanpage: '',
             brandContact: '',
