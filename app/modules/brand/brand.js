@@ -22,6 +22,7 @@ angular.module('brand')
         $scope.bundle = {
             brandName: '',
             brandDescription: '',
+            brandShortDescription: '',
             brandWebsite: '',
             brandFanpage: '',
             brandContact: '',
@@ -75,6 +76,7 @@ angular.module('brand')
             $scope.bundle.brandName = data.name;
             $scope.bundle.brandCover = data.cover;
             $scope.bundle.brandDescription = data.description;
+            $scope.bundle.brandShortDescription = data.description.substring(0, 100)+"...";
             $scope.bundle.brandWebsite = data.website;
             $scope.bundle.brandFanpage = data.fanpage;
             $scope.bundle.brandContact = data.owner_phone;
