@@ -2065,4 +2065,11 @@ textarea{
     height: 84px !important;
 }
 
+.alert-signup{
+    margin-left: 0px;
+    margin-bottom: 3px;
+    color: red;
+    text-align: left !important;
+}
+
 
