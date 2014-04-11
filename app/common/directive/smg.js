@@ -58,7 +58,7 @@ angular.module('smgDirectives', ['ui.date'])
     .directive('subfilter', function($compile) {
         var qc = 1,
             _meta, _prop
-            _operator = "AND";
+            _operator = "VÀ";
 
         return {
             restrict: 'A',
@@ -96,7 +96,7 @@ angular.module('smgDirectives', ['ui.date'])
                     scope.qc = qc;
                     scope.operator = _operator;
 
-                    var action_op = $compile('<select ng-model="operator" class="action clearfix row_' + qc + '"> ' + '<option>AND</option>' + '<option>OR</option>' + '</select>    ')(scope);
+                    var action_op = $compile('<select ng-model="operator" class="action clearfix row_' + qc + '"> ' + '<option>VÀ</option>' + '<option>HOẶC</option>' + '</select>    ')(scope);
 
                     // $compile('<div class="btn-group pull-right action clearfix row_'+qc+'"><button class="glow left active">AND </button><button class="glow right">OR</button></div>')(scope);
 
