@@ -46,6 +46,7 @@ angular.module('account')
                 fileHelper.readAsDataUrl($files[0], $scope)
                     .then(function(result) {
                         $scope.account.avatar = result;
+                        $scope.account.currentPass = '';
                         fileAvatar = $files[0];
                         //$scope.account.avatar = 'https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn1/t1.0-9/s600x600/1904163_10202726642879107_1479781473_n.jpg';
                     });
@@ -55,7 +56,8 @@ angular.module('account')
                 var fields = {
                     name: $scope.account.name,
                     email: $scope.account.email,
-                    company: $scope.account.company
+                    company: $scope.account.company,
+                    current_password: $scope.account.currentPass
                 };
 
                 if ($scope.isChangePass) {
@@ -67,6 +69,8 @@ angular.module('account')
                     fd.append('name', $scope.account.name);
                     fd.append('avatar', fileAvatar);
                     fd.append('company', $scope.account.company);
+                    fd.append('current_password', $scope.account.currentPass);
+
                     if ($scope.isChangePass)
                         fd.append('password', $scope.account.password);
                     fd.append('email', $scope.account.email);
@@ -84,6 +88,7 @@ angular.module('account')
                                 fileAvatar = null;
                                 dataFactory.updateAccountNameHeader($scope.account.name);
                                 cookie.setCookie('user', $scope.account.email, 7);
+                                $scope.account.currentPass = '';
                             } else
                                 dialogHelper.showError(respone.error.message);
                         }
@@ -96,6 +101,7 @@ angular.module('account')
                             orignalAccount = $scope.account;
                             dataFactory.updateAccountNameHeader($scope.account.name);
                             cookie.setCookie('user', $scope.account.email, 7);
+                            $scope.account.currentPass = '';
                         } else {
                             $scope.account = orignalAccount;
                             dialogHelper.showError(data.error.message);
