@@ -104,6 +104,7 @@ angular.module('promotion')
                 case 'news':
                     fields.title = dataStep3.title;
                     fields.description = dataStep3.content;
+                    fields.cover = dataStep3.fileAvatar;
                     break;
                 case 'voucher':
                     var vouchers = [];
@@ -158,6 +159,26 @@ angular.module('promotion')
 
             switch (mode) {
                 case 'create':
+                    var fd = new FormData();
+                    for (var o in fields)
+                        fd.append(o, fields[o]);
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', remoteFactory.getBaseUrl() + 'promotion/create' + remoteFactory.getTailUrl(), true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4) {
+                            var respone = JSON.parse(xhr.responseText);
+                            if (respone.error == undefined) {
+                                dialogHelper.showError('Tạo chiến dịch thành công');
+                            } else
+                                dialogHelper.showError('Quá trình tạo chiến dịch có lỗi: ' + respone.error.message);
+
+                            listPromotion();
+                        }
+                    }
+                    xhr.send(fd);
+
+                    /**
                     promotionRemote.create(fields, function(data) {
                         if (data.error != undefined)
                             dialogHelper.showError('Quá trình tạo chiến dịch có lỗi: ' + data.error.message);
@@ -166,9 +187,32 @@ angular.module('promotion')
                         listPromotion();
 
                     }, function() {});
+                    **/
+
                     break;
                 case 'update':
                     fields.promotion_id = promotionFactory.getPromotionId();
+
+                    var fd = new FormData();
+                    for (var o in fields)
+                        fd.append(o, fields[o]);
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', remoteFactory.getBaseUrl() + 'promotion/update' + remoteFactory.getTailUrl(), true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4) {
+                            var respone = JSON.parse(xhr.responseText);
+                            if (respone.error == undefined) {
+                                dialogHelper.showError('Đã cập nhật thông tin chiến dịch');
+                            } else
+                                dialogHelper.showError('Quá trình cập nhật chiến dịch có lỗi: ' + respone.error.message);
+
+                            listPromotion();
+                        }
+                    }
+                    xhr.send(fd);
+
+                    /**
                     promotionRemote.update(fields, function(data) {
                         if (data.error != undefined)
                             dialogHelper.showError('Quá trình cập nhật chiến dịch có lỗi: ' + data.error.message);
@@ -178,6 +222,8 @@ angular.module('promotion')
                         listPromotion();
 
                     }, function() {});
+                    **/
+
                     break;
             }
 
@@ -393,7 +439,9 @@ angular.module('promotion')
                         content: data.content,
                         title: data.title,
                         content: data.description,
-                        brand_id: brandId
+                        brand_id: brandId,
+                        fileAvatar: data.cover,
+                        cover: data.cover
                     });
                     break;
                 case 'voucher':

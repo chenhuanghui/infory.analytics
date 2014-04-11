@@ -174,9 +174,15 @@
                                                         Vui lòng nhập tiêu đề
                                                         </span>
                                     </div>
-                                    <div class="field-box">
+                                    <div class="field-box" ng-hide="hideCover">
+                                        <img ng-src="{{cover}}" style="height:auto; width:400px;"/>
+
                                         <span class="title">HÌNH ẢNH</span>
-                                        <input type="file" class="form-control inline-block"/>  
+                                        <input type="file" ng-file-select="changeCover($files)"/> 
+                                        <span class="alert-msg" ng-show="$parent.validation[1]">
+                                            <i class="icon-remove-sign"></i>
+                                            Vui lòng chọn ảnh cho chiến dịch
+                                        </span>
                                     </div>
                                     <div class="field-box">
                                         <span class="title">NỘI DUNG</span>

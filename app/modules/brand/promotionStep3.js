@@ -1,8 +1,8 @@
 angular.module('promotion')
 
-.controller('PromotionStep3Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userRemote', 'serviceHelper', 'promotionRemote', 'promotionFactory', 'serviceHelper',
+.controller('PromotionStep3Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userRemote', 'serviceHelper', 'promotionRemote', 'promotionFactory', 'serviceHelper', 'fileHelper',
 
-    function($scope, $routeParams, $location, remoteFactory, dataFactory, userRemote, serviceHelper, promotionRemote, promotionFactory, serviceHelper) {
+    function($scope, $routeParams, $location, remoteFactory, dataFactory, userRemote, serviceHelper, promotionRemote, promotionFactory, serviceHelper, fileHelper) {
 
         /** Global variables **/
         var brandId = $routeParams.brandId;
@@ -209,8 +209,9 @@ angular.module('promotion')
                 break;
 
             case 'news':
-                $scope.validation = [true, false, true];
+                $scope.validation = [true, true, true];
                 $scope.isCanGoNext = false;
+                var fileAvatar = null;
 
                 if (step3Data != null && step3Data.validation != undefined) {
                     $scope.validation = step3Data.validation;
@@ -218,6 +219,25 @@ angular.module('promotion')
                     $scope.promotionType = step3Data.promotionType;
                     $scope.content = step3Data.content;
                     $scope.title = step3Data.title;
+                    $scope.cover = step3Data.cover;
+                    fileAvatar = step3Data.fileAvatar;
+
+                    if ($scope.cover == null || $scope.cover == undefined || $scope.cover == '' || fileAvatar == null || fileAvatar == undefined || fileAvatar == '') {
+                        $scope.validation[1] = true;
+                    } else
+                        $scope.validation[1] = false;
+
+                }
+
+                $scope.changeCover = function($files) {
+                    $scope.hideCover = false;
+
+                    fileHelper.readAsDataUrl($files[0], $scope)
+                        .then(function(result) {
+                            $scope.cover = result;
+                            fileAvatar = $files[0];
+                            $scope.updateValidationNews(1);
+                        });
                 }
 
                 $scope.updateValidationNews = function(id) {
@@ -229,6 +249,10 @@ angular.module('promotion')
                                 $scope.validation[0] = false;
                             break;
                         case 1:
+                            if ($scope.cover == null || $scope.cover == undefined || fileAvatar == null || fileAvatar == undefined)
+                                $scope.validation[1] = true;
+                            else
+                                $scope.validation[1] = false;
                             break;
                         case 2:
                             if ($scope.content == undefined || $scope.content == '')
@@ -238,7 +262,7 @@ angular.module('promotion')
                             break;
                     }
 
-                    if (!$scope.validation[2] && !$scope.validation[0])
+                    if (!$scope.validation[2] && !$scope.validation[0] && !$scope.validation[1])
                         $scope.isCanGoNext = true;
                     else
                         $scope.isCanGoNext = false;
@@ -251,7 +275,9 @@ angular.module('promotion')
                         promotionType: $scope.promotionType,
                         content: $scope.content,
                         title: $scope.title,
-                        brand_id: brandId
+                        brand_id: brandId,
+                        cover: $scope.cover,
+                        fileAvatar: fileAvatar
                     });
                 }
 

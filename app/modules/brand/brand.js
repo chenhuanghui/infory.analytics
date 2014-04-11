@@ -378,7 +378,7 @@ angular.module('brand')
                         dataFactory.setCurrentBrand($scope.brand);
                         dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                     } else
-                        dialogHelper.showError(data.error.message);
+                        dialogHelper.showError(respone.error.message);
                 }
             }
             xhr.send(fd);
@@ -402,7 +402,7 @@ angular.module('brand')
                         dataFactory.setCurrentBrand($scope.brand);
                         dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                     } else
-                        dialogHelper.showError(data.error.message);
+                        dialogHelper.showError(respone.error.message);
                 }
             }
             xhr.send(fd);
@@ -559,7 +559,7 @@ angular.module('brand')
                             }
                         });
                     } else
-                        dialogHelper.showError(data.error.message);
+                        dialogHelper.showError(respone.error.message);
                 }
             }
             xhr.send(fd);
@@ -586,7 +586,7 @@ angular.module('brand')
                         saveToFactory();
                         dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                     } else
-                        dialogHelper.showError(data.error.message);
+                        dialogHelper.showError(respone.error.message);
                 }
             }
             xhr.send(fd);
