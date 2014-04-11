@@ -282,6 +282,8 @@ angular.module('smgDirectives', ['ui.date'])
                         // ctrl.removeFilter(scope.id);
 
                         var id = scope.id;
+                        if (id == 0)
+                            return;
                         var name1 = '.special_' + id;
                         var name2 = '.row_' + id;
 
