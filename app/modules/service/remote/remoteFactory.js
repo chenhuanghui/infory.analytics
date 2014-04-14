@@ -13,6 +13,8 @@ angular.module('smg.services')
                     return base_url;
                 },
 
+                domain: domain,
+
                 meta_property_types: metaData.meta_property_types,
 
                 meta_lists: metaData.meta_lists,
