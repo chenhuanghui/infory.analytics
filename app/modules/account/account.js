@@ -15,10 +15,14 @@ angular.module('account')
             $scope.activeTab = "personal";
             $scope.showSuccessNotify = false;
             $scope.hideLoading = false;
-
+            $scope.IsRightPass = true;
             /** Logic **/
             $scope.markPassChange = function() {
                 $scope.isChangePass = true;
+                if ($scope.account.password != $scope.account.confirmPassword)
+                    $scope.IsRightPass = false;
+                else
+                    $scope.IsRightPass = true;
             }
 
             $scope.showBill = function() {
