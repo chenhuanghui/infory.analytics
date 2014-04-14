@@ -12,7 +12,7 @@ angular.module('Smg')
                     var query = null;
                     var elements = null;
 
-                    if (type == 'AND') {
+                    if (type == 'VÀ') {
                         query = {
                             and: []
                         };
