@@ -23,6 +23,16 @@ angular.module('account')
                     phone: $scope.tel
                 }).success(function(data) {
                     if (data.error == undefined) {
+                        $scope.IsRightPass = false;
+                        $scope.confirmPassword = '';
+                        $scope.validatedPhoneNumber = false;
+
+                        $scope.name = '';
+                        $scope.email = '';
+                        $scope.password = '';
+                        $scope.company = '';
+                        $scope.tel = '';
+
                         dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Chúc mừng bạn đã tạo tài khoản thành công. Vui lòng chọn "Đồng ý" để về trang Đăng nhập', function() {
                             $location.path('/login');
                         });
