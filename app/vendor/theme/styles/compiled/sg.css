@@ -2072,4 +2072,8 @@ textarea{
     text-align: left !important;
 }
 
+.comment-sorter-title{
+    margin-right: 10px;
+    padding-top: 4px;
+}
 

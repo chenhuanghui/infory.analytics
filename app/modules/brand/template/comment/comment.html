@@ -7,12 +7,19 @@
                 <div class='col-md-12'>
                     <p class="title">Hệ thống bình luận tại mỗi cửa hàng</p>
                     <p class="sub">Quản lý hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch khuyến mãi của bạn dễ dàng theo dạng danh sách và thao tác đơn giản mang lại hiệu quả cao</p>
+
                     <div class="btn-group" style="margin-left: 25px;">
+                        <div class="left comment-sorter-title">
+                            <p>Bình luận tại cửa hàng: </p>
+                        </div>
                          <select ng-model="shop" ng-options="s.name for s in brand.shops" ng-change="updateShopComment()"></select>
                     </div>
                     
                     <div class="btn-group right">
                         <select ng-model="sorter" ng-options="s.display for s in oderComments" ng-change="updateShopComment()"></select>
+                    </div>
+                    <div class="right comment-sorter-title">
+                        <p>Sắp xếp theo: </p>
                     </div>
                 </div>
                 
@@ -38,7 +45,7 @@
                                 <div class="col-md-9 comment-content">
                                         <span class="user_name"><a ng-click = "goToShopInfo(shop)" style="cursor:pointer">{{shop.name}}</a></span> 
                                         </br>
-                                        <textarea id="inputContent1" class="form-control first-comment" placeholder="Content" rows="5" ng-model="commentInput"></textarea>  
+                                        <textarea id="inputContent1" class="form-control first-comment" placeholder="Thông điệp của bạn" rows="5" ng-model="commentInput"></textarea>  
                                 </div>
                                 <div class="clearfix"></div>
                                                                 

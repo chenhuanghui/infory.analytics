@@ -39,10 +39,10 @@ angular.module('user')
             }, function() {});
 
             $scope.goToStep1 = function() {
-        userNotifyFactory.setData(0, null);
-        userNotifyFactory.setData(1, null);
-        userNotifyFactory.setData(2, null);
-        userNotifyFactory.setMode('create');
+                userNotifyFactory.setData(0, null);
+                userNotifyFactory.setData(1, null);
+                userNotifyFactory.setData(2, null);
+                userNotifyFactory.setMode('create');
                 $location.path('/user/notify-new/step1/' + brandId);
             }
 
@@ -295,11 +295,12 @@ angular.module('user')
 
                 var properties = {
                     brand_id: brandId,
-                    fields: '["id", "name", "type", "send_method", "time_begin", "status"]'
+                    fields: '["id", "name", "type", "send_method", "time_begin", "status", "targets_count", "receivers_count"]'
                 }
 
                 $scope.sortNotificationListByStatus = function() {
                     var status = $scope.statusType.name;
+
                     if ($scope.statusType.name == '')
                         $scope.messageList = $scope.messageListFull;
                     else
@@ -359,6 +360,11 @@ angular.module('user')
                         $scope.hideLoading = true;
                         $scope.messageListFull = data;
                         for (var i = 0; i < $scope.messageListFull.length; i++) {
+                            if ($scope.messageListFull[i].receivers_count != null && $scope.messageListFull[i].receivers_count != undefined) {
+                                $scope.messageListFull[i].sentAmount = $scope.messageListFull[i].receivers_count + '/' + $scope.messageListFull[i].targets_count;
+                            } else
+                                $scope.messageListFull[i].sentAmount = '---';
+
                             if (i % 2 == 0)
                                 $scope.messageListFull[i].sttClass = 'even';
                             else
