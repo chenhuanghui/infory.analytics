@@ -1,5 +1,6 @@
 img {
-   background-image: url('/vendor/theme/img/default.jpg')
+   background-image: url('/vendor/theme/img/default.jpg');
+   background-size: contain
 }
 
 .navigation{
@@ -2085,5 +2086,9 @@ textarea{
     border-left-style: solid;
     border-left-width: 2px;
     font-size: 11px;
+}
+
+.non-background{
+    background-image: none;
 }
 
