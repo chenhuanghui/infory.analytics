@@ -135,7 +135,7 @@ angular.module('user')
                 }
 
                 userRemote.filter(fields, function(datax) {
-                    if (data.error == undefined) {
+                    if (datax.error == undefined) {
                         var userList = datax.data;
                         var isChecked = [];
 
@@ -173,6 +173,8 @@ angular.module('user')
                             user.stt = i;
                         }
 
+                        var date_begin = new Date(data.time_begin.split("-").join("/"));
+
                         var oldData = {
                             userList: userList,
                             all: false,
@@ -183,7 +185,11 @@ angular.module('user')
                             sendMethod: {
                                 name: data.send_method
                             },
-                            brand_id: brandId
+                            brand_id: brandId,
+                            data: {
+                                dateDropDownInput: date_begin,
+                                dateDisplay: serviceHelper.normalizeTime(date_begin)
+                            }
                         }
 
                         userNotifyFactory.setData(1, oldData);
@@ -257,6 +263,7 @@ angular.module('user')
 
             switch (mode) {
                 case 'create':
+                    fields.total_bugdet = step3Data.total_bugdet;
                     messageRemote.create(fields, function(data) {
                         if (data.error == undefined) {
                             listNotification();

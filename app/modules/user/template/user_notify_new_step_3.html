@@ -30,14 +30,14 @@
                 <div class="step-wapper">
                     <div id="coin-box" class="field-box">
                         <span class="title">NGÂN SÁCH CHO CHIẾN DỊCH</span>
-                        <div class="once"><span class="coin">40</span> T-COIN</div>
-                        <div class="auto">
+                        <div class="once"><span class="coin">{{colorpicker.red}}</span> T-COIN</div>
+                        <div class="auto"  ng-hide="sendMethod.name=='once'">
                             <div class="slider" id="red" ui-slider="colorpicker.options" ng-model="colorpicker.red"></div>
                             <div class="coin"><input ng-model="colorpicker.red"/></span>T-COIN</div>
                         </div>
                         <div class="report">
-                            <p><b>Số tin gửi được: <span>15</span> tin</b><i> / 1000</i></p>
-                            <p><b>Số dư hiện tại: <span>15</span> tin</b></p>
+                            <p><b>Số tin dự kiến gửi: <span>{{colorpicker.red / 10}}</span> tin</b></p>
+                            <p><b>Số dư hiện tại: <span>{{balance}}</span> T-Coin</b></p>
                         </div>
                     </div>
                     <div class="field-box">
