@@ -2077,3 +2077,9 @@ textarea{
     padding-top: 4px;
 }
 
+.border-header-menu{
+    border-left-style: solid;
+    border-left-width: 2px;
+    font-size: 11px;
+}
+
