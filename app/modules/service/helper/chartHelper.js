@@ -14,7 +14,7 @@ angular.module('Smg')
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Source: infory.vn',
+                            text: 'Nguồn: infory.vn',
                             x: -20
                         },
                         xAxis: {
@@ -183,7 +183,7 @@ angular.module('Smg')
                             text: event,
                         },
                         subtitle: {
-                            text: 'Source: infory.vn',
+                            text: 'Nguồn: infory.vn',
                         },
                         xAxis: {
                             categories: data.time
