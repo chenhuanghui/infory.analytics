@@ -1,3 +1,7 @@
+img {
+   background-image: url('/vendor/theme/img/default.jpg')
+}
+
 .navigation{
     padding: 10px 50px;
 }
