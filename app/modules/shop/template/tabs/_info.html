@@ -102,12 +102,11 @@
         </div>
     </li>
     <div class="clearfix"></div>
-    <fieldset>
-        <google-places location="location"></google-places>
-        <input type="submit" ng-click="doSearch()"></input>
+    <fieldset class="google-view">
+        <google-places location="location" changed-location="locationChanged(lat, lng)"></google-places>
     </fieldset>
-    <google-map center="map.center" zoom="map.zoom" draggable="true">
-    <marker coords="marker.coords" events="marker.events" options="marker.options"></marker>
+    <google-map class="google-view" center="map.center" zoom="map.zoom" draggable="true">
+    <marker class="google-view" coords="marker.coords" events="marker.events" options="marker.options"></marker>
     </google-map>
     
 </ul>
