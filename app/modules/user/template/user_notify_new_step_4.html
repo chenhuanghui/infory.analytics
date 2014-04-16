@@ -1,17 +1,17 @@
-<div ng-include="'partials/_header.html'"></div>
+ <div ng-include="'partials/_header.html'"></div>
 <div ng-include="'partials/_sidebar.html'"></div>
 <!-- main container -->
 <div id="notify-new" class="content">
     <div id="notify-fuelux-wizard" class="wizard">
         <ul class="wizard-steps">
             <li data-target="#notify-step1" >
-                <span class="z-step">Soạn tin</span><img class="line-step" src="img/line_step.png" />
+                <span class="z-step">Soạn tin</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#notify-step2">
-                <span class="z-step">Đối tượng</span><img class="line-step" src="img/line_step.png" />
+                <span class="z-step">Đối tượng</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#notify-step3">
-                <span class="z-step">Kích hoạt</span><img class="line-step" src="img/line_step.png" />
+                <span class="z-step">Kích hoạt</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#notify-step4" class="active" id="menu-manager" onclick="showManager('#menu-manager', '#notify-step4')">
                 <span class="z-step">Quản lý tin</span>
@@ -22,9 +22,9 @@
         <div class="step-pane active" id="notify-step4">
             <div class="step-description">
                 <div class="step-title">
-                    Quản lý tin gửi cho khách hàng
+                    Hệ thống quản lý tin gửi cho khách hàng
                 </div>
-                Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+                    Hệ thống hiển thị tất cả tin đã gửi cho khách hàng dưới dạng bảng. Bấm vào tên của tin đã gửi để chỉnh sửa. Bấm vào "Tạo tin mới" và tiến hành tạo tin.
                 <div class="btn-glow success" ng-click="goToStep1()"><i class="icon-plus"></i> Tạo Tin Mới</div>
             </div>
             <div class="form-wrapper">

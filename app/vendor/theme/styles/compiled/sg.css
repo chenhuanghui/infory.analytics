@@ -1,3 +1,8 @@
+img {
+   background-image: url('/vendor/theme/img/default.jpg');
+   background-size: contain
+}
+
 .navigation{
     padding: 10px 50px;
 }
@@ -950,7 +955,7 @@ input.datetime{
 #coin-box .auto .coin input{
     border: none;
     text-align: center;
-    width: 55px;
+    width: 85px;
     margin-left: 13px;
     font-size: 25px;
     color: #48A5F2;
@@ -2075,5 +2080,15 @@ textarea{
 .comment-sorter-title{
     margin-right: 10px;
     padding-top: 4px;
+}
+
+.border-header-menu{
+    border-left-style: solid;
+    border-left-width: 2px;
+    font-size: 11px;
+}
+
+.non-background{
+    background-image: none;
 }
 

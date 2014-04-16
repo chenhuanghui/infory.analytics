@@ -22,10 +22,10 @@
                 <a href="#" class="left trigger">
                     {{brand.name}}
                 </a>
-                <i class="icon-sort-down"></i>
+                <i class="icon-sort-down trigger"></i>
                 <div class="pop-dialog">
                     <ul >
-                        <a href="#" class="close-icon"></a>
+                        <a href="#" style="width: 250px" class="close-icon"></a>
                         <li ng-repeat="b in brands" ><a ng-click="setCurrentBrand(b)">{{b.name}}</a></li>
                         <li class="create-box">
                             <i class="icon-plus"></i>
@@ -122,19 +122,53 @@
                 </div>
             </div>
         </li> -->
+        
+
         <li class="dropdown">
             <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
                 {{_username}}
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="#/personal">Thông tin tài khoản</a></li>
+                <li><a href="#/personal/{{brand.id}}">Thông tin tài khoản</a></li>
             </ul>
         </li>
         
         <li ng-controller="SignInCtrl" class="settings hidden-xs hidden-sm">
             <a role="button" ng-click="logout()" style="cursor:pointer">
                 <i class="icon-share-alt"></i>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="nav navbar-nav pull-right hidden-xs" style="{{menuDisplayStr}}">
+        <li class="border-header-menu" >
+
+            <a href="#/home/{{brandId}}" class="trigger"> <i class="icon-home"></i> Home
+            </a>
+        </li>
+        <li class="border-header-menu" >
+            <a href="#/brand/infor/{{brandId}}" class="trigger"> Nhãn hiệu
+            </a>
+        </li>
+        <li class="border-header-menu" >
+            <a href="#/segmentation/{{brandId}}" class="trigger"> Hành vi KH
+            </a>
+        </li>
+        <li class="border-header-menu" >
+            <a href="#/funnel/step2/{{brandId}}" class="trigger"> Chuỗi hành vi KH
+            </a>
+        </li>
+        <li class="border-header-menu" >
+            <a href="#/brand/promotion/step4/{{brandId}}" class="trigger"> Chiến dịch
+            </a>
+        </li>
+        <li class="border-header-menu" >
+            <a href="#/user/manager/{{brandId}}" class="trigger"> Khách hàng
+            </a>
+        </li>
+        <li class="border-header-menu" style="margin-right:250px;">
+            <a href="#/user/notify-new/step4/{{brandId}}" class="trigger"> Thông báo
             </a>
         </li>
     </ul>
