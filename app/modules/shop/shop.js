@@ -1,5 +1,22 @@
-angular.module('shop')
-
+angular.module('shop', ['google-maps'])
+.directive('googlePlaces', function($location){
+    return {
+        restrict:'E',
+        replace:true,
+        // transclude:true,
+        scope: {location:'='},
+        template: '<input id="google_places_ac" name="google_places_ac" type="text" class="input-block-level"/>',
+        link: function($scope, elm, attrs){            
+            var autocomplete = new google.maps.places.Autocomplete($("#google_places_ac")[0], {});
+            
+            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                var place = autocomplete.getPlace();                
+                $scope.location = place.geometry.location.lat() + ',' + place.geometry.location.lng();
+                $scope.$apply();                
+            });
+        }
+    }
+})
 .controller('ShopCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'shopRemote', 'shopFactory', 'dialogHelper',
 
     function($scope, $routeParams, remoteFactory, dataFactory, shopRemote, shopFactory, dialogHelper) {
@@ -34,6 +51,32 @@ angular.module('shop')
             editCityAddress: false,
             editPhone: false
         };
+
+        $scope.map = {
+            center: {
+                latitude: 40.1451,
+                longitude: -99.6680
+            },
+            options: {                 
+                draggable: true 
+            },
+            dragging: false,
+            zoom: 8
+        }
+        $scope.marker = {
+            coords: {
+                latitude: 40.1451,
+                longitude: -99.6680
+            },
+            options: { draggable: true },
+            events: {
+                dragend: function (marker, eventName, args) {     
+                    console.log(marker.getPosition().lat());
+                    //updateLatLng(marker.getPosition().lat(), marker.getPosition().lng())
+                }
+            },
+            zoom: 7
+        }
 
         /** Logic **/
         dataFactory.updateBrandSideBar($scope.brandId);
@@ -338,9 +381,37 @@ angular.module('shop')
                 $scope.shop.full_address = $scope.shop.city_address;
             }
         }
+        
+        $scope.location = '';
+
+        $scope.doSearch = function() {
+            if($scope.location === ''){
+                alert('Directive did not update the location property in parent controller.');
+            } else {
+                alert('Yay. Location: ' + $scope.location);
+            }
+        };        
+
+        function updateLatLng(lat, lng)
+        {            
+            shopRemote.update({
+                lat: lat,
+                lng: lng,
+            }, function(data) {
+                if (data.error == undefined) {
+                    $scope.shop.phone = $scope.bundle.shopPhone;
+                    dataFactory.setCurrentShop($scope.shop);
+                    dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
+                } else {
+                    dialogHelper.showError(data.error.message);
+                    $scope.bundle.shopPhone = $scope.shop.phone;
+                }
+            }, function() {
+
+            });                      
+        }
     }
 ])
-
 .config(function($routeProvider) {
     var access = routingConfig.accessLevels;
     $routeProvider

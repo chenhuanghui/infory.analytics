@@ -25,7 +25,8 @@ var app = angular.module('Smg', [
     'checklist-model',
     'fundoo.services',
     'SPaging',
-    'textarea-autoresize'
+    'textarea-autoresize',
+    'google-maps'
 ]);
 
 angular.element(document).ready(function() {
