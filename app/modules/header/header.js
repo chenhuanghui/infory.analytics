@@ -1,18 +1,23 @@
 angular.module('header')
 
-.controller('HeaderCtrl', ['$scope', '$location', 'dataFactory', 'Auth', 'brandRemote', 'dialogHelper', 'cookie',
+.controller('HeaderCtrl', ['$scope', '$location', '$routeParams', 'dataFactory', 'Auth', 'brandRemote', 'dialogHelper', 'cookie',
 
-    function($scope, $location, dataFactory, Auth, brandRemote, dialogHelper, cookie) {
+    function($scope, $location, $routeParams, dataFactory, Auth, brandRemote, dialogHelper, cookie) {
 
+        $scope.brandId = $routeParams.brandId;
         $scope.isVisibleBrandMenu = true;
+        $scope.menuDisplayStr = 'display: none !important;';
 
-        if ($location.path() == '/personal')
+        if ($location.path().substring(0, 9) == '/personal') {
             $scope.isVisibleBrandMenu = false;
+            $scope.menuDisplayStr = 'display: block;';
+        }
 
         $scope._username = Auth.user.name;
 
         $scope.updateBrand = function(brand) {
             $scope.brand = brand;
+            $scope.brandId = brand.id;
         }
 
         $scope.updateBrands = function(brands) {

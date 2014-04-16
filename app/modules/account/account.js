@@ -116,7 +116,7 @@ angular.module('account')
                 }
             }
 
-            if ($location.path() == '/personal') {
+            if ($location.path().substring(0, 9) == '/personal') {
                 var fields = '["name"], ["avatar"], ["balance"], ["company"], ["email"]';
                 $scope.hideLoading = false;
                 accountRemote.get(fields, function(data) {
@@ -147,7 +147,7 @@ angular.module('account')
             controller: 'AccountCtrl',
             access: access.user
         })
-        .when('/personal', {
+        .when('/personal/:brandId', {
             templateUrl: 'modules/account/template/personal.html',
             controller: 'AccountCtrl',
             access: access.user

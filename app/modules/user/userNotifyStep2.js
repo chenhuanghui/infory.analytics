@@ -82,15 +82,15 @@ angular.module('user')
 
             $scope.goToStep3 = function() {
                 saveInfor();
-                if ($scope.sendMethod.name == 'once') {
-                    if ($scope.numOfSelectedUsers * 10 > $scope.balance) {
-                        dialogHelper.showError('Số dư tài khoản của bạn là ' + $scope.balance + ' T-Coin không đủ thực hiện thao tác này');
-                        return;
-                    } else
-                        $location.path('/user/notify-new/step4/' + brandId);
+                // if ($scope.sendMethod.name == 'once') {
+                //     if ($scope.numOfSelectedUsers * 10 > $scope.balance) {
+                //         dialogHelper.showError('Số dư tài khoản của bạn là ' + $scope.balance + ' T-Coin không đủ thực hiện thao tác này');
+                //         return;
+                //     } else
+                //         $location.path('/user/notify-new/step4/' + brandId);
 
-                } else
-                    $location.path('/user/notify-new/step3/' + brandId);
+                // } else
+                $location.path('/user/notify-new/step3/' + brandId);
             }
 
             $scope.goToStep1 = function() {
@@ -241,7 +241,8 @@ angular.module('user')
                     isCanGo: $scope.isCanGo,
                     searchText: $scope.searchText,
                     currentPage: $scope.currentPage,
-                    filteredUsers: $scope.filteredUsers
+                    filteredUsers: $scope.filteredUsers,
+                    balance: $scope.balance
                 });
             }
 

@@ -1,6 +1,7 @@
 angular.module('smgDirectives')
 
 .directive('chart', function() {
+    var chart = null;
     return {
         restrict: 'E',
         template: '<div></div>',
@@ -11,6 +12,13 @@ angular.module('smgDirectives')
         replace: true,
 
         link: function(scope, element, attrs) {
+            scope.exportChart = function() {
+                chart.exportChart({
+                    type: 'application/pdf',
+                    filename: 'chart'
+                });
+            }
+
             scope.$watch(function() {
                 return scope.chartData;
             }, function(value) {
@@ -19,7 +27,7 @@ angular.module('smgDirectives')
                     return;
                 scope.chartData.chart.renderTo = element[0];
                 scope.chartData.credits = false;
-                var chart = new Highcharts.Chart(scope.chartData);
+                chart = new Highcharts.Chart(scope.chartData);
             });
         }
     };
