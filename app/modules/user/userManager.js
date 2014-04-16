@@ -172,7 +172,7 @@ angular.module('user')
                     if (user.city == null)
                         user.city = " - ";
 
-                    if (user.dob != null)
+                    if (user.dob != null && user.dob != '')
                         user.dob = new Date().getFullYear() - new Date(user.dob.split("-").join("/")).getFullYear();
                     else
                         user.dob = " - ";
