@@ -1,4 +1,4 @@
-angular.module('shop')
+angular.module('shop', ['google-maps'])
 
 .controller('ShopCtrl', ['$scope', '$routeParams', 'remoteFactory', 'dataFactory', 'shopRemote', 'shopFactory', 'dialogHelper',
 
@@ -34,6 +34,30 @@ angular.module('shop')
             editCityAddress: false,
             editPhone: false
         };
+
+        $scope.map = {
+            center: {
+                latitude: 20, // default value, just for initial purpose
+                longitude: 20
+            },
+            draggable: true,
+            zoom: 12
+        }
+
+        $scope.marker = {
+            coords: {
+                latitude: 20, // default value, just for initial purpose
+                longitude: 20
+            },
+            options: {
+                draggable: true
+            },
+            events: {
+                position_changed: function(marker, eventName, args) {
+                    updateLatLng(marker.getPosition().lat(), marker.getPosition().lng())
+                }
+            }
+        }
 
         /** Logic **/
         dataFactory.updateBrandSideBar($scope.brandId);
@@ -78,7 +102,7 @@ angular.module('shop')
                     $scope.shop.phone = data.phone;
                 }
 
-                if ($scope.shop.lat == -1 || $scope.shop.lng) {
+                if ($scope.shop.lat == -1 || $scope.shop.lng == -1) {
                     $scope.shop.lat = 10.758721;
                     $scope.shop.lng = 106.691930;
                 }
@@ -89,6 +113,10 @@ angular.module('shop')
                 $scope.bundle.shopStreetAddress = data.street_address;
                 $scope.bundle.shopDistrictAddress = data.district_address;
                 $scope.bundle.shopCityAddress = data.city_address;
+                $scope.marker.coords.latitude = $scope.shop.lat;
+                $scope.marker.coords.longitude = $scope.shop.lng;
+                $scope.map.center.latitude = $scope.shop.lat;
+                $scope.map.center.longitude = $scope.shop.lng;
             } else
                 dialogHelper.showError(data.error.message);
 
@@ -338,20 +366,51 @@ angular.module('shop')
                 $scope.shop.full_address = $scope.shop.city_address;
             }
         }
+
+        $scope.locationChanged = function(lat, lng) {
+            // update map
+            $scope.marker.coords.latitude = lat;
+            $scope.marker.coords.longitude = lng;
+            $scope.map.center.longitude = lng;
+            $scope.map.center.latitude = lat;
+        }
+
+        function updateLatLng(lat, lng) {
+            shopRemote.update({
+                lat: lat,
+                lng: lng,
+                shop_id: shopId
+            }, function(data) {
+                if (data.error == undefined) {
+                    $scope.shop.lat = $scope.marker.coords.lat;
+                    $scope.shop.lng = $scope.marker.coords.lng;
+
+                    dataFactory.setCurrentShop($scope.shop);
+                    dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
+                } else {
+                    dialogHelper.showError(data.error.message);
+                    $scope.marker.coords.lat = $scope.shop.lat;
+                    $scope.marker.coords.lng = $scope.shop.lng;
+                    $scope.map.center.lat = $scope.shop.lat;
+                    $scope.map.center.lng = $scope.shop.lng;
+                }
+            }, function() {
+
+            });
+        }
     }
 ])
-
-.config(function($routeProvider) {
-    var access = routingConfig.accessLevels;
-    $routeProvider
-        .when('/shop/:brandId/:shopId', {
-            templateUrl: 'modules/shop/template/shop.html',
-            controller: 'ShopCtrl',
-            access: access.user
-        })
-        .when('/create-shop', {
-            templateUrl: 'modules/shop/template/shop_create.html',
-            controller: 'CreateShopCtrl',
-            access: access.user
-        })
-});
+    .config(function($routeProvider) {
+        var access = routingConfig.accessLevels;
+        $routeProvider
+            .when('/shop/:brandId/:shopId', {
+                templateUrl: 'modules/shop/template/shop.html',
+                controller: 'ShopCtrl',
+                access: access.user
+            })
+            .when('/create-shop', {
+                templateUrl: 'modules/shop/template/shop_create.html',
+                controller: 'CreateShopCtrl',
+                access: access.user
+            })
+    });
