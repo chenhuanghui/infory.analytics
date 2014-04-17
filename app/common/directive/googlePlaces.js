@@ -11,7 +11,7 @@ angular.module('Smg')
                 changedLocation: '&'
 
             },
-            template: '<div><input id="google_places_ac" name="google_places_ac" type="text" class="input-block-level"/> <input type="submit" ng-click="doSearch()"></input></div>',
+            template: '<div><input id="google_places_ac" name="google_places_ac" type="text" class="input-block-level"/> <input type="submit" ng-click="doSearch()" value="Search"></input></div>',
             link: function(scope, elm, attrs) {
                 var autocomplete = new google.maps.places.Autocomplete($("#google_places_ac")[0], {});
 
