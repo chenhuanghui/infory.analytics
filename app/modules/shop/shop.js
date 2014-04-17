@@ -13,14 +13,6 @@ angular.module('shop', ['google-maps'])
             fields = null;
 
         /** Scope variables **/
-        $scope.locationChanged = function(lat, lng) {
-            // update map
-            $scope.marker.coords.latitude = lat;
-            $scope.marker.coords.longitude = lng;
-            $scope.map.center.longitude = lng;
-            $scope.map.center.latitude = lat;
-        }
-
         $scope.hideLoadingInfor = false;
         $scope.hideLoadingImage = false;
         $scope.cities = remoteFactory.cities;
@@ -48,8 +40,8 @@ angular.module('shop', ['google-maps'])
                 latitude: 20, // default value, just for initial purpose
                 longitude: 20
             },
-            draggable : true,            
-            zoom: 12 
+            draggable: true,
+            zoom: 12
         }
 
         $scope.marker = {
@@ -61,10 +53,10 @@ angular.module('shop', ['google-maps'])
                 draggable: true
             },
             events: {
-                position_changed: function(marker, eventName, args) {                    
+                position_changed: function(marker, eventName, args) {
                     updateLatLng(marker.getPosition().lat(), marker.getPosition().lng())
                 }
-            }            
+            }
         }
 
         /** Logic **/
@@ -120,11 +112,11 @@ angular.module('shop', ['google-maps'])
                 $scope.bundle.shopCover = data.cover;
                 $scope.bundle.shopStreetAddress = data.street_address;
                 $scope.bundle.shopDistrictAddress = data.district_address;
-                $scope.bundle.shopCityAddress = data.city_address;                
-                $scope.marker.coords.latitude = data.lat;
-                $scope.marker.coords.longitude = data.lng;
-                $scope.map.center.latitude = data.lat;
-                $scope.map.center.longitude = data.lng;
+                $scope.bundle.shopCityAddress = data.city_address;
+                $scope.marker.coords.latitude = $scope.shop.lat;
+                $scope.marker.coords.longitude = $scope.shop.lng;
+                $scope.map.center.latitude = $scope.shop.lat;
+                $scope.map.center.longitude = $scope.shop.lng;
             } else
                 dialogHelper.showError(data.error.message);
 
@@ -375,7 +367,13 @@ angular.module('shop', ['google-maps'])
             }
         }
 
-        $scope.location = '';
+        $scope.locationChanged = function(lat, lng) {
+            // update map
+            $scope.marker.coords.latitude = lat;
+            $scope.marker.coords.longitude = lng;
+            $scope.map.center.longitude = lng;
+            $scope.map.center.latitude = lat;
+        }
 
         function updateLatLng(lat, lng) {
             shopRemote.update({
@@ -391,9 +389,9 @@ angular.module('shop', ['google-maps'])
                     dataFactory.updateShopInBrand(shopId, $scope.brandId, $scope.shop);
                 } else {
                     dialogHelper.showError(data.error.message);
-                    $scope.marker.coords.lat =  $scope.shop.lat
+                    $scope.marker.coords.lat = $scope.shop.lat;
                     $scope.marker.coords.lng = $scope.shop.lng;
-                    $scope.map.center.lat = $scope.shop.lat
+                    $scope.map.center.lat = $scope.shop.lat;
                     $scope.map.center.lng = $scope.shop.lng;
                 }
             }, function() {
