@@ -122,7 +122,7 @@ angular.module('user')
 
                 var fields = {
                     filter: null,
-                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
+                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone", "age"]',
                     brand_id: brandId,
                     page: 0,
                     page_size: 10000
@@ -155,7 +155,7 @@ angular.module('user')
                             if (user.email == null)
                                 user.email = " - ";
 
-                            if (user.gender == null)
+                            if (user.gender == null || user.gender == '')
                                 user.gender = " - ";
                             else if (user.gender == 'male')
                                 user.gender = 'Nam';
@@ -165,10 +165,8 @@ angular.module('user')
                             if (user.city == null)
                                 user.city = " - ";
 
-                            if (user.dob != null)
-                                user.dob = new Date().getFullYear() - new Date(user.dob).getFullYear();
-                            else
-                                user.dob = " - ";
+
+                            user.dob = user.age;
 
                             user.stt = i;
                         }
@@ -189,7 +187,8 @@ angular.module('user')
                             data: {
                                 dateDropDownInput: date_begin,
                                 dateDisplay: serviceHelper.normalizeTime(date_begin)
-                            }
+                            },
+                            currentPage: 1
                         }
 
                         userNotifyFactory.setData(1, oldData);
