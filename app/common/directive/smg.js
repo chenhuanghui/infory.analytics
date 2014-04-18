@@ -20,7 +20,7 @@ angular.module('smgDirectives', ['ui.date'])
                 $scope.subfilters = [];
 
                 $scope.$watch('oldsubfilters', function() {
-                    if ($scope.oldsubfilters != null && $scope.oldsubfilters != undefined && $scope.oldsubfilters.length != 0 && $scope.oldsubfilters[0].event != undefined) {
+                    if ($scope.oldsubfilters != null && $scope.oldsubfilters != undefined && $scope.oldsubfilters.length > 0 && $scope.oldsubfilters[0] != undefined && $scope.oldsubfilters[0].event != undefined) {
                         $scope.olddata = $scope.oldsubfilters;
                         var old = $scope.subfilters;
 

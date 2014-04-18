@@ -87,13 +87,15 @@
                         </div>
                     </span>
 
-                     <select class="type_menu right z-select" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-hide="hideTypeChart"></select>
+                     <select class="type_menu right z-select" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-hide="hideTypeChart" ng-change="changeChartId(chartType)"></select>
+
+                     <select class="type_menu right z-select" ng-model="chartTypeSub" ng-options="chartTypeSub as chartTypeSub.display_name for chartTypeSub in chartTypeSubs" ng-hide="!hideTypeChart" ng-change="changeChartId(chartTypeSub)"></select>
 
                      <select class="type_menu pull-right z-select" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-change="updateChart()"></select>
 
                 </div>
-                <div ng-switch on="chartType.id" class="block_content" style="height: 420px;">
-                    <div title="Code: 0xe800" class="the-icons span3 loading-container" ng-hide="hideLoading"><i class="icon-fontello-spin6 animate-spin loading-chart loading-icon"></i></div>
+                <div ng-switch on="chartId" class="block_content" style="height: 420px;">
+                    <div title="Code: 0xe800" class="the-icons span3 loading-container" ng-hide="hideLoading"><i class="icon-fontello-spin6 animate-spin loading-chart loading-icon" style="margin-bottom:200px"></i></div>
 
                     <div ng-switch-when="1">
                         <div>
@@ -113,6 +115,15 @@
                         <div>
                             <chart value='chartData[2]' height="400" ng-hide="!hideLoading">
                             </chart>
+                        </div>
+                    </div>
+
+                    <div ng-switch-when="3">
+                        <div>
+                            <google-map class="google-view" center="map.center" zoom="map.zoom" draggable="map.draggable">
+
+                                <marker class="google-view" ng-repeat="marker in markers"coords="marker.coords" events="marker.events" options="marker.options"></marker>
+                            </google-map>
                         </div>
                     </div>
                     

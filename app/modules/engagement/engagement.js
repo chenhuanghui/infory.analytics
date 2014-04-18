@@ -23,6 +23,17 @@ angular.module('engagement')
             $scope.metadata = data.meta_lists;
         }, function() {});
 
+        $scope.map = {
+            center: {
+                latitude: 10.758721, // default value, just for initial purpose
+                longitude: 106.691930
+            },
+            draggable: true,
+            zoom: 12
+        }
+
+        $scope.markers = [];
+
         $scope.chartTypes = [{
             display_name: "Biểu đồ đường",
             id: 0
@@ -32,6 +43,17 @@ angular.module('engagement')
         }, {
             display_name: "Biểu đồ cột",
             id: 2
+        }, {
+            display_name: "Bản đồ phân bố",
+            id: 3
+        }];
+
+        $scope.chartTypeSubs = [{
+            display_name: "Biểu đồ đường",
+            id: 0
+        }, {
+            display_name: "Bản đồ phân bố",
+            id: 3
         }];
 
         $scope.time_units = [{
@@ -68,6 +90,12 @@ angular.module('engagement')
                     break;
                 }
 
+            for (var i = 0; i < $scope.chartTypeSubs.length; i++)
+                if ($scope.chartTypeSubs[i].id == oldData.chartTypeSub.id) {
+                    $scope.chartTypeSub = $scope.chartTypeSubs[i];
+                    break;
+                }
+
             for (var i = 0; i < $scope.time_units.length; i++)
                 if ($scope.time_units[i].name == oldData.time_unit.name) {
                     $scope.time_unit = $scope.time_units[i];
@@ -81,6 +109,10 @@ angular.module('engagement')
                     $scope.compareUnit = $scope.event.compare_properties[i];
                     break;
                 }
+
+
+            $scope.chartId = oldData.chartId;
+
 
             $scope.time_unit = getTimeUnit(oldData.time_unit.name);
             $scope.compareUnit = getCompareTo(oldData.compareUnit);
@@ -100,6 +132,9 @@ angular.module('engagement')
         } else {
             $scope.time_unit = $scope.time_units[0];
             $scope.chartType = $scope.chartTypes[0];
+            $scope.chartTypeSub = $scope.chartTypeSubs[0];
+            $scope.chartId = 0;
+
             $scope.event = $scope.events[0];
             $scope.compareUnit = $scope.event.compare_properties[0];
 
@@ -185,7 +220,10 @@ angular.module('engagement')
                 eventBookmarks: $scope.eventBookmarks,
                 isHasBookmark: $scope.isHasBookmark,
                 time_unit: $scope.time_unit,
-                compareUnit: $scope.compareUnit
+                compareUnit: $scope.compareUnit,
+                markers: $scope.markers,
+                chartId: $scope.chartId,
+                chartTypeSub: $scope.chartTypeSub
             })
         }
 
@@ -300,6 +338,42 @@ angular.module('engagement')
 
         function updateChart(fields) {
             $scope.hideLoading = false;
+
+            var fieldsForMap = {
+                brand_id: fields.brand_id,
+                event: fields.event,
+                date_beg: fields.date_beg,
+                date_end: fields.date_end
+            };
+
+            if (fields.filter == null)
+                fieldsForMap.filter = null;
+
+            eventRemote.getDistributionMap(fieldsForMap, function(data) {
+                if (data.error == undefined) {
+
+                    $scope.markers = [];
+
+                    for (var i = 0; i < data.points.length; i++) {
+                        var marker = {
+                            coords: {
+                                latitude: data.points[i][0], // default value, just for initial purpose
+                                longitude: data.points[i][1]
+                            },
+                            options: {
+                                draggable: false
+                            },
+
+                        };
+
+                        $scope.markers.push(marker);
+                    }
+
+                    saveInfor();
+                } else
+                    dialogHelper.showError(data.error.message);
+            }, function() {});
+
             eventRemote.count(fields, function(data) {
                 $scope.hideLoading = true;
                 if (data.error == undefined) {
@@ -346,6 +420,12 @@ angular.module('engagement')
         fields.filter = null;
         updateChart(fields);
 
+        $scope.changeChartId = function(obj) {
+            if (obj != null) {
+                $scope.chartId = obj.id;
+                saveInfor();
+            }
+        }
     }
 ])
     .config(function($routeProvider) {
