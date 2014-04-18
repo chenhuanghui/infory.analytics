@@ -82,6 +82,12 @@ angular.module('engagement')
 
         dataFactory.updateBrandSideBar(brandId);
 
+        $scope.changeChartId = function(obj) {
+            if (obj != null) {
+                $scope.chartId = obj.id;
+                saveInfor();
+            }
+        }
 
         if (oldData != null) {
             for (var i = 0; i < $scope.chartTypes.length; i++)
@@ -321,6 +327,7 @@ angular.module('engagement')
             } else {
                 $scope.hideTypeChart = true;
                 $scope.chartType = $scope.chartTypes[0];
+                $scope.changeChartId($scope.chartType);
             }
         }
 
@@ -382,8 +389,11 @@ angular.module('engagement')
                         $scope.compareUnit.name_display == 'ngày trong tuần' ||
                         $scope.compareUnit.name_display == 'tháng trong năm') {
                         $scope.chartType = $scope.chartTypes[1];
-                    } else
+                        $scope.changeChartId($scope.chartType);
+                    } else {
                         $scope.chartType = $scope.chartTypes[0];
+                        $scope.changeChartId($scope.chartType);
+                    }
 
                     $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
                     $scope.chartData[1] = chartHelper.buildPieChart(data, $scope.event.name_display);
@@ -416,15 +426,10 @@ angular.module('engagement')
             $scope.compareUnit = $scope.event.compare_properties[0];
         }
 
-        buildQuery();
-        fields.filter = null;
-        updateChart(fields);
-
-        $scope.changeChartId = function(obj) {
-            if (obj != null) {
-                $scope.chartId = obj.id;
-                saveInfor();
-            }
+        if (oldData == null) {
+            buildQuery();
+            fields.filter = null;
+            updateChart(fields);
         }
     }
 ])
