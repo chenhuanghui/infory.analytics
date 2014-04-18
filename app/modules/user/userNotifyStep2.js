@@ -157,7 +157,7 @@ angular.module('user')
                     userRemote.filter({
                         brand_id: brandId,
                         filter: '',
-                        fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
+                        fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone", "age"]',
                         brand_id: brandId,
                         page: 0,
                         page_size: 10000
@@ -197,10 +197,8 @@ angular.module('user')
                     if (user.city == null)
                         user.city = " - ";
 
-                    if (user.dob != null)
-                        user.dob = new Date().getFullYear() - new Date(user.dob.split("-").join("/")).getFullYear();
-                    else
-                        user.dob = " - ";
+
+                    user.dob = user.age;
 
                     user.stt = i;
                     $scope.isChecked.push(false);
@@ -305,7 +303,7 @@ angular.module('user')
                 var query = filterHelper.buildQuery($scope.subfilters);
                 var fields = {
                     filter: JSON.stringify(query),
-                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
+                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone", "age"]',
                     brand_id: brandId,
                     page: 0,
                     page_size: 10000
