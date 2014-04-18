@@ -18,6 +18,7 @@ angular.module('engagement')
         $scope.subfilters = [];
         $scope.oldsubfilters = [];
         $scope.hideLoading = true;
+        $scope.mapObject = {};
 
         dataFactory.getMetaData(brandId, function(data) {
             $scope.metadata = data.meta_lists;
@@ -368,8 +369,9 @@ angular.module('engagement')
                                 longitude: data.points[i][1]
                             },
                             options: {
-                                draggable: false
+                                draggable: false,
                             },
+                            icon: "vendor/theme/img/iconpinmap.png"
 
                         };
 
@@ -404,6 +406,11 @@ angular.module('engagement')
                     dialogHelper.showError(data.error.message);
             }, function() {});
         }
+
+        $scope.$watch('mapObject', function() {
+            if ($scope.mapObject.control != undefined)
+                console.log($scope.mapObject.control.getGMap());
+        });
 
         $scope.onTimeSetOne = function(newDate, oldDate) {
             $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
