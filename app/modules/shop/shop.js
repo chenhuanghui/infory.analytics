@@ -37,17 +37,17 @@ angular.module('shop', ['google-maps'])
 
         $scope.map = {
             center: {
-                latitude: 20, // default value, just for initial purpose
-                longitude: 20
+                latitude: 10.758721, // default value, just for initial purpose
+                longitude: 106.691930
             },
             draggable: true,
-            zoom: 12
+            zoom: 16
         }
 
         $scope.marker = {
             coords: {
-                latitude: 20, // default value, just for initial purpose
-                longitude: 20
+                latitude: 10.758721, // default value, just for initial purpose
+                longitude: 106.691930
             },
             options: {
                 draggable: true
