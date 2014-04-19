@@ -120,7 +120,7 @@
 
                     <div ng-switch-when="3">
                         <div>
-                            <google-map class="google-view" center="map.center" zoom="map.zoom" draggable="true" control="mapObject">
+                            <google-map class="google-view" center="map.center" zoom="map.zoom" draggable="true" control="map.control" events="map.events">
 
                                 <marker class="google-view" ng-repeat="marker in markers"coords="marker.coords" icon="marker.icon" events="marker.events" options="marker.options"></marker>
                             </google-map>

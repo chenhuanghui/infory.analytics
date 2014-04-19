@@ -8,7 +8,8 @@ angular.module('engagement')
         var brandId = $routeParams.brandId,
             intervalDate = serviceHelper.getIntervalDate(),
             fields = null,
-            oldData = segmentationFactory.getData(brandId);;
+            oldData = segmentationFactory.getData(brandId),
+            bounds = [];
 
 
         /** Scope variables **/
@@ -18,20 +19,32 @@ angular.module('engagement')
         $scope.subfilters = [];
         $scope.oldsubfilters = [];
         $scope.hideLoading = true;
-        $scope.mapObject = {};
+
+        angular.extend($scope, {
+            map: {
+                center: {
+                    latitude: 10.758721, // default value, just for initial purpose
+                    longitude: 106.691930
+                },
+                draggable: true,
+                zoom: 12,
+                control: {},
+                events: {
+                    tilesloaded: function(map) {
+                        $scope.$apply(function() {
+                            $scope.map.control.getGMap().fitBounds(bounds);
+                        });
+                    },
+                    loaded: function(map) {
+
+                    }
+                }
+            }
+        });
 
         dataFactory.getMetaData(brandId, function(data) {
             $scope.metadata = data.meta_lists;
         }, function() {});
-
-        $scope.map = {
-            center: {
-                latitude: 10.758721, // default value, just for initial purpose
-                longitude: 106.691930
-            },
-            draggable: true,
-            zoom: 12
-        }
 
         $scope.markers = [];
 
@@ -362,6 +375,7 @@ angular.module('engagement')
 
                     $scope.markers = [];
 
+                    bounds = new google.maps.LatLngBounds();
                     for (var i = 0; i < data.points.length; i++) {
                         var marker = {
                             coords: {
@@ -376,8 +390,8 @@ angular.module('engagement')
                         };
 
                         $scope.markers.push(marker);
+                        bounds.extend(new google.maps.LatLng($scope.markers[i].coords.latitude, $scope.markers[i].coords.longitude));
                     }
-
                     saveInfor();
                 } else
                     dialogHelper.showError(data.error.message);
@@ -407,10 +421,9 @@ angular.module('engagement')
             }, function() {});
         }
 
-        $scope.$watch('mapObject', function() {
-            if ($scope.mapObject.control != undefined)
-                console.log($scope.mapObject.control.getGMap());
-        });
+        $scope.getMapInstance = function() {
+
+        };
 
         $scope.onTimeSetOne = function(newDate, oldDate) {
             $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
