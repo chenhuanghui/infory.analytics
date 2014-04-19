@@ -9,7 +9,8 @@ angular.module('engagement')
             intervalDate = serviceHelper.getIntervalDate(),
             fields = null,
             oldData = segmentationFactory.getData(brandId),
-            bounds = [];
+            bounds = [],
+            isNeedFitMap = true;
 
 
         /** Scope variables **/
@@ -19,6 +20,7 @@ angular.module('engagement')
         $scope.subfilters = [];
         $scope.oldsubfilters = [];
         $scope.hideLoading = true;
+        $scope.mapInstance = null;
 
         angular.extend($scope, {
             map: {
@@ -32,11 +34,12 @@ angular.module('engagement')
                 events: {
                     tilesloaded: function(map) {
                         $scope.$apply(function() {
-                            $scope.map.control.getGMap().fitBounds(bounds);
+                            $scope.mapInstance = map;
+                            if (bounds.length != 0 && isNeedFitMap) {
+                                $scope.map.control.getGMap().fitBounds(bounds);
+                                isNeedFitMap = false;
+                            }
                         });
-                    },
-                    loaded: function(map) {
-
                     }
                 }
             }
@@ -104,6 +107,9 @@ angular.module('engagement')
         }
 
         if (oldData != null) {
+            $scope.markers = oldData.markers;
+            bounds = oldData.bounds;
+
             for (var i = 0; i < $scope.chartTypes.length; i++)
                 if ($scope.chartTypes[i].id == oldData.chartType.id) {
                     $scope.chartType = $scope.chartTypes[i];
@@ -148,7 +154,6 @@ angular.module('engagement')
             $scope.eventBookmark = oldData.eventBookmark;
             $scope.eventBookmarks = oldData.eventBookmarks;
             $scope.isHasBookmark = oldData.isHasBookmark;
-
         } else {
             $scope.time_unit = $scope.time_units[0];
             $scope.chartType = $scope.chartTypes[0];
@@ -243,7 +248,8 @@ angular.module('engagement')
                 compareUnit: $scope.compareUnit,
                 markers: $scope.markers,
                 chartId: $scope.chartId,
-                chartTypeSub: $scope.chartTypeSub
+                chartTypeSub: $scope.chartTypeSub,
+                bounds: bounds
             })
         }
 
@@ -369,10 +375,12 @@ angular.module('engagement')
 
             if (fields.filter == null)
                 fieldsForMap.filter = null;
+            else
+                fieldsForMap.filter = fields.filter;
 
+            isNeedFitMap = true;
             eventRemote.getDistributionMap(fieldsForMap, function(data) {
                 if (data.error == undefined) {
-
                     $scope.markers = [];
 
                     bounds = new google.maps.LatLngBounds();
@@ -392,6 +400,10 @@ angular.module('engagement')
                         $scope.markers.push(marker);
                         bounds.extend(new google.maps.LatLng($scope.markers[i].coords.latitude, $scope.markers[i].coords.longitude));
                     }
+
+                    if ($scope.mapInstance != null)
+                        $scope.mapInstance.fitBounds(bounds);
+
                     saveInfor();
                 } else
                     dialogHelper.showError(data.error.message);
@@ -408,6 +420,7 @@ angular.module('engagement')
                         $scope.changeChartId($scope.chartType);
                     } else {
                         $scope.chartType = $scope.chartTypes[0];
+                        $scope.chartTypeSub = $scope.chartTypeSubs[0];
                         $scope.changeChartId($scope.chartType);
                     }
 
@@ -420,10 +433,6 @@ angular.module('engagement')
                     dialogHelper.showError(data.error.message);
             }, function() {});
         }
-
-        $scope.getMapInstance = function() {
-
-        };
 
         $scope.onTimeSetOne = function(newDate, oldDate) {
             $scope.data[0].dateDisplay = serviceHelper.normalizeTime(newDate);
