@@ -84,7 +84,6 @@
 .login-wrapper .box .remember {
   display: block;
   overflow: hidden;
-  margin-bottom: 20px;
 }
 .login-wrapper .box .remember input[type="checkbox"] {
   float: left;

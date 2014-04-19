@@ -5,7 +5,7 @@ angular.module('account')
             // $scope.userRoles = Auth.userRoles;
             // $scope.accessLevels = Auth.accessLevels;
             // $scope.hideMessage = true;
-
+            $scope.hideLoading = true;
             $scope.logout = function() {
                 Auth.logout(function() {
                     $location.path('/login');
@@ -15,6 +15,8 @@ angular.module('account')
             };
 
             $scope.login = function() {
+                $scope.hideLoading = false;
+                $scope.hideMessage = true;
                 Auth.login({
                         username: $scope.username,
                         password: $scope.password,
@@ -25,12 +27,13 @@ angular.module('account')
                         dataFactory.setCurrentBrand(null);
                         dataFactory.updateBrandsHeader(null);
                         dataFactory.updateBrandHeader(null);
-
+                        $scope.hideLoading = true;
                         $scope.hideMessage = false;
                         $location.path('/');
                     },
                     function(err) {
                         $scope.message = err;
+                        $scope.hideLoading = true;
                         $scope.hideMessage = false;
                     });
             };
