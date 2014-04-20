@@ -146,8 +146,9 @@ angular.module('user')
                 return fields;
             }
 
-            $scope.showUserProfile = function(userId) {
+            $scope.showUserProfile = function(userId, name) {
                 $scope.saveInfor();
+                dataFactory.setUsernameAvatar(name, null);
                 dataFactory.setUrl($location.path());
                 $location.path('/user/' + brandId + '/' + userId);
             }

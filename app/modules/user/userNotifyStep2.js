@@ -98,8 +98,9 @@ angular.module('user')
                 $location.path('/user/notify-new/step1/' + brandId);
             }
 
-            $scope.showUserProfile = function(userId) {
+            $scope.showUserProfile = function(userId, name) {
                 dataFactory.setUrl($location.path());
+                dataFactory.setUsernameAvatar(name, null);
                 $location.path('/user/' + brandId + '/' + userId);
             }
 
