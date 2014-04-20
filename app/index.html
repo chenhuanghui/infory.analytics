@@ -53,6 +53,12 @@
 
 <body>
 
+  <section class="main-loading">
+    <div id="loading-animation">
+      <div class="spinner"></div>
+    </div>
+  </section>
+
   <div id="wrapper">
       <div id="width_wrapper" ng-view></div>
   </div>
@@ -99,7 +105,7 @@
   <!-- endbuild -->
 
   
-  
+  <!-- <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script> -->
   
   <!-- build:js({.tmp,app}) scripts -->
   <script src="app.js"></script>
@@ -194,7 +200,11 @@
 
     ga('create', 'UA-XXXXX-X');
     ga('send', 'pageview');
-    
+
+    $( document ).ready(function() {
+        $('.main-loading').hide();
+    });
+
     $(document).mouseup(function (e)
     {
         if(e.which === 1){

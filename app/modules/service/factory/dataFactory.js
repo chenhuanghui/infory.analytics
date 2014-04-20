@@ -245,7 +245,7 @@ angular.module('smg.services')
                     if (userProfile != null && userProfile.userId == userId && userProfile.brand_id == brandId) {
                         success(userProfile);
                     } else {
-                        var fields = '["dob", "name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline", "city", "gender", "facebook"]';
+                        var fields = '["dob", "name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline", "city", "gender", "facebook", "age"]';
                         userRemote.get({
                             fields: fields,
                             brand_id: brandId,

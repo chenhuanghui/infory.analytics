@@ -100,12 +100,12 @@
                         <tbody ng-repeat="user in dataInCurrentPage">
                             <tr>
                                 <td><input type="checkbox" ng-model="$parent.isChecked[user.stt]" ng-change="updateSelectedUsers($parent.isChecked[user.stt]); updateIsCanGo();"/></td>
-                                <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.phone}}</td>
-                                <td class="name"  style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.name}}</td>
-                                <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.dob}}</td>
-                                <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.gender}}</td>
-                                <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.city}}</td>
-                                <td style="cursor:pointer" ng-click="showUserProfile(user.id)">{{user.last_visit}}</td>
+                                <td style="cursor:pointer" ng-click="showUserProfile(user.id, user.name)">{{user.phone}}</td>
+                                <td class="name"  style="cursor:pointer" ng-click="showUserProfile(user.id, user.name)">{{user.name}}</td>
+                                <td style="cursor:pointer" ng-click="showUserProfile(user.id, user.name)">{{user.dob}}</td>
+                                <td style="cursor:pointer" ng-click="showUserProfile(user.id, user.name)">{{user.gender}}</td>
+                                <td style="cursor:pointer" ng-click="showUserProfile(user.id, user.name)">{{user.city}}</td>
+                                <td style="cursor:pointer" ng-click="showUserProfile(user.id, user.name)">{{user.last_visit}}</td>
                             </tr>
                         </tbody>
                         

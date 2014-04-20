@@ -37,7 +37,7 @@ angular.module('user')
                 if (userProfile.email == null)
                     userProfile.email = " - ";
 
-                if (userProfile.gender == null)
+                if (userProfile.gender == null || userProfile.gender == '')
                     userProfile.gender = " - ";
                 else if (userProfile.gender == 'male')
                     userProfile.gender = 'Nam';
@@ -47,13 +47,8 @@ angular.module('user')
                 if (userProfile.city == null)
                     userProfile.city = " - ";
 
-                if (userProfile.facebook[0] != 'h')
+                if (userProfile.facebook[0] != 'h' && userProfile.facebook[0] != '' && userProfile.facebook[0] != null)
                     userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
-
-                if (userProfile.dob != null)
-                    userProfile.age = new Date().getFullYear() - new Date(userProfile.dob.split("-").join("/")).getFullYear();
-                else
-                    userProfile.age = " - ";
 
                 for (var i = 0; i < userProfile.timeline.length; i++) {
                     var time = new Date(userProfile.timeline[i].time.split("-").join("/"));

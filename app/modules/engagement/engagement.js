@@ -8,7 +8,9 @@ angular.module('engagement')
         var brandId = $routeParams.brandId,
             intervalDate = serviceHelper.getIntervalDate(),
             fields = null,
-            oldData = segmentationFactory.getData(brandId);;
+            oldData = segmentationFactory.getData(brandId),
+            bounds = [],
+            isNeedFitMap = true;
 
 
         /** Scope variables **/
@@ -18,10 +20,36 @@ angular.module('engagement')
         $scope.subfilters = [];
         $scope.oldsubfilters = [];
         $scope.hideLoading = true;
+        $scope.mapInstance = null;
+
+        angular.extend($scope, {
+            map: {
+                center: {
+                    latitude: 10.758721, // default value, just for initial purpose
+                    longitude: 106.691930
+                },
+                draggable: true,
+                zoom: 12,
+                control: {},
+                events: {
+                    tilesloaded: function(map) {
+                        $scope.$apply(function() {
+                            $scope.mapInstance = map;
+                            if (bounds.length != 0 && isNeedFitMap) {
+                                $scope.map.control.getGMap().fitBounds(bounds);
+                                isNeedFitMap = false;
+                            }
+                        });
+                    }
+                }
+            }
+        });
 
         dataFactory.getMetaData(brandId, function(data) {
             $scope.metadata = data.meta_lists;
         }, function() {});
+
+        $scope.markers = [];
 
         $scope.chartTypes = [{
             display_name: "Biểu đồ đường",
@@ -32,6 +60,17 @@ angular.module('engagement')
         }, {
             display_name: "Biểu đồ cột",
             id: 2
+        }, {
+            display_name: "Bản đồ phân bố",
+            id: 3
+        }];
+
+        $scope.chartTypeSubs = [{
+            display_name: "Biểu đồ đường",
+            id: 0
+        }, {
+            display_name: "Bản đồ phân bố",
+            id: 3
         }];
 
         $scope.time_units = [{
@@ -60,11 +99,26 @@ angular.module('engagement')
 
         dataFactory.updateBrandSideBar(brandId);
 
+        $scope.changeChartId = function(obj) {
+            if (obj != null) {
+                $scope.chartId = obj.id;
+                saveInfor();
+            }
+        }
 
         if (oldData != null) {
+            $scope.markers = oldData.markers;
+            bounds = oldData.bounds;
+
             for (var i = 0; i < $scope.chartTypes.length; i++)
                 if ($scope.chartTypes[i].id == oldData.chartType.id) {
                     $scope.chartType = $scope.chartTypes[i];
+                    break;
+                }
+
+            for (var i = 0; i < $scope.chartTypeSubs.length; i++)
+                if ($scope.chartTypeSubs[i].id == oldData.chartTypeSub.id) {
+                    $scope.chartTypeSub = $scope.chartTypeSubs[i];
                     break;
                 }
 
@@ -82,6 +136,10 @@ angular.module('engagement')
                     break;
                 }
 
+
+            $scope.chartId = oldData.chartId;
+
+
             $scope.time_unit = getTimeUnit(oldData.time_unit.name);
             $scope.compareUnit = getCompareTo(oldData.compareUnit);
 
@@ -96,10 +154,12 @@ angular.module('engagement')
             $scope.eventBookmark = oldData.eventBookmark;
             $scope.eventBookmarks = oldData.eventBookmarks;
             $scope.isHasBookmark = oldData.isHasBookmark;
-
         } else {
             $scope.time_unit = $scope.time_units[0];
             $scope.chartType = $scope.chartTypes[0];
+            $scope.chartTypeSub = $scope.chartTypeSubs[0];
+            $scope.chartId = 0;
+
             $scope.event = $scope.events[0];
             $scope.compareUnit = $scope.event.compare_properties[0];
 
@@ -185,7 +245,11 @@ angular.module('engagement')
                 eventBookmarks: $scope.eventBookmarks,
                 isHasBookmark: $scope.isHasBookmark,
                 time_unit: $scope.time_unit,
-                compareUnit: $scope.compareUnit
+                compareUnit: $scope.compareUnit,
+                markers: $scope.markers,
+                chartId: $scope.chartId,
+                chartTypeSub: $scope.chartTypeSub,
+                bounds: bounds
             })
         }
 
@@ -283,6 +347,7 @@ angular.module('engagement')
             } else {
                 $scope.hideTypeChart = true;
                 $scope.chartType = $scope.chartTypes[0];
+                $scope.changeChartId($scope.chartType);
             }
         }
 
@@ -300,6 +365,50 @@ angular.module('engagement')
 
         function updateChart(fields) {
             $scope.hideLoading = false;
+
+            var fieldsForMap = {
+                brand_id: fields.brand_id,
+                event: fields.event,
+                date_beg: fields.date_beg,
+                date_end: fields.date_end
+            };
+
+            if (fields.filter == null)
+                fieldsForMap.filter = null;
+            else
+                fieldsForMap.filter = fields.filter;
+
+            isNeedFitMap = true;
+            eventRemote.getDistributionMap(fieldsForMap, function(data) {
+                if (data.error == undefined) {
+                    $scope.markers = [];
+
+                    bounds = new google.maps.LatLngBounds();
+                    for (var i = 0; i < data.points.length; i++) {
+                        var marker = {
+                            coords: {
+                                latitude: data.points[i][0], // default value, just for initial purpose
+                                longitude: data.points[i][1]
+                            },
+                            options: {
+                                draggable: false,
+                            },
+                            icon: "vendor/theme/img/iconpinmap.png"
+
+                        };
+
+                        $scope.markers.push(marker);
+                        bounds.extend(new google.maps.LatLng($scope.markers[i].coords.latitude, $scope.markers[i].coords.longitude));
+                    }
+
+                    if ($scope.mapInstance != null)
+                        $scope.mapInstance.fitBounds(bounds);
+
+                    saveInfor();
+                } else
+                    dialogHelper.showError(data.error.message);
+            }, function() {});
+
             eventRemote.count(fields, function(data) {
                 $scope.hideLoading = true;
                 if (data.error == undefined) {
@@ -308,8 +417,12 @@ angular.module('engagement')
                         $scope.compareUnit.name_display == 'ngày trong tuần' ||
                         $scope.compareUnit.name_display == 'tháng trong năm') {
                         $scope.chartType = $scope.chartTypes[1];
-                    } else
+                        $scope.changeChartId($scope.chartType);
+                    } else {
                         $scope.chartType = $scope.chartTypes[0];
+                        $scope.chartTypeSub = $scope.chartTypeSubs[0];
+                        $scope.changeChartId($scope.chartType);
+                    }
 
                     $scope.chartData[0] = chartHelper.buildLineChart(data, $scope.event.name_display);
                     $scope.chartData[1] = chartHelper.buildPieChart(data, $scope.event.name_display);
@@ -342,10 +455,11 @@ angular.module('engagement')
             $scope.compareUnit = $scope.event.compare_properties[0];
         }
 
-        buildQuery();
-        fields.filter = null;
-        updateChart(fields);
-
+        if (oldData == null) {
+            buildQuery();
+            fields.filter = null;
+            updateChart(fields);
+        }
     }
 ])
     .config(function($routeProvider) {

@@ -74,7 +74,7 @@ angular.module('user')
                 userRemote.filter({
                     brand_id: brandId,
                     filter: '',
-                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
+                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone", "age"]',
                     brand_id: brandId,
                     page: 0,
                     page_size: 10000
@@ -138,7 +138,7 @@ angular.module('user')
 
                 var fields = {
                     filter: JSON.stringify(query),
-                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone"]',
+                    fields: '["id", "name", "dob", "gender", "city", "last_visit", "phone", "age"]',
                     brand_id: brandId,
                     page: 0,
                     page_size: 10000
@@ -146,8 +146,9 @@ angular.module('user')
                 return fields;
             }
 
-            $scope.showUserProfile = function(userId) {
+            $scope.showUserProfile = function(userId, name) {
                 $scope.saveInfor();
+                dataFactory.setUsernameAvatar(name, null);
                 dataFactory.setUrl($location.path());
                 $location.path('/user/' + brandId + '/' + userId);
             }
@@ -177,6 +178,7 @@ angular.module('user')
                     else
                         user.dob = " - ";
 
+                    user.dob = user.age;
                     user.stt = i;
                     $scope.checkList.push(false);
                 }

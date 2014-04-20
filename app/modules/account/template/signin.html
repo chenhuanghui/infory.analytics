@@ -14,8 +14,11 @@
                     <input id="remember-me" type="checkbox" ng-model="rememberme">
                     <label for="remember-me">Ghi nhớ</label>
                 </div>
-                <div class="forget">
-                    <a ng-hide="hideMessage">{{message}}</a>
+                <div ng-hide="hideLoading" class="loading-container-infor" style="margin-bottom: 10px;">
+                    <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+                </div>
+                <div class="forget" style="margin-bottom: 10px;">
+                    <a ng-hide="hideMessage" style="color: rgb(112, 38, 38)">{{message}}</a>
                 </div>
                 <button type="submit" class="btn-glow primary login" ng-click="login()" ng-disabled="loginForm.$invalid">Đăng nhập</button>
             </form>
@@ -27,5 +30,25 @@
         <a href="#signup">Đăng ký ngay</a>
     </div>
 </div>
+
+<!-- <script>
+    console.log('start connection');
+    var conn = new ab.Session(
+        'ws://116.251.210.100:8080' // The host (our Ratchet WebSocket server) to connect to
+      , function() {            // Once the connection has been established
+            console.log('connected');
+            conn.subscribe('kittensCategory', function(topic, data) {
+                // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
+                console.log('New article published to category "' + topic + '" : ' + data.title);
+            });
+        }
+      , function() {            // When the connection is closed
+            console.warn('WebSocket connection closed');
+        }
+      , {                       // Additional parameters, we're ignoring the WAMP sub-protocol for older browsers
+            'skipSubprotocolCheck': true
+        }
+    );
+</script> -->
 
 <style scoped>@import url('vendor/theme/styles/compiled/signin.css')</style>    

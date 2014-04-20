@@ -35,29 +35,30 @@ angular.module('shop', ['google-maps'])
             editPhone: false
         };
 
-        $scope.map = {
-            center: {
-                latitude: 20, // default value, just for initial purpose
-                longitude: 20
+        angular.extend($scope, {
+            map: {
+                center: {
+                    latitude: 10.758721, // default value, just for initial purpose
+                    longitude: 106.691930
+                },
+                draggable: true,
+                zoom: 16
             },
-            draggable: true,
-            zoom: 12
-        }
-
-        $scope.marker = {
-            coords: {
-                latitude: 20, // default value, just for initial purpose
-                longitude: 20
-            },
-            options: {
-                draggable: true
-            },
-            events: {
-                position_changed: function(marker, eventName, args) {
-                    updateLatLng(marker.getPosition().lat(), marker.getPosition().lng())
+            marker: {
+                coords: {
+                    latitude: 10.758721, // default value, just for initial purpose
+                    longitude: 106.691930
+                },
+                options: {
+                    draggable: true
+                },
+                events: {
+                    position_changed: function(marker, eventName, args) {
+                        updateLatLng(marker.getPosition().lat(), marker.getPosition().lng())
+                    }
                 }
             }
-        }
+        });
 
         /** Logic **/
         dataFactory.updateBrandSideBar($scope.brandId);
@@ -102,7 +103,7 @@ angular.module('shop', ['google-maps'])
                     $scope.shop.phone = data.phone;
                 }
 
-                if ($scope.shop.lat == -1 || $scope.shop.lng == -1) {
+                if ($scope.shop.lat == -1 || $scope.shop.lng == -1 || $scope.shop.lat == undefined) {
                     $scope.shop.lat = 10.758721;
                     $scope.shop.lng = 106.691930;
                 }

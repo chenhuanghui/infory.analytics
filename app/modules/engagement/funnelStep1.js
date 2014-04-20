@@ -109,6 +109,9 @@ angular.module('engagement')
 
             $scope.funnel = function() {
                 fields.funnel = [];
+                fields.date_beg = $scope.data[0].dateDisplay;
+                fields.date_end = $scope.data[1].dateDisplay;
+                fields.by = 'turn';
                 columnNames = [];
 
                 for (var i = 0; i < $scope.behaviours.length; i++) {
