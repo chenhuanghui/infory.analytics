@@ -45,7 +45,11 @@
                 </div>
                 <div class="block_content">
                     <p class="notify"> Chỉ thống kê các lượt <span>{{event.name_display}}</span> thoả điều kiện</p>
-                    <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters" oldsubfilters="oldsubfilters"></div>
+                    <div ng-hide="isVisibleFilter" class="loading-container-infor">
+                        <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
+                    </div>
+                    <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters" oldsubfilters="oldsubfilters" visibility="isVisibleFilter">
+                    </div>
                 </div>
                 <div class="block_footer">
                     <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> So sánh theo</p>
