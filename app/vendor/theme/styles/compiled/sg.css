@@ -2117,7 +2117,7 @@ textarea{
     position: absolute;
     left: 50%;
     top: 50%;
-    margin: -100px 0 0 -100px;
+    margin: -50px 0 0 -50px;
 }
 .main-loading .spinner {
   width: 100px;
