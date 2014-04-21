@@ -131,15 +131,25 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="#/personal/{{brand.id}}">Thông tin tài khoản</a></li>
+                <li>
+                    <div id="body_wrapper"><div class="header_icon" id="info_ico"></div><a id="logout" href="#/personal/{{brand.id}}">
+                                            Thông tin                                                
+                                            </a></div>
+
+                <!-- <a href="#/personal/{{brand.id}}">Thông tin tài khoản</a></li> -->
+                <li>
+                    <div id="body_wrapper"><div class="header_icon" id="logout_ico"></div><a role="button" ng-click="logout()" style="cursor:pointer" id="logout">
+                                                Đăng xuất
+                                            </a></div>
+                </li>
             </ul>
         </li>
         
-        <li ng-controller="SignInCtrl" class="settings hidden-xs hidden-sm">
+        <!-- <li ng-controller="SignInCtrl" class="settings hidden-xs hidden-sm">
             <a role="button" ng-click="logout()" style="cursor:pointer">
                 <i class="icon-share-alt"></i>
             </a>
-        </li>
+        </li> -->
     </ul>
 
     <ul class="nav navbar-nav pull-right hidden-xs" style="{{menuDisplayStr}}; float: left !important;">

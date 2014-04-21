@@ -2177,42 +2177,108 @@ textarea{
 }
 
 #report-header {
-padding: 7px 10px;
-position: relative;
+    padding: 7px 10px;
+    position: relative;
 }
 .gray-gradient-box {
-border: 1px solid #cfcfcf;
-background: #f2f2f2;
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF',endColorstr='#E4E4E4');
-background: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e4e4e4));
-background: -moz-linear-gradient(top,#fff,#e4e4e4);
+    border: 1px solid #cfcfcf;
+    background: #f2f2f2;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF',endColorstr='#E4E4E4');
+    background: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e4e4e4));
+    background: -moz-linear-gradient(top,#fff,#e4e4e4);
 }
 
 #report-title {
-color: #4e74a1;
-font-size: 13px;
-font-weight: bold;
-overflow-x: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;
-width: 850px;
+    color: #4e74a1;
+    font-size: 13px;
+    font-weight: bold;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 850px;
 }
 
 #report-description {
-color: #828282;
-font-size: 12px;
+    color: #828282;
+    font-size: 12px;
 }
 
 #bookmark {
-background: url(//cdn.mxpnl.com/cache/cc4f9ccfd2d4db3874f20c10de1d1272/images/reports/events/bookmark-icon.png) no-repeat right 16px;
-color: #939393;
-cursor: pointer;
-display: none;
-font-size: 9px;
-height: 49px;
-line-height: 49px;
-padding-right: 20px;
-position: absolute;
-right: 13px;
-top: 0;
+    background: url(//cdn.mxpnl.com/cache/cc4f9ccfd2d4db3874f20c10de1d1272/images/reports/events/bookmark-icon.png) no-repeat right 16px;
+    color: #939393;
+    cursor: pointer;
+    display: none;
+    font-size: 9px;
+    height: 49px;
+    line-height: 49px;
+    padding-right: 20px;
+    position: absolute;
+    right: 13px;
+    top: 0;
 }
+
+#main-stats .stat .data { 
+    font-weight: normal !important;
+}
+
+#main-stats .stat .date {
+    color: #9B9999 !important;
+    font-size: 13px !important;
+}
+#main-stats .stat .data .number {
+    margin-right: 4px !important;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: transparent !important;
+}
+
+.dropdown-menu {
+    background-color: #3f516b;
+}
+
+
+#body_wrapper {
+    background-color: #42546d;
+    width: auto;
+    height: 26px;
+    border: 1px solid #4a5f7e;
+    -webkit-border-radius: 0 0 3px 3px;
+    -moz-border-radius: 0 0 3px 3px;
+    border-radius: 0 0 3px 3px;
+    z-index: 10002;
+}
+
+.header_icon {
+    float: left;
+    margin-left: 11px;
+    margin-top: 5px;
+    z-index: 10004;
+    
+}
+#logout_ico {
+    background-image: url(//cdn.mxpnl.com/cache/15367c2e20e0551bcd6f9692bc74d88c/images/reports/logout.png);
+    width: 11px;
+    height: 13px;
+}
+#info_ico {
+    background-image: url(/vendor/theme/img/person.png) !important;
+    width: 12px !important;
+    height: 12px !important;
+}
+#logout {
+    color: #fff;
+    float: left;
+    text-shadow: 0 -1px #2a3747;
+    font-size: 12px;
+    /*font-weight: bold;*/
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+#logout:hover {
+    text-decoration: none;
+}
+
+
+
