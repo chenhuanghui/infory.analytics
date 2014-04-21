@@ -10,18 +10,18 @@
         <li class="active open">
             <a href="javacript:void(0)" class="toggle">
                 <i class="icon-certificate"></i>
-                <span>Nhãn hiệu</span>            
+                <span>Nhãn Hiệu</span>            
             </a>        
             <ul class="submenu">
-                <li><a href="#/brand/infor/{{brandId}}"><i class="icon-info-sign sub-icon"></i>Thông tin</a></li>
-                <li><a href="#/brand/promotion/step4/{{brandId}}" ng-click="resetEditPromotionNotification()"><i class="icon-tag sub-icon"></i>Khuyến mãi</a></li>
-                <li><a href="#/brand/comment/{{brandId}}"><i class="icon-comment sub-icon"></i>Bình luận</a></li>
+                <li><a href="#/brand/infor/{{brandId}}"><i class="icon-info-sign sub-icon"></i>Thông Tin</a></li>
+                <li><a href="#/brand/promotion/step4/{{brandId}}" ng-click="resetEditPromotionNotification()"><i class="icon-tag sub-icon"></i>Chiến Dịch</a></li>
+                <li><a href="#/brand/comment/{{brandId}}"><i class="icon-comment sub-icon"></i>Bình Luận</a></li>
             </ul>
         </li>
         <li class="active open">
             <a href="javacript:void(0)" class="toggle">        
                 <i class="icon-signal"></i>
-                <span>Phân tích</span>
+                <span>Phân Tích</span>
             </a>                
             <ul class="submenu">
                 <li><a href="#/segmentation/{{brandId}}"><i class="icon-bar-chart sub-icon"></i>Hành Vi KH </a></li>
@@ -34,13 +34,19 @@
                 <span>Khách hàng</span>
             </a>                
             <ul class="submenu">
-                <li><a href="#/user/manager/{{brandId}}"><i class="icon-reorder sub-icon"></i>Danh sách</a></li>
-                <li><a href="#/user/notify-new/step4/{{brandId}}" ng-click="resetEditPromotionNotification()"><i class="icon-bullhorn sub-icon"></i>Thông báo</a></li>
+                <li><a href="#/user/manager/{{brandId}}"><i class="icon-reorder sub-icon"></i>Danh Sách</a></li>
+                <li><a href="#/user/notify-new/step4/{{brandId}}" ng-click="resetEditPromotionNotification()"><i class="icon-bullhorn sub-icon"></i>Thông Báo</a></li>
             </ul>
         </li>      
     </ul>
 </div>
 <!-- end sidebar -->
+
+<script type="text/javascript"> 
+    $('#wrapper').css("padding", "24px");
+    $('#width_wrapper').width("1150px");
+</script>
+
 <script src="vendor/theme/scripts/theme.js"></script>
 <!-- <script>
     var side_bar_top = $('#sidebar-nav').offset().top;

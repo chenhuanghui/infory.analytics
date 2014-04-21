@@ -275,7 +275,7 @@ angular.module('smg.services')
 
                     var fields = {
                         brand_id: brandId,
-                        fields: '["meta_lists"]'
+                        fields: '["meta_lists", "meta_events", "meta_property_types", "meta_profile"]'
                     };
 
                     systemRemote.get(fields, function(data) {

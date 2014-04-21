@@ -11,6 +11,7 @@ angular.module('smgDirectives', ['ui.date'])
                 events: "=",
                 metadata: "=",
                 event: "=",
+                visibility: "="
             },
             controller: function($scope) {
                 if ($scope.oldsubfilters != null && $scope.oldsubfilters != undefined && $scope.oldsubfilters.length != 0) {
@@ -68,7 +69,8 @@ angular.module('smgDirectives', ['ui.date'])
                 events: "=",
                 event: "=",
                 metadata: "=",
-                olddata: "="
+                olddata: "=",
+                visibility: "="
 
             },
             link: function(scope, element, attr, ctrl) {
