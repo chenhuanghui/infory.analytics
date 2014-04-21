@@ -2116,7 +2116,7 @@ textarea{
     top: 50%;
     margin: -100px 0 0 -100px;
 }
-.main .spinner {
+.main-loading .spinner {
   width: 100px;
   height: 100px;
   background-color: #ff3b3b;
