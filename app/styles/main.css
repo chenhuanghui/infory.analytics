@@ -186,7 +186,7 @@ body {
     border-color: transparent;
     margin: 2px 0 0 0;
     padding: 0 3px;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .controller select.large{
@@ -199,7 +199,7 @@ body {
     -webkit-border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
     font-style: normal;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .controller ._large{
