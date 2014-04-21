@@ -13,19 +13,20 @@
         </a>
         -->
         <ul class="nav navbar-nav pull-left hidden-xs">
-            <li class="settings hidden-xs hidden-sm">
+            <!-- <li class="settings hidden-xs hidden-sm">
                 <a href="/" role="button">
                     <i class="icon-home"></i>
                 </a>
-            </li>
+            </li> -->
             <li class="notification-dropdown hidden-xs hidden-sm z-btn">
                 <a href="#" class="left trigger">
                     {{brand.name}}
                 </a>
-                <i class="icon-sort-down trigger"></i>
+                <!-- <i class="icon-sort-down trigger"></i> -->
+                <i class="icon-drop-down"></i>
                 <div class="pop-dialog">
                     <ul >
-                        <a href="#" style="width: 250px" class="close-icon"></a>
+                        <a href="#"  class="close-icon"></a>
                         <li ng-repeat="b in brands" ><a ng-click="setCurrentBrand(b)">{{b.name}}</a></li>
                         <li class="create-box">
                             <i class="icon-plus"></i>

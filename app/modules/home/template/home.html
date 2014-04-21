@@ -40,7 +40,8 @@
 
     <div class="white-background">
         <div class="home-title">
-            <span >Tổng quan</span>
+            
+            <div id="report-header" class="gray-gradient-box"><div id="report-title">Tổng quan</div><div id="report-description">Tình hình tăng trưởng </div><div id="bookmark" style="display: block;">BOOKMARK</div></div>
         </div>
         <div class="block" ng-hide="true">
             <div class="block_header">
@@ -158,13 +159,18 @@
             </div>
         </div>
         <div class="home-title-2" ng-hide="!isHasBookmark">
-            <span >Biểu đồ của bạn</span>
-            <div class="right">
-                <div class="controller">
-                    <select class="large" ng-model="eventBookmark" ng-options="eventBookmark as eventBookmark.bookmark_name for eventBookmark in eventBookmarks" ng-change="updateEventBookmark(true)"></select>
-                    <span class="btn-glow success _large">XEM BIỂU ĐỒ</span>
-                </div>
+            <!-- <span >Biểu đồ của bạn</span> -->
+
+            <div id="report-header" class="gray-gradient-box"><div id="report-title">Tổng quan</div><div id="report-description">Tình hình tăng trưởng </div><div id="bookmark" style="display: block;">BOOKMARK</div></div>
+            <div class="clearfix" style="display:block;">
+                <div class="right">
+                    <div class="controller">
+                        <select class="large" ng-model="eventBookmark" ng-options="eventBookmark as eventBookmark.bookmark_name for eventBookmark in eventBookmarks" ng-change="updateEventBookmark(true)"></select>
+                        <span class="btn-glow success _large">XEM BIỂU ĐỒ</span>
+                    </div>
+                </div>    
             </div>
+            
         </div>
         <div class="block" ng-hide="!isHasBookmark">
             <div class="block_header">

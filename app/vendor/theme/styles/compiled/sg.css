@@ -248,8 +248,8 @@ div.navbar-header ul li i.icon-home{
     background-image: linear-gradient(top,#4d6283 0,#40516c 0);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d6283',endColorstr='#40516c',GradientType=0);
-    padding: 6px 25px 5px 13px;
-    font-weight: bold;
+    padding: 4px 25px 5px 13px;
+    /*font-weight: bold;*/
     position: relative;
     z-index: 10001;
     cursor: pointer;
@@ -260,11 +260,19 @@ div.navbar-header ul li i.icon-home{
     height: auto !important;
     background: transparent !important;
     height: 20px !important;
-    width: 200px;
+    width: 130px;
     word-wrap: break-word;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    /*text-overflow: clip;
+    white-space: nowrap;
+    overflow-x: hidden;
+    line-height: 16px;*/
+    color: #fff !important;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    font-weight: 100;
 }
 
 .navbar-nav .z-btn > a:hover{
@@ -305,6 +313,7 @@ div.navbar-header ul li i.icon-home{
 	top: 100%;
 	left: 0;
 	right: 0;
+    width: 220px;
 }
 
 .navbar-nav .z-btn .pop-dialog>ul{
@@ -1179,7 +1188,7 @@ table.comment{
 .home-title{
     margin-left: 15px;
     padding-top: 15px;
-    padding-bottom: 10px;
+    /*padding-bottom: 10px;*/
     font-family: Tahoma;
     font-size: 28px;
     color: #e1e1e1;
@@ -1326,6 +1335,16 @@ table.comment{
     position: absolute;
     top: 3px;
     right: 12px;
+    
+}
+
+.icon-drop-down {
+    background: url(//cdn.mxpnl.com/cache/531b9fe2038349c6f1b1916276968d44/images/engage/project_menu_arrow.png);
+    width: 8px;
+    height: 6px;
+    position: absolute;
+    right: 12px;
+    top: 10px;
 }
 
 #sidebar-nav #dashboard-menu > li .toggle{
@@ -1440,8 +1459,10 @@ body, .z-select, .select-date .input-append input, .select-date, .wizard-steps l
 }
 
 #sidebar-nav #dashboard-menu a span {
-    text-transform: uppercase;
     font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 1px #fff;
+    /*margin: 0px 0 2px 0px;*/
 }
 
 .info_detail p span{
@@ -2147,4 +2168,51 @@ textarea{
     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
     -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
   }
+}
+
+.dropdown a {
+    color: #fff !important;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    font-weight: 100;
+}
+
+#report-header {
+padding: 7px 10px;
+position: relative;
+}
+.gray-gradient-box {
+border: 1px solid #cfcfcf;
+background: #f2f2f2;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF',endColorstr='#E4E4E4');
+background: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e4e4e4));
+background: -moz-linear-gradient(top,#fff,#e4e4e4);
+}
+
+#report-title {
+color: #4e74a1;
+font-size: 13px;
+font-weight: bold;
+overflow-x: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+width: 850px;
+}
+
+#report-description {
+color: #828282;
+font-size: 12px;
+}
+
+#bookmark {
+background: url(//cdn.mxpnl.com/cache/cc4f9ccfd2d4db3874f20c10de1d1272/images/reports/events/bookmark-icon.png) no-repeat right 16px;
+color: #939393;
+cursor: pointer;
+display: none;
+font-size: 9px;
+height: 49px;
+line-height: 49px;
+padding-right: 20px;
+position: absolute;
+right: 13px;
+top: 0;
 }
