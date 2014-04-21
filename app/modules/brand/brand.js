@@ -76,7 +76,7 @@ angular.module('brand')
             $scope.bundle.brandName = data.name;
             $scope.bundle.brandCover = data.cover;
             $scope.bundle.brandDescription = data.description;
-            $scope.bundle.brandShortDescription = data.description.substring(0, 100)+"...";
+            $scope.bundle.brandShortDescription = data.description.substring(0, 100) + "...";
             $scope.bundle.brandWebsite = data.website;
             $scope.bundle.brandFanpage = data.fanpage;
             $scope.bundle.brandContact = data.owner_phone;
@@ -261,28 +261,6 @@ angular.module('brand')
                     } else {
                         dialogHelper.showError(data.error.message);
                         $scope.bundle.brandFanpage = $scope.brand.fanpage;
-                    }
-                }, function() {
-
-                });
-            }
-        }
-
-        $scope.changeFanpage = function() {
-            $scope.bundle.editPhone = !$scope.bundle.editPhone;
-            if ($scope.bundle.brandPhone.length <= 0) {
-                $scope.bundle.brandPhone = $scope.brand.owner_phone;
-            } else {
-                brandRemote.update({
-                    fanpage: $scope.bundle.brandPhone,
-                    brand_id: brandId,
-                }, function(data) {
-                    if (data.error == undefined) {
-                        $scope.brand.fanpage = $scope.bundle.brandPhone;
-                        dataFactory.setCurrentBrand($scope.brand);
-                    } else {
-                        dialogHelper.showError(data.error.message);
-                        $scope.bundle.brandPhone = $scope.brand.owner_phone;
                     }
                 }, function() {
 
