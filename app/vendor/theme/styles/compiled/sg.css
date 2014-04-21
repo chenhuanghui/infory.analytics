@@ -658,7 +658,7 @@ div.navbar-header ul li i.icon-home{
     background-color: #fff;
     padding:0;
     margin: 10px;
-    min-height: 400px
+    /*min-height: 400px*/
 }
 
 .property-box .nav{
