@@ -46,7 +46,7 @@
                                         <select ng-model="statusType" ng-options="statusType as statusType.name_display for statusType in statusTypes" ng-init="statusType=statusTypes[0]" ng-change="sortNotificationListByStatus()"></select>
                                     </div>
                                 </th>
-                                <th>Thao tác</th>
+                                <!-- <th>Thao tác</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -57,7 +57,7 @@
                                 <td>{{message.time_begin}}</td>
                                 <td> {{message.sentAmount}} </td>
                                 <td><a class="{{$parent.messageListFull[message.index].statusClass}}" ng-click="changeStatus(message.index)" style="width:auto;">{{$parent.messageListFull[message.index].statusName}}</a></td>
-                                <td><i class="icon-remove-sign"></i> Xoá</td>
+                                <!-- <td><i class="icon-remove-sign"></i> Xoá</td> -->
                             </tr>
                         </tbody>
                     </table>
