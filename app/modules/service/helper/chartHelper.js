@@ -56,11 +56,11 @@ angular.module('Smg')
                             type: 'line'
                         },
                         title: {
-                            text: event,
+                            text: 'Thống kê lượt ' + event + 'theo thời gian',
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Source: infory.vn',
+                            text: 'Nguồn: infory.vn',
                             x: -20
                         },
                         xAxis: {
@@ -68,7 +68,7 @@ angular.module('Smg')
                         },
                         yAxis: {
                             title: {
-                                text: 'Lượt ' + event
+                                text: 'lượt '
                             },
                             plotLines: [{
                                 value: 0,
@@ -126,7 +126,7 @@ angular.module('Smg')
                             plotShadow: false
                         },
                         title: {
-                            text: event
+                            text: 'Thống kê lượt ' + event + 'theo thời gian',
                         },
                         tooltip: {
                             pointFormat: '{<b>{point.percentage:.1f}%</b>'
@@ -180,7 +180,7 @@ angular.module('Smg')
                             type: 'column'
                         },
                         title: {
-                            text: event,
+                            text: 'Thống kê lượt ' + event + 'theo thời gian',
                         },
                         subtitle: {
                             text: 'Nguồn: infory.vn',

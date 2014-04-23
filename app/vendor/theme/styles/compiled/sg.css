@@ -2280,5 +2280,10 @@ textarea{
     text-decoration: none;
 }
 
+.text-chart{
+    color: #555;
+    margin-top: 5px;
+    font-weight: bold;
+}
 
 

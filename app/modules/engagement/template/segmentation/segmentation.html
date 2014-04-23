@@ -67,7 +67,7 @@
                         <div class="dropdown left" >
                           <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                 <div class="select-date btn-glow">
-                                    <div class="input-append"><input type="text" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                                    <div class="input-append">Từ<input type="text" data-ng-model="data[0].dateDisplay" style="width: 100px;">
                                     </div>
                                     <i class="icon-sort-down"></i>
                                 </div>
@@ -80,7 +80,7 @@
                         <div class="dropdown left" style="margin-left:10px;">
                           <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
                             <div class="select-date btn-glow">
-                                <div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                                <div class="input-append">Đến<input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
                                 </div>
                                 <i class="icon-sort-down"></i>
                             </div>
@@ -91,11 +91,16 @@
                         </div>
                     </span>
 
+
                      <select class="type_menu right z-select" ng-model="chartType" ng-options="chartType as chartType.display_name for chartType in chartTypes" ng-hide="hideTypeChart" ng-change="changeChartId(chartType)"></select>
 
                      <select class="type_menu right z-select" ng-model="chartTypeSub" ng-options="chartTypeSub as chartTypeSub.display_name for chartTypeSub in chartTypeSubs" ng-hide="!hideTypeChart" ng-change="changeChartId(chartTypeSub)"></select>
 
+                     <span class="right text-chart" style="margin-left: 30px;">Dạng biểu đồ: </span>
+
                      <select class="type_menu pull-right z-select" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-change="updateChart()"></select>
+
+                     <span class="right text-chart">Đơn vị: </span>
 
                 </div>
                 <div ng-switch on="chartId" class="block_content" style="height: 420px;">
