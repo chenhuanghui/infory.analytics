@@ -28,16 +28,16 @@
                     <div class="wapper">
                         <div class="step-wapper">
                             <div class="step-wapper-header">
-                                <div class="left">
+                                <!-- <div class="left">
                                     <h4>Tổng quan</h4>
-                                </div>
+                                </div> -->
                                 <div class="right" ng-hide="false">
                                     <div class="controller">
                                         <div class="z-dropdown-wapper">
                                             <div class="z-dropdown">
                                                 <a class="trigger" style="cursor:pointer"><span>{{funnelBookmark.bookmark_name}}</span>
                                                 <i class="icon-sort-down"></i></a>
-                                                <ul>
+                                                <ul style=" max-height: 250px;">
                                                     <li ng-repeat="funnelBookmark in funnelBookmarks"><a ng-click="changeFunnelBookmark(funnelBookmark.id)" style="cursor:pointer">{{funnelBookmark.bookmark_name}}</a></li>
                                                 </ul>
                                             </div>
