@@ -2233,7 +2233,7 @@ textarea{
     background-color: transparent !important;
 }
 
-.dropdown-menu {
+.dropdown-menu.config {
     background-color: #3f516b;
 }
 
