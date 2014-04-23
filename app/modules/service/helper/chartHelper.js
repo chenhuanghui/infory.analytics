@@ -4,11 +4,48 @@ angular.module('Smg')
     .factory('chartHelper',
         function() {
             return {
-                buildLineChartForFunnel: function(values, columnNames, valueSuffix, unit, updateTableEvent) {
+                buildLineChartForFunnel: function(values, columnNames, valueSuffix, unit, updateTableEvent, totalRows, conversationRate) {
                     var chartData = {
                         chart: {
                             type: 'column',
-                            renderTo: 'container'
+                            renderTo: 'container',
+                            events: {
+                                load: function() {                                    
+                                    var ren = this.renderer;
+                                    console.log(totalRows);
+                                                                        
+                                    for (var i = 0; i < totalRows.length; i++) { 
+                                        // (x, y) start position, d is radius of 45 degree rotated square
+                                        //TODO: Refine the drawing algorithm for better positioning
+                                        var x = this.plotLeft + (i + 1) * this.plotSizeX / this.pointCount - 30;
+                                        var y = 215; // 210
+                                        var d = 29;
+                                        var fontSize = 10;
+
+                                        // draw a rotated square
+                                        ren.path(['M', x, y, 'L', x + d, y + d, x + 2*d, y, x + d, y - d, 'Z' ]) 
+                                            .attr({
+                                                'stroke-width': 2,
+                                                stroke: 'silver'                                            
+                                            })
+                                            .add();
+
+                                        ren.label(totalRows[i].rateBetweenTwoStep, x + 8, y - 9)  
+                                        // x + 8, y - 10 for centering the label
+                                        .css({
+                                            fontWeight: 'bold'
+                                        })
+                                        .add();
+                                    }
+                                    ren.label("Conversation Rate: " + conversationRate, this.plotSizeX- 100, 10)  
+                                        // x + 8, y - 10 for centering the label
+                                        .css({
+                                            fontWeight: 'bold'
+                                        })
+                                        .add();
+
+                                }
+                            }       
                         },
                         title: {
                             text: 'Thống kê ',
@@ -39,8 +76,7 @@ angular.module('Smg')
                             align: 'right',
                             verticalAlign: 'middle',
                             borderWidth: 0
-                        },
-
+                        },                        
                     };
 
                     chartData.plotOptions =  {
@@ -54,8 +90,9 @@ angular.module('Smg')
                                                 this.series.data[i].update({ color: '#2f7ed8' }, true, false);
                                             }
                                             this.update({ color: '#f00' }, true, false)
-                                            updateTableEvent(this.x)
-                                        }
+                                            updateTableEvent(this.x);
+                                            console.log(this);
+                                        }                                       
                                     }
                                 }
                             }
