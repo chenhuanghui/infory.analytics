@@ -4,10 +4,11 @@ angular.module('Smg')
     .factory('chartHelper',
         function() {
             return {
-                buildLineChartForFunnel: function(values, columnNames, valueSuffix, unit) {
+                buildLineChartForFunnel: function(values, columnNames, valueSuffix, unit, updateTableEvent) {
                     var chartData = {
                         chart: {
-                            type: 'column'
+                            type: 'column',
+                            renderTo: 'container'
                         },
                         title: {
                             text: 'Thống kê ',
@@ -42,7 +43,24 @@ angular.module('Smg')
 
                     };
 
-
+                    chartData.plotOptions =  {
+                        series: {
+                            cursor: 'pointer',
+                            point: {
+                                events: {
+                                    click: function() {
+                                        if (this.x != 0) {
+                                            for (var i = 0; i < this.series.data.length; i++) {
+                                                this.series.data[i].update({ color: '#2f7ed8' }, true, false);
+                                            }
+                                            this.update({ color: '#f00' }, true, false)
+                                            updateTableEvent(this.x)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     chartData.series = [{
                         name: ' ',
                         data: values
