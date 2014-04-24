@@ -170,7 +170,11 @@ angular.module('engagement')
                             }
                         }
 
-                        $scope.conversationRate = (100 * $scope.totalRows[$scope.totalRows.length - 1].currentStepCount / $scope.totalRows[0].previousStepCount).toFixed(2) + "%";
+                        if ($scope.totalRows != 0)
+                            $scope.conversationRate = (100 * $scope.totalRows[$scope.totalRows.length - 1].currentStepCount / $scope.totalRows[0].previousStepCount).toFixed(2) + "%";
+                        else
+                            $scope.conversationRate = '100%';
+
                         $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames, valueSuffix, unit, updateTableEvent, $scope.totalRows, $scope.conversationRate);
                     } else
                         dialogHelper.showError(data.error.message);
