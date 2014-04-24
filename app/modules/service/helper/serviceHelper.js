@@ -25,6 +25,11 @@ angular.module('Smg')
                         date_end: currentDate,
                         date_beg: endDate
                     };
+                },
+
+                capitaliseFirstLetter: function(string)
+                {
+                    return string.charAt(0).toUpperCase() + string.slice(1);
                 }
             }
         }

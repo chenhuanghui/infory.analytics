@@ -1,6 +1,10 @@
 angular.module('engagement')
-    .controller('FunnelStep2Ctrl', ['$scope', '$routeParams', '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 'serviceHelper', 'funnelFactory', 'bookmarkRemote', 'brandRemote', 'dialogHelper',
-        function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote, brandRemote, dialogHelper) {
+    .controller('FunnelStep2Ctrl', ['$scope', '$routeParams', 
+        '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 
+        'serviceHelper', 'funnelFactory', 'bookmarkRemote', 'brandRemote', 'dialogHelper', 'compareHelper',
+        function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, 
+            funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote, brandRemote, dialogHelper,
+            compareHelper) {
 
             /** Global variables **/
             var brandId = $routeParams.brandId,
@@ -41,6 +45,14 @@ angular.module('engagement')
 
             $scope.columnChart = {};
             $scope.hideLoading = false;
+
+            $scope.currentEvents = [];
+            $scope.currentEvent = null;
+            $scope.currentEventIdx = -1;
+            $scope.compareUnitName = "";
+            
+            $scope.tables = [];   
+            $scope.totalRows = [];         
 
             /** Logic **/
             dataFactory.updateBrandSideBar(brandId);
@@ -94,15 +106,16 @@ angular.module('engagement')
 
             $scope.updateCompareUnit = function() {
                 var compareToObject = null;
-
+                        
                 if ($scope.compareUnit.name_display != 'chọn thuộc tính') {
                     compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
                 }
 
-                if (compareToObject != null)
-                    fields.compare_by = JSON.stringify(compareToObject);
-
-                updateChart(fields);
+                if (compareToObject != null) {
+                    $scope.compareUnitName = serviceHelper.capitaliseFirstLetter($scope.compareUnit.name_display);
+                    compare_by = JSON.stringify(compareToObject);
+                    updateTableData(compare_by, $scope.currentEventIdx);
+                }
             }
 
             $scope.updateComputeBy = function() {
@@ -116,26 +129,48 @@ angular.module('engagement')
                 }
                 updateChart(fields);
             };
+            
 
             function updateChart(fields) {
+                
                 $scope.hideLoading = false;
 
+                // reset all variable related to current event and table data
+                $scope.currentEvent = null;
+                $scope.currentEventIdx = -1;
+                $scope.tables = [];
+                $scope.compareUnitName = "";
+                $scope.totalRows = [];
 
                 funnelRemote.get(fields, function(data) {
                     $scope.hideLoading = true;
+
+                    $scope.currentEvents = [];
+
+                    var filters = JSON.parse(fields.funnel);
+                    columnNames = [];
+
+                    // get current chart events
+                    for (var i = 0; i < filters.length; i++) {
+                        eventObj = getEventObj(filters[i].event);
+                        columnNames.push(eventObj.name_display);
+                        $scope.currentEvents.push(eventObj);
+                    }
+
                     if (data.error == undefined) {
                         var values = [];
-                        for (var i = 0; i < data.length; i++)
-                            values.push(data[i].count);
+                        for (var i = 0; i < data.length; i++) {
+                            values.push(data[i].count);        
 
-                        columnNames = [];
-                        var filters = JSON.parse(fields.funnel);
+                            if (i > 0) 
+                            {
+                                var row = createSingleTableRow("Total", data, i);
+                                $scope.totalRows.push(row);
+                            }
+                        }                                                        
 
-                        for (var i = 0; i < filters.length; i++) {
-                            columnNames.push(getEventNameDisplay(filters[i].event));
-                        }
-
-                        $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames, valueSuffix, unit);
+                        $scope.conversationRate = (100 * $scope.totalRows[$scope.totalRows.length - 1].currentStepCount / $scope.totalRows[0].previousStepCount).toFixed(2) + "%";
+                        $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames, valueSuffix, unit, updateTableEvent, $scope.totalRows, $scope.conversationRate);                        
                     } else
                         dialogHelper.showError(data.error.message);
                 }, function() {});
@@ -163,12 +198,107 @@ angular.module('engagement')
                 }
             }
 
-
-            function getEventNameDisplay(name) {
-                for (var i = 0; i < $scope.events.length; i++) {
+            // Get event object via global events metadata
+            function getEventObj(name)
+            {
+                 for (var i = 0; i < $scope.events.length; i++) 
+                 {
                     if ($scope.events[i].name == name)
-                        return $scope.events[i].name_display;
+                        return $scope.events[i];
                 }
+            }
+
+            // fields is only provided in case there's table
+            function updateTableEvent(eventIdx)
+            {            
+                $scope.currentEvent = $scope.currentEvents[eventIdx];          
+                $scope.currentEventIdx = eventIdx;             
+                $scope.tables = [];         
+                $scope.$apply(); // for ng-show working properly
+            }
+
+            function formatTimeInterval(timeInterval)
+            {
+                var timeIntervalPattern = /(\d+)\:(\d+)\:(\d+)(.)+/i;
+
+                var result = timeInterval.match(timeIntervalPattern);
+                if (result[1] > 1)
+                    hourStr = result[1] + " hours ";
+                else 
+                    hourStr = result[1] + " hour ";
+                    
+                if (result[2] > 1)
+                    minuteStr = result[2] + " minutes ";
+                else 
+                    minuteStr = result[2] + " minute ";
+                    
+                if (result[3] > 1)
+                    secondStr = result[1] + " seconds ";
+                else 
+                    secondStr = result[1] + " second ";
+
+                formattedStr = hourStr + minuteStr + secondStr;
+
+                timeInterval = timeInterval.replace(timeIntervalPattern, formattedStr);                
+
+                return timeInterval;
+            }
+
+            function createSingleTableRow(groupName, values, j)
+            {
+                var row = [];
+
+                row.name = groupName;
+                row.previousStepCount = values[j - 1].count;
+                row.currentStepCount = values[j].count;
+                row.avgTime = formatTimeInterval(values[j].avg_time_from_last_step);
+                if (values[j - 1].count != 0)
+                    row.rateBetweenTwoStep = (100 * values[j].count / values[j - 1].count).toFixed(2) + "%";
+                else 
+                    row.rateBetweenTwoStep = 0;
+
+                return row;
+            }
+
+            function updateTableData(compareBy, eventIdx)
+            {                        
+                fields = {
+                    brand_id: brandId,
+                    date_beg: $scope.data[0].dateDisplay,
+                    date_end: $scope.data[1].dateDisplay,
+                    by: $scope.computeBy.name,
+                    funnel: $scope.funnelBookmark.funnel,
+                    compare_by: compareBy
+                };                
+                
+                funnelRemote.get(fields, function(data) {
+                    $scope.hideLoading = true;                
+                    
+                    if (data.error == undefined) {
+                        var values = data.values;   
+                        var groups = data.groups;
+                        var tables = [];
+                                                
+                        // we have (eventIdx - 1) events, each event give us a table
+                        for (j = 1; j <= eventIdx; j++) {   
+                            var table = [];
+
+                            for (i = 0; i < groups.length; i++) {                                
+                                var row = createSingleTableRow(groups[i], values[i], j);
+                                table.push(row);
+                            }         
+                            
+                            // push the total row
+                            table.push($scope.totalRows[j - 1]);
+
+                            tables.push(table);
+                        }
+
+                        // set table to $scope var
+                        $scope.tables = tables;                                      
+                    } else
+                        dialogHelper.showError(data.error.message);
+                }, function() {});                
             }
         }
     ])
