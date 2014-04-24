@@ -34,6 +34,7 @@ angular.module('engagement')
             $scope.events = remoteFactory.meta_events;
             $scope.metadata = remoteFactory.meta_lists;
             $scope.hideLoadingTable = true;
+            $scope.showTable = false;
 
             $scope.computeBys = [{
                 name: 'turn',
@@ -145,7 +146,7 @@ angular.module('engagement')
 
                 funnelRemote.get(fields, function(data) {
                     $scope.hideLoading = true;
-
+                    $scope.showTable = true;
                     $scope.currentEvents = [];
 
                     var filters = JSON.parse(fields.funnel);
@@ -164,7 +165,7 @@ angular.module('engagement')
                             values.push(data[i].count);
 
                             if (i > 0) {
-                                var row = createSingleTableRow("Total", data, i);
+                                var row = createSingleTableRow("Tất cả", data, i);
                                 $scope.totalRows.push(row);
                             }
                         }
@@ -246,6 +247,9 @@ angular.module('engagement')
                 row.name = groupName;
                 row.previousStepCount = values[j - 1].count;
                 row.currentStepCount = values[j].count;
+                if (values[j].avg_time_from_last_step == null)
+                    values[j].avg_time_from_last_step = "00:00:00";
+
                 row.avgTime = formatTimeInterval(values[j].avg_time_from_last_step);
                 if (values[j - 1].count != 0)
                     row.rateBetweenTwoStep = (100 * values[j].count / values[j - 1].count).toFixed(2) + "%";
