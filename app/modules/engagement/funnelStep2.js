@@ -1,8 +1,8 @@
 angular.module('engagement')
-    .controller('FunnelStep2Ctrl', ['$scope', '$routeParams', 
-        '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper', 
+    .controller('FunnelStep2Ctrl', ['$scope', '$routeParams',
+        '$location', 'dataFactory', 'remoteFactory', '$modal', 'filterHelper', 'funnelRemote', 'chartHelper',
         'serviceHelper', 'funnelFactory', 'bookmarkRemote', 'brandRemote', 'dialogHelper', 'compareHelper',
-        function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper, 
+        function($scope, $routeParams, $location, dataFactory, remoteFactory, $modal, filterHelper,
             funnelRemote, chartHelper, serviceHelper, funnelFactory, bookmarkRemote, brandRemote, dialogHelper,
             compareHelper) {
 
@@ -33,6 +33,7 @@ angular.module('engagement')
             $scope.metas = remoteFactory.meta_property_types;
             $scope.events = remoteFactory.meta_events;
             $scope.metadata = remoteFactory.meta_lists;
+            $scope.hideLoadingTable = true;
 
             $scope.computeBys = [{
                 name: 'turn',
@@ -50,9 +51,9 @@ angular.module('engagement')
             $scope.currentEvent = null;
             $scope.currentEventIdx = -1;
             $scope.compareUnitName = "";
-            
-            $scope.tables = [];   
-            $scope.totalRows = [];         
+
+            $scope.tables = [];
+            $scope.totalRows = [];
 
             /** Logic **/
             dataFactory.updateBrandSideBar(brandId);
@@ -106,7 +107,7 @@ angular.module('engagement')
 
             $scope.updateCompareUnit = function() {
                 var compareToObject = null;
-                        
+
                 if ($scope.compareUnit.name_display != 'chọn thuộc tính') {
                     compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
                 }
@@ -129,10 +130,10 @@ angular.module('engagement')
                 }
                 updateChart(fields);
             };
-            
+
 
             function updateChart(fields) {
-                
+
                 $scope.hideLoading = false;
 
                 // reset all variable related to current event and table data
@@ -160,17 +161,16 @@ angular.module('engagement')
                     if (data.error == undefined) {
                         var values = [];
                         for (var i = 0; i < data.length; i++) {
-                            values.push(data[i].count);        
+                            values.push(data[i].count);
 
-                            if (i > 0) 
-                            {
+                            if (i > 0) {
                                 var row = createSingleTableRow("Total", data, i);
                                 $scope.totalRows.push(row);
                             }
-                        }                                                        
+                        }
 
                         $scope.conversationRate = (100 * $scope.totalRows[$scope.totalRows.length - 1].currentStepCount / $scope.totalRows[0].previousStepCount).toFixed(2) + "%";
-                        $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames, valueSuffix, unit, updateTableEvent, $scope.totalRows, $scope.conversationRate);                        
+                        $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames, valueSuffix, unit, updateTableEvent, $scope.totalRows, $scope.conversationRate);
                     } else
                         dialogHelper.showError(data.error.message);
                 }, function() {});
@@ -199,53 +199,48 @@ angular.module('engagement')
             }
 
             // Get event object via global events metadata
-            function getEventObj(name)
-            {
-                 for (var i = 0; i < $scope.events.length; i++) 
-                 {
+            function getEventObj(name) {
+                for (var i = 0; i < $scope.events.length; i++) {
                     if ($scope.events[i].name == name)
                         return $scope.events[i];
                 }
             }
 
             // fields is only provided in case there's table
-            function updateTableEvent(eventIdx)
-            {            
-                $scope.currentEvent = $scope.currentEvents[eventIdx];          
-                $scope.currentEventIdx = eventIdx;             
-                $scope.tables = [];         
+            function updateTableEvent(eventIdx) {
+                $scope.currentEvent = $scope.currentEvents[eventIdx];
+                $scope.currentEventIdx = eventIdx;
+                $scope.tables = [];
                 $scope.$apply(); // for ng-show working properly
             }
 
-            function formatTimeInterval(timeInterval)
-            {
+            function formatTimeInterval(timeInterval) {
                 var timeIntervalPattern = /(\d+)\:(\d+)\:(\d+)(.)+/i;
 
                 var result = timeInterval.match(timeIntervalPattern);
                 if (result[1] > 1)
-                    hourStr = result[1] + " hours ";
-                else 
-                    hourStr = result[1] + " hour ";
-                    
+                    hourStr = result[1] + " giờ ";
+                else
+                    hourStr = result[1] + " giờ ";
+
                 if (result[2] > 1)
-                    minuteStr = result[2] + " minutes ";
-                else 
-                    minuteStr = result[2] + " minute ";
-                    
+                    minuteStr = result[2] + " phút ";
+                else
+                    minuteStr = result[2] + " phút ";
+
                 if (result[3] > 1)
-                    secondStr = result[1] + " seconds ";
-                else 
-                    secondStr = result[1] + " second ";
+                    secondStr = result[1] + " giây ";
+                else
+                    secondStr = result[1] + " giây ";
 
                 formattedStr = hourStr + minuteStr + secondStr;
 
-                timeInterval = timeInterval.replace(timeIntervalPattern, formattedStr);                
+                timeInterval = timeInterval.replace(timeIntervalPattern, formattedStr);
 
                 return timeInterval;
             }
 
-            function createSingleTableRow(groupName, values, j)
-            {
+            function createSingleTableRow(groupName, values, j) {
                 var row = [];
 
                 row.name = groupName;
@@ -254,14 +249,13 @@ angular.module('engagement')
                 row.avgTime = formatTimeInterval(values[j].avg_time_from_last_step);
                 if (values[j - 1].count != 0)
                     row.rateBetweenTwoStep = (100 * values[j].count / values[j - 1].count).toFixed(2) + "%";
-                else 
+                else
                     row.rateBetweenTwoStep = 0;
 
                 return row;
             }
 
-            function updateTableData(compareBy, eventIdx)
-            {                        
+            function updateTableData(compareBy, eventIdx) {
                 fields = {
                     brand_id: brandId,
                     date_beg: $scope.data[0].dateDisplay,
@@ -269,25 +263,27 @@ angular.module('engagement')
                     by: $scope.computeBy.name,
                     funnel: $scope.funnelBookmark.funnel,
                     compare_by: compareBy
-                };                
-                
+                };
+
+                $scope.hideLoadingTable = false;
                 funnelRemote.get(fields, function(data) {
-                    $scope.hideLoading = true;                
-                    
+                    $scope.hideLoading = true;
+                    $scope.hideLoadingTable = true;
+
                     if (data.error == undefined) {
-                        var values = data.values;   
+                        var values = data.values;
                         var groups = data.groups;
                         var tables = [];
-                                                
+
                         // we have (eventIdx - 1) events, each event give us a table
-                        for (j = 1; j <= eventIdx; j++) {   
+                        for (j = 1; j <= eventIdx; j++) {
                             var table = [];
 
-                            for (i = 0; i < groups.length; i++) {                                
+                            for (i = 0; i < groups.length; i++) {
                                 var row = createSingleTableRow(groups[i], values[i], j);
                                 table.push(row);
-                            }         
-                            
+                            }
+
                             // push the total row
                             table.push($scope.totalRows[j - 1]);
 
@@ -295,10 +291,10 @@ angular.module('engagement')
                         }
 
                         // set table to $scope var
-                        $scope.tables = tables;                                      
+                        $scope.tables = tables;
                     } else
                         dialogHelper.showError(data.error.message);
-                }, function() {});                
+                }, function() {});
             }
         }
     ])
