@@ -1060,3 +1060,10 @@ body {
   padding-left: 5px;
   width: 240px;
 }
+/** FIX INFO style **/
+span.description {
+    width: 190px !important;
+    text-algin: justify;
+}
+
+
