@@ -18,6 +18,18 @@
   /*background: 100% 100% url(/img/bg1.jpg) no-repeat;*/
   text-align: center;
   min-height: 650px;
+
+
+  max-width: 100%;
+  max-height: 100%;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  
 }
 .login-wrapper .logo {
   margin-bottom: 45px;

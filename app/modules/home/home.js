@@ -213,7 +213,7 @@ angular.module('home')
                     brandRemote.getCostChart(field, function(data) {
                         $scope.hideLoading[id] = true;
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Dịch vụ');
+                            $scope.dataChart[id] = chartHelper.buildLineChartForHome(data, 'Dịch vụ');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
@@ -222,7 +222,7 @@ angular.module('home')
                     brandRemote.getDevelopmentChart(field, function(data) {
                         $scope.hideLoading[id] = true;
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChart(data, 'Tình hình tăng trưởng');
+                            $scope.dataChart[id] = chartHelper.buildLineChartForHome(data, 'Tình hình tăng trưởng');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});

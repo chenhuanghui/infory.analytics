@@ -1386,7 +1386,7 @@ table.comment{
     box-shadow: none;
     background: rgba(0, 0, 0, 0);
     border: none;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 .select-date .icon-sort-down{
@@ -1398,7 +1398,7 @@ table.comment{
 .z-select{
     background: transparent;
     border: none;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 
 /** global color **/
@@ -2172,7 +2172,7 @@ textarea{
 
 .dropdown a {
     color: #fff !important;
-    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    /*text-shadow: 0 1px 1px rgba(0,0,0,0.3);*/
     font-weight: 100;
 }
 
@@ -2233,7 +2233,7 @@ textarea{
     background-color: transparent !important;
 }
 
-.dropdown-menu {
+.dropdown-menu.config {
     background-color: #3f516b;
 }
 
@@ -2257,14 +2257,14 @@ textarea{
     
 }
 #logout_ico {
-    background-image: url(//cdn.mxpnl.com/cache/15367c2e20e0551bcd6f9692bc74d88c/images/reports/logout.png);
+   /* background-image: url(//cdn.mxpnl.com/cache/15367c2e20e0551bcd6f9692bc74d88c/images/reports/logout.png);
     width: 11px;
-    height: 13px;
+    height: 13px;*/
 }
 #info_ico {
-    background-image: url(/vendor/theme/img/person.png) !important;
+    /*background-image: url(/vendor/theme/img/person.png) !important;
     width: 12px !important;
-    height: 12px !important;
+    height: 12px !important;*/
 }
 #logout {
     color: #fff;
@@ -2280,5 +2280,10 @@ textarea{
     text-decoration: none;
 }
 
+.text-chart{
+    color: #6c7487;
+    margin-top: 5px;
+    font-weight: bold;
+}
 
 

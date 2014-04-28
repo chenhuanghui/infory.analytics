@@ -37,6 +37,7 @@ angular.module('engagement')
                 }];
 
                 $scope.isVisibleFilter = true;
+                run();
             }, function() {});
 
             function run() {
