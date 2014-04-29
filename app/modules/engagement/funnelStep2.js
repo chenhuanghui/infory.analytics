@@ -127,7 +127,7 @@ angular.module('engagement')
                         compare_by = JSON.stringify(compareToObject);
                         updateTableData(compare_by, $scope.currentEventIdx);
                     }
-                }
+                                }
 
                 $scope.updateComputeBy = function() {
                     fields.by = $scope.computeBy.name;
@@ -184,8 +184,7 @@ angular.module('engagement')
                             else {
                                 $scope.conversationRate = '';
                             }
-
-                            $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames, valueSuffix, unit, updateTableEvent, $scope.totalRows, $scope.conversationRate);
+                           $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames, valueSuffix, unit, updateTableEvent, $scope.totalRows, $scope.conversationRate);
                         } else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
@@ -226,6 +225,16 @@ angular.module('engagement')
                     $scope.currentEvent = $scope.currentEvents[eventIdx];
                     $scope.currentEventIdx = eventIdx;
                     $scope.tables = [];
+
+                    // add a summary table when there's no filter is selected
+                    for (i = 1; i <= eventIdx; i++) {
+                        summaryTable = [];
+                        summaryTable.push($scope.totalRows[i - 1]); 
+                        $scope.tables.push(summaryTable);
+                    }
+
+                    // add default compare unit 
+                    $scope.compareUnit = $scope.currentEvent.compare_properties[0];
                     $scope.$apply(); // for ng-show working properly
                 }
 
@@ -282,7 +291,7 @@ angular.module('engagement')
                         funnel: $scope.funnelBookmark.funnel,
                         compare_by: compareBy
                     };
-
+                
                     $scope.hideLoadingTable = false;
                     funnelRemote.get(fields, function(data) {
                         $scope.hideLoading = true;

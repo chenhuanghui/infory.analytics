@@ -96,7 +96,6 @@ angular.module('Smg')
                                                 color: '#f00'
                                             }, true, false)
                                             updateTableEvent(this.x);
-                                            console.log(this);
                                         }
                                     }
                                 }
