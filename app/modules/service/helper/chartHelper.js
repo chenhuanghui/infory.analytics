@@ -36,12 +36,14 @@ angular.module('Smg')
                                         })
                                             .add();
                                     }
-                                    ren.label("Conversation Rate: " + conversationRate, this.plotSizeX - 100, 10)
-                                    // x + 8, y - 10 for centering the label
-                                    .css({
-                                        fontWeight: 'bold'
-                                    })
-                                        .add();
+                                    if (conversationRate != '') {
+                                        ren.label("Conversation Rate: " + conversationRate, this.plotSizeX - 100, 10)
+                                        // x + 8, y - 10 for centering the label
+                                        .css({
+                                            fontWeight: 'bold'
+                                        })
+                                            .add();
+                                    }
 
                                 }
                             }

@@ -178,8 +178,12 @@ angular.module('engagement')
                                     $scope.totalRows.push(row);
                                 }
                             }
-
-                            $scope.conversationRate = (100 * $scope.totalRows[$scope.totalRows.length - 1].currentStepCount / $scope.totalRows[0].previousStepCount).toFixed(2) + "%";
+                            if (data.length >= 2) {
+                                $scope.conversationRate = (100 * $scope.totalRows[$scope.totalRows.length - 1].currentStepCount / $scope.totalRows[0].previousStepCount).toFixed(2) + "%";
+                            }
+                            else {
+                                $scope.conversationRate = '';
+                            }
 
                             $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames, valueSuffix, unit, updateTableEvent, $scope.totalRows, $scope.conversationRate);
                         } else
@@ -264,7 +268,7 @@ angular.module('engagement')
                     if (values[j - 1].count != 0)
                         row.rateBetweenTwoStep = (100 * values[j].count / values[j - 1].count).toFixed(2) + "%";
                     else
-                        row.rateBetweenTwoStep = 0;
+                        row.rateBetweenTwoStep = '0.00%';
 
                     return row;
                 }
