@@ -169,7 +169,7 @@ angular.module('user')
                         if (user.email == null)
                             user.email = " - ";
 
-                        if (user.gender == null)
+                        if (user.gender == "")
                             user.gender = " - ";
                         else if (user.gender == 'male')
                             user.gender = 'Nam';
