@@ -29,14 +29,15 @@ angular.module('user')
             };
 
             $scope.goToStep4 = function() {
+
+                saveInfor();
                 if ($scope.sendMethod.name == 'once') {
                     if ($scope.numOfSelectedUsers * 10 > $scope.balance) {
                         dialogHelper.showError('Số dư tài khoản của bạn là ' + $scope.balance + ' T-Coin không đủ thực hiện thao tác này');
                         return;
                     } else
                         $location.path('/user/notify-new/step4/' + brandId);
-                } else
-                    saveInfor();
+                }
                 $location.path('/user/notify-new/step4/' + brandId);
             }
             $scope.goToStep2 = function() {
