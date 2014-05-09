@@ -29,7 +29,6 @@ angular.module('user')
             };
 
             $scope.goToStep4 = function() {
-
                 saveInfor();
                 if ($scope.sendMethod.name == 'once') {
                     if ($scope.numOfSelectedUsers * 10 > $scope.balance) {
