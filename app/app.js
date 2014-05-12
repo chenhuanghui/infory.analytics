@@ -143,7 +143,7 @@ angular.element(document).ready(function() {
                         // }
                     }                    
 
-                    var title = 'Infory';
+                    var title = '';
 
                     switch (next.$$route.originalPath)
                     {
