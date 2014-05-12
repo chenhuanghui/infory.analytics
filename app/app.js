@@ -144,7 +144,7 @@ angular.element(document).ready(function() {
                     }                    
 
                     var title = '';
-
+                    //console.log(next.$$route.originalPath);
                     switch (next.$$route.originalPath)
                     {
                         case '/brand/infor/:brandId':
@@ -168,6 +168,11 @@ angular.element(document).ready(function() {
                         case '/user/notify-new/step4/:brandId':
                             title = 'Thông báo'
                             break;
+                        case '/home/:brandId':
+                            title = 'Trang chủ'
+                            break;
+                        default:
+                            title = 'Innovation for you';
                     }
 
                     $rootScope.title = 'Infory - ' + title;
