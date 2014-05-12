@@ -27,6 +27,9 @@ angular.module('smg.services')
                 removeImage: function(fields, success, error) {
                     $http.post(base_url + 'remove_image' + remoteFactory.getTailUrl(), fields).success(success).error(error);
                 },
+                getListInternal: function(fields, success, error) {
+                    $http.post(base_url + 'list_internal' + remoteFactory.getTailUrl(), fields).success(success).error(error);
+                },
             }
         }
     ])

@@ -6,35 +6,53 @@ angular.module('lister')
         $scope.brands = [];
         $scope.itemsPerPage = 10;
         $scope.maxSize = 10;
+        $scope.entireData = [];
 
-        dataFactory.getBrands(function(brands) {
-            $scope.hideLoading = true;
-            $scope.brands = brands;
-            resetPagination($scope.brands, 1);
+        brandRemote.getListInternal({
+            fields: '["name", "id", "cover", "type_business", "website", "fanpage", "description", "id", "owner_phone", "owner_address", "logo"]',
+            page: 0
+        }, function(data) {
+            if (data.error == undefined) {
+                $scope.brands = data.result;
+                $scope.totalItems = data.num_of_page * $scope.itemsPerPage;
 
+                for (var i = 0; i < data.num_of_page; i++) {
+                    $scope.entireData.push([]);
+                }
+
+                $scope.entireData[0] = data.result;
+
+                resetPagination(1);
+                $scope.hideLoading = true;
+            } else {
+                dialogHelper.showError(data.error.message);
+            }
         }, function() {});
 
         $scope.pageChanged = function(page) {
-            $scope.currentPage = page;
-            if ($scope.searchText == '' || $scope.searchText == undefined || $scope.searchText == null)
-                $scope.dataInCurrentPage = $scope.brands.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
-            else
-                $scope.dataInCurrentPage = $scope.filteredBrands.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
+            if ($scope.entireData[page - 1].length == 0) {
+                $scope.currentPage = page;
+                brandRemote.getListInternal({
+                    fields: '["name", "id", "cover", "type_business", "website", "fanpage", "description", "id", "owner_phone", "owner_address", "logo"]',
+                    page: page - 1
+                }, function(data) {
+                    if (data.error == undefined) {
+                        $scope.brands = data.result;
+                        $scope.entireData[page - 1] = data.result;
+                        resetPagination(page);
+                    } else {
+                        dialogHelper.showError(data.error.message);
+                    }
+                }, function() {});
+            } else {
+                $scope.brands = $scope.entireData[page - 1];
+                resetPagination(page);
+            }
         };
 
-        function resetPagination(array, page) {
+        function resetPagination(page) {
             $scope.currentPage = page;
-            $scope.totalItems = array.length;
-            $scope.dataInCurrentPage = array.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
-        }
-
-        $scope.filterBrands = function() {
-            if ($scope.searchText != '') {
-                $scope.filteredBrands = $filter('filter')($scope.brands, $scope.searchText);
-                resetPagination($scope.filteredBrands, 1);
-            } else {
-                resetPagination($scope.brands, 1);
-            }
+            $scope.dataInCurrentPage = $scope.brands;
         }
 
         $scope.moveToBrand = function(id) {
@@ -50,6 +68,6 @@ angular.module('lister')
         .when('/list', {
             templateUrl: 'modules/lister/template/lister.html',
             controller: 'ListerCtrl',
-            access: access.user
+            access: access.admin
         })
 });

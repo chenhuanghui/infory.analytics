@@ -91,14 +91,14 @@ angular.module('brand')
                         resetData(data);
                     }, function() {})
                 } else {
-                    for (var i = 0; i < brands.length; i++) {
-                        if (brands[i].id == brandId) {
-                            dataFactory.getBrand(brands[i].id, function(data) {
-                                resetData(data);
-                            }, function() {})
-                            break;
-                        }
-                    }
+                    //for (var i = 0; i < brands.length; i++) {
+                    //    if (brands[i].id == brandId) {
+                    dataFactory.getBrand(brandId, function(data) {
+                        resetData(data);
+                    }, function() {})
+                    //        break;
+                    //    }
+                    //}
                 }
             }
         }, function() {});
