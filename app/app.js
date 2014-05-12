@@ -16,6 +16,7 @@ var app = angular.module('Smg', [
     'smg.services',
     'engagement',
     'smgDirectives',
+    'lister',
     'ui.bootstrap.datetimepicker',
     'ui.date',
     'nvd3ChartDirectives',
@@ -199,6 +200,10 @@ angular.module('login', [
 
 
 angular.module('engagement', [
+    'ngRoute'
+]);
+
+angular.module('lister', [
     'ngRoute'
 ]);
 
