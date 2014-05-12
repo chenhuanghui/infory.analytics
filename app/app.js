@@ -133,7 +133,8 @@ angular.element(document).ready(function() {
         app.run(['$rootScope', '$location', '$http', 'Auth',
             function($rootScope, $location, $http, Auth) {
                 $rootScope.$on("$routeChangeStart", function(event, next, current) {
-                    $rootScope.error = null;
+                    $rootScope.error = null;                                        
+
                     if (!Auth.authorize(next.access)) {
                         // if (Auth.isLoggedIn())
                         //     $location.path('/');
@@ -141,7 +142,41 @@ angular.element(document).ready(function() {
                         // {
                         $location.path('/login');
                         // }
+                    }                    
+
+                    var title = '';
+                    //console.log(next.$$route.originalPath);
+                    switch (next.$$route.originalPath)
+                    {
+                        case '/brand/infor/:brandId':
+                            title = 'Thông tin nhãn hiệu';
+                            break;                  
+                        case '/brand/promotion/step4/:brandId':
+                            title = 'Sự kiện';
+                            break;
+                        case '/brand/comment/:brandId':
+                            title = 'Bình luận';
+                            break;
+                        case '/segmentation/:brandId':
+                            title = 'Phân tích hành vi khách hàng';
+                            break;
+                        case '/funnel/step2/:brandId':
+                            title = 'Phân tích hành vi khách hàng';
+                            break;
+                        case '/user/manager/:brandId':
+                            title = 'Danh sách khách hàng';
+                            break;
+                        case '/user/notify-new/step4/:brandId':
+                            title = 'Thông báo'
+                            break;
+                        case '/home/:brandId':
+                            title = 'Trang chủ'
+                            break;
+                        default:
+                            title = 'Innovation for you';
                     }
+
+                    $rootScope.title = 'Infory - ' + title;
                 });
 
             }
