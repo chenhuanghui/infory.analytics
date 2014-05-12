@@ -54,6 +54,9 @@
                         </tbody>
 
                     </table>
+                    <div style="margin: 20px;">
+                        Page: <input ng-model="pageNumber" ng-keyup="$event.keyCode == 13 ? pageChanged(pageNumber) : null"/>
+                    </div>
                     <spagination ng-hide="dataInCurrentPage.length == 0" class="right" total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" items-per-page="itemsPerPage" boundary-links="true" first-text="Đầu tiên" rotate="false" last-text="Cuối cùng" next-text="Sau" previous-text="Trước" max-size="10"></spagination>
                     <!--chart here-->
                     

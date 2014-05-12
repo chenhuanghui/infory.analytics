@@ -1,33 +1,54 @@
 angular.module('lister')
 
-.controller('ListerCtrl', ['$scope', '$http', '$location', '$routeParams', '$filter', 'remoteFactory', 'dataFactory', 'Auth', 'brandRemote', 'chartHelper', 'serviceHelper', 'eventRemote', 'compareHelper', 'homeFactory', 'dialogHelper',
-    function($scope, $http, $location, $routeParams, $filter, remoteFactory, dataFactory, Auth, brandRemote, chartHelper, serviceHelper, eventRemote, compareHelper, homeFactory, dialogHelper) {
+.controller('ListerCtrl', ['$scope', '$http', '$location', '$routeParams', '$filter', 'remoteFactory', 'dataFactory', 'Auth', 'brandRemote', 'chartHelper', 'serviceHelper', 'eventRemote', 'compareHelper', 'homeFactory', 'dialogHelper', 'listerFactory',
+    function($scope, $http, $location, $routeParams, $filter, remoteFactory, dataFactory, Auth, brandRemote, chartHelper, serviceHelper, eventRemote, compareHelper, homeFactory, dialogHelper, listerFactory) {
         $scope.hideLoading = false;
         $scope.brands = [];
         $scope.itemsPerPage = 10;
         $scope.maxSize = 10;
         $scope.entireData = [];
 
-        brandRemote.getListInternal({
-            fields: '["name", "id", "cover", "type_business", "website", "fanpage", "description", "id", "owner_phone", "owner_address", "logo"]',
-            page: 0
-        }, function(data) {
-            if (data.error == undefined) {
-                $scope.brands = data.result;
-                $scope.totalItems = data.num_of_page * $scope.itemsPerPage;
+        var oldData = listerFactory.getData();
+        if (oldData == null) {
+            brandRemote.getListInternal({
+                fields: '["name", "id", "cover", "type_business", "website", "fanpage", "description", "id", "owner_phone", "owner_address", "logo"]',
+                page: 0
+            }, function(data) {
+                if (data.error == undefined) {
+                    $scope.brands = data.result;
+                    $scope.totalItems = data.num_of_page * $scope.itemsPerPage;
 
-                for (var i = 0; i < data.num_of_page; i++) {
-                    $scope.entireData.push([]);
+                    for (var i = 0; i < data.num_of_page; i++) {
+                        $scope.entireData.push([]);
+                    }
+
+                    $scope.entireData[0] = data.result;
+
+                    resetPagination(1);
+                    $scope.hideLoading = true;
+                } else {
+                    dialogHelper.showError(data.error.message);
                 }
+            }, function() {});
+        } else {
+            $scope.entireData = oldData.entireData;
+            $scope.brands = oldData.brands;
+            $scope.totalItems = oldData.totalItems;
+            $scope.currentPage = oldData.currentPage;
+            $scope.hideLoading = true;
+            resetPagination($scope.currentPage);
+        }
 
-                $scope.entireData[0] = data.result;
-
-                resetPagination(1);
-                $scope.hideLoading = true;
-            } else {
-                dialogHelper.showError(data.error.message);
-            }
-        }, function() {});
+        function saveInfor() {
+            listerFactory.setData({
+                entireData: $scope.entireData,
+                brands: $scope.brands,
+                totalItems: $scope.totalItems,
+                hideLoading: $scope.hideLoading,
+                currentPage: $scope.currentPage,
+                dataInCurrentPage: $scope.dataInCurrentPage
+            });
+        }
 
         $scope.pageChanged = function(page) {
             if ($scope.entireData[page - 1].length == 0) {
@@ -51,6 +72,7 @@ angular.module('lister')
         };
 
         function resetPagination(page) {
+            saveInfor();
             $scope.currentPage = page;
             $scope.dataInCurrentPage = $scope.brands;
         }
