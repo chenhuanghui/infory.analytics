@@ -192,6 +192,7 @@ angular.module('brand')
                     if (data.error == undefined) {
                         $scope.brand.name = $scope.bundle.brandName;
                         dataFactory.setCurrentBrand($scope.brand);
+                        dataFactory.updateBrandHeader($scope.brand);
                     } else {
                         dialogHelper.showError(data.error.message);
                         $scope.bundle.brandName = $scope.brand.name;

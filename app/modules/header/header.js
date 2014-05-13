@@ -17,8 +17,15 @@ angular.module('header')
 
         $scope.updateBrand = function(brand) {
             $scope.brand = brand;
-            if (brand != null)
+            if (brand != null) {
                 $scope.brandId = brand.id;
+                for (var i = 0; i < $scope.brands.length; i++) {
+                    if ($scope.brands[i].id == brand.id) {
+                        $scope.brands[i] = brand;
+                        return;
+                    }
+                }
+            }
         }
 
         $scope.updateBrands = function(brands) {
