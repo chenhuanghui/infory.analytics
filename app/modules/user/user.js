@@ -1,7 +1,6 @@
 angular.module('user')
 
-.controller('UserCtrl', ['$scope', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote',
-
+.controller('UserCtrl', ['$scope', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote', 
     function($scope, $location, $routeParams, remoteFactory, dataFactory, userRemote) {
         /** Global variables **/
         var user_pre = dataFactory.getUsernameAvatar();
@@ -16,6 +15,36 @@ angular.module('user')
         $scope.userId = $routeParams.userId;
         $scope.oldUrl = dataFactory.getUrl();
 
+        // TODO: Check for non-use var
+        $scope.totalItems = 0;
+        $scope.dataInCurrentPage = [];
+        $scope.itemsPerPage = 7;
+        $scope.currentPage = 1;
+
+
+        $scope.pageChanged = function(page) {
+            $scope.currentPage = page;
+            $scope.dataInCurrentPage = $scope.activities.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
+            //TODO: implement save info later
+            //$scope.saveInfor();
+        };
+/*
+         $scope.saveInfor = function() {
+                userFactory.setData(
+                {
+                    userId : $scope.userId,
+                    activities: $scope.activities,
+                    currentPage: $scope.currentPage
+                });
+        };
+*/
+        function resetPagination(array, page) {
+            $scope.currentPage = page;
+            $scope.totalItems = array.length;
+            $scope.dataInCurrentPage = array.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
+        }
+
+ 
         /** Logic **/
         dataFactory.updateBrandSideBar($scope.brandId);
         $scope.goBack = function() {
@@ -112,6 +141,8 @@ angular.module('user')
                         });
                     }
                 }
+
+                resetPagination($scope.activities, 1);
             },
             function() {});
     }
