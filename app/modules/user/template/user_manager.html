@@ -78,10 +78,12 @@
                         </tbody>
 
                     </table>
-                    <spagination ng-hide="dataInCurrentPage.length == 0" class="right" total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" items-per-page="itemsPerPage" boundary-links="false" first-text="Đầu tiên" rotate="false" last-text="Cuối cùng" next-text="Sau" previous-text="Trước" max-size="10"></spagination>
+                    
+                    <div style="margin-top: 15px;margin-bottom: 5px;margin-right: 5px;">
+                        <spagination ng-hide="dataInCurrentPage.length == 0" class="right" total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" items-per-page="itemsPerPage" boundary-links="false" first-text="Đầu tiên" rotate="false" last-text="Cuối cùng" next-text="Sau" previous-text="Trước" max-size="10"></spagination>
+                    </div>
                     <!--chart here-->
-                    
-                    
+                
                 </div>
             </div>
         </div> <!-- content_wrapper-->

@@ -549,21 +549,25 @@ angular.module('brand')
         $scope.uploadImage = function($files) {
             var fd = new FormData();
             fd.append('brand_id', brandId);
-            fd.append('image', $files[0]);
+            fd.append('image', $files);
 
             var xhr = new XMLHttpRequest();
             xhr.open('POST', base_url + 'brand/add_image' + remoteFactory.getTailUrl(), true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     var respone = JSON.parse(xhr.responseText);
-                    if (respone.thumbnail_url != undefined) {
-                        $scope.gallery.unshift({
-                            thumbnail: respone.thumbnail_url
-                        });
+                    if (respone.error == undefined) {
+                        for (var i = 0; i < respone.length; i++) {
+                            if (respone[i].thumbnail_url != undefined) {
+                                $scope.gallery.unshift({
+                                    thumbnail: respone.thumbnail_url
+                                });
+                            }
 
-                        $scope.$apply(function() {
-                            $scope.gallery = $scope.gallery;
-                        });
+                            $scope.$apply(function() {
+                                $scope.gallery = $scope.gallery;
+                            });
+                        }
                         saveToFactory();
                         dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
                     } else
