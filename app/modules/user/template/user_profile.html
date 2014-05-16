@@ -51,8 +51,12 @@
                     </ul>
                 </li>
              </ul>
-
-             <spagination ng-hide="dataInCurrentPage.length == 0" class="right" total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" items-per-page="itemsPerPage" boundary-links="false" first-text="Đầu tiên" rotate="false" last-text="Cuối cùng" next-text="Sau" previous-text="Trước" max-size="10"></spagination>
+            <div id="userProfilePagination">
+                <spagination ng-hide="dataInCurrentPage.length == 0" class="right" total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" items-per-page="itemsPerPage" boundary-links="false" first-text="Đầu tiên" rotate="false" last-text="Cuối cùng" next-text="Sau" previous-text="Trước" max-size="10"></spagination>
+             </div>
+             <br>
+             <br>
+             <br>
         </div>
     </div>
     <div class="col-md-4 property-box" style="width: 380px;">
