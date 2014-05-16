@@ -560,7 +560,7 @@ angular.module('brand')
                         for (var i = 0; i < respone.length; i++) {
                             if (respone[i].thumbnail_url != undefined) {
                                 $scope.gallery.unshift({
-                                    thumbnail: respone.thumbnail_url
+                                    thumbnail: respone[i].thumbnail_url
                                 });
                             }
 
