@@ -4,7 +4,7 @@
     </div>
     <div class="z-header" ng-hide="!hideLoadingImage">
         <span>{{gallery.length}}</span> hình ảnh được tải lên
-        <input type="file" class="right" ng-file-select="uploadImage($files)"/>
+        <input type="file" class="right" ng-file-select="uploadImage($files)" multiple/>
     </div>
     <div class="z-content">
         <div class="item" ng-repeat="image in gallery">
