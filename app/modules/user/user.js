@@ -1,7 +1,7 @@
 angular.module('user')
 
-.controller('UserCtrl', ['$scope', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote', 
-    function($scope, $location, $routeParams, remoteFactory, dataFactory, userRemote) {
+.controller('UserCtrl', ['$scope', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote', 'userFactory' ,
+    function($scope, $location, $routeParams, remoteFactory, dataFactory, userRemote, userFactory) {
         /** Global variables **/
         var user_pre = dataFactory.getUsernameAvatar();
 
@@ -26,9 +26,9 @@ angular.module('user')
             $scope.currentPage = page;
             $scope.dataInCurrentPage = $scope.activities.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
             //TODO: implement save info later
-            //$scope.saveInfor();
+            $scope.saveInfor();
         };
-/*
+
          $scope.saveInfor = function() {
                 userFactory.setData(
                 {
@@ -36,8 +36,9 @@ angular.module('user')
                     activities: $scope.activities,
                     currentPage: $scope.currentPage
                 });
+                console.log(userFactory.getData($scope.userId));
         };
-*/
+
         function resetPagination(array, page) {
             $scope.currentPage = page;
             $scope.totalItems = array.length;
@@ -53,7 +54,7 @@ angular.module('user')
             }
         }
 
-        dataFactory.getUserProfile($scope.brandId, $scope.userId, function(userProfile) {
+        dataFactory.getUserProfile($scope.brandId, $scope.userId, function(userProfile, isNewData) {
                 $scope.hideLoading = true;
                 $scope.userProfile = userProfile;
                 $scope.username = userProfile.name;
@@ -62,60 +63,63 @@ angular.module('user')
                 $scope.avatar = userProfile.avatar;
                 //});
 
-                // REVIEW API - timeline group by day - it's not client job
-                if (userProfile.email == null)
-                    userProfile.email = " - ";
+                if (isNewData) {
+                    // REVIEW API - timeline group by day - it's not client job
+                    if (userProfile.email == null)
+                        userProfile.email = " - ";
 
-                if (userProfile.gender == null || userProfile.gender == '')
-                    userProfile.gender = " - ";
-                else if (userProfile.gender == 'male')
-                    userProfile.gender = 'Nam';
-                else
-                    userProfile.gender = 'Nữ';
+                    if (userProfile.gender === null || userProfile.gender === '')
+                        userProfile.gender = " - ";
+                    else if (userProfile.gender === 'male' || userProfile.gender === 'Nam') 
+                        userProfile.gender = 'Nam';
+                    else
+                        userProfile.gender = 'Nữ';
 
-                if (userProfile.city == null)
-                    userProfile.city = " - ";
+                    console.log(userProfile.gender);
+                    if (userProfile.city == null)
+                        userProfile.city = " - ";
 
-                if (userProfile.facebook[0] != 'h' && userProfile.facebook[0] != '' && userProfile.facebook[0] != null)
-                    userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
+                    if (userProfile.facebook[0] != 'h' && userProfile.facebook[0] != '' && userProfile.facebook[0] != null)
+                        userProfile.facebook = 'http://facebook.com/' + userProfile.facebook;
 
-                for (var i = 0; i < userProfile.timeline.length; i++) {
-                    var time = new Date(userProfile.timeline[i].time.split("-").join("/"));
-                    var dayOfWeek = time.getDay();
-                    switch (dayOfWeek) {
-                        case 0:
-                            dayOfWeek = 'Chủ nhật';
-                            break;
-                        case 1:
-                            dayOfWeek = 'Thứ 2';
-                            break;
-                        case 2:
-                            dayOfWeek = 'Thứ 3';
-                            break;
-                        case 3:
-                            dayOfWeek = 'Thứ 4';
-                            break;
-                        case 4:
-                            dayOfWeek = 'Thứ 5';
-                            break;
-                        case 5:
-                            dayOfWeek = 'Thứ 6';
-                            break;
-                        case 6:
-                            dayOfWeek = 'Thứ 7';
-                            break;
-                    };
+                    for (var i = 0; i < userProfile.timeline.length; i++) {
+                        var time = new Date(userProfile.timeline[i].time.split("-").join("/"));
+                        var dayOfWeek = time.getDay();
+                        switch (dayOfWeek) {
+                            case 0:
+                                dayOfWeek = 'Chủ nhật';
+                                break;
+                            case 1:
+                                dayOfWeek = 'Thứ 2';
+                                break;
+                            case 2:
+                                dayOfWeek = 'Thứ 3';
+                                break;
+                            case 3:
+                                dayOfWeek = 'Thứ 4';
+                                break;
+                            case 4:
+                                dayOfWeek = 'Thứ 5';
+                                break;
+                            case 5:
+                                dayOfWeek = 'Thứ 6';
+                                break;
+                            case 6:
+                                dayOfWeek = 'Thứ 7';
+                                break;
+                        };
 
-                    var date = time.getDate();
-                    var month = time.getMonth() + 1;
-                    var year = time.getFullYear();
-                    var minute = time.getMinutes();
-                    var hour = time.getHours();
+                        var date = time.getDate();
+                        var month = time.getMonth() + 1;
+                        var year = time.getFullYear();
+                        var minute = time.getMinutes();
+                        var hour = time.getHours();
 
-                    var time_str = dayOfWeek + ' ' + (date <= 9 ? '0' + date : date) + '-' + (month <= 9 ? '0' + month : month) + '-' + year;
+                        var time_str = dayOfWeek + ' ' + (date <= 9 ? '0' + date : date) + '-' + (month <= 9 ? '0' + month : month) + '-' + year;
 
-                    userProfile.timeline[i].time_str = time_str;
-                    userProfile.timeline[i].hour = (hour <= 9 ? '0' + hour : hour) + ' : ' + (minute <= 9 ? '0' + minute : minute);
+                        userProfile.timeline[i].time_str = time_str;
+                        userProfile.timeline[i].hour = (hour <= 9 ? '0' + hour : hour) + ' : ' + (minute <= 9 ? '0' + minute : minute);
+                    }
                 }
 
                 $scope.activities = _

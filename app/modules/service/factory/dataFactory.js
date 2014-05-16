@@ -243,7 +243,8 @@ angular.module('smg.services')
                 },
                 getUserProfile: function(brandId, userId, success, error) {
                     if (userProfile != null && userProfile.userId == userId && userProfile.brand_id == brandId) {
-                        success(userProfile);
+                        console.log(userProfile);
+                        success(userProfile, false);  // 'false' parameters here indicate that this is not new data
                     } else {
                         var fields = '["dob", "name", "id", "avatar", "phone", "address", "email", "last_visit", "timeline", "city", "gender", "facebook", "age"]';
                         userRemote.get({
@@ -255,7 +256,7 @@ angular.module('smg.services')
                                 userProfile = data;
                                 userProfile.brand_id = brandId;
                                 userProfile.userId = userId;
-                                success(userProfile);
+                                success(userProfile, true); // 'true' tell that this is new data 
                             } else
                                 dialogHelper.showError(data.error.message);
                         }, error);
