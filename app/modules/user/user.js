@@ -1,7 +1,7 @@
 angular.module('user')
 
-.controller('UserCtrl', ['$scope', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote', 'userFactory' ,
-    function($scope, $location, $routeParams, remoteFactory, dataFactory, userRemote, userFactory) {
+.controller('UserCtrl', ['$scope', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote', 
+    function($scope, $location, $routeParams, remoteFactory, dataFactory, userRemote) {
         /** Global variables **/
         var user_pre = dataFactory.getUsernameAvatar();
 
