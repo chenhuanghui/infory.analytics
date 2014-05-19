@@ -1,6 +1,6 @@
 angular.module('user')
 
-.controller('UserCtrl', ['$scope', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote', 
+.controller('UserCtrl', ['$scope', '$location', '$routeParams', 'remoteFactory', 'dataFactory', 'userRemote',
     function($scope, $location, $routeParams, remoteFactory, dataFactory, userRemote) {
         /** Global variables **/
         var user_pre = dataFactory.getUsernameAvatar();
@@ -28,7 +28,7 @@ angular.module('user')
             //TODO: implement save info later
             //$scope.saveInfor();
         };
-/*
+        /*
          $scope.saveInfor = function() {
                 userFactory.setData(
                 {
@@ -44,7 +44,7 @@ angular.module('user')
             $scope.dataInCurrentPage = array.slice((page - 1) * $scope.itemsPerPage, (page - 1) * $scope.itemsPerPage + $scope.itemsPerPage);
         }
 
- 
+
         /** Logic **/
         dataFactory.updateBrandSideBar($scope.brandId);
         $scope.goBack = function() {
@@ -68,7 +68,7 @@ angular.module('user')
 
                 if (userProfile.gender == null || userProfile.gender == '')
                     userProfile.gender = " - ";
-                else if (userProfile.gender == 'male')
+                else if (userProfile.gender == 'male' || userProfile.gender == 'Nam')
                     userProfile.gender = 'Nam';
                 else
                     userProfile.gender = 'Nữ';
