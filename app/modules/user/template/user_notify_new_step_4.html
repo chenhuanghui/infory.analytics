@@ -52,7 +52,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="{{message.sttClass}}" ng-repeat="message in dataInCurrentPage">
+                            <tr class="{{message.sttClass}}" sly-repeat="message in dataInCurrentPage">
                                 <td class="name" style="cursor:pointer;" ng-click="editMessage(message.id)">{{message.name}}</td>
                                 <td>{{message.typeName}}</td>
                                 <td>{{message.methodName}}</td>

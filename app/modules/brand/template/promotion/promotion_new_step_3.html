@@ -32,7 +32,7 @@
                         <div class="step-wapper">
                             <div ng-switch on="promotionType.name">
                                 <div ng-switch-when="voucher" class="voucher-box" name="voucher">
-                                    <div class="z-box"  ng-repeat="present in presentDescriptions" style="margin-top:10px;">
+                                    <div class="z-box"  sly-repeat="present in presentDescriptions" style="margin-top:10px;">
                                         <div class="z-box-header">
                                             <div class="left">
                                                 <span class="circle-box">{{$parent.presentDescriptions[$parent.indexInArray[present.id]].stt + 1}}</span>

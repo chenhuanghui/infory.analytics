@@ -51,7 +51,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="{{promotion.stt}}" ng-repeat="promotion in dataInCurrentPage">
+                                        <tr class="{{promotion.stt}}" sly-repeat="promotion in dataInCurrentPage">
                                             <td class="bold">{{promotion.typeDisplay}}</td>
                                             <td style="cursor:pointer" class="name" ng-click="editPromotion(promotion.id)">{{promotion.name}}</td>
                                             <td>{{promotion.time}}</td>

@@ -29,7 +29,7 @@
                                         <span>{{eventBookmark.bookmark_name}}</span>
                                         <i class="icon-sort-down"></i></a>
                                     <ul style=" max-height: 250px;">
-                                        <li ng-repeat="eventBookmark in eventBookmarks"><a ng-click="changeEventBookmark(eventBookmark.id)" style="cursor:pointer">{{eventBookmark.bookmark_name}}</a></li>
+                                        <li sly-repeat="eventBookmark in eventBookmarks"><a ng-click="changeEventBookmark(eventBookmark.id)" style="cursor:pointer">{{eventBookmark.bookmark_name}}</a></li>
                                         
                                         <li class="create-box">
                                             <i class="icon-plus"></i>
@@ -131,7 +131,7 @@
                         <div>
                             <google-map class="google-view" center="map.center" zoom="map.zoom" draggable="true" control="map.control" events="map.events">
 
-                                <marker class="google-view" ng-repeat="marker in markers"coords="marker.coords" icon="marker.icon" events="marker.events" options="marker.options"></marker>
+                                <marker class="google-view" sly-repeat="marker in markers"coords="marker.coords" icon="marker.icon" events="marker.events" options="marker.options"></marker>
                             </google-map>
                         </div>
                     </div>

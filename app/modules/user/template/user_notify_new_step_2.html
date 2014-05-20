@@ -39,7 +39,7 @@
                                 <div class="z-dropdown">
                                     <a class="trigger"><span>{{profileBookmark.bookmark_name}}</span></a>
                                     <ul>
-                                        <li ng-repeat="profileBookmark in profileBookmarks"><a ng-click="changeProfileBookmark(profileBookmark.id)" style="cursor:pointer">{{profileBookmark.bookmark_name}}</a></li>
+                                        <li sly-repeat="profileBookmark in profileBookmarks"><a ng-click="changeProfileBookmark(profileBookmark.id)" style="cursor:pointer">{{profileBookmark.bookmark_name}}</a></li>
                                         
                                         <li class="create-box">
                                             <i class="icon-plus"></i>
@@ -101,7 +101,7 @@
                                 <th>Lần sử dụng cuối</th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="user in dataInCurrentPage">
+                        <tbody sly-repeat="user in dataInCurrentPage">
                             <tr>
                                 <td><input type="checkbox" ng-model="$parent.isChecked[user.stt]" ng-change="updateSelectedUsers($parent.isChecked[user.stt]); updateIsCanGo();"/></td>
                                 <td style="cursor:pointer" ng-click="showUserProfile(user.id, user.name)">{{user.phone}}</td>

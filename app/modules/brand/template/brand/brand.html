@@ -42,7 +42,7 @@
                     </div>
 
                     <ul id="shop_list" ng-hide="!hideLoadingInfor">
-                        <li ng-repeat="shop in brand.shops">
+                        <li sly-repeat="shop in brand.shops">
                             <img src="{{brand.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="45" width="45"/>
                             <a ng-click="goToShopInfo(shop)" style="cursor:pointer" class="name">{{shop.name}}</a>
                             <span class="subtext">{{shop.full_address}}</span>

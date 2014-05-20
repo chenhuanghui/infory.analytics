@@ -36,7 +36,7 @@
                 
 
                 <ul id="shop_list" style=" max-height: 250px; ">
-                    <li ng-repeat="shop in shop.shops">
+                    <li sly-repeat="shop in shop.shops">
                         <img src="{{shop.logo}}" alt="contact" class="img-circle avatar hidden-phone left" height="42" width="42"/>
                         <a href="user-profile.html" class="name">{{shop.name}}</a>
                         <span class="subtext">{{shop.full_address}}</span>

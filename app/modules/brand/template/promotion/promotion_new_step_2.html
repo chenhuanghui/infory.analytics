@@ -91,7 +91,7 @@
                                             </thead>
 
                                             <tbody>
-                                                <tr ng-repeat="shop in brand.shops | filter:searchText">
+                                                <tr sly-repeat="shop in brand.shops | filter:searchText">
                                                     <td class="_checkbox">
                                                         <input type="checkbox" class="css-checkbox lrg" id="{{shop.id}}" ng-model="$parent.selectedShops[shop.selectedId]" ng-change="updateSelectedShops($parent.selectedShops[shop.selectedId])"/>
                                 						<label for="{{shop.id}}" class="css-label lrg klaus"></label>

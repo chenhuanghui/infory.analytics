@@ -56,7 +56,7 @@
                             </td>
                         </tr>
 
-                        <tr class="first" ng-repeat="message in shop.comments | orderBy:sorter.field">
+                        <tr class="first" sly-repeat="message in shop.comments | orderBy:sorter.field">
                             <td style="text-align: left !important;">
                                 <div class="col-md-1">
                                     <img src="{{message.user_avatar}}" alt="contact" class="img-circle avatar hidden-phone" style="height:50px; width:50px;"/>

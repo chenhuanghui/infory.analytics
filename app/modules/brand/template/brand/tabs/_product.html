@@ -15,7 +15,7 @@
                         <i class="icon-sort-down"></i>
                     </a>
                     <ul>
-                        <li style="cursor:pointer" ng-repeat="category in brand.categories"><a  ng-click="changeCategory(category.id)">{{category.name}}</a></li>
+                        <li style="cursor:pointer" sly-repeat="category in brand.categories"><a  ng-click="changeCategory(category.id)">{{category.name}}</a></li>
                         <li class="create-box">
                             <i class="icon-plus"></i>
                             <input type="text" placeholder="new category" ng-model="newCategoryName"/>
@@ -62,7 +62,7 @@
             </li>
         </ul>
     </div>
-    <div ng-repeat="product in category.products" ng-init="hideDetail = true">
+    <div sly-repeat="product in category.products" ng-init="hideDetail = true">
         <ul class="list-product">
             <li>
                 <span class="circle left">1</span>

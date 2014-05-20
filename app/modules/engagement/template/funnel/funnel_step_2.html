@@ -38,7 +38,7 @@
                                                 <a class="trigger" style="cursor:pointer"><span>{{funnelBookmark.bookmark_name}}</span>
                                                 <i class="icon-sort-down"></i></a>
                                                 <ul style=" max-height: 250px;">
-                                                    <li ng-repeat="funnelBookmark in funnelBookmarks"><a ng-click="changeFunnelBookmark(funnelBookmark.id)" style="cursor:pointer">{{funnelBookmark.bookmark_name}}</a></li>
+                                                    <li sly-repeat="funnelBookmark in funnelBookmarks"><a ng-click="changeFunnelBookmark(funnelBookmark.id)" style="cursor:pointer">{{funnelBookmark.bookmark_name}}</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -109,7 +109,7 @@
                                     <div ng-hide="hideLoadingTable" class="loading-container-infor">
                                         <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
                                     </div>
-                                    <div class="block_content no-padding" ng-repeat="table in tables" ng-hide="!hideLoadingTable">
+                                    <div class="block_content no-padding" sly-repeat="table in tables" ng-hide="!hideLoadingTable">
                                         <table class="z-table">
                                             <thead>
                                                 <tr>
@@ -121,7 +121,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>                                                
-                                                <tr ng-repeat="row in table">
+                                                <tr sly-repeat="row in table">
                                                     <td>{{row.name}}</td>
                                                     <td>{{row.previousStepCount}}</td>
                                                     <td>{{row.avgTime}}</td>

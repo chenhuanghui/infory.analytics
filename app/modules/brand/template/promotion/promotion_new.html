@@ -168,7 +168,7 @@
                                                 </tr>
                                             </thead>
 
-                                            <tbody  ng-repeat="shop in brand.shops | filter:searchText">
+                                            <tbody  sly-repeat="shop in brand.shops | filter:searchText">
                                                 <tr>
                                                     <td><input type="checkbox" ng-model="$parent.selectedShops[shop.selectedId]" ng-change="updateSelectedShops()"></td>
                                                     <td class="name">{{shop.name}}</td>
@@ -372,7 +372,7 @@
                                             <th>Trạng thái</th>
                                         </tr>
                                     </thead>
-                                    <tbody ng-repeat="promotion in promotionList">
+                                    <tbody sly-repeat="promotion in promotionList">
                                         <tr class="{{promotion.stt}}">
                                             <td>{{promotion.typeDisplay}}</td>
                                             <td class="name">{{promotion.name}}</td>

@@ -4,10 +4,10 @@
         <input type="file" class="right"/>
     </div>
     <div class="z-content">
-        <div class="item" ng-repeat="image in usersGallery">
+        <div class="item" sly-repeat="image in usersGallery">
             <i class="icon-remove-sign" ng-click="deleteUserImage(image.id)"></i>
             <div class="mask"><img src="{{image.url}}" /></div>
-            <!--<img src="{{image.url}}" ng-repeat="image in gallery"/>-->
+            <!--<img src="{{image.url}}" sly-repeat="image in gallery"/>-->
         </div>
     </div>  
 </div>
