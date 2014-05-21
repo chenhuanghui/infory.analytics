@@ -1066,4 +1066,13 @@ span.description {
     text-algin: justify;
 }
 
-
+.invisibleInput{  
+    border: none;
+    margin-top: -1px;
+}
+.invisibleInput:focus{
+    border: none;
+}
+.districtInput {
+    width: 180px;
+}

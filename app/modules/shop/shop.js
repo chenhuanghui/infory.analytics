@@ -12,15 +12,29 @@ angular.module('shop', ['google-maps'])
             brand = dataFactory.getCurrentBrand(),
             fields = null;
 
+        dataFactory.getMetaData(brandId, function(data) {
+            $scope.cities = data.cities;
+            for (var i = 0; i < data.cities.length; i++)
+            {
+                if (data.cities[i].name === $scope.shop.city_address)
+                {
+                    $scope.cityAddress = i;
+                }
+            }
+            console.log($scope.cityAddress);
+        }, function() {});
+
+
+        //TODO: init 
         /** Scope variables **/
         $scope.hideLoadingInfor = false;
         $scope.hideLoadingImage = false;
-        $scope.cities = remoteFactory.cities;
         $scope.qrCode = '';
         $scope.usersGallery = [];
 
         $scope.brandId = $routeParams.brandId;
         $scope.shop = null;
+        $scope.cityAddress = '';
         $scope.bundle = {
             shopName: '',
             shopCover: '',
@@ -171,7 +185,8 @@ angular.module('shop', ['google-maps'])
             }
         }
 
-        $scope.changeDistrictAddress = function() {
+        $scope.changeDistrictAddress = function(district) {
+            $scope.bundle.shopDistrictAddress = district;
             $scope.bundle.editDistrictAddress = !$scope.bundle.editDistrictAddress;
             if ($scope.bundle.shopDistrictAddress.length <= 0) {
                 $scope.bundle.shopDistrictAddress = $scope.shop.district_address;
@@ -194,9 +209,10 @@ angular.module('shop', ['google-maps'])
                 });
             }
         }
-
-        $scope.changeCityAddress = function(name) {
-            $('.z-dropdown').removeClass('open');
+        $scope.changeCityAddress = function(name, id) {
+            //console.log($scope.cities[id].districts);
+            $('.z-dropdown').removeClass('open');           
+            $scope.cityAddress = id;
             $scope.bundle.shopCityAddress = name;
             $scope.bundle.editCityAddress = !$scope.bundle.editCityAddress;
             if ($scope.bundle.shopCityAddress.length <= 0) {
@@ -376,6 +392,16 @@ angular.module('shop', ['google-maps'])
             $scope.map.center.latitude = lat;
         }
 
+        $scope.districtInputChanged = function()
+        {
+            $("#districtDropdown").addClass("open")
+        }
+
+        $scope.cityInputChanged = function()
+        {
+            $("#cityDropdown").addClass("open")
+        }
+ 
         function updateLatLng(lat, lng) {
             shopRemote.update({
                 lat: lat,

@@ -54,8 +54,19 @@
                 <a ng-click="bundle.editDistrictAddress = true" style="cursor:pointer" >sửa</a>
             </div>
             <div class="edit" ng-hide="!bundle.editDistrictAddress">
-                <input ng-model="bundle.shopDistrictAddress" class="form-control inline-block"/>
-                <i ng-click="changeDistrictAddress()" class="icon-ok-sign success" style="cursor:pointer" ></i>
+                <div class="controller">
+                    
+                    <div class="z-dropdown-wapper">
+                        <div id="districtDropdown" class="z-dropdown">
+                            <a class="trigger" style="cursor:pointer"><input type="text" class="invisibleInput" ng-change="districtInputChanged()" ng-model="districtFilter" value=""/><i class="icon-sort-down"></i></a>
+                            <ul style="max-height:250px">
+                                <li ng-repeat="district in cities[cityAddress].districts | filter:districtFilter"><a ng-click="changeDistrictAddress(district)" style="cursor:pointer">{{district}}</a></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+ 
             </div>
         </div>
     </li>
@@ -73,10 +84,10 @@
             <div class="edit" ng-hide="!bundle.editCityAddress">
                 <div class="controller">
                     <div class="z-dropdown-wapper">
-                        <div class="z-dropdown">
-                            <a class="trigger" style="cursor:pointer"><span>{{bundle.shopCityAddress}}</span><i class="icon-sort-down"></i></a>
-                            <ul>
-                                <li ng-repeat="city in cities"><a ng-click="changeCityAddress(city.name)" style="cursor:pointer">{{city.name}}</a></li>
+                        <div id="cityDropdown" class="z-dropdown">
+                            <a class="trigger" style="cursor:pointer"><input type="text" class="invisibleInput" ng-change="cityInputChanged()" ng-model="cityFilter" value=""/><i class="icon-sort-down"></i></a>
+                            <ul style="max-height:250px">
+                                <li ng-repeat="city in cities | filter: cityFilter "><a ng-click="changeCityAddress(city.name, $index)" style="cursor:pointer">{{city.name}}</a></li>
                             </ul>
                         </div>
                         

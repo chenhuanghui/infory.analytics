@@ -275,7 +275,7 @@ angular.module('smg.services')
 
                     var fields = {
                         brand_id: brandId,
-                        fields: '["meta_lists", "meta_events", "meta_property_types", "meta_profile"]'
+                        fields: '["meta_lists", "meta_events", "meta_property_types", "meta_profile", "cities"]'
                     };
 
                     systemRemote.get(fields, function(data) {
@@ -285,6 +285,7 @@ angular.module('smg.services')
                             metaData.meta_profile = data.meta_profile;
                             metaData.meta_events = data.meta_events;
                             metaData.meta_property_types = data.meta_property_types;
+                            metaData.cities = data.cities;
                             success(metaData);
                         } else
                             dialogHelper.showError(data.error.message);
