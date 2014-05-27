@@ -183,7 +183,7 @@ angular.module('smgDirectives', ['ui.date'])
                     function update() {
                         if (scope.olddata == 'null' || scope.olddata == '[]' || scope.olddata == null || scope.olddata == '') {
                             scope.property = scope.event.properties[0];
-                            if (scope.property.name_display == 'chọn thuộc tính')
+                            if (scope.property.name_display == 'select property')
                                 return;
                             scope.meta = scope.metas[scope.property.type].operators_display[0];
                             if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
@@ -250,7 +250,7 @@ angular.module('smgDirectives', ['ui.date'])
                             return;
 
                         //scope.property = scope.event.properties[0];
-                        if (scope.property.name_display == 'chọn thuộc tính')
+                        if (scope.property.name_display == 'select property')
                             return;
 
                         scope.meta = scope.metas[scope.property.type].operators_display[0];
@@ -296,7 +296,7 @@ angular.module('smgDirectives', ['ui.date'])
                     }
 
                     scope.getValue = function() {
-                        if (scope.property.name_display == 'chọn thuộc tính')
+                        if (scope.property.name_display == 'select property')
                             return;
 
                         switch (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)]) {

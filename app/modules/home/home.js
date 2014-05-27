@@ -85,7 +85,7 @@ angular.module('home')
             }
 
             var compareToObject = null;
-            if ($scope.eventBookmark.compare_by != undefined && $scope.compareUnit.name_display != 'chọn thuộc tính') {
+            if ($scope.eventBookmark.compare_by != undefined && $scope.compareUnit.name_display != 'select property') {
                 compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
             }
 
@@ -213,7 +213,7 @@ angular.module('home')
                     brandRemote.getCostChart(field, function(data) {
                         $scope.hideLoading[id] = true;
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChartForHome(data, 'Dịch vụ');
+                            $scope.dataChart[id] = chartHelper.buildLineChartForHome(data, 'Service');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
@@ -222,7 +222,7 @@ angular.module('home')
                     brandRemote.getDevelopmentChart(field, function(data) {
                         $scope.hideLoading[id] = true;
                         if (data.error == undefined)
-                            $scope.dataChart[id] = chartHelper.buildLineChartForHome(data, 'Tình hình tăng trưởng');
+                            $scope.dataChart[id] = chartHelper.buildLineChartForHome(data, "User's activities");
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
@@ -239,9 +239,9 @@ angular.module('home')
                     eventRemote.count(field, function(data) {
                         $scope.hideLoading[id] = true;
                         if (data.error == undefined) {
-                            if ($scope.compareUnit.name_display == 'giờ trong ngày' ||
-                                $scope.compareUnit.name_display == 'ngày trong tuần' ||
-                                $scope.compareUnit.name_display == 'tháng trong năm') {
+                            if ($scope.compareUnit.name_display == 'hour' ||
+                                $scope.compareUnit.name_display == 'weekday' ||
+                                $scope.compareUnit.name_display == 'month') {
                                 $scope.dataChart[id] = chartHelper.buildPieChart(data, getEventNameDisplay(field.event));
                             } else
                                 $scope.dataChart[id] = chartHelper.buildLineChart(data, getEventNameDisplay(field.event));

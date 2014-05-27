@@ -15,9 +15,9 @@
             <div class="block">
                 <div class="block_header">
                     <div class="left bold">
-                        Thống kê lượt 
+                        Statistics 
                         <select ng-model="event" ng-options="event as event.name_display for event in events" ng-change="updateEvent()"></select>
-                        theo thời gian
+                        by time
                     </div>
                     <div class="right">
                         <div class="controller">
@@ -39,7 +39,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <span class="btn-glow success _large" ng-click="updateDateEvent()"><i class="icon-bookmark-empty"></i>Lưu</span>
+                            <span class="btn-glow success _large" ng-click="updateDateEvent()"><i class="icon-bookmark-empty"></i>Save</span>
                         </div>
                     </div>
                 </div>
@@ -52,10 +52,10 @@
                     </div>
                 </div>
                 <div class="block_footer">
-                    <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> So sánh theo</p>
+                    <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> Compared by</p>
                     <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" style="margin-left: 10px;margin-top: 10px;"></select>
 
-                    <span class="btn-glow primary right" ng-click="getResult()"><i class="icon-ok"></i> Xem</span>
+                    <span class="btn-glow primary right" ng-click="getResult()"><i class="icon-ok"></i> Show</span>
                 </div>
             </div>
 

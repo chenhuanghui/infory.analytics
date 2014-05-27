@@ -9,30 +9,30 @@
             <div class="col-md-3 col-sm-3 stat">
                 <div class="data">
                     <span class="number">{{brandInfo.user_count}}</span>
-                    Khách hàng
+                    USERS
                 </div>
-                <span class="date">Trong cơ sở dữ liệu</span>
+                <span class="date">In database</span>
             </div>
             <div class="col-md-3 col-sm-3 stat">
                 <div class="data">
                     <span class="number">{{brandInfo.view_count}}</span>
-                    lượt xem
+                    VIEWS
                 </div>
-                <span class="date">Kể từ 01/01/02014</span>
+                <span class="date">From 2014/01/01</span>
             </div>
             <div class="col-md-3 col-sm-3 stat">
                 <div class="data">
                     <span class="number">{{brandInfo.like_count}}</span>
-                    lượt like 
+                    LIKES 
                 </div>
-                <span class="date">Kể từ 01/01/02014</span>
+                <span class="date">From 2014/01/01</span>
             </div>
             <div class="col-md-3 col-sm-3 stat last">
                 <div class="data">
                     <span class="number">${{brandInfo.balance}}</span>
                     t-coin
                 </div>
-                <span class="date">Số dư tài khoản</span>
+                <span class="date">Balance</span>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
     <div class="white-background">
         <div class="home-title">
             
-            <div id="report-header" class="gray-gradient-box"><div id="report-title">Tổng quan</div><div id="report-description">Tình hình tăng trưởng </div><div id="bookmark" style="display: block;">BOOKMARK</div></div>
+            <div id="report-header" class="gray-gradient-box"><div id="report-title">Overview</div><div id="report-description">Growth rate </div><div id="bookmark" style="display: block;">BOOKMARK</div></div>
         </div>
         <div class="block" ng-hide="true">
             <div class="block_header">
@@ -62,7 +62,7 @@
                     <div class="dropdown left" style="margin-left:10px;">
                       <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                         <div class="select-date btn-glow">
-                            Đến<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay"/>
+                            To<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay"/>
                             </div>
                         <i class="icon-sort-down"></i>
                         </div>
@@ -74,7 +74,7 @@
                 </span>
 
                 <select class="type_menu pull-right z-select" ng-model="time_unit_1" ng-options="time_unit_1 as time_unit_1.name_display for time_unit_1 in time_units" ng-change="updateTimeUnit(time_unit_1, 0)"></select>
-                <span class="right text-chart">Đơn vị: </span>
+                <span class="right text-chart">Unit: </span>
             </div>
             <div  style="height: 420px !important;">
                 <div title="Code: 0xe800" class="the-icons span3 loading-container" ng-hide="hideLoading[0]"><i class="icon-fontello-spin6 animate-spin loading-chart loading-icon"></i></div>
@@ -88,7 +88,7 @@
                     <div class="dropdown left" >
                       <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
                          <div class="select-date btn-glow">
-                            Từ<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[2].dateDisplay">
+                            From<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[2].dateDisplay">
                             </div>
                             <i class="icon-sort-down"></i>
                          </div>
@@ -101,7 +101,7 @@
                     <div class="dropdown left" style="margin-left:10px;">
                       <a class="dropdown-toggle" id="dropdown4" role="button" data-toggle="dropdown" data-target="#" href="#">
                         <div class="select-date btn-glow">
-                            Đến<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[3].dateDisplay"/>
+                            To<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[3].dateDisplay"/>
                             </div>
                             <i class="icon-sort-down"></i>
                         </div>
@@ -113,7 +113,7 @@
                 </span>
 
                 <select class="type_menu pull-right z-select" ng-model="time_unit_2" ng-options="time_unit_2 as time_unit_2.name_display for time_unit_2 in time_units" ng-change="updateTimeUnit(time_unit_2, 1)"></select>
-                <span class="right text-chart">Đơn vị: </span>
+                <span class="right text-chart">Unit: </span>
             </div>
             <div  style="height: 420px !important;">
                 <div title="Code: 0xe800" class="the-icons span3 loading-container" ng-hide="hideLoading[1]"><i class="icon-fontello-spin6 animate-spin loading-chart loading-icon"></i></div>
@@ -141,7 +141,7 @@
                     <div class="dropdown left" style="margin-left:10px;">
                       <a class="dropdown-toggle" id="dropdown6" role="button" data-toggle="dropdown" data-target="#" href="#">
                         <div class="select-date btn-glow">
-                            Đến<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[5].dateDisplay"/>
+                            To<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[5].dateDisplay"/>
                             </div>
                             <i class="icon-sort-down"></i>
                         </div>
@@ -153,7 +153,7 @@
                 </span>
 
                 <select class="type_menu pull-right z-select" ng-model="time_unit_3" ng-options="time_unit_3 as time_unit_3.name_display for time_unit_3 in time_units" ng-change="updateTimeUnit(time_unit_3, 2)"></select>
-                <span class="right text-chart">Đơn vị: </span>
+                <span class="right text-chart">Unit: </span>
             </div>
             <div style="height: 420px !important;">
                 <div title="Code: 0xe800" class="the-icons span3 loading-container" ng-hide="hideLoading[2]"><i class="icon-fontello-spin6 animate-spin loading-chart loading-icon"></i></div>
@@ -164,12 +164,12 @@
         <div class="home-title-2" ng-hide="!isHasBookmark">
             <!-- <span >Biểu đồ của bạn</span> -->
 
-            <div id="report-header" class="gray-gradient-box"><div id="report-title">Biểu đồ của bạn</div><div id="report-description">Các phân tích đánh giá đã lưu trữ trên hệ thống </div><div id="bookmark" style="display: block;">BOOKMARK</div></div>
+            <div id="report-header" class="gray-gradient-box"><div id="report-title">Chart</div><div id="report-description">Ananlytics report  </div><div id="bookmark" style="display: block;">BOOKMARK</div></div>
             <div class="clearfix" style="display:block;">
                 <div class="right">
                     <div class="controller">
                         <select class="large" ng-model="eventBookmark" ng-options="eventBookmark as eventBookmark.bookmark_name for eventBookmark in eventBookmarks" ng-change="updateEventBookmark(true)"></select>
-                        <span class="btn-glow success _large">XEM BIỂU ĐỒ</span>
+                        <span class="btn-glow success _large">View Chart</span>
                     </div>
                 </div>    
             </div>
@@ -194,7 +194,7 @@
                     <div class="dropdown left" style="margin-left:10px;">
                       <a class="dropdown-toggle" id="dropdown8" role="button" data-toggle="dropdown" data-target="#" href="#">
                         <div class="select-date btn-glow">
-                            Đến<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[7].dateDisplay" />
+                            To<div class="input-append"><input type="text" class="form-control datetime inline-block" data-ng-model="data[7].dateDisplay" />
                             </div>
                             <i class="icon-sort-down"></i>
                         </div>
@@ -206,14 +206,14 @@
                 </span>
 
                 <select class="type_menu pull-right z-select" ng-model="time_unit_4" ng-options="time_unit_4 as time_unit_4.name_display for time_unit_4 in time_units" ng-change="updateTimeUnit(time_unit_4, 3)"></select>
-                <span class="right text-chart">Đơn vị: </span>
+                <span class="right text-chart">Unit: </span>
             </div>
             <div>
                 <div title="Code: 0xe800" class="the-icons span3 loading-container" ng-hide="hideLoading[3]"><i class="icon-fontello-spin6 animate-spin loading-chart loading-icon" style="margin-bottom: 150px"></i></div>
 
                 <chart value='dataChart[3]' height="400" ng-hide="!hideLoading[3]"></chart>
                 <div class="block_footer">
-                    <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> So sánh theo</p>
+                    <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> Compare by</p>
                     <div class="z-ui-select">
                         <select ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" ng-change="updateEventBookmark()"></select>
                         <i class="icon-sort-down"></i>

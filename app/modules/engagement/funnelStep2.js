@@ -130,7 +130,7 @@ angular.module('engagement')
                 $scope.updateCompareUnit = function() {
                     var compareToObject = null;
 
-                    if ($scope.compareUnit.name_display != 'chọn thuộc tính') {
+                    if ($scope.compareUnit.name_display != 'select property') {
                         compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
                     }
 
@@ -188,7 +188,7 @@ angular.module('engagement')
                                 values.push(data[i].count);
 
                                 if (i > 0) {
-                                    var row = createSingleTableRow("Tất cả", data, i);
+                                    var row = createSingleTableRow("Overall", data, i);
                                     $scope.totalRows.push(row);
                                 }
                             }

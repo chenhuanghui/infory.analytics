@@ -5,10 +5,10 @@
     <div id="funnel-fuelux-wizard" class="wizard">
         <ul class="wizard-steps">
             <li data-target="#funnel-step1" >
-                <span class="z-step">TẠO CHUỖI MỚI</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">Build a funnel</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#funnel-step2" class="active">
-                <span class="z-step">KẾT QUẢ</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">Result</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
         </ul>                            
     </div>
@@ -17,11 +17,11 @@
             <div class="step-pane active" id="funnel-step2">
                 <div class="step-description">
                     <div class="step-title">
-                        Hệ thống phân tích chuỗi hành vi khách hàng
+                        Funnel system
                     </div>
-                    Chọn chuỗi hành vi đã lưu và bấm "Xem" để hiển thị chi tiết chuỗi hành vi khách hàng dưới dạng biểu đồ tương tác và bảng thống kê. Bấm "Tạo chuỗi hành vi mới" để thực hiện tạo mới chuỗi hành vi. Bạn có thể xuất biểu đồ dưới dạng ảnh PNG, JPEG, PDF và ảnh vector.
+                    Let's find out where your users drop off
                     <div>
-                        <a class="btn-flat success right" ng-click="goToStep1()">Tạo chuỗi hành vi mới</a>
+                        <a class="btn-flat success right" ng-click="goToStep1()">Build a funnel</a>
                     </div>
                 </div>
                 <div class="form-wrapper">
@@ -42,7 +42,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <span class="btn-glow success"><i class="icon-bookmark-empty"></i> Xem</span>
+                                        <span class="btn-glow success"><i class="icon-bookmark-empty"></i> View</span>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                         </span>
                                     </div>
                                     <div class="right">
-                                        <span>Thống kê theo <div class="ui-select">
+                                        <span>Group by <div class="ui-select">
                                                                      <select ng-model="computeBy" ng-options="computeBy as computeBy.name_display for computeBy in computeBys" ng-change="updateComputeBy()"></select>
                                                                 </div>
                                         </span>
@@ -100,7 +100,7 @@
                                 <div class="block" style="margin: 0 -10px;">
                                     <div class="block_header">
                                         <div class="left control">
-                                            So sánh theo 
+                                            Compared by 
                                             <div class="ui-select">
                                                <select class="type_menu left" ng-init="compareUnit=currentEvent.compare_properties[0].name_display" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in currentEvent.compare_properties" ng-change="updateCompareUnit()"></select>                                            
                                             </div>
@@ -114,10 +114,13 @@
                                             <thead>
                                                 <tr>
                                                     <th>{{compareUnitName}}</th>
-                                                    <th>Số lượng bước trước</th>
-                                                    <th>Thời gian trung bình<br/>giữa 2 bước</th>
-                                                    <th>Số lượng bước sau</th>
-                                                    <th>Tỷ lệ giữa 2 bước</th>
+                                                    <th>People who previous step</th>
+                                                    <th>Median time from previous step</th>
+
+
+                    
+                                                    <th>People who continued to this step</th>
+                                                    <th>Conversion rate base on the previous step</th>
                                                 </tr>
                                             </thead>
                                             <tbody>                                                

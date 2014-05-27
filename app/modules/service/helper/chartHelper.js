@@ -180,7 +180,7 @@ angular.module('Smg')
                             type: 'line'
                         },
                         title: {
-                            text: 'Thống kê lượt ' + event + ' theo thời gian',
+                            text: 'Statistics ' + event + ' by time',
                             x: -20 //center
                         },
                         subtitle: {
@@ -306,7 +306,7 @@ angular.module('Smg')
                             plotShadow: false
                         },
                         title: {
-                            text: 'Thống kê lượt ' + event + ' theo thời gian',
+                            text: 'Statistics ' + event + ' by time',
                         },
                         tooltip: {
                             pointFormat: '{<b>{point.percentage:.1f}%</b>'
@@ -360,7 +360,7 @@ angular.module('Smg')
                             type: 'column'
                         },
                         title: {
-                            text: 'Thống kê lượt ' + event + ' theo thời gian',
+                            text: 'Statistics ' + event + ' by time',
                         },
                         subtitle: {
                             text: 'Nguồn: infory.vn',

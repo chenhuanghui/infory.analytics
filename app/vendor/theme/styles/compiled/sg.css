@@ -1,3 +1,7 @@
+body {
+    font-family: 'Roboto Slab', serif;
+}
+
 img {
    background-image: url('/vendor/theme/img/default.jpg');
    background-size: contain
@@ -1189,7 +1193,6 @@ table.comment{
     margin-left: 15px;
     padding-top: 15px;
     /*padding-bottom: 10px;*/
-    font-family: Tahoma;
     font-size: 28px;
     color: #e1e1e1;
     margin-bottom: 20px;

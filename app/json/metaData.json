@@ -357,7 +357,7 @@
         "name": "view",
         "name_display": "xem thông tin",
         "properties": [{
-            "name_display": "chọn thuộc tính"
+            "name_display": "select property"
         }, {
             "name": "shop_name",
             "name_display": "cửa hàng",
@@ -408,7 +408,7 @@
             "type": "number"
         }],
         "compare_properties": [{
-            "name_display": "chọn thuộc tính"
+            "name_display": "select property"
         }, {
             "name": "shop_name",
             "name_display": "cửa hàng",
@@ -455,7 +455,7 @@
         "name": "checkin",
         "name_display": "đến cửa hàng",
         "properties": [{
-            "name_display": "chọn thuộc tính"
+            "name_display": "select property"
         }, {
             "name": "shop_name",
             "name_display": "cửa hàng",
@@ -506,7 +506,7 @@
             "type": "number"
         }],
         "compare_properties": [{
-            "name_display": "chọn thuộc tính"
+            "name_display": "select property"
         }, {
             "name": "shop_name",
             "name_display": "cửa hàng",
@@ -553,7 +553,7 @@
         "name": "checkout",
         "name_display": "mua hàng",
         "properties": [{
-            "name_display": "chọn thuộc tính"
+            "name_display": "select property"
         }, {
             "name": "shop_name",
             "name_display": "cửa hàng",
@@ -608,7 +608,7 @@
             "type": "number"
         }],
         "compare_properties": [{
-            "name_display": "chọn thuộc tính"
+            "name_display": "select property"
         }, {
             "name": "shop_name",
             "name_display": "cửa hàng",
@@ -660,7 +660,7 @@
         "name": "comment",
         "name_display": "bình luận",
         "properties": [{
-            "name_display": "chọn thuộc tính"
+            "name_display": "select property"
         }, {
             "name": "shop_name",
             "name_display": "cửa hàng",
@@ -715,7 +715,7 @@
             "type": "number"
         }],
         "compare_properties": [{
-            "name_display": "chọn thuộc tính"
+            "name_display": "select property"
         }, {
             "name": "shop_name",
             "name_display": "cửa hàng",
@@ -872,7 +872,7 @@
         "name": "profile",
         "name_display": "profile",
         "properties": [{
-            "name_display": "chọn thuộc tính"
+            "name_display": "select property"
         }, {
             "name": "dob",
             "name_display": "ngày sinh",
