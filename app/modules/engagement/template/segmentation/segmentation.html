@@ -96,11 +96,11 @@
 
                      <select class="type_menu right z-select" ng-model="chartTypeSub" ng-options="chartTypeSub as chartTypeSub.display_name for chartTypeSub in chartTypeSubs" ng-hide="!hideTypeChart" ng-change="changeChartId(chartTypeSub)"></select>
 
-                     <span class="right text-chart" style="margin-left: 30px;">Dạng biểu đồ: </span>
+                     <span class="right text-chart" style="margin-left: 30px;">Chart: </span>
 
                      <select class="type_menu pull-right z-select" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-change="updateChart()"></select>
 
-                     <span class="right text-chart">Đơn vị: </span>
+                     <span class="right text-chart">Unit: </span>
 
                 </div>
                 <div ng-switch on="chartId" class="block_content" style="height: 420px;">
