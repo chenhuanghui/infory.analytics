@@ -14,7 +14,7 @@
                             </select>
                         </div>
                         cho -->
-                        <!-- <input type="text" class="search right" placeholder="Tìm kiếm..." ng-model="searchText" ng-change="filterBrands()"/> -->
+                        <input type="text" class="search right" placeholder="Tìm kiếm..." ng-model="searchText" ng-keyup="$event.keyCode == 13 ? search(searchText) : null" ng-change="searchStrChange(searchText)"/>
                     </div>
                 </div>
                 <div ng-hide="hideLoading" class="loading-container-image-product">
@@ -44,7 +44,7 @@
                         <tbody >
 
                             <tr ng-repeat="brand in dataInCurrentPage">
-                                <td style="cursor:pointer" ng-click="moveToBrand(brand.id)">{{brand.id}}</td>
+                                <td style="cursor:pointer" ng-click="moveToBrand(brand.id)"> <a href="#/brand/infor/{{brand.id}}">{{brand.id}}</a></td>
                                 <td style="cursor:pointer" ng-click="moveToBrand(brand.id)">{{brand.name}}</td>
                                 <td style="cursor:pointer" ng-click="moveToBrand(brand.id)">{{brand.type_business}}</td>
                                 <td style="cursor:pointer" ng-click="moveToBrand(brand.id)"><img ng-src="{{brand.logo}}" width="45" height="45" /></td>

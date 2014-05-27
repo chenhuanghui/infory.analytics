@@ -30,6 +30,9 @@ angular.module('smg.services')
                 getListInternal: function(fields, success, error) {
                     $http.post(base_url + 'list_internal' + remoteFactory.getTailUrl(), fields).success(success).error(error);
                 },
+                search: function(fields, success, error) {
+                    $http.post(base_url + 'search' + remoteFactory.getTailUrl(), fields).success(success).error(error);
+                },
             }
         }
     ])
