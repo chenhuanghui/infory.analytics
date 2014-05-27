@@ -43,7 +43,7 @@ angular.module('engagement')
                 $scope.metas = data.meta_property_types;
                 $scope.events = data.meta_events;
                 $scope.subfilters = null;
-                run();
+                run();                
             }, function() {});
 
             function run() {
@@ -68,16 +68,16 @@ angular.module('engagement')
                 $scope.totalRows = [];
 
 
-                if (step1Data == null) {
+                if (step1Data == null) {                    
                     if (step2Data != null) {
-
                     }
                 } else {
                     fields = step1Data.fields;
+
                     $scope.funnelBookmark = {
                         funnel: step1Data.fields.funnel
-                    }
-                    updateChart(fields);
+                    }                                       
+                    updateChart(fields);                    
                 }
 
                 brandRemote.get(pros, function(data) {
@@ -90,16 +90,24 @@ angular.module('engagement')
                         $scope.funnelBookmarks = data.funnel_bookmarks;
                         $scope.funnelBookmark = data.funnel_bookmarks[0];
 
-                        if (step1Data == null && $scope.funnelBookmarks.length >= 2) {
-                            $scope.funnelBookmark = data.funnel_bookmarks[1];
-                            $scope.changeFunnelBookmark($scope.funnelBookmark.id);
-                        } else {
-                            $scope.funnelBookmark.funnel = step1Data.fields.funnel;
+                        if (step1Data == null) {
+                            if ($scope.funnelBookmarks.length >= 2) {
+                                $scope.funnelBookmark = data.funnel_bookmarks[1];                                
+                                $scope.changeFunnelBookmark($scope.funnelBookmark.id);                                
+                            }
+                            else
+                            {                                                                                       
+                                $scope.hideLoading = true;
+                                $("#funnelChartData").html("<div style='margin-left:340px;line-height:410px;font-weight:bold'>No data to display</div>");
+                            }
+                        } else {                            
+                            $scope.funnelBookmark.funnel = step1Data.fields.funnel;                            
                             $scope.hideLoading = true;
                         }
                     } else
                         dialogHelper.showError(data.error.message);
                 }, function() {})
+                
 
                 $scope.changeFunnelBookmark = function(id) {
                     $('.z-dropdown').removeClass('open');
@@ -149,7 +157,9 @@ angular.module('engagement')
                 function updateChart(fields) {
 
                     $scope.hideLoading = false;
-
+                    if (fields === null) {
+                        console.log("Fields is null");
+                    }
                     // reset all variable related to current event and table data
                     $scope.currentEvent = null;
                     $scope.currentEventIdx = -1;
@@ -189,7 +199,7 @@ angular.module('engagement')
                             }
                             $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames, valueSuffix, unit, updateTableEvent, $scope.totalRows, $scope.conversationRate);
                         } else
-                            dialogHelper.showError(data.error.message);
+                            dialogHelper.showError(data.error.message);                
                     }, function() {});
                 }
 
