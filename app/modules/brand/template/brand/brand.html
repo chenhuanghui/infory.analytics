@@ -22,7 +22,7 @@
                             
                             <p> <span>Website: </span> <a href="{{brand.website}}" ng-hide="!hideLoadingInfor"> {{brand.website}}</a> <i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i> </p>
                             <p> <span>Fanpage: </span> <a href="{{brand.fanpage}}" ng-hide="!hideLoadingInfor">{{brand.fanpage}}</a> <i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
-                            <p> <span>Liên hệ: </span> <a ng-hide="!hideLoadingInfor"> {{brand.owner_phone}}</a><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
+                            <p> <span>Contact: </span> <a ng-hide="!hideLoadingInfor"> {{brand.owner_phone}}</a><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
                             
                             <div class="alert alert-danger" ng-hide="true">
                                 <i class="icon-remove-sign"></i>
@@ -33,8 +33,8 @@
                     </div>
                 </div> <!-- brand info-->
                     <div id="add_shop">
-                        <input class="shop_name form-control" type="text" placeholder="Nhập tên cửa hàng" ng-model="newShopName">    
-                        <a class="btn-flat success" ng-click="addShop(newShopName)"><i class="icon-plus"></i>Thêm cửa hàng mới</a>
+                        <input class="shop_name form-control" type="text" placeholder="Store's name" ng-model="newShopName">    
+                        <a class="btn-flat success" ng-click="addShop(newShopName)"><i class="icon-plus"></i>Create new store</a>
                     </div>       
 
                     <div ng-hide="hideLoadingInfor" class="loading-container-image-product">
@@ -55,15 +55,15 @@
 
                 <ul class="nav nav-tabs">
                   <li ng-class="{active: main.active.tab == 'info'}" class="active">
-                    <a ng-click='main.active.tab = "info" ' href=""> Thông tin</a>
+                    <a ng-click='main.active.tab = "info" ' href=""> Information</a>
                   </li>
                   
                   <li ng-class="{active: main.active.tab == 'product'}">
-                    <a ng-click='main.active.tab = "product";showProducts()' href=""> Sản phẩm</a>
+                    <a ng-click='main.active.tab = "product";showProducts()' href=""> Products</a>
                   </li>
 
                     <li ng-class="{active: main.active.tab == 'gallery'}">
-                      <a ng-click='main.active.tab = "gallery"; showGallery();' href=""> Hình ảnh</a>
+                      <a ng-click='main.active.tab = "gallery"; showGallery();' href=""> Gallery</a>
                     </li>
                     <!-- <li ng-class="{active: main.active.tab == 'gallery_user'}">
                       <a ng-click='main.active.tab = "gallery_user";showUsersGallery();' href=""> Hình ảnh KH</a>

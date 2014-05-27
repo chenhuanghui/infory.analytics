@@ -56,36 +56,36 @@ angular.module('engagement')
             $scope.markers = [];
 
             $scope.chartTypes = [{
-                display_name: "Biểu đồ đường",
+                display_name: "Line",
                 id: 0
             }, {
-                display_name: "Biểu đồ tròn",
+                display_name: "Pie",
                 id: 1
             }, {
-                display_name: "Biểu đồ cột",
+                display_name: "Bar",
                 id: 2
             }, {
-                display_name: "Bản đồ phân bố",
+                display_name: "Map",
                 id: 3
             }];
 
             $scope.chartTypeSubs = [{
-                display_name: "Biểu đồ đường",
+                display_name: "Line",
                 id: 0
             }, {
-                display_name: "Bản đồ phân bố",
+                display_name: "Map",
                 id: 3
             }];
 
             $scope.time_units = [{
                 name: 'day',
-                name_display: 'Ngày'
+                name_display: 'Day'
             }, {
                 name: 'week',
-                name_display: 'Tuần'
+                name_display: 'Week'
             }, {
                 name: 'month',
-                name_display: 'Tháng'
+                name_display: 'Month'
             }];
 
             $scope.hideTypeChart = true;
@@ -344,7 +344,7 @@ angular.module('engagement')
                 };
 
                 var compareToObject = null;
-                if ($scope.compareUnit.name_display != 'select property') {
+                if ($scope.compareUnit.name_display != 'none') {
                     compareToObject = compareHelper.buildCompareToString($scope.compareUnit);
                     fields.compare_by = JSON.stringify(compareToObject);
                     $scope.hideTypeChart = false;

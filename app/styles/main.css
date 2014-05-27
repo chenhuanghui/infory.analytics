@@ -108,6 +108,7 @@ body {
   margin: 0 auto;
   height: 100%;
   min-height: 650px;
+  /*margin-bottom: 100px;*/
   /*background-color: #3f516b !important;*/
   /*background: 100% 100% url(/img/bg1.jpg) no-repeat;*/
   -webkit-border-radius: 4px;
@@ -117,9 +118,9 @@ body {
   -webkit-box-shadow: 2px 0 4px rgba(0,0,0,0.1),-2px 0 4px rgba(0,0,0,0.1);
   -moz-box-shadow: 2px 0 4px rgba(0,0,0,0.1),-2px 0 4px rgba(0,0,0,0.1);
   box-shadow: 2px 0 4px rgba(0,0,0,0.1),-2px 0 4px rgba(0,0,0,0.1);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 5px 5px 2px 2px;
+  -moz-border-radius: 5px 5px 2px 2px;
+  border-radius: 5px 5px 2px 2px;
 }
  
 .block {

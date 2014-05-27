@@ -176,7 +176,7 @@ div.navbar-header ul li i.icon-home{
 }
 
 .step-content .step-pane .step-wapper{
-    padding: 10px 40px;
+    padding: 10px;
 }
 
 .step-view-content{
@@ -458,9 +458,9 @@ div.navbar-header ul li i.icon-home{
 
 .z-box{
 	border: 1px solid #DAE3E9;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
 }
 
 .z-box .z-box-header{
@@ -755,6 +755,9 @@ div.navbar-header ul li i.icon-home{
 	color: #81AD53;
 	font-size: 25px;
 	float: right;
+    position: relative;
+    right: -7px;
+    top: -29px;
 }
 
 .property-box .tab-content ul li div.value div.edit .form-control{
@@ -807,6 +810,7 @@ div.navbar-header ul li i.icon-home{
 	border-right: 1px solid #dedede;
 	text-align: left;
 	padding: 5px 14px;	
+    font-weight: normal;
 }
 
 .z-table tbody tr td{
@@ -2294,5 +2298,49 @@ textarea{
     margin-top: 5px;
     font-weight: bold;
 }
+
+/*hight-chart*/
+
+tspan {
+    font-family: "Roboto" sans-serif;
+    font-weight: 700;
+}
+
+
+/*footer*/
+#page_footer {
+    position: relative;
+    padding: 18px 0;
+    width: 1150px;
+    margin: 0 auto;
+}
+#page_footer #page_footer_logo {
+    background: url("//cdn.mxpnl.com/cache/5adc9ef1825af08bd83ecab3d54b8e2c/images/reports/page_footer_logo.png");
+    width: 106px;
+    height: 36px;
+    margin-left: 7px;
+    background-repeat: no-repeat;
+}
+
+#page_footer .button_section {
+    display: inline;
+    padding: 18px 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#page_footer .button_section a {
+    color: #3e4f66;
+    margin-right: 20px;
+    font-size: 12px;
+    text-shadow: 0 1px rgba(255,255,255,0.25);
+}
+
+
+
+
+
+
 
 

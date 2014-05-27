@@ -15,7 +15,7 @@
             <div class="block">
                 <div class="block_header">
                     <div class="left bold">
-                        Statistics 
+                        Choose customer behavior 
                         <select ng-model="event" ng-options="event as event.name_display for event in events" ng-change="updateEvent()"></select>
                         by time
                     </div>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="block_content">
-                    <p class="notify"> Chỉ thống kê các lượt <span>{{event.name_display}}</span> thoả điều kiện</p>
+                    <!-- <p class="notify"> Filter condition:  </p> -->
                     <div ng-hide="isVisibleFilter" class="loading-container-infor">
                         <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
                     </div>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="block_footer">
-                    <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> Compared by</p>
+                    <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> Compare by</p>
                     <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" style="margin-left: 10px;margin-top: 10px;"></select>
 
                     <span class="btn-glow primary right" ng-click="getResult()"><i class="icon-ok"></i> Show</span>
@@ -67,7 +67,7 @@
                         <div class="dropdown left" >
                           <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                 <div class="select-date btn-glow">
-                                    <div class="input-append">Từ<input type="text" data-ng-model="data[0].dateDisplay" style="width: 100px;">
+                                    <div class="input-append">From<input type="text" data-ng-model="data[0].dateDisplay" style="width: 100px;">
                                     </div>
                                     <i class="icon-sort-down"></i>
                                 </div>
@@ -80,7 +80,7 @@
                         <div class="dropdown left" style="margin-left:10px;">
                           <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
                             <div class="select-date btn-glow">
-                                <div class="input-append">Đến<input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                                <div class="input-append">to<input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
                                 </div>
                                 <i class="icon-sort-down"></i>
                             </div>

@@ -5,16 +5,16 @@
     <div id="promotion-fuelux-wizard" class="wizard">
         <ul class="wizard-steps">
             <li data-target="#promotion-step1" class="active">
-                <span class="z-step">Loại sự kiện</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">Event</span><img class="line-step" src="img/line_step.png" />
             </li>
             <li data-target="#promotion-step2">
-                <span class="z-step">Thông tin</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">Information</span><img class="line-step" src="img/line_step.png" />
             </li>
             <li data-target="#promotion-step3">
-                <span class="z-step">Nội dung</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">Content</span><img class="line-step" src="img/line_step.png" />
             </li>
             <li data-target="#promotion-step4">
-                <span class="z-step">Hoàn thành</span>
+                <span class="z-step">Finish</span>
             </li>
         </ul>                            
     </div>
@@ -23,9 +23,9 @@
             <div class="step-pane active" id="promotion-step1">
                 <div class="step-description">
                     <div class="step-title">
-                        <span class="step-name">Bước 1:</span> chọn loại khuyến mãi hoặc sự kiện cho chiến dịch của bạn.
+                        <span class="step-name">Step 1:</span> Select type of your event.
                     </div>
-                    Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
+                    Build information for your campaign
                 </div>
                 <div class="form-wrapper">
                     <div class="col-md-8">
@@ -34,24 +34,24 @@
                                 <div class="flexslider">
                                   <ul class="slides">
                                     <li>
-                          	    	    <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
-                          	    		</li>
-                          	    		<li>
-                          	    	    <img src="img/kitchen_adventurer_lemon.jpg" />
-                          	    		</li>
-                          	    		<li>
-                          	    	    <img src="img/kitchen_adventurer_donut.jpg" />
-                          	    		</li>
-                          	    		<li>
-                          	    	    <img src="img/kitchen_adventurer_caramel.jpg" />
-                          	    		</li>
+                                      <img src="img/kitchen_adventurer_cheesecake_brownie.jpg" />
+                                    </li>
+                                    <li>
+                                      <img src="img/kitchen_adventurer_lemon.jpg" />
+                                    </li>
+                                    <li>
+                                      <img src="img/kitchen_adventurer_donut.jpg" />
+                                    </li>
+                                    <li>
+                                      <img src="img/kitchen_adventurer_caramel.jpg" />
+                                    </li>
                                   </ul>
                                 </div>
                             </div>
                             <div class="field-box">
-                                <span class="title">CHỌN HÌNH THỨC SỰ KIỆN</span>
+                                <span class="title">TYPE OF EVENT</span>
                                 <div class="ui-select">
-                                    <select ng-model="promotionType" ng-options="promotionType as promotionType.name_display for promotionType in promotionTypes"></select>
+                                    <select ng-model="promotionType" ng-options="promotionType as promotionType.name_display for promotionType in promotionTypes" ng-init="promotionType=promotionTypes[0]"></select>
                                 </div>
                             </div>
                         </div>
@@ -60,21 +60,21 @@
 
                 <div class="col-md-4" style="height: 0;">
                     <div class="step-view-content">
-                        <h5>XEM TRƯỚC</h5>
+                        PREVIEW
                         <tabset>
                             <tab>
                               <tab-heading>
                                 <i class="icon-reorder"></i>
                               </tab-heading>
-                              <table class="attribute-table">
+                              <table class="table attribute-table">
                                 <thead>
-                                    <tr><th class="col-md-5">Thuộc tính</th><th>Nội dung</th></tr>
+                                    <tr><th>Property</th><th>Content</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td>Loại</td><td>{{promotionType.name_display}}</td></tr>
-                                    <tr class="odd"><td>Chương trình</td><td>{{name}}</td></tr>
-                                    <tr><td>Thời gian</td><td>{{time}}</td></tr>
-                                    <tr class="odd"><td>Mô tả</td><td>{{description}}</td></tr>
+                                    <tr><td>Type</td><td>{{promotionType.name_display}}</td></tr>
+                                    <tr><td>Campaign</td><td>{{name}}</td></tr>
+                                    <tr><td>Time</td><td>{{time}}</td></tr>
+                                    <tr><td>Description</td><td>{{description}}</td></tr>
                                 </tbody>
                               </table>
                             </tab>

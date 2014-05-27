@@ -5,7 +5,7 @@
         <div id="content_wrapper">
             <div class="notice shadow">
                 <div class='col-md-12'>
-                    <p class="title">Hệ thống quản lý khách hàng</p>
+                    <p class="title">Manage people system</p>
                     <p class="sub">Chọn điều kiện lọc bấm "Xem" để hiển thị thông tin khách hàng. Bạn có thể sử dụng chức năng "Tìm kiếm" để tìm kiếm nhanh khách hàng quan tâm. Bấm vào tên khách hàng để hiển thị chi tiết thông tin cá nhân, lịch sử giao dịch...</p>
                 </div>
                 
@@ -15,22 +15,22 @@
             <div class="block">
                 <div class="block_header">
                     <!-- <div class="left control">
-                        Statistics 
+                        Choose customer behavior 
                         <select ng-model="event" ng-options="event as event.name_display for event in events" ng-init="event=events[0]"></select>
                         by time
                     </div> -->
 
-                    <span class="btn-flat success icon-bookmark-empty right" ng-click="bookmark()">Lưu</span>
+                    <span class="btn-flat success icon-bookmark-empty right" ng-click="bookmark()">Save</span>
                 </div>
                 <div class="block_content">
-                    <p class="notify">Danh sách khách hàng thoả điều kiện</p>
+                    <!-- <p class="notify">Danh sách khách hàng thoả điều kiện</p> -->
                     <div ng-hide="isVisibleFilter" class="loading-container-infor">
                         <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
                     </div>
                     <div smg-filter metas="metas" events="events" metadata="metadata" event="event" subfilters="subfilters" oldsubfilters="oldsubfilters" visibility="isVisibleFilter"></div>
                 </div>
                 <div class="block_footer">
-                    <span class="btn-flat primary right" ng-click="getResult()">Xem</span>
+                    <span class="btn-flat primary right" ng-click="getResult()">Show</span>
                 </div>
             </div>
             
@@ -44,7 +44,7 @@
                             </select>
                         </div>
                         cho -->
-                        <input type="text" class="search right" placeholder="Tìm kiếm..." ng-model="searchText" ng-change="filterUser()"/>
+                        <input type="text" class="search right" placeholder="what're you looking for" ng-model="searchText" ng-change="filterUser()"/>
                     </div>
                 </div>
                 <div ng-hide="hideLoading" class="loading-container-image-product">
@@ -58,11 +58,11 @@
                                 <th class = "name">
                                     Phone number
                                 </th>
-                                <th class="name">Tên</th>
-                                <th>Tuổi</th>
-                                <th>Giới tính</th>
-                                <th>Vị trí</th>
-                                <th>Lần sử dụng cuối</th>
+                                <th class="name">Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Location</th>
+                                <th>Last time</th>
                             </tr>
                         </thead>
                         <tbody >

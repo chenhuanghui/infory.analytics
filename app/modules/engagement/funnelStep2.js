@@ -12,8 +12,8 @@ angular.module('engagement')
                 step1Data = funnelFactory.getData(0, brandId),
                 step2Data = funnelFactory.getData(1, brandId),
                 fields = null,
-                valueSuffix = 'lượt',
-                unit = 'Số lượt',
+                valueSuffix = 'unit(s)',
+                unit = 'Unit',
                 pros = {
                     id: brandId,
                     fields: '["funnel_bookmarks"]'
@@ -49,10 +49,10 @@ angular.module('engagement')
             function run() {
                 $scope.computeBys = [{
                     name: 'turn',
-                    name_display: 'lượt'
+                    name_display: 'turn'
                 }, {
                     name: 'customer',
-                    name_display: 'lượng khách hàng'
+                    name_display: 'customer'
                 }],
                 $scope.computeBy = $scope.computeBys[0];
 
@@ -144,11 +144,11 @@ angular.module('engagement')
                 $scope.updateComputeBy = function() {
                     fields.by = $scope.computeBy.name;
                     if ($scope.computeBy.name == 'turn') {
-                        valueSuffix = 'lượt';
-                        unit = 'Số lượt';
+                        valueSuffix = 'turn';
+                        unit = 'Turn';
                     } else {
-                        valueSuffix = 'người dùng';
-                        unit = 'Số lượng người dùng';
+                        valueSuffix = 'User';
+                        unit = 'User';
                     }
                     updateChart(fields);
                 };
@@ -256,19 +256,19 @@ angular.module('engagement')
 
                     var result = timeInterval.match(timeIntervalPattern);
                     if (result[1] > 1)
-                        hourStr = result[1] + " giờ ";
+                        hourStr = result[1] + " hour ";
                     else
-                        hourStr = result[1] + " giờ ";
+                        hourStr = result[1] + " hour ";
 
                     if (result[2] > 1)
-                        minuteStr = result[2] + " phút ";
+                        minuteStr = result[2] + " minute ";
                     else
-                        minuteStr = result[2] + " phút ";
+                        minuteStr = result[2] + " minute ";
 
                     if (result[3] > 1)
-                        secondStr = result[1] + " giây ";
+                        secondStr = result[1] + " second ";
                     else
-                        secondStr = result[1] + " giây ";
+                        secondStr = result[1] + " second ";
 
                     formattedStr = hourStr + minuteStr + secondStr;
 

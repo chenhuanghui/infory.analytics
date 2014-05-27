@@ -4,17 +4,17 @@
 <div id="promotion-new" class="content">
     <div id="promotion-fuelux-wizard" class="wizard">
         <ul class="wizard-steps">
-            <li data-target="#promotion-step1">
-                <span class="z-step">Loại sự kiện</span><img class="line-step non-background" src="img/line_step.png" />
+            <li data-target="#promotion-step1" class="active">
+                <span class="z-step">Event</span><img class="line-step" src="img/line_step.png" />
             </li>
-            <li data-target="#promotion-step2" class="active">
-                <span class="z-step">Thông tin</span><img class="line-step non-background" src="img/line_step.png" />
+            <li data-target="#promotion-step2">
+                <span class="z-step">Information</span><img class="line-step" src="img/line_step.png" />
             </li>
             <li data-target="#promotion-step3">
-                <span class="z-step">Nội dung</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">Content</span><img class="line-step" src="img/line_step.png" />
             </li>
             <li data-target="#promotion-step4">
-                <span class="z-step">Hoàn thành</span>
+                <span class="z-step">Finish</span>
             </li>
         </ul>                            
     </div>
@@ -23,24 +23,25 @@
             <div class="step-pane active" id="promotion-step2">
                 <div class="step-description">
                     <div class="step-title">
-                        <span class="step-name">Bước 2:</span> Thông tin chiến dịch
+                        <span class="step-name">Step 2:</span> Campaign information
                     </div>
-                    Tạo hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch của bạn dễ dàng theo dạng danh sách và thao tác đợn giản
+                    Create campagin's information easily by listing 
+                    
                 </div>
                 <div class="form-wrapper">
                     <div class="col-md-8">
                         <form class="step-wapper" name="step_2_form">
                             <div class="field-box">
-                                <span class="title">TÊN CHIẾN DỊCH</span>
-                                <input class="form-control inline-block" name="promotionName" type="text" ng-model="name" placeholder="Tên chương trình khuyến mãi mới" required/>
+                                <span class="title">Campaign name</span>
+                                <input class="form-control inline-block" name="promotionName" type="text" ng-model="name" placeholder="Name" required/>
 
                                 <span class="alert-msg" ng-show="step_2_form.promotionName.$error.required">
                                     <i class="icon-remove-sign"></i>
-                                    Vui lòng nhập tên chiến dịch
+                                    Name
                                 </span>
                             </div>
                             <div class="field-box">
-                                <span class="title">THỜI GIAN</span>
+                                <span class="title">Duration</span>
                                 <div class="dropdown inline-block">
                                   <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                     <div class="select-date btn-glow">
@@ -69,11 +70,11 @@
                                 </div> 
                             </div>
                             <div class="field-box">
-                                <span class="title">MÔ TẢ</span>
+                                <span class="title">Description</span>
                                 <div class="block">
                                     <div class="block_header">
                                         <div class="left control">
-                                            <span class="highlight">{{numOfSelectedShops}}</span> của hàng được chọn
+                                            <span class="highlight">{{numOfSelectedShops}}</span> store selected
                                         </div>
                                         <input type="text" class="search right small-input no-margin" placeholder="Tìm kiếm..." ng-model="searchText"/>
                                     </div>
@@ -85,8 +86,8 @@
                                 						<input type="checkbox" class="css-checkbox lrg" id="checkbox_klaus" ng-model="checkAllShops" ng-change="checkAll()"/>
                                 						<label for="checkbox_klaus" class="css-label lrg klaus"></label>
                                 					</th>
-                                                    <th class="name">Tên cửa hàng</th>
-                                                    <th>Địa chỉ</th>
+                                                    <th class="name">Store name</th>
+                                                    <th>Address</th>
                                                 </tr>
                                             </thead>
 
@@ -109,21 +110,21 @@
                     
                     <div class="col-md-4" style="height: 0;">
                         <div class="step-view-content">
-                            <h5>XEM TRƯỚC</h5>
+                            PREVIEW
                             <tabset>
                                 <tab>
                                   <tab-heading>
                                     <i class="icon-reorder"></i>
                                   </tab-heading>
-                                  <table class="attribute-table">
+                                  <table class="table attribute-table">
                                     <thead>
-                                        <tr><th class="col-md-5">Thuộc tính</th><th>Nội dung</th></tr>
+                                        <tr><th>Property</th><th>Content</th></tr>
                                     </thead>
                                     <tbody>
-                                        <tr><td>Loại</td><td>{{promotionType.name_display}}</td></tr>
-                                        <tr class="odd"><td>Chương trình</td><td>{{name}}</td></tr>
-                                        <tr><td>Thời gian</td><td>{{time}}</td></tr>
-                                        <tr class="odd"><td>Mô tả</td><td>{{description}}</td></tr>
+                                        <tr><td>Type</td><td>{{promotionType.name_display}}</td></tr>
+                                        <tr><td>Campaign</td><td>{{name}}</td></tr>
+                                        <tr><td>Time</td><td>{{time}}</td></tr>
+                                        <tr><td>Description</td><td>{{description}}</td></tr>
                                     </tbody>
                                   </table>
                                 </tab>

@@ -25,17 +25,17 @@
                     <i class="close"></i>
                 </div>
             </div>
-            <span>{{category.products.length}}</span> sản phẩm
+            <span>{{category.products.length}}</span> product(s)
         </div>
     </div>
     <div class="clearfix"></div>
     <div class="add-product" style="cursor:pointer" ng-click="hideAdd = !hideAdd" ng-init="hideAdd = true" ng-hide="!hideLoadingProduct">
-        <i class="icon-plus"></i> THÊM SẢN PHẨM
+        <i class="icon-plus"></i> Create new product
     </div>
     <div ng-hide="hideAdd">
         <ul class="detail-product" ng-hide="hideDetail">
             <li>
-                <div class="property col-md-3">Hình ảnh phẩm</div>
+                <div class="property col-md-3">Image</div>
                 <div class="value col-md-9">
                     <div class="edit">
                         <img src="" class="left" /> 
@@ -44,18 +44,18 @@
                 </div>
             </li>
             <li>
-                <div class="property col-md-3">Tên ảnh phẩm</div>
+                <div class="property col-md-3">Name</div>
                 <div class="value col-md-9">
                     <div class="edit">
-                        <input class="form-control inline-block" ng-model="productTemp.name" placeholder="Thêm tên sản phẩm"/>
+                        <input class="form-control inline-block" ng-model="productTemp.name" placeholder="Name"/>
                     </div>
                 </div>
             </li>
             <li>
-                <div class="property col-md-3">Mô tả</div>
+                <div class="property col-md-3">Description</div>
                 <div class="value col-md-9">
                     <div class="edit">
-                        <input class="form-control inline-block" ng-model="productTemp.description" placeholder="Thêm mô tả sản phẩm"/>
+                        <textarea class="form-control inline-block" ng-model="productTemp.description" placeholder="Descirption"></textarea>
                         <i style="cursor:pointer" class="icon-ok-sign success" ng-click="addProduct(category.id); hideAdd = !hideAdd;"></i>
                     </div>
                 </div>
@@ -71,12 +71,12 @@
                 <br />
                 <span class="description">{{product.full_description}}</span>
                 <!-- <i class="right icon-remove-sign" ng-click="deleteProduct(product.id)"></i> -->
-                <a class="right" ng-click="hideDetail = !hideDetail" style="cursor:pointer">Sửa</a>
+                <a class="right" ng-click="hideDetail = !hideDetail" style="cursor:pointer">edit</a>
             </li>
         </ul>
         <ul class="detail-product" ng-hide="hideDetail">
             <li>
-                <div class="property col-md-3">Hình ảnh phẩm</div>
+                <div class="property col-md-3">Image</div>
                 <div class="value col-md-9">
                     <div class="edit">
                         <img ng-src="{{product.images[0]}}" class="left" /> 
@@ -85,7 +85,7 @@
                 </div>
             </li>
             <li>
-                <div class="property col-md-3">Tên ảnh phẩm</div>
+                <div class="property col-md-3">Name</div>
                 <div class="value col-md-9">
                     <div class="edit">
                         <input class="form-control inline-block" ng-model="name" ng-init="name = product.name"/>
@@ -94,10 +94,10 @@
                 </div>
             </li>
             <li>
-                <div class="property col-md-3">Mô tả</div>
+                <div class="property col-md-3">Description</div>
                 <div class="value col-md-9">
                     <div class="edit">
-                        <input class="form-control inline-block" ng-model="description" ng-init="description = product.full_description"/>
+                        <textarea class="form-control inline-block" ng-model="description" ng-init="description = product.full_description"></textarea>
                         <i style="cursor:pointer" class="icon-ok-sign success" ng-click="changeProductDescription(product.category_id, product.id, description); hideDetail = !hideDetail;"></i>
                     </div>
                 </div>

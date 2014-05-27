@@ -49,11 +49,11 @@ angular.module('Smg')
                             }
                         },
                         title: {
-                            text: 'Thống kê ',
+                            text: 'Statictis ',
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Nguồn: infory.vn',
+                            text: 'Source: infory',
                             x: -20
                         },
                         xAxis: {
@@ -119,7 +119,7 @@ angular.module('Smg')
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Nguồn: infory.vn',
+                            text: 'Source: infory',
                             x: -20
                         },
                         xAxis: {
@@ -127,7 +127,7 @@ angular.module('Smg')
                         },
                         yAxis: {
                             title: {
-                                text: 'lượt '
+                                text: 'turn '
                             },
                             plotLines: [{
                                 value: 0,
@@ -136,7 +136,7 @@ angular.module('Smg')
                             }]
                         },
                         tooltip: {
-                            valueSuffix: ' lượt'
+                            valueSuffix: ' turn'
                         },
                         legend: {
                             layout: 'vertical',
@@ -151,7 +151,7 @@ angular.module('Smg')
                         chartData.xAxis.categories = data.groups;
                         chartData.series = [];
                         chartData.series.push({
-                            name: 'người dùng',
+                            name: 'user',
                             data: data.values
                         })
                     } else {
@@ -184,7 +184,7 @@ angular.module('Smg')
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Nguồn: infory.vn',
+                            text: 'Source: infory',
                             x: -20
                         },
                         xAxis: {
@@ -192,7 +192,7 @@ angular.module('Smg')
                         },
                         yAxis: {
                             title: {
-                                text: 'lượt '
+                                text: 'turn '
                             },
                             plotLines: [{
                                 value: 0,
@@ -201,7 +201,7 @@ angular.module('Smg')
                             }]
                         },
                         tooltip: {
-                            valueSuffix: ' lượt'
+                            valueSuffix: ' turn'
                         },
                         legend: {
                             layout: 'vertical',
@@ -216,7 +216,7 @@ angular.module('Smg')
                         chartData.xAxis.categories = data.groups;
                         chartData.series = [];
                         chartData.series.push({
-                            name: 'người dùng',
+                            name: 'user',
                             data: data.values
                         })
                     } else {
@@ -268,7 +268,7 @@ angular.module('Smg')
                             }
                         },
                         series: [{
-                            name: 'Giá trị',
+                            name: 'Value',
                             type: 'pie',
                             data: []
                         }]
@@ -324,7 +324,7 @@ angular.module('Smg')
                             }
                         },
                         series: [{
-                            name: 'Giá trị',
+                            name: 'Value',
                             type: 'pie',
                             data: []
                         }]
@@ -363,7 +363,7 @@ angular.module('Smg')
                             text: 'Statistics ' + event + ' by time',
                         },
                         subtitle: {
-                            text: 'Nguồn: infory.vn',
+                            text: 'Source: infory',
                         },
                         xAxis: {
                             categories: data.time
