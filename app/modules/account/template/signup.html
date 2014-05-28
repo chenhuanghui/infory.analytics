@@ -11,47 +11,47 @@
                 <input class="form-control" type="text" placeholder="Họ tên" ng-model="name" required ng-minlength="6"name="name">
                 <span class="alert-msg alert-signup" ng-show="signUpForm.name.$error.minlength">
                     <i class="icon-remove-sign"></i>
-                Họ và tên phải ít nhất 6 ký tự
+                at least 6 characters
                 </span>
 
                 <span class="alert-msg alert-signup" ng-show="signUpForm.name.$error.required">
                     <i class="icon-remove-sign"></i>
-                Vui lòng nhập họ và tên
+                Type your name
                 </span>
 
                 <input class="form-control" type="text" placeholder="Địa chỉ email" ng-model="email" name="email" required>
                 <span class="alert-msg alert-signup" ng-show="signUpForm.email.$error.email">
                     <i class="icon-remove-sign"></i>
-                Email không hợp lệ
+                Email invalid
                 </span>
 
                 <span class="alert-msg alert-signup" ng-show="signUpForm.email.$error.required">
                     <i class="icon-remove-sign"></i>
-                Vui lòng nhập email
+                Type your email
                 </span>
 
                 <input class="form-control" type="text" placeholder="Tên công ty" ng-model="company" name="company" required>
                 <span class="alert-msg alert-signup" ng-show="signUpForm.company.$error.required">
                     <i class="icon-remove-sign"></i>
-                Vui lòng nhập tên công ty
+                Type your company name
                 </span>
 
                 <input class="form-control" type="password" ng-model="password" ng-minlength="6" name="password" placeholder="Nhập mật khẩu" required ng-change="updatePass()"/>
 
                 <span class="alert-msg alert-signup" ng-show="signUpForm.password.$error.required">
                     <i class="icon-remove-sign"></i>
-                Vui lòng nhập mật khẩu
+                Type your password
                 </span>
 
                 <span class="alert-msg alert-signup" ng-show="signUpForm.password.$error.minlength">
                     <i class="icon-remove-sign"></i>
-                Mật khẩu ít nhất 6 ký tự
+                at least 6 characters
                 </span>
 
                 <input class="form-control" placeholder="Nhập lại mật khẩu" type="password" ng-model="confirmPassword" ng-minlength="6" name="confirmPassword" ng-change="updatePass()"/>
                 <span class="alert-msg alert-signup" ng-show="!IsRightPass">
                     <i class="icon-remove-sign"></i>
-                Mật khẩu xác nhận không khớp 
+                Invalid password
                 </span>
 
 				<input class="form-control" type="text" placeholder="Phone number" name="tel" ng-model="tel" ng-change="checkPhoneNumber()"/>
@@ -62,14 +62,14 @@
                 </span>
 
                 <div class="action">
-                    <a class="btn-glow primary signup" ng-disabled="signUpForm.$invalid || !IsRightPass || !validatedPhoneNumber" ng-click="signUp()">Đăng kí</a>
+                    <a class="btn-glow primary signup" ng-disabled="signUpForm.$invalid || !IsRightPass || !validatedPhoneNumber" ng-click="signUp()">Sign Up</a>
                 </div>                
             </div>
         </div>
 
         <div class="already">
-            <p>Bạn đã có tài khoản ?</p>
-            <a href="#/login">Đăng nhập</a>
+            <p>Have an account?</p>
+            <a href="#/login">Sign In</a>
         </div>
     </form>
     

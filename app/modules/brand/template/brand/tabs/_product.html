@@ -15,12 +15,13 @@
                         <i class="icon-sort-down"></i>
                     </a>
                     <ul>
-                        <li style="cursor:pointer" ng-repeat="category in brand.categories"><a  ng-click="changeCategory(category.id)">{{category.name}}</a></li>
                         <li class="create-box">
                             <i class="icon-plus"></i>
                             <input type="text" placeholder="new category" ng-model="newCategoryName"/>
                             <input type="button" value="CREATE CATEGORY" ng-click="createCategory(newCategoryName)"/>
                         </li>
+                        <li style="cursor:pointer" ng-repeat="category in brand.categories"><a  ng-click="changeCategory(category.id)">{{category.name}}</a></li>
+                        
                     </ul>
                     <i class="close"></i>
                 </div>

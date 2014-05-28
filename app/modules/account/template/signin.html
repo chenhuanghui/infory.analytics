@@ -6,13 +6,13 @@
     <div class="box">
         <div class="content-wrap">
             <form name="loginForm">
-                <h6>Đăng nhập</h6>
+                <h6>Sign in</h6>
                 <input class="form-control" type="text" placeholder="Địa chỉ email" ng-model="username" name="email" required ng-minlength=6>
                 <input class="form-control" type="password" placeholder="Mật khẩu" ng-model="password" name="password" required g-minlength=6>
-                <a href="#/forget_password" class="forgot">Quên mật khẩu?</a>
+                <a href="#/forget_password" class="forgot">Forgot your password?</a>
                 <div class="remember">
                     <input id="remember-me" type="checkbox" ng-model="rememberme">
-                    <label for="remember-me">Ghi nhớ</label>
+                    <label for="remember-me">Remember</label>
                 </div>
                 <div ng-hide="hideLoading" class="loading-container-infor" style="margin-bottom: 10px;">
                     <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
@@ -20,14 +20,14 @@
                 <div class="forget" style="margin-bottom: 10px;">
                     <a ng-hide="hideMessage" style="color: rgb(112, 38, 38)">{{message}}</a>
                 </div>
-                <button type="submit" class="btn-glow primary login" ng-click="login()" ng-disabled="loginForm.$invalid">Đăng nhập</button>
+                <button type="submit" class="btn-glow primary login" ng-click="login()" ng-disabled="loginForm.$invalid">Sign In</button>
             </form>
         </div>
     </div>
 
     <div class="no-account">
-        <p>Bạn chưa có tài khoản?</p>
-        <a href="#signup">Đăng ký ngay</a>
+        <p>Do you have any account yet?</p>
+        <a href="#signup">Sign up now</a>
     </div>
 </div>
 
