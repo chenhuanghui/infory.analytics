@@ -5,16 +5,16 @@
     <div id="promotion-fuelux-wizard" class="wizard">
         <ul class="wizard-steps">
             <li data-target="#promotion-step1">
-                <span class="z-step">Loại sự kiện</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">TYPE</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
-            <li data-target="#promotion-step2">
-                <span class="z-step">Thông tin</span><img class="line-step non-background" src="img/line_step.png" />
+            <li data-target="#promotion-step2" >
+                <span class="z-step">INFORMATION</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#promotion-step3">
-                <span class="z-step">Nội dung</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">CONTENT</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#promotion-step4" class="active">
-                <span class="z-step">Hoàn thành</span>
+                <span class="z-step">MANAGE</span>
             </li>
         </ul>                            
     </div>
@@ -27,7 +27,7 @@
                     </div>
                     Tạo hệ thông tin mới từ dịch vụ cũng như chiến dịch khuyến mãi của bạn.
                     <div>
-                        <a class="btn-flat success right" ng-click="goToStep1()">Tạo khuyến mãi mới</a>
+                        <a class="btn-flat success right" ng-click="goToStep1()">BUILD A EVENT</a>
                     </div>
                 </div>
                 <div class="form-wrapper">
@@ -43,8 +43,8 @@
                                             <th class="center">
                                                 <select class="z-select" ng-model="orderPromotion" ng-options="orderPromotion as orderPromotion.name_display for orderPromotion in orderPromotions" ng-init="orderPromotion=orderPromotions[0]" ng-change="sortPromotionList()"></select>
                                             </th>
-                                            <th class="center">Chiến dịch</th>
-                                            <th class="center">Thời gian</th>
+                                            <th class="center">Campaign</th>
+                                            <th class="center">Duration</th>
                                             <th class="center">
                                                 <select class="z-select" ng-model="statusType" ng-options="statusType as statusType.name_display for statusType in statusTypes" ng-init="statusType=statusTypes[0]" ng-change="sortPromotionListByStatus()"></select>
                                             </th>

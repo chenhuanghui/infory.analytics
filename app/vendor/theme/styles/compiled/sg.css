@@ -2337,10 +2337,112 @@ tspan {
     text-shadow: 0 1px rgba(255,255,255,0.25);
 }
 
+/*sidebar*/
+
+.project_settings_buttons {
+    height: 30px;
+    background-color: #eff1f6;
+    background-image: -moz-linear-gradient(top,#f4f5f9,#e8ebf1);
+    background-image: -ms-linear-gradient(top,#f4f5f9,#e8ebf1);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#f4f5f9),to(#e8ebf1));
+    background-image: -webkit-linear-gradient(top,#f4f5f9,#e8ebf1);
+    background-image: -o-linear-gradient(top,#f4f5f9 0,#e8ebf1 0);
+    background-image: linear-gradient(top,#f4f5f9 0,#e8ebf1 0);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4f5f9',endColorstr='#e8ebf1',GradientType=0);
+    border-top: 1px solid #bfceda;
+    border-right: 1px solid #bfceda;
+    -webkit-border-radius: 0 0 0 3px;
+    -moz-border-radius: 0 0 0 3px;
+    border-radius: 0 0 0 3px;
+    width: 168px;
+}
+
+.footer_controls {
+position: absolute;
+bottom: 0;
+z-index: 10;
+}
+.project_settings_buttons .ftsection {
+    float: left;
+    border-right: 1px solid #bfceda;
+    -webkit-box-shadow: inset 0 1px #fff;
+    -moz-box-shadow: inset 0 1px #fff;
+    box-shadow: inset 0 1px #fff;
+    -webkit-box-shadow: inset 1px 0 #f7f8fb;
+    -moz-box-shadow: inset 1px 0 #f7f8fb;
+    box-shadow: inset 1px 0 #f7f8fb;
+    position: relative;
+    z-index: 1;
+}
 
 
+.project_settings_buttons .ftsection:first-child {
+    -webkit-border-radius: 0 0 0 3px;
+    -moz-border-radius: 0 0 0 3px;
+    border-radius: 0 0 0 3px;
+}
+.project_settings_buttons .ftsection.ftbutton {
+    cursor: pointer;
+}
+
+.project_settings_buttons .ftsection:first-child *:first-child {
+-webkit-border-radius: 0 0 0 3px;
+-moz-border-radius: 0 0 0 3px;
+border-radius: 0 0 0 3px;
+}
 
 
+.project_settings_buttons .settings {
+-webkit-border-radius: 0 0 0 3px;
+-moz-border-radius: 0 0 0 3px;
+border-radius: 0 0 0 3px;
+background: url(//cdn.mxpnl.com/cache/d91c0e0ef3a9c1e519636e0e14648543/images/icons/wheel.png) no-repeat center;
+height: 20px;
+width: 19px;
+padding: 5px;
+}
 
+.project_settings_buttons .invite {
+background: url(//cdn.mxpnl.com/cache/8a62e34a5dec7e51ca44ef7c87194b98/images/icons/person_plus.png) no-repeat center;
+height: 23px;
+width: 19px;
+padding-top: 3px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
 
+.project_settings_buttons .settings #fttooltip {
+    padding: 0;
+    padding-left: 10px;
+    position: absolute;
+    width: 145px;
+    height: 25px;
+    line-height: 25px;
+    top: -32px;
+    left: -2px;
+    color: #fff;
+    font-weight: bold;
+    background-color: #3d4e67;
+    background-image: -moz-linear-gradient(top,#3f516b,#394a62);
+    background-image: -ms-linear-gradient(top,#3f516b,#394a62);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#3f516b),to(#394a62));
+    background-image: -webkit-linear-gradient(top,#3f516b,#394a62);
+    background-image: -o-linear-gradient(top,#3f516b 0,#394a62 0);
+    background-image: linear-gradient(top,#3f516b 0,#394a62 0);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f516b',endColorstr='#394a62',GradientType=0);
+    -webkit-box-shadow: inset 0 1px rgba(255,255,255,0.1),0 1px rgba(0,0,0,0.2);
+    -moz-box-shadow: inset 0 1px rgba(255,255,255,0.1),0 1px rgba(0,0,0,0.2);
+    box-shadow: inset 0 1px rgba(255,255,255,0.1),0 1px rgba(0,0,0,0.2);
+    border: 1px solid #2f3f57;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    z-index: 2;
+}
 
+.project_settings_buttons #fttooltip {
+display: none;
+}
