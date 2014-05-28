@@ -7,12 +7,12 @@
         <div class="content-wrap">
             <form name="loginForm">
                 <h6>Sign in</h6>
-                <input class="form-control" type="text" placeholder="Địa chỉ email" ng-model="username" name="email" required ng-minlength=6>
-                <input class="form-control" type="password" placeholder="Mật khẩu" ng-model="password" name="password" required g-minlength=6>
+                <input class="form-control" type="text" placeholder="Email address" ng-model="username" name="email" required ng-minlength=6>
+                <input class="form-control" type="password" placeholder="Password" ng-model="password" name="password" required g-minlength=6>
                 <a href="#/forget_password" class="forgot">Forgot your password?</a>
                 <div class="remember">
                     <input id="remember-me" type="checkbox" ng-model="rememberme">
-                    <label for="remember-me">Remember</label>
+                    <label for="remember-me">Remember me</label>
                 </div>
                 <div ng-hide="hideLoading" class="loading-container-infor" style="margin-bottom: 10px;">
                     <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="no-account">
-        <p>Do you have any account yet?</p>
+        <p>You did not have account?</p>
         <a href="#signup">Sign up now</a>
     </div>
 </div>
