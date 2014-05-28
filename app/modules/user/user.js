@@ -68,10 +68,10 @@ angular.module('user')
 
                 if (userProfile.gender == null || userProfile.gender == '')
                     userProfile.gender = " - ";
-                else if (userProfile.gender == 'male' || userProfile.gender == 'Nam')
-                    userProfile.gender = 'Nam';
+                else if (userProfile.gender == 'male' || userProfile.gender == 'Male')
+                    userProfile.gender = 'Male';
                 else
-                    userProfile.gender = 'Nữ';
+                    userProfile.gender = 'Female';
 
                 if (userProfile.city == null)
                     userProfile.city = " - ";
@@ -84,25 +84,25 @@ angular.module('user')
                     var dayOfWeek = time.getDay();
                     switch (dayOfWeek) {
                         case 0:
-                            dayOfWeek = 'Chủ nhật';
+                            dayOfWeek = 'Sunday';
                             break;
                         case 1:
-                            dayOfWeek = 'Thứ 2';
+                            dayOfWeek = 'Monday';
                             break;
                         case 2:
-                            dayOfWeek = 'Thứ 3';
+                            dayOfWeek = 'Tuesday';
                             break;
                         case 3:
-                            dayOfWeek = 'Thứ 4';
+                            dayOfWeek = 'Wednesday';
                             break;
                         case 4:
-                            dayOfWeek = 'Thứ 5';
+                            dayOfWeek = 'Thursday';
                             break;
                         case 5:
-                            dayOfWeek = 'Thứ 6';
+                            dayOfWeek = 'Friday';
                             break;
                         case 6:
-                            dayOfWeek = 'Thứ 7';
+                            dayOfWeek = 'Saturday';
                             break;
                     };
 
