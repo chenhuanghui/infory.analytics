@@ -59,7 +59,7 @@ angular.module('smgDirectives', ['ui.date'])
     .directive('subfilter', function($compile) {
         var qc = 1,
             _meta, _prop
-            _operator = "VÀ";
+            _operator = "AND";
 
         return {
             restrict: 'A',
@@ -98,7 +98,7 @@ angular.module('smgDirectives', ['ui.date'])
                     scope.qc = qc;
                     scope.operator = _operator;
 
-                    var action_op = $compile('<select ng-model="operator" class="action clearfix row_' + qc + '"> ' + '<option>VÀ</option>' + '<option>HOẶC</option>' + '</select>    ')(scope);
+                    var action_op = $compile('<select ng-model="operator" class="action clearfix row_' + qc + '"> ' + '<option>AND</option>' + '<option>OR</option>' + '</select>    ')(scope);
 
                     // $compile('<div class="btn-group pull-right action clearfix row_'+qc+'"><button class="glow left active">AND </button><button class="glow right">OR</button></div>')(scope);
 
@@ -183,7 +183,7 @@ angular.module('smgDirectives', ['ui.date'])
                     function update() {
                         if (scope.olddata == 'null' || scope.olddata == '[]' || scope.olddata == null || scope.olddata == '') {
                             scope.property = scope.event.properties[0];
-                            if (scope.property.name_display == 'select property')
+                            if (scope.property.name_display == 'choose a property')
                                 return;
                             scope.meta = scope.metas[scope.property.type].operators_display[0];
                             if (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)] == 'dropdown')
@@ -250,7 +250,7 @@ angular.module('smgDirectives', ['ui.date'])
                             return;
 
                         //scope.property = scope.event.properties[0];
-                        if (scope.property.name_display == 'select property')
+                        if (scope.property.name_display == 'choose a property')
                             return;
 
                         scope.meta = scope.metas[scope.property.type].operators_display[0];
@@ -296,7 +296,7 @@ angular.module('smgDirectives', ['ui.date'])
                     }
 
                     scope.getValue = function() {
-                        if (scope.property.name_display == 'select property')
+                        if (scope.property.name_display == 'choose a property')
                             return;
 
                         switch (scope.metas[scope.property.type].operators_ui_controller[scope.metas[scope.property.type].operators_display.indexOf(scope.meta)]) {

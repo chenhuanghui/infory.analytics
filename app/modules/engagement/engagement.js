@@ -169,7 +169,7 @@ angular.module('engagement')
 
                 dataFactory.getBookmarks(brandId, function(data) {
                         data.bookmarks.event_bookmarks.unshift({
-                            bookmark_name: 'Chọn bộ lọc đã lưu',
+                            bookmark_name: 'Choose a saved bookmark',
                             id: -1
                         });
 
@@ -417,9 +417,9 @@ angular.module('engagement')
                     $scope.hideLoading = true;
                     if (data.error == undefined) {
 
-                        if ($scope.compareUnit.name_display == 'giờ trong ngày' ||
-                            $scope.compareUnit.name_display == 'ngày trong tuần' ||
-                            $scope.compareUnit.name_display == 'tháng trong năm') {
+                        if ($scope.compareUnit.name == 'hour' ||
+                            $scope.compareUnit.name == 'weekday' ||
+                            $scope.compareUnit.name == 'month') {
                             $scope.chartType = $scope.chartTypes[1];
                             $scope.changeChartId($scope.chartType);
                         } else {

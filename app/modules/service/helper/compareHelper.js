@@ -21,6 +21,13 @@ angular.module('Smg')
                                 }
                             }
                             break;
+                        case 'multiple_group':
+                            query = {
+                                multiple_group: {
+                                    property: compareUnit.name
+                                }
+                            }
+                            break;
                         case 'number':
                             query = {
                                 number: {
