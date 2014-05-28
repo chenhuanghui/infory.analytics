@@ -4,17 +4,17 @@
 <div id="notify-new" class="content">
     <div id="notify-fuelux-wizard" class="wizard">
         <ul class="wizard-steps">
-            <li data-target="#notify-step1">
-                <span class="z-step">Soạn tin</span><img class="line-step non-background" src="img/line_step.png" />
+            <li data-target="#notify-step1" >
+                <span class="z-step">COMPOSE</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#notify-step2" class="active">
-                <span class="z-step">Đối tượng</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">TARGET</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#notify-step3">
-                <span class="z-step">Kích hoạt</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">ACTIVATE</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#notify-step4" id="menu-manager" onclick="showManager('#menu-manager', '#notify-step4')">
-                <span class="z-step">Quản lý tin</span>
+                <span class="z-step">MANAGE</span>
             </li>
         </ul>                            
     </div>
@@ -31,7 +31,7 @@
                 <div class="block">
                     <div class="block_header">
                         <div class="left control">
-                            Lọc danh sách khách hàng theo
+                            Filter by
                         </div>
                         <div class="right">
                             <div class="controller" ng-hide="true">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="block_content">
-                        <p class="notify"> Danh sách khách hàng nhận thông báo <span>{{event.name_display}}</span> thoả điều kiện</p>
+                        <!-- <p class="notify"> People <span>{{event.name_display}}</span> thoả điều kiện</p> -->
                         <div ng-hide="isVisibleFilter" class="loading-container-infor">
                             <div title="Code: 0xe800" class="the-icons span3"><i class="icon-fontello-spin6 animate-spin loading-infor loading-icon"></i></div>
                         </div>
@@ -66,20 +66,20 @@
                     </div>
                     <div class="block_footer">
                         <div class="left method">
-                            Phương thức  <select ng-model="sendMethod" ng-options="sendMethod as sendMethod.name_display for sendMethod in sendMethods" ng-change="updateIsCanGo()"></select>
+                            Method  <select ng-model="sendMethod" ng-options="sendMethod as sendMethod.name_display for sendMethod in sendMethods" ng-change="updateIsCanGo()"></select>
                         </div>
-                        <button ng-hide="sendMethod.name == 'auto'" ng-click="getResult()" type="button" class="btn-glow primary right"><i class="icon-ok"></i> Xem</button>
+                        <button ng-hide="sendMethod.name == 'auto'" ng-click="getResult()" type="button" class="btn-glow primary right"><i class="icon-ok"></i> SHOW</button>
                     </div><!-- block footer-->
                 </div><!-- block -->
                 
                 <div class="block" ng-hide="sendMethod.name == 'auto'">
                     <div class="block_header">
                         <div class="left control">
-                            <span class="highlight">{{numOfSelectedUsers}}</span> khách hàng được chọn / <span class="highlight">{{isChecked.length}}</span> khách hàng thoả điều kiện
+                            <span class="highlight">{{numOfSelectedUsers}}</span> selected / <span class="highlight">{{isChecked.length}}</span> people(s)
                         </div>
                         <input type="text" class="search right" placeholder="Tìm kiếm..." ng-model="searchText" ng-change="filterUser()"/>
                         <div class="fee right">
-                            Chi phí: <span>{{numOfSelectedUsers * 10}}</span> T-coin
+                            Cost: <span>{{numOfSelectedUsers * 10}}</span> T-coin
                         </div>
                     </div>
                     <div ng-hide="hideLoading" class="loading-container-image-product">
@@ -94,11 +94,11 @@
                                 <th class = "name">
                                     Phone number
                                 </th>
-                                <th class="name">Tên</th>
-                                <th>Tuổi</th>
-                                <th>Giới tính</th>
-                                <th>Vị trí</th>
-                                <th>Lần sử dụng cuối</th>
+                                <th class="name">Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Location</th>
+                                <th>Last activity</th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="user in dataInCurrentPage">
@@ -128,7 +128,7 @@
                     <i class="icon-chevron-left"></i> Back
                 </button>
                 <button type="button" class="btn-glow primary btn-next" ng-click="goToStep3()" ng-disabled="!isCanGo">
-                    Tiếp tục <i class="icon-chevron-right"></i>
+                    Next <i class="icon-chevron-right"></i>
                 </button>
             </div>
         </div>

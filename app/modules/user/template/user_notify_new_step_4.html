@@ -4,17 +4,17 @@
 <div id="notify-new" class="content">
     <div id="notify-fuelux-wizard" class="wizard">
         <ul class="wizard-steps">
-            <li data-target="#notify-step1" >
-                <span class="z-step">Soạn tin</span><img class="line-step non-background" src="img/line_step.png" />
+            <li data-target="#notify-step1">
+                <span class="z-step">COMPOSE</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#notify-step2">
-                <span class="z-step">Đối tượng</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">TARGET</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#notify-step3">
-                <span class="z-step">Kích hoạt</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">ACTIVATE</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#notify-step4" class="active" id="menu-manager" onclick="showManager('#menu-manager', '#notify-step4')">
-                <span class="z-step">Quản lý tin</span>
+                <span class="z-step">MANAGE</span>
             </li>
         </ul>                            
     </div>
@@ -27,7 +27,7 @@
                 <div>
                     Hệ thống hiển thị tất cả tin đã gửi cho khách hàng dưới dạng bảng. Bấm vào tên của tin đã gửi để chỉnh sửa. Bấm vào "Tạo tin mới" và tiến hành tạo tin.
                 </div>
-                <div class="btn-glow success" ng-click="goToStep1()" style="margin-top:0px !important;"><i class="icon-plus"></i> Tạo Tin Mới</div>
+                <div class="btn-glow success" ng-click="goToStep1()" style="margin-top:0px !important;"><i class="icon-plus"></i> Build a notification</div>
             </div>
             <div class="form-wrapper">
                 <div class="col-md-12">
@@ -38,11 +38,11 @@
                     <table class="z-table bordered-table" ng-hide="!hideLoading">
                         <thead>
                             <tr>
-                                <th>Tựa đề</th>
-                                <th>Loại hình</th>
-                                <th>Phương thức</th>
-                                <th>Thời điểm gửi</th>
-                                <th>Tin đã gửi</th>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Method</th>
+                                <th>Time</th>
+                                <th>Sent</th>
                                 <th>
                                     <div class="ui-select">
                                         <select ng-model="statusType" ng-options="statusType as statusType.name_display for statusType in statusTypes" ng-init="statusType=statusTypes[0]" ng-change="sortNotificationListByStatus()"></select>
@@ -63,7 +63,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <spagination ng-hide="dataInCurrentPage.length == 0" class="right" total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" items-per-page="itemsPerPage" boundary-links="false" rotate="false" first-text="Đầu tiên" last-text="Cuối cùng" next-text="Sau" previous-text="Trước" max-size="10" style="width: 650px;"></spagination>
+                    <spagination ng-hide="dataInCurrentPage.length == 0" class="right" total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" items-per-page="itemsPerPage" boundary-links="false" rotate="false" first-text="First" last-text="Last" next-text="Next" previous-text="Prev" max-size="10" style="width: 650px;"></spagination>
                 </div>
             </div>
         </div>
