@@ -209,6 +209,7 @@ angular.module('shop', ['google-maps'])
                 });
             }
         }
+
         $scope.changeCityAddress = function(name, id) {
             //console.log($scope.cities[id].districts);
             $('.z-dropdown').removeClass('open');           
@@ -402,6 +403,23 @@ angular.module('shop', ['google-maps'])
             $("#cityDropdown").addClass("open")
         }
  
+        $scope.editCityAddressChanged = function()
+        {
+           $scope.bundle.editCityAddress = true;
+           $scope.bundle.editDistrictAddress = false;
+           if ($scope.bundle.shopDistrictAddress.length <= 0) 
+                $scope.bundle.shopDistrictAddress = $scope.shop.district_address;
+         
+        }
+
+        $scope.editDistrictAddressChanged = function()
+        {
+
+            $scope.bundle.editCityAddress = false;
+            $scope.bundle.editDistrictAddress = true;
+            if ($scope.bundle.shopCityAddress.length <= 0) 
+                $scope.bundle.shopCityAddress = $scope.shop.city_address;
+        }
         function updateLatLng(lat, lng) {
             shopRemote.update({
                 lat: lat,
