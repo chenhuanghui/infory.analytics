@@ -49,11 +49,11 @@ angular.module('Smg')
                             }
                         },
                         title: {
-                            text: 'Statictis ',
+                            text: 'Funnel ',
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Source: infory',
+                            text: 'Source: infory.vn',
                             x: -20
                         },
                         xAxis: {
@@ -119,7 +119,7 @@ angular.module('Smg')
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Source: infory',
+                            text: 'Source: infory.vn',
                             x: -20
                         },
                         xAxis: {
@@ -180,11 +180,11 @@ angular.module('Smg')
                             type: 'line'
                         },
                         title: {
-                            text: 'Statistics ' + event + ' by time',
+                            text: event + ' count over time',
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Source: infory',
+                            text: 'Source: infory.vn',
                             x: -20
                         },
                         xAxis: {
@@ -208,8 +208,7 @@ angular.module('Smg')
                             align: 'right',
                             verticalAlign: 'middle',
                             borderWidth: 0
-                        },
-
+                        }
                     };
 
                     if (data.time == undefined) {
@@ -306,7 +305,7 @@ angular.module('Smg')
                             plotShadow: false
                         },
                         title: {
-                            text: 'Statistics ' + event + ' by time',
+                            text: event + ' count over time',
                         },
                         tooltip: {
                             pointFormat: '{<b>{point.percentage:.1f}%</b>'
@@ -360,10 +359,10 @@ angular.module('Smg')
                             type: 'column'
                         },
                         title: {
-                            text: 'Statistics ' + event + ' by time',
+                            text: event + ' count over time',
                         },
                         subtitle: {
-                            text: 'Source: infory',
+                            text: 'Source: infory.vn',
                         },
                         xAxis: {
                             categories: data.time
