@@ -5,9 +5,17 @@
         <div id="content_wrapper">
             <div class="notice shadow">
                 <div class='col-md-12'>
-                    <p class="title">Hệ thống phân tích hành vi khách hàng</p>
+                    <p class="title">EXPLORE YOUR CUSTOMER SEGMENTATION</p>
                 </div>
-                <p class="sub" style="margin-left:40px;">Lựa chọn hành vi khách hàng và điều kiện lọc tương ứng, bấm "Xem" để hiển thị biểu đồ tương tác. Bạn có thể lưu và xem lại hành vi khách hàng thông qua chức năng "Lưu" và "Chọn bộ lọc đã lưu". Ngoài ra, hệ thống hỗ trợ xuất biểu đồ dưới dạng ảnh PNG, JPEG, PDF và ảnh vector</p>
+                <p class="sub" style="margin-left:40px;">
+                    <b>Tips:</b>
+                    <ol style="margin-left:40px;">
+                        <li>To analyze a behavior: choose behavior need to be analyzed > specify your filter > click <b>Render chart</b></li>
+                        <li>You can change chart type, period of time, and time unit</li>
+                        <li>You can export the chart to image in different formats: png, jpeg, pdf, svg using the button on the top right corner</li>
+                        <li>To save the chart for future analysis: click in the bookmark textbox > enter the bookmark name > click <b>Bookmark this chart</b></li>
+                    </ol>
+                </p>
                 <div class="clearfix"></div>
             </div>
             
@@ -15,9 +23,8 @@
             <div class="block">
                 <div class="block_header">
                     <div class="left bold">
-                        Choose customer behavior 
+                        Choose a customer's behavior 
                         <select ng-model="event" ng-options="event as event.name_display for event in events" ng-change="updateEvent()"></select>
-                        by time
                     </div>
                     <div class="right">
                         <div class="controller">
@@ -33,13 +40,13 @@
                                         
                                         <li class="create-box">
                                             <i class="icon-plus"></i>
-                                            <input type="text" placeholder="new category" ng-model="newCategoryName"/>
-                                            <input type="button" value="CREATE CATEGORY" ng-click="createEvent(newCategoryName)"/>
+                                            <input type="text" placeholder="Enter bookmark name" ng-model="newCategoryName"/>
+                                            <input type="button" value="Bookmark this chart" ng-click="createEvent(newCategoryName)"/>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <span class="btn-glow success _large" ng-click="updateDateEvent()"><i class="icon-bookmark-empty"></i>Save</span>
+                            <span class="btn-glow success _large" ng-click="updateDateEvent()"><i class="icon-bookmark-empty"></i>Bookmark</span>
                         </div>
                     </div>
                 </div>
@@ -55,7 +62,7 @@
                     <p class="notify left" style="margin-left: 20px;margin-top: 15px;"> Compare by</p>
                     <select class="type_menu left" ng-model="compareUnit" ng-options="compareUnit as compareUnit.name_display for compareUnit in event.compare_properties" style="margin-left: 10px;margin-top: 10px;"></select>
 
-                    <span class="btn-glow primary right" ng-click="getResult()"><i class="icon-ok"></i> Show</span>
+                    <span class="btn-glow primary right" ng-click="getResult()"><i class="icon-ok"></i> Render chart</span>
                 </div>
             </div>
 
@@ -80,7 +87,7 @@
                         <div class="dropdown left" style="margin-left:10px;">
                           <a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
                             <div class="select-date btn-glow">
-                                <div class="input-append">to<input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
+                                <div class="input-append">To<input type="text" class="form-control datetime inline-block" data-ng-model="data[1].dateDisplay" style="width: 100px;">
                                 </div>
                                 <i class="icon-sort-down"></i>
                             </div>
@@ -96,11 +103,11 @@
 
                      <select class="type_menu right z-select" ng-model="chartTypeSub" ng-options="chartTypeSub as chartTypeSub.display_name for chartTypeSub in chartTypeSubs" ng-hide="!hideTypeChart" ng-change="changeChartId(chartTypeSub)"></select>
 
-                     <span class="right text-chart" style="margin-left: 30px;">Chart: </span>
+                     <span class="right text-chart" style="margin-left: 30px;">Chart type: </span>
 
                      <select class="type_menu pull-right z-select" ng-model="time_unit" ng-options="time_unit as time_unit.name_display for time_unit in time_units" ng-change="updateChart()"></select>
 
-                     <span class="right text-chart">Unit: </span>
+                     <span class="right text-chart">Time unit: </span>
 
                 </div>
                 <div ng-switch on="chartId" class="block_content" style="height: 420px;">

@@ -12,12 +12,12 @@ angular.module('Smg')
                     var query = null;
                     var elements = null;
 
-                    if (type == 'VÀ') {
+                    if (type == 'AND' && subfilters.length > 0) {
                         query = {
                             and: []
                         };
                         elements = query.and;
-                    } else {
+                    } else if (type == 'OR' && subfilters.length > 0){
                         query = {
                             or: []
                         };
@@ -32,31 +32,31 @@ angular.module('Smg')
                         if (pre_query.paremeters.firstInput != 0 && pre_query.paremeters.firstInput == '')
                             continue;
                         switch (pre_query.meta) {
-                            case 'là':
+                            case 'is':
 
-                                if (pre_query.paremeters.firstInput == 'Nam')
+                                if (pre_query.paremeters.firstInput == 'male')
                                     pre_query.paremeters.firstInput = 'male';
 
-                                if (pre_query.paremeters.firstInput == 'Nữ')
+                                if (pre_query.paremeters.firstInput == 'female')
                                     pre_query.paremeters.firstInput = 'female';
 
                                 elements.push({
-                                    belong: {
+                                    is: {
                                         property: pre_query.property.name,
                                         value: pre_query.paremeters.firstInput
                                     }
                                 })
                                 break;
                                 ///
-                            case 'có':
+                            case 'has':
                                 elements.push({
-                                    belong: {
+                                    has: {
                                         property: pre_query.property.name,
                                         value: pre_query.paremeters.firstInput
                                     }
                                 })
                                 break;
-                            case 'lớn hơn':
+                            case 'larger than':
                                 elements.push({
                                     larger_than: {
                                         property: pre_query.property.name,
@@ -64,7 +64,7 @@ angular.module('Smg')
                                     }
                                 })
                                 break;
-                            case 'nhỏ hơn':
+                            case 'smaller than':
                                 elements.push({
                                     smaller_than: {
                                         property: pre_query.property.name,
@@ -72,7 +72,7 @@ angular.module('Smg')
                                     }
                                 })
                                 break;
-                            case 'trong khoảng':
+                            case 'between':
                                 elements.push({
                                     between: {
                                         property: pre_query.property.name,
@@ -81,7 +81,7 @@ angular.module('Smg')
                                     }
                                 })
                                 break;
-                            case 'lớn hơn hoặc bằng':
+                            case 'larger than or equal':
                                 elements.push({
                                     larger_than_or_equal: {
                                         property: pre_query.property.name,
@@ -89,7 +89,7 @@ angular.module('Smg')
                                     }
                                 })
                                 break;
-                            case 'bé hơn hoặc bằng':
+                            case 'smaller than or equal':
                                 elements.push({
                                     smaller_than_or_equal: {
                                         property: pre_query.property.name,
@@ -97,7 +97,7 @@ angular.module('Smg')
                                     }
                                 })
                                 break;
-                            case 'bằng':
+                            case 'equal':
                                 elements.push({
                                     equal: {
                                         property: pre_query.property.name,
@@ -108,7 +108,7 @@ angular.module('Smg')
                                 ///
                             case 'cách đây':
 
-                            case 'trước ngày':
+                            case 'before':
                                 elements.push({
                                     before_date: {
                                         property: pre_query.property.name,
@@ -116,7 +116,7 @@ angular.module('Smg')
                                     }
                                 })
                                 break;
-                            case 'sau ngày':
+                            case 'after':
                                 elements.push({
                                     after_date: {
                                         property: pre_query.property.name,
@@ -124,7 +124,7 @@ angular.module('Smg')
                                     }
                                 })
                                 break;
-                            case 'trong khoảng thời gian':
+                            case 'between dates':
                                 elements.push({
                                     between_dates: {
                                         property: pre_query.property.name,
