@@ -5,12 +5,12 @@
         <div id="content_wrapper">
             <div class="notice shadow">
                 <div class='col-md-12'>
-                    <p class="title">Hệ thống bình luận tại mỗi cửa hàng</p>
-                    <p class="sub">Quản lý hệ thống tin tức mới từ dịch vụ cũng như những chiến dịch khuyến mãi của bạn dễ dàng theo dạng danh sách và thao tác đơn giản mang lại hiệu quả cao</p>
+                    <p class="title">COMMENT</p>
+                    <p class="sub">You can manage all of your customer's comment. And reply to any comment need your answer</p>
 
                     <div class="btn-group" style="margin-left: 25px;">
                         <div class="left comment-sorter-title">
-                            <p>Bình luận tại cửa hàng: </p>
+                            <p>Comment at: </p>
                         </div>
                          <select ng-model="shop" ng-options="s.name for s in brand.shops" ng-change="updateShopComment()"></select>
                     </div>
@@ -19,7 +19,7 @@
                         <select ng-model="sorter" ng-options="s.display for s in oderComments" ng-change="updateShopComment()"></select>
                     </div>
                     <div class="right comment-sorter-title">
-                        <p>Sắp xếp theo: </p>
+                        <p>Order by: </p>
                     </div>
                 </div>
                 
@@ -45,13 +45,13 @@
                                 <div class="col-md-9 comment-content">
                                         <span class="user_name"><a ng-click = "goToShopInfo(shop)" style="cursor:pointer">{{shop.name}}</a></span> 
                                         </br>
-                                        <textarea id="inputContent1" class="form-control first-comment" placeholder="Thông điệp của bạn" rows="5" ng-model="commentInput"></textarea>  
+                                        <textarea id="inputContent1" class="form-control first-comment" placeholder="Enter your message" rows="5" ng-model="commentInput"></textarea>  
                                 </div>
                                 <div class="clearfix"></div>
                                                                 
                                 <div id="num-of-like">
                                     <br />
-                                    <span class="btn-flat success right" id="reply-button" ng-click="addComment(); updateShopComment();">Trả lời</span>
+                                    <span class="btn-flat success right" id="reply-button" ng-click="addComment(); updateShopComment();">Reply</span>
                                 </div> 
                             </td>
                         </tr>
@@ -80,9 +80,9 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <div id="num-of-like">
-                                    <span class="left bold">{{message.like_count}}</span>&nbsp;<span>lượt thích</span>
+                                    <span class="left bold">{{message.like_count}}</span>&nbsp;<span>liked</span>
                                     <!-- <span class="btn-flat success right" id="reply-button">Trả lời</span> -->
-                                    <span class="btn-flat gray back right" ng-click="delComment(message.id); updateShopComment();">Xoá</span>
+                                    <span class="btn-flat gray back right" ng-click="delComment(message.id); updateShopComment();">Delete</span>
                                 </div>   
                             </td>
                         </tr>
