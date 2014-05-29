@@ -83,7 +83,7 @@ angular.module('engagement')
                 brandRemote.get(pros, function(data) {
                     if (data.error == undefined) {
                         data.funnel_bookmarks.unshift({
-                            bookmark_name: 'Chọn các hành vi đã lưu',
+                            bookmark_name: 'Choose a saved funnel',
                             id: -1
                         });
 

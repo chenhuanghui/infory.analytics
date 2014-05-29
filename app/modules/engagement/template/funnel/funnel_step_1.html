@@ -5,10 +5,10 @@
     <div id="funnel-fuelux-wizard" class="wizard">
         <ul class="wizard-steps">
             <li data-target="#funnel-step1" class="active">
-                <span class="z-step">TẠO CHUỖI MỚI</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">BUILD A FUNNELS</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
             <li data-target="#funnel-step2">
-                <span class="z-step">KẾT QUẢ</span><img class="line-step non-background" src="img/line_step.png" />
+                <span class="z-step">MANAGE</span><img class="line-step non-background" src="img/line_step.png" />
             </li>
         </ul>                            
     </div>
@@ -17,21 +17,28 @@
             <div class="step-pane active" id="funnel-step1">
                 <div class="step-description">
                     <div class="step-title">
-                        Hệ thống phân tích chuỗi hành vi khách hàng
+                        FUNNELS SYSTEM
                     </div>
-                        Nhập tên chuỗi hành vi, ứng với mỗi hành vi chọn điều kiện lọc tương ứng. Bấm "Thêm hành vi người dùng" để thêm hành vi cần theo dõi. Bấm "Lưu" để lưu lại chuỗi hành vi phân tích. Bấm "Theo dõi hành vi người dùng" để hiển thị chi tiết chuỗi hành vi khách hàng dưới dạng biểu đồ tương tác và bảng thống kê
+                        Funnels system can help you discoverd a lot of secrect information behind text and number.
+                        </br>
+                        <b>Tips:</b>
+                        <ol>
+                            <li>Select your behavior with filter system included </li>
+                            <li>Click NEW FUNNEL STEP to add more behavior</li>
+                        </ol>
+
                 </div>
                 <div class="form-wrapper">
                     <div class="wapper">
                         <form class="step-wapper" name="funnelForm">
                             <div class="field-box">
-                                <span class="title">TÊN CHUỖI HÀNH VI</span>
+                                <span class="title">FUNNEL'S NAME</span>
 
-                                <input type="text" class="form-control" style="width: 50%;" placeholder="Thống kê hành vi sử dụng" ng-model="nameOfChainOfBehaviours" name="nameOfFunnel" ng-change="updateValidate()"/>
+                                <input type="text" class="form-control" style="width: 50%;" placeholder="Name your funnel" ng-model="nameOfChainOfBehaviours" name="nameOfFunnel" ng-change="updateValidate()"/>
 
                                 <span class="alert-msg" ng-show="validation">
                                     <i class="icon-remove-sign"></i>
-                                    Vui lòng nhập chuỗi hành vi
+                                    Please enter a name for your funnel
                                 </span>
                             </div>
                             <div class="clearfix"></div>
@@ -39,7 +46,7 @@
                             <div class="z-box" ng-repeat="behaviour in behaviours" style="margin-top:10px;">
                                 <div class="z-box-header">
                                     <div class="left">
-                                        <span>Hành vi thứ {{behaviour.id + 1}}</span> 
+                                        <span>FUNNEL STEP {{behaviour.id + 1}}</span> 
                                         <div class="ui-select">
                                             <select ng-model="event" ng-options="event as event.name_display for event in behaviour.events" ng-init="event=behaviour.event"></select>
                                         </div>
@@ -59,7 +66,7 @@
                             
                             <div class="add-bar shadow" ng-click="addBehaviour()" style="cursor:pointer">
                                 <i class="icon-plus"></i>
-                                THÊM HÀNH VI NGƯỜI DÙNG
+                                NEW FUNNEL STEP
                             </div>
                         </form>
                     </div>
@@ -71,10 +78,10 @@
     <div class="col-md-12 with-sidebar">
         <div class="funnel-wizard-actions wizard-actions">
             <button type="button" class="btn-glow primary success btn-save" ng-disabled="validation" ng-click="bookmark()">
-                <i class="icon-bookmark-empty"></i>Lưu
+                <i class="icon-bookmark-empty"></i>Save
             </button>
             <button type="button" class="btn-glow primary btn-next" ng-click="funnel()" ng-disabled="validation">
-                Theo dõi hành vi người dùng
+                Render your funnel
             </button>
         </div>
     </div>
