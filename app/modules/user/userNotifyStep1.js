@@ -10,16 +10,16 @@ angular.module('user')
             $scope.notifyTypes = [{
                 id: 0,
                 name: 'sms',
-                name_display: 'Gửi qua SMS'
+                name_display: 'SMS'
 
             }, {
                 id: 1,
                 name: 'email',
-                name_display: 'Gửi qua email'
+                name_display: 'Email'
             }, {
                 id: 2,
                 name: 'in-app',
-                name_display: 'Gửi qua ứng dụng'
+                name_display: 'Notification via infory mobile'
             }];
 
             $scope.isCanGo = false;

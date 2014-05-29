@@ -87,7 +87,7 @@ angular.module('user')
                         oldData.notifyType = {
                             id: 1,
                             name: 'email',
-                            name_display: 'Gửi qua email'
+                            name_display: 'Email'
                         };
                         oldData.email_title = data.title;
 
@@ -96,14 +96,14 @@ angular.module('user')
                         oldData.notifyType = {
                             id: 2,
                             name: 'in-app',
-                            name_display: 'Gửi qua ứng dụng'
+                            name_display: 'Notification via infory mobile'
                         };
                         break;
                     case 'sms':
                         oldData.notifyType = {
                             id: 0,
                             name: 'sms',
-                            name_display: 'Gửi qua SMS'
+                            name_display: 'SMS'
 
                         };
                         oldData.email_sender = data.sender;
@@ -158,9 +158,9 @@ angular.module('user')
                             if (user.gender == null || user.gender == '')
                                 user.gender = " - ";
                             else if (user.gender == 'male')
-                                user.gender = 'Nam';
+                                user.gender = 'Male';
                             else
-                                user.gender = 'Nữ';
+                                user.gender = 'Female';
 
                             if (user.city == null)
                                 user.city = " - ";
@@ -266,9 +266,9 @@ angular.module('user')
                     messageRemote.create(fields, function(data) {
                         if (data.error == undefined) {
                             listNotification();
-                            dialogHelper.showError('Quá trình tạo thành công');
+                            dialogHelper.showError('Create successful');
                         } else
-                            dialogHelper.showError('Quá trình tạo có lỗi: ' + data.error.message);
+                            dialogHelper.showError('Have error: ' + data.error.message);
                     }, function() {})
                     break;
                 case 'update':
@@ -276,9 +276,9 @@ angular.module('user')
                     messageRemote.update(fields, function(data) {
                         if (data.error == undefined) {
                             listNotification();
-                            dialogHelper.showError('Đã cập nhật thông tin');
+                            dialogHelper.showError('Updated');
                         } else
-                            dialogHelper.showError('Quá trình cập nhật có lỗi: ' + data.error.message);
+                            dialogHelper.showError('Have error: ' + data.error.message);
                     }, function() {})
                     break;
             }
@@ -287,16 +287,16 @@ angular.module('user')
 
                 $scope.statusTypes = [{
                     name: '',
-                    name_display: 'Trạng thái'
+                    name_display: 'Status'
                 }, {
                     name: 'running',
-                    name_display: 'Đang chạy'
+                    name_display: 'Running'
                 }, {
                     name: 'stopped',
-                    name_display: 'Đã dừng'
+                    name_display: 'Stop'
                 }, {
                     name: 'waiting',
-                    name_display: 'Chờ duyệt'
+                    name_display: 'Waiting'
                 }];
 
                 var properties = {
@@ -327,7 +327,7 @@ angular.module('user')
                         case 'running':
                             $scope.messageListFull[id].statusClass = 'btn-flat inverse';
                             $scope.messageListFull[id].status = 'stopped';
-                            $scope.messageListFull[id].statusName = 'Đã dừng';
+                            $scope.messageListFull[id].statusName = 'Shopped';
                             nextStatus = 'stopped';
                             break;
                         case 'waiting':
@@ -335,7 +335,7 @@ angular.module('user')
                         case 'stopped':
                             $scope.messageListFull[id].statusClass = 'btn-flat success';
                             $scope.messageListFull[id].status = 'running';
-                            $scope.messageListFull[id].statusName = 'Đang chạy';
+                            $scope.messageListFull[id].statusName = 'Running';
                             nextStatus = 'running';
                             break;
                     }
@@ -351,10 +351,10 @@ angular.module('user')
                             $scope.messageListFull[id].status = status;
                             if ($scope.messageListFull[id].status == 'running') {
                                 $scope.messageListFull[id].statusClass = 'btn-flat success';
-                                $scope.messageListFull[id].statusName = 'Đang chạy';
+                                $scope.messageListFull[id].statusName = 'Running';
                             } else {
                                 $scope.messageListFull[id].statusClass = 'btn-flat inverse';
-                                $scope.messageListFull[id].statusName = 'Đã dừng';
+                                $scope.messageListFull[id].statusName = 'Stop';
                             }
                         }
                     }, function() {});
@@ -381,36 +381,36 @@ angular.module('user')
                             switch ($scope.messageListFull[i].status) {
                                 case 'running':
                                     $scope.messageListFull[i].statusClass = 'btn-flat success';
-                                    $scope.messageListFull[i].statusName = 'Đang chạy';
+                                    $scope.messageListFull[i].statusName = 'Running';
                                     break;
                                 case 'stopped':
                                     $scope.messageListFull[i].statusClass = 'btn-flat gray';
-                                    $scope.messageListFull[i].statusName = 'Tạm dừng';
+                                    $scope.messageListFull[i].statusName = 'Stop';
                                     break;
                                 case 'finished':
                                     $scope.messageListFull[i].statusClass = 'btn-flat gray';
-                                    $scope.messageListFull[i].statusName = 'Kết thúc';
+                                    $scope.messageListFull[i].statusName = 'Finished';
                                     break;
                             }
 
                             switch ($scope.messageListFull[i].send_method) {
                                 case 'once':
-                                    $scope.messageListFull[i].methodName = 'Gửi một lần';
+                                    $scope.messageListFull[i].methodName = 'Once time';
                                     break;
                                 case 'auto':
-                                    $scope.messageListFull[i].methodName = 'Gửi tự động';
+                                    $scope.messageListFull[i].methodName = 'Automatic';
                                     break;
                             }
 
                             switch ($scope.messageListFull[i].type) {
                                 case 'sms':
-                                    $scope.messageListFull[i].typeName = 'Gửi sms';
+                                    $scope.messageListFull[i].typeName = 'SMS';
                                     break;
                                 case 'email':
-                                    $scope.messageListFull[i].typeName = 'Gửi email';
+                                    $scope.messageListFull[i].typeName = 'Email';
                                     break;
                                 case 'in-app':
-                                    $scope.messageListFull[i].typeName = 'Gửi notification';
+                                    $scope.messageListFull[i].typeName = 'Notification via infory mobile';
                                     break;
                             }
 

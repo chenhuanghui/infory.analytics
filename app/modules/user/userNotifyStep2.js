@@ -33,10 +33,10 @@ angular.module('user')
                 $scope.isChecked = [];
                 $scope.sendMethods = [{
                     name: 'once',
-                    name_display: 'Gửi một lần'
+                    name_display: 'Once'
                 }, {
                     name: 'auto',
-                    name_display: 'Gửi tự động'
+                    name_display: 'Automatic'
                 }];
                 $scope.sendMethod = $scope.sendMethods[0];
 
