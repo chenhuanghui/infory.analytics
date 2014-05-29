@@ -149,28 +149,28 @@ angular.element(document).ready(function() {
                     switch (next.$$route.originalPath)
                     {
                         case '/brand/infor/:brandId':
-                            title = 'Thông tin nhãn hiệu';
+                            title = 'Brand';
                             break;                  
                         case '/brand/promotion/step4/:brandId':
-                            title = 'Sự kiện';
+                            title = 'Event';
                             break;
                         case '/brand/comment/:brandId':
-                            title = 'Bình luận';
+                            title = 'Comment';
                             break;
                         case '/segmentation/:brandId':
-                            title = 'Phân tích hành vi khách hàng';
+                            title = 'Segmentation';
                             break;
                         case '/funnel/step2/:brandId':
-                            title = 'Phân tích hành vi khách hàng';
+                            title = 'Funnel';
                             break;
                         case '/user/manager/:brandId':
-                            title = 'Danh sách khách hàng';
+                            title = 'People';
                             break;
                         case '/user/notify-new/step4/:brandId':
-                            title = 'Thông báo'
+                            title = 'Notification'
                             break;
                         case '/home/:brandId':
-                            title = 'Trang chủ'
+                            title = 'Home'
                             break;
                         default:
                             title = 'Innovation for you';
