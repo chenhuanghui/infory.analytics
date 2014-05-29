@@ -51,7 +51,7 @@
         <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editDistrictAddress">
                 <span>{{bundle.shopDistrictAddress}}</span>
-                <a ng-click="bundle.editDistrictAddress = true" style="cursor:pointer" >sửa</a>
+                <a ng-click="editDistrictAddressChanged()" style="cursor:pointer" >sửa</a>
             </div>
             <div class="edit" ng-hide="!bundle.editDistrictAddress">
                 <div class="controller">
@@ -79,7 +79,7 @@
         <div class="value col-md-8" ng-hide="!hideLoadingInfor">
             <div class="overview" ng-hide="bundle.editCityAddress">
                 <span>{{bundle.shopCityAddress}}</span>
-                <a ng-click="bundle.editCityAddress = true" style="cursor:pointer" >sửa</a>
+                <a ng-click="editCityAddressChanged()" style="cursor:pointer" >sửa</a>
             </div>
             <div class="edit" ng-hide="!bundle.editCityAddress">
                 <div class="controller">
