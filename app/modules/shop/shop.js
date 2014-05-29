@@ -23,7 +23,7 @@ angular.module('shop', ['google-maps'])
                 }
             }
         }
-        
+
         dataFactory.getMetaData(brandId, function(data) {
             $scope.cities = data.cities;
             updateShopAddress();
@@ -137,6 +137,7 @@ angular.module('shop', ['google-maps'])
                 $scope.marker.coords.longitude = $scope.shop.lng;
                 $scope.map.center.latitude = $scope.shop.lat;
                 $scope.map.center.longitude = $scope.shop.lng;
+                updateShopAddress();
             } else
                 dialogHelper.showError(data.error.message);
 
