@@ -756,8 +756,8 @@ div.navbar-header ul li i.icon-home{
 	font-size: 25px;
 	float: right;
     position: relative;
-    right: -7px;
-    top: -29px;
+    right: 7px;
+    top: 0px;
 }
 
 .property-box .tab-content ul li div.value div.edit .form-control{

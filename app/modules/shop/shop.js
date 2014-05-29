@@ -12,16 +12,21 @@ angular.module('shop', ['google-maps'])
             brand = dataFactory.getCurrentBrand(),
             fields = null;
 
-        dataFactory.getMetaData(brandId, function(data) {
-            $scope.cities = data.cities;
-            for (var i = 0; i < data.cities.length; i++)
-            {
-                if (data.cities[i].name === $scope.shop.city_address)
+        function updateShopAddress(){
+            if ($scope.cities != null && $scope.cities != undefined && $scope.shop != undefined && $scope.shop != null){
+                for (var i = 0; i < $scope.cities.length; i++)
                 {
-                    $scope.cityAddress = i;
+                    if ($scope.cities[i].name === $scope.shop.city_address)
+                    {
+                        $scope.cityAddress = i;
+                    }
                 }
             }
-            console.log($scope.cityAddress);
+        }
+        
+        dataFactory.getMetaData(brandId, function(data) {
+            $scope.cities = data.cities;
+            updateShopAddress();
         }, function() {});
 
 
