@@ -363,7 +363,7 @@ angular.module('promotion')
                                     data[i].statusName = 'Stopped';
                                     break;
                             }
-                            data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg.split("-").join("/"))) + " đến " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end.split("-").join("/")));
+                            data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg.split("-").join("/"))) + " to " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end.split("-").join("/")));
                         }
 
                         $scope.promotionList = data;
