@@ -13,13 +13,13 @@ angular.module('home')
         $scope.dataChart = [{}, {}, {}];
         $scope.time_units = [{
             name: 'day',
-            name_display: 'Ngày'
+            name_display: 'Day'
         }, {
             name: 'week',
-            name_display: 'Tuần'
+            name_display: 'Week'
         }, {
             name: 'month',
-            name_display: 'Tháng'
+            name_display: 'Month'
         }];
         $scope.data = [{
             dateDropDownInput: intervalDate.date_beg,

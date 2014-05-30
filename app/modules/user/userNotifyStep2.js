@@ -199,10 +199,10 @@ angular.module('user')
 
                         if (user.gender == null)
                             user.gender = " - ";
-                        else if (user.gender == 'male')
-                            user.gender = 'Nam';
+                        else if (user.gender == 'male' || user.gender == 'Male')
+                            user.gender = 'Male';
                         else
-                            user.gender = 'Nữ';
+                            user.gender = 'Female';
 
                         if (user.city == null)
                             user.city = " - ";

@@ -10,10 +10,10 @@ angular.module('promotion')
         /** Scope variables **/
         $scope.promotionTypes = [{
             name: 'news',
-            name_display: 'Đăng tin'
+            name_display: 'News'
         }, {
             name: 'voucher',
-            name_display: 'Khuyến mãi'
+            name_display: 'Voucher'
         }];
 
         dataFactory.getBrand(brandId, function(data) {}, function() {});

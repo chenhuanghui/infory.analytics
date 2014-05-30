@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-7 shop_overview block">
                 <div id="shop_info" class="shadow">
-                    <a class="btn-glow btn-return" href="/#/brand/infor/{{brandId}}"> Back nhãn hiệu</a>
+                    <a class="btn-glow btn-return" href="/#/brand/infor/{{brandId}}"> Back brand page</a>
                     
                     <div class="cover_wapper">
                         <div class="blur"></div>
@@ -26,7 +26,7 @@
                             <p ng-hide="!hideLoadingInfor">{{shop.brand_description}}</p>        
                             <p> <span>Website: </span> <a href="{{shop.brand_website}}" ng-hide="!hideLoadingInfor"> {{shop.brand_website}}</a> <i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
                             <p> <span>Fanpage: </span> <a href="{{shop.brand_fanpage}}" ng-hide="!hideLoadingInfor" >{{shop.brand_fanpage}}</a><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
-                            <p> <span>Liên hệ: </span> <a href="http://smartguide.vn" ng-hide="!hideLoadingInfor">{{shop.phone}}</a><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
+                            <p> <span>Contact: </span> <a href="http://smartguide.vn" ng-hide="!hideLoadingInfor">{{shop.phone}}</a><i class="icon-fontello-spin6 animate-spin loading-small-infor loading-icon" ng-hide="hideLoadingInfor"></i></p>
                         </div>
                     </div>
                 </div> <!-- shop info-->
@@ -49,7 +49,7 @@
 
                 <ul class="nav nav-tabs">
                   <li ng-class="{active: main.active.tab == 'info'}" class="active">
-                    <a ng-click='main.active.tab = "info" ' href=""> Thông tin</a>
+                    <a ng-click='main.active.tab = "info" ' href=""> Information</a>
                   </li>
                   
                   <!-- <li ng-class="{active: main.active.tab == 'product'}">
@@ -61,7 +61,7 @@
                     </li> -->
                     
                     <li ng-class="{active: main.active.tab == 'gallery_user'}">
-                      <a ng-click='main.active.tab = "gallery_user";showUsersGallery();' href=""> Hình ảnh KH</a>
+                      <a ng-click='main.active.tab = "gallery_user";showUsersGallery();' href=""> Users' gallery</a>
                     </li>
                 </ul>
                 <div class="tab-content">

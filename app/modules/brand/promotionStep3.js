@@ -13,7 +13,7 @@ angular.module('promotion')
         /** Scope variables **/
         $scope.selectedShops = [];
         $scope.isCanGoNext = false;
-        $scope.mode = promotionFactory.getMode() == 'create' ? 'Kích hoạt' : 'Cập nhật';
+        $scope.mode = promotionFactory.getMode() == 'create' ? 'Create' : 'Update';
 
         /** Logic **/
         dataFactory.getBrand(brandId, function(data) {
@@ -26,7 +26,7 @@ angular.module('promotion')
         } else {
             $scope.promotionType = step2Data.promotionType;
             $scope.name = step2Data.name;
-            $scope.time = step2Data.date_beg.dateDisplay + " đến " + step2Data.date_end.dateDisplay;
+            $scope.time = step2Data.date_beg.dateDisplay + " to " + step2Data.date_end.dateDisplay;
         }
 
         switch ($scope.promotionType.name) {

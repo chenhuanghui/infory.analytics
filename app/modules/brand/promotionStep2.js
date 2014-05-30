@@ -85,7 +85,7 @@ angular.module('promotion')
         }
 
         function updateTime() {
-            $scope.time = $scope.data[0].dateDisplay + " đến " + $scope.data[1].dateDisplay;
+            $scope.time = $scope.data[0].dateDisplay + " to " + $scope.data[1].dateDisplay;
         }
 
         $scope.onTimeSetOne = function(newDate, oldDate) {

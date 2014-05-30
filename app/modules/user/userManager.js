@@ -133,7 +133,7 @@ angular.module('user')
 
                     bookmarkRemote.profileCreate(fields, function(data) {
                         if (data.error == undefined)
-                            dialogHelper.showError('Lưu profile người dùng thành công');
+                            dialogHelper.showError('Saving successfully');
                         else
                             dialogHelper.showError(data.error.message);
                     }, function() {});
@@ -171,10 +171,10 @@ angular.module('user')
 
                         if (user.gender == "")
                             user.gender = " - ";
-                        else if (user.gender == 'male')
-                            user.gender = 'Nam';
+                        else if (user.gender == 'male' || user.gender == 'Male')
+                            user.gender = 'Male';
                         else
-                            user.gender = 'Nữ';
+                            user.gender = 'Female';
 
                         if (user.city == null)
                             user.city = " - ";

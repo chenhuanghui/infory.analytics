@@ -13,13 +13,13 @@ angular.module('promotion')
         /** Scope variables **/
         $scope.orderPromotions = [{
             name: '',
-            name_display: 'Tất cả'
+            name_display: 'All'
         }, {
             name: 'news',
-            name_display: 'Đăng tin'
+            name_display: 'News'
         }, {
             name: 'voucher',
-            name_display: 'Khuyến mãi'
+            name_display: 'Voucher'
         }];
 
         $scope.hideLoading = false;
@@ -169,9 +169,9 @@ angular.module('promotion')
                         if (xhr.readyState == 4) {
                             var respone = JSON.parse(xhr.responseText);
                             if (respone.error == undefined) {
-                                dialogHelper.showError('Tạo chiến dịch thành công');
+                                dialogHelper.showError('Create event successfully');
                             } else
-                                dialogHelper.showError('Quá trình tạo chiến dịch có lỗi: ' + respone.error.message);
+                                dialogHelper.showError('Unexpected error: ' + respone.error.message);
 
                             listPromotion();
                         }
@@ -203,9 +203,9 @@ angular.module('promotion')
                         if (xhr.readyState == 4) {
                             var respone = JSON.parse(xhr.responseText);
                             if (respone.error == undefined) {
-                                dialogHelper.showError('Đã cập nhật thông tin chiến dịch');
+                                dialogHelper.showError('Event is updated');
                             } else
-                                dialogHelper.showError('Quá trình cập nhật chiến dịch có lỗi: ' + respone.error.message);
+                                dialogHelper.showError('Unexpected error: ' + respone.error.message);
 
                             listPromotion();
                         }
@@ -230,16 +230,16 @@ angular.module('promotion')
             function listPromotion() {
                 $scope.statusTypes = [{
                     name: '',
-                    name_display: 'Trạng thái'
+                    name_display: 'Status'
                 }, {
                     name: 'running',
-                    name_display: 'Đang chạy'
+                    name_display: 'Running'
                 }, {
                     name: 'stopped',
-                    name_display: 'Đã dừng'
+                    name_display: 'Stopped'
                 }, {
                     name: 'waiting',
-                    name_display: 'Chờ duyệt'
+                    name_display: 'Waiting'
                 }];
 
                 $scope.statusType = $scope.statusTypes[0];
@@ -251,7 +251,7 @@ angular.module('promotion')
                         case 'running':
                             $scope.promotionListFull[id].statusClass = 'btn-flat inverse';
                             $scope.promotionListFull[id].status = 'stopped';
-                            $scope.promotionListFull[id].statusName = 'Đã dừng';
+                            $scope.promotionListFull[id].statusName = 'Stopped';
                             nextStatus = 'stopped';
                             break;
                         case 'waiting':
@@ -259,7 +259,7 @@ angular.module('promotion')
                         case 'stopped':
                             $scope.promotionListFull[id].statusClass = 'btn-flat success';
                             $scope.promotionListFull[id].status = 'running';
-                            $scope.promotionListFull[id].statusName = 'Đang chạy';
+                            $scope.promotionListFull[id].statusName = 'Running';
                             nextStatus = 'running';
                             break;
                     }
@@ -276,10 +276,10 @@ angular.module('promotion')
                             $scope.promotionListFull[id].status = status;
                             if ($scope.promotionListFull[id].status == 'running') {
                                 $scope.promotionListFull[id].statusClass = 'btn-flat success';
-                                $scope.promotionListFull[id].statusName = 'Đang chạy';
+                                $scope.promotionListFull[id].statusName = 'Running';
                             } else {
                                 $scope.promotionListFull[id].statusClass = 'btn-flat inverse';
-                                $scope.promotionListFull[id].statusName = 'Đã dừng';
+                                $scope.promotionListFull[id].statusName = 'Stopped';
                             }
                         }
                     }, function() {});
@@ -339,10 +339,10 @@ angular.module('promotion')
                                     data[i].typeDisplay = 'Voucher';
                                     break;
                                 case 'news':
-                                    data[i].typeDisplay = 'Đăng tin';
+                                    data[i].typeDisplay = 'News';
                                     break;
                                 case 'score':
-                                    data[i].typeDisplay = 'Tích luỹ điểm';
+                                    data[i].typeDisplay = 'Score';
                                     break;
                             }
 
@@ -352,15 +352,15 @@ angular.module('promotion')
                             switch (data[i].status) {
                                 case 'running':
                                     data[i].statusClass = 'btn-flat success';
-                                    data[i].statusName = 'Đang chạy';
+                                    data[i].statusName = 'Running';
                                     break;
                                 case 'waiting':
                                     data[i].statusClass = 'btn-flat gray';
-                                    data[i].statusName = 'Chờ duyệt';
+                                    data[i].statusName = 'Waiting';
                                     break;
                                 case 'stopped':
                                     data[i].statusClass = 'btn-flat inverse';
-                                    data[i].statusName = 'Đã dừng';
+                                    data[i].statusName = 'Stopped';
                                     break;
                             }
                             data[i].time = serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_beg.split("-").join("/"))) + " đến " + serviceHelper.normalizeTimeWithMinute(new Date(data[i].date_end.split("-").join("/")));
@@ -391,10 +391,10 @@ angular.module('promotion')
             };
             switch (data.type) {
                 case 'news':
-                    promotionType.name_display = 'Đăng tin';
+                    promotionType.name_display = 'News';
                     break;
                 case 'voucher':
-                    promotionType.name_display = 'Khuyến mãi';
+                    promotionType.name_display = 'Voucher';
                     break;
             }
 
@@ -431,7 +431,7 @@ angular.module('promotion')
 
             switch (data.type) {
                 case 'news':
-                    promotionType.name_display = 'Đăng tin';
+                    promotionType.name_display = 'News';
                     promotionFactory.setData(2, {
                         validation: [false, false, false],
                         isCanGoNext: true,
@@ -523,7 +523,7 @@ angular.module('promotion')
                     }
 
 
-                    promotionType.name_display = 'Khuyến mãi';
+                    promotionType.name_display = 'Voucher';
 
                     promotionFactory.setData(2, {
                         isCanGoNext: true,
