@@ -33,7 +33,7 @@ angular.module('account')
                         $scope.company = '';
                         $scope.tel = '';
 
-                        dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Chúc mừng bạn đã tạo tài khoản thành công. Vui lòng chọn "Đồng ý" để về trang Đăng nhập', function() {
+                        dialogHelper.loadDialog('Warning', 'OK', 'Cancle', 'Congratulation. Your account has been created. Click OK to return to Sign In page!', function() {
                             $location.path('/login');
                         });
                     } else

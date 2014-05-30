@@ -294,7 +294,7 @@ angular.module('brand')
         }
 
         $scope.delComment = function(id) {
-            dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Thao tác xóa bình luận của bạn không thể phục hồi được. Vui lòng xác nhận', function() {
+            dialogHelper.loadDialog('Warning', 'OK', 'Cancel', 'Your action is not restorable. Do you want to continue?', function() {
                 commentRemote.delete({
                     comment_id: id
                 }, function(data) {
@@ -357,7 +357,7 @@ angular.module('brand')
                         });
 
                         dataFactory.setCurrentBrand($scope.brand);
-                        dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
+                        dialogHelper.showError('Uploaded, system will be updated in a moment');
                     } else
                         dialogHelper.showError(respone.error.message);
                 }
@@ -381,7 +381,7 @@ angular.module('brand')
                         });
 
                         dataFactory.setCurrentBrand($scope.brand);
-                        dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
+                        dialogHelper.showError('Uploaded, system will be updated in a moment');
                     } else
                         dialogHelper.showError(respone.error.message);
                 }
@@ -532,7 +532,7 @@ angular.module('brand')
                                     for (var j = 0; j < $scope.brand.categories[i].products.length; j++) {
                                         if ($scope.brand.categories[i].products[j].id == productId) {
                                             $scope.brand.categories[i].products[j].images = respone.images;
-                                            dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
+                                            dialogHelper.showError('Uploaded, system will be updated in a moment');
                                             return;
                                         }
                                     }
@@ -569,7 +569,7 @@ angular.module('brand')
                             });
                         }
                         saveToFactory();
-                        dialogHelper.showError('Đăng tải thành công. Hệ thống sẽ cập nhật trong giây lát');
+                        dialogHelper.showError('Uploaded, system will be updated in a moment');
                     } else
                         dialogHelper.showError(respone.error.message);
                 }
@@ -578,7 +578,7 @@ angular.module('brand')
         }
 
         $scope.removeImage = function(thumbnail_url) {
-            dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Thao tác xóa ảnh của bạn không thể phục hồi được. Vui lòng xác nhận', function() {
+            dialogHelper.loadDialog('Warning', 'OK', 'Cancel', 'Your action is not restorable. Do you want to continue? ', function() {
                 for (var i = 0; i < $scope.gallery.length; i++) {
                     if ($scope.gallery[i].thumbnail == thumbnail_url) {
                         brandRemote.removeImage({
@@ -682,7 +682,7 @@ angular.module('brand')
 
         $scope.delShop = function(id) {
 
-            dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Thao tác xóa cửa hàng của bạn không thể phục hồi được. Vui lòng xác nhận', function() {
+            dialogHelper.loadDialog('Warning', 'OK', 'Cancel', 'Your action is not restorable. Do you want to continue?', function() {
                 shopRemote.delete({
                     shop_id: id
                 }, function(data) {

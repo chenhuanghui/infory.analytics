@@ -245,7 +245,7 @@ angular.module('shop', ['google-maps'])
         }
 
         $scope.deleteUserImage = function(id) {
-            dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Thao tác xóa ảnh của bạn không thể phục hồi được. Vui lòng xác nhận', function() {
+            dialogHelper.loadDialog('Warning', 'OK', 'Cancle', 'Your action is not restorable. Do you want to continue?', function() {
                 shopRemote.removeUserImage({
                     shop_id: shopId,
                     image_id: id

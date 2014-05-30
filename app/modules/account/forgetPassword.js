@@ -2,7 +2,7 @@ angular.module('account')
     .controller('forgetPasswordCtrl', ['$scope', '$http', '$location', 'remoteFactory', 'dialogHelper',
         function($scope, $http, $location, remoteFactory, dialogHelper) {
             $scope.forgetPassword = function() {
-                dialogHelper.loadDialog('Thông báo', 'Đồng ý', 'Hủy', 'Mật khẩu mới đã được gửi đến địa chỉ email: ' + $scope.email + ' . Vui lòng chọn "Đồng ý" để về trang Đăng nhập', function() {
+                dialogHelper.loadDialog('Warning', 'OK', 'Cancle', 'Your new password is sent to the address: ' + $scope.email + '. Click OK to return Sign In page!', function() {
                     $location.path('/login');
                 });
 
