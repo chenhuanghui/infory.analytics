@@ -104,11 +104,35 @@
                                 <div ng-switch-when="in-app">
                                     <div class="sms-box">
                                         <div class="field-box">
-                                            <span class="title">Content</span>
-                                            <textarea class="form-control" rows="4" ng-model="$parent.in_app_content" ng-change="updateValidation(2, 0)"></textarea>
+                                            <span class="title">Title</span>
+                                            <input class="form-control inline-block" type="text" ng-change="updateValidation(2, 0)">
                                             <span class="alert-msg" ng-show="validation[2][0]">
                                                             <i class="icon-remove-sign"></i>
+                                                        Filed is required
+                                            </span>
+                                        </div>
+                                        <div class="field-box">
+                                            <span class="title">Content</span>
+                                            <textarea class="form-control" rows="4" ng-model="$parent.in_app_content" ng-change="updateValidation(2, 1)"></textarea>
+                                            <span class="alert-msg" ng-show="validation[2][1]">
+                                                            <i class="icon-remove-sign"></i>
                                                         Content is required
+                                            </span>
+                                        </div>
+                                        <div class="field-box">
+                                            <span class="title">Thumbnail</span>
+                                            <input class="form-control inline-block" type="text" ng-change="updateValidation(2, 2)">
+                                            <span class="alert-msg" ng-show="validation[2][2]">
+                                                            <i class="icon-remove-sign"></i>
+                                                        Filed is required
+                                            </span>
+                                        </div>
+                                        <div class="field-box">
+                                            <span class="title">Video link</span>
+                                            <input class="form-control inline-block" type="text" ng-change="updateValidation(2, 3)">
+                                            <span class="alert-msg" ng-show="validation[2][3]">
+                                                            <i class="icon-remove-sign"></i>
+                                                        Filed is required
                                             </span>
                                         </div>
                                     </div>
