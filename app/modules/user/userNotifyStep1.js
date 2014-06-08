@@ -60,6 +60,7 @@ angular.module('user')
                 $scope.name = oldData.name;
                 $scope.title = oldData.title;
                 $scope.image = oldData.image;
+                $scope.imageUpload = oldData.imageUpload;
                 $scope.video = oldData.video;
             } else
                 $scope.notifyType = $scope.notifyTypes[0];
@@ -140,6 +141,7 @@ angular.module('user')
                 fileHelper.readAsDataUrl($files[0], $scope)
                     .then(function(result) {
                         $scope.image = result;
+                        $scope.imageUpload = $files[0];
 //                        fileAvatar = $files[0];
 //                        $scope.updateValidationNews(1);
                         $scope.validation[2][1] = false;
@@ -185,6 +187,7 @@ angular.module('user')
                     in_app_content: $scope.in_app_content,
                     title: $scope.title,
                     image: $scope.image,
+                    imageUpload: $scope.imageUpload,
                     video: $scope.video,
                     name: $scope.name
                 });

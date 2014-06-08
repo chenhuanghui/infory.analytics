@@ -6,7 +6,8 @@ angular.module('user')
                 step1Data = userNotifyFactory.getData(0, brandId),
                 step2Data = userNotifyFactory.getData(1, brandId),
                 step3Data = userNotifyFactory.getData(2, brandId),
-                mode = userNotifyFactory.getMode();
+                mode = userNotifyFactory.getMode(),
+                base_url = remoteFactory.getBaseUrl();
 
             /** Scope variables **/
             $scope.messageList = [];
@@ -246,8 +247,8 @@ angular.module('user')
                 case 'in-app':
                     fields.content = step1Data.in_app_content;
                     fields.title = step1Data.title;
-                    //fields.image = step1Data.image;
-                    fields.video_thumbnail = step1Data.image;
+                    fields.image = step1Data.imageUpload;
+                    //fields.video_thumbnail = step1Data.image;
                     fields.video = step1Data.video;
                     
                     break;
@@ -268,13 +269,25 @@ angular.module('user')
             switch (mode) {
                 case 'create':
                     fields.total_bugdet = step3Data.total_bugdet;
-                    messageRemote.create(fields, function(data) {
-                        if (data.error == undefined) {
-                            listNotification();
-                            dialogHelper.showError('Create successful');
-                        } else
-                            dialogHelper.showError('Have error: ' + data.error.message);
-                    }, function() {})
+                    var fd = new FormData();
+                    for (var o in fields){
+                        fd.append(o, fields[o]);
+                    }
+                    
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', base_url + 'message/create' + remoteFactory.getTailUrl(), true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4) {
+                            var respone = JSON.parse(xhr.responseText);
+                            if (respone.error == undefined) {
+                                listNotification();
+                                dialogHelper.showError('Create successful');
+                            } else
+                                dialogHelper.showError(respone.error.message);
+                        }
+                    }
+                    xhr.send(fd);
+                    
                     break;
                 case 'update':
                     fields.message_id = userNotifyFactory.getMessageId();
