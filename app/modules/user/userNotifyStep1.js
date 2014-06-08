@@ -1,6 +1,6 @@
 angular.module('user')
-    .controller('UserNotifyStep1Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote',
-        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote) {
+    .controller('UserNotifyStep1Ctrl', ['$scope', '$routeParams', '$location', 'remoteFactory', 'dataFactory', 'userNotifyFactory', 'filterHelper', 'userRemote', 'fileHelper',
+        function($scope, $routeParams, $location, remoteFactory, dataFactory, userNotifyFactory, filterHelper, userRemote, fileHelper) {
 
             /** Global variables **/
             var brandId = $routeParams.brandId,
@@ -19,20 +19,21 @@ angular.module('user')
             }, {
                 id: 2,
                 name: 'in-app',
-                name_display: 'Notification via infory mobile'
+                name_display: 'Via mobile'
             }];
 
             $scope.isCanGo = false;
             $scope.validation = [
                 [false, true],
                 [true, true, true],
-                [true],
+                [true, true],
                 [true]
             ];
 
-            $scope.isOk = [false, false, false, false];
+            $scope.isOk = [false, false, false, false, false];
             $scope.name = '';
-
+            $scope.title = '';
+            
             /** Logic **/
             dataFactory.updateBrandSideBar(brandId);
             dataFactory.getBrand(brandId, function(data) {
@@ -57,6 +58,9 @@ angular.module('user')
                 $scope.email_sender = oldData.email_sender;
                 $scope.in_app_content = oldData.in_app_content;
                 $scope.name = oldData.name;
+                $scope.title = oldData.title;
+                $scope.image = oldData.image;
+                $scope.video = oldData.video;
             } else
                 $scope.notifyType = $scope.notifyTypes[0];
 
@@ -86,10 +90,28 @@ angular.module('user')
                         }
                         break;
                     case 2:
-                        $scope.validation[id][idChange] = checkString($scope.in_app_content);
+                        switch (idChange) {
+                            case 0:
+                                $scope.validation[id][idChange] = checkString($scope.title);
+                                break;
+                            case 1:
+                                $scope.validation[id][idChange] = checkFile($scope.image);
+                                break;
+                            case 2:
+                                $scope.validation[id][idChange] = checkString($scope.in_app_content);
+                                break;
+                            case 3:
+                                $scope.validation[id][idChange] = checkString($scope.video);
+                                break;
+                            case 4:
+                                $scope.validation[id][idChange] = checkString($scope.video_thumbnail);
+                                break;    
+                        }
                         break;
                     case 3:
                         $scope.validation[id][idChange] = checkString($scope.name);
+                        break;
+                        
                 }
 
                 $scope.isOk[id] = isOk(id);
@@ -112,8 +134,29 @@ angular.module('user')
                 $scope.isCanGo = false;
             }
 
+            $scope.changeImage = function($files) {
+                $scope.hideCover = false;
+
+                fileHelper.readAsDataUrl($files[0], $scope)
+                    .then(function(result) {
+                        $scope.image = result;
+//                        fileAvatar = $files[0];
+//                        $scope.updateValidationNews(1);
+                        $scope.validation[2][1] = false;
+                        $scope.isOk[2] = isOk(2);
+                        $scope.updateGoNext();
+                    });
+            }
+            
             function checkString(string) {
                 if (string == undefined || string == '')
+                    return true;
+                else
+                    return false;
+            }
+            
+            function checkFile(file) {
+               if (string == undefined || string == '')
                     return true;
                 else
                     return false;
@@ -140,6 +183,9 @@ angular.module('user')
                     email_content: $scope.email_content,
                     email_sender: $scope.email_sender,
                     in_app_content: $scope.in_app_content,
+                    title: $scope.title,
+                    image: $scope.image,
+                    video: $scope.video,
                     name: $scope.name
                 });
                 $location.path('/user/notify-new/step2/' + brandId);

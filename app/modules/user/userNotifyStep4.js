@@ -245,6 +245,11 @@ angular.module('user')
                     break;
                 case 'in-app':
                     fields.content = step1Data.in_app_content;
+                    fields.title = step1Data.title;
+                    //fields.image = step1Data.image;
+                    fields.video_thumbnail = step1Data.image;
+                    fields.video = step1Data.video;
+                    
                     break;
             }
 

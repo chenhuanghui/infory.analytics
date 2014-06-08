@@ -149,12 +149,12 @@ angular.module('promotion')
                 }
 
                 function isCanGo() {
-                    for (var i = 0; i < $scope.presentDescriptions.length; i++) {
-                        if ($scope.presentDescriptions[i].isOK == false) {
-                            $scope.isCanGoNext = false;
-                            return;
-                        }
-                    }
+                    // for (var i = 0; i < $scope.presentDescriptions.length; i++) {
+                    //     if ($scope.presentDescriptions[i].isOK == false) {
+                    //         $scope.isCanGoNext = false;
+                    //         return;
+                    //     }
+                    // }
 
                     $scope.isCanGoNext = true;
                 }

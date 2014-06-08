@@ -27,7 +27,7 @@ angular.module('Smg')
                 },
                 showError: function(content) {
                     if (content != '' && content != undefined)
-                        this.loadDialog('Thông báo', 'Đồng ý', '', content, null);
+                        this.loadDialog('Message', 'Accept', '', content, null);
                 }
             }
         }
