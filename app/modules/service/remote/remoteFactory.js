@@ -2,7 +2,7 @@ angular.module('smg.services')
     .factory('remoteFactory', ['$http', 'Auth', 'metaData',
         function($http, Auth, metaData) {
             var mode = 'dev';
-            var domain = (mode == 'dev') ? 'http://dev2.smartguide.vn/' : 'https://api.infory.vn/'
+            var domain = (mode == 'dev') ? 'http://dev.infory.vn/' : 'https://api.infory.vn/'
             var base_url = domain + "dashboard/api/v1/";
 
             return {

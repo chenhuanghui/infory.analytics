@@ -547,34 +547,40 @@ angular.module('brand')
         }
 
         $scope.uploadImage = function($files) {
-            var fd = new FormData();
-            fd.append('brand_id', brandId);
-            fd.append('image', $files);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', base_url + 'brand/add_image' + remoteFactory.getTailUrl(), true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    var respone = JSON.parse(xhr.responseText);
-                    if (respone.error == undefined) {
-                        for (var i = 0; i < respone.length; i++) {
-                            if (respone[i].thumbnail_url != undefined) {
+            var uploadStatus = true;
+            for (var i = 0; i < $files.length; i++) {
+                if(uploadStatus == true)
+                {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', base_url + 'brand/add_image' + remoteFactory.getTailUrl(), true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4) {
+                            var response = JSON.parse(xhr.responseText);
+                            if (response.error == undefined) {
                                 $scope.gallery.unshift({
-                                    thumbnail: respone[i].thumbnail_url
-                                });
-                            }
+                                        thumbnail: response[0].thumbnail_url
+                                    });
 
-                            $scope.$apply(function() {
-                                $scope.gallery = $scope.gallery;
-                            });
+                                $scope.$apply(function() {
+                                    $scope.gallery = $scope.gallery;
+                                });
+                                saveToFactory();
+                            }
+                            else
+                            {
+                                dialogHelper.showError(respone.error.message);
+                                uploadStatus = false;
+                            }
                         }
-                        saveToFactory();
-                        dialogHelper.showError('Uploaded, system will be updated in a moment');
-                    } else
-                        dialogHelper.showError(respone.error.message);
+                    }
+                    var fd = new FormData();
+                    fd.append('image', $files[i]);
+                    fd.append('brand_id', brandId);
+                    xhr.send(fd);
                 }
             }
-            xhr.send(fd);
+            if(uploadStatus == true)
+                dialogHelper.showError('Uploaded, system will be updated in a moment');
         }
 
         $scope.removeImage = function(thumbnail_url) {

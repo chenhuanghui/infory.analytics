@@ -4,7 +4,7 @@
     </div>
     <div class="z-header" ng-hide="!hideLoadingImage">
         <span>{{gallery.length}}</span> image(s) uploaded
-        <input type="file" class="right" ng-file-select="uploadImage($files)" multiple/>
+        <input type="file" class="right" ng-file-select="uploadImage($files)"/>
     </div>
     <div class="z-content">
         <div class="item" ng-repeat="image in gallery">

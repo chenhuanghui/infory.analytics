@@ -36,8 +36,8 @@ angular.module('Smg')
                 }
             }
 
-            var loginRoute = "http://dev2.smartguide.vn/dashboard/auth";
-            var logoutRoute = "http://dev2.smartguide.vn/dashboard/api/v1/logout";
+            var loginRoute = "http://dev.infory.vn/dashboard/auth";
+            var logoutRoute = "http://dev.infory.vn/dashboard/api/v1/logout";
 
             return {
                 authorize: function(accessLevel, role) {
