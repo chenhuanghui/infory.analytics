@@ -37,7 +37,7 @@ angular.module('Smg')
                                             .add();
                                     }
                                     if (conversationRate != '') {
-                                        ren.label("Conversation Rate: " + conversationRate, this.plotSizeX - 100, 10)
+                                        ren.label("Conversion Rate: " + conversationRate, this.plotSizeX - 100, 10)
                                         // x + 8, y - 10 for centering the label
                                         .css({
                                             fontWeight: 'bold'
@@ -53,7 +53,7 @@ angular.module('Smg')
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Source: infory.vn',
+                            text: 'Source: app.infory.vn',
                             x: -20
                         },
                         xAxis: {
@@ -119,7 +119,7 @@ angular.module('Smg')
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Source: infory.vn',
+                            text: 'Source: app.infory.vn',
                             x: -20
                         },
                         xAxis: {
@@ -184,7 +184,7 @@ angular.module('Smg')
                             x: -20 //center
                         },
                         subtitle: {
-                            text: 'Source: infory.vn',
+                            text: 'Source: app.infory.vn',
                             x: -20
                         },
                         xAxis: {
@@ -362,7 +362,7 @@ angular.module('Smg')
                             text: event + ' count over time',
                         },
                         subtitle: {
-                            text: 'Source: infory.vn',
+                            text: 'Source: app.infory.vn',
                         },
                         xAxis: {
                             categories: data.time
