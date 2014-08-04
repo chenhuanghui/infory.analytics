@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Smg')
-    .factory('Auth', ['$http', '$cookieStore', '$document', /*'accountRemote', */ 'cookie',
-        function($http, $cookieStore, $document, /*accountRemote, */ cookie) {
+    .factory('Auth', ['$http', '$document', /*'accountRemote', */ 'cookie',
+        function($http, $document, /*accountRemote, */ cookie) {
             function changeUser(user) {
                 _.extend(currentUser, user);
             };
@@ -69,18 +69,14 @@ angular.module('Smg')
                                 cookie.deleteCookie('access_token');
                                 cookie.deleteCookie('role');
 
-                                if (rememberme) {
+                                if (rememberme)
                                     var expires = 7;
-                                    cookie.setCookie('name', user.name, expires);
-                                    cookie.setCookie('user', user.username, expires);
-                                    cookie.setCookie('access_token', user.access_token, expires);
-                                    cookie.setCookie('role', user.role.title, expires);
-                                } else {
-                                    cookie.setCookie('name', user.name, expires);
-                                    cookie.setCookie('user', user.username, expires);
-                                    $cookieStore.put('access_token', user.access_token);
-                                    $cookieStore.put('role', user.role.title);
-                                }
+                                else
+                                    var expires = 0;
+                                cookie.setCookie('name', user.name, expires);
+                                cookie.setCookie('user', user.username, expires);
+                                cookie.setCookie('access_token', user.access_token, expires);
+                                cookie.setCookie('role', user.role.title, expires);
 
                                 changeUser(user);
                                 success(user);

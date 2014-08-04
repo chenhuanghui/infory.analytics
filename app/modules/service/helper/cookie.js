@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Smg')
-    .factory('cookie', ['$cookieStore', '$document',
-        function($cookieStore, $document) {
+    .factory('cookie', ['$document',
+        function($document) {
 
             function normalize(str) {
                 if (str[0] == '%')
@@ -13,25 +13,27 @@ angular.module('Smg')
 
             return {
                 deleteCookie: function(name) {
-                    $document.context.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                    $document.context.cookie = encodeURI(name) + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=.infory.dev;path=/';
                 },
 
                 setCookie: function(cname, cvalue, exdays) {
-                    var d = new Date();
-                    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-                    var expires = "expires=" + d.toGMTString();
-                    if (exdays != 0)
-                        $document.context.cookie = cname + "=" + cvalue + "; " + expires;
-                    else
-                        $document.context.cookie = cname + "=" + cvalue + ";";
+                    var expires = "";
+                    if(exdays !== 0)
+                    {
+                        var d = new Date();
+                        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                        expires = ";expires=" + d.toGMTString();
+                    }
+
+                    $document.context.cookie = encodeURI(cname) + "=" + encodeURI(cvalue) + expires + ";domain=.infory.dev;path=/";
                 },
 
                 getCookie: function(cname) {
-                    var name = cname + "=";
+                    var name = encodeURI(cname) + "=";
                     var ca = $document.context.cookie.split(';');
                     for (var i = 0; i < ca.length; i++) {
                         var c = ca[i].trim();
-                        if (c.indexOf(name) == 0) return normalize(c.substring(name.length, c.length));
+                        if (c.indexOf(name) == 0) return normalize(decodeURI(c.substring(name.length, c.length)));
                     }
 
                     return "";
