@@ -28,11 +28,6 @@
                     <ul >
                         <a href="#"  class="close-icon"></a>
                         <li ng-repeat="b in brands" ><a ng-click="setCurrentBrand(b)">{{b.name}}</a></li>
-                        <li class="create-box">
-                            <i class="icon-plus"></i>
-                            <input type ="text" id="id_name" placeholder="New brand" ng-model="newBrandName"/>
-                            <input id="create_submit" class="disabled" type="button" value="CREATE BRAND" ng-click="createBrand(newBrandName)"/>
-                        </li>
                     </ul>
                 </div>
             </li>
@@ -155,31 +150,16 @@
     <ul class="nav navbar-nav pull-right hidden-xs" style="{{menuDisplayStr}}; float: left !important;">
         <li  >
 
-            <a href="#/home/{{brandId}}" class="trigger"> <i class="icon-home" style="font-size:20px;"></i>
+            <a href="#/home/{{brandId}}" class="trigger"> <i class="icon-home" style="font-size:20px;"></i>   OVERVIEW
             </a>
         </li>
-        <li >
-            <a href="#/brand/infor/{{brandId}}" class="trigger"> Brand
-            </a>
-        </li>
+
         <li  >
-            <a href="#/segmentation/{{brandId}}" class="trigger"> Segmentation
+            <a href="#/segmentation/{{brandId}}" class="trigger"> <i class="icon-bar-chart" style="font-size:20px;"></i>   Segmentation
             </a>
         </li>
         <li >
-            <a href="#/funnel/step2/{{brandId}}" class="trigger"> Funnels
-            </a>
-        </li>
-        <li >
-            <a href="#/brand/promotion/step4/{{brandId}}" class="trigger"> Event
-            </a>
-        </li>
-        <li >
-            <a href="#/user/manager/{{brandId}}" class="trigger"> People
-            </a>
-        </li>
-        <li style="margin-right:250px;">
-            <a href="#/user/notify-new/step4/{{brandId}}" class="trigger"> Notification
+            <a href="#/funnel/step2/{{brandId}}" class="trigger"> <i class="icon-filter" style="font-size:20px;"></i>   Funnels
             </a>
         </li>
     </ul>
