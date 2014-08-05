@@ -36,8 +36,8 @@ angular.module('Smg')
                 }
             }
 
-            var loginRoute = "http://dev.infory.vn/dashboard/auth";
-            var logoutRoute = "http://dev.infory.vn/dashboard/api/v1/logout";
+            var loginRoute = "https://api.infory.vn/dashboard/auth";
+            var logoutRoute = "https://api.infory.vn/dashboard/api/v1/logout";
 
             return {
                 authorize: function(accessLevel, role) {

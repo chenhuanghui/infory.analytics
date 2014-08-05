@@ -1,7 +1,7 @@
 angular.module('smg.services')
     .factory('remoteFactory', ['$http', 'Auth', 'metaData',
         function($http, Auth, metaData) {
-            var mode = 'dev';
+            var mode = 'prod';
             var domain = (mode == 'dev') ? 'http://dev.infory.vn/' : 'https://api.infory.vn/'
             var base_url = domain + "dashboard/api/v1/";
 

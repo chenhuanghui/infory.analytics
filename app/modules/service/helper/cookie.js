@@ -13,7 +13,7 @@ angular.module('Smg')
 
             return {
                 deleteCookie: function(name) {
-                    $document.context.cookie = encodeURI(name) + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=.infory.dev;path=/';
+                    $document.context.cookie = encodeURI(name) + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=.infory.vn;path=/';
                 },
 
                 setCookie: function(cname, cvalue, exdays) {
@@ -25,7 +25,7 @@ angular.module('Smg')
                         expires = ";expires=" + d.toGMTString();
                     }
 
-                    $document.context.cookie = encodeURI(cname) + "=" + encodeURI(cvalue) + expires + ";domain=.infory.dev;path=/";
+                    $document.context.cookie = encodeURI(cname) + "=" + encodeURI(cvalue) + expires + ";domain=.infory.vn;path=/";
                 },
 
                 getCookie: function(cname) {
