@@ -43,7 +43,7 @@ angular.module('engagement')
                 $scope.metas = data.meta_property_types;
                 $scope.events = data.meta_events;
                 $scope.subfilters = null;
-                run();                
+                run();
             }, function() {});
 
             function run() {
@@ -68,7 +68,7 @@ angular.module('engagement')
                 $scope.totalRows = [];
 
 
-                if (step1Data == null) {                    
+                if (step1Data == null) {
                     if (step2Data != null) {
                     }
                 } else {
@@ -76,8 +76,8 @@ angular.module('engagement')
 
                     $scope.funnelBookmark = {
                         funnel: step1Data.fields.funnel
-                    }                                       
-                    updateChart(fields);                    
+                    }
+                    updateChart(fields);
                 }
 
                 brandRemote.get(pros, function(data) {
@@ -92,22 +92,22 @@ angular.module('engagement')
 
                         if (step1Data == null) {
                             if ($scope.funnelBookmarks.length >= 2) {
-                                $scope.funnelBookmark = data.funnel_bookmarks[1];                                
-                                $scope.changeFunnelBookmark($scope.funnelBookmark.id);                                
+                                $scope.funnelBookmark = data.funnel_bookmarks[1];
+                                $scope.changeFunnelBookmark($scope.funnelBookmark.id);
                             }
                             else
-                            {                                                                                       
+                            {
                                 $scope.hideLoading = true;
                                 $("#funnelChartData").html("<div style='margin-left:340px;line-height:410px;font-weight:bold'>No data to display</div>");
                             }
-                        } else {                            
-                            $scope.funnelBookmark.funnel = step1Data.fields.funnel;                            
+                        } else {
+                            $scope.funnelBookmark.funnel = step1Data.fields.funnel;
                             $scope.hideLoading = true;
                         }
                     } else
                         dialogHelper.showError(data.error.message);
                 }, function() {})
-                
+
 
                 $scope.changeFunnelBookmark = function(id) {
                     $('.z-dropdown').removeClass('open');
@@ -199,7 +199,7 @@ angular.module('engagement')
                             }
                             $scope.columnChart = chartHelper.buildLineChartForFunnel(values, columnNames, valueSuffix, unit, updateTableEvent, $scope.totalRows, $scope.conversationRate);
                         } else
-                            dialogHelper.showError(data.error.message);                
+                            dialogHelper.showError(data.error.message);
                     }, function() {});
                 }
 
@@ -240,13 +240,13 @@ angular.module('engagement')
                     $scope.tables = [];
 
                     // add a summary table when there's no filter is selected
-                    for (i = 1; i <= eventIdx; i++) {
+                    for (i = eventIdx; i <= eventIdx; i++) {
                         summaryTable = [];
                         summaryTable.push($scope.totalRows[i - 1]);
                         $scope.tables.push(summaryTable);
                     }
 
-                    // add default compare unit 
+                    // add default compare unit
                     $scope.compareUnit = $scope.currentEvent.compare_properties[0];
                     $scope.$apply(); // for ng-show working properly
                 }
@@ -316,7 +316,7 @@ angular.module('engagement')
                             var tables = [];
 
                             // we have (eventIdx - 1) events, each event give us a table
-                            for (j = 1; j <= eventIdx; j++) {
+                            for (j = eventIdx; j <= eventIdx; j++) {
                                 var table = [];
 
                                 for (i = 0; i < groups.length; i++) {
